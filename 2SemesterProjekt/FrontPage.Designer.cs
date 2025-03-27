@@ -1,6 +1,6 @@
 ﻿namespace _2SemesterProjektWinForms
 {
-    partial class Form1
+    partial class FrontPage
     {
         /// <summary>
         ///  Required designer variable.
