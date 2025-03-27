@@ -12,6 +12,7 @@ namespace _2SemesterProject.Domain.Models
 		public int OrderID { get; private set; }
 		public int CustomerID { get; private set; }
 		public Customer Customer { get;}
+		public List<ProductLine> ProductLines { get;}
 
 		public Order(int orderID, int customerID)
 		{
