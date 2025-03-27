@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProject.Domain.Interfaces
 {
-	internal class IProductLineService
+	public class IProductLineService
 	{
 	}
 }

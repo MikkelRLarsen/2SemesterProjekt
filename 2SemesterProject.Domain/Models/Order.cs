@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProject.Domain.Models
 {
-	internal class Order
+	public class Order
 	{
 		public int OrderID { get; private set; }
 		public int CustomerID { get; private set; }

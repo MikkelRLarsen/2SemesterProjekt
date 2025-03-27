@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProject.Domain.Models
 {
-	internal class Product
+	public class Product
 	{
+		public int ProductID { get; private set; }
 	}
 }

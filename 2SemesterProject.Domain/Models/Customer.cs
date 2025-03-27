@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace _2SemesterProject.Domain.Models
 {
-	internal class Customer
+	public class Customer
 	{
 		public int CustomerID { get; private set; }
 		public string CustomerName { get; private set; }
