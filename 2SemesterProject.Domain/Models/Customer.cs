@@ -12,19 +12,21 @@ namespace _2SemesterProject.Domain.Models
 		public int CustomerID { get; private set; }
 		public string CustomerName { get; private set; }
 
+		public List<Order> Order { get;}
+
 		public Customer(int customerID, string customerName)
 		{
 			CustomerID = customerID;
 			CustomerName = customerName;
 
-			if (!CustomerInformationValid()) throw new ArgumentException("Customer Information not valid");
+			if (!InformationValid()) throw new ArgumentException("Customer Information not valid");
 		}
 
 		/// <summary>
 		/// Checks if CustomerID is greater than 0 and if CustomerName contains any numbers or speciel characters
 		/// </summary>
 		/// <returns>Bool</returns>
-		protected bool CustomerInformationValid()
+		protected bool InformationValid()
 		{
 			Debug.Assert(CustomerID != null, "CustomerID was null");
 			Debug.Assert(CustomerName != null, "CustomerName was null");
