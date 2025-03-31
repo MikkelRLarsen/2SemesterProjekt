@@ -1,4 +1,4 @@
-﻿using _2SemesterProject.Domain.Interfaces;
+﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
 using _2SemesterProject.Domain.Models;
 using System;
 using System.Collections.Generic;
