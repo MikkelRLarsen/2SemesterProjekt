@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2SemesterProjekt.Repository
+namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-	internal class CustomerRepository : ICustomerRepository
+	internal class CustomerRepositoryEF : ICustomerRepository
 	{
 		public async Task<Customer> GetAllCustomerAsync()
 		{

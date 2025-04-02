@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using _2SemesterProject.Domain.Models;
 
-namespace _2SemesterProjekt.Repository
+namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
 	internal class EntityFramework : DbContext
 	{
