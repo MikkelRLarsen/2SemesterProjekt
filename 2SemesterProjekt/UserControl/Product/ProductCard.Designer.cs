@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductCard));
-			profilePicture = new PictureBox();
+			productPicture = new PictureBox();
 			label = new Label();
 			productIdLabel = new Label();
 			label5 = new Label();
@@ -40,19 +40,19 @@
 			productPriceLabel = new Label();
 			label6 = new Label();
 			inStockLabel = new Label();
-			((System.ComponentModel.ISupportInitialize)profilePicture).BeginInit();
+			((System.ComponentModel.ISupportInitialize)productPicture).BeginInit();
 			SuspendLayout();
 			// 
-			// profilePicture
+			// productPicture
 			// 
-			profilePicture.Anchor = AnchorStyles.Left;
-			profilePicture.Image = (Image)resources.GetObject("profilePicture.Image");
-			profilePicture.Location = new Point(5, 5);
-			profilePicture.Name = "profilePicture";
-			profilePicture.Size = new Size(100, 100);
-			profilePicture.SizeMode = PictureBoxSizeMode.StretchImage;
-			profilePicture.TabIndex = 1;
-			profilePicture.TabStop = false;
+			productPicture.Anchor = AnchorStyles.Left;
+			productPicture.Image = (Image)resources.GetObject("productPicture.Image");
+			productPicture.Location = new Point(5, 5);
+			productPicture.Name = "productPicture";
+			productPicture.Size = new Size(100, 100);
+			productPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+			productPicture.TabIndex = 1;
+			productPicture.TabStop = false;
 			// 
 			// label
 			// 
@@ -170,17 +170,17 @@
 			Controls.Add(label5);
 			Controls.Add(productIdLabel);
 			Controls.Add(label);
-			Controls.Add(profilePicture);
+			Controls.Add(productPicture);
 			Name = "ProductCard";
 			Size = new Size(700, 110);
-			((System.ComponentModel.ISupportInitialize)profilePicture).EndInit();
+			((System.ComponentModel.ISupportInitialize)productPicture).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
 
 		#endregion
 
-		private PictureBox profilePicture;
+		private PictureBox productPicture;
 		private Label label;
 		private Label productIdLabel;
 		private Label label5;
