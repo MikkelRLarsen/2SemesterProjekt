@@ -7,14 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using _2SemesterProject.Domain.Models;
 
 namespace _2SemesterProjekt
 {
     public partial class CustomerCard: UserControl
     {
-        public CustomerCard()
+        private Customer _customer;
+
+        public CustomerCard(Customer customer)
         {
             InitializeComponent();
+			_customer = customer;
+			InitializeUIDesign();
+        }
+
+        private void InitializeUIDesign()
+        {
+            customerIdLabel.Text = _customer.CustomerID.ToString();
+            customerNameLabel.Text = _customer.CustomerName;
         }
     }
 }

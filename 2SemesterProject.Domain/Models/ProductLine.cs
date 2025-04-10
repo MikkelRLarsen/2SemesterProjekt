@@ -31,7 +31,7 @@ namespace _2SemesterProject.Domain.Models
 		/// <returns>Bool</returns>
 		protected bool InformationValid()
 		{
-			Debug.Assert(ProductLineID != null, "ProductLineID is null")
+			Debug.Assert(ProductLineID != null, "ProductLineID is null");
 			Debug.Assert(OrderID != null, "OrderID was null");
 			Debug.Assert(ProductID != null, "ProductID was null");
 
