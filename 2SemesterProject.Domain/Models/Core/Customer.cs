@@ -4,15 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using _2SemesterProject.Domain.Models.Core.Pets;
 
-namespace _2SemesterProject.Domain.Models
+namespace _2SemesterProject.Domain.Models.Core
 {
 	public class Customer
 	{
 		public int CustomerID { get; private set; }
-		public string CustomerName { get; private set; }
+		public string? CustomerName { get; private set; }
 
-		public List<Order> Order { get;}
+		public string? CustomerEmail { get; private set; }
+		public string? CustomerAdress { get; private set; }
+		public string? CustomerType { get; private set; }
+
+		public List<Pet> Pets { get; }
 
 		public Customer(int customerID, string customerName)
 		{

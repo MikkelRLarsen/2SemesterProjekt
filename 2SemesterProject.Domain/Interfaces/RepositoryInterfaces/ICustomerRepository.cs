@@ -1,4 +1,4 @@
-﻿using _2SemesterProject.Domain.Models;
+﻿using _2SemesterProject.Domain.Models.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;

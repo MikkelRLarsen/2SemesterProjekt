@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\CageBookingSection\" />
+    <Folder Include="Models\SaleSection\" />
+  </ItemGroup>
+
 </Project>
