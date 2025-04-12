@@ -9,6 +9,6 @@ namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces.Core
 {
 	public interface ICustomerRepository
 	{
-		public Task<Customer> GetAllCustomerAsync();
+		public Task<IEnumerable<Customer>> GetAllCustomerAsync();
 	}
 }

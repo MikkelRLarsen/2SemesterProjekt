@@ -2,6 +2,7 @@
 using _2SemesterProject.Domain.Models.Core.Pets;
 using _2SemesterProject.Domain.Models.ExaminationSection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
 	public class EntityFrameworkRepositoryCore : DbContext
 	{
-		DbSet<Customer> Customers { get; set; }
-		DbSet<Employee> Employees { get; set; }
-		DbSet<Pet> Pets { get; set; }
-		DbSet<Examination> Examinations { get; set; }
-		DbSet<ExaminationType> ExaminationType { get; set; }
+		internal DbSet<Customer> Customers { get; set; }
+		internal DbSet<Employee> Employees { get; set; }
+		internal DbSet<Pet> Pets { get; set; }
+		internal DbSet<Examination> Examinations { get; set; }
+		internal DbSet<ExaminationType> ExaminationType { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
