@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-	internal class EntityFrameworkRepositoryCore : DbContext
+	public class EntityFrameworkRepositoryCore : DbContext
 	{
 		DbSet<Customer> Customers { get; set; }
 		DbSet<Employee> Employees { get; set; }
