@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces
+namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces.Core
 {
 	public interface ICustomerRepository
 	{

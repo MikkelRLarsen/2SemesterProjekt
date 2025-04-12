@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2SemesterProject.Domain.Interfaces.ServiceInterfaces
+namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces.Core
 {
-	public interface ICustomerService
+	public interface IPetRepository
 	{
 	}
 }

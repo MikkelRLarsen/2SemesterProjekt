@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces
+namespace _2SemesterProject.Domain.Interfaces.ServiceInterfaces.Core
 {
-	public interface IProductRepository
+	public class IEmployeeService
 	{
 	}
 }
