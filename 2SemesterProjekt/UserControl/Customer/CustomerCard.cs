@@ -22,6 +22,11 @@ namespace _2SemesterProjekt
 			InitializeUIDesign();
         }
 
+        public CustomerCard()
+        {
+			InitializeComponent();
+		}
+
         private void InitializeUIDesign()
         {
             customerIdLabel.Text = _customer.CustomerID.ToString();
