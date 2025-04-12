@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2SemesterProject.Domain.Models.ExaminationSection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces.ExaminationSe
 {
 	public interface IExaminationSection
 	{
+		public Task<IEnumerable<Examination>> GetAllExaminationsAsync();
+		public Examination GetExaminationById(int examinationId);
+		public void UpdateExamination(Examination examination);
+		public void DeleteExamination(Examination examination);
+		public void CreatExamination(Examination examination);
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2SemesterProject.Domain.Models.ExaminationSection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces.ExaminationSe
 {
 	internal interface IExaminationTypeRepository
 	{
+		public Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync();
+		public ExaminationType GetExaminationTypeById(int examinationTypeId);
+		public void UpdateExaminationType(ExaminationType examinationType);
+		public void DeleteExaminationType(ExaminationType examinationType);
+		public void CreatExaminationType(ExaminationType examinationType);
 	}
 }
