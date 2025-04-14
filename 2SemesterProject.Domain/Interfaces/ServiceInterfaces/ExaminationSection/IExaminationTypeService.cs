@@ -13,6 +13,6 @@ namespace _2SemesterProject.Domain.Interfaces.ServiceInterfaces.ExaminationSecti
 		public ExaminationType GetExaminationTypeById(int examinationTypeId);
 		public void UpdateExaminationType(ExaminationType examinationType);
 		public void DeleteExaminationType(ExaminationType examinationType);
-		public void CreatExaminationType(ExaminationType examinationType);
+		public void CreateExaminationType(ExaminationType examinationType);
 	}
 }

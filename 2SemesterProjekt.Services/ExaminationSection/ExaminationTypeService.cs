@@ -1,4 +1,5 @@
 ﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces.ExaminationSection;
+using _2SemesterProject.Domain.Interfaces.ServiceInterfaces.ExaminationSection;
 using _2SemesterProject.Domain.Models.ExaminationSection;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProjekt.Services.ExaminationSection
 {
-	public class ExaminationTypeService : IExaminationTypeRepository
+	public class ExaminationTypeService : IExaminationTypeService
 	{
 
 		private readonly IExaminationTypeRepository _examinationTypeRepo;
