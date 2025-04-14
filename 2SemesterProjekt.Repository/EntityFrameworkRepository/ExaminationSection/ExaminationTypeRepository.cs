@@ -12,7 +12,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository.ExaminationSect
 	public class ExaminationTypeRepository : IExaminationTypeRepository
 	{
 		private readonly EntityFrameworkRepositoryCore _dbContext = new EntityFrameworkRepositoryCore();	
-		public void CreatExaminationType(ExaminationType examinationType)
+		public void CreateExaminationType(ExaminationType examinationType)
 		{
 			_dbContext.ExaminationType.Add(examinationType);
 			_dbContext.SaveChanges();
