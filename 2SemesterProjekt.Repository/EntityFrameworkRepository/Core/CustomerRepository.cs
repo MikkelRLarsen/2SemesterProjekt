@@ -14,11 +14,36 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository.Core
 	{
 		private readonly EntityFrameworkRepositoryCore _dbContext = new EntityFrameworkRepositoryCore();
 
-		public async Task<IEnumerable<Customer>> GetAllCustomerAsync()
+		public void CreateCustomer(Customer customer)
+		{
+			_dbContext.Customers.Add(customer);
+			_dbContext.SaveChanges();
+		}
+
+		public void DeleteCustomer(Customer customer)
+		{
+			_dbContext.Customers.Remove(customer);
+			_dbContext.SaveChanges();
+		}
+
+		public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
 		{
 			return await _dbContext.Customers
 			   .Include(c => c.Pets)
 			   .ToListAsync();
+		}
+
+		public Customer GetCustomerById(int customerID)
+		{
+			return _dbContext.Customers
+				.Where(c => c.CustomerID == customerID)
+				.First();
+		}
+
+		public void UpdateCustomer(Customer customer)
+		{
+			_dbContext.Customers.Update(customer);
+			_dbContext.SaveChanges();
 		}
 	}
 }

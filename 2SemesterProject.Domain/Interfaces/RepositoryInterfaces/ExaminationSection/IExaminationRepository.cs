@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces.ExaminationSection
 {
-	public interface IExaminationSection
+	public interface IExaminationRepository
 	{
 		public Task<IEnumerable<Examination>> GetAllExaminationsAsync();
 		public Examination GetExaminationById(int examinationId);
