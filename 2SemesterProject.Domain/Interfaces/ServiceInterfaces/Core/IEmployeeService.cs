@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProject.Domain.Interfaces.ServiceInterfaces.Core
 {
-	internal interface IEmployeeService
+	public interface IEmployeeService
 	{
 		public Task<IEnumerable<Employee>> GetAllEmployeeAsync();
 		public Employee GetEmployeeById(int employeeId);

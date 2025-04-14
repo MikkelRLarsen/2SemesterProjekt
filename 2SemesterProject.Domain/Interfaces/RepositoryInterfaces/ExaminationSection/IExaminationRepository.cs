@@ -13,6 +13,6 @@ namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces.ExaminationSe
 		public Examination GetExaminationById(int examinationId);
 		public void UpdateExamination(Examination examination);
 		public void DeleteExamination(Examination examination);
-		public void CreatExamination(Examination examination);
+		public void CreateExamination(Examination examination);
 	}
 }

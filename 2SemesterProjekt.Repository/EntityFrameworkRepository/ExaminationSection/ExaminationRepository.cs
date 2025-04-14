@@ -13,7 +13,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository.ExaminationSect
 	{
 		private readonly EntityFrameworkRepositoryCore _dbContext = new EntityFrameworkRepositoryCore();
 
-		public void CreatExamination(Examination examination)
+		public void CreateExamination(Examination examination)
 		{
 			_dbContext.Examinations.Add(examination);
 			_dbContext.SaveChanges();
