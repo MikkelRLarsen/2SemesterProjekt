@@ -35,6 +35,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository.Core
 		public Employee GetEmployeeById(int employeeId)
 		{
 			return _dbContext.Employees
+				.Include (e => e.Pets)
 				.Where(e => e.EmployeeID == employeeId)
 				.First();
 		}

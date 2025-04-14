@@ -37,6 +37,9 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository.Core
 		public Pet GetCustomerById(int petId)
 		{
 			return _dbContext.Pets
+				.Include(p => p.Customer)
+				.Include(p => p.Examinations)
+				.ThenInclude(e => e.ExaminationType)
 				.Where(p => p.PetID == petId)
 				.First();
 		}

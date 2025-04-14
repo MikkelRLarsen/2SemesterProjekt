@@ -36,6 +36,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository.Core
 		public Customer GetCustomerById(int customerID)
 		{
 			return _dbContext.Customers
+				.Include (c => c.Pets)
 				.Where(c => c.CustomerID == customerID)
 				.First();
 		}

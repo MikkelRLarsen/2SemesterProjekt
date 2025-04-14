@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces.ExaminationSection
 {
-	internal interface IExaminationTypeRepository
+	public interface IExaminationTypeRepository
 	{
 		public Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync();
 		public ExaminationType GetExaminationTypeById(int examinationTypeId);

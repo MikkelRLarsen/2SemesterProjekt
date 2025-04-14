@@ -36,6 +36,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository.ExaminationSect
 		public Examination GetExaminationById(int examinationId)
 		{
 			return _dbContext.Examinations
+				.Include(e => e.ExaminationType)
+				.Include(e => e.Pet)
 				.Where(e => e.ExaminationID == examinationId)
 				.First();
 		}
