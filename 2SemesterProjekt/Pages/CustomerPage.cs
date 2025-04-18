@@ -18,7 +18,7 @@ namespace _2SemesterProjekt
 		private readonly ButtonPanel _addCustomerButton;
 		private readonly ButtonPanel _updateCustomerButton;
 		private readonly ButtonPanel _deleteCustomerButton;
-		public CustomerCard _selectedCustomerCard; 
+		public CustomerCard? _selectedCustomerCard; 
 
 
 		public CustomerPage()
@@ -44,6 +44,7 @@ namespace _2SemesterProjekt
 			if (_selectedCustomerCard != null)
 			{
 				customerFlowPanel.Controls.Remove(_selectedCustomerCard);
+				_selectedCustomerCard = null;
 			}
 		}
 
