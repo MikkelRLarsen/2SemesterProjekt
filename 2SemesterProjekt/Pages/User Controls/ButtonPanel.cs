@@ -11,15 +11,17 @@ using _2SemesterProjekt.Properties;
 
 namespace _2SemesterProjekt
 {
-    public partial class ButtonPanel: UserControl
+    public partial class ButtonPanel: System.Windows.Forms.UserControl
     {
 		private readonly Color _buttonColor;
+		private readonly UserControl _userControl;
 
-		public ButtonPanel(string labelName, string pictureName, Color color, EventHandler? onClick = null)
+		public ButtonPanel(UserControl userControl, string labelName, string pictureName, Color color, EventHandler? onClick = null)
         {
 			InitializeComponent();
 			var resourceManager = Properties.Resources.ResourceManager;
 			var image = (Image)resourceManager.GetObject(Path.GetFileNameWithoutExtension(pictureName));
+			_userControl = userControl;
             pictureBox.Image = image;
             buttonNameLabel.Text = labelName;
 			_buttonColor = color;

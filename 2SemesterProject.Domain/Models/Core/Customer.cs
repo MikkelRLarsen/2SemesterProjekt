@@ -16,16 +16,23 @@ namespace _2SemesterProject.Domain.Models.Core
 		public string? CustomerEmail { get; private set; }
 		public string? CustomerAdress { get; private set; }
 		public string? CustomerType { get; private set; }
+		public int CustomerPhoneNumber { get; private set; }
 
 		public List<Pet> Pets { get; }
 
-		public Customer(int customerID, string customerName)
+		public Customer(int customerID, string? customerName, string? customerEmail, string? customerAdress, string? customerType, int customerPhoneNumber)
 		{
 			CustomerID = customerID;
 			CustomerName = customerName;
-
-			if (!InformationValid()) throw new ArgumentException("Customer Information not valid");
+			CustomerEmail = customerEmail;
+			CustomerAdress = customerAdress;
+			CustomerType = customerType;
+			CustomerPhoneNumber = customerPhoneNumber;
 		}
+
+		public Customer() { }
+
+
 
 		/// <summary>
 		/// Checks if CustomerID is greater than 0 and if CustomerName contains any numbers or speciel characters
@@ -42,6 +49,16 @@ namespace _2SemesterProject.Domain.Models.Core
 
 			return true;
 
+		}
+
+		public void UpdateCustomer(string customerName, string customerEmail, string customerAdress, int? customerPhoneNumber)
+		{
+			CustomerName = customerName;
+			CustomerEmail = customerEmail;
+			CustomerAdress = customerAdress;
+			CustomerPhoneNumber = (int)customerPhoneNumber;
+
+			InformationValid();
 		}
 	}
 }

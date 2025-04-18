@@ -8,25 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using _2SemesterProject.Domain.Models;
+using _2SemesterProject.Domain.Models.ExaminationSection;
 
 namespace _2SemesterProjekt
 {
     public partial class ProductCard: UserControl
     {
-        private Product _product;
+        private Examination _examination;
         
-        public ProductCard(Product product)
+        public ProductCard(Examination product)
         {
             InitializeComponent();
-            _product = product;
+            _examination = product;
             InitializeUIDesign();
         }
 
         private void InitializeUIDesign()
 		{
-            productIdLabel.Text = _product.ProductID.ToString();
-            productNameLabel.Text = _product.ProductName;
-            productPriceLabel.Text = _product.ProductPrice.ToString();
+            productIdLabel.Text = _examination.ExaminationID.ToString();
+            productNameLabel.Text = _examination.Pet.PetName;
+            productPriceLabel.Text = _examination.ExaminationType.ExaminationTypeName;
         }
     }
 }

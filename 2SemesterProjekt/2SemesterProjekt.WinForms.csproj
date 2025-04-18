@@ -10,12 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="WinForms.Templates\**" />
+    <EmbeddedResource Remove="WinForms.Templates\**" />
+    <None Remove="WinForms.Templates\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="WinForms.Templates\" />
   </ItemGroup>
 
   <ItemGroup>

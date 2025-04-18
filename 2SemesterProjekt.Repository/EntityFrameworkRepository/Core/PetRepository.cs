@@ -34,7 +34,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository.Core
 				.ToListAsync(); 
 		}
 
-		public Pet GetCustomerById(int petId)
+		public Pet GetPetById(int petId)
 		{
 			return _dbContext.Pets
 				.Include(p => p.Customer)
