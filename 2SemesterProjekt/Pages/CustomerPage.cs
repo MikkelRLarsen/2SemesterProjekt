@@ -54,7 +54,7 @@ namespace _2SemesterProjekt
 
 			customerFlowPanel.Controls.Clear();
 
-			customerFlowPanel.Controls.Add(new UpdateCustomerCard(new Customer(1, "Mikkel", "Mikkel@rosendahllarsen.dk", "Sundvej 18B, 3th", "Private", 21435547)));
+			customerFlowPanel.Controls.Add(new UpdateCustomerCard(new Customer(1, "Mikkel", "Mikkel@rosendahllarsen.dk", "Sundvej 18B, 3th", "Private", 21435547), this));
 
 		}
 	}

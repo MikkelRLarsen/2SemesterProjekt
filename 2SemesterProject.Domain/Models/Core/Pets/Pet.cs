@@ -19,7 +19,7 @@ namespace _2SemesterProject.Domain.Models.Core.Pets
 		public Employee Employee { get; }
 		public List<Examination> Examinations { get; }
 
-		protected Pet(int petID, int customerID, int employeeID, string petName, string petSpecies)
+		public Pet(int petID, int customerID, int employeeID, string petName, string petSpecies)
 		{
 			PetID = petID;
 			CustomerID = customerID;

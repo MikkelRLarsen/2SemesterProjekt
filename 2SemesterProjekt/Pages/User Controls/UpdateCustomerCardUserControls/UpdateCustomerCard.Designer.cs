@@ -40,6 +40,10 @@
 			customerTlfTextBox = new TextBox();
 			customerEmailTextBox = new TextBox();
 			DoneButton = new Button();
+			AddPetButton = new Button();
+			PrevButton = new Button();
+			NextButton = new Button();
+			PetPanal = new FlowLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)profilePicture).BeginInit();
 			SuspendLayout();
 			// 
@@ -47,7 +51,7 @@
 			// 
 			profilePicture.Anchor = AnchorStyles.Left;
 			profilePicture.Image = Properties.Resources.member;
-			profilePicture.Location = new Point(6, 22);
+			profilePicture.Location = new Point(14, 17);
 			profilePicture.Name = "profilePicture";
 			profilePicture.Size = new Size(99, 100);
 			profilePicture.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -148,18 +152,60 @@
 			// 
 			// DoneButton
 			// 
-			DoneButton.Location = new Point(166, 128);
+			DoneButton.Location = new Point(126, 277);
 			DoneButton.Name = "DoneButton";
-			DoneButton.Size = new Size(366, 32);
+			DoneButton.Size = new Size(353, 35);
 			DoneButton.TabIndex = 22;
 			DoneButton.Text = "Click when done";
 			DoneButton.UseVisualStyleBackColor = true;
 			DoneButton.Click += DoneButton_Click;
 			// 
+			// AddPetButton
+			// 
+			AddPetButton.Location = new Point(506, 129);
+			AddPetButton.Name = "AddPetButton";
+			AddPetButton.Size = new Size(163, 31);
+			AddPetButton.TabIndex = 23;
+			AddPetButton.Text = "Add Pet";
+			AddPetButton.UseVisualStyleBackColor = true;
+			AddPetButton.Click += AddPetButton_Click;
+			// 
+			// PrevButton
+			// 
+			PrevButton.Location = new Point(506, 166);
+			PrevButton.Name = "PrevButton";
+			PrevButton.Size = new Size(72, 23);
+			PrevButton.TabIndex = 25;
+			PrevButton.Text = "<-";
+			PrevButton.UseVisualStyleBackColor = true;
+			PrevButton.Click += PrevButton_Click;
+			// 
+			// NextButton
+			// 
+			NextButton.Location = new Point(597, 166);
+			NextButton.Name = "NextButton";
+			NextButton.Size = new Size(72, 23);
+			NextButton.TabIndex = 26;
+			NextButton.Text = "->";
+			NextButton.UseVisualStyleBackColor = true;
+			NextButton.Click += NextButton_Click;
+			// 
+			// PetPanal
+			// 
+			PetPanal.BackColor = SystemColors.ActiveCaption;
+			PetPanal.Location = new Point(133, 129);
+			PetPanal.Name = "PetPanal";
+			PetPanal.Size = new Size(350, 120);
+			PetPanal.TabIndex = 27;
+			// 
 			// UpdateCustomerCard
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
+			Controls.Add(PetPanal);
+			Controls.Add(NextButton);
+			Controls.Add(PrevButton);
+			Controls.Add(AddPetButton);
 			Controls.Add(DoneButton);
 			Controls.Add(customerEmailTextBox);
 			Controls.Add(customerTlfTextBox);
@@ -173,7 +219,7 @@
 			Controls.Add(label1);
 			Controls.Add(label);
 			Name = "UpdateCustomerCard";
-			Size = new Size(700, 170);
+			Size = new Size(700, 332);
 			((System.ComponentModel.ISupportInitialize)profilePicture).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
@@ -193,5 +239,9 @@
 		private TextBox customerTlfTextBox;
 		private TextBox customerEmailTextBox;
 		private Button DoneButton;
+		private Button AddPetButton;
+		private Button PrevButton;
+		private Button NextButton;
+		private FlowLayoutPanel PetPanal;
 	}
 }
