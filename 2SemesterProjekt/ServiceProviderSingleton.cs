@@ -7,6 +7,7 @@ using _2SemesterProjekt.Repository.EntityFrameworkRepository.ExaminationSection;
 using _2SemesterProjekt.Services.Core;
 using _2SemesterProjekt.Services.ExaminationSection;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics;
 
 namespace _2SemesterProjekt
 {
@@ -43,6 +44,7 @@ namespace _2SemesterProjekt
 				new ServiceProviderSingleton();
 			}
 
+			Debug.Assert( _serviceProvider != null , "_serviceProvider in ServiceProviderSingletong was null, somehow");
 			return _serviceProvider;
 		}
 	}
