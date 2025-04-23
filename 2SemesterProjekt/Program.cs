@@ -13,7 +13,6 @@ namespace _2SemesterProjektWinForms
 {
     internal static class Program
     {
-		private static ServiceProvider _serviceProvider;
 
 		/// <summary>
 		///  The main entry point for the application.
@@ -33,26 +32,6 @@ namespace _2SemesterProjektWinForms
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.SetHighDpiMode(HighDpiMode.SystemAware);
 
-			var services = new ServiceCollection();
-
-			// Register services
-			// Bll Services
-			services.AddScoped<ICustomerService, CustomerService>();
-			services.AddScoped<IEmployeeService, EmployeeService>();
-			services.AddScoped<IPetService, PetService>();
-			services.AddScoped<IExaminationService, ExaminationService>();
-			services.AddScoped<IExaminationTypeService, ExaminationTypeService>();
-
-			// Dal Services
-			services.AddTransient<ICustomerRepository, CustomerRepository>();
-			services.AddTransient<IEmployeeRepository, EmployeeRepository>();
-			services.AddTransient<IPetRepository, PetRepository>();
-			services.AddTransient<IExaminationRepository, ExaminationRepository>();
-			services.AddTransient<IExaminationTypeRepository, ExaminationTypeRepository>();
-			
-
-
-			_serviceProvider = services.BuildServiceProvider();
 		}
 	}
 }

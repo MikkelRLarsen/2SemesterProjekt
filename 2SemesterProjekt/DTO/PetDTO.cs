@@ -20,9 +20,9 @@ namespace _2SemesterProjekt.DTO
 		}
 
 
-		public int PetID { get; protected set; }
-		public int CustomerID { get; protected set; }
-		public string PetName { get; protected set; }
-		public string PetSpecies { get; protected set; }
+		public int? PetID { get; set; }
+		public int? CustomerID { get; set; }
+		public string? PetName { get; set; }
+		public string? PetSpecies { get; set; }
 	}
 }

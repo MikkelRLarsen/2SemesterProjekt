@@ -1,4 +1,5 @@
-﻿using _2SemesterProject.Domain.Models.Core;
+﻿using _2SemesterProject.Domain.Interfaces.ServiceInterfaces.Core;
+using _2SemesterProject.Domain.Models.Core;
 using _2SemesterProjekt.DTO;
 using _2SemesterProjekt.Pages.User_Controls.UpdateCustomerCardUserControls;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +8,8 @@ namespace _2SemesterProjekt.Pages.User_Controls
 {
 	public partial class UpdateCustomerCard : UserControl
 	{
-		private readonly ServiceProvider _serviceProviderSingleton = ServiceProviderSingleton._serviceProvider;
+		private readonly ServiceProvider _serviceProviderSingleton;
+		private readonly ICustomerService _customerService;
 
 		private readonly CustomerPage _customerPage;
 		private readonly CustomerDTO _customerDTO;
@@ -22,6 +24,7 @@ namespace _2SemesterProjekt.Pages.User_Controls
 			InitializeComponent();
 			_customerDTO = new CustomerDTO();
 			_customerPage = customerPage;
+			_customerService = ServiceProviderSingleton.GetServiceProvider().GetService(typeof(ICustomerService)) as ICustomerService;
 		}
 
 		public UpdateCustomerCard(Customer customer, CustomerPage customerPage)
@@ -30,6 +33,7 @@ namespace _2SemesterProjekt.Pages.User_Controls
 			_customerPage = customerPage;
 			_customerDTO = new CustomerDTO(customer);
 			_customer = customer;
+			_customerService = ServiceProviderSingleton.GetServiceProvider().GetService(typeof(ICustomerService)) as ICustomerService;
 
 			customerNameTextBox.Text = customer.CustomerName;
 			customerAdressTextBox.Text = customer.CustomerAdress;

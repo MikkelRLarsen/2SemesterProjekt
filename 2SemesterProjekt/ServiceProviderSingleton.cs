@@ -1,19 +1,49 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces.Core;
+using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces.ExaminationSection;
+using _2SemesterProject.Domain.Interfaces.ServiceInterfaces.Core;
+using _2SemesterProject.Domain.Interfaces.ServiceInterfaces.ExaminationSection;
+using _2SemesterProjekt.Repository.EntityFrameworkRepository.Core;
+using _2SemesterProjekt.Repository.EntityFrameworkRepository.ExaminationSection;
+using _2SemesterProjekt.Services.Core;
+using _2SemesterProjekt.Services.ExaminationSection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace _2SemesterProjekt
 {
 	internal class ServiceProviderSingleton
 	{
-		public static ServiceProvider? _serviceProvider { get; private set; }
+		private static ServiceProvider? _serviceProvider;
 
-		public ServiceProviderSingleton(ServiceProvider serviceProvider)
+		private ServiceProviderSingleton()
 		{
-			_serviceProvider = serviceProvider;
+			var services = new ServiceCollection();
+
+			// Register services
+			// Bll Services
+			services.AddScoped<ICustomerService, CustomerService>();
+			services.AddScoped<IEmployeeService, EmployeeService>();
+			services.AddScoped<IPetService, PetService>();
+			services.AddScoped<IExaminationService, ExaminationService>();
+			services.AddScoped<IExaminationTypeService, ExaminationTypeService>();
+
+			// Dal Services
+			services.AddTransient<ICustomerRepository, CustomerRepository>();
+			services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+			services.AddTransient<IPetRepository, PetRepository>();
+			services.AddTransient<IExaminationRepository, ExaminationRepository>();
+			services.AddTransient<IExaminationTypeRepository, ExaminationTypeRepository>();
+
+			_serviceProvider = services.BuildServiceProvider();
+		}
+
+		public static ServiceProvider GetServiceProvider()
+		{
+			if (_serviceProvider == null)
+			{
+				new ServiceProviderSingleton();
+			}
+
+			return _serviceProvider;
 		}
 	}
 }
