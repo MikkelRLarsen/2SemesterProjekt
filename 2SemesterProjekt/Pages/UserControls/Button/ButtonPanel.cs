@@ -11,20 +11,35 @@ using _2SemesterProjekt.Properties;
 
 namespace _2SemesterProjekt
 {
+    // Custom button including hover effects and click-based events
     public partial class ButtonPanel: UserControl
     {
-		private readonly Color _buttonColor;
+		private readonly Color _buttonColor; // Stores base color of button for reverting
+		private readonly Image? _buttonImage; // Stores the image of button if initailized
 
-		public ButtonPanel(string labelName, string pictureName, Color color, EventHandler? onClick = null)
+		public ButtonPanel(string buttonName, string imageResourceName, Color color, EventHandler? onClick = null)
         {
 			InitializeComponent();
+
+			// Loads image from embedded resources
 			var resourceManager = Properties.Resources.ResourceManager;
-			var image = (Image)resourceManager.GetObject(Path.GetFileNameWithoutExtension(pictureName));
-            pictureBox.Image = image;
-            buttonNameLabel.Text = labelName;
+            _buttonImage = resourceManager.GetObject(Path.GetFileNameWithoutExtension(imageResourceName)) as Image;
+
+			if (_buttonImage != null)
+			{
+				pictureBox.Image = _buttonImage;
+			}
+			else
+			{
+				pictureBox.Image = null; // Clear if not found
+			}
+
+			// Sets label and background color of the button
+			buttonNameLabel.Text = buttonName;
 			_buttonColor = color;
             this.BackColor = color;
 
+			// Connects click event to this panel and all child components
 			if (onClick != null) 
 			{
 				this.Click += onClick;
@@ -34,35 +49,57 @@ namespace _2SemesterProjekt
 				}
 			}
 
-			InitializeMouseOnHover();
-			CenterButtonNameLabel();
+			InitializeMouseOnHover(); // Hover effects to button
+            UpdateLabelHorizontally(); // Center nameLabel
 		}
 
-		private void CenterButtonNameLabel()
+		private void UpdateLabelHorizontally()
 		{
-			int centerX = ((this.Width + 50) - buttonNameLabel.Width) / 2;
-			buttonNameLabel.Location = new Point(centerX, buttonNameLabel.Location.Y);
-		}
+			int centerX;
+
+			if (pictureBox.Image != null)
+			{
+				centerX = ((this.Width + pictureBox.Image.Width) - buttonNameLabel.Width) / 2; // Center based on both control width and image width
+
+            }
+			else
+			{
+				centerX = (this.Width - buttonNameLabel.Width) / 2; // Fallback centering without image
+            }
+
+            buttonNameLabel.Location = new Point(centerX, buttonNameLabel.Location.Y);
+        }
 		
 		private void InitializeMouseOnHover()
 		{
-			this.MouseEnter += ButtonPanel_MouseEnter;
+            // Hover effects to this control and all child components
+            this.MouseEnter += ButtonPanel_MouseEnter;
+			foreach (Control control in this.Controls)
+			{
+                control.MouseEnter += ButtonPanel_MouseEnter;
+			}
 			this.MouseLeave += ButtonPanel_MouseLeave;
-			buttonNameLabel.MouseEnter += ButtonPanel_MouseEnter;
-			buttonNameLabel.MouseLeave += ButtonPanel_MouseLeave;
-			pictureBox.MouseEnter += ButtonPanel_MouseEnter;
-			pictureBox.MouseLeave += ButtonPanel_MouseLeave;
-			this.Cursor = Cursors.Hand;
-			buttonNameLabel.Cursor = Cursors.Hand;
-			pictureBox.Cursor = Cursors.Hand;
+			foreach (Control control in this.Controls)
+			{
+				control.MouseLeave += ButtonPanel_MouseLeave;
+			}
+
+            // Click event handler to this control and child components
+            this.Cursor = Cursors.Hand;
+			foreach (Control control in this.Controls)
+			{
+				control.Cursor = Cursors.Hand;
+			}
 		}
 
-		private void ButtonPanel_MouseEnter(object sender, EventArgs e)
+        // Background color change on hover
+        private void ButtonPanel_MouseEnter(object? sender, EventArgs e)
 		{
 			this.BackColor = Color.DeepSkyBlue;
 		}
 
-		private void ButtonPanel_MouseLeave(object sender, EventArgs e)
+        // Revert background color on leave
+        private void ButtonPanel_MouseLeave(object? sender, EventArgs e)
 		{
 			this.BackColor = _buttonColor;
 		}
