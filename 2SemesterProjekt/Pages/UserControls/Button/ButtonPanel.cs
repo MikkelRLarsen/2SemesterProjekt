@@ -12,12 +12,13 @@ using _2SemesterProjekt.Properties;
 namespace _2SemesterProjekt
 {
     // Custom button including hover effects and click-based events
-    public partial class ButtonPanel: UserControl
+    public partial class ButtonPanel : UserControl
     {
 		private readonly Color _buttonColor; // Stores base color of button for reverting
 		private readonly Image? _buttonImage; // Stores the image of button if initailized
 
-		public ButtonPanel(string buttonName, string imageResourceName, Color color, EventHandler? onClick = null)
+        // Constructor for ButtonPanel with image
+        public ButtonPanel(string buttonName, string imageResourceName, Color color, EventHandler? onClick = null)
         {
 			InitializeComponent();
 
@@ -50,16 +51,40 @@ namespace _2SemesterProjekt
 			}
 
 			InitializeMouseOnHover(); // Hover effects to button
-            UpdateLabelHorizontally(); // Center nameLabel
+            CenterLabel(); // Center nameLabel
 		}
 
-		private void UpdateLabelHorizontally()
+        // Constructor for ButtonPanel without an image
+        public ButtonPanel(string buttonName, Color color, EventHandler? onClick = null)
+        {
+            InitializeComponent();
+
+            // Sets label and background color of the button
+            buttonNameLabel.Text = buttonName;
+            _buttonColor = color;
+            this.BackColor = color;
+
+            // Connects click event to this panel and all child components
+            if (onClick != null)
+            {
+                this.Click += onClick;
+                foreach (Control control in this.Controls)
+                {
+                    control.Click += onClick;
+                }
+            }
+
+            InitializeMouseOnHover(); // Hover effects to button
+            CenterLabel(); // Center nameLabel
+        }
+
+        private void CenterLabel()
 		{
 			int centerX;
 
 			if (pictureBox.Image != null)
 			{
-				centerX = ((this.Width + pictureBox.Image.Width) - buttonNameLabel.Width) / 2; // Center based on both control width and image width
+				centerX = ((this.Width + pictureBox.Width) - buttonNameLabel.Width) / 2; // Center based on both control width and image width
 
             }
 			else
@@ -69,25 +94,20 @@ namespace _2SemesterProjekt
 
             buttonNameLabel.Location = new Point(centerX, buttonNameLabel.Location.Y);
         }
-		
-		private void InitializeMouseOnHover()
+
+        /// <summary>
+        /// Hover effects to this control and all child components
+        /// </summary>
+        private void InitializeMouseOnHover()
 		{
-            // Hover effects to this control and all child components
             this.MouseEnter += ButtonPanel_MouseEnter;
-			foreach (Control control in this.Controls)
+            this.MouseLeave += ButtonPanel_MouseLeave;
+            this.Cursor = Cursors.Hand;
+
+            foreach (Control control in this.Controls)
 			{
                 control.MouseEnter += ButtonPanel_MouseEnter;
-			}
-			this.MouseLeave += ButtonPanel_MouseLeave;
-			foreach (Control control in this.Controls)
-			{
 				control.MouseLeave += ButtonPanel_MouseLeave;
-			}
-
-            // Click event handler to this control and child components
-            this.Cursor = Cursors.Hand;
-			foreach (Control control in this.Controls)
-			{
 				control.Cursor = Cursors.Hand;
 			}
 		}

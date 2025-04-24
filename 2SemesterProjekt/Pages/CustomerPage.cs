@@ -21,7 +21,7 @@ namespace _2SemesterProjekt
 			buttonFlowPanel.Controls.Add(new ButtonPanel("Fjern kunde", "RemoveCustomer.png", Color.IndianRed));
 		}
 
-		private void AddCustomer_Click(object sender, EventArgs e)
+		private void AddCustomer_Click(object? sender, EventArgs e)
 		{
 			customerFlowPanel.Controls.Add(new CustomerCard());
 		}
