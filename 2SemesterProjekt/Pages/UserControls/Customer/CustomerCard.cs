@@ -11,9 +11,9 @@ using _2SemesterProject.Domain.Models;
 
 namespace _2SemesterProjekt
 {
-    public partial class CustomerCard: UserControl
+    public partial class CustomerCard : UserControl
     {
-        private Customer _customer;
+        private Customer _customer; // Holds Customer data
 
         public CustomerCard(Customer customer)
         {
@@ -21,11 +21,6 @@ namespace _2SemesterProjekt
 			_customer = customer;
 			InitializeUIDesign();
         }
-
-        public CustomerCard()
-        {
-			InitializeComponent();
-		}
 
         private void InitializeUIDesign()
         {

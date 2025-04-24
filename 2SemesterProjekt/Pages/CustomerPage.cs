@@ -16,14 +16,9 @@ namespace _2SemesterProjekt
 		{
 			InitializeComponent();
 			buttonFlowPanel.Controls.Add(new ButtonPanel("Find kunde", "FindCustomer.png", Color.SteelBlue));
-			buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kunde", "AddCustomer.png", Color.MediumSeaGreen, AddCustomer_Click));
+			buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kunde", "AddCustomer.png", Color.MediumSeaGreen));
 			buttonFlowPanel.Controls.Add(new ButtonPanel("Redigér kunde", "EditCustomer.png", Color.Goldenrod));
 			buttonFlowPanel.Controls.Add(new ButtonPanel("Fjern kunde", "RemoveCustomer.png", Color.IndianRed));
-		}
-
-		private void AddCustomer_Click(object? sender, EventArgs e)
-		{
-			customerFlowPanel.Controls.Add(new CustomerCard());
 		}
 	}
 }
