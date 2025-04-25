@@ -13,20 +13,20 @@ namespace _2SemesterProjekt
 {
     public partial class ProductCard : UserControl
     {
-        private Product _product; // Holds Product data
+  //      private Product _product; // Holds Product data
         
-        public ProductCard(Product product)
-        {
-            InitializeComponent();
-            _product = product;
-            InitializeUIDesign();
-        }
+  //      public ProductCard(Product product)
+  //      {
+  //          InitializeComponent();
+  //          _product = product;
+  //          InitializeUIDesign();
+  //      }
 
-        private void InitializeUIDesign()
-		{
-            productIdLabel.Text = _product.ProductID.ToString();
-            productNameLabel.Text = _product.ProductName;
-            productPriceLabel.Text = _product.ProductPrice.ToString();
-        }
+  //      private void InitializeUIDesign()
+		//{
+  //          productIdLabel.Text = _product.ProductID.ToString();
+  //          productNameLabel.Text = _product.ProductName;
+  //          productPriceLabel.Text = _product.ProductPrice.ToString();
+  //      }
     }
 }

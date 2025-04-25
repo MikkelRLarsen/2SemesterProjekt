@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			pageNameLabel = new Label();
-			CustomerflowPanel = new FlowLayoutPanel();
+			ExaminationFlowPanel = new FlowLayoutPanel();
 			CRUDPanel = new FlowLayoutPanel();
 			SuspendLayout();
 			// 
@@ -43,15 +43,15 @@
 			pageNameLabel.TabIndex = 2;
 			pageNameLabel.Text = "Konsultation";
 			// 
-			// CustomerflowPanel
+			// ExaminationFlowPanel
 			// 
-			CustomerflowPanel.BackColor = SystemColors.ControlLightLight;
-			CustomerflowPanel.BorderStyle = BorderStyle.FixedSingle;
-			CustomerflowPanel.FlowDirection = FlowDirection.TopDown;
-			CustomerflowPanel.Location = new Point(250, 150);
-			CustomerflowPanel.Name = "CustomerflowPanel";
-			CustomerflowPanel.Size = new Size(709, 580);
-			CustomerflowPanel.TabIndex = 3;
+			ExaminationFlowPanel.BackColor = SystemColors.ControlLightLight;
+			ExaminationFlowPanel.BorderStyle = BorderStyle.FixedSingle;
+			ExaminationFlowPanel.FlowDirection = FlowDirection.TopDown;
+			ExaminationFlowPanel.Location = new Point(250, 150);
+			ExaminationFlowPanel.Name = "ExaminationFlowPanel";
+			ExaminationFlowPanel.Size = new Size(709, 580);
+			ExaminationFlowPanel.TabIndex = 3;
 			// 
 			// CRUDPanel
 			// 
@@ -65,7 +65,7 @@
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			Controls.Add(CRUDPanel);
-			Controls.Add(CustomerflowPanel);
+			Controls.Add(ExaminationFlowPanel);
 			Controls.Add(pageNameLabel);
 			Name = "KonsultationPage";
 			Size = new Size(1200, 825);
@@ -76,7 +76,7 @@
 		#endregion
 
 		private Label pageNameLabel;
-		private FlowLayoutPanel CustomerflowPanel;
+		private FlowLayoutPanel ExaminationFlowPanel;
 		private FlowLayoutPanel CRUDPanel;
 	}
 }

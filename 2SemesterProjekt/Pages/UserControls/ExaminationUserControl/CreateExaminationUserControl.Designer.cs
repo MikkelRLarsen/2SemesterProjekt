@@ -30,19 +30,20 @@
 		{
 			label5 = new Label();
 			label1 = new Label();
-			comboBox1 = new ComboBox();
-			comboBox2 = new ComboBox();
+			CustomerExaminationDropdown = new ComboBox();
+			PetExaminationDropdown = new ComboBox();
 			label2 = new Label();
-			comboBox3 = new ComboBox();
+			ExaminationDropdown = new ComboBox();
 			label3 = new Label();
-			comboBox4 = new ComboBox();
+			PriceExaminationDropdown = new ComboBox();
 			label4 = new Label();
-			comboBox5 = new ComboBox();
 			label6 = new Label();
-			comboBox6 = new ComboBox();
+			EmployeeExaminationDropdown = new ComboBox();
 			label7 = new Label();
 			CreateExaminationButton = new Button();
 			CancelExaminationButton = new Button();
+			DateTimePickerExamination = new DateTimePicker();
+			ErrorMessageExamination = new Label();
 			SuspendLayout();
 			// 
 			// label5
@@ -65,21 +66,21 @@
 			label1.TabIndex = 5;
 			label1.Text = "Opret Konsultation";
 			// 
-			// comboBox1
+			// CustomerExaminationDropdown
 			// 
-			comboBox1.FormattingEnabled = true;
-			comboBox1.Location = new Point(260, 149);
-			comboBox1.Name = "comboBox1";
-			comboBox1.Size = new Size(207, 23);
-			comboBox1.TabIndex = 6;
+			CustomerExaminationDropdown.FormattingEnabled = true;
+			CustomerExaminationDropdown.Location = new Point(260, 149);
+			CustomerExaminationDropdown.Name = "CustomerExaminationDropdown";
+			CustomerExaminationDropdown.Size = new Size(207, 23);
+			CustomerExaminationDropdown.TabIndex = 6;
 			// 
-			// comboBox2
+			// PetExaminationDropdown
 			// 
-			comboBox2.FormattingEnabled = true;
-			comboBox2.Location = new Point(260, 189);
-			comboBox2.Name = "comboBox2";
-			comboBox2.Size = new Size(207, 23);
-			comboBox2.TabIndex = 8;
+			PetExaminationDropdown.FormattingEnabled = true;
+			PetExaminationDropdown.Location = new Point(260, 189);
+			PetExaminationDropdown.Name = "PetExaminationDropdown";
+			PetExaminationDropdown.Size = new Size(207, 23);
+			PetExaminationDropdown.TabIndex = 8;
 			// 
 			// label2
 			// 
@@ -91,13 +92,13 @@
 			label2.TabIndex = 7;
 			label2.Text = "Kæledyr:";
 			// 
-			// comboBox3
+			// ExaminationDropdown
 			// 
-			comboBox3.FormattingEnabled = true;
-			comboBox3.Location = new Point(260, 230);
-			comboBox3.Name = "comboBox3";
-			comboBox3.Size = new Size(207, 23);
-			comboBox3.TabIndex = 10;
+			ExaminationDropdown.FormattingEnabled = true;
+			ExaminationDropdown.Location = new Point(260, 230);
+			ExaminationDropdown.Name = "ExaminationDropdown";
+			ExaminationDropdown.Size = new Size(207, 23);
+			ExaminationDropdown.TabIndex = 10;
 			// 
 			// label3
 			// 
@@ -109,13 +110,13 @@
 			label3.TabIndex = 9;
 			label3.Text = "Konsultation:";
 			// 
-			// comboBox4
+			// PriceExaminationDropdown
 			// 
-			comboBox4.FormattingEnabled = true;
-			comboBox4.Location = new Point(260, 270);
-			comboBox4.Name = "comboBox4";
-			comboBox4.Size = new Size(207, 23);
-			comboBox4.TabIndex = 12;
+			PriceExaminationDropdown.FormattingEnabled = true;
+			PriceExaminationDropdown.Location = new Point(260, 270);
+			PriceExaminationDropdown.Name = "PriceExaminationDropdown";
+			PriceExaminationDropdown.Size = new Size(207, 23);
+			PriceExaminationDropdown.TabIndex = 12;
 			// 
 			// label4
 			// 
@@ -127,14 +128,6 @@
 			label4.TabIndex = 11;
 			label4.Text = "Pris:";
 			// 
-			// comboBox5
-			// 
-			comboBox5.FormattingEnabled = true;
-			comboBox5.Location = new Point(260, 316);
-			comboBox5.Name = "comboBox5";
-			comboBox5.Size = new Size(207, 23);
-			comboBox5.TabIndex = 14;
-			// 
 			// label6
 			// 
 			label6.AutoSize = true;
@@ -145,13 +138,13 @@
 			label6.TabIndex = 13;
 			label6.Text = "Tid:";
 			// 
-			// comboBox6
+			// EmployeeExaminationDropdown
 			// 
-			comboBox6.FormattingEnabled = true;
-			comboBox6.Location = new Point(260, 365);
-			comboBox6.Name = "comboBox6";
-			comboBox6.Size = new Size(207, 23);
-			comboBox6.TabIndex = 16;
+			EmployeeExaminationDropdown.FormattingEnabled = true;
+			EmployeeExaminationDropdown.Location = new Point(260, 365);
+			EmployeeExaminationDropdown.Name = "EmployeeExaminationDropdown";
+			EmployeeExaminationDropdown.Size = new Size(207, 23);
+			EmployeeExaminationDropdown.TabIndex = 16;
 			// 
 			// label7
 			// 
@@ -185,23 +178,41 @@
 			CancelExaminationButton.Text = "Annuller";
 			CancelExaminationButton.UseVisualStyleBackColor = false;
 			// 
+			// DateTimePickerExamination
+			// 
+			DateTimePickerExamination.Location = new Point(260, 316);
+			DateTimePickerExamination.Name = "DateTimePickerExamination";
+			DateTimePickerExamination.Size = new Size(207, 23);
+			DateTimePickerExamination.TabIndex = 19;
+			// 
+			// ErrorMessageExamination
+			// 
+			ErrorMessageExamination.AutoSize = true;
+			ErrorMessageExamination.Location = new Point(311, 422);
+			ErrorMessageExamination.Name = "ErrorMessageExamination";
+			ErrorMessageExamination.Size = new Size(78, 15);
+			ErrorMessageExamination.TabIndex = 20;
+			ErrorMessageExamination.Text = "ErrorMessage";
+			ErrorMessageExamination.Visible = false;
+			// 
 			// CreateExaminationUserControl
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
+			Controls.Add(ErrorMessageExamination);
+			Controls.Add(DateTimePickerExamination);
 			Controls.Add(CreateExaminationButton);
 			Controls.Add(CancelExaminationButton);
-			Controls.Add(comboBox6);
+			Controls.Add(EmployeeExaminationDropdown);
 			Controls.Add(label7);
-			Controls.Add(comboBox5);
 			Controls.Add(label6);
-			Controls.Add(comboBox4);
+			Controls.Add(PriceExaminationDropdown);
 			Controls.Add(label4);
-			Controls.Add(comboBox3);
+			Controls.Add(ExaminationDropdown);
 			Controls.Add(label3);
-			Controls.Add(comboBox2);
+			Controls.Add(PetExaminationDropdown);
 			Controls.Add(label2);
-			Controls.Add(comboBox1);
+			Controls.Add(CustomerExaminationDropdown);
 			Controls.Add(label1);
 			Controls.Add(label5);
 			Margin = new Padding(0);
@@ -215,18 +226,20 @@
 
 		private Label label5;
 		private Label label1;
-		private ComboBox comboBox1;
-		private ComboBox comboBox2;
+		private ComboBox CustomerExaminationDropdown;
+		private ComboBox PetExaminationDropdown;
 		private Label label2;
-		private ComboBox comboBox3;
+		private ComboBox ExaminationDropdown;
 		private Label label3;
-		private ComboBox comboBox4;
+		private ComboBox PriceExaminationDropdown;
 		private Label label4;
 		private ComboBox comboBox5;
 		private Label label6;
-		private ComboBox comboBox6;
+		private ComboBox EmployeeExaminationDropdown;
 		private Label label7;
 		private Button CreateExaminationButton;
 		private Button CancelExaminationButton;
+		private DateTimePicker DateTimePickerExamination;
+		private Label ErrorMessageExamination;
 	}
 }
