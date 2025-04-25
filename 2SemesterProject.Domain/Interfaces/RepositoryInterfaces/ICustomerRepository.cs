@@ -9,6 +9,10 @@ namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces
 {
 	public interface ICustomerRepository
 	{
-		public Task<Customer> GetAllCustomerAsync();
+		public Task<IEnumerable<Customer>> GetAllCustomersAsync();
+		public Customer GetCustomerById(int customerID);
+		public void UpdateCustomer(Customer customer);
+		public void DeleteCustomer(Customer customer);
+		public void CreateCustomer(Customer customer);
 	}
 }
