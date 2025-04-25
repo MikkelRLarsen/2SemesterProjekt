@@ -15,8 +15,8 @@ namespace _2SemesterProjekt
 {
 	public partial class AddCustomer : UserControl
 	{
-		ICustomerService _customerService;
-		string[] _customerTypes = { "Privat", "Erhverv" };
+		private readonly ICustomerService _customerService;
+		private readonly string[] _customerTypes = { "Privat", "Erhverv" };
 
 		public AddCustomer()
 		{
