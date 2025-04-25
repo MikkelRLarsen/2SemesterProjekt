@@ -13,15 +13,17 @@ namespace _2SemesterProject.Domain.Models
 
 		public List<Pet> Pets { get; }
 
-		public Customer(int customerID, string? customerName, string? customerEmail, string? customerAdress, string? customerType, int customerPhoneNumber)
+		public Customer(int customerID, string? firstName, string? email, string? adress, string? type, int phoneNumber)
 		{
 			CustomerID = customerID;
-			FirstName = customerName;
-			Email = customerEmail;
-			Adress = customerAdress;
-			Type = customerType;
-			PhoneNumber = customerPhoneNumber;
+			FirstName = firstName;
+			Email = email;
+			Adress = adress;
+			Type = type;
+			PhoneNumber = phoneNumber;
 		}
+
+
 
 
 		/// <summary>
