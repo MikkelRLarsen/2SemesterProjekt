@@ -1,6 +1,6 @@
 ﻿namespace _2SemesterProjekt.Pages
 {
-	partial class OrderPage
+	partial class KonsultationPage
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -30,17 +30,18 @@
 		{
 			pageNameLabel = new Label();
 			CustomerflowPanel = new FlowLayoutPanel();
+			CRUDPanel = new FlowLayoutPanel();
 			SuspendLayout();
 			// 
 			// pageNameLabel
 			// 
 			pageNameLabel.AutoSize = true;
 			pageNameLabel.Font = new Font("Gadugi", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			pageNameLabel.Location = new Point(473, 36);
+			pageNameLabel.Location = new Point(396, 39);
 			pageNameLabel.Name = "pageNameLabel";
-			pageNameLabel.Size = new Size(232, 77);
+			pageNameLabel.Size = new Size(418, 77);
 			pageNameLabel.TabIndex = 2;
-			pageNameLabel.Text = "Ordrer";
+			pageNameLabel.Text = "Konsultation";
 			// 
 			// CustomerflowPanel
 			// 
@@ -52,13 +53,21 @@
 			CustomerflowPanel.Size = new Size(709, 580);
 			CustomerflowPanel.TabIndex = 3;
 			// 
-			// OrderPage
+			// CRUDPanel
+			// 
+			CRUDPanel.Location = new Point(979, 429);
+			CRUDPanel.Name = "CRUDPanel";
+			CRUDPanel.Size = new Size(209, 301);
+			CRUDPanel.TabIndex = 4;
+			// 
+			// KonsultationPage
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
+			Controls.Add(CRUDPanel);
 			Controls.Add(CustomerflowPanel);
 			Controls.Add(pageNameLabel);
-			Name = "OrderPage";
+			Name = "KonsultationPage";
 			Size = new Size(1200, 825);
 			ResumeLayout(false);
 			PerformLayout();
@@ -68,5 +77,6 @@
 
 		private Label pageNameLabel;
 		private FlowLayoutPanel CustomerflowPanel;
+		private FlowLayoutPanel CRUDPanel;
 	}
 }
