@@ -31,7 +31,6 @@
             pageNameLabel = new Label();
             petNameTextbox = new TextBox();
             petSpeciesTextbox = new TextBox();
-            textBox3 = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -41,6 +40,7 @@
             button1 = new Button();
             button2 = new Button();
             petBirthdaySelector = new DateTimePicker();
+            ownerPhoneNumberTextbox = new TextBox();
             SuspendLayout();
             // 
             // pageNameLabel
@@ -67,13 +67,6 @@
             petSpeciesTextbox.Name = "petSpeciesTextbox";
             petSpeciesTextbox.Size = new Size(238, 23);
             petSpeciesTextbox.TabIndex = 5;
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(659, 208);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(238, 23);
-            textBox3.TabIndex = 6;
             // 
             // label1
             // 
@@ -158,10 +151,20 @@
             petBirthdaySelector.Size = new Size(237, 23);
             petBirthdaySelector.TabIndex = 17;
             // 
+            // ownerPhoneNumberTextbox
+            // 
+            ownerPhoneNumberTextbox.Location = new Point(659, 208);
+            ownerPhoneNumberTextbox.MaxLength = 8;
+            ownerPhoneNumberTextbox.Name = "ownerPhoneNumberTextbox";
+            ownerPhoneNumberTextbox.Size = new Size(238, 23);
+            ownerPhoneNumberTextbox.TabIndex = 18;
+            ownerPhoneNumberTextbox.KeyPress += ownerPhoneNumberTextbox_KeyPress;
+            // 
             // AddPetPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(ownerPhoneNumberTextbox);
             Controls.Add(petBirthdaySelector);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -171,7 +174,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBox3);
             Controls.Add(petSpeciesTextbox);
             Controls.Add(petNameTextbox);
             Controls.Add(pageNameLabel);
@@ -186,7 +188,6 @@
         private Label pageNameLabel;
         private TextBox petNameTextbox;
         private TextBox petSpeciesTextbox;
-        private TextBox textBox3;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -197,5 +198,6 @@
         private Button button1;
         private Button button2;
         private DateTimePicker petBirthdaySelector;
+        private TextBox ownerPhoneNumberTextbox;
     }
 }

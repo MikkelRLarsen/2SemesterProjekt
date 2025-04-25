@@ -22,5 +22,13 @@ namespace _2SemesterProjekt.Pages
             this.Controls.Clear(); // Clear existing content
             this.Controls.Add(new ProductPage()); // Load the new page
         }
+
+        private void ownerPhoneNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
