@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace _2SemesterProject.Domain.Models
 {
 	public class Customer
 	{
-		public int CustomerID { get; private set; }
+		public int CustomerID { get; init; }
 		public string? FirstName { get; private set; }
 		public string? LastName { get; private set; }
 		public string? Email { get; private set; }
@@ -12,7 +13,7 @@ namespace _2SemesterProject.Domain.Models
 		public string? Type { get; private set; }
 		public int PhoneNumber { get; private set; }
 
-		public List<Pet> Pets { get; }
+		public List<Pet>? Pets { get; } = new();
 
 		public Customer(int customerID, string? firstName, string? lastName, string? email, string? adress, string? type, int phoneNumber)
 		{
@@ -26,20 +27,56 @@ namespace _2SemesterProject.Domain.Models
 		}
 
 		/// <summary>
-		/// Checks if CustomerID is greater than 0 and if CustomerName contains any numbers or speciel characters
+		/// Acceptcriteria:
+		/// CustomerID is greater than 0,
+		/// FirstName and LastName only contains letters
+		/// Email contains @ and .
+		/// Adress only contains letters and digits
+		/// Type only contains letters
 		/// </summary>
 		/// <returns>Bool</returns>
 		protected bool InformationValid()
 		{
-			Debug.Assert(CustomerID != null, "CustomerID was null");
-			Debug.Assert(FirstName != null, "CustomerName was null");
+			Debug.Assert(CustomerID != 0, "CustomerID was null");
+			Debug.Assert(FirstName != null, "FirstName was null");
+			Debug.Assert(LastName != null, "LastName was null");
+			Debug.Assert(Email != null, "Email was null");
+			Debug.Assert(Adress != null, "Adress was null");
+			Debug.Assert(Type != null, "Type was null");
+			Debug.Assert(PhoneNumber != 0, "PhoneNumber was null");
 
-			if (CustomerID == 0) return false;
-			if (FirstName.Any(ch => !char.IsLetterOrDigit(ch))) return false;
-			if (FirstName.Any(ch => !char.IsDigit(ch))) return false;
+			if (CustomerID <= 0)
+			{
+				return false;
+			}
+
+			if (string.IsNullOrEmpty(FirstName) || string.IsNullOrEmpty(LastName) ||
+				!FirstName.All(char.IsLetter) || !LastName.All(char.IsLetter))
+			{
+				return false;
+			}
+
+			if (string.IsNullOrEmpty(Email) || !Email.Contains('@') || !Email.Contains('.'))
+			{
+				return false;
+			}
+
+			if (string.IsNullOrEmpty(Adress) || !Adress.All(char.IsLetterOrDigit))
+			{
+				return false;
+			}
+
+			if (string.IsNullOrEmpty(Type) || !Type.All(char.IsLetter))
+			{
+				return false;
+			}
+
+			if (PhoneNumber < 10000000 || PhoneNumber > 99999999)
+			{
+				return false;
+			}
 
 			return true;
-
 		}
 	}
 }
