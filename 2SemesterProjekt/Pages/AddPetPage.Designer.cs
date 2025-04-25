@@ -138,6 +138,7 @@
             button1.TabIndex = 15;
             button1.Text = "Annuller";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // button2
             // 

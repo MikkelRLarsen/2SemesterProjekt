@@ -16,5 +16,11 @@ namespace _2SemesterProjekt.Pages
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Controls.Clear(); // Clear existing content
+            this.Controls.Add(new ProductPage()); // Load the new page
+        }
     }
 }
