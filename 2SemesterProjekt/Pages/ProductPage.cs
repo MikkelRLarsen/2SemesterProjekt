@@ -15,6 +15,10 @@ namespace _2SemesterProjekt.Pages
         public ProductPage()
         {
             InitializeComponent();
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Find kæledyr", "FindCustomer.png", Color.SteelBlue));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kæledyr", "AddCustomer.png", Color.MediumSeaGreen));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Redigér kæledyr", "EditCustomer.png", Color.Goldenrod));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Fjern kæledyr", "RemoveCustomer.png", Color.IndianRed));
         }
     }
 }
