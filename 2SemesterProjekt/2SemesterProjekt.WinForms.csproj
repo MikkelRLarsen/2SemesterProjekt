@@ -14,7 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Resources\" />
     <Folder Include="WinForms.Templates\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\2SemesterProject.Domain\2SemesterProject.Domain.csproj" />
   </ItemGroup>
 
 </Project>
