@@ -1,4 +1,5 @@
-﻿using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
+using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -7,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _2SemesterProjekt.Repository.EntityFrameworkRepository;
 
 namespace _2SemesterProjekt
 {
@@ -20,11 +22,12 @@ namespace _2SemesterProjekt
 
 			// Register services
 			// Bll Services
-			services.AddScoped<ICustomerService, CustomerService>(); 
+			services.AddScoped<ICustomerService, CustomerService>();
 
 
 			// Dal Services
-			// services.AddTransient<ICustomerRepository, CustomerRepository>();
+			services.AddTransient<ICustomerRepository, CustomerRepositoryEF>();
+			services.AddTransient<EntityFramework>();
 
 
 			_serviceProvider = services.BuildServiceProvider();

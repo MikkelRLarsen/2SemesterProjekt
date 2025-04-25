@@ -130,7 +130,7 @@
 			textBoxAddress.Location = new Point(842, 381);
 			textBoxAddress.Name = "textBoxAddress";
 			textBoxAddress.Size = new Size(230, 41);
-			textBoxAddress.TabIndex = 1;
+			textBoxAddress.TabIndex = 4;
 			// 
 			// textBoxLastName
 			// 
@@ -138,7 +138,8 @@
 			textBoxLastName.Location = new Point(842, 284);
 			textBoxLastName.Name = "textBoxLastName";
 			textBoxLastName.Size = new Size(230, 41);
-			textBoxLastName.TabIndex = 1;
+			textBoxLastName.TabIndex = 2;
+			textBoxLastName.KeyPress += textBoxLastName_KeyPress;
 			// 
 			// textBoxFirstName
 			// 
@@ -147,6 +148,7 @@
 			textBoxFirstName.Name = "textBoxFirstName";
 			textBoxFirstName.Size = new Size(230, 41);
 			textBoxFirstName.TabIndex = 1;
+			textBoxFirstName.KeyPress += textBoxFirstName_KeyPress;
 			// 
 			// textBoxEmail
 			// 
@@ -154,15 +156,17 @@
 			textBoxEmail.Location = new Point(340, 381);
 			textBoxEmail.Name = "textBoxEmail";
 			textBoxEmail.Size = new Size(230, 41);
-			textBoxEmail.TabIndex = 1;
+			textBoxEmail.TabIndex = 3;
 			// 
 			// textBoxPhoneNumber
 			// 
 			textBoxPhoneNumber.Font = new Font("Gadugi", 18.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			textBoxPhoneNumber.Location = new Point(340, 474);
+			textBoxPhoneNumber.MaxLength = 8;
 			textBoxPhoneNumber.Name = "textBoxPhoneNumber";
 			textBoxPhoneNumber.Size = new Size(230, 41);
-			textBoxPhoneNumber.TabIndex = 1;
+			textBoxPhoneNumber.TabIndex = 5;
+			textBoxPhoneNumber.KeyPress += textBoxPhoneNumber_KeyPress;
 			// 
 			// panelCancel
 			// 

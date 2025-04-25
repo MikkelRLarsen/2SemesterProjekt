@@ -15,9 +15,8 @@ namespace _2SemesterProject.Domain.Models
 
 		public List<Pet>? Pets { get; } = new();
 
-		public Customer(int customerID, string? firstName, string? lastName, string? email, string? adress, string? type, int phoneNumber)
+		public Customer(string? firstName, string? lastName, string? email, string? adress, string? type, int phoneNumber)
 		{
-			CustomerID = customerID;
 			FirstName = firstName;
 			LastName = lastName;
 			Email = email;
@@ -42,18 +41,12 @@ namespace _2SemesterProject.Domain.Models
 		/// <returns>Bool</returns>
 		protected bool InformationValid()
 		{
-			Debug.Assert(CustomerID != 0, "CustomerID was null");
 			Debug.Assert(FirstName != null, "FirstName was null");
 			Debug.Assert(LastName != null, "LastName was null");
 			Debug.Assert(Email != null, "Email was null");
 			Debug.Assert(Adress != null, "Adress was null");
 			Debug.Assert(Type != null, "Type was null");
 			Debug.Assert(PhoneNumber != 0, "PhoneNumber was null");
-
-			if (CustomerID <= 0)
-			{
-				return false;
-			}
 
 			if (string.IsNullOrEmpty(FirstName) || string.IsNullOrEmpty(LastName) ||
 				!FirstName.All(char.IsLetter) || !LastName.All(char.IsLetter))
@@ -66,7 +59,7 @@ namespace _2SemesterProject.Domain.Models
 				return false;
 			}
 
-			if (string.IsNullOrEmpty(Adress) || !Adress.All(char.IsLetterOrDigit))
+			if (string.IsNullOrEmpty(Adress) || Adress.All(char.IsLetterOrDigit))
 			{
 				return false;
 			}

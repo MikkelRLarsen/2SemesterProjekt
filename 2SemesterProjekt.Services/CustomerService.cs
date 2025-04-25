@@ -1,4 +1,5 @@
-﻿using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
+using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProject.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,17 @@ namespace _2SemesterProjekt.Services
 {
 	public class CustomerService : ICustomerService
 	{
-		public void CreateCustomer(Customer customer)
+		private readonly ICustomerRepository _customerRepository;
+
+		public CustomerService(ICustomerRepository customerRepository) 
 		{
-			throw new NotImplementedException();
+			_customerRepository = customerRepository;
+		}
+
+		public bool CreateCustomer(Customer customer)
+		{
+			var result = _customerRepository.CreateCustomer(customer);
+			return result;
 		}
 
 		public void DeleteCustomer(Customer customer)
