@@ -6,6 +6,7 @@ namespace _2SemesterProject.Domain.Models
 	{
 		public int CustomerID { get; private set; }
 		public string? FirstName { get; private set; }
+		public string? LastName { get; private set; }
 		public string? Email { get; private set; }
 		public string? Adress { get; private set; }
 		public string? Type { get; private set; }
@@ -13,18 +14,16 @@ namespace _2SemesterProject.Domain.Models
 
 		public List<Pet> Pets { get; }
 
-		public Customer(int customerID, string? firstName, string? email, string? adress, string? type, int phoneNumber)
+		public Customer(int customerID, string? firstName, string? lastName, string? email, string? adress, string? type, int phoneNumber)
 		{
 			CustomerID = customerID;
 			FirstName = firstName;
+			LastName = lastName;
 			Email = email;
 			Adress = adress;
 			Type = type;
 			PhoneNumber = phoneNumber;
 		}
-
-
-
 
 		/// <summary>
 		/// Checks if CustomerID is greater than 0 and if CustomerName contains any numbers or speciel characters
