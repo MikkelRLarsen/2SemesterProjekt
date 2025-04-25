@@ -25,7 +25,7 @@ namespace _2SemesterProjekt
         private void InitializeUIDesign()
         {
             customerIdLabel.Text = _customer.CustomerID.ToString();
-            customerNameLabel.Text = _customer.CustomerName;
+            customerNameLabel.Text = _customer.FirstName;
         }
     }
 }
