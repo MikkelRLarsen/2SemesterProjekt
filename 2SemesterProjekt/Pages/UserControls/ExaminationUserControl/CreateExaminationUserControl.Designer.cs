@@ -41,6 +41,8 @@
 			label6 = new Label();
 			comboBox6 = new ComboBox();
 			label7 = new Label();
+			CreateExaminationButton = new Button();
+			CancelExaminationButton = new Button();
 			SuspendLayout();
 			// 
 			// label5
@@ -49,9 +51,9 @@
 			label5.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label5.Location = new Point(204, 149);
 			label5.Name = "label5";
-			label5.Size = new Size(50, 19);
+			label5.Size = new Size(58, 19);
 			label5.TabIndex = 4;
-			label5.Text = "Navn:";
+			label5.Text = "Kunde:";
 			// 
 			// label1
 			// 
@@ -83,11 +85,11 @@
 			// 
 			label2.AutoSize = true;
 			label2.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label2.Location = new Point(204, 189);
+			label2.Location = new Point(185, 189);
 			label2.Name = "label2";
-			label2.Size = new Size(50, 19);
+			label2.Size = new Size(70, 19);
 			label2.TabIndex = 7;
-			label2.Text = "Navn:";
+			label2.Text = "Kæledyr:";
 			// 
 			// comboBox3
 			// 
@@ -101,11 +103,11 @@
 			// 
 			label3.AutoSize = true;
 			label3.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label3.Location = new Point(204, 230);
+			label3.Location = new Point(152, 230);
 			label3.Name = "label3";
-			label3.Size = new Size(50, 19);
+			label3.Size = new Size(103, 19);
 			label3.TabIndex = 9;
-			label3.Text = "Navn:";
+			label3.Text = "Konsultation:";
 			// 
 			// comboBox4
 			// 
@@ -119,11 +121,11 @@
 			// 
 			label4.AutoSize = true;
 			label4.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label4.Location = new Point(204, 270);
+			label4.Location = new Point(219, 270);
 			label4.Name = "label4";
-			label4.Size = new Size(50, 19);
+			label4.Size = new Size(39, 19);
 			label4.TabIndex = 11;
-			label4.Text = "Navn:";
+			label4.Text = "Pris:";
 			// 
 			// comboBox5
 			// 
@@ -137,11 +139,11 @@
 			// 
 			label6.AutoSize = true;
 			label6.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label6.Location = new Point(204, 316);
+			label6.Location = new Point(219, 316);
 			label6.Name = "label6";
-			label6.Size = new Size(50, 19);
+			label6.Size = new Size(35, 19);
 			label6.TabIndex = 13;
-			label6.Text = "Navn:";
+			label6.Text = "Tid:";
 			// 
 			// comboBox6
 			// 
@@ -155,16 +157,40 @@
 			// 
 			label7.AutoSize = true;
 			label7.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label7.Location = new Point(204, 365);
+			label7.Location = new Point(152, 365);
 			label7.Name = "label7";
-			label7.Size = new Size(50, 19);
+			label7.Size = new Size(102, 19);
 			label7.TabIndex = 15;
-			label7.Text = "Navn:";
+			label7.Text = "Medarbejder:";
+			// 
+			// CreateExaminationButton
+			// 
+			CreateExaminationButton.BackColor = Color.MediumAquamarine;
+			CreateExaminationButton.FlatStyle = FlatStyle.Popup;
+			CreateExaminationButton.Location = new Point(410, 463);
+			CreateExaminationButton.Name = "CreateExaminationButton";
+			CreateExaminationButton.Size = new Size(170, 58);
+			CreateExaminationButton.TabIndex = 18;
+			CreateExaminationButton.Text = "Opret Konsultation";
+			CreateExaminationButton.UseVisualStyleBackColor = false;
+			// 
+			// CancelExaminationButton
+			// 
+			CancelExaminationButton.BackColor = Color.IndianRed;
+			CancelExaminationButton.FlatStyle = FlatStyle.Popup;
+			CancelExaminationButton.Location = new Point(107, 463);
+			CancelExaminationButton.Name = "CancelExaminationButton";
+			CancelExaminationButton.Size = new Size(170, 58);
+			CancelExaminationButton.TabIndex = 17;
+			CancelExaminationButton.Text = "Annuller";
+			CancelExaminationButton.UseVisualStyleBackColor = false;
 			// 
 			// CreateExaminationUserControl
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
+			Controls.Add(CreateExaminationButton);
+			Controls.Add(CancelExaminationButton);
 			Controls.Add(comboBox6);
 			Controls.Add(label7);
 			Controls.Add(comboBox5);
@@ -200,5 +226,7 @@
 		private Label label6;
 		private ComboBox comboBox6;
 		private Label label7;
+		private Button CreateExaminationButton;
+		private Button CancelExaminationButton;
 	}
 }
