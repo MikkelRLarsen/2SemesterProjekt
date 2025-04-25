@@ -11,9 +11,9 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 	internal class EntityFramework : DbContext
 	{
 		DbSet<Customer> Customers { get; set;}
-		DbSet<Order> Orders { get; set;}
-		DbSet<ProductLine> ProductLines { get; set;}
-		DbSet<Product> Products { get; set;}
+		DbSet<Pet> Pets { get; set;}
+		DbSet<Examination> Examinations { get; set;}
+		DbSet<Employee> Employees { get; set;}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -33,32 +33,32 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Product>().ToTable("Product");
-			modelBuilder.Entity<Order>().ToTable("Order");
-			modelBuilder.Entity<ProductLine>().ToTable("ProductLine");
-			modelBuilder.Entity<Customer>().ToTable("Customer");
+			modelBuilder.Entity<Customer>().ToTable("Customers");
+			modelBuilder.Entity<Pet>().ToTable("Pet");
+			modelBuilder.Entity<Examination>().ToTable("Examination");
+			modelBuilder.Entity<Employee>().ToTable("Employee");
 
-			// Relations
-			modelBuilder.Entity<ProductLine>()
-				.HasOne(pl => pl.Order)
-				.WithMany(o => o.ProductLines)
-				.HasForeignKey(pl => pl.OrderID);
+			//Relations
+			modelBuilder.Entity<Customer>()
+				.HasMany(c => c.Pets)
+				.WithOne(p => p.Customer)
+				.HasForeignKey(p => p.CustomerID);
 
-			modelBuilder.Entity<Product>()
-				.HasMany(p => p.ProductLines)
-				.WithOne(pl => pl.Product)
-				.HasForeignKey(p => p.ProductID);
+			modelBuilder.Entity<Examination>()
+				.HasOne(e => e.Pet)
+				.WithMany(p => p.Examinations)
+				.HasForeignKey(e => e.ExaminationID);
 
-			modelBuilder.Entity<Order>()
-				.HasOne(o => o.Customer)
-				.WithMany(c => c.Order)
-				.HasForeignKey(o => o.CustomerID);
+			modelBuilder.Entity<Examination>()
+				.HasOne(e => e.Employee)
+				.WithMany(em => em.Examinations)
+				.HasForeignKey(e => e.ExaminationID);
 
 			// Primary Keys
-			modelBuilder.Entity<Product>().HasKey(p => p.ProductID);
-			modelBuilder.Entity<Order>().HasKey(o => o.OrderID);
-			modelBuilder.Entity<ProductLine>().HasKey(pl => pl.ProductLineID);
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
+			modelBuilder.Entity<Pet>().HasKey(p => p.PetID);
+			modelBuilder.Entity<Examination>().HasKey(e => e.ExaminationID);
+			modelBuilder.Entity<Employee>().HasKey(em => em.Employee);
 		}
 	}
 }
