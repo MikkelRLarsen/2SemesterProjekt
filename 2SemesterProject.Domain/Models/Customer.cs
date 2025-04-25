@@ -1,26 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace _2SemesterProject.Domain.Models
 {
 	public class Customer
 	{
 		public int CustomerID { get; private set; }
-		public string CustomerName { get; private set; }
+		public string? FirstName { get; private set; }
+		public string? Email { get; private set; }
+		public string? Adress { get; private set; }
+		public string? Type { get; private set; }
+		public int PhoneNumber { get; private set; }
 
-		public List<Order> Order { get;}
+		public List<Pet> Pets { get; }
 
-		public Customer(int customerID, string customerName)
+		public Customer(int customerID, string? customerName, string? customerEmail, string? customerAdress, string? customerType, int customerPhoneNumber)
 		{
 			CustomerID = customerID;
-			CustomerName = customerName;
-
-			if (!InformationValid()) throw new ArgumentException("Customer Information not valid");
+			FirstName = customerName;
+			Email = customerEmail;
+			Adress = customerAdress;
+			Type = customerType;
+			PhoneNumber = customerPhoneNumber;
 		}
+
 
 		/// <summary>
 		/// Checks if CustomerID is greater than 0 and if CustomerName contains any numbers or speciel characters
@@ -29,11 +31,11 @@ namespace _2SemesterProject.Domain.Models
 		protected bool InformationValid()
 		{
 			Debug.Assert(CustomerID != null, "CustomerID was null");
-			Debug.Assert(CustomerName != null, "CustomerName was null");
+			Debug.Assert(FirstName != null, "CustomerName was null");
 
 			if (CustomerID == 0) return false;
-			if (CustomerName.Any(ch => !char.IsLetterOrDigit(ch))) return false;
-			if (CustomerName.Any(ch => !char.IsDigit(ch))) return false;
+			if (FirstName.Any(ch => !char.IsLetterOrDigit(ch))) return false;
+			if (FirstName.Any(ch => !char.IsDigit(ch))) return false;
 
 			return true;
 
