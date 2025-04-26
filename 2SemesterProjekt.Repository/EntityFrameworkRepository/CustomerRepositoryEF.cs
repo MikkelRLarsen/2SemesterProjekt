@@ -21,7 +21,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		{
 			// Check if the customer is already in DB
 			var existingCustomer = _db.Customers
-				.FirstOrDefault(c => c.Email == customer.Email);
+				.FirstOrDefault(c => c.PhoneNumber == customer.PhoneNumber);
 
 			if (existingCustomer == null) // Add to DB
 			{
