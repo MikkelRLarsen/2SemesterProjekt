@@ -17,12 +17,12 @@ namespace _2SemesterProject.Domain.Models
 
 		public List<Pet>? Pets { get; } = new();
 
-		public Customer(string? firstName, string? lastName, string? email, string? adress, string? type, int phoneNumber)
+		public Customer(string? firstName, string? lastName, string? email, string? address, string? type, int phoneNumber)
 		{
 			FirstName = firstName;
 			LastName = lastName;
 			Email = email;
-			Address = adress;
+			Address = address;
 			Type = type;
 			PhoneNumber = phoneNumber;
 
