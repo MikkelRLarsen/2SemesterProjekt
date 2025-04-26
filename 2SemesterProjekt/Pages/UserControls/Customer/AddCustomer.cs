@@ -26,7 +26,7 @@ namespace _2SemesterProjekt
 			_customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
 
 			// Add buttons
-			panelCancel.Controls.Add(new ButtonPanel("Anuller", Color.IndianRed, CancelButton_Click));
+			panelCancel.Controls.Add(new ButtonPanel("Annuller", Color.IndianRed, CancelButton_Click));
 			panelCreate.Controls.Add(new ButtonPanel("Tilføj kunde", Color.MediumSeaGreen, CreateButton_Click));
 
 			// Add content for dropdown
