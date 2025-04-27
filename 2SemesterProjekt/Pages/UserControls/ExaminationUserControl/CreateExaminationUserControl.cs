@@ -58,7 +58,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private void CustomerExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
         {
             Customer customerChoice = CustomerExaminationDropdown.SelectedItem as Customer;
-            
+
             //string customerChoice = CustomerExaminationDropdown.SelectedItem.ToString();
         }
 
@@ -85,6 +85,28 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private void EmployeeExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
         {
             string employeeChoice = EmployeeExaminationDropdown.SelectedItem.ToString();
+        }
+
+        private void CreateExaminationButton_Click(object sender, EventArgs e)
+        {
+            //Customer selectedCustomer = CustomerExaminationDropdown.SelectedItem as Customer;
+            
+            Pet selectedPet = PetExaminationDropdown.SelectedItem as Pet;
+            
+            Employee selectedEmployee = EmployeeExaminationDropdown.SelectedItem as Employee;
+            
+            DateTime selectedDate = DateTimePickerExamination.Value;
+            
+            Examination selectedExamination = ExaminationDropdown.SelectedItem as Examination;
+
+            Examination newExamination = new Examination(
+                examinationID: 0,
+                petID: selectedPet.PetID,
+                employeeID: selectedEmployee.EmployeeID,
+                date: selectedDate,
+                type: selectedExamination.Type,
+                price: selectedExamination.Price
+                );
         }
     }
 }

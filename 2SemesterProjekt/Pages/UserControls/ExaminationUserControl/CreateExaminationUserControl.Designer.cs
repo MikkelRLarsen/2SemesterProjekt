@@ -177,6 +177,7 @@
             CreateExaminationButton.TabIndex = 18;
             CreateExaminationButton.Text = "Opret Konsultation";
             CreateExaminationButton.UseVisualStyleBackColor = false;
+            CreateExaminationButton.Click += CreateExaminationButton_Click;
             // 
             // CancelExaminationButton
             // 
