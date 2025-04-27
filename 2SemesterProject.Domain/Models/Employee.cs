@@ -32,7 +32,7 @@ namespace _2SemesterProject.Domain.Models
 
 			if (EmployeeID == 0) return false;
 			if (FirstName.Any(ch => !char.IsLetterOrDigit(ch))) return false;
-			if (FirstName.Any(ch => !char.IsDigit(ch))) return false;
+			//if (FirstName.Any(ch => !char.IsDigit(ch))) return false;
 
 			return true;
 		}
