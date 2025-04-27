@@ -37,8 +37,8 @@
             label4 = new Label();
             comboBox1 = new ComboBox();
             label5 = new Label();
-            button1 = new Button();
-            button2 = new Button();
+            cancelButton = new Button();
+            createButton = new Button();
             petBirthdaySelector = new DateTimePicker();
             ownerPhoneNumberTextbox = new TextBox();
             SuspendLayout();
@@ -121,28 +121,28 @@
             label5.TabIndex = 14;
             label5.Text = "Dyrelæge";
             // 
-            // button1
+            // cancelButton
             // 
-            button1.BackColor = Color.IndianRed;
-            button1.FlatStyle = FlatStyle.Popup;
-            button1.Location = new Point(356, 564);
-            button1.Name = "button1";
-            button1.Size = new Size(170, 58);
-            button1.TabIndex = 15;
-            button1.Text = "Annuller";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            cancelButton.BackColor = Color.IndianRed;
+            cancelButton.FlatStyle = FlatStyle.Popup;
+            cancelButton.Location = new Point(356, 564);
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new Size(170, 58);
+            cancelButton.TabIndex = 15;
+            cancelButton.Text = "Annuller";
+            cancelButton.UseVisualStyleBackColor = false;
+            cancelButton.Click += button1_Click;
             // 
-            // button2
+            // createButton
             // 
-            button2.BackColor = Color.MediumAquamarine;
-            button2.FlatStyle = FlatStyle.Popup;
-            button2.Location = new Point(659, 564);
-            button2.Name = "button2";
-            button2.Size = new Size(170, 58);
-            button2.TabIndex = 16;
-            button2.Text = "Tilføj dette kæledyr";
-            button2.UseVisualStyleBackColor = false;
+            createButton.BackColor = Color.MediumAquamarine;
+            createButton.FlatStyle = FlatStyle.Popup;
+            createButton.Location = new Point(659, 564);
+            createButton.Name = "createButton";
+            createButton.Size = new Size(170, 58);
+            createButton.TabIndex = 16;
+            createButton.Text = "Tilføj dette kæledyr";
+            createButton.UseVisualStyleBackColor = false;
             // 
             // petBirthdaySelector
             // 
@@ -166,8 +166,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(ownerPhoneNumberTextbox);
             Controls.Add(petBirthdaySelector);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(createButton);
+            Controls.Add(cancelButton);
             Controls.Add(label5);
             Controls.Add(comboBox1);
             Controls.Add(label4);
@@ -195,8 +195,8 @@
         private TextBox petBirthdayTextbox;
         private ComboBox comboBox1;
         private Label label5;
-        private Button button1;
-        private Button button2;
+        private Button cancelButton;
+        private Button createButton;
         private DateTimePicker petBirthdaySelector;
         private TextBox ownerPhoneNumberTextbox;
     }

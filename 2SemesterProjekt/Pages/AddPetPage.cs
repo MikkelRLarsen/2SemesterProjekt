@@ -15,9 +15,10 @@ namespace _2SemesterProjekt.Pages
         public AddPetPage()
         {
             InitializeComponent();
+            petBirthdaySelector.MaxDate = DateTime.Today;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Controls.Clear(); // Clear existing content
             this.Controls.Add(new ProductPage()); // Load the new page
