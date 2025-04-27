@@ -131,7 +131,7 @@
             cancelButton.TabIndex = 15;
             cancelButton.Text = "Annuller";
             cancelButton.UseVisualStyleBackColor = false;
-            cancelButton.Click += button1_Click;
+            cancelButton.Click += cancelButton_Click;
             // 
             // createButton
             // 
