@@ -11,9 +11,27 @@ namespace _2SemesterProjekt.Services
     class ExaminationService : IExaminationService
     {
 
-        public void CreateExamination(Customer customerChoice, Pet petChoice, Examination examinationChoice, )
+        
+        public Task<IEnumerable<Examination>> GetAllExaminationsAsync()
         {
-
+            throw new NotImplementedException();
         }
+        public Examination GetExaminationById(int examinationId)
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdateExamination(Examination examination)
+        {
+            throw new NotImplementedException();
+        }
+        public void DeleteExamination(Examination examination)
+        {
+            throw new NotImplementedException();
+        }
+        public void CreateExamination(Examination examination)
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }
