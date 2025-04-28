@@ -18,7 +18,6 @@ namespace _2SemesterProjekt
     public partial class AddCustomer : UserControl
     {
         private readonly ICustomerService _customerService;
-        private readonly string[] _customerTypes = { "Privat", "Erhverv" };
 
         public AddCustomer()
         {
@@ -32,7 +31,8 @@ namespace _2SemesterProjekt
             panelCreate.Controls.Add(new ButtonPanel("Tilføj kunde", Color.MediumSeaGreen, CreateButton_Click));
 
             // Add content for dropdown
-            comboBoxType.DataSource = _customerTypes;
+            var customerTypes = _customerService.GetCustomerTypes();
+            comboBoxType.DataSource = customerTypes;
         }
 
         // Eventhandler for cancel button

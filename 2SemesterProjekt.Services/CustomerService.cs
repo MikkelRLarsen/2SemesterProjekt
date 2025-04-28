@@ -12,8 +12,9 @@ namespace _2SemesterProjekt.Services
 	public class CustomerService : ICustomerService
 	{
 		private readonly ICustomerRepository _customerRepository;
+        private readonly string[] _customerTypes = { "Privat", "Erhverv" };
 
-		public CustomerService(ICustomerRepository customerRepository) 
+        public CustomerService(ICustomerRepository customerRepository) 
 		{
 			_customerRepository = customerRepository;
 		}
@@ -33,6 +34,11 @@ namespace _2SemesterProjekt.Services
 		{
 			throw new NotImplementedException();
 		}
+
+		public string[] GetCustomerTypes()
+		{
+			return _customerTypes;
+        }
 
 		public Customer GetCustomerById(int customerID)
 		{
