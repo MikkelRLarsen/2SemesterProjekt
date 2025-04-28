@@ -31,7 +31,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             InitializeComponent();
 
-            /*
+            
             CustomerExaminationDropdown.DataSource = _customerService.GetAllCustomersAsync();
             CustomerExaminationDropdown.DisplayMember = "FirstName";
 
@@ -46,7 +46,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
             EmployeeExaminationDropdown.DataSource = _employeeService.GetAllEmployeeAsync();
             EmployeeExaminationDropdown.DisplayMember = "FirstName";
-            */
+            
 
 
             
