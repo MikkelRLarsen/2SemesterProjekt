@@ -1,18 +1,21 @@
-﻿using System;
+﻿using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
+using _2SemesterProjekt.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
-using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
-using _2SemesterProjekt.Domain.Models;
 
-namespace _2SemesterProjekt.Services
+namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-    class ExaminationService : IExaminationService
+    class ExaminationRepositoryEF : IExaminationRepository
     {
-        private readonly IExaminationRepository _examinationRepository;
+        private readonly EntityFramework _db;
         
+        public ExaminationRepositoryEF(EntityFramework db)
+        {
+            _db = db;
+        }
         public Task<IEnumerable<Examination>> GetAllExaminationsAsync()
         {
             throw new NotImplementedException();
@@ -33,18 +36,6 @@ namespace _2SemesterProjekt.Services
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<string> GetAllExaminationTypes()
-        {
-            List<string> examinationTypes = new List<string>()
-            {
-                "Konsulation", "Operation", "Behandling"
-            };
-
-            return examinationTypes;
-        }
-        public double GetAllExaminationPrices(string examinationType)
-        {
-            return 100;
-        }
+        
     }
 }

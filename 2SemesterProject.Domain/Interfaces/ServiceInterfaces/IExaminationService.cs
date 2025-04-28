@@ -14,5 +14,9 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 		public void UpdateExamination(Examination examination);
 		public void DeleteExamination(Examination examination);
 		public void CreateExamination(Examination examination);
-	}
+
+		public IEnumerable<string> GetAllExaminationTypes();
+		public double GetAllExaminationPrices(string examinationType);
+
+    }
 }
