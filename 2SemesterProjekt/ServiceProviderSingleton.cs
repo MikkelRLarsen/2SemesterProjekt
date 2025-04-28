@@ -1,5 +1,5 @@
-﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
-using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
+using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -22,8 +22,12 @@ namespace _2SemesterProjekt
 
 			// Register services
 			// Bll Services
+ 
+			services.AddScoped<IEmployeeService, IEmployeeService>();
+
 			services.AddScoped<ICustomerService, CustomerService>();
 
+			services.AddScoped<IExaminationService, IExaminationService>();
 
 			// Dal Services
 			services.AddTransient<ICustomerRepository, CustomerRepositoryEF>();

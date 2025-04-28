@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using _2SemesterProject.Domain.Models;
-using _2SemesterProject.Domain.Interfaces;
+using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 
 namespace _2SemesterProjekt.Pages
 {
