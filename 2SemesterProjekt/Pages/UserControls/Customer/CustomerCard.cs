@@ -21,11 +21,10 @@ namespace _2SemesterProjekt
 			//_customer = customer;
 			//InitializeUIDesign();
    //     }
-
-   //     private void InitializeUIDesign()
-   //     {
-   //         customerIdLabel.Text = _customer.CustomerID.ToString();
-   //         customerNameLabel.Text = _customer.CustomerName;
-   //     }
+        private void InitializeUIDesign()
+        {
+            customerIdLabel.Text = _customer.CustomerID.ToString();
+            customerNameLabel.Text = _customer.FirstName;
+        }
     }
 }

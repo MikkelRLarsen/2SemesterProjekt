@@ -1,4 +1,5 @@
 ﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
+using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProject.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -6,41 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
+namespace _2SemesterProjekt.Services
 {
-	public class CustomerRepositoryEF : ICustomerRepository
+	public class CustomerService : ICustomerService
 	{
-		private readonly EntityFramework _db;
+		private readonly ICustomerRepository _customerRepository;
 
-		public CustomerRepositoryEF(EntityFramework db)
+		public CustomerService(ICustomerRepository customerRepository) 
 		{
-			_db = db;
+			_customerRepository = customerRepository;
 		}
 
 		public bool CreateCustomer(Customer customer)
 		{
-			// Check if the customer is already in DB
-			var existingCustomer = _db.Customers
-				.FirstOrDefault(c => c.PhoneNumber == customer.PhoneNumber);
-
-			if (existingCustomer == null) // Add to DB
-			{
-				_db.Customers.Add(customer);
-				_db.SaveChanges();
-				return true;
-			}
-			else // If hit return and dont add it to DB
-			{
-				return false;
-			}
+			var result = _customerRepository.CreateCustomer(customer);
+			return result;
 		}
 
 		public void DeleteCustomer(Customer customer)
-		{
-			throw new NotImplementedException();
-		}
-
-		public async Task<Customer> GetAllCustomerAsync()
 		{
 			throw new NotImplementedException();
 		}

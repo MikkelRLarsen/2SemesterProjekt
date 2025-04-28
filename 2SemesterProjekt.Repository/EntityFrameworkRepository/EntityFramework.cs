@@ -10,7 +10,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
 	public class EntityFramework : DbContext
 	{
-		DbSet<Customer> Customers { get; set;}
+		public DbSet<Customer> Customers { get; set;}
 		public DbSet<Pet> Pets { get; set;}
 		DbSet<Examination> Examinations { get; set;}
 		DbSet<Employee> Employees { get; set;}
@@ -58,7 +58,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
 			modelBuilder.Entity<Pet>().HasKey(p => p.PetID);
 			modelBuilder.Entity<Examination>().HasKey(e => e.ExaminationID);
-			modelBuilder.Entity<Employee>().HasKey(em => em.Employee);
+			modelBuilder.Entity<Employee>().HasKey(em => em.EmployeeID);
 		}
 	}
 }

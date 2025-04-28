@@ -21,4 +21,8 @@
     <Folder Include="TestModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\2SemesterProject.Domain\2SemesterProject.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
