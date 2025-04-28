@@ -1,5 +1,5 @@
-﻿using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
-using _2SemesterProject.Domain.Models;
+﻿using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -37,18 +37,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             ServiceProvider allServices = ServiceProviderSingleton.GetServiceProvider();
 
             _examinationService = allServices.GetService<IExaminationService>();
-            
             _employeeService = allServices.GetService<IEmployeeService>();
-            
             _customerService = allServices.GetService<ICustomerService>();
-
             _petService = allServices.GetService<IPetService>();
 
             CustomerExaminationDropdown.DataSource = _customerService.GetAllCustomersAsync();
             CustomerExaminationDropdown.DisplayMember = "FirstName";
-
-            PetExaminationDropdown.DataSource = _petService.GetAllPetsByCustomerIdAsync();
-            PetExaminationDropdown.DisplayMember = "Name";
 
             ExaminationDropdown.DataSource = _examinationService.GetAllExaminationsAsync();
             ExaminationDropdown.DisplayMember = "Type";
@@ -64,7 +58,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             PetExaminationDropdown.Enabled = true;
 
             Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
-            PetExaminationDropdown.DataSource = await _petService.GetAllPetsFromCustomerID(kunde.CustomerID);
+            PetExaminationDropdown.DataSource = await _petService.GetAllPetsFromCustomerIDAsync(kunde.CustomerID);
             PetExaminationDropdown.DisplayMember = "Name";
         }
 

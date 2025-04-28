@@ -1,6 +1,6 @@
-﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
-using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
-using _2SemesterProject.Domain.Models;
+﻿using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
+using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +59,7 @@ namespace _2SemesterProjekt.Services
             }
         }
 
-		public Task<IEnumerable<Pet>> GetAllPetsFromCustomerID(int customerID)
+		public Task<IEnumerable<Pet>> GetAllPetsFromCustomerIDAsync(int customerID)
 		{
 			throw new NotImplementedException();
 		}

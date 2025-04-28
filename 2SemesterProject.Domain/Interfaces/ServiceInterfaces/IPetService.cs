@@ -13,7 +13,7 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 		public Pet GetPetById(int petId);
 		public void UpdatePet(Pet pet);
 		public void DeletePet(Pet pet);
-		public Task<IEnumerable<Pet>> GetAllPetsFromCustomerID(int customerID);
+		public Task<IEnumerable<Pet>> GetAllPetsFromCustomerIDAsync(int customerID);
 		public string CreatePet(Pet pet, int ownerPhoneNumber);
 
 	}
