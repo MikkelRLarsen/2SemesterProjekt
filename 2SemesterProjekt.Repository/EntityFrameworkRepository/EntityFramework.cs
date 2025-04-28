@@ -58,7 +58,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
 			modelBuilder.Entity<Pet>().HasKey(p => p.PetID);
 			modelBuilder.Entity<Examination>().HasKey(e => e.ExaminationID);
-			modelBuilder.Entity<Employee>().HasKey(em => em.Employee);
+			modelBuilder.Entity<Employee>().HasKey(em => em.EmployeeID);
 		}
 	}
 }

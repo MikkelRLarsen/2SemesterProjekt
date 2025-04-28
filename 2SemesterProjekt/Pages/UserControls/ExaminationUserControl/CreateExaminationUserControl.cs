@@ -7,20 +7,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProject.Domain.Models;
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
     public partial class CreateExaminationUserControl : UserControl
     {
+
+        // To use GetAllCustomersAsync();
+        private readonly ICustomerService _customerService;
+
+        // To use GetAllPetsAsync();
+        private readonly IPetService _petService;
+
+        // To use GetAllExaminationsAsync();
+        private readonly IExaminationService _examinationService;
+
+        // To use GetAllEmployeesAsync();
+        private readonly IEmployeeService _employeeService;
+
         public CreateExaminationUserControl()
         {
             InitializeComponent();
 
+            /*
+            CustomerExaminationDropdown.DataSource = _customerService.GetAllCustomersAsync();
+            CustomerExaminationDropdown.DisplayMember = "FirstName";
+
+            PetExaminationDropdown.DataSource = _petService.GetAllPetsAsync();
+            PetExaminationDropdown.DisplayMember = "Name";
+
+            ExaminationDropdown.DataSource = _examinationService.GetAllExaminationsAsync();
+            ExaminationDropdown.DisplayMember = "Type";
+
+            PriceExaminationDropdown.DataSource = _examinationService.GetAllExaminationsAsync();
+            PriceExaminationDropdown.DisplayMember = "Price";
+
+            EmployeeExaminationDropdown.DataSource = _employeeService.GetAllEmployeeAsync();
+            EmployeeExaminationDropdown.DisplayMember = "FirstName";
+            */
+
+
+            
             //Test customer:
             List<Customer> customers = new List<Customer>();
             Customer customer1 = new Customer(1, "Allan", "Allansen", "aa@aa.dk", "Allansvej 11", "Privat", 25262728);
+            Customer customer2 = new Customer(2, "Charlie", "Charliesen", "cc@cc.dk", "Charlievej 12", "Erhverv", 12131415);
             customers.Add(customer1);
+            customers.Add(customer2);
 
             //Test pet:
             List<Pet> pets = new List<Pet>();
@@ -37,8 +72,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             Examination examination1 = new Examination(1, 1, 1, DateTime.Today, "Konsultation", 100);
             examinations.Add(examination1);
 
-            CustomerExaminationDropdown.DataSource = customers;
-            CustomerExaminationDropdown.DisplayMember = "FirstName";
+            CustomerExaminationDropdown.DataSource = customers
+            .Select(c => new
+            {
+                c,
+                FullName = $"{c.FirstName} {c.LastName}"
+            })
+            .ToList();
+            CustomerExaminationDropdown.DisplayMember = "FullName";
 
             PetExaminationDropdown.DataSource = pets;
             PetExaminationDropdown.DisplayMember = "Name";
@@ -51,7 +92,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
             EmployeeExaminationDropdown.DataSource = employees;
             EmployeeExaminationDropdown.DisplayMember = "FirstName";
-
+            
 
         }
 
@@ -90,13 +131,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private void CreateExaminationButton_Click(object sender, EventArgs e)
         {
             //Customer selectedCustomer = CustomerExaminationDropdown.SelectedItem as Customer;
-            
+
             Pet selectedPet = PetExaminationDropdown.SelectedItem as Pet;
-            
+
             Employee selectedEmployee = EmployeeExaminationDropdown.SelectedItem as Employee;
-            
+
             DateTime selectedDate = DateTimePickerExamination.Value;
-            
+
             Examination selectedExamination = ExaminationDropdown.SelectedItem as Examination;
 
             Examination newExamination = new Examination(
@@ -107,6 +148,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                 type: selectedExamination.Type,
                 price: selectedExamination.Price
                 );
+
+            _examinationService.CreateExamination(newExamination);
+        }
+
+        private void CancelExaminationButton_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
