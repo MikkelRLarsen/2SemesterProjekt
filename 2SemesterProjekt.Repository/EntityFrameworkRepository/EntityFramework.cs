@@ -8,10 +8,10 @@ using _2SemesterProject.Domain.Models;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-	internal class EntityFramework : DbContext
+	public class EntityFramework : DbContext
 	{
 		DbSet<Customer> Customers { get; set;}
-		DbSet<Pet> Pets { get; set;}
+		public DbSet<Pet> Pets { get; set;}
 		DbSet<Examination> Examinations { get; set;}
 		DbSet<Employee> Employees { get; set;}
 
