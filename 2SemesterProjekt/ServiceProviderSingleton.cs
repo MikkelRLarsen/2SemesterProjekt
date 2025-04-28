@@ -1,5 +1,5 @@
-﻿using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
-using _2SemesterProject.Domain.Models;
+﻿using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

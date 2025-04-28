@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace _2SemesterProject.Domain.Models
+namespace _2SemesterProjekt.Domain.Models
 {
 	public class Customer
 	{
