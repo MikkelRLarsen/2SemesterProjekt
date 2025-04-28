@@ -40,11 +40,6 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			throw new NotImplementedException();
 		}
 
-		public async Task<Customer> GetAllCustomerAsync()
-		{
-			throw new NotImplementedException();
-		}
-
 		public Task<IEnumerable<Customer>> GetAllCustomersAsync()
 		{
 			throw new NotImplementedException();

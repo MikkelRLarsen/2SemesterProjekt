@@ -137,11 +137,11 @@ namespace _2SemesterProjekt
                 customerPhoneNumber = Convert.ToInt32(textBoxPhoneNumber.Text);
             }
 
-            if (customerPhoneNumber < 10000000 || customerPhoneNumber > 99999999)
+            if (textBoxPhoneNumber.Text[0] == '0' || customerPhoneNumber < 10000000 || customerPhoneNumber > 99999999)
             {
                 textBoxPhoneNumber.ForeColor = Color.White;
                 textBoxPhoneNumber.BackColor = Color.LightCoral;
-                displayMessage += "Telefonnummer skal være et 8-cifret tal.\n";
+                displayMessage += "Telefonnummer skal være et helt 8-cifret tal.\n";
             }
 
             if (displayMessage == string.Empty) // If there is no errors, then create customer
@@ -152,15 +152,23 @@ namespace _2SemesterProjekt
                     textBoxEmail.Text,     // Email
                     textBoxAddress.Text,   // Address
                     comboBoxType.Text,     // Type
-                    Convert.ToInt32(textBoxPhoneNumber.Text) // PhoneNumber
-            );
+                    customerPhoneNumber // PhoneNumber
+                );
 
-                _customerService.CreateCustomer(customer);
-                MessageBox.Show($"{customer.FirstName} er oprettet i systemet");
+                bool isCreationSuccessful = _customerService.CreateCustomer(customer); // Checks if the customer already is in DB
+
+                if (isCreationSuccessful)
+                {
+                    MessageBox.Show($"{customer.FirstName} er oprettet i systemet", "Kunnde oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"{customer.FirstName} findes allerede!", "Kunde findes allerede", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else // Show error to user
             {
-                MessageBox.Show(displayMessage, "Fejl i indtastning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(displayMessage, "Fejl i indtastning", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
