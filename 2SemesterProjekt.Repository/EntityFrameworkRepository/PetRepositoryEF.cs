@@ -33,7 +33,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         }
         public bool CreatePet(Pet pet)
         {
-            var existingPet = _db.Pets.FirstOrDefault(p => p.Name == pet.Name && p.CustomerID == pet.CustomerID);
+            var existingPet = _db.Pets.FirstOrDefault(p => p.Name == pet.Name && p.CustomerID == pet.CustomerID && p.Species == pet.Species);
 
             if (existingPet != null)
             {
