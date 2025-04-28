@@ -1,5 +1,6 @@
 ﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
 using _2SemesterProject.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,9 +46,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			throw new NotImplementedException();
 		}
 
-		public Task<IEnumerable<Customer>> GetAllCustomersAsync()
+		public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
 		{
-			throw new NotImplementedException();
+			return await _db.Customers
+				.Include(c => c.Pets)
+				.ToListAsync();
 		}
 
 		public Customer GetCustomerById(int customerID)

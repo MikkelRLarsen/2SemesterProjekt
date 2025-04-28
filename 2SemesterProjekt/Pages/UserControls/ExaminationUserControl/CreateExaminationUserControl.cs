@@ -1,5 +1,6 @@
 ﻿using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProject.Domain.Models;
+using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
 	public partial class CreateExaminationUserControl : UserControl
 	{
-		ICustomerService _custerService;
+		ICustomerService _customerService;
 		IEmployeeService _employeeService;
 		IPetService _petService;
 		IExaminationService _examinationService;
@@ -29,10 +30,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 		private async void CustomerExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			PetExaminationDropdown.Enabled = true;
+			if (CustomerExaminationDropdown.SelectedItem != null)
+			{
+				PetExaminationDropdown.Enabled = true;
 
-			Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
-			PetExaminationDropdown.DataSource = await _petService.GetAllPetsFromCustomerID(kunde.CustomerID);
+				Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
+				PetExaminationDropdown.DataSource = kunde.Pets;
+			}
 		}
 
 		private async void PetExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
@@ -89,14 +93,21 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			ServiceProvider allServices = ServiceProviderSingleton.GetServiceProvider();
 
-			_custerService = allServices.GetService<ICustomerService>();
+			_customerService = allServices.GetService<ICustomerService>();
 			_employeeService = allServices.GetService<IEmployeeService>();
 			_petService = allServices.GetService<IPetService>();
 			_examinationService = allServices.GetService<IExaminationService>();
 
-			CustomerExaminationDropdown.DataSource = await _custerService.GetAllCustomersAsync();
+			CustomerExaminationDropdown.DataSource = await GetAllCustomers();
 
 			SetAllDisplayMembers();
+		}
+
+		private async Task<List<Customer>> GetAllCustomers()
+		{
+			List<Customer> customers = new List<Customer>();
+			customers.AddRange(await _customerService.GetAllCustomersAsync());
+			return customers;
 		}
 
 		private void SetAllDisplayMembers()

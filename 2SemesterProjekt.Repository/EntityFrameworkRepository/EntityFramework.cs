@@ -33,7 +33,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Customer>().ToTable("Customers");
+			modelBuilder.Entity<Customer>().ToTable("Customer");
 			modelBuilder.Entity<Pet>().ToTable("Pet");
 			modelBuilder.Entity<Examination>().ToTable("Examination");
 			modelBuilder.Entity<Employee>().ToTable("Employee");

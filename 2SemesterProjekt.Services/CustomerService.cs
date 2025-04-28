@@ -29,9 +29,9 @@ namespace _2SemesterProjekt.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<IEnumerable<Customer>> GetAllCustomersAsync()
+		public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
 		{
-			throw new NotImplementedException();
+			return await _customerRepository.GetAllCustomersAsync();
 		}
 
 		public Customer GetCustomerById(int customerID)
