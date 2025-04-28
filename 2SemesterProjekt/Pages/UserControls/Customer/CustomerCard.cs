@@ -13,7 +13,7 @@ namespace _2SemesterProjekt
 {
     public partial class CustomerCard : UserControl
     {
-   //     private Customer _customer; // Holds Customer data
+        private Customer _customer; // Holds Customer data
 
    //     public CustomerCard(Customer customer)
    //     {

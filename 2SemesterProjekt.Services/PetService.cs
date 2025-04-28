@@ -35,13 +35,12 @@ namespace _2SemesterProjekt.Services
         {
             throw new NotImplementedException();
         }
-        public string CreatePet(Pet pet, int ownerPhoneNumber) /* This method is set to a string,
-                                                                because it can return several
+        public string CreatePet(Pet pet, int ownerPhoneNumber) /* This method can return different
                                                                 messages to the UI, so it
                                                                 can generate either an error
                                                                 message or success message. */
         {
-            int ownerId = _customerRepository.GetCustomerByPhoneNumber(ownerPhoneNumber);
+            int ownerId = _customerRepository.GetCustomerIDByPhoneNumber(ownerPhoneNumber);
             if (ownerId == 0 || ownerId == null)
             {
                 return "Customer Not Found";

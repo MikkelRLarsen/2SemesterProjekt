@@ -59,5 +59,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		{
 			throw new NotImplementedException();
 		}
+
+		public int GetCustomerIDByPhoneNumber(int ownerPhoneNumber)
+		{
+			var owner = _db.Customers.FirstOrDefault(c => c.PhoneNumber == ownerPhoneNumber);
+			return owner.CustomerID;
+		}
 	}
 }
