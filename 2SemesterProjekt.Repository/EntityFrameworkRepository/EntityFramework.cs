@@ -27,13 +27,13 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		protected static string GetConnectionString()
 		{
 			string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-			string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString");
+			string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString.txt");
 			return File.ReadAllText(fullName);
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Customer>().ToTable("Customers");
+			modelBuilder.Entity<Customer>().ToTable("Customer");
 			modelBuilder.Entity<Pet>().ToTable("Pet");
 			modelBuilder.Entity<Examination>().ToTable("Examination");
 			modelBuilder.Entity<Employee>().ToTable("Employee");

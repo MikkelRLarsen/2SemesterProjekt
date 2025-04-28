@@ -152,15 +152,23 @@ namespace _2SemesterProjekt
                     textBoxEmail.Text,     // Email
                     textBoxAddress.Text,   // Address
                     comboBoxType.Text,     // Type
-                    Convert.ToInt32(textBoxPhoneNumber.Text) // PhoneNumber
-            );
+                    customerPhoneNumber // PhoneNumber
+                );
 
-                _customerService.CreateCustomer(customer);
-                MessageBox.Show($"{customer.FirstName} er oprettet i systemet");
+                bool isCreationSuccessful = _customerService.CreateCustomer(customer); // Checks if the customer already is in DB
+
+                if (isCreationSuccessful)
+                {
+                    MessageBox.Show($"{customer.FirstName} er oprettet i systemet", "Kunnde oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"{customer.FirstName} findes allerede!", "Kunde findes allerede", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else // Show error to user
             {
-                MessageBox.Show(displayMessage, "Fejl i indtastning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(displayMessage, "Fejl i indtastning", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
