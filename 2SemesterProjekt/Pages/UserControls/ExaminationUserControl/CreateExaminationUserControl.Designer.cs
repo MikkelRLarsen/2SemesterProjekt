@@ -178,6 +178,7 @@
 			CancelExaminationButton.TabIndex = 17;
 			CancelExaminationButton.Text = "Annuller";
 			CancelExaminationButton.UseVisualStyleBackColor = false;
+			CancelExaminationButton.Click += CancelExaminationButton_Click;
 			// 
 			// DateTimePickerExamination
 			// 

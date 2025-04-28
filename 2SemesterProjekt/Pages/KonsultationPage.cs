@@ -21,7 +21,7 @@ namespace _2SemesterProjekt.Pages
 		private void CreateExamination_Click(object sender, EventArgs e)
 		{
 			ExaminationFlowPanel.Controls.Clear();
-			ExaminationFlowPanel.Controls.Add(new CreateExaminationUserControl());
+			ExaminationFlowPanel.Controls.Add(new CreateExaminationUserControl(ExaminationFlowPanel));
 		}
 
 		private void KonsultationPage_Load(object sender, EventArgs e)

@@ -19,10 +19,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		IEmployeeService _employeeService;
 		IPetService _petService;
 		IExaminationService _examinationService;
+		FlowLayoutPanel _konsultationPanel;
 
-		public CreateExaminationUserControl()
+		public CreateExaminationUserControl(FlowLayoutPanel konsultationPanel)
 		{
 			InitializeComponent();
+			_konsultationPanel = konsultationPanel;
 		}
 
 		private async void CustomerExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
@@ -62,6 +64,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 		private void CreateExaminationButton_Click(object sender, EventArgs e)
 		{
+
 			try
 			{
 				Examination newExamination = new Examination(0
@@ -72,6 +75,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 					, Convert.ToDouble(PriceExaminationDisplay.Text));
 
 				_examinationService.CreateExamination(newExamination);
+
+				_konsultationPanel.Controls.Clear();
 
 			}
 			catch (Exception ex)
@@ -90,7 +95,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			_examinationService = allServices.GetService<IExaminationService>();
 
 			CustomerExaminationDropdown.DataSource = await _custerService.GetAllCustomersAsync();
-			
+
 			SetAllDisplayMembers();
 		}
 
@@ -99,6 +104,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			CustomerExaminationDropdown.DisplayMember = "FirstName";
 			PetExaminationDropdown.DisplayMember = "Name";
 			EmployeeExaminationDropdown.DisplayMember = "FirstName";
+		}
+
+		private void CancelExaminationButton_Click(object sender, EventArgs e)
+		{
+			_konsultationPanel.Controls.Clear ();
 		}
 	}
 }
