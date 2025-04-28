@@ -63,6 +63,7 @@ namespace _2SemesterProjekt
             buttonNameLabel.Text = buttonName;
             _buttonColor = color;
             this.BackColor = color;
+			pictureBox.Image = null;
 
             // Connects click event to this panel and all child components
             if (onClick != null)

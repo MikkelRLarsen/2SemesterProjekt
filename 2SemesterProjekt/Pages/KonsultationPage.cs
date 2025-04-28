@@ -16,18 +16,20 @@ namespace _2SemesterProjekt.Pages
 		public KonsultationPage()
 		{
 			InitializeComponent();
-			CRUDPanel.Controls.Add(new ButtonPanel("Find kunde", "FindCustomer.png", Color.SteelBlue));
-			CRUDPanel.Controls.Add(new ButtonPanel("Tilføj kunde", "AddCustomer.png", Color.MediumSeaGreen,CreateExamination_Click));
-			CRUDPanel.Controls.Add(new ButtonPanel("Redigér kunde", "EditCustomer.png", Color.Goldenrod));
-			CRUDPanel.Controls.Add(new ButtonPanel("Fjern kunde", "RemoveCustomer.png", Color.IndianRed));
-
-
 		}
 
 		private void CreateExamination_Click(object sender, EventArgs e)
 		{
 			ExaminationFlowPanel.Controls.Clear();
 			ExaminationFlowPanel.Controls.Add(new CreateExaminationUserControl());
+		}
+
+		private void KonsultationPage_Load(object sender, EventArgs e)
+		{
+			CRUDPanel.Controls.Add(new ButtonPanel("Find kunde", "FindCustomer.png", Color.SteelBlue));
+			CRUDPanel.Controls.Add(new ButtonPanel("Tilføj kunde", "AddCustomer.png", Color.MediumSeaGreen, CreateExamination_Click));
+			CRUDPanel.Controls.Add(new ButtonPanel("Redigér kunde", "EditCustomer.png", Color.Goldenrod));
+			CRUDPanel.Controls.Add(new ButtonPanel("Fjern kunde", "RemoveCustomer.png", Color.IndianRed));
 		}
 	}
 }

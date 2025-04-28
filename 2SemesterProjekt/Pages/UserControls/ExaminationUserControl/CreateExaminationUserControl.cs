@@ -1,4 +1,7 @@
-﻿using System;
+﻿using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProject.Domain.Models;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -56,12 +59,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             EmployeeExaminationDropdown.DataSource = _employeeService.GetAllEmployeeAsync();
             EmployeeExaminationDropdown.DisplayMember = "FirstName";
         }
-
-        private void CustomerExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
+        private async void CustomerExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Customer customerChoice = CustomerExaminationDropdown.SelectedItem as Customer;
+            PetExaminationDropdown.Enabled = true;
 
-            //string customerChoice = CustomerExaminationDropdown.SelectedItem.ToString();
+            Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
+            PetExaminationDropdown.DataSource = await _petService.GetAllPetsFromCustomerID(kunde.CustomerID);
+            PetExaminationDropdown.DisplayMember = "Name";
         }
 
         private void PetExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
@@ -117,5 +121,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             
         }
-    }
+  
+
+		
+	}
+
 }
