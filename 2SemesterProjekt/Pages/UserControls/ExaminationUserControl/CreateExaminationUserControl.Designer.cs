@@ -35,7 +35,6 @@
 			label2 = new Label();
 			ExaminationDropdown = new ComboBox();
 			label3 = new Label();
-			PriceExaminationDropdown = new ComboBox();
 			label4 = new Label();
 			label6 = new Label();
 			EmployeeExaminationDropdown = new ComboBox();
@@ -44,6 +43,7 @@
 			CancelExaminationButton = new Button();
 			DateTimePickerExamination = new DateTimePicker();
 			ErrorMessageExamination = new Label();
+			PriceExaminationDisplay = new TextBox();
 			SuspendLayout();
 			// 
 			// label5
@@ -83,6 +83,7 @@
 			PetExaminationDropdown.Name = "PetExaminationDropdown";
 			PetExaminationDropdown.Size = new Size(207, 23);
 			PetExaminationDropdown.TabIndex = 8;
+			PetExaminationDropdown.SelectedIndexChanged += PetExaminationDropdown_SelectedIndexChanged;
 			// 
 			// label2
 			// 
@@ -102,6 +103,7 @@
 			ExaminationDropdown.Name = "ExaminationDropdown";
 			ExaminationDropdown.Size = new Size(207, 23);
 			ExaminationDropdown.TabIndex = 10;
+			ExaminationDropdown.SelectedIndexChanged += ExaminationDropdown_SelectedIndexChanged;
 			// 
 			// label3
 			// 
@@ -112,15 +114,6 @@
 			label3.Size = new Size(103, 19);
 			label3.TabIndex = 9;
 			label3.Text = "Konsultation:";
-			// 
-			// PriceExaminationDropdown
-			// 
-			PriceExaminationDropdown.Enabled = false;
-			PriceExaminationDropdown.FormattingEnabled = true;
-			PriceExaminationDropdown.Location = new Point(260, 270);
-			PriceExaminationDropdown.Name = "PriceExaminationDropdown";
-			PriceExaminationDropdown.Size = new Size(207, 23);
-			PriceExaminationDropdown.TabIndex = 12;
 			// 
 			// label4
 			// 
@@ -150,6 +143,7 @@
 			EmployeeExaminationDropdown.Name = "EmployeeExaminationDropdown";
 			EmployeeExaminationDropdown.Size = new Size(207, 23);
 			EmployeeExaminationDropdown.TabIndex = 16;
+			EmployeeExaminationDropdown.SelectedIndexChanged += EmployeeExaminationDropdown_SelectedIndexChanged;
 			// 
 			// label7
 			// 
@@ -163,7 +157,8 @@
 			// 
 			// CreateExaminationButton
 			// 
-			CreateExaminationButton.BackColor = Color.MediumAquamarine;
+			CreateExaminationButton.BackColor = Color.DarkGray;
+			CreateExaminationButton.Enabled = false;
 			CreateExaminationButton.FlatStyle = FlatStyle.Popup;
 			CreateExaminationButton.Location = new Point(410, 463);
 			CreateExaminationButton.Name = "CreateExaminationButton";
@@ -171,6 +166,7 @@
 			CreateExaminationButton.TabIndex = 18;
 			CreateExaminationButton.Text = "Opret Konsultation";
 			CreateExaminationButton.UseVisualStyleBackColor = false;
+			CreateExaminationButton.Click += CreateExaminationButton_Click;
 			// 
 			// CancelExaminationButton
 			// 
@@ -190,6 +186,7 @@
 			DateTimePickerExamination.Name = "DateTimePickerExamination";
 			DateTimePickerExamination.Size = new Size(207, 23);
 			DateTimePickerExamination.TabIndex = 19;
+			DateTimePickerExamination.ValueChanged += DateTimePickerExamination_ValueChanged;
 			// 
 			// ErrorMessageExamination
 			// 
@@ -201,10 +198,20 @@
 			ErrorMessageExamination.Text = "ErrorMessage";
 			ErrorMessageExamination.Visible = false;
 			// 
+			// PriceExaminationDisplay
+			// 
+			PriceExaminationDisplay.BorderStyle = BorderStyle.FixedSingle;
+			PriceExaminationDisplay.Enabled = false;
+			PriceExaminationDisplay.Location = new Point(260, 270);
+			PriceExaminationDisplay.Name = "PriceExaminationDisplay";
+			PriceExaminationDisplay.Size = new Size(207, 23);
+			PriceExaminationDisplay.TabIndex = 21;
+			// 
 			// CreateExaminationUserControl
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
+			Controls.Add(PriceExaminationDisplay);
 			Controls.Add(ErrorMessageExamination);
 			Controls.Add(DateTimePickerExamination);
 			Controls.Add(CreateExaminationButton);
@@ -212,7 +219,6 @@
 			Controls.Add(EmployeeExaminationDropdown);
 			Controls.Add(label7);
 			Controls.Add(label6);
-			Controls.Add(PriceExaminationDropdown);
 			Controls.Add(label4);
 			Controls.Add(ExaminationDropdown);
 			Controls.Add(label3);
@@ -237,7 +243,6 @@
 		private Label label2;
 		private ComboBox ExaminationDropdown;
 		private Label label3;
-		private ComboBox PriceExaminationDropdown;
 		private Label label4;
 		private ComboBox comboBox5;
 		private Label label6;
@@ -247,5 +252,6 @@
 		private Button CancelExaminationButton;
 		private DateTimePicker DateTimePickerExamination;
 		private Label ErrorMessageExamination;
+		private TextBox PriceExaminationDisplay;
 	}
 }

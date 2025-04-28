@@ -18,6 +18,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		ICustomerService _custerService;
 		IEmployeeService _employeeService;
 		IPetService _petService;
+		IExaminationService _examinationService;
 
 		public CreateExaminationUserControl()
 		{
@@ -31,6 +32,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			_custerService = allServices.GetService<ICustomerService>();
 			_employeeService = allServices.GetService<IEmployeeService>();
 			_petService = allServices.GetService<IPetService>();
+			_examinationService = allServices.GetService<IExaminationService>();
 
 			CustomerExaminationDropdown.DataSource = await _custerService.GetAllCustomersAsync();
 			CustomerExaminationDropdown.DisplayMember = "FirstName";
@@ -43,6 +45,53 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
 			PetExaminationDropdown.DataSource = await _petService.GetAllPetsFromCustomerID(kunde.CustomerID);
 			PetExaminationDropdown.DisplayMember = "Name";
+		}
+
+		private async void PetExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ExaminationDropdown.DataSource = await _examinationService.GetAllExaminationsAsync(); // Not implemented Yet
+			ExaminationDropdown.Enabled = true;
+		}
+
+		private void ExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			PriceExaminationDisplay.Text = ""; //Get Price for Examination
+			DateTimePickerExamination.Enabled = true;
+		}
+
+		private async void DateTimePickerExamination_ValueChanged(object sender, EventArgs e)
+		{
+			EmployeeExaminationDropdown.Enabled = true;
+			if (EmployeeExaminationDropdown.DataSource != null)
+			{
+				EmployeeExaminationDropdown.DataSource = await _employeeService.GetAllEmployeeAsync();
+			}
+		}
+
+		private void EmployeeExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			CreateExaminationButton.Enabled = true;
+			CreateExaminationButton
+		}
+
+		private void CreateExaminationButton_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				Examination newExamination = new Examination(0
+					, (PetExaminationDropdown.SelectedItem as Pet).PetID
+					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
+					, DateTimePickerExamination.Value
+					, ExaminationDropdown.SelectedItem as String
+					, Convert.ToDouble(PriceExaminationDisplay.Text));
+
+				_examinationService.CreateExamination(newExamination);
+
+			}
+			catch (Exception ex)
+			{
+				ErrorMessageExamination.Text = ex.Message; 
+			}			
 		}
 	}
 }
