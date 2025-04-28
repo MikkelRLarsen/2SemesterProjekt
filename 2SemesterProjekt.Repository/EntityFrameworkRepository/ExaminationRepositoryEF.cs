@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-    class ExaminationRepositoryEF : IExaminationRepository
+    public class ExaminationRepositoryEF : IExaminationRepository
     {
         private readonly EntityFramework _db;
         
@@ -34,7 +34,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         }
         public void CreateExamination(Examination examination)
         {
-            throw new NotImplementedException();
+            _db.Examinations.Add(examination);
+            _db.SaveChanges();
         }
         
     }

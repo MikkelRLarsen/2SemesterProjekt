@@ -17,9 +17,8 @@ namespace _2SemesterProjekt.Domain.Models
 		public Pet Pet { get; }
 		public Employee Employee { get; }
 
-		public Examination(int examinationID, int petID, int employeeID, DateTime date, string type, double price)
+		public Examination(int petID, int employeeID, DateTime date, string type, double price)
 		{
-			ExaminationID = examinationID;
 			PetID = petID;
 			EmployeeID = employeeID;
 			Date = date;

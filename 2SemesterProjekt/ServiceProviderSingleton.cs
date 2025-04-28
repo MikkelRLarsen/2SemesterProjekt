@@ -26,14 +26,16 @@ namespace _2SemesterProjekt
 			services.AddScoped<ICustomerService, CustomerService>();
 			services.AddScoped<IEmployeeService, EmployeeService>();
 			services.AddScoped<IPetService, PetService>();
+			services.AddScoped<IExaminationService, ExaminationService>();
 
 
 
 			// Dal Services
+			services.AddTransient<EntityFramework>();
 			services.AddTransient<ICustomerRepository, CustomerRepositoryEF>();
 			services.AddTransient<IEmployeeRepository,  EmployeeRepositoryEF>();
 			services.AddTransient<IPetRepository, PetRepositoryEF>();
-			services.AddTransient<EntityFramework>();
+			services.AddTransient<IExaminationRepository, ExaminationRepositoryEF>();
 
 
 			_serviceProvider = services.BuildServiceProvider();

@@ -9,11 +9,16 @@ using _2SemesterProjekt.Domain.Models;
 
 namespace _2SemesterProjekt.Services
 {
-    class ExaminationService : IExaminationService
+    public class ExaminationService : IExaminationService
     {
         private readonly IExaminationRepository _examinationRepository;
-        
-        public Task<IEnumerable<Examination>> GetAllExaminationsAsync()
+
+		public ExaminationService(IExaminationRepository examinationRepository)
+		{
+			_examinationRepository = examinationRepository;
+		}
+
+		public Task<IEnumerable<Examination>> GetAllExaminationsAsync()
         {
             throw new NotImplementedException();
         }
@@ -31,9 +36,9 @@ namespace _2SemesterProjekt.Services
         }
         public void CreateExamination(Examination examination)
         {
-            throw new NotImplementedException();
+            _examinationRepository.CreateExamination(examination);
         }
-        public IEnumerable<string> GetAllExaminationTypes()
+        public async Task<IEnumerable<string>> GetAllExaminationTypesAsync()
         {
             List<string> examinationTypes = new List<string>()
             {

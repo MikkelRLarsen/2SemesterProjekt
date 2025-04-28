@@ -192,11 +192,12 @@
 			// ErrorMessageExamination
 			// 
 			ErrorMessageExamination.AutoSize = true;
-			ErrorMessageExamination.Location = new Point(311, 422);
+			ErrorMessageExamination.Location = new Point(307, 426);
 			ErrorMessageExamination.Name = "ErrorMessageExamination";
 			ErrorMessageExamination.Size = new Size(78, 15);
 			ErrorMessageExamination.TabIndex = 20;
 			ErrorMessageExamination.Text = "ErrorMessage";
+			ErrorMessageExamination.TextAlign = ContentAlignment.MiddleCenter;
 			ErrorMessageExamination.Visible = false;
 			// 
 			// PriceExaminationDisplay
@@ -207,6 +208,7 @@
 			PriceExaminationDisplay.Name = "PriceExaminationDisplay";
 			PriceExaminationDisplay.Size = new Size(207, 23);
 			PriceExaminationDisplay.TabIndex = 21;
+			PriceExaminationDisplay.TextChanged += PriceExaminationDisplay_TextChanged;
 			// 
 			// CreateExaminationUserControl
 			// 

@@ -47,12 +47,12 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<Examination>()
 				.HasOne(e => e.Pet)
 				.WithMany(p => p.Examinations)
-				.HasForeignKey(e => e.ExaminationID);
+				.HasForeignKey(e => e.PetID);
 
 			modelBuilder.Entity<Examination>()
 				.HasOne(e => e.Employee)
 				.WithMany(em => em.Examinations)
-				.HasForeignKey(e => e.ExaminationID);
+				.HasForeignKey(e => e.EmployeeID);
 
 			// Primary Keys
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);

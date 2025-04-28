@@ -10,7 +10,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 	{
 		ICustomerService _customerService;
 		IEmployeeService _employeeService;
-		IPetService _petService;
 		IExaminationService _examinationService;
 		FlowLayoutPanel _konsultationPanel;
 
@@ -33,13 +32,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 		private async void PetExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			ExaminationDropdown.DataSource = await _examinationService.GetAllExaminationsAsync(); // Not implemented Yet
+			ExaminationDropdown.DataSource = await _examinationService.GetAllExaminationTypesAsync();
 			ExaminationDropdown.Enabled = true;
 		}
 
-		private void ExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
+		private async void ExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			PriceExaminationDisplay.Text = ""; //Get Price for Examination
+			PriceExaminationDisplay.Text = Convert.ToString(_examinationService.GetAllExaminationPrices(ExaminationDropdown.SelectedItem as string));
 			DateTimePickerExamination.Enabled = true;
 		}
 
@@ -60,8 +59,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			try
 			{
-				Examination newExamination = new Examination(0
-					, (PetExaminationDropdown.SelectedItem as Pet).PetID
+				Examination newExamination = new Examination((PetExaminationDropdown.SelectedItem as Pet).PetID
 					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
 					, DateTimePickerExamination.Value
 					, ExaminationDropdown.SelectedItem as String
@@ -74,6 +72,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			}
 			catch (Exception ex)
 			{
+				ErrorMessageExamination.Visible = true;
 				ErrorMessageExamination.Text = ex.Message;
 			}
 		}
@@ -84,12 +83,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			_customerService = allServices.GetService<ICustomerService>();
 			_employeeService = allServices.GetService<IEmployeeService>();
-			_petService = allServices.GetService<IPetService>();
 			_examinationService = allServices.GetService<IExaminationService>();
 
 			CustomerExaminationDropdown.DataSource = await GetAllCustomers();
 
 			SetAllDisplayMembers();
+			DateTimePickerExamination.MinDate = DateTime.Now;
 		}
 
 		private async Task<List<Customer>> GetAllCustomers()
@@ -108,7 +107,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 		private void CancelExaminationButton_Click(object sender, EventArgs e)
 		{
-			_konsultationPanel.Controls.Clear ();
+			_konsultationPanel.Controls.Clear();
+		}
+
+		private void PriceExaminationDisplay_TextChanged(object sender, EventArgs e)
+		{
+			PriceExaminationDisplay.BackColor = Color.White;
 		}
 	}
 }
