@@ -58,7 +58,13 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		public int GetCustomerIDByPhoneNumber(int ownerPhoneNumber)
 		{
 			var owner = _db.Customers.FirstOrDefault(c => c.PhoneNumber == ownerPhoneNumber);
-			return owner.CustomerID;
+			if (owner != null){
+                return owner.CustomerID;
+            }
+			else
+			{
+				return 0;
+			}
 		}
 	}
 }

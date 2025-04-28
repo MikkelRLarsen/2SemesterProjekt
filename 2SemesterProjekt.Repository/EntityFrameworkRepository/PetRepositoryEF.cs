@@ -31,20 +31,23 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             throw new NotImplementedException();
         }
-        public bool CreatePet(Pet pet)
+        public bool CheckIfPetExists(Pet pet)
         {
             var existingPet = _db.Pets.FirstOrDefault(p => p.Name == pet.Name && p.CustomerID == pet.CustomerID && p.Species == pet.Species);
 
-            if (existingPet != null)
+            if (existingPet == null)
             {
                 return false;
             }
             else
             {
-                _db.Pets.Add(pet);
-                _db.SaveChanges();
                 return true;
             }
+        }
+        public void CreatePet(Pet pet)
+        {
+            _db.Pets.Add(pet);
+            _db.SaveChanges();
         }
     }
 }

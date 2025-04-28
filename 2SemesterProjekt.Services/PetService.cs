@@ -35,13 +35,11 @@ namespace _2SemesterProjekt.Services
         {
             throw new NotImplementedException();
         }
-        public string CreatePet(string petName, string petSpecies, DateTime petBirthday, int phoneNumber) /* This method can return different
-                                                                messages to the UI, so it
-                                                                can generate either an error
-                                                                message or success message. */
+
+        public string ValidatePet(string petName, string petSpecies, DateTime petBirthday, int phoneNumber)
         {
             int ownerId = _customerRepository.GetCustomerIDByPhoneNumber(phoneNumber);
-            if (ownerId == 0 || ownerId == null)
+            if (ownerId == 0)
             {
                 return "Kunden med dette telefonnummer findes ikke i systemet.";
             }
@@ -52,17 +50,25 @@ namespace _2SemesterProjekt.Services
             else
             {
                 Pet pet = new Pet(ownerId, petName, petSpecies, petBirthday);
-                bool petCreation = _petRepository.CreatePet(pet);
-
-                if (!petCreation)
+                bool petExists = _petRepository.CheckIfPetExists(pet);
+                if (petExists)
                 {
                     return "Kæledyret findes allerede i databasen.";
                 }
                 else
                 {
+                    CreatePet(pet);
                     return $"{pet.Name} er blevet tilføjet til systemet.";
                 }
             }
+
+        }
+        public void CreatePet(Pet pet) /* This method can return different
+                                                                messages to the UI, so it
+                                                                can generate either an error
+                                                                message or success message. */
+        {
+            _petRepository.CreatePet(pet);
         }
     }
 }

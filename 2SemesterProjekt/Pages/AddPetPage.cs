@@ -49,7 +49,7 @@ namespace _2SemesterProjekt.Pages
             else
             {
                 int customerPhoneNumber = Convert.ToInt32(ownerPhoneNumberTextbox.Text);
-                NotificationMessage(_petService.CreatePet(petNameTextbox.Text, petSpeciesTextbox.Text, petBirthdaySelector.Value, customerPhoneNumber));
+                NotificationMessage(_petService.ValidatePet(petNameTextbox.Text, petSpeciesTextbox.Text, petBirthdaySelector.Value, customerPhoneNumber));
             }
         }
 
