@@ -73,9 +73,11 @@
 			CustomerExaminationDropdown.Name = "CustomerExaminationDropdown";
 			CustomerExaminationDropdown.Size = new Size(207, 23);
 			CustomerExaminationDropdown.TabIndex = 6;
+			CustomerExaminationDropdown.SelectedIndexChanged += CustomerExaminationDropdown_SelectedIndexChanged;
 			// 
 			// PetExaminationDropdown
 			// 
+			PetExaminationDropdown.Enabled = false;
 			PetExaminationDropdown.FormattingEnabled = true;
 			PetExaminationDropdown.Location = new Point(260, 189);
 			PetExaminationDropdown.Name = "PetExaminationDropdown";
@@ -94,6 +96,7 @@
 			// 
 			// ExaminationDropdown
 			// 
+			ExaminationDropdown.Enabled = false;
 			ExaminationDropdown.FormattingEnabled = true;
 			ExaminationDropdown.Location = new Point(260, 230);
 			ExaminationDropdown.Name = "ExaminationDropdown";
@@ -112,6 +115,7 @@
 			// 
 			// PriceExaminationDropdown
 			// 
+			PriceExaminationDropdown.Enabled = false;
 			PriceExaminationDropdown.FormattingEnabled = true;
 			PriceExaminationDropdown.Location = new Point(260, 270);
 			PriceExaminationDropdown.Name = "PriceExaminationDropdown";
@@ -140,6 +144,7 @@
 			// 
 			// EmployeeExaminationDropdown
 			// 
+			EmployeeExaminationDropdown.Enabled = false;
 			EmployeeExaminationDropdown.FormattingEnabled = true;
 			EmployeeExaminationDropdown.Location = new Point(260, 365);
 			EmployeeExaminationDropdown.Name = "EmployeeExaminationDropdown";
@@ -180,6 +185,7 @@
 			// 
 			// DateTimePickerExamination
 			// 
+			DateTimePickerExamination.Enabled = false;
 			DateTimePickerExamination.Location = new Point(260, 316);
 			DateTimePickerExamination.Name = "DateTimePickerExamination";
 			DateTimePickerExamination.Size = new Size(207, 23);

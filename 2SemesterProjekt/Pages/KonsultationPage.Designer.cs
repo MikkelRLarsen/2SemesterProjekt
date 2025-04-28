@@ -69,6 +69,7 @@
 			Controls.Add(pageNameLabel);
 			Name = "KonsultationPage";
 			Size = new Size(1200, 825);
+			Load += KonsultationPage_Load;
 			ResumeLayout(false);
 			PerformLayout();
 		}

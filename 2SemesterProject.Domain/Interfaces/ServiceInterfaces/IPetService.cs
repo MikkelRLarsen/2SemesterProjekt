@@ -14,5 +14,6 @@ namespace _2SemesterProject.Domain.Interfaces.ServiceInterfaces
 		public void UpdatePet(Pet pet);
 		public void DeletePet(Pet pet);
 		public void CreatPet(Pet pet);
+		public Task<IEnumerable<Pet>> GetAllPetsFromCustomerID(int customerID);
 	}
 }
