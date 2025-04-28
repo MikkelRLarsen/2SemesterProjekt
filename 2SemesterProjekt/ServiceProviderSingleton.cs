@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProject.Domain.Models;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,7 +21,10 @@ namespace _2SemesterProjekt
 			// Register services
 			// Bll Services
 			//services.AddScoped<ICustomerService, CustomerService>(); 
+			
+			services.AddScoped<IEmployeeService, IEmployeeService>();
 
+			services.AddScoped<IExaminationService, IExaminationService>();
 
 			// Dal Services
 			// services.AddTransient<ICustomerRepository, CustomerRepository>();

@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProject.Domain.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
     public partial class CreateExaminationUserControl : UserControl
     {
-
         // To use GetAllCustomersAsync();
         private readonly ICustomerService _customerService;
 
@@ -30,12 +30,21 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         public CreateExaminationUserControl()
         {
             InitializeComponent();
-
             
+            ServiceProvider allServices = ServiceProviderSingleton.GetServiceProvider();
+
+            _examinationService = allServices.GetService<IExaminationService>();
+            
+            _employeeService = allServices.GetService<IEmployeeService>();
+            
+            _customerService = allServices.GetService<ICustomerService>();
+
+            _petService = allServices.GetService<IPetService>();
+
             CustomerExaminationDropdown.DataSource = _customerService.GetAllCustomersAsync();
             CustomerExaminationDropdown.DisplayMember = "FirstName";
 
-            PetExaminationDropdown.DataSource = _petService.GetAllPetsAsync();
+            PetExaminationDropdown.DataSource = _petService.GetAllPetsByCustomerIdAsync();
             PetExaminationDropdown.DisplayMember = "Name";
 
             ExaminationDropdown.DataSource = _examinationService.GetAllExaminationsAsync();
@@ -46,54 +55,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
             EmployeeExaminationDropdown.DataSource = _employeeService.GetAllEmployeeAsync();
             EmployeeExaminationDropdown.DisplayMember = "FirstName";
-            
-
-
-            
-            //Test customer:
-            List<Customer> customers = new List<Customer>();
-            Customer customer1 = new Customer(1, "Allan", "Allansen", "aa@aa.dk", "Allansvej 11", "Privat", 25262728);
-            Customer customer2 = new Customer(2, "Charlie", "Charliesen", "cc@cc.dk", "Charlievej 12", "Erhverv", 12131415);
-            customers.Add(customer1);
-            customers.Add(customer2);
-
-            //Test pet:
-            List<Pet> pets = new List<Pet>();
-            Pet pet1 = new Pet(1, 1, "Andy", "Hund", DateTime.Today);
-            pets.Add(pet1);
-
-            //Test Employee
-            List<Employee> employees = new List<Employee>();
-            Employee employee1 = new Employee(1, "Beate", "Beatesen", "Dyrlæge");
-            employees.Add(employee1);
-
-            //Test examination
-            List<Examination> examinations = new List<Examination>();
-            Examination examination1 = new Examination(1, 1, 1, DateTime.Today, "Konsultation", 100);
-            examinations.Add(examination1);
-
-            CustomerExaminationDropdown.DataSource = customers
-            .Select(c => new
-            {
-                c,
-                FullName = $"{c.FirstName} {c.LastName}"
-            })
-            .ToList();
-            CustomerExaminationDropdown.DisplayMember = "FullName";
-
-            PetExaminationDropdown.DataSource = pets;
-            PetExaminationDropdown.DisplayMember = "Name";
-
-            ExaminationDropdown.DataSource = examinations;
-            ExaminationDropdown.DisplayMember = "Type";
-
-            PriceExaminationDropdown.DataSource = examinations;
-            PriceExaminationDropdown.DisplayMember = "Price";
-
-            EmployeeExaminationDropdown.DataSource = employees;
-            EmployeeExaminationDropdown.DisplayMember = "FirstName";
-            
-
         }
 
         private void CustomerExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
