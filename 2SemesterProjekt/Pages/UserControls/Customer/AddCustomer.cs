@@ -137,11 +137,11 @@ namespace _2SemesterProjekt
                 customerPhoneNumber = Convert.ToInt32(textBoxPhoneNumber.Text);
             }
 
-            if (customerPhoneNumber < 10000000 || customerPhoneNumber > 99999999)
+            if (textBoxPhoneNumber.Text[0] == '0' || customerPhoneNumber < 10000000 || customerPhoneNumber > 99999999)
             {
                 textBoxPhoneNumber.ForeColor = Color.White;
                 textBoxPhoneNumber.BackColor = Color.LightCoral;
-                displayMessage += "Telefonnummer skal være et 8-cifret tal.\n";
+                displayMessage += "Telefonnummer skal være et helt 8-cifret tal.\n";
             }
 
             if (displayMessage == string.Empty) // If there is no errors, then create customer
