@@ -43,18 +43,18 @@ namespace _2SemesterProjekt.Services
             int ownerId = _customerRepository.GetCustomerIDByPhoneNumber(ownerPhoneNumber);
             if (ownerId == 0 || ownerId == null)
             {
-                return "Customer Not Found";
+                return "Kunden med dette telefonnummer findes ikke i systemet.";
             }
             else
             {
                 bool petCreation = _petRepository.CreatePet(pet, ownerId);
                 if (!petCreation)
                 {
-                    return "Pet Already In DB";
+                    return "Kæledyret findes allerede i databasen.";
                 }
                 else
                 {
-                    return "Pet Added To DB";
+                    return $"{pet.Name} er blevet tilføjet til systemet.";
                 }
             }
         }

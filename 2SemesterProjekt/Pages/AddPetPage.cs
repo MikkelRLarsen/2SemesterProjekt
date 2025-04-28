@@ -46,7 +46,7 @@ namespace _2SemesterProjekt.Pages
             }
             catch
             {
-                NotificationMessage("Invalid Phone Number");
+                NotificationMessage("Telefonnummeret er ikke gyldigt!");
             }
             Pet newPet = new Pet(0, 0, petNameTextbox.Text, petSpeciesTextbox.Text, petBirthdaySelector.Value);
             NotificationMessage(_petService.CreatePet(newPet, Convert.ToInt32(ownerPhoneNumberTextbox.Text)));
@@ -54,22 +54,7 @@ namespace _2SemesterProjekt.Pages
 
         private void NotificationMessage(string typeOfMsg)
         {
-            if (typeOfMsg == "Invalid Phone Number")
-            {
-                // Invalid telefonnummer.
-            }
-            else if (typeOfMsg == "Customer Not Found")
-            {
-                // Kunden findes ikke i systemet.
-            }
-            else if (typeOfMsg == "Pet Already In DB")
-            {
-                // Kæledyret tilhørende kunden findes allerede i systemet.
-            }
-            else if (typeOfMsg == "Pet Added To DB")
-            {
-                // Kæledyret er blevet tilføjet til systemet!
-            }
+            MessageBox.Show(typeOfMsg, "Information", MessageBoxButtons.OK);
         }
     }
 }
