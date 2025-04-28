@@ -12,8 +12,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 	{
 		public DbSet<Customer> Customers { get; set;}
 		public DbSet<Pet> Pets { get; set;}
-		DbSet<Examination> Examinations { get; set;}
-		DbSet<Employee> Employees { get; set;}
+		public DbSet<Examination> Examinations { get; set;}
+		public DbSet<Employee> Employees { get; set;}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{

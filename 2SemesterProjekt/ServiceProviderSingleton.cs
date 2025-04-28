@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _2SemesterProjekt.Repository.EntityFrameworkRepository;
+using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
 
 namespace _2SemesterProjekt
 {
@@ -22,15 +23,16 @@ namespace _2SemesterProjekt
 
 			// Register services
 			// Bll Services
- 
-			services.AddScoped<IEmployeeService, IEmployeeService>();
-
 			services.AddScoped<ICustomerService, CustomerService>();
+			services.AddScoped<IEmployeeService, EmployeeService>();
+			services.AddScoped<IPetService, PetService>();
 
-			services.AddScoped<IExaminationService, IExaminationService>();
+
 
 			// Dal Services
 			services.AddTransient<ICustomerRepository, CustomerRepositoryEF>();
+			services.AddTransient<IEmployeeRepository,  EmployeeRepositoryEF>();
+			services.AddTransient<IPetRepository, PetRepositoryEF>();
 			services.AddTransient<EntityFramework>();
 
 

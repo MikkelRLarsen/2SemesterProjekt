@@ -8,7 +8,7 @@ using _2SemesterProjekt.Domain.Models;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-    internal class PetRepositoryEF : IPetRepository
+    public class PetRepositoryEF : IPetRepository
     {
         private readonly EntityFramework _db;
         public PetRepositoryEF(EntityFramework db)
