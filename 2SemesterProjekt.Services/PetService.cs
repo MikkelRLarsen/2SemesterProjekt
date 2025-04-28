@@ -58,5 +58,10 @@ namespace _2SemesterProjekt.Services
                 }
             }
         }
-    }
+
+		public Task<IEnumerable<Pet>> GetAllPetsFromCustomerID(int customerID)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
