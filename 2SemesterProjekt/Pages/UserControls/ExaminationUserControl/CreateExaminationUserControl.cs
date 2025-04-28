@@ -25,26 +25,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			InitializeComponent();
 		}
 
-		private async void LoadForm(object sender, EventArgs e)
-		{
-			ServiceProvider allServices = ServiceProviderSingleton.GetServiceProvider();
-
-			_custerService = allServices.GetService<ICustomerService>();
-			_employeeService = allServices.GetService<IEmployeeService>();
-			_petService = allServices.GetService<IPetService>();
-			_examinationService = allServices.GetService<IExaminationService>();
-
-			CustomerExaminationDropdown.DataSource = await _custerService.GetAllCustomersAsync();
-			CustomerExaminationDropdown.DisplayMember = "FirstName";
-		}
-
 		private async void CustomerExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			PetExaminationDropdown.Enabled = true;
 
 			Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
 			PetExaminationDropdown.DataSource = await _petService.GetAllPetsFromCustomerID(kunde.CustomerID);
-			PetExaminationDropdown.DisplayMember = "Name";
 		}
 
 		private async void PetExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,7 +57,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		private void EmployeeExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			CreateExaminationButton.Enabled = true;
-			CreateExaminationButton
+			CreateExaminationButton.BackColor = Color.MediumAquamarine;
 		}
 
 		private void CreateExaminationButton_Click(object sender, EventArgs e)
@@ -90,8 +76,29 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			}
 			catch (Exception ex)
 			{
-				ErrorMessageExamination.Text = ex.Message; 
-			}			
+				ErrorMessageExamination.Text = ex.Message;
+			}
+		}
+
+		private async void CreateExaminationUserControl_Load(object sender, EventArgs e)
+		{
+			ServiceProvider allServices = ServiceProviderSingleton.GetServiceProvider();
+
+			_custerService = allServices.GetService<ICustomerService>();
+			_employeeService = allServices.GetService<IEmployeeService>();
+			_petService = allServices.GetService<IPetService>();
+			_examinationService = allServices.GetService<IExaminationService>();
+
+			CustomerExaminationDropdown.DataSource = await _custerService.GetAllCustomersAsync();
+			
+			SetAllDisplayMembers();
+		}
+
+		private void SetAllDisplayMembers()
+		{
+			CustomerExaminationDropdown.DisplayMember = "FirstName";
+			PetExaminationDropdown.DisplayMember = "Name";
+			EmployeeExaminationDropdown.DisplayMember = "FirstName";
 		}
 	}
 }

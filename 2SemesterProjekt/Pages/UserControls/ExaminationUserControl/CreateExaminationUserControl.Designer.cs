@@ -230,6 +230,7 @@
 			Margin = new Padding(0);
 			Name = "CreateExaminationUserControl";
 			Size = new Size(709, 580);
+			Load += CreateExaminationUserControl_Load;
 			ResumeLayout(false);
 			PerformLayout();
 		}
