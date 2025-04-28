@@ -23,10 +23,12 @@ namespace _2SemesterProjekt
 			// Register services
 			// Bll Services
 			services.AddScoped<ICustomerService, CustomerService>();
+			services.AddScoped<IPetService, PetService>();
 
 
 			// Dal Services
 			services.AddTransient<ICustomerRepository, CustomerRepositoryEF>();
+			services.AddTransient<IPetRepository, PetRepositoryEF>();
 			services.AddTransient<EntityFramework>();
 
 

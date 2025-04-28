@@ -8,7 +8,7 @@ using _2SemesterProject.Domain.Models;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-    internal class PetRepositoryEF : IPetRepository
+    public class PetRepositoryEF : IPetRepository
     {
         private readonly EntityFramework _db;
         public PetRepositoryEF(EntityFramework db)
@@ -31,10 +31,9 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             throw new NotImplementedException();
         }
-        public bool CreatePet(Pet pet, int ownerId)
+        public bool CreatePet(Pet pet)
         {
-            Pet newPet = new Pet(pet.PetID, ownerId, pet.Name, pet.Species, pet.Birthday);
-            var existingPet = _db.Pets.FirstOrDefault(p => p.Name == newPet.Name && p.CustomerID == newPet.CustomerID);
+            var existingPet = _db.Pets.FirstOrDefault(p => p.Name == pet.Name && p.CustomerID == pet.CustomerID);
 
             if (existingPet != null)
             {
@@ -42,7 +41,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             }
             else
             {
-                _db.Pets.Add(newPet);
+                _db.Pets.Add(pet);
                 _db.SaveChanges();
                 return true;
             }

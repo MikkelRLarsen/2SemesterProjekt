@@ -25,5 +25,12 @@ namespace _2SemesterProject.Domain.Models
 			Species = species;
 			Birthday = birthday;
 		}
-	}
+        public Pet(int customerID, string name, string species, DateTime birthday)
+        {
+            CustomerID = customerID;
+            Name = name;
+            Species = species;
+            Birthday = birthday;
+        }
+    }
 }

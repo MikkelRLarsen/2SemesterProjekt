@@ -35,19 +35,25 @@ namespace _2SemesterProjekt.Services
         {
             throw new NotImplementedException();
         }
-        public string CreatePet(Pet pet, int ownerPhoneNumber) /* This method can return different
+        public string CreatePet(string petName, string petSpecies, DateTime petBirthday, int phoneNumber) /* This method can return different
                                                                 messages to the UI, so it
                                                                 can generate either an error
                                                                 message or success message. */
         {
-            int ownerId = _customerRepository.GetCustomerIDByPhoneNumber(ownerPhoneNumber);
+            int ownerId = _customerRepository.GetCustomerIDByPhoneNumber(phoneNumber);
             if (ownerId == 0 || ownerId == null)
             {
                 return "Kunden med dette telefonnummer findes ikke i systemet.";
             }
+            else if (string.IsNullOrWhiteSpace(petName) || string.IsNullOrWhiteSpace(petSpecies))
+            {
+                return "Udfyld venligst navn og/eller art!";
+            }
             else
             {
-                bool petCreation = _petRepository.CreatePet(pet, ownerId);
+                Pet pet = new Pet(ownerId, petName, petSpecies, petBirthday);
+                bool petCreation = _petRepository.CreatePet(pet);
+
                 if (!petCreation)
                 {
                     return "Kæledyret findes allerede i databasen.";

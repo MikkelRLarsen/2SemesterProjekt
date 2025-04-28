@@ -17,11 +17,13 @@ namespace _2SemesterProjekt.Pages
     public partial class AddPetPage : UserControl
     {
         private readonly IPetService _petService;
+        private readonly ICustomerService _customerService;
         public AddPetPage()
         {
             InitializeComponent();
             petBirthdaySelector.MaxDate = DateTime.Today;
             _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>();
+            _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -40,16 +42,15 @@ namespace _2SemesterProjekt.Pages
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Convert.ToInt32(ownerPhoneNumberTextbox.Text);
-            }
-            catch
+            if (!Int32.TryParse(ownerPhoneNumberTextbox.Text, out int phoneNumber))
             {
                 NotificationMessage("Telefonnummeret er ikke gyldigt!");
             }
-            Pet newPet = new Pet(0, 0, petNameTextbox.Text, petSpeciesTextbox.Text, petBirthdaySelector.Value);
-            NotificationMessage(_petService.CreatePet(newPet, Convert.ToInt32(ownerPhoneNumberTextbox.Text)));
+            else
+            {
+                int customerPhoneNumber = Convert.ToInt32(ownerPhoneNumberTextbox.Text);
+                NotificationMessage(_petService.CreatePet(petNameTextbox.Text, petSpeciesTextbox.Text, petBirthdaySelector.Value, customerPhoneNumber));
+            }
         }
 
         private void NotificationMessage(string typeOfMsg)
