@@ -32,26 +32,29 @@ namespace _2SemesterProject.Domain.Models
             Name = name;
             Species = species;
             Birthday = birthday;
-        }
-		public string ValidateInformation()
-		{
-            if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Species))
+
+            if (ValidateInformation() == false)
             {
-                return "Udfyld venligst navn og/eller art!";
+                throw new ArgumentException("Invalid pet data.");
+            }
+        }
+		public bool ValidateInformation()
+		{
+            if (CustomerID == 0)
+            {
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Species))
+            {
+                return false;
+            }
+            else if (Birthday == null)
+            {
+                return false;
             }
             else
             {
-                Pet pet = new Pet(ownerId, petName, petSpecies, petBirthday);
-                bool petExists = _petRepository.CheckIfPetExists(pet);
-                if (petExists)
-                {
-                    return "Kæledyret findes allerede i databasen.";
-                }
-                else
-                {
-                    CreatePet(pet);
-                    return $"{pet.Name} er blevet tilføjet til systemet.";
-                }
+                return true;
             }
         }
     }

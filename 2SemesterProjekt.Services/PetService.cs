@@ -12,12 +12,10 @@ namespace _2SemesterProjekt.Services
     public class PetService : IPetService
     {
         private readonly IPetRepository _petRepository;
-        private readonly ICustomerRepository _customerRepository;
 
-        public PetService(IPetRepository petRepository, ICustomerRepository customerRepository)
+        public PetService(IPetRepository petRepository)
         {
             _petRepository = petRepository;
-            _customerRepository = customerRepository;
         }
         public Task<IEnumerable<Pet>> GetAllPetsAsync()
         {
@@ -35,18 +33,13 @@ namespace _2SemesterProjekt.Services
         {
             throw new NotImplementedException();
         }
-
-        public string ValidatePet(string petName, string petSpecies, DateTime petBirthday, int phoneNumber)
+        public void CreatePet(Pet pet)
         {
-            
-
+            _petRepository.CreatePet(pet);
         }
-        public string CreatePet(string petName, string petSpecies, DateTime petBirthday, int phoneNumber) /* This method can return different
-                                                                messages to the UI, so it
-                                                                can generate either an error
-                                                                message or success message. */
+        public bool CheckIfPetExists(Pet pet)
         {
-            
+            return _petRepository.CheckIfPetExists(pet);
         }
     }
 }

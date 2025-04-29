@@ -43,7 +43,7 @@ namespace _2SemesterProjekt.Services
 		{
 			throw new NotImplementedException();
 		}
-		public int GetCustomerIdByPhoneNumber(int phoneNumber)
+		public int GetCustomerIDByPhoneNumber(int phoneNumber)
 		{
 			return _customerRepository.GetCustomerIDByPhoneNumber(phoneNumber);
 		}

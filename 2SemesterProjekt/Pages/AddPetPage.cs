@@ -55,8 +55,28 @@ namespace _2SemesterProjekt.Pages
                 {
                     NotificationMessage("Kunden med dette telefonnummer findes ikke i systemet.");
                 }
+                else if(string.IsNullOrWhiteSpace(petNameTextbox.Text) || string.IsNullOrWhiteSpace(petSpeciesTextbox.Text))
+                {
+                    NotificationMessage("Udfyld venligst navn og/eller art!");
+                    
+                }
                 else {
-                    NotificationMessage(_petService.CreatePet(petNameTextbox.Text, petSpeciesTextbox.Text, petBirthdaySelector.Value, customerId));
+                    var pet = new Pet(
+                        customerId,
+                        petNameTextbox.Text,
+                        petSpeciesTextbox.Text,
+                        petBirthdaySelector.Value);
+                    bool petExists = _petService.CheckIfPetExists(pet);
+
+                    if (petExists)
+                    {
+                        NotificationMessage("Kæledyret findes allerede i databasen.");
+                    }
+                    else
+                    {
+                        _petService.CreatePet(pet);
+                        NotificationMessage($"{pet.Name} er blevet tilføjet til systemet.");
+                    }
                 }
             }
         }
