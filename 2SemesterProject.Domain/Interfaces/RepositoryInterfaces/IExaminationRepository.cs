@@ -10,5 +10,7 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 	public interface IExaminationRepository
 	{
 		public Task CreateExaminationAsync(Examination examination);
+
+		public Task<IEnumerable<Examination>> GetAllExaminationOnDate(DateTime date);
 	}
 }

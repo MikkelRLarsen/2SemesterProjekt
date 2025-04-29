@@ -1,5 +1,6 @@
 ﻿using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
 using _2SemesterProjekt.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,19 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             await _db.Examinations.AddAsync(examination);
             _db.SaveChanges();
         }
-        
-    }
+
+		public async Task<IEnumerable<Examination>> GetAllExaminationOnDate(DateTime date)
+		{
+            try
+            {
+				return await _db.Examinations
+	                .Where(e => e.Date == date)
+	                .ToListAsync();
+			}
+            catch (Exception)
+            {
+                return Enumerable.Empty<Examination>();
+            }
+		}
+	}
 }

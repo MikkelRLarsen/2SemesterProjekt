@@ -30,7 +30,10 @@ namespace _2SemesterProjekt.Services
 
         public async Task CreateExaminationAsync(Examination examination)
         {
-			await _examinationRepository.CreateExaminationAsync(examination);
+            if (IsDoubleBooked(examination) == false)
+            {
+			    await _examinationRepository.CreateExaminationAsync(examination);
+            }
         }
         public async Task<IEnumerable<string>> GetAllExaminationTypesAsync()
         {
@@ -39,6 +42,25 @@ namespace _2SemesterProjekt.Services
         public async Task<double> GetAllExaminationPricesAsync(string examinationType)
         {
             return _examinationPrices[examinationType];
+        }
+
+        private bool IsDoubleBooked(Examination examination)
+        {
+
+            Examination[] allExaminationOnSpecificDate = _examinationRepository.GetAllExaminationOnDate(examination.Date).Result.ToArray();
+
+
+
+            try
+            {
+				_examinationRepository.GetAllExaminationOnDate(examination.Date);
+                return true;
+			}
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
     }
 }
