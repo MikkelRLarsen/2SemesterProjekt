@@ -18,9 +18,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			_db = db;
 		}
 
-		public async Task<IEnumerable<Employee>> GetAllEmployeeAsync()
+		public async Task<IEnumerable<Employee>> GetAllPetDoctorsAsync()
 		{
-			return await _db.Employees.ToListAsync();
+			return await _db.Employees
+				.Where(e => e.Type == "Dyrlæge")
+				.ToListAsync();
 		}
 	}
 }

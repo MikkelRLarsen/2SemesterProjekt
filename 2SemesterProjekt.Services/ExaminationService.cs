@@ -30,10 +30,9 @@ namespace _2SemesterProjekt.Services
 
         public async Task CreateExaminationAsync(Examination examination)
         {
-            if (await IsDoubleBooked(examination) == false)
-            {
-			    await _examinationRepository.CreateExaminationAsync(examination);
-            }
+            //Checks if the is a Double Booking that specific Date. Returns error if Pet or Employee is booked
+            await IsDoubleBooked(examination);
+            await _examinationRepository.CreateExaminationAsync(examination);
         }
         public async Task<IEnumerable<string>> GetAllExaminationTypesAsync()
         {
@@ -44,9 +43,8 @@ namespace _2SemesterProjekt.Services
             return _examinationPrices[examinationType];
         }
 
-        private async Task<bool> IsDoubleBooked(Examination examination)
+        private async Task IsDoubleBooked(Examination examination)
         {
-
             IEnumerable<Examination> allExaminationOnSpecificDate = await _examinationRepository.GetAllExaminationOnDate(examination.Date);
 
             foreach (Examination examinationOnDate in allExaminationOnSpecificDate)
@@ -61,8 +59,6 @@ namespace _2SemesterProjekt.Services
 					throw new ArgumentException("Pet is already booked that day");
 				}
             }
-
-            return false;
         }
     }
 }

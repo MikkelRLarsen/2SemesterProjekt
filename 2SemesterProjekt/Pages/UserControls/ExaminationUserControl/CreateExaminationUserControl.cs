@@ -65,7 +65,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		private async void DateTimePickerExamination_ValueChanged(object sender, EventArgs e)
 		{
 			EmployeeExaminationDropdown.Enabled = true;
-			EmployeeExaminationDropdown.DataSource = await _employeeService.GetAllEmployeeAsync();
+			EmployeeExaminationDropdown.DataSource = await _employeeService.GetAllPetDoctorsAsync();
 		}
 
 		/// <summary>

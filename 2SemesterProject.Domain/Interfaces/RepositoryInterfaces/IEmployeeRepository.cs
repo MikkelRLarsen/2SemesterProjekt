@@ -9,6 +9,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 {
 	public interface IEmployeeRepository
 	{
-		public Task<IEnumerable<Employee>> GetAllEmployeeAsync();
+		public Task<IEnumerable<Employee>> GetAllPetDoctorsAsync();
 	}
 }

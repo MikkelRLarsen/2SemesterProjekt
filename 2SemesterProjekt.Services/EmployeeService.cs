@@ -18,9 +18,9 @@ namespace _2SemesterProjekt.Services
 			_employeeRepository = employeeRepository;
 		}
 
-		public async Task<IEnumerable<Employee>> GetAllEmployeeAsync()
+		public async Task<IEnumerable<Employee>> GetAllPetDoctorsAsync()
         {
-            return await _employeeRepository.GetAllEmployeeAsync();
+            return await _employeeRepository.GetAllPetDoctorsAsync();
         }
         public Employee GetEmployeeById(int employeeId)
         {
