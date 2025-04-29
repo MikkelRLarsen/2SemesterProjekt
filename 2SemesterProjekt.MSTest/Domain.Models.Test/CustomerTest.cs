@@ -21,7 +21,7 @@ public class CustomerTest
 	public void Given_First_Name_Is_Valid__Then_Entity_Is_Created(string validFirstName)
     {
 		// Act
-		var sut = new Customer(validFirstName, _lastName, _email, _address, _type, _phone);
+		var customer = new Customer(validFirstName, _lastName, _email, _address, _type, _phone);
     }
 
 	[TestMethod]
@@ -45,7 +45,7 @@ public class CustomerTest
 	public void Given_Last_Name_Is_Valid__Then_Entity_Is_Created(string validLastName)
 	{
 		// Act
-		var sut = new Customer(_firstName, validLastName, _email, _address, _type, _phone);
+		var customer = new Customer(_firstName, validLastName, _email, _address, _type, _phone);
 	}
 
 	[TestMethod]
@@ -71,7 +71,7 @@ public class CustomerTest
 	public void Given_Email_Is_Valid__Then_Entity_Is_Created(string validEmail)
 	{
 		// Act
-		var sut = new Customer(_firstName, _lastName, validEmail, _address, _type, _phone);
+		var customer = new Customer(_firstName, _lastName, validEmail, _address, _type, _phone);
 	}
 
 	[TestMethod]
@@ -99,7 +99,7 @@ public class CustomerTest
 	public void Given_Address_Is_Valid__Then_Entity_Is_Created(string validAddress)
 	{
 		// Act
-		var sut = new Customer(_firstName, _lastName, _email, validAddress, _type, _phone);
+		var customer = new Customer(_firstName, _lastName, _email, validAddress, _type, _phone);
 	}
 
 	[TestMethod]
@@ -154,7 +154,7 @@ public class CustomerTest
 	public void Given_Phone_Is_Valid__Then_Entity_Is_Created(int validPhone)
 	{
 		// Act
-		var sut = new Customer(_firstName, _lastName, _email, _address, _type, validPhone);
+		var customer = new Customer(_firstName, _lastName, _email, _address, _type, validPhone);
 	}
 
 	[TestMethod]

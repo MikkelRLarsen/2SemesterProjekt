@@ -15,5 +15,6 @@ namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces
 		public void DeleteCustomer(Customer customer);
 		public bool CreateCustomer(Customer customer);
 		public int GetCustomerIDByPhoneNumber (int phoneNumber);
+		public Task CreateCustomerAsync(Customer customer);
 	}
 }
