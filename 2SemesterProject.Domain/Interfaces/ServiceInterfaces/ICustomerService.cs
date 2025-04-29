@@ -10,9 +10,10 @@ namespace _2SemesterProject.Domain.Interfaces.ServiceInterfaces
 	public interface ICustomerService
 	{
 		public Task<IEnumerable<Customer>> GetAllCustomersAsync();
-		public Customer GetCustomerById(int customerID);
+		public string[] GetCustomerTypes();
+        public Customer GetCustomerById(int customerID);
 		public void UpdateCustomer(Customer customer);
 		public void DeleteCustomer(Customer customer);
-		public void CreateCustomer(Customer customer);
+		public Task CreateCustomerAsync(Customer customer);
 	}
 }

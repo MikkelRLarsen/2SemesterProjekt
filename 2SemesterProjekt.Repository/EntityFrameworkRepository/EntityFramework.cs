@@ -8,9 +8,9 @@ using _2SemesterProject.Domain.Models;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-	internal class EntityFramework : DbContext
+	public class EntityFramework : DbContext
 	{
-		DbSet<Customer> Customers { get; set;}
+		public DbSet<Customer> Customers { get; set;}
 		DbSet<Pet> Pets { get; set;}
 		DbSet<Examination> Examinations { get; set;}
 		DbSet<Employee> Employees { get; set;}
@@ -27,13 +27,13 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		protected static string GetConnectionString()
 		{
 			string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-			string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString");
+			string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString.txt");
 			return File.ReadAllText(fullName);
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Customer>().ToTable("Customers");
+			modelBuilder.Entity<Customer>().ToTable("Customer");
 			modelBuilder.Entity<Pet>().ToTable("Pet");
 			modelBuilder.Entity<Examination>().ToTable("Examination");
 			modelBuilder.Entity<Employee>().ToTable("Employee");
@@ -58,7 +58,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
 			modelBuilder.Entity<Pet>().HasKey(p => p.PetID);
 			modelBuilder.Entity<Examination>().HasKey(e => e.ExaminationID);
-			modelBuilder.Entity<Employee>().HasKey(em => em.Employee);
+			modelBuilder.Entity<Employee>().HasKey(em => em.EmployeeID);
 		}
 	}
 }
