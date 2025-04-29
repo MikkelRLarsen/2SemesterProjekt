@@ -60,7 +60,7 @@ namespace _2SemesterProjekt.Domain.Models
 			{
 				string priceAsString = Price.ToString();
 
-				if(!priceAsString.Contains(','))
+				if(!priceAsString.Contains('.'))
 				{
 					return true;
 				}
