@@ -21,7 +21,7 @@ namespace _2SemesterProjekt.Services
 
 		public async Task CreateCustomerAsync(Customer customer)
 		{
-			var result = _customerRepository.CreateCustomerAsync(customer);
+			await _customerRepository.CreateCustomerAsync(customer);
 		}
 
 		public void DeleteCustomer(Customer customer)

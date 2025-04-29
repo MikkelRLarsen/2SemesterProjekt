@@ -81,7 +81,7 @@ namespace _2SemesterProjekt
             textBoxAddress.BackColor = SystemColors.Window;
         }
 
-        private void textBoxPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
+        private async void textBoxPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allow only digits
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -93,7 +93,7 @@ namespace _2SemesterProjekt
             textBoxPhoneNumber.BackColor = SystemColors.Window;
         }
 
-        private void CreateButton_Click(object? sender, EventArgs e)
+        private async void CreateButton_Click(object? sender, EventArgs e)
         {
             string displayMessage = string.Empty;
 
@@ -151,9 +151,9 @@ namespace _2SemesterProjekt
                        phoneNumber           // PhoneNumber
                     );
 
-                    _customerService.CreateCustomerAsync(customer); // Creates the customer in DB
+                    await _customerService.CreateCustomerAsync(customer); // Creates the customer in DB
 
-                    MessageBox.Show($"{customer.FirstName} er oprettet i systemet", "Kunde oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"{textBoxFirstName.Text} er oprettet i systemet", "Kunde oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
