@@ -70,6 +70,7 @@
 			// 
 			// CustomerExaminationDropdown
 			// 
+			CustomerExaminationDropdown.DropDownStyle = ComboBoxStyle.DropDownList;
 			CustomerExaminationDropdown.FormattingEnabled = true;
 			CustomerExaminationDropdown.Location = new Point(371, 248);
 			CustomerExaminationDropdown.Margin = new Padding(4, 5, 4, 5);
@@ -80,6 +81,7 @@
 			// 
 			// PetExaminationDropdown
 			// 
+			PetExaminationDropdown.DropDownStyle = ComboBoxStyle.DropDownList;
 			PetExaminationDropdown.Enabled = false;
 			PetExaminationDropdown.FormattingEnabled = true;
 			PetExaminationDropdown.Location = new Point(371, 315);
@@ -102,6 +104,7 @@
 			// 
 			// ExaminationDropdown
 			// 
+			ExaminationDropdown.DropDownStyle = ComboBoxStyle.DropDownList;
 			ExaminationDropdown.Enabled = false;
 			ExaminationDropdown.FormattingEnabled = true;
 			ExaminationDropdown.Location = new Point(371, 383);
@@ -146,6 +149,7 @@
 			// 
 			// EmployeeExaminationDropdown
 			// 
+			EmployeeExaminationDropdown.DropDownStyle = ComboBoxStyle.DropDownList;
 			EmployeeExaminationDropdown.Enabled = false;
 			EmployeeExaminationDropdown.FormattingEnabled = true;
 			EmployeeExaminationDropdown.Location = new Point(371, 608);
