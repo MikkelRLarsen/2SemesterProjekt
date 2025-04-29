@@ -93,7 +93,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
 					, DateTimePickerExamination.Value
 					, ExaminationDropdown.SelectedItem as String
-					, Convert.ToDouble(PriceExaminationDisplay.Text));
+					, Convert.ToDecimal(PriceExaminationDisplay.Text));
 
 				//Creates ExaminationAsync, so the user can continoue to use the program
 				await _examinationService.CreateExaminationAsync(newExamination);

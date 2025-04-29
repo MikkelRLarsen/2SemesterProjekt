@@ -28,7 +28,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             try
             {
 				return await _db.Examinations
-	                .Where(e => e.Date == date)
+	                .Where(e => e.Date.Date == date.Date)
 	                .ToListAsync();
 			}
             catch (Exception)

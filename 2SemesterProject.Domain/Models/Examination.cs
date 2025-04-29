@@ -13,11 +13,11 @@ namespace _2SemesterProjekt.Domain.Models
 		public int EmployeeID { get; private set; }
 		public DateTime Date { get; private set; }
 		public string Type { get; private set; }
-		public double Price { get; private set; }
+		public decimal Price { get; private set; }
 		public Pet Pet { get; }
 		public Employee Employee { get; }
 
-		public Examination(int petID, int employeeID, DateTime date, string type, double price)
+		public Examination(int petID, int employeeID, DateTime date, string type, decimal price)
 		{
 			PetID = petID;
 			EmployeeID = employeeID;
