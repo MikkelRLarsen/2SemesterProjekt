@@ -163,6 +163,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		private void PriceExaminationDisplay_TextChanged(object sender, EventArgs e)
 		{
 			PriceExaminationDisplay.BackColor = Color.White;
+			PriceExaminationDisplay.ForeColor = Color.Black;
 		}
 	}
 }

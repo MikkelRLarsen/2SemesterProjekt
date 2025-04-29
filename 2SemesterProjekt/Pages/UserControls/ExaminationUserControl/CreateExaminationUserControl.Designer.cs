@@ -219,6 +219,7 @@
 			// 
 			PriceExaminationDisplay.BorderStyle = BorderStyle.FixedSingle;
 			PriceExaminationDisplay.Enabled = false;
+			PriceExaminationDisplay.ForeColor = Color.Black;
 			PriceExaminationDisplay.Location = new Point(371, 450);
 			PriceExaminationDisplay.Margin = new Padding(4, 5, 4, 5);
 			PriceExaminationDisplay.Name = "PriceExaminationDisplay";
