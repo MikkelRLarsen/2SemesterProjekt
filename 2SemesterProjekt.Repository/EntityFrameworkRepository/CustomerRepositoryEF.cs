@@ -74,9 +74,5 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				return 0;
 			}
 		}
-        public bool CreateCustomer(Customer customer)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
