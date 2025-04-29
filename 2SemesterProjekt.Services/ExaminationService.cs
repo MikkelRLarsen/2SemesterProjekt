@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
@@ -12,45 +13,32 @@ namespace _2SemesterProjekt.Services
     public class ExaminationService : IExaminationService
     {
         private readonly IExaminationRepository _examinationRepository;
+        private Dictionary<string, double> _examinationPrices = new();
 
 		public ExaminationService(IExaminationRepository examinationRepository)
 		{
 			_examinationRepository = examinationRepository;
+            CreateDictionaryForExaminationPrices();
 		}
 
-		public Task<IEnumerable<Examination>> GetAllExaminationsAsync()
+        private void CreateDictionaryForExaminationPrices()
         {
-            throw new NotImplementedException();
+            _examinationPrices.Add("Konsulation", 200);
+            _examinationPrices.Add("Operation", 500);
+            _examinationPrices.Add("Behandling", 400);
         }
-        public Examination GetExaminationById(int examinationId)
+
+        public async Task CreateExaminationAsync(Examination examination)
         {
-            throw new NotImplementedException();
-        }
-        public void UpdateExamination(Examination examination)
-        {
-            throw new NotImplementedException();
-        }
-        public void DeleteExamination(Examination examination)
-        {
-            throw new NotImplementedException();
-        }
-        public void CreateExamination(Examination examination)
-        {
-			throw new ArgumentException("Error in BLL");
-			_examinationRepository.CreateExamination(examination);
+			await _examinationRepository.CreateExaminationAsync(examination);
         }
         public async Task<IEnumerable<string>> GetAllExaminationTypesAsync()
         {
-            List<string> examinationTypes = new List<string>()
-            {
-                "Konsulation", "Operation", "Behandling"
-            };
-
-            return examinationTypes;
+            return _examinationPrices.Keys.ToArray();
         }
-        public double GetAllExaminationPrices(string examinationType)
+        public async Task<double> GetAllExaminationPricesAsync(string examinationType)
         {
-            return 100;
+            return _examinationPrices[examinationType];
         }
     }
 }

@@ -10,9 +10,5 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 	public interface IEmployeeRepository
 	{
 		public Task<IEnumerable<Employee>> GetAllEmployeeAsync();
-		public Employee GetEmployeeById(int employeeId);
-		public void UpdateEmployee(Employee employee);
-		public void DeleteEmployee(Employee employee);
-		public void CreateEmployee(Employee employee);
 	}
 }

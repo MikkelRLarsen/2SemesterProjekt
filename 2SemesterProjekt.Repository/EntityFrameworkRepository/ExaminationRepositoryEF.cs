@@ -16,25 +16,9 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             _db = db;
         }
-        public Task<IEnumerable<Examination>> GetAllExaminationsAsync()
+        public async Task CreateExaminationAsync(Examination examination)
         {
-            throw new NotImplementedException();
-        }
-        public Examination GetExaminationById(int examinationId)
-        {
-            throw new NotImplementedException();
-        }
-        public void UpdateExamination(Examination examination)
-        {
-            throw new NotImplementedException();
-        }
-        public void DeleteExamination(Examination examination)
-        {
-            throw new NotImplementedException();
-        }
-        public void CreateExamination(Examination examination)
-        {
-            _db.Examinations.Add(examination);
+            await _db.Examinations.AddAsync(examination);
             _db.SaveChanges();
         }
         

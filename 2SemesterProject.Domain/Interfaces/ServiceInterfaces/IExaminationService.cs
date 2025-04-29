@@ -9,14 +9,9 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 {
 	public interface IExaminationService
 	{
-		public Task<IEnumerable<Examination>> GetAllExaminationsAsync();
-		public Examination GetExaminationById(int examinationId);
-		public void UpdateExamination(Examination examination);
-		public void DeleteExamination(Examination examination);
-		public void CreateExamination(Examination examination);
-
+		public Task CreateExaminationAsync(Examination examination);
 		public Task<IEnumerable<string>> GetAllExaminationTypesAsync();
-		public double GetAllExaminationPrices(string examinationType);
+		public Task<double> GetAllExaminationPricesAsync(string examinationType);
 
     }
 }

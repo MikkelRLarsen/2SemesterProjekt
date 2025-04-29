@@ -9,10 +9,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 {
 	public interface IExaminationRepository
 	{
-		public Task<IEnumerable<Examination>> GetAllExaminationsAsync();
-		public Examination GetExaminationById(int examinationId);
-		public void UpdateExamination(Examination examination);
-		public void DeleteExamination(Examination examination);
-		public void CreateExamination(Examination examination);
+		public Task CreateExaminationAsync(Examination examination);
 	}
 }

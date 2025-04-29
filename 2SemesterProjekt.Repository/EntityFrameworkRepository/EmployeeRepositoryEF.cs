@@ -18,30 +18,9 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			_db = db;
 		}
 
-		public void CreateEmployee(Employee employee)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void DeleteEmployee(Employee employee)
-		{
-			throw new NotImplementedException();
-		}
-
 		public async Task<IEnumerable<Employee>> GetAllEmployeeAsync()
 		{
 			return await _db.Employees.ToListAsync();
-		
-		}
-
-		public Employee GetEmployeeById(int employeeId)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void UpdateEmployee(Employee employee)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

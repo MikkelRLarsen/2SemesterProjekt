@@ -53,7 +53,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// <param name="e"></param>
 		private async void ExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			PriceExaminationDisplay.Text = Convert.ToString(_examinationService.GetAllExaminationPrices(ExaminationDropdown.SelectedItem as string));
+			PriceExaminationDisplay.Text = Convert.ToString(await _examinationService.GetAllExaminationPricesAsync(ExaminationDropdown.SelectedItem as string));
 			DateTimePickerExamination.Enabled = true;
 		}
 
@@ -84,7 +84,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void CreateExaminationButton_Click(object sender, EventArgs e)
+		private async void CreateExaminationButton_Click(object sender, EventArgs e)
 		{
 
 			try
@@ -95,13 +95,21 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 					, ExaminationDropdown.SelectedItem as String
 					, Convert.ToDouble(PriceExaminationDisplay.Text));
 
-				_examinationService.CreateExamination(newExamination);
+				//Creates ExaminationAsync, so the user can continoue to use the program
+				await _examinationService.CreateExaminationAsync(newExamination);
 
+				//Shows a message that the creation has been completed
+				ErrorMessageExamination.Visible =true;
+				ErrorMessageExamination.Text = "Examination has been created";
+
+				//Pauses the Task for 3 secound before clearing it (Going back to previously page)
+				await Task.Delay(3000);
 				_konsultationPanel.Controls.Clear();
 
 			}
 			catch (Exception ex)
 			{
+				//Shows error message if an error happend
 				ErrorMessageExamination.Visible = true;
 				ErrorMessageExamination.Text = ex.Message;
 			}
