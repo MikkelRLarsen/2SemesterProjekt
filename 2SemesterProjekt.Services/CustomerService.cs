@@ -52,5 +52,10 @@ namespace _2SemesterProjekt.Services
 		{
 			return _customerRepository.GetCustomerIDByPhoneNumber(phoneNumber);
 		}
-	}
+
+        public bool CreateCustomer(Customer customer)
+		{
+			throw new NotImplementedException();
+		}
+    }
 }
