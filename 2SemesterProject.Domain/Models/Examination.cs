@@ -25,10 +25,7 @@ namespace _2SemesterProjekt.Domain.Models
 			Type = type;
 			Price = price;
 
-			if (InformationValid() == false)
-			{
-				throw new ArgumentException("Information for Examination was invalid");
-			}
+			InformationValid();
 		}
 
 		/// <summary>
@@ -37,24 +34,19 @@ namespace _2SemesterProjekt.Domain.Models
 		/// Checks if Price got more then 2 digits
 		/// </summary>
 		/// <returns></returns>
-		protected bool InformationValid()
+		protected void InformationValid()
 		{
 			if (PetID == 0 || PetID == null)
 			{
-				return false;
+				throw new ArgumentException("PetID was 0 or null");
 			}
 
 			if (EmployeeID == 0 || EmployeeID == null)
 			{
-				return false;
+				throw new ArgumentException("Employee was 0 or null");
 			}
 
-			if (ValidatePrice() != false)
-			{
-				return false;
-			}
-
-			return true;
+			Validate_Double_More_Than_2_Digits();
 		}
 
 		/// <summary>
@@ -62,23 +54,30 @@ namespace _2SemesterProjekt.Domain.Models
 		/// Also checks if it contains decimals that it doesn't have more than 2 decimals
 		/// </summary>
 		/// <returns></returns>
-		protected bool ValidatePrice()
+		protected bool Validate_Double_More_Than_2_Digits()
 		{
-			string priceAsString = Price.ToString();
-
-			if(!priceAsString.Contains(','))
+			try
 			{
-				return true;
+				string priceAsString = Price.ToString();
+
+				if(!priceAsString.Contains(','))
+				{
+					return true;
+				}
+
+				string[] priceAsAStringArray = priceAsString.Split(',');
+
+				if (priceAsAStringArray[1].Length <= 2)
+				{
+					return true;
+				}
+
+				return false;
 			}
-
-			string[] priceAsAStringArray = priceAsString.Split(',');
-
-			if (priceAsAStringArray[1].Length <= 2)
+			catch (Exception)
 			{
-				return true;
+				throw new ArgumentException("Price had to many digits");
 			}
-
-			return false;
 		}
 	}
 }

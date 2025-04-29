@@ -36,7 +36,8 @@ namespace _2SemesterProjekt.Services
         }
         public void CreateExamination(Examination examination)
         {
-            _examinationRepository.CreateExamination(examination);
+			throw new ArgumentException("Error in BLL");
+			_examinationRepository.CreateExamination(examination);
         }
         public async Task<IEnumerable<string>> GetAllExaminationTypesAsync()
         {

@@ -59,7 +59,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			try
 			{
-
 				Examination newExamination = new Examination((PetExaminationDropdown.SelectedItem as Pet).PetID
 					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
 					, DateTimePickerExamination.Value
