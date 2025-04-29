@@ -19,10 +19,9 @@ namespace _2SemesterProjekt.Services
 			_customerRepository = customerRepository;
 		}
 
-		public bool CreateCustomer(Customer customer)
+		public async Task CreateCustomerAsync(Customer customer)
 		{
-			var result = _customerRepository.CreateCustomer(customer);
-			return result;
+			var result = _customerRepository.CreateCustomerAsync(customer);
 		}
 
 		public void DeleteCustomer(Customer customer)

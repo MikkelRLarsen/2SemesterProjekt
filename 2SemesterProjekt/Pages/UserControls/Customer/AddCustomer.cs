@@ -130,14 +130,8 @@ namespace _2SemesterProjekt
                 displayMessage += "Adressen må kun indeholde bogstaver, tal og mellemrum.\n";
             }
 
-            // Validate phonenumber: 8-digit long.
-            int customerPhoneNumber = 0;
-            if (textBoxPhoneNumber.Text != string.Empty)
-            {
-                customerPhoneNumber = Convert.ToInt32(textBoxPhoneNumber.Text);
-            }
-
-            if (textBoxPhoneNumber.Text[0] == '0' || customerPhoneNumber < 10000000 || customerPhoneNumber > 99999999)
+            // Validate phonenumber: only numbers and 8-digit long.
+            if (!Int32.TryParse(textBoxPhoneNumber.Text, out int phoneNumber) || textBoxPhoneNumber.Text[0] == '0' || phoneNumber < 10000000 || phoneNumber > 99999999)
             {
                 textBoxPhoneNumber.ForeColor = Color.White;
                 textBoxPhoneNumber.BackColor = Color.LightCoral;
@@ -146,27 +140,27 @@ namespace _2SemesterProjekt
 
             if (displayMessage == string.Empty) // If there is no errors, then create customer
             {
-                var customer = new Customer(
-                    textBoxFirstName.Text, // FirstName
-                    textBoxLastName.Text,  // LastName
-                    textBoxEmail.Text,     // Email
-                    textBoxAddress.Text,   // Address
-                    comboBoxType.Text,     // Type
-                    customerPhoneNumber // PhoneNumber
-                );
-
-                bool isCreationSuccessful = _customerService.CreateCustomer(customer); // Checks if the customer already is in DB
-
-                if (isCreationSuccessful)
+                try
                 {
-                    MessageBox.Show($"{customer.FirstName} er oprettet i systemet", "Kunnde oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var customer = new Customer(
+                       textBoxFirstName.Text, // FirstName
+                       textBoxLastName.Text, // LastName
+                       textBoxEmail.Text,    // Email
+                       textBoxAddress.Text,  // Address
+                       comboBoxType.Text,    // Type
+                       phoneNumber           // PhoneNumber
+                    );
+
+                    _customerService.CreateCustomerAsync(customer); // Creates the customer in DB
+
+                    MessageBox.Show($"{customer.FirstName} er oprettet i systemet", "Kunde oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show($"{customer.FirstName} findes allerede!", "Kunde findes allerede", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"{ex}", "Fejl i oprettelse", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else // Show error to user
+            else // Show error to user in UI
             {
                 MessageBox.Show(displayMessage, "Fejl i indtastning", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

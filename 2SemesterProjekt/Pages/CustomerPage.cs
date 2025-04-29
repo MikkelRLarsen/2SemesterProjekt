@@ -16,13 +16,8 @@ namespace _2SemesterProjekt
 		{
 			InitializeComponent();
 
-			buttonFlowPanel.Controls.Add(new ButtonPanel("Find kunde", "FindCustomer.png", Color.SteelBlue));
-
 			// Button with a click event handler
 			buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kunde", "AddCustomer.png", Color.MediumSeaGreen, AddCustomerButton_Click));
-
-			buttonFlowPanel.Controls.Add(new ButtonPanel("Redigér kunde", "EditCustomer.png", Color.Goldenrod));
-			buttonFlowPanel.Controls.Add(new ButtonPanel("Fjern kunde", "RemoveCustomer.png", Color.IndianRed));
 		}
 
 		// Event handler with "Add Customer" when button is clicked

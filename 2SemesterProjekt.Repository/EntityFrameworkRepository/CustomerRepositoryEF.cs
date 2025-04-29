@@ -17,21 +17,20 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			_db = db;
 		}
 
-		public bool CreateCustomer(Customer customer)
+		public async Task CreateCustomerAsync(Customer customer)
 		{
 			// Check if the customer is already in DB
 			var existingCustomer = _db.Customers
-				.FirstOrDefault(c => c.PhoneNumber == customer.PhoneNumber);
+				.First(c => c.PhoneNumber == customer.PhoneNumber);
 
 			if (existingCustomer == null) // Add to DB
 			{
 				_db.Customers.Add(customer);
 				_db.SaveChanges();
-				return true;
 			}
 			else // If hit return and dont add it to DB
 			{
-				return false;
+				throw new ArgumentException($"{customer.FirstName} {customer.LastName} findes allerde i databasen.");
 			}
 		}
 
