@@ -19,9 +19,18 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
         public async Task CreateCustomerAsync(Customer customer)
         {
-            // Check if the customer is already in DB
-            var existingCustomer = _db.Customers
-                .First(c => c.PhoneNumber == customer.PhoneNumber);
+            Customer existingCustomer;
+            
+            try
+            {
+                // Check if the customer is already in DB
+                existingCustomer = _db.Customers
+                    .First(c => c.PhoneNumber == customer.PhoneNumber);
+            }
+            catch
+            {
+                existingCustomer = null!;
+            }
 
             if (existingCustomer == null) // Add to DB
             {
