@@ -19,6 +19,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			_konsultationPanel = konsultationPanel;
 		}
 
+		/// <summary>
+		/// Eventhandler for when CustomerDropdown Index is changed
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private async void CustomerExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (CustomerExaminationDropdown.SelectedItem != null)
@@ -85,17 +90,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			_employeeService = allServices.GetService<IEmployeeService>();
 			_examinationService = allServices.GetService<IExaminationService>();
 
-			CustomerExaminationDropdown.DataSource = await GetAllCustomers();
 
 			SetAllDisplayMembers();
 			DateTimePickerExamination.MinDate = DateTime.Now;
-		}
 
-		private async Task<List<Customer>> GetAllCustomers()
-		{
-			List<Customer> customers = new List<Customer>();
-			customers.AddRange(await _customerService.GetAllCustomersAsync());
-			return customers;
+			CustomerExaminationDropdown.DataSource = await _customerService.GetAllCustomersAsync();
 		}
 
 		private void SetAllDisplayMembers()
