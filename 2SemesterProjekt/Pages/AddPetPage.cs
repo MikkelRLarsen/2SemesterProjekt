@@ -37,7 +37,7 @@ namespace _2SemesterProjekt.Pages
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true;
+                e.Handled = true; // The user is only able to enter numbers in the textbox.
             }
         }
 
@@ -51,11 +51,11 @@ namespace _2SemesterProjekt.Pages
             {
                 int customerPhoneNumber = Convert.ToInt32(ownerPhoneNumberTextbox.Text);
                 int customerId = _customerService.GetCustomerIDByPhoneNumber(customerPhoneNumber);
-                if (customerId == 0)
+                if (customerId == 0) // Customer ID validation
                 {
                     NotificationMessage("Kunden med dette telefonnummer findes ikke i systemet.");
                 }
-                else if(string.IsNullOrWhiteSpace(petNameTextbox.Text) || string.IsNullOrWhiteSpace(petSpeciesTextbox.Text))
+                else if(string.IsNullOrWhiteSpace(petNameTextbox.Text) || string.IsNullOrWhiteSpace(petSpeciesTextbox.Text)) // Pet name and species validation
                 {
                     NotificationMessage("Udfyld venligst navn og/eller art!");
                     
@@ -68,11 +68,12 @@ namespace _2SemesterProjekt.Pages
                         petBirthdaySelector.Value);
                     bool petExists = _petService.CheckIfPetExists(pet);
 
-                    if (petExists)
+                    if (petExists) // Error message if the pet already exists
                     {
                         NotificationMessage("Kæledyret findes allerede i databasen.");
                     }
-                    else
+                    else /* If not, the pet will be saved to the DB through the service
+                          and a success message will appear. */
                     {
                         _petService.CreatePet(pet);
                         NotificationMessage($"{pet.Name} er blevet tilføjet til systemet.");

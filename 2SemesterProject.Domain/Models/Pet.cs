@@ -40,15 +40,15 @@ namespace _2SemesterProject.Domain.Models
         }
 		public bool ValidateInformation()
 		{
-            if (CustomerID == 0)
+            if (CustomerID == 0) // Invalid if customerID is 0
             {
                 return false;
             }
-            else if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Species))
+            else if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Species)) // Invalid if Name or Species is empty
             {
                 return false;
             }
-            else if (Birthday == null)
+            else if (Birthday == null) // Invalid if Birthday is null
             {
                 return false;
             }
