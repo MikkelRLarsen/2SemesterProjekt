@@ -30,7 +30,7 @@ namespace _2SemesterProjekt.Pages
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Controls.Clear(); // Clear existing content
-            this.Controls.Add(new ProductPage()); // Load the new page
+            this.Controls.Add(new PetPage()); // Load the new page
         }
 
         private void ownerPhoneNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)

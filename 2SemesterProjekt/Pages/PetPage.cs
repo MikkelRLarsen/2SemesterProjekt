@@ -11,9 +11,9 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace _2SemesterProjekt.Pages
 {
-    public partial class ProductPage: UserControl
+    public partial class PetPage: UserControl
     {
-        public ProductPage()
+        public PetPage()
         {
             InitializeComponent();
             buttonFlowPanel.Controls.Add(new ButtonPanel("Find kæledyr", "FindCustomer.png", Color.SteelBlue));
