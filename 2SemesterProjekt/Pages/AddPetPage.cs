@@ -11,6 +11,7 @@ using _2SemesterProject.Domain.Models;
 using _2SemesterProject.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
 
 namespace _2SemesterProjekt.Pages
 {
@@ -49,7 +50,14 @@ namespace _2SemesterProjekt.Pages
             else
             {
                 int customerPhoneNumber = Convert.ToInt32(ownerPhoneNumberTextbox.Text);
-                NotificationMessage(_petService.ValidatePet(petNameTextbox.Text, petSpeciesTextbox.Text, petBirthdaySelector.Value, customerPhoneNumber));
+                int customerId = _customerService.GetCustomerIDByPhoneNumber(customerPhoneNumber);
+                if (customerId == 0)
+                {
+                    NotificationMessage("Kunden med dette telefonnummer findes ikke i systemet.");
+                }
+                else {
+                    NotificationMessage(_petService.CreatePet(petNameTextbox.Text, petSpeciesTextbox.Text, petBirthdaySelector.Value, customerId));
+                }
             }
         }
 

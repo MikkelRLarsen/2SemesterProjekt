@@ -38,37 +38,15 @@ namespace _2SemesterProjekt.Services
 
         public string ValidatePet(string petName, string petSpecies, DateTime petBirthday, int phoneNumber)
         {
-            int ownerId = _customerRepository.GetCustomerIDByPhoneNumber(phoneNumber);
-            if (ownerId == 0)
-            {
-                return "Kunden med dette telefonnummer findes ikke i systemet.";
-            }
-            else if (string.IsNullOrWhiteSpace(petName) || string.IsNullOrWhiteSpace(petSpecies))
-            {
-                return "Udfyld venligst navn og/eller art!";
-            }
-            else
-            {
-                Pet pet = new Pet(ownerId, petName, petSpecies, petBirthday);
-                bool petExists = _petRepository.CheckIfPetExists(pet);
-                if (petExists)
-                {
-                    return "Kæledyret findes allerede i databasen.";
-                }
-                else
-                {
-                    CreatePet(pet);
-                    return $"{pet.Name} er blevet tilføjet til systemet.";
-                }
-            }
+            
 
         }
-        public void CreatePet(Pet pet) /* This method can return different
+        public string CreatePet(string petName, string petSpecies, DateTime petBirthday, int phoneNumber) /* This method can return different
                                                                 messages to the UI, so it
                                                                 can generate either an error
                                                                 message or success message. */
         {
-            _petRepository.CreatePet(pet);
+            
         }
     }
 }
