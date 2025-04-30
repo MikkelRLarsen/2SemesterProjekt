@@ -1,6 +1,6 @@
-﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
-using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
-using _2SemesterProject.Domain.Models;
+﻿using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
+using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,14 +24,9 @@ namespace _2SemesterProjekt.Services
 			await _customerRepository.CreateCustomerAsync(customer);
 		}
 
-		public void DeleteCustomer(Customer customer)
+		public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
 		{
-			throw new NotImplementedException();
-		}
-
-		public Task<IEnumerable<Customer>> GetAllCustomersAsync()
-		{
-			throw new NotImplementedException();
+			return await _customerRepository.GetAllCustomersAsync();
 		}
 
 		public string[] GetCustomerTypes()
@@ -39,25 +34,11 @@ namespace _2SemesterProjekt.Services
 			return _customerTypes;
         }
 
-		public Customer GetCustomerById(int customerID)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void UpdateCustomer(Customer customer)
-		{
-			throw new NotImplementedException();
-		}
 		public int GetCustomerIDByPhoneNumber(int phoneNumber)
 		{
 			return _customerRepository.GetCustomerIDByPhoneNumber(phoneNumber);
 			/* Retrieves and returns the customer ID of the customer, who has a specific
 			 phone number. Will always return 0, if the customer doesn't exist in the DB. */
-		}
-
-        public bool CreateCustomer(Customer customer)
-		{
-			throw new NotImplementedException();
 		}
     }
 }

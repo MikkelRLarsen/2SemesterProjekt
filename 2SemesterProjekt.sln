@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2SemesterProjekt.WinForms",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2SemesterProjekt.Blazor", "2SemesterProjekt.Blazor\2SemesterProjekt.Blazor.csproj", "{256BC617-0496-4C6C-BB1B-B861E323FEE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2SemesterProject.Domain", "2SemesterProject.Domain\2SemesterProject.Domain.csproj", "{657F9FDD-4BEE-4382-B0CC-431E1C7E14B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2SemesterProjekt.Domain", "2SemesterProject.Domain\2SemesterProjekt.Domain.csproj", "{657F9FDD-4BEE-4382-B0CC-431E1C7E14B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2SemesterProjekt.Services", "2SemesterProjekt.Services\2SemesterProjekt.Services.csproj", "{F239D9BB-6AC6-43AF-8DB6-B84FF8EEFFE0}"
 EndProject

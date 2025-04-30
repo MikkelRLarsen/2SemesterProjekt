@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
-namespace _2SemesterProject.Domain.Models
+namespace _2SemesterProjekt.Domain.Models
 {
 	public class Customer
 	{

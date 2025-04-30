@@ -1,4 +1,4 @@
-using _2SemesterProject.Domain.Models;
+using _2SemesterProjekt.Domain.Models;
 
 namespace _2SemesterProjekt.MSTest;
 

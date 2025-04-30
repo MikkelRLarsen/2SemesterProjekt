@@ -1,18 +1,14 @@
-﻿using _2SemesterProject.Domain.Models;
+﻿using _2SemesterProjekt.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2SemesterProject.Domain.Interfaces.ServiceInterfaces
+namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 {
 	public interface IEmployeeService
 	{
-		public Task<IEnumerable<Employee>> GetAllEmployeeAsync();
-		public Employee GetEmployeeById(int employeeId);
-		public void UpdateEmployee(Employee employee);
-		public void DeleteEmployee(Employee employee);
-		public void CreateEmployee(Employee employee);
+		public Task<IEnumerable<Employee>> GetAllPetDoctorsAsync();
 	}
 }

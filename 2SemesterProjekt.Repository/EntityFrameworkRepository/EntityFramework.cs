@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using _2SemesterProject.Domain.Models;
+using _2SemesterProjekt.Domain.Models;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
@@ -12,8 +12,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 	{
 		public DbSet<Customer> Customers { get; set;}
 		public DbSet<Pet> Pets { get; set;}
-		DbSet<Examination> Examinations { get; set;}
-		DbSet<Employee> Employees { get; set;}
+		public DbSet<Examination> Examinations { get; set;}
+		public DbSet<Employee> Employees { get; set;}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -27,7 +27,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		protected static string GetConnectionString()
 		{
 			string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-			string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString.txt");
+			string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString");
 			return File.ReadAllText(fullName);
 		}
 
@@ -47,12 +47,12 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<Examination>()
 				.HasOne(e => e.Pet)
 				.WithMany(p => p.Examinations)
-				.HasForeignKey(e => e.ExaminationID);
+				.HasForeignKey(e => e.PetID);
 
 			modelBuilder.Entity<Examination>()
 				.HasOne(e => e.Employee)
 				.WithMany(em => em.Examinations)
-				.HasForeignKey(e => e.ExaminationID);
+				.HasForeignKey(e => e.EmployeeID);
 
 			// Primary Keys
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);

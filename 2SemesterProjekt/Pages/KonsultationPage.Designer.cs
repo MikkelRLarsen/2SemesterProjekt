@@ -1,6 +1,6 @@
 ﻿namespace _2SemesterProjekt.Pages
 {
-	partial class OrderPage
+	partial class KonsultationPage
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -29,37 +29,47 @@
 		private void InitializeComponent()
 		{
 			pageNameLabel = new Label();
-			CustomerflowPanel = new FlowLayoutPanel();
+			ExaminationFlowPanel = new FlowLayoutPanel();
+			CRUDPanel = new FlowLayoutPanel();
 			SuspendLayout();
 			// 
 			// pageNameLabel
 			// 
 			pageNameLabel.AutoSize = true;
 			pageNameLabel.Font = new Font("Gadugi", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			pageNameLabel.Location = new Point(473, 36);
+			pageNameLabel.Location = new Point(396, 39);
 			pageNameLabel.Name = "pageNameLabel";
-			pageNameLabel.Size = new Size(232, 77);
+			pageNameLabel.Size = new Size(418, 77);
 			pageNameLabel.TabIndex = 2;
-			pageNameLabel.Text = "Ordrer";
+			pageNameLabel.Text = "Konsultation";
 			// 
-			// CustomerflowPanel
+			// ExaminationFlowPanel
 			// 
-			CustomerflowPanel.BackColor = SystemColors.ControlLightLight;
-			CustomerflowPanel.BorderStyle = BorderStyle.FixedSingle;
-			CustomerflowPanel.FlowDirection = FlowDirection.TopDown;
-			CustomerflowPanel.Location = new Point(250, 150);
-			CustomerflowPanel.Name = "CustomerflowPanel";
-			CustomerflowPanel.Size = new Size(709, 580);
-			CustomerflowPanel.TabIndex = 3;
+			ExaminationFlowPanel.BackColor = SystemColors.ControlLightLight;
+			ExaminationFlowPanel.BorderStyle = BorderStyle.FixedSingle;
+			ExaminationFlowPanel.FlowDirection = FlowDirection.TopDown;
+			ExaminationFlowPanel.Location = new Point(250, 150);
+			ExaminationFlowPanel.Name = "ExaminationFlowPanel";
+			ExaminationFlowPanel.Size = new Size(709, 580);
+			ExaminationFlowPanel.TabIndex = 3;
 			// 
-			// OrderPage
+			// CRUDPanel
+			// 
+			CRUDPanel.Location = new Point(979, 429);
+			CRUDPanel.Name = "CRUDPanel";
+			CRUDPanel.Size = new Size(209, 301);
+			CRUDPanel.TabIndex = 4;
+			// 
+			// KonsultationPage
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			Controls.Add(CustomerflowPanel);
+			Controls.Add(CRUDPanel);
+			Controls.Add(ExaminationFlowPanel);
 			Controls.Add(pageNameLabel);
-			Name = "OrderPage";
+			Name = "KonsultationPage";
 			Size = new Size(1200, 825);
+			Load += KonsultationPage_Load;
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -67,6 +77,7 @@
 		#endregion
 
 		private Label pageNameLabel;
-		private FlowLayoutPanel CustomerflowPanel;
+		private FlowLayoutPanel ExaminationFlowPanel;
+		private FlowLayoutPanel CRUDPanel;
 	}
 }
