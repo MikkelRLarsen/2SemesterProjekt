@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using System.Threading.Tasks;
 
 namespace _2SemesterProjekt.Pages
 {
@@ -9,12 +10,20 @@ namespace _2SemesterProjekt.Pages
     {
         private readonly IPetService _petService;
         private readonly ICustomerService _customerService;
+        private readonly IEmployeeService _employeeService;
         public AddPetPage()
         {
             InitializeComponent();
             petBirthdaySelector.MaxDate = DateTime.Today;
-            _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>();
-            _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
+            _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>()!;
+            _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
+            _employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
+        }
+
+        private async void AddPetPage_Load(object sender, EventArgs e)
+        {
+            comboBoxPrimaryVeterinarian.DataSource = await _employeeService.GetAllPetDoctorsAsync();
+            comboBoxPrimaryVeterinarian.DisplayMember = "FirstName";
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -45,17 +54,20 @@ namespace _2SemesterProjekt.Pages
                 {
                     NotificationMessage("Kunden med dette telefonnummer findes ikke i systemet.");
                 }
-                else if(string.IsNullOrWhiteSpace(petNameTextbox.Text) || string.IsNullOrWhiteSpace(petSpeciesTextbox.Text)) // Pet name and species validation
+                else if (string.IsNullOrWhiteSpace(petNameTextbox.Text) || string.IsNullOrWhiteSpace(petSpeciesTextbox.Text)) // Pet name and species validation
                 {
                     NotificationMessage("Udfyld venligst navn og/eller art!");
-                    
+
                 }
-                else {
+                else
+                {
                     var pet = new Pet(
                         customerId,
                         petNameTextbox.Text,
                         petSpeciesTextbox.Text,
-                        petBirthdaySelector.Value); /* Instantiating a Pet object with
+                        petBirthdaySelector.Value,
+                        (comboBoxPrimaryVeterinarian.SelectedItem as Employee).EmployeeID
+                    ); /* Instantiating a Pet object with
                                                      the retrieved customer ID and the
                                                      text inside the textboxes.*/
                     bool petExists = _petService.CheckIfPetExists(pet); /* This method checks if
@@ -81,5 +93,7 @@ namespace _2SemesterProjekt.Pages
         {
             MessageBox.Show(typeOfMsg, "Information", MessageBoxButtons.OK);
         }
+
+       
     }
 }

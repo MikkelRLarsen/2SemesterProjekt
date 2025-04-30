@@ -13,14 +13,6 @@
         public Employee? Employee { get; }
 		public List<Examination> Examinations { get; }
 
-		public Pet(int petID, int customerID, string name, string species, DateTime birthday)
-		{
-			PetID = petID;
-			CustomerID = customerID;
-			Name = name;
-			Species = species;
-			Birthday = birthday;
-		}
         public Pet(int customerID, string name, string species, DateTime birthday, int? employeeID)
         {
             CustomerID = customerID;
