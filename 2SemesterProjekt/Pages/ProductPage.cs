@@ -16,7 +16,6 @@ namespace _2SemesterProjekt.Pages
         {
             InitializeComponent();
             buttonFlowPanel.Controls.Add(new ButtonPanel("Eksporter til .txt", "", Color.MediumSeaGreen, ExportToTxt_Click));
-
         }
 
         private void ExportToTxt_Click(object sender, EventArgs e)
