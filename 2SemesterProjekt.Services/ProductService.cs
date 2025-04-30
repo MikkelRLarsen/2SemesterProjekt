@@ -36,22 +36,21 @@ namespace _2SemesterProjekt.Services
                                       $"Produktnavn: {product.Name}, " +
                                       $"Pris pr. styk: {product.PricePerUnit}, " +
                                       $"Antal på lager: {product.NumberInStock}, " +
-                                      $"Minimumsantal: {product.MinNumberInStock}";
+                                      $"Minimumsantal: {product.MinNumberInStock}\n\n";
 
                     }
                     else
                     {
-                        productList += $"(VAREN HAR RAMT MINIMUMSBEHOLDNING) " +
-                                      $"Varenummer: {product.EAN}, " +
+                        productList += $"Varenummer: {product.EAN}, " +
                                       $"Produktnavn: {product.Name}, " +
                                       $"Pris pr. styk: {product.PricePerUnit}, " +
                                       $"Antal på lager: {product.NumberInStock}, " +
-                                      $"Minimumsantal: {product.MinNumberInStock}";
+                                      $"Minimumsantal: {product.MinNumberInStock}\n\n";
                     }
                     stockWorth += product.NumberInStock * product.PricePerUnit;
                 }
 
-                string stockList = productList.Insert(0, $"Værdi af lagerbeholdning: {stockWorth} \n");
+                string stockList = productList.Insert(0, $"Værdi af lagerbeholdning: {stockWorth}\n\n");
                 
                 return stockList;
             }

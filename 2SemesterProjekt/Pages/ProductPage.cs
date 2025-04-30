@@ -34,7 +34,7 @@ namespace _2SemesterProjekt.Pages
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Tekstfil|*.txt";
-                saveFileDialog.FileName = $"Lagerbeholdning - {DateTime.Now}.txt";
+                saveFileDialog.FileName = $"Lagerbeholdning.txt";
                 saveFileDialog.Title = "Gem din tekstfil";
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
