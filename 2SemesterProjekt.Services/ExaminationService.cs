@@ -34,10 +34,12 @@ namespace _2SemesterProjekt.Services
             await IsDoubleBooked(examination);
             await _examinationRepository.CreateExaminationAsync(examination);
         }
+
         public async Task<IEnumerable<string>> GetAllExaminationTypesAsync()
         {
             return _examinationPrices.Keys.ToArray();
         }
+
         public async Task<double> GetAllExaminationPricesAsync(string examinationType)
         {
             return _examinationPrices[examinationType];

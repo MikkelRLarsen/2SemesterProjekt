@@ -54,27 +54,9 @@ namespace _2SemesterProjekt.Domain.Models
 		/// Also checks if it contains decimals that it doesn't have more than 2 decimals
 		/// </summary>
 		/// <returns></returns>
-		protected bool Validate_Double_More_Than_2_Digits()
+		protected void Validate_Double_More_Than_2_Digits()
 		{
-			try
-			{
-				string priceAsString = Price.ToString();
-
-				if(!priceAsString.Contains('.'))
-				{
-					return true;
-				}
-
-				string[] priceAsAStringArray = priceAsString.Split(',');
-
-				if (priceAsAStringArray[1].Length <= 2)
-				{
-					return true;
-				}
-
-				return false;
-			}
-			catch (Exception)
+			if (decimal.Round(Price, 2) != Price)
 			{
 				throw new ArgumentException("Price had to many digits");
 			}

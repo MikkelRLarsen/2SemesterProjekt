@@ -10,22 +10,60 @@ public class ExaminationTest
 	private int EmployeeID = 1;
 	private DateTime Date = DateTime.Now;
 	private string Type = "Operation";
-	private decimal Price = 500;
-	public static IEnumerable<object[]> GetInvalidPrices()
-	{
-		yield return new object[] { 0m };
-		yield return new object[] { 100.99m };
-		yield return new object[] { 0.100m };
-		yield return new object[] { 0.999m };
-	}
-
-
+	private decimal Price = 500m;
 
 	[TestMethod]
-	[DynamicData(nameof(GetInvalidPrices), DynamicDataSourceType.Method)]
-	public void Given_Price_Expect_Error_Since_Its_Over_2_Digit(decimal price)
+	public void Constructor_ValidData_ShouuldCreateObject()
 	{
-		Assert.ThrowsException<ArgumentException>(() => new Examination(PetID, EmployeeID, Date, Type, price));
+		// Act
+		Examination exam = new Examination(PetID, EmployeeID, Date, Type, Price);
+
+		// Assert
+		Assert.AreEqual(PetID, exam.PetID);
+		Assert.AreEqual(EmployeeID, exam.EmployeeID);
+		Assert.AreEqual(Date, exam.Date);
+		Assert.AreEqual(Type, exam.Type);
+		Assert.AreEqual(Price, exam.Price);
+	}
+
+	[TestMethod]
+	[ExpectedException(typeof(ArgumentException))]
+	public void Constructor_PetidZero_ShouldThrowException()
+	{
+		//Act
+		_ = new Examination(0, EmployeeID, Date, Type, Price);
+	}
+
+	[TestMethod]
+	[ExpectedException(typeof(ArgumentException))]
+	public void Constructor_EmployeeidZero_ShouldThrowException()
+	{
+		//Act
+		_ = new Examination(PetID, 0, Date, Type, Price);
+	}
+
+	[TestMethod]
+	[ExpectedException(typeof(ArgumentException))]
+	public void Constructor_PriceWithTooManyDecimals_ShouldThrowException()
+	{
+		// Arrange
+		decimal priceWithTooManyDecimals = 123.456m;
+
+		// Act
+		_ = new Examination(PetID, EmployeeID, Date, Type, priceWithTooManyDecimals);
+	}
+
+	[TestMethod]
+	public void Constructor_PriceWithTwoDecimals_ShouldNotThrow()
+	{
+		// Arrange
+		decimal validPriceWithTwoDecimals = 123.45m;
+
+		// Act
+		Examination exam = new Examination(PetID, EmployeeID, Date, Type, validPriceWithTwoDecimals);
+
+		// Assert
+		Assert.AreEqual(validPriceWithTwoDecimals, exam.Price);
 	}
 
 
