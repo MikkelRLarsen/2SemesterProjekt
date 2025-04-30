@@ -73,7 +73,7 @@
 			CustomerExaminationDropdown.Name = "CustomerExaminationDropdown";
 			CustomerExaminationDropdown.Size = new Size(207, 23);
 			CustomerExaminationDropdown.TabIndex = 6;
-			CustomerExaminationDropdown.SelectionChangeCommitted += CustomerExaminationDropdown_SelectedIndexChanged;
+			CustomerExaminationDropdown.SelectionChangeCommitted += CustomerExaminationDropdown_SelectionChangeCommitted;
 			// 
 			// PetExaminationDropdown
 			// 
@@ -84,7 +84,7 @@
 			PetExaminationDropdown.Name = "PetExaminationDropdown";
 			PetExaminationDropdown.Size = new Size(207, 23);
 			PetExaminationDropdown.TabIndex = 8;
-			PetExaminationDropdown.SelectionChangeCommitted += PetExaminationDropdown_SelectedIndexChanged;
+			PetExaminationDropdown.SelectionChangeCommitted += PetExaminationDropdown_SelectionChangeCommitted;
 			// 
 			// label2
 			// 
@@ -105,7 +105,7 @@
 			ExaminationDropdown.Name = "ExaminationDropdown";
 			ExaminationDropdown.Size = new Size(207, 23);
 			ExaminationDropdown.TabIndex = 10;
-			ExaminationDropdown.SelectionChangeCommitted += ExaminationDropdown_SelectedIndexChanged;
+			ExaminationDropdown.SelectionChangeCommitted += ExaminationDropdown_SelectionChangeCommitted;
 			// 
 			// label3
 			// 
@@ -146,7 +146,7 @@
 			EmployeeExaminationDropdown.Name = "EmployeeExaminationDropdown";
 			EmployeeExaminationDropdown.Size = new Size(207, 23);
 			EmployeeExaminationDropdown.TabIndex = 16;
-			EmployeeExaminationDropdown.SelectionChangeCommitted += EmployeeExaminationDropdown_SelectedIndexChanged;
+			EmployeeExaminationDropdown.SelectionChangeCommitted += EmployeeExaminationDropdown_SelectionChangeCommitted;
 			// 
 			// label7
 			// 

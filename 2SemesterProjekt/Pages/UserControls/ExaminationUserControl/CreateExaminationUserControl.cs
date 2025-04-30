@@ -24,15 +24,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void CustomerExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
+		private async void CustomerExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
 		{
-			if (CustomerExaminationDropdown.SelectedItem != null)
-			{
-				PetExaminationDropdown.Enabled = true;
+			PetExaminationDropdown.Enabled = true;
 
-				Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
-				PetExaminationDropdown.DataSource = kunde.Pets;
-			}
+			Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
+			PetExaminationDropdown.DataSource = kunde.Pets;
 		}
 
 		/// <summary>
@@ -40,7 +37,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void PetExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
+		private async void PetExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
 		{
 			ExaminationDropdown.DataSource = await _examinationService.GetAllExaminationTypesAsync();
 			ExaminationDropdown.Enabled = true;
@@ -51,7 +48,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void ExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
+		private async void ExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
 		{
 			PriceExaminationDisplay.Text = Convert.ToString(await _examinationService.GetAllExaminationPricesAsync(ExaminationDropdown.SelectedItem as string));
 			DateTimePickerExamination.Enabled = true;
@@ -73,7 +70,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void EmployeeExaminationDropdown_SelectedIndexChanged(object sender, EventArgs e)
+		private void EmployeeExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
 		{
 			CreateExaminationButton.Enabled = true;
 			CreateExaminationButton.BackColor = Color.MediumAquamarine;
@@ -89,6 +86,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			try
 			{
+				// Creates the new Examination as a local variable to run validate Information.
 				Examination newExamination = new Examination((PetExaminationDropdown.SelectedItem as Pet).PetID
 					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
 					, DateTimePickerExamination.Value
@@ -99,13 +97,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				await _examinationService.CreateExaminationAsync(newExamination);
 
 				//Shows a message that the creation has been completed
-				ErrorMessageExamination.Visible =true;
+				ErrorMessageExamination.Visible = true;
 				ErrorMessageExamination.Text = "Examination has been created";
-
-				//Pauses the Task for 3 secound before clearing it (Going back to previously page)
-				await Task.Delay(3000);
-				_konsultationPanel.Controls.Clear();
-
 			}
 			catch (Exception ex)
 			{

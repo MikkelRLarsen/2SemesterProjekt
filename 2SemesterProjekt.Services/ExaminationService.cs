@@ -21,6 +21,9 @@ namespace _2SemesterProjekt.Services
             CreateDictionaryForExaminationPrices();
 		}
 
+        /// <summary>
+        /// Harcodet Prices for Examination
+        /// </summary>
         private void CreateDictionaryForExaminationPrices()
         {
             _examinationPrices.Add("Konsulation", 200);
@@ -45,10 +48,19 @@ namespace _2SemesterProjekt.Services
             return _examinationPrices[examinationType];
         }
 
+        /// <summary>
+        /// Checks if The Employee or Pet is already booked for examination on the given day.
+        /// Throw ArgumentException if they are already booked
+        /// </summary>
+        /// <param name="examination"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         private async Task IsDoubleBooked(Examination examination)
         {
+            // Retrives all Examination of a given day
             IEnumerable<Examination> allExaminationOnSpecificDate = await _examinationRepository.GetAllExaminationOnDate(examination.Date);
 
+            // Checks if Employee or Pet is already booked on that day
             foreach (Examination examinationOnDate in allExaminationOnSpecificDate)
             {
                 if (examinationOnDate.EmployeeID == examination.EmployeeID)
