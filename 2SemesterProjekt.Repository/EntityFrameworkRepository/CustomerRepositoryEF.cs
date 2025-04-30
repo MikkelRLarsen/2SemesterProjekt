@@ -58,9 +58,23 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             throw new NotImplementedException();
         }
 
-        public void UpdateCustomer(Customer customer)
-        {
-            throw new NotImplementedException();
-        }
+		public void UpdateCustomer(Customer customer)
+		{
+			throw new NotImplementedException();
+		}
+
+		public int GetCustomerIDByPhoneNumber(int ownerPhoneNumber)
+		{
+			var owner = _db.Customers.FirstOrDefault(c => c.PhoneNumber == ownerPhoneNumber);
+            /* owner will be set to null if there isn't a customer with
+            the specific phone number in the DB. */
+			if (owner != null){
+                return owner.CustomerID;
+            }
+			else
+			{
+				return 0;
+			}
+		}
     }
 }

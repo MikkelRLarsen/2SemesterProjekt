@@ -14,6 +14,8 @@ namespace _2SemesterProject.Domain.Interfaces.ServiceInterfaces
         public Customer GetCustomerById(int customerID);
 		public void UpdateCustomer(Customer customer);
 		public void DeleteCustomer(Customer customer);
+		public bool CreateCustomer(Customer customer);
+		public int GetCustomerIDByPhoneNumber(int phoneNumber);
 		public Task CreateCustomerAsync(Customer customer);
 	}
 }
