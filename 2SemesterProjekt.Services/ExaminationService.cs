@@ -43,7 +43,7 @@ namespace _2SemesterProjekt.Services
             return _examinationPrices.Keys.ToArray();
         }
 
-        public async Task<double> GetAllExaminationPricesAsync(string examinationType)
+        public async Task<double> GetExaminationPrice(string examinationType)
         {
             return _examinationPrices[examinationType];
         }

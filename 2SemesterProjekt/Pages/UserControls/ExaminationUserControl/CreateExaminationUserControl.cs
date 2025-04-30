@@ -50,7 +50,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// <param name="e"></param>
 		private async void ExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
 		{
-			PriceExaminationDisplay.Text = Convert.ToString(await _examinationService.GetAllExaminationPricesAsync(ExaminationDropdown.SelectedItem as string));
+			PriceExaminationDisplay.Text = Convert.ToString(await _examinationService.GetExaminationPrice(ExaminationDropdown.SelectedItem as string));
 			DateTimePickerExamination.Enabled = true;
 		}
 
