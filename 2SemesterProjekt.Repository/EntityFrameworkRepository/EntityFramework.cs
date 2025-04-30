@@ -27,7 +27,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		protected static string GetConnectionString()
 		{
 			string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-			string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString.txt");
+			string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString");
 			return File.ReadAllText(fullName);
 		}
 

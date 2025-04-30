@@ -9,10 +9,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 {
 	public interface IPetRepository
 	{
-		public Task<IEnumerable<Pet>> GetAllPetsAsync();
-		public Pet GetPetById(int petId);
-		public void UpdatePet(Pet pet);
-		public void DeletePet(Pet pet);
         public void CreatePet(Pet pet);
         public bool CheckIfPetExists(Pet pet);
 	}
