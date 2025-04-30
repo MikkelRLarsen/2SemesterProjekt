@@ -17,11 +17,16 @@ namespace _2SemesterProjekt.Pages
         {
             InitializeComponent();
             buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kæledyr", Color.MediumSeaGreen, ShowPetCreation));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Vis inaktiv liste", Color.MediumVioletRed, ShowInactivePets));
         }
         private void ShowPetCreation(object sender, EventArgs e)
         {
             this.Controls.Clear(); // Clear existing content
             this.Controls.Add(new AddPetPage()); // Load the new page
+        }
+        private void ShowInactivePets(object sender, EventArgs e)
+        {
+            this.Controls.Clear(); // Clear existing content
         }
     }
 }
