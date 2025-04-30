@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\UserControls\PetUserControl\" />
     <Folder Include="Resources\" />
     <Folder Include="WinForms.Templates\" />
   </ItemGroup>
