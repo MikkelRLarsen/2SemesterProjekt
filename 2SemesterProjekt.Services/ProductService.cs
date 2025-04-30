@@ -31,21 +31,23 @@ namespace _2SemesterProjekt.Services
                 {
                     if (product.MinNumberInStock > product.NumberInStock)
                     {
-                        productList += $"(VAREN HAR RAMT MINIMUMSBEHOLDNING) " +
-                                      $"Varenummer: {product.EAN}, " +
-                                      $"Produktnavn: {product.Name}, " +
-                                      $"Pris pr. styk: {product.PricePerUnit}, " +
-                                      $"Antal på lager: {product.NumberInStock}, " +
-                                      $"Minimumsantal: {product.MinNumberInStock}\n\n";
+                        productList += $"(VAREN HAR RAMT MINIMUMSBEHOLDNING)\n" +
+                                      $"Varenummer: {product.EAN},\n" +
+                                      $"Produktnavn: {product.Name},\n" +
+                                      $"Pris pr. styk: {product.PricePerUnit},\n" +
+                                      $"Antal på lager: {product.NumberInStock},\n" +
+                                      $"Minimumsantal: {product.MinNumberInStock}\n\n" +
+                                      "******************************************\n\n";
 
                     }
                     else
                     {
-                        productList += $"Varenummer: {product.EAN}, " +
-                                      $"Produktnavn: {product.Name}, " +
-                                      $"Pris pr. styk: {product.PricePerUnit}, " +
-                                      $"Antal på lager: {product.NumberInStock}, " +
-                                      $"Minimumsantal: {product.MinNumberInStock}\n\n";
+                        productList += $"Varenummer: {product.EAN},\n" +
+                                      $"Produktnavn: {product.Name},\n" +
+                                      $"Pris pr. styk: {product.PricePerUnit},\n" +
+                                      $"Antal på lager: {product.NumberInStock},\n" +
+                                      $"Minimumsantal: {product.MinNumberInStock}\n\n" +
+                                      "******************************************\n\n";
                     }
                     stockWorth += product.NumberInStock * product.PricePerUnit;
                 }
