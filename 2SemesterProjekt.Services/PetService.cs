@@ -35,11 +35,12 @@ namespace _2SemesterProjekt.Services
         }
         public void CreatePet(Pet pet)
         {
-            _petRepository.CreatePet(pet);
+            _petRepository.CreatePet(pet); // The pet gets added to the DB.
         }
         public bool CheckIfPetExists(Pet pet)
         {
             return _petRepository.CheckIfPetExists(pet);
+            // Returns true if the pet exists. Returns false, if not.
         }
     }
 }

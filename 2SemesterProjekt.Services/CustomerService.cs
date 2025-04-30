@@ -51,6 +51,8 @@ namespace _2SemesterProjekt.Services
 		public int GetCustomerIDByPhoneNumber(int phoneNumber)
 		{
 			return _customerRepository.GetCustomerIDByPhoneNumber(phoneNumber);
+			/* Retrieves and returns the customer ID of the customer, who has a specific
+			 phone number. Will always return 0, if the customer doesn't exist in the DB. */
 		}
 
         public bool CreateCustomer(Customer customer)

@@ -43,14 +43,14 @@ namespace _2SemesterProjekt.Pages
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            if (!Int32.TryParse(ownerPhoneNumberTextbox.Text, out int phoneNumber))
+            if (!Int32.TryParse(ownerPhoneNumberTextbox.Text, out int phoneNumber)) // Checks if copy/pasted text is a valid phone number.
             {
                 NotificationMessage("Telefonnummeret er ikke gyldigt!");
             }
             else
             {
-                int customerPhoneNumber = Convert.ToInt32(ownerPhoneNumberTextbox.Text);
-                int customerId = _customerService.GetCustomerIDByPhoneNumber(customerPhoneNumber);
+                int customerPhoneNumber = Convert.ToInt32(ownerPhoneNumberTextbox.Text); // Converts phone number to int.
+                int customerId = _customerService.GetCustomerIDByPhoneNumber(customerPhoneNumber); // Retrieves the customer's ID by using the entered phone number.
                 if (customerId == 0) // Customer ID validation
                 {
                     NotificationMessage("Kunden med dette telefonnummer findes ikke i systemet.");
@@ -65,8 +65,13 @@ namespace _2SemesterProjekt.Pages
                         customerId,
                         petNameTextbox.Text,
                         petSpeciesTextbox.Text,
-                        petBirthdaySelector.Value);
-                    bool petExists = _petService.CheckIfPetExists(pet);
+                        petBirthdaySelector.Value); /* Instantiating a Pet object with
+                                                     the retrieved customer ID and the
+                                                     text inside the textboxes.*/
+                    bool petExists = _petService.CheckIfPetExists(pet); /* This method checks if
+                                                                         a pet with the same values in its properties
+                                                                         as the newly instantiated Pet object
+                                                                         already exists in the DB. */
 
                     if (petExists) // Error message if the pet already exists
                     {
@@ -75,7 +80,7 @@ namespace _2SemesterProjekt.Pages
                     else /* If not, the pet will be saved to the DB through the service
                           and a success message will appear. */
                     {
-                        _petService.CreatePet(pet);
+                        _petService.CreatePet(pet); // The newly instantiated Pet object gets added to the DB.
                         NotificationMessage($"{pet.Name} er blevet tilføjet til systemet.");
                     }
                 }
