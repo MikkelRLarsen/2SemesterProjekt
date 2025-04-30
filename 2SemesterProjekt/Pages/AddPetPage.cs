@@ -22,8 +22,30 @@ namespace _2SemesterProjekt.Pages
 
         private async void AddPetPage_Load(object sender, EventArgs e)
         {
-            comboBoxPrimaryVeterinarian.DataSource = await _employeeService.GetAllPetDoctorsAsync();
+            var dropDownItems = new List<object> { "Ikke valgt" }; // Add not chosen option
+            var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
+            
+            dropDownItems.AddRange(veterinarians);
+
+            comboBoxPrimaryVeterinarian.DataSource = dropDownItems;
             comboBoxPrimaryVeterinarian.DisplayMember = "FirstName";
+
+            comboBoxPrimaryVeterinarian.Format += ComboBoxPrimaryVeterinarian_Format!;
+        }
+
+        /// <summary>
+        /// Goes through the list and displays employees first names
+        /// </summary>
+        private void ComboBoxPrimaryVeterinarian_Format(object sender, ListControlConvertEventArgs e)
+        {
+            if (e.ListItem is Employee employee)
+            {
+                e.Value = employee.FirstName;
+            }
+            else
+            {
+                e.Value = e.ListItem!.ToString();
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -61,12 +83,14 @@ namespace _2SemesterProjekt.Pages
                 }
                 else
                 {
+                    var selectedVet = comboBoxPrimaryVeterinarian.SelectedItem as Employee;
+
                     var pet = new Pet(
                         customerId,
                         petNameTextbox.Text,
                         petSpeciesTextbox.Text,
                         petBirthdaySelector.Value,
-                        (comboBoxPrimaryVeterinarian.SelectedItem as Employee).EmployeeID
+                        selectedVet?.EmployeeID
                     ); /* Instantiating a Pet object with
                                                      the retrieved customer ID and the
                                                      text inside the textboxes.*/
