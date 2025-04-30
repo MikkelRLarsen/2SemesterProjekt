@@ -22,21 +22,5 @@ namespace _2SemesterProjekt.Services
         {
             return await _employeeRepository.GetAllPetDoctorsAsync();
         }
-        public Employee GetEmployeeById(int employeeId)
-        {
-            throw new NotImplementedException();
-        }
-        public void UpdateEmployee(Employee employee)
-        {
-            throw new NotImplementedException();
-        }
-        public void DeleteEmployee(Employee employee)
-        {
-            throw new NotImplementedException();
-        }
-        public void CreateEmployee(Employee employee)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

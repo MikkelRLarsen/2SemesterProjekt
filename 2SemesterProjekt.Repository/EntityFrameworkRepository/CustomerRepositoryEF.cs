@@ -40,26 +40,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             }
         }
 
-        public void DeleteCustomer(Customer customer)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
         {
 			return await _db.Customers
 	            .Include(c => c.Pets)
 	            .ToListAsync();
-		}
-
-        public Customer GetCustomerById(int customerID)
-        {
-            throw new NotImplementedException();
-        }
-
-		public void UpdateCustomer(Customer customer)
-		{
-			throw new NotImplementedException();
 		}
 
 		public int GetCustomerIDByPhoneNumber(int ownerPhoneNumber)

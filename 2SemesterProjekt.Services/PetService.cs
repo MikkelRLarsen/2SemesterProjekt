@@ -17,22 +17,6 @@ namespace _2SemesterProjekt.Services
         {
             _petRepository = petRepository;
         }
-        public Task<IEnumerable<Pet>> GetAllPetsAsync()
-        {
-            throw new NotImplementedException();
-        }
-        public Pet GetPetById(int petId)
-        {
-            throw new NotImplementedException();
-        }
-        public void UpdatePet(Pet pet)
-        {
-            throw new NotImplementedException();
-        }
-        public void DeletePet(Pet pet)
-        {
-            throw new NotImplementedException();
-        }
         public void CreatePet(Pet pet)
         {
             _petRepository.CreatePet(pet); // The pet gets added to the DB.

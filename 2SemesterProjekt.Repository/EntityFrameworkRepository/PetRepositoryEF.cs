@@ -15,22 +15,6 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             _db = db;
         }
-        public Task<IEnumerable<Pet>> GetAllPetsAsync()
-        {
-            throw new NotImplementedException();
-        }
-        public Pet GetPetById(int petId)
-        {
-            throw new NotImplementedException();
-        }
-        public void UpdatePet(Pet pet)
-        {
-            throw new NotImplementedException();
-        }
-        public void DeletePet(Pet pet)
-        {
-            throw new NotImplementedException();
-        }
         public bool CheckIfPetExists(Pet pet)
         {
             var existingPet = _db.Pets.FirstOrDefault(p => p.Name == pet.Name && p.CustomerID == pet.CustomerID && p.Species == pet.Species);

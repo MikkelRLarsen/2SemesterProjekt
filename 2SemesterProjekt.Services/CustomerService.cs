@@ -24,11 +24,6 @@ namespace _2SemesterProjekt.Services
 			await _customerRepository.CreateCustomerAsync(customer);
 		}
 
-		public void DeleteCustomer(Customer customer)
-		{
-			throw new NotImplementedException();
-		}
-
 		public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
 		{
 			return await _customerRepository.GetAllCustomersAsync();
@@ -39,25 +34,11 @@ namespace _2SemesterProjekt.Services
 			return _customerTypes;
         }
 
-		public Customer GetCustomerById(int customerID)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void UpdateCustomer(Customer customer)
-		{
-			throw new NotImplementedException();
-		}
 		public int GetCustomerIDByPhoneNumber(int phoneNumber)
 		{
 			return _customerRepository.GetCustomerIDByPhoneNumber(phoneNumber);
 			/* Retrieves and returns the customer ID of the customer, who has a specific
 			 phone number. Will always return 0, if the customer doesn't exist in the DB. */
-		}
-
-        public bool CreateCustomer(Customer customer)
-		{
-			throw new NotImplementedException();
 		}
     }
 }
