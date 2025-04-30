@@ -38,11 +38,11 @@ namespace _2SemesterProjekt.Pages
         /// </summary>
         private void ComboBoxPrimaryVeterinarian_Format(object sender, ListControlConvertEventArgs e)
         {
-            if (e.ListItem is Employee employee)
+            if (e.ListItem is Employee employee) // Show first name if hit is employee
             {
                 e.Value = employee.FirstName;
             }
-            else
+            else // Make the item to a string
             {
                 e.Value = e.ListItem!.ToString();
             }
