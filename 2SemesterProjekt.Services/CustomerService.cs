@@ -12,16 +12,16 @@ namespace _2SemesterProjekt.Services
 	public class CustomerService : ICustomerService
 	{
 		private readonly ICustomerRepository _customerRepository;
+        private readonly string[] _customerTypes = { "Privat", "Erhverv" };
 
-		public CustomerService(ICustomerRepository customerRepository) 
+        public CustomerService(ICustomerRepository customerRepository) 
 		{
 			_customerRepository = customerRepository;
 		}
 
-		public bool CreateCustomer(Customer customer)
+		public async Task CreateCustomerAsync(Customer customer)
 		{
-			var result = _customerRepository.CreateCustomer(customer);
-			return result;
+			await _customerRepository.CreateCustomerAsync(customer);
 		}
 
 		public void DeleteCustomer(Customer customer)
@@ -34,6 +34,11 @@ namespace _2SemesterProjekt.Services
 			return await _customerRepository.GetAllCustomersAsync();
 		}
 
+		public string[] GetCustomerTypes()
+		{
+			return _customerTypes;
+        }
+
 		public Customer GetCustomerById(int customerID)
 		{
 			throw new NotImplementedException();
@@ -43,5 +48,16 @@ namespace _2SemesterProjekt.Services
 		{
 			throw new NotImplementedException();
 		}
-	}
+		public int GetCustomerIDByPhoneNumber(int phoneNumber)
+		{
+			return _customerRepository.GetCustomerIDByPhoneNumber(phoneNumber);
+			/* Retrieves and returns the customer ID of the customer, who has a specific
+			 phone number. Will always return 0, if the customer doesn't exist in the DB. */
+		}
+
+        public bool CreateCustomer(Customer customer)
+		{
+			throw new NotImplementedException();
+		}
+    }
 }

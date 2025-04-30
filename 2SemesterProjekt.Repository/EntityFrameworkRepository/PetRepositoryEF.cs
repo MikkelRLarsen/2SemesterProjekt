@@ -31,21 +31,26 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             throw new NotImplementedException();
         }
-        public bool CreatePet(Pet pet, int ownerId)
+        public bool CheckIfPetExists(Pet pet)
         {
-            Pet newPet = new Pet(pet.PetID, ownerId, pet.Name, pet.Species, pet.Birthday);
-            var existingPet = _db.Pets.FirstOrDefault(p => p.Name == newPet.Name && p.CustomerID == newPet.CustomerID);
+            var existingPet = _db.Pets.FirstOrDefault(p => p.Name == pet.Name && p.CustomerID == pet.CustomerID && p.Species == pet.Species);
+            /* Checks if a pet with the same name, customer ID and species
+            as the argument already exists in the DB. */
 
-            if (existingPet != null)
+            if (existingPet == null)
             {
-                return false;
+                return false; // The pet doesn't exist.
             }
-            else
+            else 
             {
-                _db.Pets.Add(newPet);
-                _db.SaveChanges();
-                return true;
+                return true; // The pet already exists.
             }
+        }
+        public void CreatePet(Pet pet)
+        {
+            _db.Pets.Add(pet);
+            _db.SaveChanges();
+            // The pet has been added to the DB.
         }
     }
 }

@@ -11,15 +11,12 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace _2SemesterProjekt.Pages
 {
-    public partial class ProductPage: UserControl
+    public partial class PetPage: UserControl
     {
-        public ProductPage()
+        public PetPage()
         {
             InitializeComponent();
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Find kæledyr", "FindCustomer.png", Color.SteelBlue));
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kæledyr", "AddCustomer.png", Color.MediumSeaGreen, ShowPetCreation));
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Redigér kæledyr", "EditCustomer.png", Color.Goldenrod));
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Fjern kæledyr", "RemoveCustomer.png", Color.IndianRed));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kæledyr", Color.MediumSeaGreen, ShowPetCreation));
         }
         private void ShowPetCreation(object sender, EventArgs e)
         {

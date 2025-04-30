@@ -18,7 +18,6 @@ namespace _2SemesterProjekt
     public partial class AddCustomer : UserControl
     {
         private readonly ICustomerService _customerService;
-        private readonly string[] _customerTypes = { "Privat", "Erhverv" };
 
         public AddCustomer()
         {
@@ -32,7 +31,8 @@ namespace _2SemesterProjekt
             panelCreate.Controls.Add(new ButtonPanel("Tilføj kunde", Color.MediumSeaGreen, CreateButton_Click));
 
             // Add content for dropdown
-            comboBoxType.DataSource = _customerTypes;
+            var customerTypes = _customerService.GetCustomerTypes();
+            comboBoxType.DataSource = customerTypes;
         }
 
         // Eventhandler for cancel button
@@ -81,7 +81,7 @@ namespace _2SemesterProjekt
             textBoxAddress.BackColor = SystemColors.Window;
         }
 
-        private void textBoxPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
+        private async void textBoxPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allow only digits
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -93,7 +93,7 @@ namespace _2SemesterProjekt
             textBoxPhoneNumber.BackColor = SystemColors.Window;
         }
 
-        private void CreateButton_Click(object? sender, EventArgs e)
+        private async void CreateButton_Click(object? sender, EventArgs e)
         {
             string displayMessage = string.Empty;
 
@@ -130,37 +130,39 @@ namespace _2SemesterProjekt
                 displayMessage += "Adressen må kun indeholde bogstaver, tal og mellemrum.\n";
             }
 
-            // Validate phonenumber: 8-digit long.
-            int customerPhoneNumber = 0;
-            if (textBoxPhoneNumber.Text != string.Empty)
-            {
-                customerPhoneNumber = Convert.ToInt32(textBoxPhoneNumber.Text);
-            }
-
-            if (customerPhoneNumber < 10000000 || customerPhoneNumber > 99999999)
+            // Validate phonenumber: only numbers and 8-digit long.
+            if (!Int32.TryParse(textBoxPhoneNumber.Text, out int phoneNumber) || textBoxPhoneNumber.Text[0] == '0' || phoneNumber < 10000000 || phoneNumber > 99999999)
             {
                 textBoxPhoneNumber.ForeColor = Color.White;
                 textBoxPhoneNumber.BackColor = Color.LightCoral;
-                displayMessage += "Telefonnummer skal være et 8-cifret tal.\n";
+                displayMessage += "Telefonnummer skal være et helt 8-cifret tal.\n";
             }
 
             if (displayMessage == string.Empty) // If there is no errors, then create customer
             {
-                var customer = new Customer(
-                    textBoxFirstName.Text, // FirstName
-                    textBoxLastName.Text,  // LastName
-                    textBoxEmail.Text,     // Email
-                    textBoxAddress.Text,   // Address
-                    comboBoxType.Text,     // Type
-                    Convert.ToInt32(textBoxPhoneNumber.Text) // PhoneNumber
-            );
+                try
+                {
+                    var customer = new Customer(
+                       textBoxFirstName.Text, // FirstName
+                       textBoxLastName.Text, // LastName
+                       textBoxEmail.Text,    // Email
+                       textBoxAddress.Text,  // Address
+                       comboBoxType.Text,    // Type
+                       phoneNumber           // PhoneNumber
+                    );
 
-                _customerService.CreateCustomer(customer);
-                MessageBox.Show($"{customer.FirstName} er oprettet i systemet");
+                    await _customerService.CreateCustomerAsync(customer); // Creates the customer in DB
+
+                    MessageBox.Show($"{textBoxFirstName.Text} er oprettet i systemet", "Kunde oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{ex}", "Fejl i oprettelse", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else // Show error to user
+            else // Show error to user in UI
             {
-                MessageBox.Show(displayMessage, "Fejl i indtastning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(displayMessage, "Fejl i indtastning", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -12,12 +12,10 @@ namespace _2SemesterProjekt.Services
     public class PetService : IPetService
     {
         private readonly IPetRepository _petRepository;
-        private readonly ICustomerRepository _customerRepository;
 
-        public PetService(IPetRepository petRepository, ICustomerRepository customerRepository)
+        public PetService(IPetRepository petRepository)
         {
             _petRepository = petRepository;
-            _customerRepository = customerRepository;
         }
         public Task<IEnumerable<Pet>> GetAllPetsAsync()
         {
@@ -35,28 +33,14 @@ namespace _2SemesterProjekt.Services
         {
             throw new NotImplementedException();
         }
-        public string CreatePet(Pet pet, int ownerPhoneNumber) /* This method can return different
-                                                                messages to the UI, so it
-                                                                can generate either an error
-                                                                message or success message. */
+        public void CreatePet(Pet pet)
         {
-            int ownerId = _customerRepository.GetCustomerIDByPhoneNumber(ownerPhoneNumber);
-            if (ownerId == 0 || ownerId == null)
-            {
-                return "Kunden med dette telefonnummer findes ikke i systemet.";
-            }
-            else
-            {
-                bool petCreation = _petRepository.CreatePet(pet, ownerId);
-                if (!petCreation)
-                {
-                    return "Kæledyret findes allerede i databasen.";
-                }
-                else
-                {
-                    return $"{pet.Name} er blevet tilføjet til systemet.";
-                }
-            }
+            _petRepository.CreatePet(pet); // The pet gets added to the DB.
+        }
+        public bool CheckIfPetExists(Pet pet)
+        {
+            return _petRepository.CheckIfPetExists(pet);
+            // Returns true if the pet exists. Returns false, if not.
         }
 	}
 }

@@ -13,6 +13,7 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 		public Pet GetPetById(int petId);
 		public void UpdatePet(Pet pet);
 		public void DeletePet(Pet pet);
-		public bool CreatePet(Pet pet, int ownerId);
+        public void CreatePet(Pet pet);
+        public bool CheckIfPetExists(Pet pet);
 	}
 }

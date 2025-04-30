@@ -13,6 +13,7 @@ namespace _2SemesterProject.Domain.Interfaces.ServiceInterfaces
 		public Pet GetPetById(int petId);
 		public void UpdatePet(Pet pet);
 		public void DeletePet(Pet pet);
-		public string CreatePet(Pet pet, int ownerPhoneNumber);
+        public void CreatePet(Pet pet);
+		public bool CheckIfPetExists(Pet pet);
 	}
 }

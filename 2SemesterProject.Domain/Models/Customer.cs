@@ -8,16 +8,16 @@ namespace _2SemesterProjekt.Domain.Models
 	public class Customer
 	{
 		public int CustomerID { get; init; }
-		public string? FirstName { get; private set; }
-		public string? LastName { get; private set; }
-		public string? Email { get; private set; }
-		public string? Address { get; private set; }
-		public string? Type { get; private set; }
+		public string FirstName { get; private set; }
+		public string LastName { get; private set; }
+		public string Email { get; private set; }
+		public string Address { get; private set; }
+		public string Type { get; private set; }
 		public int PhoneNumber { get; private set; }
 
 		public List<Pet>? Pets { get; } = new();
 
-		public Customer(string? firstName, string? lastName, string? email, string? address, string? type, int phoneNumber)
+		public Customer(string firstName, string lastName, string email, string address, string type, int phoneNumber)
 		{
 			FirstName = firstName;
 			LastName = lastName;

@@ -1,7 +1,5 @@
-﻿
-using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
-using _2SemesterProjekt.Domain.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
+using _2SemesterProject.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,54 +8,55 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-	public class CustomerRepositoryEF : ICustomerRepository
-	{
-		private readonly EntityFramework _db;
+    public class CustomerRepositoryEF : ICustomerRepository
+    {
+        private readonly EntityFramework _db;
 
-		public CustomerRepositoryEF(EntityFramework db)
-		{
-			_db = db;
-		}
+        public CustomerRepositoryEF(EntityFramework db)
+        {
+            _db = db;
+        }
 
-		public bool CreateCustomer(Customer customer)
-		{
-			// Check if the customer is already in DB
-			var existingCustomer = _db.Customers
-				.FirstOrDefault(c => c.PhoneNumber == customer.PhoneNumber);
+        public async Task CreateCustomerAsync(Customer customer)
+        {
+            Customer existingCustomer;
+            
+            try
+            {
+                // Check if the customer is already in DB
+                existingCustomer = _db.Customers
+                    .First(c => c.PhoneNumber == customer.PhoneNumber);
+            }
+            catch
+            {
+                existingCustomer = null!;
+            }
 
-			if (existingCustomer == null) // Add to DB
-			{
-				_db.Customers.Add(customer);
-				_db.SaveChanges();
-				return true;
-			}
-			else // If hit return and dont add it to DB
-			{
-				return false;
-			}
-		}
+            if (existingCustomer == null) // Add to DB
+            {
+                _db.Customers.Add(customer);
+                _db.SaveChanges();
+            }
+            else // If hit return and dont add it to DB
+            {
+                throw new ArgumentException($"{customer.FirstName} {customer.LastName} findes allerde i databasen.");
+            }
+        }
 
-		public void DeleteCustomer(Customer customer)
-		{
-			throw new NotImplementedException();
-		}
+        public void DeleteCustomer(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
 
-		public async Task<Customer> GetAllCustomerAsync()
-		{
-			throw new NotImplementedException();
-		}
+        public Task<IEnumerable<Customer>> GetAllCustomersAsync()
+        {
+            throw new NotImplementedException();
+        }
 
-		public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
-		{
-			return await _db.Customers
-				.Include(c => c.Pets)
-				.ToListAsync();
-		}
-
-		public Customer GetCustomerById(int customerID)
-		{
-			throw new NotImplementedException();
-		}
+        public Customer GetCustomerById(int customerID)
+        {
+            throw new NotImplementedException();
+        }
 
 		public void UpdateCustomer(Customer customer)
 		{
@@ -67,7 +66,15 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		public int GetCustomerIDByPhoneNumber(int ownerPhoneNumber)
 		{
 			var owner = _db.Customers.FirstOrDefault(c => c.PhoneNumber == ownerPhoneNumber);
-			return owner.CustomerID;
+            /* owner will be set to null if there isn't a customer with
+            the specific phone number in the DB. */
+			if (owner != null){
+                return owner.CustomerID;
+            }
+			else
+			{
+				return 0;
+			}
 		}
-	}
+    }
 }
