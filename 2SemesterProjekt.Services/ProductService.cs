@@ -18,15 +18,15 @@ namespace _2SemesterProjekt.Services
         }
         public async Task<string> ExportStockStatusToTxt()
         {
-            var products = await _productRepository.ExportStockStatusToTxt();
+            var products = await _productRepository.ExportStockStatusToTxt(); // Retrieves a list of products in the DB
             if (products == null)
             {
-                return "Error";
+                return "Error"; // Returned to the UI so it can generate an error message.
             }
             else
             {
-                string productList = "";
-                decimal stockWorth = 0;
+                string productList = ""; // Info about the products will get saved here.
+                decimal stockWorth = 0; // The worth of the stock will get saved here.
                 foreach (var product in products)
                 {
                     if (product.MinNumberInStock > product.NumberInStock)
@@ -53,6 +53,7 @@ namespace _2SemesterProjekt.Services
                 }
 
                 string stockList = productList.Insert(0, $"Værdi af lagerbeholdning: {stockWorth}\n\n");
+                // The Insert()-method inserts the string at index 0 in productList.
                 
                 return stockList;
             }
