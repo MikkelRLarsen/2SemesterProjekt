@@ -9,6 +9,7 @@ namespace _2SemesterProjekt.MSTest;
 [TestClass]
 public class PetTest
 {
+    // Accept criteria: PetName is not empty or does not only contain whitespace.
     [TestMethod]
     [DataRow("Connor")]
     public void PetNameIsValid(string validPetName)
@@ -25,6 +26,7 @@ public class PetTest
         new Pet(1, invalidPetName, "Hund", DateTime.Now));
     }
 
+    // Accept criteria: Species is not empty or does not only contain whitespace.
     [TestMethod]
     [DataRow("Hund")]
     [DataRow("Kat")]
@@ -41,6 +43,7 @@ public class PetTest
         new Pet(1, "Connor", invalidSpecies, DateTime.Now));
     }
 
+    // Accept criteria: CustomerID is not 0.
     [TestMethod]
     [DataRow(1)]
     public void CustomerIDIsValid(int validCustomerID)
