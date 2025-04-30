@@ -16,7 +16,7 @@ namespace _2SemesterProjekt.Pages
         public PetPage()
         {
             InitializeComponent();
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kæledyr", "AddCustomer.png", Color.MediumSeaGreen, ShowPetCreation));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kæledyr", Color.MediumSeaGreen, ShowPetCreation));
         }
         private void ShowPetCreation(object sender, EventArgs e)
         {
