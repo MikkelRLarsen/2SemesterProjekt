@@ -14,13 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\UserControls\PetUserControl\" />
     <Folder Include="Resources\" />
     <Folder Include="WinForms.Templates\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\2SemesterProject.Domain\2SemesterProject.Domain.csproj" />
     <ProjectReference Include="..\2SemesterProject.Domain\2SemesterProjekt.Domain.csproj" />
     <ProjectReference Include="..\2SemesterProjekt.Repository\2SemesterProjekt.Repository.csproj" />
     <ProjectReference Include="..\2SemesterProjekt.Services\2SemesterProjekt.Services.csproj" />
