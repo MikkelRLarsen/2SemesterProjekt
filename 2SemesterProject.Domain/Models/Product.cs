@@ -17,10 +17,10 @@ namespace _2SemesterProject.Domain.Models
         public int NumberInStock { get; private set; }
         public int MinNumberInStock { get; private set; }
 
-        public Product(string name, long ean, string type, decimal pricePerUnit, int numberInStock, int minNumberInStock)
+        public Product(string name, long eAN, string type, decimal pricePerUnit, int numberInStock, int minNumberInStock)
         {
             Name = name;
-            EAN = ean;
+            EAN = eAN;
             Type = type;
             PricePerUnit = pricePerUnit;
             NumberInStock = numberInStock;
