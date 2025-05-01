@@ -16,21 +16,19 @@ namespace _2SemesterProjekt.Pages
     public partial class ProductPage : UserControl
     {
         private readonly IProductService _productService;
+        private readonly IExportService _exportService;
         public ProductPage()
         {
             InitializeComponent();
             _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();
+            _exportService = ServiceProviderSingleton.GetServiceProvider().GetService<IExportService>();
             buttonFlowPanel.Controls.Add(new ButtonPanel("Eksporter til .txt", "", Color.MediumSeaGreen, ExportToTxt_Click));
         }
 
         private async void ExportToTxt_Click(object sender, EventArgs e)
         {
-            string txtValue = await _productService.ExportStockStatusToTxtAsync(); // Retrieves a list of products in the DB
-            if (txtValue == "Error")
-            {
-                NotificationMessage("Der opstod en fejl: Tekstfilen kunne ikke oprettes.");
-            }
-            if (txtValue != "Error" || txtValue != null)
+            bool fileCanBeCreated = await _exportService.CheckIfTxtCanBeCreated("StockStatus");
+            if (fileCanBeCreated)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Tekstfil|*.txt";
@@ -39,10 +37,15 @@ namespace _2SemesterProjekt.Pages
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    File.WriteAllText(saveFileDialog.FileName, txtValue);
-                    NotificationMessage($"Tekstfilen er blevet oprettet og gemt.");
+                    _exportService.CreateTxtFileAsync("StockStatus", saveFileDialog.FileName);
+                    NotificationMessage("Filen er blevet oprettet.");
                 }
             }
+            else
+            {
+                NotificationMessage(".txt-filen kunne ikke oprettes.");
+            }
+            
         }
         private void NotificationMessage(string typeOfMsg)
         {

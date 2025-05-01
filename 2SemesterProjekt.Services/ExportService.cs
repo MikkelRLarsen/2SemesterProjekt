@@ -1,35 +1,30 @@
-﻿using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
-using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
+﻿using _2SemesterProject.Domain.Interfaces.RepositoryInterfaces;
+using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProject.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using _2SemesterProject.Domain.Models;
 
 namespace _2SemesterProjekt.Services
 {
-    public class ProductService : IProductService
+    public class ExportService : IExportService
     {
-        private readonly IProductRepository _productRepository;
-
-        public ProductService(IProductRepository productRepository)
+        private readonly IProductService _productService;
+        public ExportService(IProductService productService)
         {
-            _productRepository = productRepository;
+            _productService = productService;
         }
-        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        public async void ExportToTxtAsync(string txtData, string fileName)
         {
-            return await _productRepository.GetAllProductsAsync();
+            File.WriteAllText(fileName, txtData);
         }
-        public async Task<string> CreateStockStatusTxtFileAsync()
+        public async void CreateTxtFileAsync(string exportType, string fileName)
         {
-            var products = await GetAllProductsAsync(); // Retrieves a list of products
-            if (products == null)
+            if (exportType == "StockStatus")
             {
-                return null;
-            }
-            else
-            {
+                var products = await _productService.GetAllProductsAsync();
                 string productList = ""; // Info about the products will get saved here.
                 decimal stockWorth = 0; // The worth of the stock will get saved here.
                 foreach (var product in products)
@@ -57,18 +52,26 @@ namespace _2SemesterProjekt.Services
                     stockWorth += product.NumberInStock * product.PricePerUnit;
                 }
 
-                string stockList = productList.Insert(0, $"Værdi af lagerbeholdning: {stockWorth}\n\n");
+                string txtData = productList.Insert(0, $"Værdi af lagerbeholdning: {stockWorth}\n\n");
                 // The Insert()-method inserts the string at index 0 in productList.
 
-                return stockList;
+                ExportToTxtAsync(txtData, fileName);
             }
         }
-        public async void ExportStockStatusToTxtAsync(string filename)
+        public async Task<bool> CheckIfTxtCanBeCreated(string exportType)
         {
-            string txtValue = await CreateStockStatusTxtFileAsync();
-            if (txtValue != null)
+            IEnumerable<dynamic> txtDataSource = new List<dynamic>();
+            if (exportType == "StockStatus")
             {
-                File.WriteAllText(filename, txtValue);
+                txtDataSource = await _productService.GetAllProductsAsync();
+            }
+            if (txtDataSource != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

@@ -29,6 +29,7 @@ namespace _2SemesterProjekt
 			services.AddScoped<IPetService, PetService>();
 			services.AddScoped<IExaminationService, ExaminationService>();
             services.AddScoped<IProductService, ProductService>();
+			services.AddScoped<IExportService, ExportService>();
 
 
 
