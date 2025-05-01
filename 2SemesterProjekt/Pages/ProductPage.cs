@@ -34,7 +34,7 @@ namespace _2SemesterProjekt.Pages
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                _productService.ExportAllProductsToTxtAsync(saveFileDialog.FileName);
+                _productService.ExportStockStatusToTxtAsync(saveFileDialog.FileName);
                 NotificationMessage("Filen er blevet oprettet.");
             }
             

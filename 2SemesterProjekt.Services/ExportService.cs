@@ -18,7 +18,7 @@ namespace _2SemesterProjekt.Services
             with the "fileName" argument as its file name. */
         }
 
-        public async void ExportAllProductsToTxtAsync(IEnumerable<Product> products, string fileName)
+        public async void ExportStockStatusToTxtAsync(IEnumerable<Product> products, string fileName)
         {
             string productList = ""; // Info about the products will get saved here.
             decimal stockWorth = 0; // The worth of the stock will get saved here.
