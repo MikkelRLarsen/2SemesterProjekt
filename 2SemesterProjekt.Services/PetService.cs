@@ -17,14 +17,19 @@ namespace _2SemesterProjekt.Services
         {
             _petRepository = petRepository;
         }
+
         public void CreatePet(Pet pet)
         {
             _petRepository.CreatePet(pet); // The pet gets added to the DB.
         }
+
         public bool CheckIfPetExists(Pet pet)
         {
             return _petRepository.CheckIfPetExists(pet);
             // Returns true if the pet exists. Returns false, if not.
         }
-	}
+
+        public async Task<IEnumerable<Pet>> GetAllPetsAsync()
+        {
+            return await _petRepository.GetAllPetsAsync();
 }
