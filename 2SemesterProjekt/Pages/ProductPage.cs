@@ -25,7 +25,7 @@ namespace _2SemesterProjekt.Pages
 
         private async void ExportToTxt_Click(object sender, EventArgs e)
         {
-            string txtValue = await _productService.ExportStockStatusToTxt(); // Retrieves a list of products in the DB
+            string txtValue = await _productService.ExportStockStatusToTxtAsync(); // Retrieves a list of products in the DB
             if (txtValue == "Error")
             {
                 NotificationMessage("Der opstod en fejl: Tekstfilen kunne ikke oprettes.");
