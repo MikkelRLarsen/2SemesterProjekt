@@ -29,8 +29,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			PetExaminationDropdown.Enabled = true;
 
 			Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
-			PetExaminationDropdown.DataSource = kunde.Pets;
-			UpdateEmployeeExaminationDropDown(PetExaminationDropdown.SelectedItem as Pet);
+
+			if (kunde.Pets != null)
+			{
+				PetExaminationDropdown.DataSource = kunde.Pets;
+				UpdateEmployeeExaminationDropDown(PetExaminationDropdown.SelectedItem as Pet);
+			}
 		}
 
 		/// <summary>
@@ -142,6 +146,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			CustomerExaminationDropdown.DisplayMember = "FirstName";
 			PetExaminationDropdown.DisplayMember = "Name";
 			EmployeeExaminationDropdown.DisplayMember = "FirstName";
+			ExaminationDropdown.DisplayMember = "Description";
 		}
 
 		/// <summary>
