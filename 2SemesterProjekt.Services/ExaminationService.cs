@@ -1,7 +1,6 @@
 ﻿using _2SemesterProjekt.Domain.Models;
 using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
-using _2SemesterProjekt.Domain.Models;
 
 namespace _2SemesterProjekt.Services
 {
