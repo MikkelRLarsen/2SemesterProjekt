@@ -50,23 +50,32 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.HasForeignKey(p => p.CustomerID);
 
 			modelBuilder.Entity<Examination>()
-				.HasOne(e => e.Pet)
+				.HasOne(ex => ex.Pet)
 				.WithMany(p => p.Examinations)
-				.HasForeignKey(e => e.PetID);
+				.HasForeignKey(ex => ex.PetID);
 
 			modelBuilder.Entity<Examination>()
-				.HasOne(e => e.Employee)
+				.HasOne(ex => ex.Employee)
 				.WithMany(em => em.Examinations)
-				.HasForeignKey(e => e.EmployeeID);
+				.HasForeignKey(ex => ex.EmployeeID);
 
-			//modelBuilder.Entity<ExaminationType>()
-			//	.HasOne(et => et.Examinations
+			modelBuilder.Entity<ExaminationType>()
+				.HasMany(eType  => eType.Examinations)
+				.WithOne(ex => ex.ExaminationType)
+				.HasForeignKey(ex => ex.ExaminationTypeID);
+
+			modelBuilder.Entity<ExaminationTag>()
+				.HasMany(eTag => eTag.ExaminationTypes)
+				.WithOne(eType => eType.ExaminationTag)
+				.HasForeignKey(eType => eType.ExaminationTagID);
 
 			// Primary Keys
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
 			modelBuilder.Entity<Pet>().HasKey(p => p.PetID);
-			modelBuilder.Entity<Examination>().HasKey(e => e.ExaminationID);
+			modelBuilder.Entity<Examination>().HasKey(ex => ex.ExaminationID);
 			modelBuilder.Entity<Employee>().HasKey(em => em.EmployeeID);
+			modelBuilder.Entity<ExaminationType>().HasKey(eType => eType.ExaminationTypeID);
+			modelBuilder.Entity<ExaminationTag>().HasKey(eTag => eTag.ExaminationTagID);
 		}
 	}
 }
