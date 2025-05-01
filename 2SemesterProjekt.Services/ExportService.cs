@@ -14,6 +14,8 @@ namespace _2SemesterProjekt.Services
         public async void ExportToTxtAsync(string txtData, string fileName)
         {
             File.WriteAllText(fileName, txtData);
+            /* Creates a textfile containing the value in the "txtData" argument
+            with the "fileName" argument as its file name. */
         }
 
         public async void ExportAllProductsToTxtAsync(IEnumerable<Product> products, string fileName)
@@ -49,6 +51,7 @@ namespace _2SemesterProjekt.Services
             // The Insert()-method inserts the string at index 0 in productList.
 
             ExportToTxtAsync(txtData, fileName);
+            // Calls the file creation method.
         }
     }
 }

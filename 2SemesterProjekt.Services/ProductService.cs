@@ -21,13 +21,14 @@ namespace _2SemesterProjekt.Services
         }
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
-            return await _productRepository.GetAllProductsAsync();
+            return await _productRepository.GetAllProductsAsync(); // Retrieves a list of products from the DB
         }
 
-        public async void ExportAllProductsToTxt(string fileName)
+        public async void ExportAllProductsToTxtAsync(string fileName)
         {
-            var productList = await _productRepository.GetAllProductsAsync();
-            _exportService.ExportAllProductsToTxtAsync(productList, fileName);
+            var productList = await _productRepository.GetAllProductsAsync(); // Retrieves a list of products
+            _exportService.ExportAllProductsToTxtAsync(productList, fileName); /* The productList gets passed into a method,
+                                                                                * which will then be added to a textfile. */
         }
     }
 }
