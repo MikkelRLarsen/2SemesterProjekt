@@ -12,7 +12,8 @@ namespace _2SemesterProjektWinForms
 			navigationFlowPanel.Controls.Add(new NavigationButton("Kunder", mainPanel, new CustomerPage()));
 			navigationFlowPanel.Controls.Add(new NavigationButton("Konsultation", mainPanel, new KonsultationPage()));
 			navigationFlowPanel.Controls.Add(new NavigationButton("Kæledyr", mainPanel, new PetPage()));
-			navigationFlowPanel.Controls.Add(new NavigationButton("Afslut"));
+            navigationFlowPanel.Controls.Add(new NavigationButton("Lager", mainPanel, new ProductPage()));
+            navigationFlowPanel.Controls.Add(new NavigationButton("Afslut"));
 		}
 	}
 }

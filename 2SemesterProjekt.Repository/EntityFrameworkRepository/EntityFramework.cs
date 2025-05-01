@@ -17,6 +17,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		public DbSet<Employee> Employees { get; set;}
 		public DbSet<ExaminationType> ExaminationTypes { get; set;}
 		public DbSet<ExaminationTag> ExaminationTags { get; set;}
+		public DbSet<Product> Products { get; set;}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -42,6 +43,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<Employee>().ToTable("Employee");
 			modelBuilder.Entity<ExaminationType>().ToTable("ExaminationType");
 			modelBuilder.Entity<ExaminationTag>().ToTable("ExaminationTag");
+			modelBuilder.Entity<Product>().ToTable("Product");
 
 			//Relations
 			modelBuilder.Entity<Customer>()
@@ -76,6 +78,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<Employee>().HasKey(em => em.EmployeeID);
 			modelBuilder.Entity<ExaminationType>().HasKey(eType => eType.ExaminationTypeID);
 			modelBuilder.Entity<ExaminationTag>().HasKey(eTag => eTag.ExaminationTagID);
+			modelBuilder.Entity<Product>().HasKey(pr => pr.ProductID);
 		}
 	}
 }
