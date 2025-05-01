@@ -14,8 +14,7 @@ namespace _2SemesterProjekt.Services
         public async void ExportToTxtAsync(string txtData, string fileName)
         {
             File.WriteAllText(fileName, txtData);
-            /* Creates a textfile containing the value in the "txtData" argument
-            with the "fileName" argument as its file name. */
+            // Creates a textfile.
         }
 
         public async void ExportStockStatusToTxtAsync(IEnumerable<Product> products, string fileName)
