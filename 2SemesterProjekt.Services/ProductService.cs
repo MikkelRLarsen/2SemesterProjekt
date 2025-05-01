@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _2SemesterProject.Domain.Models;
 
 namespace _2SemesterProjekt.Services
 {
@@ -16,9 +17,13 @@ namespace _2SemesterProjekt.Services
         {
             _productRepository = productRepository;
         }
+        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        {
+            return await _productRepository.GetAllProductsAsync();
+        }
         public async Task<string> ExportStockStatusToTxtAsync()
         {
-            var products = await _productRepository.ExportStockStatusToTxt(); // Retrieves a list of products in the DB
+            var products = await GetAllProductsAsync(); // Retrieves a list of products
             if (products == null)
             {
                 return "Error"; // Returned to the UI so it can generate an error message.

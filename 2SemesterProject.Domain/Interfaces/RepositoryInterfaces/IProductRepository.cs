@@ -9,6 +9,6 @@ namespace _2SemesterProject.Domain.Interfaces.RepositoryInterfaces
 {
     public interface IProductRepository
     {
-        public Task<IEnumerable<Product>> ExportStockStatusToTxtAsync();
+        public Task<IEnumerable<Product>> GetAllProductsAsync();
     }
 }
