@@ -60,15 +60,16 @@
             buttonFlowPanel.Size = new Size(209, 301);
             buttonFlowPanel.TabIndex = 4;
             // 
-            // ProductPage
+            // PetPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(buttonFlowPanel);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(pageNameLabel);
-            Name = "ProductPage";
+            Name = "PetPage";
             Size = new Size(1200, 825);
+            Load += PetPage_Load;
             ResumeLayout(false);
             PerformLayout();
         }

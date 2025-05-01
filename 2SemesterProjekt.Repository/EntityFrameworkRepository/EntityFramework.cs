@@ -27,7 +27,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		protected static string GetConnectionString()
 		{
 			string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-			string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString");
+			string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString.txt");
 			return File.ReadAllText(fullName);
 		}
 
@@ -54,11 +54,16 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.WithMany(em => em.Examinations)
 				.HasForeignKey(e => e.EmployeeID);
 
+			modelBuilder.Entity<Pet>()
+				.HasOne(e => e.Employee)
+				.WithMany(p => p.Pets)
+				.HasForeignKey(e => e.EmployeeID);
+
 			// Primary Keys
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
 			modelBuilder.Entity<Pet>().HasKey(p => p.PetID);
-			modelBuilder.Entity<Examination>().HasKey(e => e.ExaminationID);
-			modelBuilder.Entity<Employee>().HasKey(em => em.EmployeeID);
+			modelBuilder.Entity<Examination>().HasKey(em => em.ExaminationID);
+			modelBuilder.Entity<Employee>().HasKey(e => e.EmployeeID);
 		}
 	}
 }
