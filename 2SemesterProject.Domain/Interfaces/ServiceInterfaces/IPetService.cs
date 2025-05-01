@@ -6,5 +6,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 	{
         public void CreatePet(Pet pet);
 		public bool CheckIfPetExists(Pet pet);
-	}
+        public Task<IEnumerable<Pet>> GetAllPetsAsync();
+    }
 }

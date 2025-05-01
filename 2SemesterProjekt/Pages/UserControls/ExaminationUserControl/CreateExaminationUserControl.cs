@@ -12,6 +12,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		IEmployeeService _employeeService;
 		IExaminationService _examinationService;
 		FlowLayoutPanel _konsultationPanel;
+		private IEnumerable<Employee> _employees;
 
 		public CreateExaminationUserControl(FlowLayoutPanel konsultationPanel)
 		{
@@ -30,6 +31,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
 			PetExaminationDropdown.DataSource = kunde.Pets;
+			UpdateEmployeeExaminationDropDown(PetExaminationDropdown.SelectedItem as Pet);
 		}
 
 		/// <summary>
@@ -41,6 +43,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			ExaminationDropdown.DataSource = await _examinationService.GetAllExaminationTypesAsync();
 			ExaminationDropdown.Enabled = true;
+
+			UpdateEmployeeExaminationDropDown(PetExaminationDropdown.SelectedItem as Pet);
 		}
 
 		/// <summary>
@@ -62,8 +66,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		private async void DateTimePickerExamination_ValueChanged(object sender, EventArgs e)
 		{
 			EmployeeExaminationDropdown.Enabled = true;
-			EmployeeExaminationDropdown.DataSource = await _employeeService.GetAllPetDoctorsAsync();
-		}
+
+			_employees = await _employeeService.GetAllPetDoctorsAsync();
+
+            EmployeeExaminationDropdown.DataSource = _employees;
+        }
 
 		/// <summary>
 		/// Eventhandler for when EmployeeExaminationDropdown is changed
@@ -157,6 +164,26 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			PriceExaminationDisplay.BackColor = Color.White;
 			PriceExaminationDisplay.ForeColor = Color.Black;
+		}
+
+		/// <summary>
+		/// Sets the primary vet to the top of the dropdown list if the pet has a primary set
+		/// </summary>
+		/// <param name="pet"></param>
+		private void UpdateEmployeeExaminationDropDown(Pet pet)
+		{
+			if (pet.EmployeeID != null)
+			{
+				Employee primaryVet = _employees.First(p => p.EmployeeID == pet.EmployeeID);
+
+				_employees.ToList().Remove(primaryVet);
+
+				var listWithPrimaryVetOnTop = new List<Employee>() { primaryVet };
+
+				listWithPrimaryVetOnTop.AddRange(_employees);
+
+				EmployeeExaminationDropdown.DataSource = listWithPrimaryVetOnTop;
+			}
 		}
 	}
 }
