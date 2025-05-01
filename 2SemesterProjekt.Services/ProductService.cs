@@ -12,64 +12,22 @@ namespace _2SemesterProjekt.Services
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
+        private readonly IExportService _exportService;
 
-        public ProductService(IProductRepository productRepository)
+        public ProductService(IProductRepository productRepository, IExportService exportService)
         {
             _productRepository = productRepository;
+            _exportService = exportService;
         }
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
             return await _productRepository.GetAllProductsAsync();
         }
-        public async Task<string> CreateStockStatusTxtFileAsync()
+
+        public async void ExportAllProductsToTxt(string fileName)
         {
-            var products = await GetAllProductsAsync(); // Retrieves a list of products
-            if (products == null)
-            {
-                return null;
-            }
-            else
-            {
-                string productList = ""; // Info about the products will get saved here.
-                decimal stockWorth = 0; // The worth of the stock will get saved here.
-                foreach (var product in products)
-                {
-                    if (product.MinNumberInStock > product.NumberInStock)
-                    {
-                        productList += $"(VAREN HAR RAMT MINIMUMSBEHOLDNING)\n" +
-                                      $"Varenummer: {product.EAN},\n" +
-                                      $"Produktnavn: {product.Name},\n" +
-                                      $"Pris pr. styk: {product.PricePerUnit},\n" +
-                                      $"Antal på lager: {product.NumberInStock},\n" +
-                                      $"Minimumsantal: {product.MinNumberInStock}\n\n" +
-                                      "******************************************\n\n";
-
-                    }
-                    else
-                    {
-                        productList += $"Varenummer: {product.EAN},\n" +
-                                      $"Produktnavn: {product.Name},\n" +
-                                      $"Pris pr. styk: {product.PricePerUnit},\n" +
-                                      $"Antal på lager: {product.NumberInStock},\n" +
-                                      $"Minimumsantal: {product.MinNumberInStock}\n\n" +
-                                      "******************************************\n\n";
-                    }
-                    stockWorth += product.NumberInStock * product.PricePerUnit;
-                }
-
-                string stockList = productList.Insert(0, $"Værdi af lagerbeholdning: {stockWorth}\n\n");
-                // The Insert()-method inserts the string at index 0 in productList.
-
-                return stockList;
-            }
-        }
-        public async void ExportStockStatusToTxtAsync(string filename)
-        {
-            string txtValue = await CreateStockStatusTxtFileAsync();
-            if (txtValue != null)
-            {
-                File.WriteAllText(filename, txtValue);
-            }
+            var productList = await _productRepository.GetAllProductsAsync();
+            _exportService.ExportAllProductsToTxtAsync(productList, fileName);
         }
     }
 }

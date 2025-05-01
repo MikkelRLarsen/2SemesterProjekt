@@ -27,23 +27,15 @@ namespace _2SemesterProjekt.Pages
 
         private async void ExportToTxt_Click(object sender, EventArgs e)
         {
-            bool fileCanBeCreated = await _exportService.CheckIfTxtCanBeCreated("StockStatus");
-            if (fileCanBeCreated)
-            {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Tekstfil|*.txt";
-                saveFileDialog.FileName = $"Lagerbeholdning.txt";
-                saveFileDialog.Title = "Gem din tekstfil";
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Tekstfil|*.txt";
+            saveFileDialog.FileName = $"Lagerbeholdning.txt";
+            saveFileDialog.Title = "Gem din tekstfil";
 
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    _exportService.CreateTxtFileAsync("StockStatus", saveFileDialog.FileName);
-                    NotificationMessage("Filen er blevet oprettet.");
-                }
-            }
-            else
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                NotificationMessage(".txt-filen kunne ikke oprettes.");
+                _productService.ExportAllProductsToTxt(saveFileDialog.FileName);
+                NotificationMessage("Filen er blevet oprettet.");
             }
             
         }
