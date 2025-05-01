@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2SemesterProject.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,21 +13,25 @@ namespace _2SemesterProjekt.Domain.Models
 		public int PetID { get; private set; }
 		public int EmployeeID { get; private set; }
 		public DateTime Date { get; private set; }
-		public string Type { get; private set; }
+		public int ExaminationTypeID { get; private set; }
 		public decimal Price { get; private set; }
 		public Pet Pet { get; }
 		public Employee Employee { get; }
+		public ExaminationType ExaminationType { get; }
 
-		public Examination(int petID, int employeeID, DateTime date, string type, decimal price)
+		public Examination(int petID, int employeeID, DateTime date, int examinationTypeID, decimal price)
 		{
 			PetID = petID;
 			EmployeeID = employeeID;
 			Date = date;
-			Type = type;
+			ExaminationTypeID = examinationTypeID;
 			Price = price;
 
 			InformationValid();
 		}
+
+
+
 
 		/// <summary>
 		/// Checks and validate Examination Object. 
@@ -42,6 +47,11 @@ namespace _2SemesterProjekt.Domain.Models
 			}
 
 			if (EmployeeID == 0 || EmployeeID == null)
+			{
+				throw new ArgumentException("Employee was 0 or null");
+			}
+
+			if (ExaminationTypeID == 0 || ExaminationTypeID == null)
 			{
 				throw new ArgumentException("Employee was 0 or null");
 			}

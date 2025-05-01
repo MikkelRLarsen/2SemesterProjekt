@@ -9,20 +9,20 @@ public class ExaminationTest
 	private int PetID = 1;
 	private int EmployeeID = 1;
 	private DateTime Date = DateTime.Now;
-	private string Type = "Operation";
+	private int ExaminationTypeID = 1;
 	private decimal Price = 500m;
 
 	[TestMethod]
 	public void Constructor_ValidData_ShouuldCreateObject()
 	{
 		// Act
-		Examination exam = new Examination(PetID, EmployeeID, Date, Type, Price);
+		Examination exam = new Examination(PetID, EmployeeID, Date, ExaminationTypeID, Price);
 
 		// Assert
 		Assert.AreEqual(PetID, exam.PetID);
 		Assert.AreEqual(EmployeeID, exam.EmployeeID);
 		Assert.AreEqual(Date, exam.Date);
-		Assert.AreEqual(Type, exam.Type);
+		Assert.AreEqual(ExaminationTypeID, exam.ExaminationTypeID);
 		Assert.AreEqual(Price, exam.Price);
 	}
 
@@ -31,7 +31,7 @@ public class ExaminationTest
 	public void Constructor_PetidZero_ShouldThrowException()
 	{
 		//Act
-		_ = new Examination(0, EmployeeID, Date, Type, Price);
+		_ = new Examination(0, EmployeeID, Date, ExaminationTypeID, Price);
 	}
 
 	[TestMethod]
@@ -39,7 +39,15 @@ public class ExaminationTest
 	public void Constructor_EmployeeidZero_ShouldThrowException()
 	{
 		//Act
-		_ = new Examination(PetID, 0, Date, Type, Price);
+		_ = new Examination(PetID, 0, Date, ExaminationTypeID, Price);
+	}
+
+	[TestMethod]
+	[ExpectedException(typeof(ArgumentException))]
+	public void Constructor_ExaminationTypeidZero_ShouldThrowException()
+	{
+		//Act
+		_ = new Examination(PetID, EmployeeID, Date, 0, Price);
 	}
 
 	[TestMethod]
@@ -50,7 +58,7 @@ public class ExaminationTest
 		decimal priceWithTooManyDecimals = 123.456m;
 
 		// Act
-		_ = new Examination(PetID, EmployeeID, Date, Type, priceWithTooManyDecimals);
+		_ = new Examination(PetID, EmployeeID, Date, ExaminationTypeID, priceWithTooManyDecimals);
 	}
 
 	[TestMethod]
@@ -60,7 +68,7 @@ public class ExaminationTest
 		decimal validPriceWithTwoDecimals = 123.45m;
 
 		// Act
-		Examination exam = new Examination(PetID, EmployeeID, Date, Type, validPriceWithTwoDecimals);
+		Examination exam = new Examination(PetID, EmployeeID, Date, ExaminationTypeID, validPriceWithTwoDecimals);
 
 		// Assert
 		Assert.AreEqual(validPriceWithTwoDecimals, exam.Price);
