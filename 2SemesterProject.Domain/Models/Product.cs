@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,5 +16,15 @@ namespace _2SemesterProject.Domain.Models
         public decimal PricePerUnit { get; private set; }
         public int NumberInStock { get; private set; }
         public int MinNumberInStock { get; private set; }
+
+        public Product(string name, long ean, string type, decimal pricePerUnit, int numberInStock, int minNumberInStock)
+        {
+            Name = name;
+            EAN = ean;
+            Type = type;
+            PricePerUnit = pricePerUnit;
+            NumberInStock = numberInStock;
+            MinNumberInStock = minNumberInStock;
+        }
     }
 }
