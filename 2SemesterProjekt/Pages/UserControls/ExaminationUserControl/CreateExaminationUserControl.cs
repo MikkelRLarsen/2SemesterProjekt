@@ -1,7 +1,6 @@
 ﻿using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
 using Microsoft.Extensions.DependencyInjection;
-using _2SemesterProjekt.Domain.Models;
 
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
@@ -97,7 +96,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				Examination newExamination = new Examination((PetExaminationDropdown.SelectedItem as Pet).PetID
 					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
 					, DateTimePickerExamination.Value
-					, ExaminationDropdown.SelectedItem as String
+					, (ExaminationDropdown.SelectedItem as ExaminationType).ExaminationTypeID
 					, Convert.ToDecimal(PriceExaminationDisplay.Text));
 
 				//Creates ExaminationAsync, so the user can continoue to use the program
