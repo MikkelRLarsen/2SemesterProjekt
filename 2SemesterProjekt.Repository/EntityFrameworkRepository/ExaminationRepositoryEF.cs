@@ -36,5 +36,19 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 return Enumerable.Empty<Examination>();
             }
 		}
+        public async Task<IEnumerable<Examination>> GetAllInactivesAsync()
+        {
+            var noActivityFor12Months = DateTime.Now.AddMonths(-12);
+
+            List<Examination> listOfInactives = new List<Examination>();
+
+            listOfInactives = await _db.Examinations 
+                .Where(e => e.Date < noActivityFor12Months)
+                .Include(e => e.Pet.Name)
+                .Include (e => e.Pet.Customer)
+                .ToListAsync();
+
+            return listOfInactives;
+        }
 	}
 }

@@ -12,5 +12,8 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 		public Task CreateExaminationAsync(Examination examination);
 
 		public Task<IEnumerable<Examination>> GetAllExaminationOnDate(DateTime date);
-	}
+
+		public Task<IEnumerable<Examination>> GetAllInactivesAsync();
+
+    }
 }

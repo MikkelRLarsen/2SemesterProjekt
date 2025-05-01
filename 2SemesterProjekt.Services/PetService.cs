@@ -6,16 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 
 namespace _2SemesterProjekt.Services
 {
     public class PetService : IPetService
     {
         private readonly IPetRepository _petRepository;
+        private readonly IExaminationRepository _examinationRepository;
 
-        public PetService(IPetRepository petRepository)
+        public PetService(IPetRepository petRepository, IExaminationRepository examinationRepository)
         {
             _petRepository = petRepository;
+            _examinationRepository = examinationRepository;
         }
 
         public void CreatePet(Pet pet)
@@ -32,6 +35,10 @@ namespace _2SemesterProjekt.Services
         public async Task<IEnumerable<Pet>> GetAllPetsAsync()
         {
             return await _petRepository.GetAllPetsAsync();
+        }
+        public async Task<IEnumerable<Examination>> GetAllInactivesAsync()
+        {
+            return await _examinationRepository.GetAllInactivesAsync();
         }
     }
 }

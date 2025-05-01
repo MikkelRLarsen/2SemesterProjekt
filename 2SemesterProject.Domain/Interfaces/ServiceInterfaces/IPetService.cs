@@ -12,5 +12,8 @@ namespace _2SemesterProject.Domain.Interfaces.ServiceInterfaces
         public void CreatePet(Pet pet);
 		public bool CheckIfPetExists(Pet pet);
         public Task<IEnumerable<Pet>> GetAllPetsAsync();
+
+        public Task<IEnumerable<Examination>> GetAllInactivesAsync();
+
     }
 }
