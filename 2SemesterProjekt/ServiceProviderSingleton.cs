@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _2SemesterProjekt.Repository.EntityFrameworkRepository;
-using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 
 namespace _2SemesterProjekt
 {

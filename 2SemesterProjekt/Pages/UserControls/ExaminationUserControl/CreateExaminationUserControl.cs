@@ -1,7 +1,7 @@
 ﻿using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
-using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using Microsoft.Extensions.DependencyInjection;
+using _2SemesterProjekt.Domain.Models;
 
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
@@ -50,7 +50,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// <param name="e"></param>
 		private async void ExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
 		{
-			PriceExaminationDisplay.Text = Convert.ToString(await _examinationService.GetExaminationPrice(ExaminationDropdown.SelectedItem as string));
+			PriceExaminationDisplay.Text = Convert.ToString((ExaminationDropdown.SelectedItem as ExaminationType).BasePrice);
 			DateTimePickerExamination.Enabled = true;
 		}
 

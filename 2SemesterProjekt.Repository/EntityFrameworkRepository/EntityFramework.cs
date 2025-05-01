@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _2SemesterProjekt.Domain.Models;
-using _2SemesterProject.Domain.Models;
+using _2SemesterProjekt.Domain.Models;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
