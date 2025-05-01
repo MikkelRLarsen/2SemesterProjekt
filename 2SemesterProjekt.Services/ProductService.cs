@@ -16,7 +16,7 @@ namespace _2SemesterProjekt.Services
         {
             _productRepository = productRepository;
         }
-        public async Task<string> ExportStockStatusToTxt()
+        public async Task<string> ExportStockStatusToTxtAsync()
         {
             var products = await _productRepository.ExportStockStatusToTxt(); // Retrieves a list of products in the DB
             if (products == null)

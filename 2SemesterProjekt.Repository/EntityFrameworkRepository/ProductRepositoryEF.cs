@@ -17,7 +17,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             _db = db;
         }
-        public async Task<IEnumerable<Product>> ExportStockStatusToTxt()
+        public async Task<IEnumerable<Product>> ExportStockStatusToTxtAsync()
         {
             return await _db.Products.ToListAsync();
         }

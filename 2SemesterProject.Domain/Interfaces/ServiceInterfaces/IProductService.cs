@@ -9,6 +9,6 @@ namespace _2SemesterProject.Domain.Interfaces.ServiceInterfaces
 {
     public interface IProductService
     {
-        public Task<string> ExportStockStatusToTxt();
+        public Task<string> ExportStockStatusToTxtAsync();
     }
 }
