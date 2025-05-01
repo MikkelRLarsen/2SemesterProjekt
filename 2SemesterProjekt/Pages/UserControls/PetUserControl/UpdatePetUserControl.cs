@@ -1,30 +1,40 @@
-﻿using _2SemesterProjekt.Domain.Models;
-using Microsoft.Extensions.DependencyInjection;
-using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
-using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Models;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace _2SemesterProjekt.Pages
+namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 {
-    public partial class AddPetPage : UserControl
+    public partial class UpdatePetUserControl : UserControl
     {
         private readonly IPetService _petService;
         private readonly ICustomerService _customerService;
         private readonly IEmployeeService _employeeService;
-        public AddPetPage()
+        private PetCard PetCard;
+        public UpdatePetUserControl(PetCard petCard)
         {
             InitializeComponent();
             petBirthdaySelector.MaxDate = DateTime.Today;
             _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>()!;
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
             _employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
+            PetCard = petCard;
         }
 
         private async void AddPetPage_Load(object sender, EventArgs e)
         {
             var dropDownItems = new List<object> { "Ikke valgt" }; // Add not chosen option
             var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
-            
+
             dropDownItems.AddRange(veterinarians);
 
             comboBoxPrimaryVeterinarian.DataSource = dropDownItems;
@@ -118,6 +128,6 @@ namespace _2SemesterProjekt.Pages
             MessageBox.Show(typeOfMsg, "Information", MessageBoxButtons.OK);
         }
 
-       
+
     }
 }

@@ -41,6 +41,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         public async Task<IEnumerable<Pet>> GetAllPetsAsync()
         {
             return await _db.Pets
+                .Include(p => p.Customer)
+                .Include(p => p.Employee)
                 .ToListAsync();
         }
     }

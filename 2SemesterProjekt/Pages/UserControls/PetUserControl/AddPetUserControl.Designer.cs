@@ -1,6 +1,6 @@
 ﻿namespace _2SemesterProjekt.Pages
 {
-    partial class AddPetPage
+    partial class AddPetUserControl
     {
         /// <summary> 
         /// Required designer variable.

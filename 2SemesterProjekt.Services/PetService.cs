@@ -32,4 +32,6 @@ namespace _2SemesterProjekt.Services
         public async Task<IEnumerable<Pet>> GetAllPetsAsync()
         {
             return await _petRepository.GetAllPetsAsync();
+        }
+    }
 }
