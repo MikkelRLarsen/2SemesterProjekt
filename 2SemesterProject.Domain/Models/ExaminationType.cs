@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2SemesterProjekt.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace _2SemesterProject.Domain.Models
 		public string Description { get; private set; }
 		public int ExaminationTagID { get; private set;}
 		public ExaminationTag ExaminationTag { get;}
+		public List<Examination> Examinations { get;}
 
 		public ExaminationType(int examinationTypeID, string description, int examinationTagID)
 		{

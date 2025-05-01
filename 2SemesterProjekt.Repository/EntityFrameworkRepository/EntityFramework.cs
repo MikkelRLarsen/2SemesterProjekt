@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProject.Domain.Models;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
@@ -14,6 +15,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		public DbSet<Pet> Pets { get; set;}
 		public DbSet<Examination> Examinations { get; set;}
 		public DbSet<Employee> Employees { get; set;}
+		public DbSet<ExaminationType> ExaminationTypes { get; set;}
+		public DbSet<ExaminationTag> ExaminationTags { get; set;}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -37,6 +40,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<Pet>().ToTable("Pet");
 			modelBuilder.Entity<Examination>().ToTable("Examination");
 			modelBuilder.Entity<Employee>().ToTable("Employee");
+			modelBuilder.Entity<ExaminationType>().ToTable("ExaminationType");
+			modelBuilder.Entity<ExaminationTag>().ToTable("ExaminationTag");
 
 			//Relations
 			modelBuilder.Entity<Customer>()
@@ -53,6 +58,9 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.HasOne(e => e.Employee)
 				.WithMany(em => em.Examinations)
 				.HasForeignKey(e => e.EmployeeID);
+
+			//modelBuilder.Entity<ExaminationType>()
+			//	.HasOne(et => et.Examinations
 
 			// Primary Keys
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
