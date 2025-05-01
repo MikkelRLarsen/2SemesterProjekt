@@ -20,6 +20,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         private readonly ICustomerService _customerService;
         private readonly IEmployeeService _employeeService;
         private PetCard PetCard;
+
         public UpdatePetUserControl(PetCard petCard)
         {
             InitializeComponent();
@@ -30,17 +31,19 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             PetCard = petCard;
         }
 
-        private async void AddPetPage_Load(object sender, EventArgs e)
+        private async void UpdatePetUserControl_Load(object sender, EventArgs e)
         {
-            var dropDownItems = new List<object> { "Ikke valgt" }; // Add not chosen option
-            var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
+            petNameTextbox.Text = PetCard.Pet.Name;
+            petSpeciesTextbox.Text = PetCard.Pet.Species;
+            ownerPhoneNumberTextbox.Text = PetCard.Pet.Customer.PhoneNumber.ToString();
+            petBirthdaySelector.Text = PetCard.Pet.Birthday.ToString();
+            if (PetCard.Pet.Employee == null)
+            {
+                var dropDownItems = new List<object> { "Ikke valgt" };
 
-            dropDownItems.AddRange(veterinarians);
+            }
 
-            comboBoxPrimaryVeterinarian.DataSource = dropDownItems;
-            comboBoxPrimaryVeterinarian.DisplayMember = "FirstName";
-
-            comboBoxPrimaryVeterinarian.Format += ComboBoxPrimaryVeterinarian_Format!;
+            comboBoxPrimaryVeterinarian.DataSource = new List<string>();
         }
 
         /// <summary>
@@ -127,7 +130,5 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         {
             MessageBox.Show(typeOfMsg, "Information", MessageBoxButtons.OK);
         }
-
-
     }
 }

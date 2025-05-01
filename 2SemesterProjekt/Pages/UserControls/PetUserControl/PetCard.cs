@@ -14,10 +14,13 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
     public partial class PetCard : UserControl
     {
         private PetPage _petPage;
+        public Pet Pet { get; }
+
         public PetCard(PetPage petPage, Pet pet)
         {
             InitializeComponent();
             _petPage = petPage;
+            Pet = pet;
 
             labelPetID.Text = pet.PetID.ToString();
             labelPetName.Text = pet.Name;

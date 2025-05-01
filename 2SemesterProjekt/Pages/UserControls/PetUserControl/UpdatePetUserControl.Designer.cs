@@ -147,6 +147,7 @@
             cancelButton.TabIndex = 24;
             cancelButton.Text = "Annuller";
             cancelButton.UseVisualStyleBackColor = false;
+            cancelButton.Click += cancelButton_Click;
             // 
             // createButton
             // 
@@ -178,6 +179,7 @@
             Controls.Add(pageNameLabel);
             Name = "UpdatePetUserControl";
             Size = new Size(1200, 825);
+            Load += UpdatePetUserControl_Load;
             ResumeLayout(false);
             PerformLayout();
         }
