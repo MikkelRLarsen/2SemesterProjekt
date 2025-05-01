@@ -44,8 +44,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
             listOfInactives = await _db.Examinations 
                 .Where(e => e.Date < noActivityFor12Months)
-                .Include(e => e.Pet.Name)
-                .Include (e => e.Pet.Customer)
+                .Include(e => e.Pet)
+                .ThenInclude (p => p.Customer)
                 .ToListAsync();
 
             return listOfInactives;
