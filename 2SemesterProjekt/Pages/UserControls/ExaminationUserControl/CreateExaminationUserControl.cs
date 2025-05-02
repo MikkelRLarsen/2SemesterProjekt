@@ -1,6 +1,7 @@
 ﻿using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
 using Microsoft.Extensions.DependencyInjection;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
@@ -100,8 +101,20 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// <param name="e"></param>
 		private async void CreateExaminationButton_Click(object sender, EventArgs e)
 		{
+			//Resets ErrorMessage when retrying
+			ErrorMessageExamination.Text = "";
 
+			// Creates a messagebox if Discount is higher then 60% to confirm the booking of examination
+			if (DiscountNummericUpDown.Value >= 60)
+			{
+				DialogResult resultFromMessageBox = MessageBox.Show("Are you sure you want to countinue?", "Chosen Discount is higher then 60 %", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
+				// If the user press No then abort booking
+				if (resultFromMessageBox == DialogResult.No)
+				{
+					return;
+				}
+			}
 
 			try
 			{
