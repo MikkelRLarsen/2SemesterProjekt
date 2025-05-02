@@ -12,6 +12,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		IExaminationService _examinationService;
 		FlowLayoutPanel _konsultationPanel;
 		private IEnumerable<Employee> _employees;
+		private Decimal? _basePriceForExamination;
 
 		public CreateExaminationUserControl(FlowLayoutPanel konsultationPanel)
 		{
@@ -30,12 +31,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
 
-			// Hvis 
+			// Show only next box if the Customer has Pets
 			if (kunde.Pets != null)
 			{
 				PetExaminationDropdown.DataSource = kunde.Pets;
 				UpdateEmployeeExaminationDropDown(PetExaminationDropdown.SelectedItem as Pet);
 			}
+
+			UpdateDiscountStatus();
 		}
 
 		/// <summary>
@@ -45,8 +48,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// <param name="e"></param>
 		private async void PetExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
 		{
-			ExaminationDropdown.DataSource = await _examinationService.GetAllExaminationTypesAsync();
-			ExaminationDropdown.Enabled = true;
+			ExaminationTypeDropdown.DataSource = await _examinationService.GetAllExaminationTypesAsync();
+			ExaminationTypeDropdown.Enabled = true;
 
 			UpdateEmployeeExaminationDropDown(PetExaminationDropdown.SelectedItem as Pet);
 		}
@@ -58,8 +61,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// <param name="e"></param>
 		private async void ExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
 		{
-			PriceExaminationDisplay.Text = Convert.ToString((ExaminationDropdown.SelectedItem as ExaminationType).BasePrice);
+			_basePriceForExamination = (ExaminationTypeDropdown.SelectedItem as ExaminationType).BasePrice;
+			PriceExaminationDisplay.Text = _basePriceForExamination.ToString();
+
 			DateTimePickerExamination.Enabled = true;
+			UpdateDiscountStatus();
 		}
 
 		/// <summary>
@@ -73,8 +79,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			_employees = await _employeeService.GetAllPetDoctorsAsync();
 
-            EmployeeExaminationDropdown.DataSource = _employees;
-        }
+			EmployeeExaminationDropdown.DataSource = _employees;
+		}
 
 		/// <summary>
 		/// Eventhandler for when EmployeeExaminationDropdown is changed
@@ -95,13 +101,15 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		private async void CreateExaminationButton_Click(object sender, EventArgs e)
 		{
 
+
+
 			try
 			{
 				// Creates the new Examination as a local variable to run validate Information.
 				Examination newExamination = new Examination((PetExaminationDropdown.SelectedItem as Pet).PetID
 					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
 					, DateTimePickerExamination.Value
-					, (ExaminationDropdown.SelectedItem as ExaminationType).ExaminationTypeID
+					, (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTypeID
 					, Convert.ToDecimal(PriceExaminationDisplay.Text));
 
 				//Creates ExaminationAsync, so the user can continoue to use the program
@@ -147,7 +155,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			CustomerExaminationDropdown.DisplayMember = "FirstName";
 			PetExaminationDropdown.DisplayMember = "Name";
 			EmployeeExaminationDropdown.DisplayMember = "FirstName";
-			ExaminationDropdown.DisplayMember = "Description";
+			ExaminationTypeDropdown.DisplayMember = "Description";
 		}
 
 		/// <summary>
@@ -188,6 +196,40 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				listWithPrimaryVetOnTop.AddRange(_employees);
 
 				EmployeeExaminationDropdown.DataSource = listWithPrimaryVetOnTop;
+			}
+		}
+
+		private void UpdateDiscountStatus()
+		{
+			try
+			{
+				// Checks if selected Customer is Private and ExaminationTag is 2 whihc is Operation
+				if ((CustomerExaminationDropdown.SelectedItem as Customer).Type == "Privat"
+					&& ExaminationTypeDropdown.SelectedItem as ExaminationType != null
+					&& (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTag.ExaminationTagID == 2)
+				{
+					DiscountLabel.Visible = true;
+					DiscountNummericUpDown.Visible = true;
+				}
+				else
+				{
+					DiscountLabel.Visible = false;
+					DiscountNummericUpDown.Visible = false;
+					DiscountNummericUpDown.Value = 0;
+				}
+			}
+			catch (Exception)
+			{
+				throw new ArgumentException("Error in Display Discount Status");
+			}
+
+		}
+
+		private void DiscountNummericUpDown_ValueChanged(object sender, EventArgs e)
+		{
+			if (PriceExaminationDisplay.Text != null && _basePriceForExamination != null)
+			{
+				PriceExaminationDisplay.Text = (_basePriceForExamination * ((100 - DiscountNummericUpDown.Value) / 100)).ToString();
 			}
 		}
 	}
