@@ -30,7 +30,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
 
-			// Hvis 
+			// Show only next box if the Customer has Pets
 			if (kunde.Pets != null)
 			{
 				PetExaminationDropdown.DataSource = kunde.Pets;
