@@ -31,7 +31,7 @@ namespace _2SemesterProjekt.Pages
             buttonFlowPanel.Controls.Add(new ButtonPanel("Vis inaktiv liste", Color.MediumVioletRed, ShowInactivePets));
 
             buttonFlowPanel.Controls.Add(new ButtonPanel("Redigér kæledyr", Color.Goldenrod, ShowPetUpdate));
-            
+
             _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>()!;
 
         }
@@ -57,11 +57,20 @@ namespace _2SemesterProjekt.Pages
         }
         private async void ShowInactivePets(object sender, EventArgs e)
         {
+            // Clears the panel of potential existing content.
             flowLayoutPanel1.Controls.Clear(); // Clear existing content
-            var listOfPets = await _petService.GetAllInactivesAsync();
-            foreach (var examination in listOfPets)
+
+            try
             {
-                flowLayoutPanel1.Controls.Add(new PetCard(this, examination, PetCardType.InactivePet));
+                var listOfPets = await _petService.GetAllInactivesAsync();
+                foreach (var examination in listOfPets)
+                {
+                    flowLayoutPanel1.Controls.Add(new PetCard(this, examination, PetCardType.InactivePet));
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Der findes ingen inaktive kæledyr.");
             }
         }
     }

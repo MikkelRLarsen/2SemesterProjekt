@@ -12,6 +12,9 @@ using _2SemesterProjekt.Domain.Models;
 
 namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 {
+    /// <summary>
+    /// Allows the creation of different kinds of PetCards via multiple constructors.
+    /// </summary>
     public enum PetCardType
     {
         WholePet,
@@ -24,7 +27,13 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         private IPetService _petService;
         public Pet Pet { get; }
         public Examination Examination { get; }
-
+        
+        /// <summary>
+        /// Creates the whole PetCard for active pets.
+        /// </summary>
+        /// <param name="petPage"></param>
+        /// <param name="pet"></param>
+        /// <param name="petCardType"></param>
         public PetCard(PetPage petPage, Pet pet, PetCardType petCardType)
         {
             InitializeComponent();
@@ -33,6 +42,13 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             _petCardType = petCardType;
             CardSetup(); 
         }
+        
+        /// <summary>
+        /// Creates the PetCard for inactive pets.
+        /// </summary>
+        /// <param name="petPage"></param>
+        /// <param name="examination"></param>
+        /// <param name="petCardType"></param>
         public PetCard(PetPage petPage, Examination examination, PetCardType petCardType)
         {
             InitializeComponent();
@@ -66,11 +82,12 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             if (_petCardType == PetCardType.InactivePet)
             {
                 // Changing ID to Date.
-                label.Name = "Sidste besøg: ";
-                labelPetID.Text = Examination.Date.ToString();
-                
-                labelPetName.Text = Pet.Name;
-                labelPetOwner.Text = $"{Pet.Customer.FirstName} {Pet.Customer.LastName}";
+                label.Text = "Sidste besøg: ";
+                labelPetID.Location = new Point (300, 22);
+                labelPetID.Text = Examination.Date.ToString("dd-MM-yyyy");
+
+                labelPetName.Text = Examination.Pet.Name;
+                labelPetOwner.Text = $"{Examination.Pet.Customer.FirstName} {Examination.Pet.Customer.LastName}";
                 
                 // Hiding the not needed labels:
                 label2.Visible = false;
@@ -79,14 +96,6 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 labelPetBirth.Visible = false;
                 label3.Visible = false;
                 labelPetSpecies.Visible = false;
-
-                //   var inactivePets = await _petService.GetAllInactivesAsync();
-                //foreach (var examination in inactivePets)
-                //    {
-                //        labelPetName.Text = examination.Pet.Name.ToString();
-                //        labelPetOwner.Text = examination.Pet.Customer.FirstName + examination.Pet.Customer.LastName.ToString();
-                //        labelPrimaryVet.Text = examination.Date.ToString();
-                //    }
             }
         }
 
