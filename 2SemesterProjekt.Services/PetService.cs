@@ -1,5 +1,5 @@
 ﻿using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
-using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -17,14 +17,27 @@ namespace _2SemesterProjekt.Services
         {
             _petRepository = petRepository;
         }
-        public void CreatePet(Pet pet)
+
+        public async Task CreatePetAsync(Pet pet)
         {
-            _petRepository.CreatePet(pet); // The pet gets added to the DB.
+            await _petRepository.CreatePetAsync(pet); // The pet gets added to the DB.
         }
+
         public bool CheckIfPetExists(Pet pet)
         {
             return _petRepository.CheckIfPetExists(pet);
             // Returns true if the pet exists. Returns false, if not.
         }
-	}
+
+        public async Task<IEnumerable<Pet>> GetAllPetsAsync()
+        {
+            return await _petRepository.GetAllPetsAsync();
+        }
+
+        public async Task UpdatePetASync(Pet pet)
+        {
+            
+            await _petRepository.UpdatePetAsync(pet);
+        }
+    }
 }

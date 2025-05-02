@@ -1,5 +1,4 @@
-﻿using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
-using _2SemesterProjekt.Pages.UserControls.Product;
+using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;

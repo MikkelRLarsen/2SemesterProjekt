@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace _2SemesterProjekt.Domain.Models
 {
@@ -13,7 +8,8 @@ namespace _2SemesterProjekt.Domain.Models
 		public string? FirstName { get; private set; }
 		public string? LastName { get; private set; }
 		public string Type { get; private set; }
-		public List<Examination> Examinations {get;}
+		public List<Pet> Pets { get; }
+		public List<Examination> Examinations { get; }
 
 		public Employee(int employeeID, string? firstName, string? lastName, string type)
 		{
