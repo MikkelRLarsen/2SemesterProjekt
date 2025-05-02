@@ -108,7 +108,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			// Creates a messagebox if Discount is higher then 60% to confirm the booking of examination
 			if (DiscountNummericUpDown.Value >= 60)
 			{
-				DialogResult resultFromMessageBox = MessageBox.Show("Are you sure you want to countinue?", "Chosen Discount is higher then 60 %", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+				DialogResult resultFromMessageBox = MessageBox.Show("Are you sure you want to continue?", "Chosen discount is higher then 60 %", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
 				// If the user press No then abort booking
 				if (resultFromMessageBox == DialogResult.No)
@@ -209,7 +209,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			try
 			{
-				// Checks if selected Customer is Private and ExaminationTag is 2 whihc is Operation
+				// Checks if selected Customer is Private and ExaminationTag is 2 which is Operation
 				if ((CustomerExaminationDropdown.SelectedItem as Customer).Type == "Privat"
 					&& ExaminationTypeDropdown.SelectedItem as ExaminationType != null
 					&& (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTag.ExaminationTagID == 2)
