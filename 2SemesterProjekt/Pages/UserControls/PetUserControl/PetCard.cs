@@ -65,15 +65,28 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
             if (_petCardType == PetCardType.InactivePet)
             {
-               var inactivePets = await _petService.GetAllInactivesAsync();
-            foreach (var examination in inactivePets)
-                {
-                    labelPetName.Text = examination.Pet.Name.ToString();
-                    labelPetOwner.Text = examination.Pet.Customer.FirstName + examination.Pet.Customer.LastName.ToString();
-                    labelPrimaryVet.Text = examination.Date.ToString();
-                }
-
+                // Changing ID to Date.
+                label.Name = "Sidste besøg: ";
+                labelPetID.Text = Examination.Date.ToString();
                 
+                labelPetName.Text = Pet.Name;
+                labelPetOwner.Text = $"{Pet.Customer.FirstName} {Pet.Customer.LastName}";
+                
+                // Hiding the not needed labels:
+                label2.Visible = false;
+                labelPrimaryVet.Visible = false;
+                label1.Visible = false;
+                labelPetBirth.Visible = false;
+                label3.Visible = false;
+                labelPetSpecies.Visible = false;
+
+                //   var inactivePets = await _petService.GetAllInactivesAsync();
+                //foreach (var examination in inactivePets)
+                //    {
+                //        labelPetName.Text = examination.Pet.Name.ToString();
+                //        labelPetOwner.Text = examination.Pet.Customer.FirstName + examination.Pet.Customer.LastName.ToString();
+                //        labelPrimaryVet.Text = examination.Date.ToString();
+                //    }
             }
         }
 
