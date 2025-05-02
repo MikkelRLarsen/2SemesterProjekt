@@ -12,9 +12,13 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 {
     public partial class CreateOrder : UserControl
     {
-        public CreateOrder()
+        FlowLayoutPanel _orderPanel;
+        public CreateOrder(FlowLayoutPanel orderPanel)
         {
             InitializeComponent();
+            _orderPanel = orderPanel;
         }
+
+
     }
 }

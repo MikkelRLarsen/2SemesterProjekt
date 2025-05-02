@@ -23,8 +23,8 @@ namespace _2SemesterProjekt.Pages
             InitializeComponent();
             _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();
             _exportService = ServiceProviderSingleton.GetServiceProvider().GetService<IExportService>();
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Opret ordre", "", Color.LightSalmon, CreateOrder));
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Eksporter til .txt", "", Color.MediumSeaGreen, ExportToTxt_Click));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Opret ordre", "", Color.MediumSeaGreen, CreateOrder));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Eksporter til .txt", "", Color.MediumSlateBlue, ExportToTxt_Click));
         }
 
         private void CreateOrder(object sender, EventArgs e)
