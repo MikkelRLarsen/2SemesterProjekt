@@ -1,7 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
+
 
 namespace _2SemesterProjekt.Domain.Models
 {

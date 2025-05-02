@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2SemesterProject.Domain.Models
+namespace _2SemesterProjekt.Domain.Models
 {
     public class Product
     {

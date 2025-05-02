@@ -1,6 +1,5 @@
 ﻿using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
-using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using Microsoft.Extensions.DependencyInjection;
 using _2SemesterProjekt.Pages.UserControls.UIModels;
 
@@ -31,8 +30,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			PetExaminationDropdown.Enabled = true;
 
 			Customer kunde = CustomerExaminationDropdown.SelectedItem as Customer;
-			PetExaminationDropdown.DataSource = kunde.Pets;
-			UpdateEmployeeExaminationDropDown(PetExaminationDropdown.SelectedItem as Pet);
+
+			// Show only next box if the Customer has Pets
+			if (kunde.Pets != null)
+			{
+				PetExaminationDropdown.DataSource = kunde.Pets;
+				UpdateEmployeeExaminationDropDown(PetExaminationDropdown.SelectedItem as Pet);
+			}
 		}
 
 		/// <summary>
@@ -55,7 +59,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// <param name="e"></param>
 		private async void ExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
 		{
-			PriceExaminationDisplay.Text = Convert.ToString(await _examinationService.GetExaminationPrice(ExaminationDropdown.SelectedItem as string));
+			PriceExaminationDisplay.Text = Convert.ToString((ExaminationDropdown.SelectedItem as ExaminationType).BasePrice);
 			DateTimePickerExamination.Enabled = true;
 		}
 
@@ -98,7 +102,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				Examination newExamination = new Examination((PetExaminationDropdown.SelectedItem as Pet).PetID
 					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
 					, DateTimePickerExamination.Value
-					, ExaminationDropdown.SelectedItem as String
+					, (ExaminationDropdown.SelectedItem as ExaminationType).ExaminationTypeID
 					, Convert.ToDecimal(PriceExaminationDisplay.Text));
 
 				//Creates ExaminationAsync, so the user can continoue to use the program
@@ -144,6 +148,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			CustomerExaminationDropdown.DisplayMember = "FirstName";
 			PetExaminationDropdown.DisplayMember = "Name";
 			EmployeeExaminationDropdown.DisplayMember = "FirstName";
+			ExaminationDropdown.DisplayMember = "Description";
 		}
 
 		/// <summary>
