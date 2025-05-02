@@ -21,9 +21,9 @@ namespace _2SemesterProjekt.Services
             _examinationRepository = examinationRepository;
         }
 
-        public void CreatePet(Pet pet)
+        public async Task CreatePetAsync(Pet pet)
         {
-            _petRepository.CreatePet(pet); // The pet gets added to the DB.
+            await _petRepository.CreatePetAsync(pet); // The pet gets added to the DB.
         }
 
         public bool CheckIfPetExists(Pet pet)
@@ -35,6 +35,12 @@ namespace _2SemesterProjekt.Services
         public async Task<IEnumerable<Pet>> GetAllPetsAsync()
         {
             return await _petRepository.GetAllPetsAsync();
+        }
+
+        public async Task UpdatePetASync(Pet pet)
+        {
+            
+            await _petRepository.UpdatePetAsync(pet);
         }
         public async Task<IEnumerable<Examination>> GetAllInactivesAsync()
         {

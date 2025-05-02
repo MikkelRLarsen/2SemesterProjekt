@@ -101,12 +101,13 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
         private async void PetCard_Click(object sender, EventArgs e)
         {
-            if (_petPage.PetCard != null)
+            if (_petPage.PetCard != null) // protects against null reference exceptions the first time it's clicked
             {
-                _petPage.PetCard.BackColor = SystemColors.Window;
+                _petPage.PetCard.BackColor = SystemColors.Window; // If a card was previously selected, reset its background color
             }
 
-            _petPage.PetCard = this;
+            _petPage.PetCard = this; // Set the currently clicked card as the new selected card
+
             this.BackColor = SystemColors.ActiveBorder;
         }
     }
