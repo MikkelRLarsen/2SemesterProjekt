@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
 
 namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
