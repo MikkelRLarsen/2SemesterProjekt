@@ -1,6 +1,7 @@
 ﻿using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
 using Microsoft.Extensions.DependencyInjection;
+using _2SemesterProjekt.Pages.UserControls.UIModels;
 
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
@@ -177,18 +178,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// <param name="pet"></param>
 		private void UpdateEmployeeExaminationDropDown(Pet pet)
 		{
-			if (pet.EmployeeID != null)
+			if (pet.EmployeeID != null) // If pet have a primary vet - codes executes
 			{
-				Employee primaryVet = _employees.First(p => p.EmployeeID == pet.EmployeeID);
-
-				_employees.ToList().Remove(primaryVet);
-
-				var listWithPrimaryVetOnTop = new List<Employee>() { primaryVet };
-
-				listWithPrimaryVetOnTop.AddRange(_employees);
-
-				EmployeeExaminationDropdown.DataSource = listWithPrimaryVetOnTop;
-			}
+				EmployeeExaminationDropdown.DataSource = VeterinarianListBuilder.GetVeterinariansWithPrimaryFirst(_employees, pet.EmployeeID);
+            }
 		}
 	}
 }

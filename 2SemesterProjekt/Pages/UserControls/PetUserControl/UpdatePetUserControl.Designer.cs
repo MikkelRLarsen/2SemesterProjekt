@@ -40,7 +40,7 @@
             label5 = new Label();
             comboBoxPrimaryVeterinarian = new ComboBox();
             cancelButton = new Button();
-            createButton = new Button();
+            updateButton = new Button();
             SuspendLayout();
             // 
             // pageNameLabel
@@ -60,6 +60,7 @@
             petNameTextbox.Name = "petNameTextbox";
             petNameTextbox.Size = new Size(238, 23);
             petNameTextbox.TabIndex = 5;
+            petNameTextbox.KeyPress += petNameTextbox_KeyPress;
             // 
             // label1
             // 
@@ -76,6 +77,7 @@
             petSpeciesTextbox.Name = "petSpeciesTextbox";
             petSpeciesTextbox.Size = new Size(238, 23);
             petSpeciesTextbox.TabIndex = 9;
+            petSpeciesTextbox.KeyPress += petSpeciesTextbox_KeyPress;
             // 
             // label2
             // 
@@ -118,6 +120,7 @@
             ownerPhoneNumberTextbox.Name = "ownerPhoneNumberTextbox";
             ownerPhoneNumberTextbox.Size = new Size(238, 23);
             ownerPhoneNumberTextbox.TabIndex = 21;
+            ownerPhoneNumberTextbox.KeyPress += ownerPhoneNumberTextbox_KeyPress;
             // 
             // label5
             // 
@@ -147,23 +150,25 @@
             cancelButton.TabIndex = 24;
             cancelButton.Text = "Annuller";
             cancelButton.UseVisualStyleBackColor = false;
+            cancelButton.Click += cancelButton_Click;
             // 
-            // createButton
+            // updateButton
             // 
-            createButton.BackColor = Color.MediumAquamarine;
-            createButton.FlatStyle = FlatStyle.Popup;
-            createButton.Location = new Point(659, 564);
-            createButton.Name = "createButton";
-            createButton.Size = new Size(169, 58);
-            createButton.TabIndex = 25;
-            createButton.Text = "Tilføj dette kæledyr";
-            createButton.UseVisualStyleBackColor = false;
+            updateButton.BackColor = Color.MediumAquamarine;
+            updateButton.FlatStyle = FlatStyle.Popup;
+            updateButton.Location = new Point(659, 564);
+            updateButton.Name = "updateButton";
+            updateButton.Size = new Size(169, 58);
+            updateButton.TabIndex = 25;
+            updateButton.Text = "Redigér kæledyr";
+            updateButton.UseVisualStyleBackColor = false;
+            updateButton.Click += updateButton_Click;
             // 
             // UpdatePetUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(createButton);
+            Controls.Add(updateButton);
             Controls.Add(cancelButton);
             Controls.Add(comboBoxPrimaryVeterinarian);
             Controls.Add(label5);
@@ -178,6 +183,7 @@
             Controls.Add(pageNameLabel);
             Name = "UpdatePetUserControl";
             Size = new Size(1200, 825);
+            Load += UpdatePetUserControl_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -196,6 +202,6 @@
         private Label label5;
         private ComboBox comboBoxPrimaryVeterinarian;
         private Button cancelButton;
-        private Button createButton;
+        private Button updateButton;
     }
 }

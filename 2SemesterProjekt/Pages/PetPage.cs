@@ -37,8 +37,11 @@ namespace _2SemesterProjekt.Pages
 
         private void ShowPetUpdate(object sender, EventArgs e)
         {
-            this.Controls.Clear();
-            this.Controls.Add(new UpdatePetUserControl(PetCard));
+            if (this.PetCard != null)
+            {
+                this.Controls.Clear();
+                this.Controls.Add(new UpdatePetUserControl(PetCard));
+            }
         }
 
         private async void PetPage_Load(object sender, EventArgs e)

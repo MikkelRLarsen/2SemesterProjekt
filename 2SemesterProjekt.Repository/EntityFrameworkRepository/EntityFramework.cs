@@ -46,6 +46,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.WithOne(p => p.Customer)
 				.HasForeignKey(p => p.CustomerID);
 
+			modelBuilder.Entity<Employee>()
+				.HasMany(em => em.Pets)
+				.WithOne(p => p.Employee)
+				.HasForeignKey(p => p.EmployeeID);
+
 			modelBuilder.Entity<Examination>()
 				.HasOne(ex => ex.Pet)
 				.WithMany(p => p.Examinations)
