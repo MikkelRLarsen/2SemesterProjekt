@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
 using _2SemesterProjekt.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
@@ -35,6 +36,14 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             _db.Pets.Add(pet);
             _db.SaveChanges();
             // The pet has been added to the DB.
+        }
+
+        public async Task<IEnumerable<Pet>> GetAllPetsAsync()
+        {
+            return await _db.Pets
+                .Include(p => p.Customer)
+                .Include(p => p.Employee)
+                .ToListAsync();
         }
     }
 }

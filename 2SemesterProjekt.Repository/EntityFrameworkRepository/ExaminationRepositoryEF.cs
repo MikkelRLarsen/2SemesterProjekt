@@ -1,4 +1,5 @@
-﻿using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
+﻿using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
 using _2SemesterProjekt.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-    public class ExaminationRepositoryEF : IExaminationRepository
+	public class ExaminationRepositoryEF : IExaminationRepository
     {
         private readonly EntityFramework _db;
         
@@ -35,6 +36,13 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             {
                 return Enumerable.Empty<Examination>();
             }
+		}
+
+		public async Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync()
+		{
+			return await _db.ExaminationTypes
+                .Include(eType => eType.ExaminationTag)
+                .ToListAsync();
 		}
 	}
 }

@@ -1,20 +1,60 @@
-﻿using _2SemesterProjekt.Domain.Models;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
-using _2SemesterProject.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Models;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace _2SemesterProjekt.Pages
+namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 {
-    public partial class AddPetPage : UserControl
+    public partial class UpdatePetUserControl : UserControl
     {
         private readonly IPetService _petService;
         private readonly ICustomerService _customerService;
-        public AddPetPage()
+        private readonly IEmployeeService _employeeService;
+        private PetCard PetCard;
+        public UpdatePetUserControl(PetCard petCard)
         {
             InitializeComponent();
             petBirthdaySelector.MaxDate = DateTime.Today;
-            _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>();
-            _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
+            _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>()!;
+            _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
+            _employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
+            PetCard = petCard;
+        }
+
+        private async void AddPetPage_Load(object sender, EventArgs e)
+        {
+            var dropDownItems = new List<object> { "Ikke valgt" }; // Add not chosen option
+            var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
+
+            dropDownItems.AddRange(veterinarians);
+
+            comboBoxPrimaryVeterinarian.DataSource = dropDownItems;
+            comboBoxPrimaryVeterinarian.DisplayMember = "FirstName";
+
+            comboBoxPrimaryVeterinarian.Format += ComboBoxPrimaryVeterinarian_Format!;
+        }
+
+        /// <summary>
+        /// Goes through the list and displays employees first names
+        /// </summary>
+        private void ComboBoxPrimaryVeterinarian_Format(object sender, ListControlConvertEventArgs e)
+        {
+            if (e.ListItem is Employee employee) // Show first name if hit is employee
+            {
+                e.Value = employee.FirstName;
+            }
+            else // Make the item to a string
+            {
+                e.Value = e.ListItem!.ToString();
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -45,17 +85,22 @@ namespace _2SemesterProjekt.Pages
                 {
                     NotificationMessage("Kunden med dette telefonnummer findes ikke i systemet.");
                 }
-                else if(string.IsNullOrWhiteSpace(petNameTextbox.Text) || string.IsNullOrWhiteSpace(petSpeciesTextbox.Text)) // Pet name and species validation
+                else if (string.IsNullOrWhiteSpace(petNameTextbox.Text) || string.IsNullOrWhiteSpace(petSpeciesTextbox.Text)) // Pet name and species validation
                 {
                     NotificationMessage("Udfyld venligst navn og/eller art!");
-                    
+
                 }
-                else {
+                else
+                {
+                    var selectedVet = comboBoxPrimaryVeterinarian.SelectedItem as Employee;
+
                     var pet = new Pet(
                         customerId,
                         petNameTextbox.Text,
                         petSpeciesTextbox.Text,
-                        petBirthdaySelector.Value); /* Instantiating a Pet object with
+                        petBirthdaySelector.Value,
+                        selectedVet?.EmployeeID
+                    ); /* Instantiating a Pet object with
                                                      the retrieved customer ID and the
                                                      text inside the textboxes.*/
                     bool petExists = _petService.CheckIfPetExists(pet); /* This method checks if
@@ -81,5 +126,7 @@ namespace _2SemesterProjekt.Pages
         {
             MessageBox.Show(typeOfMsg, "Information", MessageBoxButtons.OK);
         }
+
+
     }
 }
