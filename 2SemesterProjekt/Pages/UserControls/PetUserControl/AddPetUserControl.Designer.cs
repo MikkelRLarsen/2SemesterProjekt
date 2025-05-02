@@ -47,67 +47,62 @@
             // 
             pageNameLabel.AutoSize = true;
             pageNameLabel.Font = new Font("Gadugi", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            pageNameLabel.Location = new Point(412, 60);
-            pageNameLabel.Margin = new Padding(4, 0, 4, 0);
+            pageNameLabel.Location = new Point(288, 36);
             pageNameLabel.Name = "pageNameLabel";
-            pageNameLabel.Size = new Size(958, 115);
+            pageNameLabel.Size = new Size(642, 77);
             pageNameLabel.TabIndex = 3;
             pageNameLabel.Text = "Tilføj et nyt kæledyr";
             pageNameLabel.TextAlign = ContentAlignment.TopCenter;
             // 
             // petNameTextbox
             // 
-            petNameTextbox.Location = new Point(412, 346);
-            petNameTextbox.Margin = new Padding(4, 5, 4, 5);
+            petNameTextbox.Location = new Point(288, 208);
             petNameTextbox.Name = "petNameTextbox";
-            petNameTextbox.Size = new Size(338, 31);
+            petNameTextbox.Size = new Size(238, 23);
             petNameTextbox.TabIndex = 4;
+            petNameTextbox.KeyPress += petNameTextbox_KeyPress;
             // 
             // petSpeciesTextbox
             // 
-            petSpeciesTextbox.Location = new Point(412, 425);
-            petSpeciesTextbox.Margin = new Padding(4, 5, 4, 5);
+            petSpeciesTextbox.Location = new Point(288, 255);
             petSpeciesTextbox.Name = "petSpeciesTextbox";
-            petSpeciesTextbox.Size = new Size(338, 31);
+            petSpeciesTextbox.Size = new Size(238, 23);
             petSpeciesTextbox.TabIndex = 5;
+            petSpeciesTextbox.KeyPress += petSpeciesTextbox_KeyPress;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(354, 351);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(248, 211);
             label1.Name = "label1";
-            label1.Size = new Size(53, 25);
+            label1.Size = new Size(35, 15);
             label1.TabIndex = 7;
             label1.Text = "Navn";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(371, 430);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(260, 258);
             label2.Name = "label2";
-            label2.Size = new Size(36, 25);
+            label2.Size = new Size(23, 15);
             label2.TabIndex = 8;
             label2.Text = "Art";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(304, 511);
-            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Location = new Point(213, 307);
             label3.Name = "label3";
-            label3.Size = new Size(109, 25);
+            label3.Size = new Size(70, 15);
             label3.TabIndex = 9;
             label3.Text = "Fødselsdato";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(840, 351);
-            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Location = new Point(588, 211);
             label4.Name = "label4";
-            label4.Size = new Size(98, 25);
+            label4.Size = new Size(65, 15);
             label4.TabIndex = 10;
             label4.Text = "Ejers tlf. nr.";
             // 
@@ -115,19 +110,17 @@
             // 
             comboBoxPrimaryVeterinarian.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxPrimaryVeterinarian.FormattingEnabled = true;
-            comboBoxPrimaryVeterinarian.Location = new Point(941, 425);
-            comboBoxPrimaryVeterinarian.Margin = new Padding(4, 5, 4, 5);
+            comboBoxPrimaryVeterinarian.Location = new Point(659, 255);
             comboBoxPrimaryVeterinarian.Name = "comboBoxPrimaryVeterinarian";
-            comboBoxPrimaryVeterinarian.Size = new Size(338, 33);
+            comboBoxPrimaryVeterinarian.Size = new Size(238, 23);
             comboBoxPrimaryVeterinarian.TabIndex = 13;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(851, 430);
-            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Location = new Point(596, 258);
             label5.Name = "label5";
-            label5.Size = new Size(88, 25);
+            label5.Size = new Size(57, 15);
             label5.TabIndex = 14;
             label5.Text = "Dyrelæge";
             // 
@@ -135,10 +128,9 @@
             // 
             cancelButton.BackColor = Color.IndianRed;
             cancelButton.FlatStyle = FlatStyle.Popup;
-            cancelButton.Location = new Point(509, 940);
-            cancelButton.Margin = new Padding(4, 5, 4, 5);
+            cancelButton.Location = new Point(356, 564);
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(242, 96);
+            cancelButton.Size = new Size(169, 58);
             cancelButton.TabIndex = 15;
             cancelButton.Text = "Annuller";
             cancelButton.UseVisualStyleBackColor = false;
@@ -148,10 +140,9 @@
             // 
             createButton.BackColor = Color.MediumAquamarine;
             createButton.FlatStyle = FlatStyle.Popup;
-            createButton.Location = new Point(941, 940);
-            createButton.Margin = new Padding(4, 5, 4, 5);
+            createButton.Location = new Point(659, 564);
             createButton.Name = "createButton";
-            createButton.Size = new Size(242, 96);
+            createButton.Size = new Size(169, 58);
             createButton.TabIndex = 16;
             createButton.Text = "Tilføj dette kæledyr";
             createButton.UseVisualStyleBackColor = false;
@@ -159,25 +150,23 @@
             // 
             // petBirthdaySelector
             // 
-            petBirthdaySelector.Location = new Point(412, 501);
-            petBirthdaySelector.Margin = new Padding(4, 5, 4, 5);
+            petBirthdaySelector.Location = new Point(288, 301);
             petBirthdaySelector.Name = "petBirthdaySelector";
-            petBirthdaySelector.Size = new Size(336, 31);
+            petBirthdaySelector.Size = new Size(236, 23);
             petBirthdaySelector.TabIndex = 17;
             // 
             // ownerPhoneNumberTextbox
             // 
-            ownerPhoneNumberTextbox.Location = new Point(941, 346);
-            ownerPhoneNumberTextbox.Margin = new Padding(4, 5, 4, 5);
+            ownerPhoneNumberTextbox.Location = new Point(659, 208);
             ownerPhoneNumberTextbox.MaxLength = 8;
             ownerPhoneNumberTextbox.Name = "ownerPhoneNumberTextbox";
-            ownerPhoneNumberTextbox.Size = new Size(338, 31);
+            ownerPhoneNumberTextbox.Size = new Size(238, 23);
             ownerPhoneNumberTextbox.TabIndex = 18;
             ownerPhoneNumberTextbox.KeyPress += ownerPhoneNumberTextbox_KeyPress;
             // 
-            // AddPetPage
+            // AddPetUserControl
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(ownerPhoneNumberTextbox);
             Controls.Add(petBirthdaySelector);
@@ -192,9 +181,8 @@
             Controls.Add(petSpeciesTextbox);
             Controls.Add(petNameTextbox);
             Controls.Add(pageNameLabel);
-            Margin = new Padding(4, 5, 4, 5);
-            Name = "AddPetPage";
-            Size = new Size(1714, 1375);
+            Name = "AddPetUserControl";
+            Size = new Size(1200, 825);
             Load += AddPetPage_Load;
             ResumeLayout(false);
             PerformLayout();

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using System.Threading.Tasks;
+using _2SemesterProjekt.Pages.UserControls.PetUserControl;
 
 namespace _2SemesterProjekt.Pages
 {
@@ -23,7 +24,7 @@ namespace _2SemesterProjekt.Pages
         {
             var dropDownItems = new List<object> { "Ikke valgt" }; // Add not chosen option
             var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
-            
+
             dropDownItems.AddRange(veterinarians);
 
             comboBoxPrimaryVeterinarian.DataSource = dropDownItems;
@@ -59,31 +60,68 @@ namespace _2SemesterProjekt.Pages
             {
                 e.Handled = true; // The user is only able to enter numbers in the textbox.
             }
+            // Resets textbox after error message
+            ownerPhoneNumberTextbox.ForeColor = SystemColors.WindowText;
+            ownerPhoneNumberTextbox.BackColor = SystemColors.Window;
         }
 
-        private void createButton_Click(object sender, EventArgs e)
+        private void petNameTextbox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Int32.TryParse(ownerPhoneNumberTextbox.Text, out int phoneNumber)) // Checks if copy/pasted text is a valid phone number.
+            // Resets textbox after error message
+            petNameTextbox.ForeColor = SystemColors.WindowText;
+            petNameTextbox.BackColor = SystemColors.Window;
+        }
+
+        private void petSpeciesTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Resets textbox after error message
+            petSpeciesTextbox.ForeColor = SystemColors.WindowText;
+            petSpeciesTextbox.BackColor = SystemColors.Window;
+        }
+
+        private async void createButton_Click(object sender, EventArgs e)
+        {
+            string displayMessage = string.Empty;
+
+            // Validate phonenumber: only numbers and 8-digit long.
+            if (!Int32.TryParse(ownerPhoneNumberTextbox.Text, out int phoneNumber) || ownerPhoneNumberTextbox.Text[0] == '0' || phoneNumber < 10000000 || phoneNumber > 99999999)
             {
-                NotificationMessage("Telefonnummeret er ikke gyldigt!");
+                ownerPhoneNumberTextbox.ForeColor = Color.White;
+                ownerPhoneNumberTextbox.BackColor = Color.LightCoral;
+                displayMessage += "Telefonnummer skal være et helt 8-cifret tal.\n";
             }
-            else
+
+            // Validate pet name input
+            if (string.IsNullOrWhiteSpace(petNameTextbox.Text))
             {
-                int customerPhoneNumber = Convert.ToInt32(ownerPhoneNumberTextbox.Text); // Converts phone number to int.
-                int customerId = _customerService.GetCustomerIDByPhoneNumber(customerPhoneNumber); // Retrieves the customer's ID by using the entered phone number.
-                if (customerId == 0) // Customer ID validation
-                {
-                    NotificationMessage("Kunden med dette telefonnummer findes ikke i systemet.");
-                }
-                else if (string.IsNullOrWhiteSpace(petNameTextbox.Text) || string.IsNullOrWhiteSpace(petSpeciesTextbox.Text)) // Pet name and species validation
-                {
-                    NotificationMessage("Udfyld venligst navn og/eller art!");
+                petNameTextbox.ForeColor = Color.White;
+                petNameTextbox.BackColor = Color.LightCoral;
+                displayMessage += "Indtast et gyldigt kæledyrsnavn.\n";
+            }
 
-                }
-                else
-                {
-                    var selectedVet = comboBoxPrimaryVeterinarian.SelectedItem as Employee;
+            // Validate pet name input
+            if (string.IsNullOrWhiteSpace(petSpeciesTextbox.Text))
+            {
+                petSpeciesTextbox.ForeColor = Color.White;
+                petSpeciesTextbox.BackColor = Color.LightCoral;
+                displayMessage += "Indtast en dyreart.\n";
+            }
 
+            int customerId = _customerService.GetCustomerIDByPhoneNumber(phoneNumber); // Retrieves the customer's ID by using the entered phone number.
+
+            if (customerId == 0) // Customer ID validation
+            {
+                ownerPhoneNumberTextbox.ForeColor = Color.White;
+                ownerPhoneNumberTextbox.BackColor = Color.LightCoral;
+                displayMessage += "Kunden med dette telefonnummer findes ikke i systemet.";
+            }
+
+            var selectedVet = comboBoxPrimaryVeterinarian.SelectedItem as Employee;
+
+            if (displayMessage == string.Empty)
+            {
+                try
+                {
                     var pet = new Pet(
                         customerId,
                         petNameTextbox.Text,
@@ -91,32 +129,26 @@ namespace _2SemesterProjekt.Pages
                         petBirthdaySelector.Value,
                         selectedVet?.EmployeeID
                     ); /* Instantiating a Pet object with
-                                                     the retrieved customer ID and the
-                                                     text inside the textboxes.*/
-                    bool petExists = _petService.CheckIfPetExists(pet); /* This method checks if
-                                                                         a pet with the same values in its properties
-                                                                         as the newly instantiated Pet object
-                                                                         already exists in the DB. */
+                      the retrieved customer ID and the
+                      text inside the textboxes.*/
 
-                    if (petExists) // Error message if the pet already exists
+                    if (_petService.CheckIfPetExists(pet)) // Error message if the pet already exists
                     {
-                        NotificationMessage("Kæledyret findes allerede i databasen.");
+                        displayMessage += "Kæledyret findes allerede i databasen.";
                     }
-                    else /* If not, the pet will be saved to the DB through the service
-                          and a success message will appear. */
+                    else //If not, the pet will be saved to the DB through the service and a success message will appear.
                     {
-                        _petService.CreatePet(pet); // The newly instantiated Pet object gets added to the DB.
-                        NotificationMessage($"{pet.Name} er blevet tilføjet til systemet.");
+                        await _petService.CreatePetAsync(pet); // The newly instantiated Pet object gets added to the DB.
+                        displayMessage += $"{pet.Name} er blevet tilføjet til systemet.";
                     }
                 }
+                catch (Exception ex)
+                {
+                    displayMessage += $"{ex}";
+                }
             }
-        }
 
-        private void NotificationMessage(string typeOfMsg)
-        {
-            MessageBox.Show(typeOfMsg, "Information", MessageBoxButtons.OK);
+            MessageBox.Show(displayMessage, "Information", MessageBoxButtons.OK);
         }
-
-       
     }
 }
