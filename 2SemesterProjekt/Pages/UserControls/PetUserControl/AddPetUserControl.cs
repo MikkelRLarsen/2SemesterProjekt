@@ -112,6 +112,8 @@ namespace _2SemesterProjekt.Pages
 
             if (customerId == 0) // Customer ID validation
             {
+                ownerPhoneNumberTextbox.ForeColor = Color.White;
+                ownerPhoneNumberTextbox.BackColor = Color.LightCoral;
                 displayMessage += "Kunden med dette telefonnummer findes ikke i systemet.";
             }
 
@@ -145,9 +147,9 @@ namespace _2SemesterProjekt.Pages
                 {
                     displayMessage += $"{ex}";
                 }
-
-                MessageBox.Show(displayMessage, "Information", MessageBoxButtons.OK);
             }
+
+            MessageBox.Show(displayMessage, "Information", MessageBoxButtons.OK);
         }
     }
 }

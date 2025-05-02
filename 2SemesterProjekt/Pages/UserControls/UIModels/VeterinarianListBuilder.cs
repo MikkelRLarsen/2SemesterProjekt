@@ -32,7 +32,7 @@ namespace _2SemesterProjekt.Pages.UserControls.UIModels
             var listWithPrimaryVetOnTop = new List<Employee>() { primaryVet };
 
             // Adds the other vets to the new list
-            listWithPrimaryVetOnTop.AddRange(veterinarians);
+            listWithPrimaryVetOnTop.AddRange(vetList);
 
             return listWithPrimaryVetOnTop;
         }
