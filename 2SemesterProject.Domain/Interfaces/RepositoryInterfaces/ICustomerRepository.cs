@@ -12,5 +12,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 		public Task<IEnumerable<Customer>> GetAllCustomersAsync();
 		public int GetCustomerIDByPhoneNumber (int phoneNumber);
 		public Task CreateCustomerAsync(Customer customer);
+		public Task<Customer> GetCustomerByPhoneNumberAsync(int phoneNumber);
 	}
 }

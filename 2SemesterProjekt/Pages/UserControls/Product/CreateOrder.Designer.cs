@@ -31,9 +31,9 @@
             label1 = new Label();
             customerPhoneNumberTextbox = new TextBox();
             label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
+            customerNameLabel = new Label();
+            customerAddressLabel = new Label();
+            customerEmailLabel = new Label();
             orderListBox = new ListBox();
             numericUpDown1 = new NumericUpDown();
             label6 = new Label();
@@ -76,35 +76,35 @@
             label2.TabIndex = 8;
             label2.Text = "Kundes tlf. nr.";
             // 
-            // label3
+            // customerNameLabel
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(114, 180);
-            label3.Name = "label3";
-            label3.Size = new Size(228, 15);
-            label3.TabIndex = 9;
-            label3.Text = "customerFirstName + customerLastName";
-            label3.Visible = false;
+            customerNameLabel.AutoSize = true;
+            customerNameLabel.Location = new Point(114, 180);
+            customerNameLabel.Name = "customerNameLabel";
+            customerNameLabel.Size = new Size(228, 15);
+            customerNameLabel.TabIndex = 9;
+            customerNameLabel.Text = "customerFirstName + customerLastName";
+            customerNameLabel.Visible = false;
             // 
-            // label4
+            // customerAddressLabel
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(114, 195);
-            label4.Name = "label4";
-            label4.Size = new Size(99, 15);
-            label4.TabIndex = 10;
-            label4.Text = "customerAddress";
-            label4.Visible = false;
+            customerAddressLabel.AutoSize = true;
+            customerAddressLabel.Location = new Point(114, 195);
+            customerAddressLabel.Name = "customerAddressLabel";
+            customerAddressLabel.Size = new Size(99, 15);
+            customerAddressLabel.TabIndex = 10;
+            customerAddressLabel.Text = "customerAddress";
+            customerAddressLabel.Visible = false;
             // 
-            // label5
+            // customerEmailLabel
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(114, 210);
-            label5.Name = "label5";
-            label5.Size = new Size(86, 15);
-            label5.TabIndex = 11;
-            label5.Text = "customerEmail";
-            label5.Visible = false;
+            customerEmailLabel.AutoSize = true;
+            customerEmailLabel.Location = new Point(114, 210);
+            customerEmailLabel.Name = "customerEmailLabel";
+            customerEmailLabel.Size = new Size(86, 15);
+            customerEmailLabel.TabIndex = 11;
+            customerEmailLabel.Text = "customerEmail";
+            customerEmailLabel.Visible = false;
             // 
             // orderListBox
             // 
@@ -144,6 +144,7 @@
             getCustomerButton.TabIndex = 16;
             getCustomerButton.Text = "Find kunde";
             getCustomerButton.UseVisualStyleBackColor = true;
+            getCustomerButton.Click += getCustomerButton_Click;
             // 
             // createOrderButton
             // 
@@ -234,9 +235,9 @@
             Controls.Add(label6);
             Controls.Add(numericUpDown1);
             Controls.Add(orderListBox);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
+            Controls.Add(customerEmailLabel);
+            Controls.Add(customerAddressLabel);
+            Controls.Add(customerNameLabel);
             Controls.Add(label2);
             Controls.Add(customerPhoneNumberTextbox);
             Controls.Add(label1);
@@ -252,9 +253,9 @@
         private Label label1;
         private TextBox customerPhoneNumberTextbox;
         private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label label5;
+        private Label customerNameLabel;
+        private Label customerAddressLabel;
+        private Label customerEmailLabel;
         private ListBox orderListBox;
         private NumericUpDown numericUpDown1;
         private Label label6;
