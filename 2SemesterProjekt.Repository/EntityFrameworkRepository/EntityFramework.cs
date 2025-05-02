@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProject.Domain.Models;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
@@ -14,6 +15,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		public DbSet<Pet> Pets { get; set;}
 		public DbSet<Examination> Examinations { get; set;}
 		public DbSet<Employee> Employees { get; set;}
+		public DbSet<Product> Products { get; set;}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -37,6 +39,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<Pet>().ToTable("Pet");
 			modelBuilder.Entity<Examination>().ToTable("Examination");
 			modelBuilder.Entity<Employee>().ToTable("Employee");
+			modelBuilder.Entity<Product>().ToTable("Product");
 
 			//Relations
 			modelBuilder.Entity<Customer>()
@@ -62,8 +65,9 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			// Primary Keys
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
 			modelBuilder.Entity<Pet>().HasKey(p => p.PetID);
-			modelBuilder.Entity<Examination>().HasKey(em => em.ExaminationID);
-			modelBuilder.Entity<Employee>().HasKey(e => e.EmployeeID);
+			modelBuilder.Entity<Examination>().HasKey(e => e.ExaminationID);
+			modelBuilder.Entity<Employee>().HasKey(em => em.EmployeeID);
+			modelBuilder.Entity<Product>().HasKey(pr => pr.ProductID);
 		}
 	}
 }
