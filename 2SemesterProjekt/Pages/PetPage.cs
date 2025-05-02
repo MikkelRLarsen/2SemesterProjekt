@@ -28,7 +28,7 @@ namespace _2SemesterProjekt.Pages
             InitializeComponent();
             buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kæledyr", Color.MediumSeaGreen, ShowPetCreation));
 
-            //buttonFlowPanel.Controls.Add(new ButtonPanel("Vis inaktiv liste", Color.MediumVioletRed, ShowInactivePets));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Vis inaktiv liste", Color.MediumVioletRed, ShowInactivePets));
 
             buttonFlowPanel.Controls.Add(new ButtonPanel("Redigér kæledyr", Color.Goldenrod, ShowPetUpdate));
             
@@ -52,12 +52,17 @@ namespace _2SemesterProjekt.Pages
             var listOfPets = await _petService.GetAllPetsAsync();
             foreach (var pet in listOfPets)
             {
-                flowLayoutPanel1.Controls.Add(new PetCard(this, pet));
+                flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
             }
         }
-        //private async Task ShowInactivePets(object sender, EventArgs e)
-        //{
-        //    flowLayoutPanel1.Controls.Clear(); // Clear existing content
-        //}
+        private async void ShowInactivePets(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Controls.Clear(); // Clear existing content
+            var listOfPets = await _petService.GetAllInactivesAsync();
+            foreach (var examination in listOfPets)
+            {
+                flowLayoutPanel1.Controls.Add(new PetCard(this, examination, PetCardType.InactivePet));
+            }
+        }
     }
 }
