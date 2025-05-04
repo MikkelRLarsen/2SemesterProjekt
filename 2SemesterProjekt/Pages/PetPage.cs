@@ -28,6 +28,7 @@ namespace _2SemesterProjekt.Pages
             InitializeComponent();
             buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kæledyr", Color.MediumSeaGreen, ShowPetCreation));
 
+            // Clicking the "Vis inaktiv liste"-button loads any inactive pets via method: "ShowInactivePets".
             buttonFlowPanel.Controls.Add(new ButtonPanel("Vis inaktiv liste", Color.MediumVioletRed, ShowInactivePets));
 
             buttonFlowPanel.Controls.Add(new ButtonPanel("Redigér kæledyr", Color.Goldenrod, ShowPetUpdate));
@@ -61,8 +62,9 @@ namespace _2SemesterProjekt.Pages
         private async void ShowInactivePets(object sender, EventArgs e)
         {
             // Clears the panel of potential existing content.
-            flowLayoutPanel1.Controls.Clear(); // Clear existing content
+            flowLayoutPanel1.Controls.Clear();
 
+            // If any, loads the inactive-pet-information on to PetCard.
             try
             {
                 var listOfPets = await _petService.GetAllInactivesAsync();
