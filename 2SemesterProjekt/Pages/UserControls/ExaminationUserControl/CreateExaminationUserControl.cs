@@ -106,9 +106,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			ErrorMessageExamination.Text = "";
 
 			// Creates a messagebox if Discount is higher then 60% to confirm the booking of examination
-			if (DiscountNummericUpDown.Value >= 60)
+			if (DiscountNumericUpDown.Value >= 60)
 			{
-				DialogResult resultFromMessageBox = MessageBox.Show("Are you sure you want to countinue?", "Chosen Discount is higher then 60 %", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+				DialogResult resultFromMessageBox = MessageBox.Show("Er du sikkker på at du vil forsætte?", "Valgt rabat er over 60%", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
 				// If the user press No then abort booking
 				if (resultFromMessageBox == DialogResult.No)
@@ -131,7 +131,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 				//Shows a message that the creation has been completed
 				ErrorMessageExamination.Visible = true;
-				ErrorMessageExamination.Text = "Examination has been created";
+				ErrorMessageExamination.Text = "Behandling er oprettet";
 			}
 			catch (Exception ex)
 			{
@@ -209,33 +209,34 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			try
 			{
-				// Checks if selected Customer is Private and ExaminationTag is 2 whihc is Operation
+				// Checks if selected Customer is Private and ExaminationTag is 2 which is Operation
 				if ((CustomerExaminationDropdown.SelectedItem as Customer).Type == "Privat"
 					&& ExaminationTypeDropdown.SelectedItem as ExaminationType != null
 					&& (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTag.ExaminationTagID == 2)
 				{
 					DiscountLabel.Visible = true;
-					DiscountNummericUpDown.Visible = true;
+					DiscountNumericUpDown.Visible = true;
 				}
 				else
 				{
 					DiscountLabel.Visible = false;
-					DiscountNummericUpDown.Visible = false;
-					DiscountNummericUpDown.Value = 0;
+					DiscountNumericUpDown.Visible = false;
+					DiscountNumericUpDown.Value = 0;
+					PriceExaminationDisplay.Text = _basePriceForExamination.ToString();
 				}
 			}
 			catch (Exception)
 			{
-				throw new ArgumentException("Error in Display Discount Status");
+				throw new ArgumentException("Fejl i Display af rabat");
 			}
 
 		}
 
-		private void DiscountNummericUpDown_ValueChanged(object sender, EventArgs e)
+		private void DiscountNumericUpDown_ValueChanged(object sender, EventArgs e)
 		{
 			if (PriceExaminationDisplay.Text != null && _basePriceForExamination != null)
 			{
-				PriceExaminationDisplay.Text = (_basePriceForExamination * ((100 - DiscountNummericUpDown.Value) / 100)).ToString();
+				PriceExaminationDisplay.Text = (_basePriceForExamination * ((100 - DiscountNumericUpDown.Value) / 100)).ToString();
 			}
 		}
 	}

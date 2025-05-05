@@ -45,8 +45,8 @@
 			ErrorMessageExamination = new Label();
 			PriceExaminationDisplay = new TextBox();
 			DiscountLabel = new Label();
-			DiscountNummericUpDown = new NumericUpDown();
-			((System.ComponentModel.ISupportInitialize)DiscountNummericUpDown).BeginInit();
+			DiscountNumericUpDown = new NumericUpDown();
+			((System.ComponentModel.ISupportInitialize)DiscountNumericUpDown).BeginInit();
 			SuspendLayout();
 			// 
 			// label5
@@ -246,21 +246,21 @@
 			DiscountLabel.Text = "Rabat i %";
 			DiscountLabel.Visible = false;
 			// 
-			// DiscountNummericUpDown
+			// DiscountNumericUpDown
 			// 
-			DiscountNummericUpDown.Increment = new decimal(new int[] { 5, 0, 0, 0 });
-			DiscountNummericUpDown.Location = new Point(371, 672);
-			DiscountNummericUpDown.Name = "DiscountNummericUpDown";
-			DiscountNummericUpDown.Size = new Size(295, 31);
-			DiscountNummericUpDown.TabIndex = 24;
-			DiscountNummericUpDown.Visible = false;
-			DiscountNummericUpDown.ValueChanged += DiscountNummericUpDown_ValueChanged;
+			DiscountNumericUpDown.Increment = new decimal(new int[] { 5, 0, 0, 0 });
+			DiscountNumericUpDown.Location = new Point(371, 672);
+			DiscountNumericUpDown.Name = "DiscountNumericUpDown";
+			DiscountNumericUpDown.Size = new Size(295, 31);
+			DiscountNumericUpDown.TabIndex = 24;
+			DiscountNumericUpDown.Visible = false;
+			DiscountNumericUpDown.ValueChanged += DiscountNumericUpDown_ValueChanged;
 			// 
 			// CreateExaminationUserControl
 			// 
 			AutoScaleDimensions = new SizeF(10F, 25F);
 			AutoScaleMode = AutoScaleMode.Font;
-			Controls.Add(DiscountNummericUpDown);
+			Controls.Add(DiscountNumericUpDown);
 			Controls.Add(DiscountLabel);
 			Controls.Add(PriceExaminationDisplay);
 			Controls.Add(ErrorMessageExamination);
@@ -282,7 +282,7 @@
 			Name = "CreateExaminationUserControl";
 			Size = new Size(1013, 967);
 			Load += CreateExaminationUserControl_Load;
-			((System.ComponentModel.ISupportInitialize)DiscountNummericUpDown).EndInit();
+			((System.ComponentModel.ISupportInitialize)DiscountNumericUpDown).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -307,6 +307,6 @@
 		private Label ErrorMessageExamination;
 		private TextBox PriceExaminationDisplay;
 		private Label DiscountLabel;
-		private NumericUpDown DiscountNummericUpDown;
+		private NumericUpDown DiscountNumericUpDown;
 	}
 }
