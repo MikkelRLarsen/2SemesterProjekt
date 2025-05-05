@@ -43,6 +43,15 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             {
                 customerNameLabel.Text = "Kunne ikke finde kunden.";
                 customerNameLabel.Visible = true;
+                customerAddressLabel.Visible = false;
+                customerEmailLabel.Visible = false;
+                orderListBox.Enabled = false;
+                discountNumericUpDown.Enabled = false;
+                addToOrderButton.Enabled = false;
+                productSearchButton.Enabled = false;
+                productSearchTextbox.Enabled = false;
+                productsListBox.Enabled = false;
+                createOrderButton.Enabled = false;
             }
             else
             {
@@ -52,7 +61,32 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 customerNameLabel.Visible = true;
                 customerAddressLabel.Visible = true;
                 customerEmailLabel.Visible = true;
+                orderListBox.Enabled = true;
+                discountNumericUpDown.Enabled = true;
+                addToOrderButton.Enabled = true;
+                productSearchButton.Enabled = true;
+                productSearchTextbox.Enabled = true;
+                productsListBox.Enabled = true;
+                createOrderButton.Enabled = true;
             }
+        }
+
+        private void createOrderButton_Click(object sender, EventArgs e)
+        {
+            if (discountNumericUpDown.Value >= 60)
+            {
+                DialogResult messageBoxResult = MessageBox.Show("Er du sikker på, at du vil fortsætte?", "Indtastet rabat er over 60%", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                if (messageBoxResult == DialogResult.No)
+                {
+                    return;
+                }
+            }
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }
