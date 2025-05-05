@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-	public class ExaminationRepositoryEF : IExaminationRepository
+    public class ExaminationRepositoryEF : IExaminationRepository
     {
         private readonly EntityFramework _db;
-        
+
         public ExaminationRepositoryEF(EntityFramework db)
         {
             _db = db;
@@ -24,26 +24,26 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             _db.SaveChanges();
         }
 
-		public async Task<IEnumerable<Examination>> GetAllExaminationOnDate(DateTime date)
-		{
+        public async Task<IEnumerable<Examination>> GetAllExaminationOnDate(DateTime date)
+        {
             try
             {
-				return await _db.Examinations
-	                .Where(e => e.Date.Date == date.Date)
-	                .ToListAsync();
-			}
+                return await _db.Examinations
+                    .Where(e => e.Date.Date == date.Date)
+                    .ToListAsync();
+            }
             catch (Exception)
             {
                 return Enumerable.Empty<Examination>();
             }
-		}
+        }
 
-		public async Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync()
-		{
-			return await _db.ExaminationTypes
+        public async Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync()
+        {
+            return await _db.ExaminationTypes
                 .Include(eType => eType.ExaminationTag)
                 .ToListAsync();
-		}
+        }
         public async Task<IEnumerable<Examination>> GetAllInactivesAsync()
         {
             // Gets petIDs of those pets whose most recent exam is older than 12 months.   
@@ -71,8 +71,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .ThenInclude(p => p.Customer)
                 // The pet's owner.
                 .ToListAsync();
-            
+
             return listOfInactives;
         }
-	}
+    }
 }
