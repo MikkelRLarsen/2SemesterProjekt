@@ -15,8 +15,8 @@ namespace _2SemesterProjekt.Services
 
         public async Task CreateExaminationAsync(Examination examination)
         {
-            //Checks if the examination is a Double Booking that specific Date. Returns error if Pet or Employee is booked
-            await IsDoubleBooked(examination);
+			//Checks if the examination is a Double Booking that specific Date. Returns error if Pet or Employee is booked
+			await IsDoubleBooked(examination);
             await _examinationRepository.CreateExaminationAsync(examination);
         }
 

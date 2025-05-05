@@ -2,6 +2,7 @@
 using _2SemesterProjekt.Domain.Models;
 using Microsoft.Extensions.DependencyInjection;
 using _2SemesterProjekt.Pages.UserControls.UIModels;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
@@ -13,6 +14,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		IExaminationService _examinationService;
 		FlowLayoutPanel _konsultationPanel;
 		private IEnumerable<Employee> _employees;
+		private Decimal? _basePriceForExamination;
 
 		public CreateExaminationUserControl(FlowLayoutPanel konsultationPanel)
 		{
@@ -37,6 +39,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				PetExaminationDropdown.DataSource = kunde.Pets;
 				UpdateEmployeeExaminationDropDown(PetExaminationDropdown.SelectedItem as Pet);
 			}
+
+			UpdateDiscountStatus();
 		}
 
 		/// <summary>
@@ -46,8 +50,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// <param name="e"></param>
 		private async void PetExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
 		{
-			ExaminationDropdown.DataSource = await _examinationService.GetAllExaminationTypesAsync();
-			ExaminationDropdown.Enabled = true;
+			ExaminationTypeDropdown.DataSource = await _examinationService.GetAllExaminationTypesAsync();
+			ExaminationTypeDropdown.Enabled = true;
 
 			UpdateEmployeeExaminationDropDown(PetExaminationDropdown.SelectedItem as Pet);
 		}
@@ -59,8 +63,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// <param name="e"></param>
 		private async void ExaminationDropdown_SelectionChangeCommitted(object sender, EventArgs e)
 		{
-			PriceExaminationDisplay.Text = Convert.ToString((ExaminationDropdown.SelectedItem as ExaminationType).BasePrice);
+			_basePriceForExamination = (ExaminationTypeDropdown.SelectedItem as ExaminationType).BasePrice;
+			PriceExaminationDisplay.Text = _basePriceForExamination.ToString();
+
 			DateTimePickerExamination.Enabled = true;
+			UpdateDiscountStatus();
 		}
 
 		/// <summary>
@@ -74,8 +81,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			_employees = await _employeeService.GetAllPetDoctorsAsync();
 
-            EmployeeExaminationDropdown.DataSource = _employees;
-        }
+			EmployeeExaminationDropdown.DataSource = _employees;
+		}
 
 		/// <summary>
 		/// Eventhandler for when EmployeeExaminationDropdown is changed
@@ -95,6 +102,20 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		/// <param name="e"></param>
 		private async void CreateExaminationButton_Click(object sender, EventArgs e)
 		{
+			//Resets ErrorMessage when retrying
+			ErrorMessageExamination.Text = "";
+
+			// Creates a messagebox if Discount is higher then 60% to confirm the booking of examination
+			if (DiscountNumericUpDown.Value >= 60)
+			{
+				DialogResult resultFromMessageBox = MessageBox.Show("Er du sikkker på at du vil forsætte?", "Valgt rabat er over 60%", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+				// If the user press No then abort booking
+				if (resultFromMessageBox == DialogResult.No)
+				{
+					return;
+				}
+			}
 
 			try
 			{
@@ -102,7 +123,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				Examination newExamination = new Examination((PetExaminationDropdown.SelectedItem as Pet).PetID
 					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
 					, DateTimePickerExamination.Value
-					, (ExaminationDropdown.SelectedItem as ExaminationType).ExaminationTypeID
+					, (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTypeID
 					, Convert.ToDecimal(PriceExaminationDisplay.Text));
 
 				//Creates ExaminationAsync, so the user can continoue to use the program
@@ -110,7 +131,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 				//Shows a message that the creation has been completed
 				ErrorMessageExamination.Visible = true;
-				ErrorMessageExamination.Text = "Examination has been created";
+				ErrorMessageExamination.Text = "Behandling er oprettet";
 			}
 			catch (Exception ex)
 			{
@@ -148,7 +169,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			CustomerExaminationDropdown.DisplayMember = "FirstName";
 			PetExaminationDropdown.DisplayMember = "Name";
 			EmployeeExaminationDropdown.DisplayMember = "FirstName";
-			ExaminationDropdown.DisplayMember = "Description";
+			ExaminationTypeDropdown.DisplayMember = "Description";
 		}
 
 		/// <summary>
@@ -182,6 +203,41 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			{
 				EmployeeExaminationDropdown.DataSource = VeterinarianListBuilder.GetVeterinariansWithPrimaryFirst(_employees, pet.EmployeeID);
             }
+		}
+
+		private void UpdateDiscountStatus()
+		{
+			try
+			{
+				// Checks if selected Customer is Private and ExaminationTag is 2 which is Operation
+				if ((CustomerExaminationDropdown.SelectedItem as Customer).Type == "Privat"
+					&& ExaminationTypeDropdown.SelectedItem as ExaminationType != null
+					&& (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTag.ExaminationTagID == 2)
+				{
+					DiscountLabel.Visible = true;
+					DiscountNumericUpDown.Visible = true;
+				}
+				else
+				{
+					DiscountLabel.Visible = false;
+					DiscountNumericUpDown.Visible = false;
+					DiscountNumericUpDown.Value = 0;
+					PriceExaminationDisplay.Text = _basePriceForExamination.ToString();
+				}
+			}
+			catch (Exception)
+			{
+				throw new ArgumentException("Fejl i Display af rabat");
+			}
+
+		}
+
+		private void DiscountNumericUpDown_ValueChanged(object sender, EventArgs e)
+		{
+			if (PriceExaminationDisplay.Text != null && _basePriceForExamination != null)
+			{
+				PriceExaminationDisplay.Text = (_basePriceForExamination * ((100 - DiscountNumericUpDown.Value) / 100)).ToString();
+			}
 		}
 	}
 }
