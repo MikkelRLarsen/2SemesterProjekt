@@ -240,9 +240,9 @@
             totalPriceInfoLabel.AutoSize = true;
             totalPriceInfoLabel.Location = new Point(175, 385);
             totalPriceInfoLabel.Name = "totalPriceInfoLabel";
-            totalPriceInfoLabel.Size = new Size(25, 15);
+            totalPriceInfoLabel.Size = new Size(13, 15);
             totalPriceInfoLabel.TabIndex = 25;
-            totalPriceInfoLabel.Text = "100";
+            totalPriceInfoLabel.Text = "0";
             // 
             // CreateOrder
             // 

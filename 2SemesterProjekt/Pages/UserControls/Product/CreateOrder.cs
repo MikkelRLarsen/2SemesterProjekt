@@ -19,6 +19,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         FlowLayoutPanel _orderPanel;
         private readonly IProductService _productService;
         private readonly ICustomerService _customerService;
+        private decimal _totalPrice;
         public CreateOrder(FlowLayoutPanel orderPanel)
         {
             InitializeComponent();
@@ -92,7 +93,11 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
         private void discountNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            totalPriceInfoLabel.Text = (Convert.ToDecimal(totalPriceInfoLabel.Text) * ((100 - discountNumericUpDown.Value) / 100)).ToString();
+            if (_totalPrice != 0)
+            {
+                _totalPrice = (_totalPrice * ((100 - discountNumericUpDown.Value) / 100));
+                totalPriceInfoLabel.Text = _totalPrice.ToString();
+            }
         }
     }
 }
