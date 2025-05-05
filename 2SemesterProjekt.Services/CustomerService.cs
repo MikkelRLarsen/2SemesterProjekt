@@ -40,5 +40,10 @@ namespace _2SemesterProjekt.Services
 			/* Retrieves and returns the customer ID of the customer, who has a specific
 			 phone number. Will always return 0, if the customer doesn't exist in the DB. */
 		}
+		
+		public async Task<Customer> GetCustomerByPhoneNumberAsync(int phoneNumber)
+		{
+			return await _customerRepository.GetCustomerByPhoneNumberAsync(phoneNumber);
+		}
     }
 }
