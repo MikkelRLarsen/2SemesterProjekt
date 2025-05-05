@@ -34,6 +34,7 @@ namespace _2SemesterProjekt.Pages
             buttonFlowPanel.Controls.Add(new ButtonPanel("Redigér kæledyr", Color.Goldenrod, ShowPetUpdate));
 
             _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>()!;
+            _examinationService = ServiceProviderSingleton.GetServiceProvider().GetService<IExaminationService>()!;
 
         }
         private void ShowPetCreation(object sender, EventArgs e)
