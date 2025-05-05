@@ -4,7 +4,7 @@ using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 
 namespace _2SemesterProjekt.Services
 {
-    public class ExaminationService : IExaminationService
+	public class ExaminationService : IExaminationService
     {
         private readonly IExaminationRepository _examinationRepository;
 
@@ -20,7 +20,17 @@ namespace _2SemesterProjekt.Services
             await _examinationRepository.CreateExaminationAsync(examination);
         }
 
-        public async Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync()
+		public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
+		{
+			return await _examinationRepository.GetAllExaminationOnCustomerPhoneNumber(customerPhoneNumber);
+		}
+
+		public async Task<IEnumerable<Examination>> GetAllExaminationsAsync()
+		{
+            return await _examinationRepository.GetAllExaminationsAsync();
+		}
+
+		public async Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync()
         {
             return await _examinationRepository.GetAllExaminationTypesAsync();
         }

@@ -170,7 +170,7 @@
 			// CollapsePictureBox
 			// 
 			CollapsePictureBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-			CollapsePictureBox.Location = new Point(915, 298);
+			CollapsePictureBox.Location = new Point(895, 296);
 			CollapsePictureBox.Name = "CollapsePictureBox";
 			CollapsePictureBox.Size = new Size(85, 75);
 			CollapsePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -299,6 +299,7 @@
 			// 
 			AutoScaleDimensions = new SizeF(10F, 25F);
 			AutoScaleMode = AutoScaleMode.Font;
+			BorderStyle = BorderStyle.FixedSingle;
 			Controls.Add(BirthdayLabel);
 			Controls.Add(label9);
 			Controls.Add(EmployeeNameLabel);
@@ -320,9 +321,9 @@
 			Controls.Add(DateLabel);
 			Controls.Add(customerNumberLabel);
 			Controls.Add(PetNameLabel);
-			Margin = new Padding(4, 5, 4, 5);
+			Margin = new Padding(0, 5, 0, 5);
 			Name = "ExaminationCard";
-			Size = new Size(1000, 373);
+			Size = new Size(980, 371);
 			((System.ComponentModel.ISupportInitialize)profilePicture).EndInit();
 			((System.ComponentModel.ISupportInitialize)CollapsePictureBox).EndInit();
 			ResumeLayout(false);
