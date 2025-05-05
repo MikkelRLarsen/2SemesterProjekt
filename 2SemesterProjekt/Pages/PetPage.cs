@@ -34,7 +34,7 @@ namespace _2SemesterProjekt.Pages
             buttonFlowPanel.Controls.Add(new ButtonPanel("Redigér kæledyr", Color.Goldenrod, ShowPetUpdate));
 
             _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>()!;
-
+            _examinationService = ServiceProviderSingleton.GetServiceProvider().GetService<IExaminationService>()!;
         }
         private void ShowPetCreation(object sender, EventArgs e)
         {
@@ -67,7 +67,7 @@ namespace _2SemesterProjekt.Pages
             // If any, loads the inactive-pet-information on to PetCard.
             try
             {
-                var listOfPets = await _petService.GetAllInactivesAsync();
+                var listOfPets = await _examinationService.GetAllInactivesAsync();
                 foreach (var examination in listOfPets)
                 {
                     flowLayoutPanel1.Controls.Add(new PetCard(this, examination, PetCardType.InactivePet));

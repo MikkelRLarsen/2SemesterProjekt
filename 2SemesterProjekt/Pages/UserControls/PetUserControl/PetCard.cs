@@ -24,7 +24,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
     {
         private PetPage _petPage;
         private PetCardType _petCardType;
-        private IPetService _petService;
+        private IExaminationService examinationService;
         public Pet Pet { get; }
         public Examination Examination { get; }
         
