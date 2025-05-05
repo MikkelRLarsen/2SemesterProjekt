@@ -67,7 +67,7 @@ namespace _2SemesterProjekt.Pages
             // If any, loads the inactive-pet-information on to PetCard.
             try
             {
-                var listOfPets = await _petService.GetAllInactivesAsync();
+                var listOfPets = await _examinationService.GetAllInactivesAsync();
                 foreach (var examination in listOfPets)
                 {
                     flowLayoutPanel1.Controls.Add(new PetCard(this, examination, PetCardType.InactivePet));
