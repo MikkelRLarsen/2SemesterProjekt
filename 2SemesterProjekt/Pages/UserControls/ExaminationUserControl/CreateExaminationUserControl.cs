@@ -131,7 +131,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 				//Shows a message that the creation has been completed
 				ErrorMessageExamination.Visible = true;
-				ErrorMessageExamination.Text = "Examination has been created";
+				ErrorMessageExamination.Text = "Behandling er oprettet";
 			}
 			catch (Exception ex)
 			{
@@ -227,7 +227,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			}
 			catch (Exception)
 			{
-				throw new ArgumentException("Error in Display Discount Status");
+				throw new ArgumentException("Fejl i Display af rabat");
 			}
 
 		}
