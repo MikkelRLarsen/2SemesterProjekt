@@ -106,9 +106,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			ErrorMessageExamination.Text = "";
 
 			// Creates a messagebox if Discount is higher then 60% to confirm the booking of examination
-			if (DiscountNummericUpDown.Value >= 60)
+			if (DiscountNumericUpDown.Value >= 60)
 			{
-				DialogResult resultFromMessageBox = MessageBox.Show("Are you sure you want to continue?", "Chosen discount is higher then 60 %", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+				DialogResult resultFromMessageBox = MessageBox.Show("Er du sikkker på at du vil forsætte?", "Valgt rabat er over 60%", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
 				// If the user press No then abort booking
 				if (resultFromMessageBox == DialogResult.No)
@@ -215,13 +215,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 					&& (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTag.ExaminationTagID == 2)
 				{
 					DiscountLabel.Visible = true;
-					DiscountNummericUpDown.Visible = true;
+					DiscountNumericUpDown.Visible = true;
 				}
 				else
 				{
 					DiscountLabel.Visible = false;
-					DiscountNummericUpDown.Visible = false;
-					DiscountNummericUpDown.Value = 0;
+					DiscountNumericUpDown.Visible = false;
+					DiscountNumericUpDown.Value = 0;
+					PriceExaminationDisplay.Text = _basePriceForExamination.ToString();
 				}
 			}
 			catch (Exception)
@@ -231,11 +232,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 		}
 
-		private void DiscountNummericUpDown_ValueChanged(object sender, EventArgs e)
+		private void DiscountNumericUpDown_ValueChanged(object sender, EventArgs e)
 		{
 			if (PriceExaminationDisplay.Text != null && _basePriceForExamination != null)
 			{
-				PriceExaminationDisplay.Text = (_basePriceForExamination * ((100 - DiscountNummericUpDown.Value) / 100)).ToString();
+				PriceExaminationDisplay.Text = (_basePriceForExamination * ((100 - DiscountNumericUpDown.Value) / 100)).ToString();
 			}
 		}
 	}
