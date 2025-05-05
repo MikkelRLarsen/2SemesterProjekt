@@ -26,8 +26,8 @@ namespace _2SemesterProjekt.Pages
 
 		private void KonsultationPage_Load(object sender, EventArgs e)
 		{
-			CRUDPanel.Controls.Add(new ButtonPanel("Opret", "AddCustomer.png", Color.MediumSeaGreen, CreateExamination_Click));
-			CRUDPanel.Controls.Add(new ButtonPanel("Find", ))
+			CRUDPanel.Controls.Add(new ButtonPanel("Find", Color.MediumAquamarine, FindExamination_Click));
+			CRUDPanel.Controls.Add(new ButtonPanel("Opret", Color.MediumSeaGreen, CreateExamination_Click));
 		}
 
 		private void FindExamination_Click(object sender, EventArgs e)
