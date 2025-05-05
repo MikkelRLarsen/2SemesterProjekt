@@ -46,16 +46,32 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		}
         public async Task<IEnumerable<Examination>> GetAllInactivesAsync()
         {
-            var noActivityFor12Months = DateTime.Now.AddMonths(-12);
+            // Gets petIDs of those pets whose most recent exam is older than 12 months.   
+            List<int> inactivePetIDs = new List<int>();
+            DateTime twelveMonths = DateTime.Now.AddMonths(-12);
 
-            List<Examination> listOfInactives = new List<Examination>();
-
-            listOfInactives = await _db.Examinations 
-                .Where(e => e.Date < noActivityFor12Months)
-                .Include(e => e.Pet)
-                .ThenInclude (p => p.Customer)
+            inactivePetIDs = await _db.Examinations
+                .GroupBy(e => e.PetID) 
+                // GroupBy: adds all examinations (if there are more than one) to the PetID.
+                .Where(g => g.Max(e => e.Date) < twelveMonths)
+                // Max: the maximum date in the group.
+                // twelveMonths: is that max date older than 12 months.
+                .Select(g => g.Key) 
+                // Key: gets the value of the key that was used to create the group: ie. PetId.
                 .ToListAsync();
 
+            // Gets old exams, pet and the pet's owner.
+            List<Examination> listOfInactives = new List<Examination>();
+
+            listOfInactives = await _db.Examinations
+                .Where(e => inactivePetIDs.Contains(e.PetID) && e.Date < twelveMonths)
+                // The old exams.
+                .Include(e => e.Pet)
+                // The pet.
+                .ThenInclude(p => p.Customer)
+                // The pet's owner.
+                .ToListAsync();
+            
             return listOfInactives;
         }
 	}
