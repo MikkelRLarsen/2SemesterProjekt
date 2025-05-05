@@ -31,6 +31,7 @@
             pageNameLabel = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             buttonFlowPanel = new FlowLayoutPanel();
+            textBoxCustomerPhoneNumber = new TextBox();
             SuspendLayout();
             // 
             // pageNameLabel
@@ -45,9 +46,10 @@
             // 
             // flowLayoutPanel1
             // 
+            flowLayoutPanel1.Anchor = AnchorStyles.Top;
+            flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.BackColor = SystemColors.ControlLightLight;
             flowLayoutPanel1.BorderStyle = BorderStyle.FixedSingle;
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(250, 150);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(709, 580);
@@ -60,10 +62,22 @@
             buttonFlowPanel.Size = new Size(209, 301);
             buttonFlowPanel.TabIndex = 4;
             // 
+            // textBoxCustomerPhoneNumber
+            // 
+            textBoxCustomerPhoneNumber.Font = new Font("Gadugi", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBoxCustomerPhoneNumber.ForeColor = SystemColors.InactiveCaption;
+            textBoxCustomerPhoneNumber.Location = new Point(976, 394);
+            textBoxCustomerPhoneNumber.Name = "textBoxCustomerPhoneNumber";
+            textBoxCustomerPhoneNumber.Size = new Size(209, 29);
+            textBoxCustomerPhoneNumber.TabIndex = 5;
+            textBoxCustomerPhoneNumber.Click += textBoxCustomerPhoneNumber_Click;
+            textBoxCustomerPhoneNumber.KeyPress += textBoxCustomerPhoneNumber_KeyPress;
+            // 
             // PetPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(textBoxCustomerPhoneNumber);
             Controls.Add(buttonFlowPanel);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(pageNameLabel);
@@ -79,5 +93,6 @@
         private Label pageNameLabel;
 		private FlowLayoutPanel flowLayoutPanel1;
         private FlowLayoutPanel buttonFlowPanel;
+        private TextBox textBoxCustomerPhoneNumber;
     }
 }

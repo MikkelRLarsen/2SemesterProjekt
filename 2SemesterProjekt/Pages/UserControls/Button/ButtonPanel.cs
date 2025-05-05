@@ -16,6 +16,7 @@ namespace _2SemesterProjekt
     {
 		private readonly Color _buttonColor; // Stores base color of button for reverting
 		private readonly Image? _buttonImage; // Stores the image of button if initailized
+		public Label ButtonText { get { return this.buttonNameLabel; } } // Stores the label of the button to handle removal in petpage
 
         // Constructor for ButtonPanel with image
         public ButtonPanel(string buttonName, string imageResourceName, Color color, EventHandler? onClick = null)
