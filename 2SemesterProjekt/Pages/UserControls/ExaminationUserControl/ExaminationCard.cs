@@ -13,26 +13,29 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
 	public partial class ExaminationCard : UserControl
 	{
+		private readonly Examination _examination;
+
 		public ExaminationCard(Examination examination)
 		{
+			_examination = examination;
 			InitializeComponent();
 			InitializeUIDesign();
 		}
 
 		private void InitializeUIDesign()
 		{
-			PetNameLabel.Text = string.Empty;
-			PetSpeciesLabel.Text = string.Empty;
-			BirthdayLabel.Text = string.Empty;
+			PetNameLabel.Text = _examination.Pet.Name;
+			PetSpeciesLabel.Text = _examination.Pet.Species;
+			BirthdayLabel.Text = _examination.Pet.Birthday.ToShortDateString();
 
-			ExaminationLabel.Text = string.Empty;
-			DateLabel.Text = string.Empty;
-			StatusLabel.Text = string.Empty;
+			ExaminationLabel.Text = _examination.ExaminationType.Description;
+			DateLabel.Text = _examination.Date.ToShortDateString();
+			StatusLabel.Text = DateTime.Now > _examination.Date ? "Fuldført" : "Kommende";
 
-			CustomerNameLabel.Text = string.Empty;
-			CustomerPhoneNumberLabel.Text = string.Empty;
+			CustomerNameLabel.Text = _examination.Pet.Customer.FirstName;
+			CustomerPhoneNumberLabel.Text = _examination.Pet.Customer.PhoneNumber.ToString();
 
-			EmployeeNameLabel.Text = string.Empty;
+			EmployeeNameLabel.Text = _examination.Employee.FirstName;
 		}
 
 		private void CollapsePictureBox_Click(object sender, EventArgs e)
