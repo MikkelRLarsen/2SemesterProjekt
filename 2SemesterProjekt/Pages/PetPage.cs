@@ -42,8 +42,9 @@ namespace _2SemesterProjekt.Pages
         {
             if (this.PetCard != null)
             {
-                this.Controls.Clear();
-                this.Controls.Add(new UpdatePetUserControl(PetCard));
+                var updatePetControl = new UpdatePetUserControl(PetCard);
+				this.Controls.Add(updatePetControl);
+                updatePetControl.BringToFront();
             }
             else
             {
