@@ -88,7 +88,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Parent.Controls.Clear();
         }
 
         private void discountNumericUpDown_ValueChanged(object sender, EventArgs e)
