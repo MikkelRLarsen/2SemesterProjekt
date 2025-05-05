@@ -51,5 +51,9 @@ namespace _2SemesterProjekt.Services
 				}
             }
         }
+        public async Task<IEnumerable<Examination>> GetAllInactivesAsync()
+        {
+            return await _examinationRepository.GetAllInactivesAsync();
+        }
     }
 }

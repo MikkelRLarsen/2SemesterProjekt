@@ -13,12 +13,10 @@ namespace _2SemesterProjekt.Services
     public class PetService : IPetService
     {
         private readonly IPetRepository _petRepository;
-        private readonly IExaminationRepository _examinationRepository;
 
-        public PetService(IPetRepository petRepository, IExaminationRepository examinationRepository)
+        public PetService(IPetRepository petRepository)
         {
             _petRepository = petRepository;
-            _examinationRepository = examinationRepository;
         }
 
         public async Task CreatePetAsync(Pet pet)
@@ -41,10 +39,6 @@ namespace _2SemesterProjekt.Services
         {
             
             await _petRepository.UpdatePetAsync(pet);
-        }
-        public async Task<IEnumerable<Examination>> GetAllInactivesAsync()
-        {
-            return await _examinationRepository.GetAllInactivesAsync();
         }
     }
 }

@@ -8,7 +8,5 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 		public bool CheckIfPetExists(Pet pet);
         public Task<IEnumerable<Pet>> GetAllPetsAsync();
         public Task UpdatePetASync(Pet pet);
-        public Task<IEnumerable<Examination>> GetAllInactivesAsync();
-
     }
 }

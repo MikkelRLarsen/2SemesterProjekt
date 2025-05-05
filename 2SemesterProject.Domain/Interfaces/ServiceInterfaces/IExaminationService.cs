@@ -6,6 +6,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 	{
 		public Task CreateExaminationAsync(Examination examination);
 		public Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync();
-
+		public Task<IEnumerable<Examination>> GetAllInactivesAsync();
     }
 }
