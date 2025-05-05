@@ -71,11 +71,12 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             }
         }
 
+
         private void createOrderButton_Click(object sender, EventArgs e)
         {
             if (discountNumericUpDown.Value >= 60)
             {
-                DialogResult messageBoxResult = MessageBox.Show("Er du sikker på, at du vil fortsætte?", "Indtastet rabat er over 60%", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                DialogResult messageBoxResult = MessageBox.Show("Indtastet rabat er over 60%. Er du sikker på, at du vil fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                 if (messageBoxResult == DialogResult.No)
                 {
@@ -87,6 +88,11 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void discountNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            totalPriceInfoLabel.Text = (Convert.ToDecimal(totalPriceInfoLabel.Text) * ((100 - discountNumericUpDown.Value) / 100)).ToString();
         }
     }
 }

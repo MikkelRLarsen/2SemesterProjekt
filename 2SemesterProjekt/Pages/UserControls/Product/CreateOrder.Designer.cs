@@ -45,6 +45,8 @@
             addToOrderButton = new Button();
             productSearchTextbox = new TextBox();
             productSearchButton = new Button();
+            totalPriceLabel = new Label();
+            totalPriceInfoLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)discountNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -52,37 +54,36 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Gadugi", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(176, 47);
+            label1.Location = new Point(154, 35);
             label1.Name = "label1";
-            label1.Size = new Size(497, 95);
+            label1.Size = new Size(399, 77);
             label1.TabIndex = 6;
             label1.Text = "Opret Ordre";
             // 
             // customerPhoneNumberTextbox
             // 
             customerPhoneNumberTextbox.BorderStyle = BorderStyle.FixedSingle;
-            customerPhoneNumberTextbox.Location = new Point(130, 193);
-            customerPhoneNumberTextbox.Margin = new Padding(3, 4, 3, 4);
+            customerPhoneNumberTextbox.Location = new Point(114, 145);
             customerPhoneNumberTextbox.Name = "customerPhoneNumberTextbox";
-            customerPhoneNumberTextbox.Size = new Size(135, 27);
+            customerPhoneNumberTextbox.Size = new Size(118, 23);
             customerPhoneNumberTextbox.TabIndex = 7;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(29, 197);
+            label2.Location = new Point(25, 148);
             label2.Name = "label2";
-            label2.Size = new Size(106, 20);
+            label2.Size = new Size(83, 15);
             label2.TabIndex = 8;
             label2.Text = "Kundes tlf. nr.";
             // 
             // customerNameLabel
             // 
             customerNameLabel.AutoSize = true;
-            customerNameLabel.Location = new Point(130, 240);
+            customerNameLabel.Location = new Point(114, 180);
             customerNameLabel.Name = "customerNameLabel";
-            customerNameLabel.Size = new Size(282, 20);
+            customerNameLabel.Size = new Size(228, 15);
             customerNameLabel.TabIndex = 9;
             customerNameLabel.Text = "customerFirstName + customerLastName";
             customerNameLabel.Visible = false;
@@ -90,9 +91,9 @@
             // customerAddressLabel
             // 
             customerAddressLabel.AutoSize = true;
-            customerAddressLabel.Location = new Point(130, 260);
+            customerAddressLabel.Location = new Point(114, 195);
             customerAddressLabel.Name = "customerAddressLabel";
-            customerAddressLabel.Size = new Size(123, 20);
+            customerAddressLabel.Size = new Size(99, 15);
             customerAddressLabel.TabIndex = 10;
             customerAddressLabel.Text = "customerAddress";
             customerAddressLabel.Visible = false;
@@ -100,9 +101,9 @@
             // customerEmailLabel
             // 
             customerEmailLabel.AutoSize = true;
-            customerEmailLabel.Location = new Point(130, 280);
+            customerEmailLabel.Location = new Point(114, 210);
             customerEmailLabel.Name = "customerEmailLabel";
-            customerEmailLabel.Size = new Size(107, 20);
+            customerEmailLabel.Size = new Size(86, 15);
             customerEmailLabel.TabIndex = 11;
             customerEmailLabel.Text = "customerEmail";
             customerEmailLabel.Visible = false;
@@ -111,39 +112,38 @@
             // 
             orderListBox.Enabled = false;
             orderListBox.FormattingEnabled = true;
-            orderListBox.Location = new Point(130, 345);
-            orderListBox.Margin = new Padding(3, 4, 3, 4);
+            orderListBox.ItemHeight = 15;
+            orderListBox.Location = new Point(114, 243);
             orderListBox.Name = "orderListBox";
-            orderListBox.Size = new Size(239, 184);
+            orderListBox.Size = new Size(210, 139);
             orderListBox.TabIndex = 12;
             // 
             // discountNumericUpDown
             // 
             discountNumericUpDown.Enabled = false;
             discountNumericUpDown.Increment = new decimal(new int[] { 5, 0, 0, 0 });
-            discountNumericUpDown.Location = new Point(130, 539);
-            discountNumericUpDown.Margin = new Padding(3, 4, 3, 4);
+            discountNumericUpDown.Location = new Point(114, 404);
             discountNumericUpDown.Name = "discountNumericUpDown";
-            discountNumericUpDown.Size = new Size(240, 27);
+            discountNumericUpDown.Size = new Size(210, 23);
             discountNumericUpDown.TabIndex = 14;
+            discountNumericUpDown.ValueChanged += discountNumericUpDown_ValueChanged;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(57, 541);
+            label6.Location = new Point(50, 406);
             label6.Name = "label6";
-            label6.Size = new Size(75, 20);
+            label6.Size = new Size(58, 15);
             label6.TabIndex = 15;
             label6.Text = "Rabat i %";
             // 
             // getCustomerButton
             // 
             getCustomerButton.FlatStyle = FlatStyle.Popup;
-            getCustomerButton.Location = new Point(279, 193);
-            getCustomerButton.Margin = new Padding(3, 4, 3, 4);
+            getCustomerButton.Location = new Point(244, 145);
             getCustomerButton.Name = "getCustomerButton";
-            getCustomerButton.Size = new Size(91, 31);
+            getCustomerButton.Size = new Size(80, 23);
             getCustomerButton.TabIndex = 16;
             getCustomerButton.Text = "Find kunde";
             getCustomerButton.UseVisualStyleBackColor = true;
@@ -154,10 +154,9 @@
             createOrderButton.BackColor = Color.DarkGray;
             createOrderButton.Enabled = false;
             createOrderButton.FlatStyle = FlatStyle.Popup;
-            createOrderButton.Location = new Point(438, 627);
-            createOrderButton.Margin = new Padding(3, 4, 3, 4);
+            createOrderButton.Location = new Point(383, 470);
             createOrderButton.Name = "createOrderButton";
-            createOrderButton.Size = new Size(194, 77);
+            createOrderButton.Size = new Size(170, 58);
             createOrderButton.TabIndex = 17;
             createOrderButton.Text = "Opret ordre";
             createOrderButton.UseVisualStyleBackColor = false;
@@ -167,10 +166,9 @@
             // 
             cancelButton.BackColor = Color.IndianRed;
             cancelButton.FlatStyle = FlatStyle.Popup;
-            cancelButton.Location = new Point(176, 627);
-            cancelButton.Margin = new Padding(3, 4, 3, 4);
+            cancelButton.Location = new Point(154, 470);
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(194, 77);
+            cancelButton.Size = new Size(170, 58);
             cancelButton.TabIndex = 18;
             cancelButton.Text = "Annuller";
             cancelButton.UseVisualStyleBackColor = false;
@@ -180,9 +178,9 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(130, 321);
+            label7.Location = new Point(114, 225);
             label7.Name = "label7";
-            label7.Size = new Size(78, 20);
+            label7.Size = new Size(63, 15);
             label7.TabIndex = 19;
             label7.Text = "Ordreliste";
             // 
@@ -190,20 +188,19 @@
             // 
             productsListBox.Enabled = false;
             productsListBox.FormattingEnabled = true;
-            productsListBox.Location = new Point(438, 245);
-            productsListBox.Margin = new Padding(3, 4, 3, 4);
+            productsListBox.ItemHeight = 15;
+            productsListBox.Location = new Point(383, 184);
             productsListBox.Name = "productsListBox";
-            productsListBox.Size = new Size(239, 324);
+            productsListBox.Size = new Size(210, 244);
             productsListBox.TabIndex = 20;
             // 
             // addToOrderButton
             // 
             addToOrderButton.Enabled = false;
             addToOrderButton.FlatStyle = FlatStyle.Popup;
-            addToOrderButton.Location = new Point(685, 540);
-            addToOrderButton.Margin = new Padding(3, 4, 3, 4);
+            addToOrderButton.Location = new Point(599, 405);
             addToOrderButton.Name = "addToOrderButton";
-            addToOrderButton.Size = new Size(98, 31);
+            addToOrderButton.Size = new Size(86, 23);
             addToOrderButton.TabIndex = 21;
             addToOrderButton.Text = "Tilføj til ordre";
             addToOrderButton.UseVisualStyleBackColor = true;
@@ -212,28 +209,47 @@
             // 
             productSearchTextbox.BorderStyle = BorderStyle.FixedSingle;
             productSearchTextbox.Enabled = false;
-            productSearchTextbox.Location = new Point(438, 195);
-            productSearchTextbox.Margin = new Padding(3, 4, 3, 4);
+            productSearchTextbox.Location = new Point(383, 146);
             productSearchTextbox.Name = "productSearchTextbox";
-            productSearchTextbox.Size = new Size(240, 27);
+            productSearchTextbox.Size = new Size(210, 23);
             productSearchTextbox.TabIndex = 22;
             // 
             // productSearchButton
             // 
             productSearchButton.Enabled = false;
             productSearchButton.FlatStyle = FlatStyle.Popup;
-            productSearchButton.Location = new Point(685, 195);
-            productSearchButton.Margin = new Padding(3, 4, 3, 4);
+            productSearchButton.Location = new Point(599, 146);
             productSearchButton.Name = "productSearchButton";
-            productSearchButton.Size = new Size(59, 31);
+            productSearchButton.Size = new Size(52, 23);
             productSearchButton.TabIndex = 23;
             productSearchButton.Text = "Søg";
             productSearchButton.UseVisualStyleBackColor = true;
             // 
+            // totalPriceLabel
+            // 
+            totalPriceLabel.AutoSize = true;
+            totalPriceLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            totalPriceLabel.Location = new Point(114, 385);
+            totalPriceLabel.Name = "totalPriceLabel";
+            totalPriceLabel.Size = new Size(60, 15);
+            totalPriceLabel.TabIndex = 24;
+            totalPriceLabel.Text = "Total pris:";
+            // 
+            // totalPriceInfoLabel
+            // 
+            totalPriceInfoLabel.AutoSize = true;
+            totalPriceInfoLabel.Location = new Point(175, 385);
+            totalPriceInfoLabel.Name = "totalPriceInfoLabel";
+            totalPriceInfoLabel.Size = new Size(25, 15);
+            totalPriceInfoLabel.TabIndex = 25;
+            totalPriceInfoLabel.Text = "100";
+            // 
             // CreateOrder
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(totalPriceInfoLabel);
+            Controls.Add(totalPriceLabel);
             Controls.Add(productSearchButton);
             Controls.Add(productSearchTextbox);
             Controls.Add(addToOrderButton);
@@ -251,9 +267,8 @@
             Controls.Add(label2);
             Controls.Add(customerPhoneNumberTextbox);
             Controls.Add(label1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "CreateOrder";
-            Size = new Size(810, 773);
+            Size = new Size(709, 580);
             ((System.ComponentModel.ISupportInitialize)discountNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -278,5 +293,7 @@
         private Button addToOrderButton;
         private TextBox productSearchTextbox;
         private Button productSearchButton;
+        private Label totalPriceLabel;
+        private Label totalPriceInfoLabel;
     }
 }
