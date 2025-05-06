@@ -68,6 +68,7 @@
 			// 
 			textBoxCustomerPhoneNumber.Location = new Point(1399, 673);
 			textBoxCustomerPhoneNumber.Name = "textBoxCustomerPhoneNumber";
+			textBoxCustomerPhoneNumber.PlaceholderText = "Indtast tlf på kunde";
 			textBoxCustomerPhoneNumber.Size = new Size(299, 31);
 			textBoxCustomerPhoneNumber.TabIndex = 5;
 			// 

@@ -41,10 +41,13 @@ namespace _2SemesterProjekt.Pages
 
 			try
 			{
+				// Checks if phonenumber is valid
 				if (ValidPhoneNumberTextBox() == true)
 				{
+					// If valid then retrieve all Examination a customers pet have
 					IEnumerable<Examination> allCustomerExamination = await _examinationService.GetAllExaminationOnCustomerPhoneNumber(Convert.ToInt32(textBoxCustomerPhoneNumber.Text));
 
+					// If the customer doens't exist or they dont have any pets throw error which will be caught in Catch
 					if (allCustomerExamination.Count() == 0)
 					{
 						throw new ArgumentException("Kunden er ikke registeret i databasen eller ikke har nogen kæledyr");
@@ -57,9 +60,9 @@ namespace _2SemesterProjekt.Pages
 						ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination));
 					}
 				}
-				else
+				else // If ValidPhoneNumberTextBox == False
 				{
-
+					// Retrieve all Examinations
 					IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
 
 					ExaminationFlowPanel.Controls.Clear();
@@ -82,6 +85,7 @@ namespace _2SemesterProjekt.Pages
 
 		private bool ValidPhoneNumberTextBox()
 		{
+			// If User haven't input any text into TextBox and will therefore return false -> Retrieves all Customers
 			if(textBoxCustomerPhoneNumber.Text == String.Empty)
 			{
 				return false;

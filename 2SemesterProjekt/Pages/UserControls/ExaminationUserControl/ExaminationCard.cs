@@ -24,6 +24,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 		private void InitializeUIDesign()
 		{
+			// Sets all information on Card based on Examination
 			PetNameLabel.Text = _examination.Pet.Name;
 			PetSpeciesLabel.Text = _examination.Pet.Species;
 			BirthdayLabel.Text = _examination.Pet.Birthday.ToShortDateString();
@@ -40,11 +41,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 		private void CollapsePictureBox_Click(object sender, EventArgs e)
 		{
+			// Not Yet Implemented. Might be implemented in later Sprint
 			//Expand or Collapse the Card to show more or less information
 		}
 
 		private void collapseTimer_Tick(object sender, EventArgs e)
 		{
+			// Not Yet Implemented. Might be implemented in later Sprint
 			// For later use. Expand the UserControl
 		}
 	}
