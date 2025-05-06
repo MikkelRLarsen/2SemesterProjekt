@@ -45,6 +45,11 @@ namespace _2SemesterProjekt.Pages
 				{
 					IEnumerable<Examination> allCustomerExamination = await _examinationService.GetAllExaminationOnCustomerPhoneNumber(Convert.ToInt32(textBoxCustomerPhoneNumber.Text));
 
+					if (allCustomerExamination.Count() == 0)
+					{
+						throw new ArgumentException("Kunden er ikke registeret i databasen eller ikke har nogen kæledyr");
+					}
+
 					ExaminationFlowPanel.Controls.Clear();
 
 					foreach (var examination in allCustomerExamination)
@@ -54,6 +59,7 @@ namespace _2SemesterProjekt.Pages
 				}
 				else
 				{
+
 					IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
 
 					ExaminationFlowPanel.Controls.Clear();
@@ -63,10 +69,12 @@ namespace _2SemesterProjekt.Pages
 						ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination));
 					}
 				}
+
+				textBoxCustomerPhoneNumber.Text = string.Empty;
+				textBoxCustomerPhoneNumber.BackColor = Color.White;
 			}
 			catch (Exception ex)
 			{
-
 				MessageBox.Show(ex.Message, "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 
@@ -74,6 +82,11 @@ namespace _2SemesterProjekt.Pages
 
 		private bool ValidPhoneNumberTextBox()
 		{
+			if(textBoxCustomerPhoneNumber.Text == String.Empty)
+			{
+				return false;
+			}
+
 			// Validate phonenumber: only numbers and 8-digit long.
 			if (!Int32.TryParse(textBoxCustomerPhoneNumber.Text, out int phoneNumber) || textBoxCustomerPhoneNumber.Text[0] == '0' || phoneNumber < 10000000 || phoneNumber > 99999999)
 			{
@@ -81,8 +94,10 @@ namespace _2SemesterProjekt.Pages
 				textBoxCustomerPhoneNumber.BackColor = Color.LightCoral;
 				throw new ArgumentException("Telefonnummer skal være et helt 8-cifret tal");
 			}
-
-			return true;
+			else
+			{
+				return true;
+			}
 		}
 	}
 }
