@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\2SemesterProject.Domain\2SemesterProject.Domain.csproj" />
     <ProjectReference Include="..\2SemesterProject.Domain\2SemesterProjekt.Domain.csproj" />
   </ItemGroup>
 
