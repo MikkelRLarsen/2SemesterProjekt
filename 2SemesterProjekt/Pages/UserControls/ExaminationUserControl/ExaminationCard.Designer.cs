@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			components = new System.ComponentModel.Container();
-			profilePicture = new PictureBox();
+			PetPicture = new PictureBox();
 			ExaminationLabel = new Label();
 			label3 = new Label();
 			label5 = new Label();
@@ -51,20 +51,20 @@
 			label9 = new Label();
 			EmployeeNameLabel = new Label();
 			BirthdayLabel = new Label();
-			((System.ComponentModel.ISupportInitialize)profilePicture).BeginInit();
+			((System.ComponentModel.ISupportInitialize)PetPicture).BeginInit();
 			((System.ComponentModel.ISupportInitialize)CollapsePictureBox).BeginInit();
 			SuspendLayout();
 			// 
-			// profilePicture
+			// PetPicture
 			// 
-			profilePicture.Image = Properties.Resources.member;
-			profilePicture.Location = new Point(13, 15);
-			profilePicture.Margin = new Padding(4, 5, 4, 5);
-			profilePicture.Name = "profilePicture";
-			profilePicture.Size = new Size(139, 174);
-			profilePicture.SizeMode = PictureBoxSizeMode.StretchImage;
-			profilePicture.TabIndex = 12;
-			profilePicture.TabStop = false;
+			PetPicture.Image = Properties.Resources.member;
+			PetPicture.Location = new Point(13, 15);
+			PetPicture.Margin = new Padding(4, 5, 4, 5);
+			PetPicture.Name = "PetPicture";
+			PetPicture.Size = new Size(139, 174);
+			PetPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+			PetPicture.TabIndex = 12;
+			PetPicture.TabStop = false;
 			// 
 			// ExaminationLabel
 			// 
@@ -311,7 +311,7 @@
 			Controls.Add(label2);
 			Controls.Add(StatusLabel);
 			Controls.Add(CollapsePictureBox);
-			Controls.Add(profilePicture);
+			Controls.Add(PetPicture);
 			Controls.Add(ExaminationLabel);
 			Controls.Add(label3);
 			Controls.Add(label5);
@@ -324,7 +324,7 @@
 			Margin = new Padding(0, 5, 0, 5);
 			Name = "ExaminationCard";
 			Size = new Size(980, 371);
-			((System.ComponentModel.ISupportInitialize)profilePicture).EndInit();
+			((System.ComponentModel.ISupportInitialize)PetPicture).EndInit();
 			((System.ComponentModel.ISupportInitialize)CollapsePictureBox).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
@@ -332,7 +332,7 @@
 
 		#endregion
 
-		private PictureBox profilePicture;
+		private PictureBox PetPicture;
 		private Label ExaminationLabel;
 		private Label label3;
 		private Label label5;

@@ -37,6 +37,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			CustomerPhoneNumberLabel.Text = _examination.Pet.Customer.PhoneNumber.ToString();
 
 			EmployeeNameLabel.Text = _examination.Employee.FirstName;
+
+			PetPicture.Image = GetImage(_examination.Pet.Species);
 		}
 
 		private void CollapsePictureBox_Click(object sender, EventArgs e)
@@ -49,6 +51,16 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			// Not Yet Implemented. Might be implemented in later Sprint
 			// For later use. Expand the UserControl
+		}
+
+		/// <summary>
+		/// Finds matching image for pet species in resources
+		/// </summary>
+		private Image GetImage(string speciesName)
+		{
+			var image = (Image)Properties.Resources.ResourceManager.GetObject(speciesName)!;
+
+			return image;
 		}
 	}
 }
