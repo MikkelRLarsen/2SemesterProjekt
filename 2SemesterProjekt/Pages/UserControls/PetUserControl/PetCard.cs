@@ -27,7 +27,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 			labelPetName.Text = pet.Name;
 			labelPetOwner.Text = $"{pet.Customer.FirstName} {pet.Customer.LastName}";
 
-			if (pet.Employee == null) // If pet doesnet have a primary vet then show "not chosen"
+			if (pet.Employee == null) // If pet doesn't have a primary vet then show "not chosen"
 			{
 				labelPrimaryVet.Text = "Ikke valgt";
 			}
