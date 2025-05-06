@@ -34,16 +34,18 @@ namespace _2SemesterProjekt.Pages
         }
         private void ShowPetCreation(object sender, EventArgs e)
         {
-            this.Controls.Clear(); // Clear existing content
-            this.Controls.Add(new AddPetUserControl()); // Load the new page
+            var addPetControl = new AddPetUserControl();
+            this.Controls.Add(addPetControl); // Load the new page
+			addPetControl.BringToFront();
         }
 
         private void ShowPetUpdate(object sender, EventArgs e)
         {
             if (this.PetCard != null)
             {
-                this.Controls.Clear();
-                this.Controls.Add(new UpdatePetUserControl(PetCard));
+                var updatePetControl = new UpdatePetUserControl(PetCard);
+				this.Controls.Add(updatePetControl); // Load the new page
+				updatePetControl.BringToFront();
             }
             else
             {
@@ -92,6 +94,8 @@ namespace _2SemesterProjekt.Pages
                     flowLayoutPanel1.Controls.Add(new PetCard(this, pet));
                 }
 
+                // Checks if the button already exists before adding
+                if (!buttonFlowPanel.Controls.OfType<ButtonPanel>().Any(b => b.Text == "Vis alle kæledyr"))
                 // Add option for resetting the flowpanel
                 buttonFlowPanel.Controls.Add(new ButtonPanel("Vis alle kæledyr", Color.MediumVioletRed, ShowAllPets));
             }

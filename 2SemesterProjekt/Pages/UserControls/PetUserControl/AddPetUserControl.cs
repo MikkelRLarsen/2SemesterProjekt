@@ -50,9 +50,11 @@ namespace _2SemesterProjekt.Pages
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            this.Controls.Clear(); // Clear existing content
-            this.Controls.Add(new PetPage()); // Load the new page
-        }
+			if (this.Parent != null)
+			{
+				this.Parent.Controls.Remove(this); // Clear existing content (Parent is PetPage)
+			}
+		}
 
         private void ownerPhoneNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)
         {
