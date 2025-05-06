@@ -122,7 +122,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 				displayMessage += "Indtast et gyldigt kæledyrsnavn.\n";
 			}
 
-			// Validate pet name input
+			// Validate pet species input
 			if (string.IsNullOrWhiteSpace(petSpeciesTextbox.Text))
 			{
 				petSpeciesTextbox.ForeColor = Color.White;
