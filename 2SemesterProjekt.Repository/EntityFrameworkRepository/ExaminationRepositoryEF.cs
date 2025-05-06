@@ -38,7 +38,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			}
 			catch (Exception)
 			{
-				throw new ArgumentException("Kunde har ikke nogle pets");
+				return Enumerable.Empty<Examination>();
 			}
 		}
 
