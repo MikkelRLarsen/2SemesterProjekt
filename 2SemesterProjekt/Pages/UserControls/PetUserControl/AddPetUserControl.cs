@@ -52,7 +52,7 @@ namespace _2SemesterProjekt.Pages
         {
 			if (this.Parent != null)
 			{
-				this.Parent.Controls.Remove(this); // Clear existing content
+				this.Parent.Controls.Remove(this); // Clear existing content (Parent is PetPage)
 			}
 		}
 

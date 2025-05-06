@@ -27,11 +27,11 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 			labelPetName.Text = pet.Name;
 			labelPetOwner.Text = $"{pet.Customer.FirstName} {pet.Customer.LastName}";
 
-			if (pet.Employee == null)
+			if (pet.Employee == null) // If pet doesnet have a primary vet then show "not chosen"
 			{
 				labelPrimaryVet.Text = "Ikke valgt";
 			}
-			else
+			else // Show vet first name
 			{
 				labelPrimaryVet.Text = pet.Employee.FirstName;
 			}
@@ -54,6 +54,9 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 			this.BackColor = SystemColors.ActiveBorder;
 		}
 
+		/// <summary>
+		/// Finds matching image for pet species in resources
+		/// </summary>
 		private Image GetImage(string speciesName)
 		{
 			var image = (Image)Properties.Resources.ResourceManager.GetObject(speciesName)!;

@@ -73,8 +73,8 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 		{
 			if (this.Parent != null)
 			{
-				this.Parent.Controls.Remove(this); // Clear existing content
-			}
+				this.Parent.Controls.Remove(this); // Clear existing content (Parent is PetPage)
+            }
 		}
 
 		private void ownerPhoneNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)
