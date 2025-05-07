@@ -60,5 +60,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				return 0;
 			}
 		}
+
+        public async Task<Customer> GetCustomerByPhoneNumberAsync(int phoneNumber)
+        {
+            var customer = _db.Customers.FirstOrDefault(c => c.PhoneNumber == phoneNumber);
+            return customer;
+        }
     }
 }

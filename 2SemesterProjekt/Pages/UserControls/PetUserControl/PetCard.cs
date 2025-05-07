@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,16 +100,26 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             }
         }
 
-        private async void PetCard_Click(object sender, EventArgs e)
-        {
-            if (_petPage.PetCard != null) // protects against null reference exceptions the first time it's clicked
-            {
-                _petPage.PetCard.BackColor = SystemColors.Window; // If a card was previously selected, reset its background color
-            }
+		private async void PetCard_Click(object sender, EventArgs e)
+		{
+			if (_petPage.PetCard != null) // protects against null reference exceptions the first time it's clicked
+			{
+				_petPage.PetCard.BackColor = SystemColors.Window; // If a card was previously selected, reset its background color
+			}
 
-            _petPage.PetCard = this; // Set the currently clicked card as the new selected card
+			_petPage.PetCard = this; // Set the currently clicked card as the new selected card
 
-            this.BackColor = SystemColors.ActiveBorder;
-        }
-    }
+			this.BackColor = SystemColors.ActiveBorder;
+		}
+
+		/// <summary>
+		/// Finds matching image for pet species in resources
+		/// </summary>
+		private Image GetImage(string speciesName)
+		{
+			var image = (Image)Properties.Resources.ResourceManager.GetObject(speciesName)!;
+
+			return image;
+		}
+	}
 }

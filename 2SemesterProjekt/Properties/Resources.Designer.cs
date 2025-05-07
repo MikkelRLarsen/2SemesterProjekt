@@ -69,5 +69,65 @@ namespace _2SemesterProjekt.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-    }
+
+		/// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap Hund
+		{
+			get
+			{
+				object obj = ResourceManager.GetObject("Hund", resourceCulture);
+				return ((System.Drawing.Bitmap)(obj));
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap Kat
+		{
+			get
+			{
+				object obj = ResourceManager.GetObject("Kat", resourceCulture);
+				return ((System.Drawing.Bitmap)(obj));
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap Marsvin
+		{
+			get
+			{
+				object obj = ResourceManager.GetObject("Marsvin", resourceCulture);
+				return ((System.Drawing.Bitmap)(obj));
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap Fugl
+		{
+			get
+			{
+				object obj = ResourceManager.GetObject("Fugl", resourceCulture);
+				return ((System.Drawing.Bitmap)(obj));
+			}
+		}
+
+		/// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap Kanin
+		{
+			get
+			{
+				object obj = ResourceManager.GetObject("Kanin", resourceCulture);
+				return ((System.Drawing.Bitmap)(obj));
+			}
+		}
+	}
 }

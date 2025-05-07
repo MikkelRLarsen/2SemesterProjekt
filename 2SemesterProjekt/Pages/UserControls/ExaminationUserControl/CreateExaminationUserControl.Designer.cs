@@ -20,7 +20,7 @@
 			base.Dispose(disposing);
 		}
 
-		#region Component Designer generated code
+        #region Component Designer generated code
 
 		/// <summary> 
 		/// Required method for Designer support - do not modify 
@@ -287,9 +287,9 @@
 			PerformLayout();
 		}
 
-		#endregion
+        #endregion
 
-		private Label label5;
+        private Label label5;
 		private Label label1;
 		private ComboBox CustomerExaminationDropdown;
 		private ComboBox PetExaminationDropdown;
