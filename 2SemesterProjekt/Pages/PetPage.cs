@@ -67,7 +67,7 @@ namespace _2SemesterProjekt.Pages
             _listOfPets = await _petService.GetAllPetsAsync();
             foreach (var pet in _listOfPets)
             {
-                flowLayoutPanel1.Controls.Add(new PetCard(this, pet));
+                flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
             }
         }
 
@@ -99,7 +99,7 @@ namespace _2SemesterProjekt.Pages
                 flowLayoutPanel1.Controls.Clear();
                 foreach (var pet in customerPets)
                 {
-                    flowLayoutPanel1.Controls.Add(new PetCard(this, pet));
+                    flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
                 }
 
                 // Checks if the button already exists before adding
