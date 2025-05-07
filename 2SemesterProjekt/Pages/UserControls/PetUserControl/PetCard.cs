@@ -83,7 +83,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             {
                 // Changing ID to Date.
                 label.Text = "Sidste besøg: ";
-                labelPetID.Location = new Point (300, 22);
+                labelPetID.Location = new Point (label.Location.X + 160, 28);
                 labelPetID.Text = Examination.Date.ToString("dd-MM-yyyy");
 
                 labelPetName.Text = Examination.Pet.Name;
