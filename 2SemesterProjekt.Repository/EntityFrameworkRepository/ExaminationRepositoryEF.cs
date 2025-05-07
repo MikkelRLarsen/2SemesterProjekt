@@ -24,6 +24,24 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             _db.SaveChanges();
         }
 
+		public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
+		{
+			try
+			{
+				return await _db.Examinations
+					.Where(e => e.Pet.Customer.PhoneNumber == customerPhoneNumber)
+					.Include(e => e.Pet)
+					.ThenInclude(p => p.Customer)
+					.Include(e => e.Employee)
+					.Include(e => e.ExaminationType)
+					.ToListAsync();
+			}
+			catch (Exception)
+			{
+				return Enumerable.Empty<Examination>();
+			}
+		}
+
 		public async Task<IEnumerable<Examination>> GetAllExaminationOnDate(DateTime date)
 		{
             try
@@ -36,6 +54,16 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             {
                 return Enumerable.Empty<Examination>();
             }
+		}
+
+		public async Task<IEnumerable<Examination>> GetAllExaminationsAsync()
+		{
+            return await _db.Examinations
+                .Include(e => e.Pet)
+                .ThenInclude(p => p.Customer)
+                .Include(e => e.Employee)
+                .Include(e => e.ExaminationType)
+                .ToListAsync();
 		}
 
 		public async Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync()
