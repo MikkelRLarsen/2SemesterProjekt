@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
@@ -46,9 +47,28 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         }
         public async Task<IEnumerable<Examination>> GetAllInactivesAsync()
         {
-            // Gets petIDs of those pets whose most recent exam is older than 12 months.   
-            List<int> inactivePetIDs = new List<int>();
-            DateTime twelveMonths = DateTime.Now.AddMonths(-12);
+
+			var twelveMonthsAgo = DateTime.Now.AddMonths(-12);
+
+			var result = await _db.Examinations
+				.Where(e => e.Date < twelveMonthsAgo &&
+							!_db.Examinations
+								.Where(r => r.Date >= twelveMonthsAgo)
+								.Select(r => r.PetID)
+								.Distinct()
+								.Contains(e.PetID))
+				.Include(e => e.Pet)
+					.ThenInclude(p => p.Customer)
+				.OrderBy(e => e.PetID)
+				.ThenByDescending(e => e.Date)
+				.ToListAsync();
+
+			return result;
+
+
+			// Gets petIDs of those pets whose most recent exam is older than 12 months.   
+			List<int> inactivePetIDs = new List<int>();
+            DateTime twelveMonths = DateTime.Now.Date.AddMonths(-12);
 
             inactivePetIDs = await _db.Examinations
                 .GroupBy(e => e.PetID) 
@@ -70,7 +90,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 // The pet.
                 .ThenInclude(p => p.Customer)
                 // The pet's owner.
-                .ToListAsync();
+                .ToListAsync(); 
 
             return listOfInactives;
         }
