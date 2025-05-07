@@ -103,8 +103,8 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         {
             if (_totalPrice != 0)
             {
-                _totalPrice = (_totalPrice * ((100 - discountNumericUpDown.Value) / 100));
-                totalPriceInfoLabel.Text = _totalPrice.ToString();
+                decimal discount = (_totalPrice * ((100 - discountNumericUpDown.Value) / 100));
+                totalPriceInfoLabel.Text = discount.ToString();
             }
         }
 
@@ -128,6 +128,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 _order.Add(productToSell);
                 orderProductsListBox.DataSource = _order;
                 orderProductsListBox.Refresh();
+
                 _totalPrice += productToSell.PricePerUnit;
                 totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
                 totalPriceInfoLabel.Refresh();
