@@ -54,6 +54,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         {
             InitializeComponent();
             _petPage = petPage;
+            Pet = examination.Pet;
             Examination = examination;
             _petCardType = petCardType;
             CardSetup();
@@ -98,7 +99,9 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 label3.Visible = false;
                 labelPetSpecies.Visible = false;
             }
-        }
+
+			profilePicture.Image = GetImage(Pet.Species);
+		}
 
 		private async void PetCard_Click(object sender, EventArgs e)
 		{
