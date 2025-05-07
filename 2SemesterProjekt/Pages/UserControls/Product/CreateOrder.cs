@@ -22,6 +22,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         private decimal _totalPrice;
         private BindingList<Domain.Models.Product> _order;
         private Domain.Models.Product _selectedProduct;
+        private Domain.Models.Product _selectedProductInOrder;
         public CreateOrder(FlowLayoutPanel orderPanel)
         {
             InitializeComponent();
@@ -37,7 +38,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             allProductsListBox.DataSource = productList;
             allProductsListBox.DisplayMember = "ProductInfo";
             orderProductsListBox.DataSource = _order;
-            orderProductsListBox.DisplayMember = "ProductInfo";
+            orderProductsListBox.DisplayMember = "ProductInOrderInfo";
         }
 
         private void customerPhoneNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)
@@ -58,11 +59,6 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 customerNameLabel.Visible = true;
                 customerAddressLabel.Visible = false;
                 customerEmailLabel.Visible = false;
-                discountNumericUpDown.Enabled = false;
-                addToOrderButton.Enabled = false;
-                productSearchButton.Enabled = false;
-                productSearchTextbox.Enabled = false;
-                createOrderButton.Enabled = false;
             }
             else
             {
@@ -72,11 +68,6 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 customerNameLabel.Visible = true;
                 customerAddressLabel.Visible = true;
                 customerEmailLabel.Visible = true;
-                discountNumericUpDown.Enabled = true;
-                addToOrderButton.Enabled = true;
-                productSearchButton.Enabled = true;
-                productSearchTextbox.Enabled = true;
-                createOrderButton.Enabled = true;
             }
         }
 
@@ -91,6 +82,19 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 {
                     return;
                 }
+            }
+            else if (customerPhoneNumberTextbox != null || customerNameLabel.Text == "Kunne ikke finde kunden.")
+            {
+                DialogResult messageBoxResult = MessageBox.Show("Du har ikke indtastet et telefonnummer, som findes i systemet. Vil du stadigvæk fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (messageBoxResult == DialogResult.No)
+                {
+                    return;
+                }
+            }
+            else
+            {
+
             }
         }
 
@@ -125,6 +129,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             }
             else if (productToSell != null)
             {
+                productToSell.QuantityInOrder = 1;
                 _order.Add(productToSell);
                 orderProductsListBox.DataSource = _order;
                 orderProductsListBox.Refresh();
@@ -133,6 +138,23 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
                 totalPriceInfoLabel.Refresh();
             }
+        }
+
+        private void AddMoreButton_Click(object sender, EventArgs e)
+        {
+            _selectedProductInOrder.QuantityInOrder += 1;
+            _selectedProductInOrder.TotalPrice += _selectedProductInOrder.PricePerUnit;
+            _totalPrice += _selectedProductInOrder.PricePerUnit;
+
+            totalPriceInfoLabel.Refresh();
+            orderProductsListBox.DataSource = _order;
+            orderProductsListBox.Refresh();
+        }
+
+        private void orderProductsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListBox lb = (ListBox)sender;
+            _selectedProductInOrder = (Domain.Models.Product)lb.SelectedItem;
         }
     }
 }

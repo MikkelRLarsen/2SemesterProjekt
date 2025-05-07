@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -16,7 +18,12 @@ namespace _2SemesterProjekt.Domain.Models
         public decimal PricePerUnit { get; private set; }
         public int NumberInStock { get; private set; }
         public int MinNumberInStock { get; private set; }
+        [NotMapped]
+        public int? QuantityInOrder { get; set; }
+        [NotMapped]
+        public decimal TotalPrice { get; set; }
         public string ProductInfo { get {return $"{Name} [{NumberInStock} på lager] - {PricePerUnit} kr. [EAN: {EAN}"; } }
+        public string ProductInOrderInfo { get { return $"{QuantityInOrder}x {Name} - {PricePerUnit} kr."; } }
 
         public Product(string name, long eAN, string type, decimal pricePerUnit, int numberInStock, int minNumberInStock)
         {

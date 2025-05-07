@@ -47,6 +47,7 @@
             totalPriceInfoLabel = new Label();
             allProductsListBox = new ListBox();
             orderProductsListBox = new ListBox();
+            AddMoreButton = new Button();
             ((System.ComponentModel.ISupportInitialize)discountNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -110,7 +111,6 @@
             // 
             // discountNumericUpDown
             // 
-            discountNumericUpDown.Enabled = false;
             discountNumericUpDown.Increment = new decimal(new int[] { 5, 0, 0, 0 });
             discountNumericUpDown.Location = new Point(114, 404);
             discountNumericUpDown.Name = "discountNumericUpDown";
@@ -142,7 +142,6 @@
             // createOrderButton
             // 
             createOrderButton.BackColor = Color.DarkGray;
-            createOrderButton.Enabled = false;
             createOrderButton.FlatStyle = FlatStyle.Popup;
             createOrderButton.Location = new Point(383, 470);
             createOrderButton.Name = "createOrderButton";
@@ -176,7 +175,6 @@
             // 
             // addToOrderButton
             // 
-            addToOrderButton.Enabled = false;
             addToOrderButton.FlatStyle = FlatStyle.Popup;
             addToOrderButton.Location = new Point(565, 404);
             addToOrderButton.Name = "addToOrderButton";
@@ -189,7 +187,6 @@
             // productSearchTextbox
             // 
             productSearchTextbox.BorderStyle = BorderStyle.FixedSingle;
-            productSearchTextbox.Enabled = false;
             productSearchTextbox.Location = new Point(383, 146);
             productSearchTextbox.Name = "productSearchTextbox";
             productSearchTextbox.Size = new Size(210, 23);
@@ -197,7 +194,6 @@
             // 
             // productSearchButton
             // 
-            productSearchButton.Enabled = false;
             productSearchButton.FlatStyle = FlatStyle.Popup;
             productSearchButton.Location = new Point(599, 146);
             productSearchButton.Name = "productSearchButton";
@@ -243,11 +239,24 @@
             orderProductsListBox.Name = "orderProductsListBox";
             orderProductsListBox.Size = new Size(210, 139);
             orderProductsListBox.TabIndex = 27;
+            orderProductsListBox.SelectedIndexChanged += orderProductsListBox_SelectedIndexChanged;
+            // 
+            // AddMoreButton
+            // 
+            AddMoreButton.FlatStyle = FlatStyle.Popup;
+            AddMoreButton.Location = new Point(33, 303);
+            AddMoreButton.Name = "AddMoreButton";
+            AddMoreButton.Size = new Size(75, 79);
+            AddMoreButton.TabIndex = 28;
+            AddMoreButton.Text = "Tilføj flere af det valgte produkt";
+            AddMoreButton.UseVisualStyleBackColor = true;
+            AddMoreButton.Click += AddMoreButton_Click;
             // 
             // CreateOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(AddMoreButton);
             Controls.Add(orderProductsListBox);
             Controls.Add(allProductsListBox);
             Controls.Add(totalPriceInfoLabel);
@@ -298,5 +307,6 @@
         private Label totalPriceInfoLabel;
         private ListBox allProductsListBox;
         private ListBox orderProductsListBox;
+        private Button AddMoreButton;
     }
 }
