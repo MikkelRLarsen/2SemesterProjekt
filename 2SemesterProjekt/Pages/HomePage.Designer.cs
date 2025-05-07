@@ -20,26 +20,40 @@
 			base.Dispose(disposing);
 		}
 
-		#region Component Designer generated code
+        #region Component Designer generated code
 
-		/// <summary> 
-		/// Required method for Designer support - do not modify 
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
-			SuspendLayout();
-			// 
-			// HomePage
-			// 
-			AutoScaleDimensions = new SizeF(7F, 15F);
-			AutoScaleMode = AutoScaleMode.Font;
-			BackColor = SystemColors.Control;
-			Name = "HomePage";
-			Size = new Size(1200, 825);
-			ResumeLayout(false);
-		}
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(1200, 825);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // HomePage
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
+            Controls.Add(pictureBox1);
+            Name = "HomePage";
+            Size = new Size(1200, 825);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
+        }
 
-		#endregion
-	}
+        #endregion
+
+        private PictureBox pictureBox1;
+    }
 }
