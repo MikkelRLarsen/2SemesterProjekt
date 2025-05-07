@@ -30,5 +30,15 @@ namespace _2SemesterProjekt.Services
             _exportService.ExportStockStatusToTxtAsync(productList, fileName); /* The productList gets passed into the called method,
                                                                                 * which will then be added to a textfile. */
         }
+
+        public async Task<IEnumerable<Product>> GetAllProductsInStockAsync()
+        {
+            return await _productRepository.GetAllProductsInStockAsync();
+        }
+
+        public async Task<Product> GetProductByEANAsync(long eAN)
+        {
+            return await _productRepository.GetProductByEANAsync(eAN);
+        }
     }
 }

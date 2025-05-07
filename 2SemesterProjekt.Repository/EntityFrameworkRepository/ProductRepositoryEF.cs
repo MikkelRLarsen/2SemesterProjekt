@@ -21,5 +21,15 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             return await _db.Products.ToListAsync();
         }
+        public async Task<IEnumerable<Product>> GetAllProductsInStockAsync()
+        {
+            return await _db.Products
+                .Where(pr => pr.NumberInStock > 0)
+                .ToListAsync();
+        }
+        public async Task<Product> GetProductByEANAsync(long eAN)
+        {
+            return await _db.Products.FirstOrDefaultAsync(pr => pr.EAN == eAN);
+        }
     }
 }

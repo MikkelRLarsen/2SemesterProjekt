@@ -34,19 +34,19 @@
             customerNameLabel = new Label();
             customerAddressLabel = new Label();
             customerEmailLabel = new Label();
-            orderListBox = new ListBox();
             discountNumericUpDown = new NumericUpDown();
             label6 = new Label();
             getCustomerButton = new Button();
             createOrderButton = new Button();
             cancelButton = new Button();
             label7 = new Label();
-            productsListBox = new ListBox();
             addToOrderButton = new Button();
             productSearchTextbox = new TextBox();
             productSearchButton = new Button();
             totalPriceLabel = new Label();
             totalPriceInfoLabel = new Label();
+            allProductsListBox = new ListBox();
+            orderProductsListBox = new ListBox();
             ((System.ComponentModel.ISupportInitialize)discountNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -107,16 +107,6 @@
             customerEmailLabel.TabIndex = 11;
             customerEmailLabel.Text = "customerEmail";
             customerEmailLabel.Visible = false;
-            // 
-            // orderListBox
-            // 
-            orderListBox.Enabled = false;
-            orderListBox.FormattingEnabled = true;
-            orderListBox.ItemHeight = 15;
-            orderListBox.Location = new Point(114, 243);
-            orderListBox.Name = "orderListBox";
-            orderListBox.Size = new Size(210, 139);
-            orderListBox.TabIndex = 12;
             // 
             // discountNumericUpDown
             // 
@@ -184,26 +174,17 @@
             label7.TabIndex = 19;
             label7.Text = "Ordreliste";
             // 
-            // productsListBox
-            // 
-            productsListBox.Enabled = false;
-            productsListBox.FormattingEnabled = true;
-            productsListBox.ItemHeight = 15;
-            productsListBox.Location = new Point(383, 184);
-            productsListBox.Name = "productsListBox";
-            productsListBox.Size = new Size(210, 244);
-            productsListBox.TabIndex = 20;
-            // 
             // addToOrderButton
             // 
             addToOrderButton.Enabled = false;
             addToOrderButton.FlatStyle = FlatStyle.Popup;
-            addToOrderButton.Location = new Point(599, 405);
+            addToOrderButton.Location = new Point(565, 404);
             addToOrderButton.Name = "addToOrderButton";
             addToOrderButton.Size = new Size(86, 23);
             addToOrderButton.TabIndex = 21;
             addToOrderButton.Text = "Tilføj til ordre";
             addToOrderButton.UseVisualStyleBackColor = true;
+            addToOrderButton.Click += addToOrderButton_Click;
             // 
             // productSearchTextbox
             // 
@@ -244,23 +225,42 @@
             totalPriceInfoLabel.TabIndex = 25;
             totalPriceInfoLabel.Text = "0";
             // 
+            // allProductsListBox
+            // 
+            allProductsListBox.FormattingEnabled = true;
+            allProductsListBox.ItemHeight = 15;
+            allProductsListBox.Location = new Point(383, 195);
+            allProductsListBox.Name = "allProductsListBox";
+            allProductsListBox.Size = new Size(268, 199);
+            allProductsListBox.TabIndex = 26;
+            allProductsListBox.SelectedIndexChanged += allProductsListBox_SelectedIndexChanged;
+            // 
+            // orderProductsListBox
+            // 
+            orderProductsListBox.FormattingEnabled = true;
+            orderProductsListBox.ItemHeight = 15;
+            orderProductsListBox.Location = new Point(114, 243);
+            orderProductsListBox.Name = "orderProductsListBox";
+            orderProductsListBox.Size = new Size(210, 139);
+            orderProductsListBox.TabIndex = 27;
+            // 
             // CreateOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(orderProductsListBox);
+            Controls.Add(allProductsListBox);
             Controls.Add(totalPriceInfoLabel);
             Controls.Add(totalPriceLabel);
             Controls.Add(productSearchButton);
             Controls.Add(productSearchTextbox);
             Controls.Add(addToOrderButton);
-            Controls.Add(productsListBox);
             Controls.Add(label7);
             Controls.Add(cancelButton);
             Controls.Add(createOrderButton);
             Controls.Add(getCustomerButton);
             Controls.Add(label6);
             Controls.Add(discountNumericUpDown);
-            Controls.Add(orderListBox);
             Controls.Add(customerEmailLabel);
             Controls.Add(customerAddressLabel);
             Controls.Add(customerNameLabel);
@@ -269,6 +269,7 @@
             Controls.Add(label1);
             Name = "CreateOrder";
             Size = new Size(709, 580);
+            Load += CreateOrder_Load;
             ((System.ComponentModel.ISupportInitialize)discountNumericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -295,5 +296,7 @@
         private Button productSearchButton;
         private Label totalPriceLabel;
         private Label totalPriceInfoLabel;
+        private ListBox allProductsListBox;
+        private ListBox orderProductsListBox;
     }
 }

@@ -10,5 +10,7 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
     public interface IProductRepository
     {
         public Task<IEnumerable<Product>> GetAllProductsAsync();
+        public Task<IEnumerable<Product>> GetAllProductsInStockAsync();
+        public Task<Product> GetProductByEANAsync(long eAN);
     }
 }

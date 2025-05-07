@@ -16,6 +16,7 @@ namespace _2SemesterProjekt.Domain.Models
         public decimal PricePerUnit { get; private set; }
         public int NumberInStock { get; private set; }
         public int MinNumberInStock { get; private set; }
+        public string ProductInfo { get {return $"{Name} [{NumberInStock} på lager] - {PricePerUnit} kr. [EAN: {EAN}"; } }
 
         public Product(string name, long eAN, string type, decimal pricePerUnit, int numberInStock, int minNumberInStock)
         {
