@@ -145,7 +145,7 @@ namespace _2SemesterProjekt.Pages
             // Clears the panel of potential existing content.
             flowLayoutPanel1.Controls.Clear();
 
-            // If any, loads the inactive-pet-information on to PetCard.
+            // If any, loads the inactive-pet-information onto PetCard.
             try
             {
                 var listOfPets = await _examinationService.GetAllInactivesAsync();
