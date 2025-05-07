@@ -50,13 +50,22 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
 			var twelveMonthsAgo = DateTime.Now.AddMonths(-12);
 
+            // This is a subquery inside a query
+            // First it find all examination which is older than 12 months AND where a pet haven't had a examination within the last 12 months
+            // Then orders them by PetID and afterwards order them by examination date, so I can filter through them in BLL
+
 			var result = await _db.Examinations
 				.Where(e => e.Date < twelveMonthsAgo &&
-							!_db.Examinations
-								.Where(r => r.Date >= twelveMonthsAgo)
-								.Select(r => r.PetID)
-								.Distinct()
-								.Contains(e.PetID))
+
+							!_db.Examinations // Subquery begins
+								.Where(ex => ex.Date >= twelveMonthsAgo) // Find all examinations within 12 months
+								.Select(ex => ex.PetID) // Selects the PetID, since its the only propperty im intereset in
+								.Distinct() // I dont want duplitcated petID, so I only want Distinct of them. 
+								.Contains(e.PetID)) // Checks if the PetID from subquery is inside the original search
+								// Summery of subquery. Gets all Distinct PetID from examinations which have happend wihtin 12 months
+                                // and checks if they were in the original seach which contains all examination older than 12 months
+
+                // All in all: query returns all examinations that are older than 12 months and where the pet haven't had a examination within 12 months
 				.Include(e => e.Pet)
 					.ThenInclude(p => p.Customer)
 				.OrderBy(e => e.PetID)
@@ -64,35 +73,6 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.ToListAsync();
 
 			return result;
-
-
-			// Gets petIDs of those pets whose most recent exam is older than 12 months.   
-			List<int> inactivePetIDs = new List<int>();
-            DateTime twelveMonths = DateTime.Now.Date.AddMonths(-12);
-
-            inactivePetIDs = await _db.Examinations
-                .GroupBy(e => e.PetID) 
-                // GroupBy: adds all examinations (if there are more than one) to the PetID.
-                .Where(g => g.Max(e => e.Date) < twelveMonths)
-                // Max: the maximum date in the group.
-                // twelveMonths: is that max date older than 12 months.
-                .Select(g => g.Key) 
-                // Key: gets the value of the key that was used to create the group: ie. PetId.
-                .ToListAsync();
-
-            // Gets old exams, pet and the pet's owner.
-            List<Examination> listOfInactives = new List<Examination>();
-
-            listOfInactives = await _db.Examinations
-                .Where(e => inactivePetIDs.Contains(e.PetID) && e.Date < twelveMonths)
-                // The old exams.
-                .Include(e => e.Pet)
-                // The pet.
-                .ThenInclude(p => p.Customer)
-                // The pet's owner.
-                .ToListAsync(); 
-
-            return listOfInactives;
         }
     }
 }
