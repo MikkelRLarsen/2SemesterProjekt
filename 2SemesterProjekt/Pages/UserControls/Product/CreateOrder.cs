@@ -21,8 +21,10 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         private readonly ICustomerService _customerService;
         private decimal _totalPrice;
         private BindingList<Domain.Models.Product> _order;
+        private BindingList<Domain.Models.Product> _allProducts;
         private Domain.Models.Product _selectedProduct;
         private Domain.Models.Product _selectedProductInOrder;
+        private Customer _customer;
         public CreateOrder(FlowLayoutPanel orderPanel)
         {
             InitializeComponent();
@@ -34,8 +36,8 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
         private async void CreateOrder_Load(object sender, EventArgs e)
         {
-            List<Domain.Models.Product> productList = (List<Domain.Models.Product>)await _productService.GetAllProductsInStockAsync();
-            allProductsListBox.DataSource = productList;
+            _allProducts = new BindingList<Domain.Models.Product>((List<Domain.Models.Product>)await _productService.GetAllProductsInStockAsync());
+            allProductsListBox.DataSource = _allProducts;
             allProductsListBox.DisplayMember = "ProductInfo";
             orderProductsListBox.DataSource = _order;
             orderProductsListBox.DisplayMember = "ProductInOrderInfo";
@@ -59,6 +61,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 customerNameLabel.Visible = true;
                 customerAddressLabel.Visible = false;
                 customerEmailLabel.Visible = false;
+                _customer = null;
             }
             else
             {
@@ -68,6 +71,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 customerNameLabel.Visible = true;
                 customerAddressLabel.Visible = true;
                 customerEmailLabel.Visible = true;
+                _customer = customer;
             }
         }
 
@@ -94,7 +98,11 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             }
             else
             {
-
+                if (_customer != null)
+                {
+                    int orderID = _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice);
+                    _productLineService.CreateProductLines(orderID, _order);
+                }
             }
         }
 
@@ -120,6 +128,13 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
         private async void addToOrderButton_Click(object sender, EventArgs e)
         {
+            _selectedProduct = (Domain.Models.Product)allProductsListBox.SelectedItem;
+
+            if (_selectedProduct == null)
+            {
+                allProductsListBox.SetSelected(0, true);
+            }
+
             long eAN = _selectedProduct.EAN;
             Domain.Models.Product productToSell = await _productService.GetProductByEANAsync(eAN);
 
@@ -130,23 +145,38 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             else if (productToSell != null)
             {
                 productToSell.QuantityInOrder = 1;
+                productToSell.TotalPrice = productToSell.QuantityInOrder * productToSell.PricePerUnit;
                 _order.Add(productToSell);
                 orderProductsListBox.DataSource = _order;
                 orderProductsListBox.Refresh();
+                _allProducts.Remove(productToSell);
+                _allProducts.ResetBindings();
+                allProductsListBox.Refresh();
 
                 _totalPrice += productToSell.PricePerUnit;
                 totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
                 totalPriceInfoLabel.Refresh();
             }
+            if (removeFromOrderButton.Enabled == false || addMoreButton.Enabled == false)
+            {
+                removeFromOrderButton.Enabled = true;
+                addMoreButton.Enabled = true;
+            }
         }
 
         private void AddMoreButton_Click(object sender, EventArgs e)
         {
+            if (_selectedProductInOrder == null)
+            {
+                orderProductsListBox.SetSelected(0, true);
+            }
             _selectedProductInOrder.QuantityInOrder += 1;
             _selectedProductInOrder.TotalPrice += _selectedProductInOrder.PricePerUnit;
             _totalPrice += _selectedProductInOrder.PricePerUnit;
 
+            totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
             totalPriceInfoLabel.Refresh();
+            _order.ResetBindings();
             orderProductsListBox.DataSource = _order;
             orderProductsListBox.Refresh();
         }
@@ -155,6 +185,34 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         {
             ListBox lb = (ListBox)sender;
             _selectedProductInOrder = (Domain.Models.Product)lb.SelectedItem;
+        }
+
+        private void removeFromOrder_Click(object sender, EventArgs e)
+        {
+            _selectedProductInOrder = (Domain.Models.Product)orderProductsListBox.SelectedItem;
+
+            if (_selectedProductInOrder == null)
+            {
+                orderProductsListBox.SetSelected(0, true);
+            }
+
+            _totalPrice -= _selectedProductInOrder.TotalPrice;
+            _selectedProductInOrder.QuantityInOrder = 0;
+            _selectedProductInOrder.TotalPrice = 0;
+            _allProducts.Add(_selectedProductInOrder);
+            _order.Remove(_selectedProductInOrder);
+
+            _order.ResetBindings();
+            allProductsListBox.Refresh();
+            orderProductsListBox.Refresh();
+            totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
+            totalPriceInfoLabel.Refresh();
+
+            if (_order.Count == 0)
+            {
+                removeFromOrderButton.Enabled = false;
+                addMoreButton.Enabled = false;
+            }
         }
     }
 }

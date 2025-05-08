@@ -47,7 +47,8 @@
             totalPriceInfoLabel = new Label();
             allProductsListBox = new ListBox();
             orderProductsListBox = new ListBox();
-            AddMoreButton = new Button();
+            addMoreButton = new Button();
+            removeFromOrderButton = new Button();
             ((System.ComponentModel.ISupportInitialize)discountNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -241,22 +242,36 @@
             orderProductsListBox.TabIndex = 27;
             orderProductsListBox.SelectedIndexChanged += orderProductsListBox_SelectedIndexChanged;
             // 
-            // AddMoreButton
+            // addMoreButton
             // 
-            AddMoreButton.FlatStyle = FlatStyle.Popup;
-            AddMoreButton.Location = new Point(33, 303);
-            AddMoreButton.Name = "AddMoreButton";
-            AddMoreButton.Size = new Size(75, 79);
-            AddMoreButton.TabIndex = 28;
-            AddMoreButton.Text = "Tilføj flere af det valgte produkt";
-            AddMoreButton.UseVisualStyleBackColor = true;
-            AddMoreButton.Click += AddMoreButton_Click;
+            addMoreButton.Enabled = false;
+            addMoreButton.FlatStyle = FlatStyle.Popup;
+            addMoreButton.Location = new Point(33, 243);
+            addMoreButton.Name = "addMoreButton";
+            addMoreButton.Size = new Size(75, 79);
+            addMoreButton.TabIndex = 28;
+            addMoreButton.Text = "Tilføj flere af det valgte produkt";
+            addMoreButton.UseVisualStyleBackColor = true;
+            addMoreButton.Click += AddMoreButton_Click;
+            // 
+            // removeFromOrderButton
+            // 
+            removeFromOrderButton.Enabled = false;
+            removeFromOrderButton.FlatStyle = FlatStyle.Popup;
+            removeFromOrderButton.Location = new Point(33, 328);
+            removeFromOrderButton.Name = "removeFromOrderButton";
+            removeFromOrderButton.Size = new Size(75, 54);
+            removeFromOrderButton.TabIndex = 29;
+            removeFromOrderButton.Text = "Fjern det valgte produkt";
+            removeFromOrderButton.UseVisualStyleBackColor = true;
+            removeFromOrderButton.Click += removeFromOrder_Click;
             // 
             // CreateOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(AddMoreButton);
+            Controls.Add(removeFromOrderButton);
+            Controls.Add(addMoreButton);
             Controls.Add(orderProductsListBox);
             Controls.Add(allProductsListBox);
             Controls.Add(totalPriceInfoLabel);
@@ -307,6 +322,7 @@
         private Label totalPriceInfoLabel;
         private ListBox allProductsListBox;
         private ListBox orderProductsListBox;
-        private Button AddMoreButton;
+        private Button addMoreButton;
+        private Button removeFromOrderButton;
     }
 }

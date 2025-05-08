@@ -19,11 +19,11 @@ namespace _2SemesterProjekt.Domain.Models
         public int NumberInStock { get; private set; }
         public int MinNumberInStock { get; private set; }
         [NotMapped]
-        public int? QuantityInOrder { get; set; }
+        public int QuantityInOrder { get; set; }
         [NotMapped]
         public decimal TotalPrice { get; set; }
         public string ProductInfo { get {return $"{Name} [{NumberInStock} på lager] - {PricePerUnit} kr. [EAN: {EAN}"; } }
-        public string ProductInOrderInfo { get { return $"{QuantityInOrder}x {Name} - {PricePerUnit} kr."; } }
+        public string ProductInOrderInfo { get { return $"{QuantityInOrder}x {Name} - {TotalPrice} kr. [max. {NumberInStock}]"; } }
 
         public Product(string name, long eAN, string type, decimal pricePerUnit, int numberInStock, int minNumberInStock)
         {
