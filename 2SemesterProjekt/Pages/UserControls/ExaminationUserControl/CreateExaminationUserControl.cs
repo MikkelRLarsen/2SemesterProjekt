@@ -12,6 +12,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		ICustomerService _customerService;
 		IEmployeeService _employeeService;
 		IExaminationService _examinationService;
+		ICageService _cageService;
 		FlowLayoutPanel _konsultationPanel;
 		private IEnumerable<Employee> _employees;
 		private Decimal? _basePriceForExamination;
@@ -41,6 +42,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			}
 
 			UpdateDiscountStatus();
+			UpdateCageBookingCheckbox();
 		}
 
 		/// <summary>
@@ -54,8 +56,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			ExaminationTypeDropdown.Enabled = true;
 
 			UpdateEmployeeExaminationDropDown(PetExaminationDropdown.SelectedItem as Pet);
+			UpdateCageBookingCheckbox();
 		}
-
+		
 		/// <summary>
 		/// Eventhandler for when ExaminationDropdown Index is changed
 		/// </summary>
@@ -68,6 +71,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			DateTimePickerExamination.Enabled = true;
 			UpdateDiscountStatus();
+			UpdateCageBookingCheckbox();
 		}
 
 		/// <summary>
@@ -119,6 +123,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			try
 			{
+				if (checkBoxCageBooking.Checked)
+				{
+					/*await _cageService.CreateCageBookingAsync(
+						new CageBooking(DateTimePickerExamination.Value, null
+							))*/
+				}
+				
 				// Creates the new Examination as a local variable to run validate Information.
 				Examination newExamination = new Examination((PetExaminationDropdown.SelectedItem as Pet).PetID
 					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
@@ -128,6 +139,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 				//Creates ExaminationAsync, so the user can continoue to use the program
 				await _examinationService.CreateExaminationAsync(newExamination);
+
+
 
 				//Shows a message that the creation has been completed
 				ErrorMessageExamination.Visible = true;
@@ -150,9 +163,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			ServiceProvider allServices = ServiceProviderSingleton.GetServiceProvider();
 
-			_customerService = allServices.GetService<ICustomerService>();
-			_employeeService = allServices.GetService<IEmployeeService>();
-			_examinationService = allServices.GetService<IExaminationService>();
+			_customerService = allServices.GetService<ICustomerService>()!;
+			_employeeService = allServices.GetService<IEmployeeService>()!;
+			_examinationService = allServices.GetService<IExaminationService>()!;
+			_cageService = allServices.GetService<ICageService>()!;
 
 
 			SetAllDisplayMembers();
@@ -239,5 +253,22 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				PriceExaminationDisplay.Text = (_basePriceForExamination * ((100 - DiscountNumericUpDown.Value) / 100)).ToString();
 			}
 		}
+
+		private void UpdateCageBookingCheckbox()
+		{
+			if (ExaminationTypeDropdown.SelectedItem != null)
+			{
+				if ((ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTag.DescriptionTag == "Operation" &&
+					(PetExaminationDropdown.SelectedItem as Pet).Species == "Kat" ||
+					(PetExaminationDropdown.SelectedItem as Pet).Species == "Hund")
+				{
+					checkBoxCageBooking.Visible = true;
+				}
+				else
+				{
+					checkBoxCageBooking.Visible = false;
+				}
+			}
+        }
 	}
 }

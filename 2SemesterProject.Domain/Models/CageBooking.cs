@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using _2SemesterProjekt.Domain.Models;
 
-namespace _2SemesterProject.Domain.Models
+namespace _2SemesterProjekt.Domain.Models
 {
     public class CageBooking
     {
@@ -16,9 +16,8 @@ namespace _2SemesterProject.Domain.Models
         public Examination Examination { get; }
         public Cage Cage { get; }
 
-        public CageBooking(int cageBookingID, DateTime startDate, DateTime endDate, decimal totalPrice)
+        public CageBooking(DateTime startDate, DateTime endDate, decimal totalPrice)
         {
-            CageBookingID = cageBookingID;
             StartDate = startDate;
             EndDate = endDate;
             TotalPrice = totalPrice;
