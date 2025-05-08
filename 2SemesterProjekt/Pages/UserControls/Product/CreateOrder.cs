@@ -100,8 +100,8 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             {
                 if (_customer != null)
                 {
-                    int orderID = _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice);
-                    _productLineService.CreateProductLines(orderID, _order);
+                    int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice);
+                    _productLineService.CreateProductLinesAsync(orderID, _order);
                 }
             }
         }

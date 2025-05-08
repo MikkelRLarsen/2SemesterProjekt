@@ -13,6 +13,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		public DbSet<ExaminationType> ExaminationTypes { get; set;}
 		public DbSet<ExaminationTag> ExaminationTags { get; set;}
 		public DbSet<Product> Products { get; set;}
+		public DbSet<Order> Orders { get; set;}
+		public DbSet<ProductLine> ProductLines { get; set;}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -39,12 +41,19 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<ExaminationType>().ToTable("ExaminationType");
 			modelBuilder.Entity<ExaminationTag>().ToTable("ExaminationTag");
 			modelBuilder.Entity<Product>().ToTable("Product");
+			modelBuilder.Entity<Order>().ToTable("Order");
+			modelBuilder.Entity<ProductLine>().ToTable("ProductLine");
 
 			//Relations
 			modelBuilder.Entity<Customer>()
 				.HasMany(c => c.Pets)
 				.WithOne(p => p.Customer)
 				.HasForeignKey(p => p.CustomerID);
+
+			modelBuilder.Entity<Customer>()
+				.HasMany(c => c.Orders)
+				.WithOne(o => o.Customer)
+				.HasForeignKey(o => o.CustomerID);
 
 			modelBuilder.Entity<Employee>()
 				.HasMany(em => em.Pets)
@@ -71,6 +80,14 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.WithOne(eType => eType.ExaminationTag)
 				.HasForeignKey(eType => eType.ExaminationTagID);
 
+			modelBuilder.Entity<Order>()
+				.HasMany(o => o.ProductLines)
+				.WithOne(prLine => prLine.Order)
+				.HasForeignKey(prLine => prLine.OrderID);
+
+
+
+
 			// Primary Keys
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
 			modelBuilder.Entity<Pet>().HasKey(p => p.PetID);
@@ -79,6 +96,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<ExaminationType>().HasKey(eType => eType.ExaminationTypeID);
 			modelBuilder.Entity<ExaminationTag>().HasKey(eTag => eTag.ExaminationTagID);
 			modelBuilder.Entity<Product>().HasKey(pr => pr.ProductID);
+			modelBuilder.Entity<Order>().HasKey(o => o.OrderID);
+			modelBuilder.Entity<ProductLine>().HasKey(prLine => prLine.ProductLineID);
 		}
 	}
 }

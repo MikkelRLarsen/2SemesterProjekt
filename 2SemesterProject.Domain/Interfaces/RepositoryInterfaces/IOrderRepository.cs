@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 {
-    internal interface IOrderRepository
+    public interface IOrderRepository
     {
+        public Task CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice);
+        public Task CreateOrderAsync(decimal totalPrice);
     }
 }

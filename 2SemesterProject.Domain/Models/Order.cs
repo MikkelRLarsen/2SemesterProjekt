@@ -10,22 +10,21 @@ namespace _2SemesterProjekt.Domain.Models
     {
         public int OrderID { get; set; }
         public int? CustomerID { get; set; }
-        public List<ProductLine> ProductLines { get; set; }
+        
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }
+        public List<ProductLine> ProductLines { get; }
 
-        public Order(int orderID, int? customerID, List<ProductLine> productLines, DateTime orderDate, decimal totalPrice)
+        public Order(int orderID, int? customerID, DateTime orderDate, decimal totalPrice)
         {
             OrderID = orderID;
             CustomerID = customerID;
-            ProductLines = productLines;
             OrderDate = orderDate;
             TotalPrice = totalPrice;
         }
-        public Order(int orderID, List<ProductLine> productLines, DateTime orderDate, decimal totalPrice)
+        public Order(int orderID, DateTime orderDate, decimal totalPrice)
         {
             OrderID = orderID;
-            ProductLines = productLines;
             OrderDate = orderDate;
             TotalPrice = totalPrice;
         }

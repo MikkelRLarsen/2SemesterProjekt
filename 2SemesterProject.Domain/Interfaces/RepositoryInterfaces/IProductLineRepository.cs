@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2SemesterProjekt.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 {
     public interface IProductLineRepository
     {
+        public Task CreateProductLinesAsync(int orderID, List<Product> products);
     }
 }
