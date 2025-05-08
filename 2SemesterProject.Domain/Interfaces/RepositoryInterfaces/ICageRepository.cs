@@ -9,7 +9,9 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 {
     public interface ICageRepository
     {
-        public Task CreateBookingAsync(CageBooking booking);
+        public Task<int> CreateBookingAsync(CageBooking booking);
         public Task<IEnumerable<CageBooking>> GetAllCageBookingsOnDate(DateTime date);
+        public Task<decimal> GetBasePriceForPetCageAsync(string petSpecies);
+        public Task<int> GetPetCageIdAsync(string petSpecies);
     }
 }

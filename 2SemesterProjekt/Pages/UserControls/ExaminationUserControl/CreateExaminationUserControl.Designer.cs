@@ -47,7 +47,10 @@
             DiscountLabel = new Label();
             DiscountNumericUpDown = new NumericUpDown();
             checkBoxCageBooking = new CheckBox();
+            labelCageBookingDays = new Label();
+            NumberOfDaysUpDown = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)DiscountNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)NumberOfDaysUpDown).BeginInit();
             SuspendLayout();
             // 
             // label5
@@ -126,7 +129,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(219, 284);
+            label4.Location = new Point(219, 288);
             label4.Name = "label4";
             label4.Size = new Size(39, 19);
             label4.TabIndex = 11;
@@ -136,7 +139,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(219, 330);
+            label6.Location = new Point(219, 334);
             label6.Name = "label6";
             label6.Size = new Size(35, 19);
             label6.TabIndex = 13;
@@ -147,7 +150,7 @@
             EmployeeExaminationDropdown.DropDownStyle = ComboBoxStyle.DropDownList;
             EmployeeExaminationDropdown.Enabled = false;
             EmployeeExaminationDropdown.FormattingEnabled = true;
-            EmployeeExaminationDropdown.Location = new Point(260, 379);
+            EmployeeExaminationDropdown.Location = new Point(260, 383);
             EmployeeExaminationDropdown.Name = "EmployeeExaminationDropdown";
             EmployeeExaminationDropdown.Size = new Size(207, 23);
             EmployeeExaminationDropdown.TabIndex = 16;
@@ -157,7 +160,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(152, 379);
+            label7.Location = new Point(152, 383);
             label7.Name = "label7";
             label7.Size = new Size(102, 19);
             label7.TabIndex = 15;
@@ -168,7 +171,7 @@
             CreateExaminationButton.BackColor = Color.DarkGray;
             CreateExaminationButton.Enabled = false;
             CreateExaminationButton.FlatStyle = FlatStyle.Popup;
-            CreateExaminationButton.Location = new Point(410, 477);
+            CreateExaminationButton.Location = new Point(410, 481);
             CreateExaminationButton.Name = "CreateExaminationButton";
             CreateExaminationButton.Size = new Size(170, 58);
             CreateExaminationButton.TabIndex = 18;
@@ -180,7 +183,7 @@
             // 
             CancelExaminationButton.BackColor = Color.IndianRed;
             CancelExaminationButton.FlatStyle = FlatStyle.Popup;
-            CancelExaminationButton.Location = new Point(107, 477);
+            CancelExaminationButton.Location = new Point(107, 481);
             CancelExaminationButton.Name = "CancelExaminationButton";
             CancelExaminationButton.Size = new Size(170, 58);
             CancelExaminationButton.TabIndex = 17;
@@ -191,7 +194,7 @@
             // DateTimePickerExamination
             // 
             DateTimePickerExamination.Enabled = false;
-            DateTimePickerExamination.Location = new Point(260, 330);
+            DateTimePickerExamination.Location = new Point(260, 334);
             DateTimePickerExamination.Name = "DateTimePickerExamination";
             DateTimePickerExamination.Size = new Size(207, 23);
             DateTimePickerExamination.TabIndex = 19;
@@ -200,7 +203,7 @@
             // ErrorMessageExamination
             // 
             ErrorMessageExamination.AutoSize = true;
-            ErrorMessageExamination.Location = new Point(308, 451);
+            ErrorMessageExamination.Location = new Point(308, 455);
             ErrorMessageExamination.Name = "ErrorMessageExamination";
             ErrorMessageExamination.Size = new Size(78, 15);
             ErrorMessageExamination.TabIndex = 20;
@@ -213,7 +216,7 @@
             PriceExaminationDisplay.BorderStyle = BorderStyle.FixedSingle;
             PriceExaminationDisplay.Enabled = false;
             PriceExaminationDisplay.ForeColor = Color.Black;
-            PriceExaminationDisplay.Location = new Point(260, 284);
+            PriceExaminationDisplay.Location = new Point(260, 288);
             PriceExaminationDisplay.Name = "PriceExaminationDisplay";
             PriceExaminationDisplay.Size = new Size(207, 23);
             PriceExaminationDisplay.TabIndex = 21;
@@ -223,7 +226,7 @@
             // 
             DiscountLabel.AutoSize = true;
             DiscountLabel.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            DiscountLabel.Location = new Point(175, 418);
+            DiscountLabel.Location = new Point(175, 422);
             DiscountLabel.Name = "DiscountLabel";
             DiscountLabel.Size = new Size(75, 19);
             DiscountLabel.TabIndex = 22;
@@ -233,8 +236,8 @@
             // DiscountNumericUpDown
             // 
             DiscountNumericUpDown.Increment = new decimal(new int[] { 5, 0, 0, 0 });
-            DiscountNumericUpDown.Location = new Point(260, 417);
-            DiscountNumericUpDown.Margin = new Padding(2, 2, 2, 2);
+            DiscountNumericUpDown.Location = new Point(260, 421);
+            DiscountNumericUpDown.Margin = new Padding(2);
             DiscountNumericUpDown.Name = "DiscountNumericUpDown";
             DiscountNumericUpDown.Size = new Size(206, 23);
             DiscountNumericUpDown.TabIndex = 24;
@@ -244,7 +247,7 @@
             // checkBoxCageBooking
             // 
             checkBoxCageBooking.AutoSize = true;
-            checkBoxCageBooking.Location = new Point(260, 259);
+            checkBoxCageBooking.Location = new Point(260, 260);
             checkBoxCageBooking.Name = "checkBoxCageBooking";
             checkBoxCageBooking.RightToLeft = RightToLeft.No;
             checkBoxCageBooking.Size = new Size(121, 19);
@@ -253,10 +256,31 @@
             checkBoxCageBooking.UseVisualStyleBackColor = true;
             checkBoxCageBooking.Visible = false;
             // 
+            // labelCageBookingDays
+            // 
+            labelCageBookingDays.AutoSize = true;
+            labelCageBookingDays.Location = new Point(396, 261);
+            labelCageBookingDays.Name = "labelCageBookingDays";
+            labelCageBookingDays.Size = new Size(67, 15);
+            labelCageBookingDays.TabIndex = 27;
+            labelCageBookingDays.Text = "Antal dage:";
+            labelCageBookingDays.Visible = false;
+            // 
+            // NumberOfDaysUpDown
+            // 
+            NumberOfDaysUpDown.Location = new Point(469, 259);
+            NumberOfDaysUpDown.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
+            NumberOfDaysUpDown.Name = "NumberOfDaysUpDown";
+            NumberOfDaysUpDown.Size = new Size(35, 23);
+            NumberOfDaysUpDown.TabIndex = 28;
+            NumberOfDaysUpDown.Visible = false;
+            // 
             // CreateExaminationUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(NumberOfDaysUpDown);
+            Controls.Add(labelCageBookingDays);
             Controls.Add(checkBoxCageBooking);
             Controls.Add(DiscountNumericUpDown);
             Controls.Add(DiscountLabel);
@@ -281,6 +305,7 @@
             Size = new Size(709, 580);
             Load += CreateExaminationUserControl_Load;
             ((System.ComponentModel.ISupportInitialize)DiscountNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)NumberOfDaysUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -307,5 +332,7 @@
 		private Label DiscountLabel;
 		private NumericUpDown DiscountNumericUpDown;
         private CheckBox checkBoxCageBooking;
+        private Label labelCageBookingDays;
+        private NumericUpDown NumberOfDaysUpDown;
     }
 }

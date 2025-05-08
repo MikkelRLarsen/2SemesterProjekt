@@ -10,17 +10,19 @@ namespace _2SemesterProjekt.Domain.Models
     public class CageBooking
     {
         public int CageBookingID { get; init; }
+        public int CageID { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public decimal TotalPrice { get; private set; }
         public Examination Examination { get; }
         public Cage Cage { get; }
 
-        public CageBooking(DateTime startDate, DateTime endDate, decimal totalPrice)
+        public CageBooking(DateTime startDate, DateTime endDate, decimal totalPrice, int cageID)
         {
             StartDate = startDate;
             EndDate = endDate;
             TotalPrice = totalPrice;
+            CageID = cageID;
         }
     }
 }

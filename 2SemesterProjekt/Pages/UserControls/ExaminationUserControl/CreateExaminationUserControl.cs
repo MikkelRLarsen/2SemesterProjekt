@@ -123,29 +123,70 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			try
 			{
-				if (checkBoxCageBooking.Checked)
+                // Creates the new Examination as a local variable to run validate Information.
+                Examination newExamination;
+
+				Pet chosenPet = (PetExaminationDropdown.SelectedItem as Pet);
+				Employee chosenEmployee = (EmployeeExaminationDropdown.SelectedItem as Employee);
+				ExaminationType chosenExaminationType = (ExaminationTypeDropdown.SelectedItem as ExaminationType);
+                DateTime chosenExaminationDate = DateTimePickerExamination.Value;
+
+
+                if (checkBoxCageBooking.Checked) // Create Cage Booking
 				{
-					/*await _cageService.CreateCageBookingAsync(
-						new CageBooking(DateTimePickerExamination.Value, null
-							))*/
-				}
-				
-				// Creates the new Examination as a local variable to run validate Information.
-				Examination newExamination = new Examination((PetExaminationDropdown.SelectedItem as Pet).PetID
-					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
-					, DateTimePickerExamination.Value
-					, (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTypeID
-					, Convert.ToDecimal(PriceExaminationDisplay.Text));
+					DateTime estimatedEndOfCageBooking = DateTimePickerExamination.Value.AddDays(Convert.ToDouble(NumberOfDaysUpDown.Value));
+					
+					await _cageService.IsFullyBooked(
+						chosenPet.Species, // Pet species
+						chosenExaminationDate, // Startdate of cagebooking
+						estimatedEndOfCageBooking // Estimated enddate of booking
+                    );
 
-				//Creates ExaminationAsync, so the user can continoue to use the program
-				await _examinationService.CreateExaminationAsync(newExamination);
+					decimal totalPrice = await _cageService.GetTotalPriceForCage(
+                        chosenPet.Species,
+                        chosenExaminationDate,
+                        estimatedEndOfCageBooking
+                    );
 
+					int cageID = await _cageService.GetPetCageIdAsync(chosenPet.Species);
 
+                    CageBooking booking = new CageBooking(
+						chosenExaminationDate,
+						estimatedEndOfCageBooking,
+						totalPrice,
+						cageID
+					);
 
-				//Shows a message that the creation has been completed
-				ErrorMessageExamination.Visible = true;
-				ErrorMessageExamination.Text = "Behandling er oprettet";
-			}
+					int cageBookingID = await _cageService.CreateCageBookingAsync(booking);
+
+                    newExamination = new Examination(
+                        chosenPet.PetID,
+                        chosenEmployee.EmployeeID,
+                        chosenExaminationDate,
+                        chosenExaminationType.ExaminationTypeID,
+                        Convert.ToDecimal(PriceExaminationDisplay.Text),
+                        booking.CageBookingID
+                    );
+                }
+				else // Don't create cage booking
+				{
+                    newExamination = new Examination(
+						chosenPet.PetID,
+						chosenEmployee.EmployeeID, 
+						chosenExaminationDate, 
+						chosenExaminationType.ExaminationTypeID, 
+						Convert.ToDecimal(PriceExaminationDisplay.Text),
+						null // No cage booking
+					);
+                }
+
+                //Creates ExaminationAsync, so the user can continoue to use the program
+                await _examinationService.CreateExaminationAsync(newExamination);
+
+                //Shows a message that the creation has been completed
+                ErrorMessageExamination.Visible = true;
+                ErrorMessageExamination.Text = "Behandling er oprettet";
+            }
 			catch (Exception ex)
 			{
 				//Shows error message if an error happend
@@ -263,11 +304,15 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 					(PetExaminationDropdown.SelectedItem as Pet).Species == "Hund")
 				{
 					checkBoxCageBooking.Visible = true;
+					labelCageBookingDays.Visible = true;
+					NumberOfDaysUpDown.Visible = true;
 				}
 				else
 				{
 					checkBoxCageBooking.Visible = false;
-				}
+                    labelCageBookingDays.Visible = false;
+                    NumberOfDaysUpDown.Visible = false;
+                }
 			}
         }
 	}

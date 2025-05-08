@@ -9,20 +9,21 @@ namespace _2SemesterProjekt.Domain.Models
 		public int EmployeeID { get; private set; }
 		public DateTime Date { get; private set; }
 		public int ExaminationTypeID { get; private set; }
-		public int CageBookingID { get; private set; }
+		public int? CageBookingID { get; private set; }
 		public decimal Price { get; private set; }
 		public Pet Pet { get; }
 		public Employee Employee { get; }
 		public ExaminationType ExaminationType { get; }
 		public CageBooking CageBooking { get; }
 
-		public Examination(int petID, int employeeID, DateTime date, int examinationTypeID, decimal price)
+		public Examination(int petID, int employeeID, DateTime date, int examinationTypeID, decimal price, int? cageBookingID)
 		{
 			PetID = petID;
 			EmployeeID = employeeID;
 			Date = date;
 			ExaminationTypeID = examinationTypeID;
 			Price = price;
+			CageBookingID = cageBookingID;
 
 			InformationValid();
 		}

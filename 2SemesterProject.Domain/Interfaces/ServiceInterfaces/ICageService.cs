@@ -9,6 +9,9 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 {
     public interface ICageService
     {
-        public Task CreateCageBookingAsync(CageBooking cageBooking);
+        public Task<decimal> GetTotalPriceForCage(string petSpecies, DateTime startDate, DateTime estimatedEndDate);
+        public Task IsFullyBooked(string petSpecies, DateTime startDate, DateTime estimatedEndDate);
+        public Task<int> CreateCageBookingAsync(CageBooking cageBooking);
+        public Task<int> GetPetCageIdAsync(string petSpecies);
     }
 }

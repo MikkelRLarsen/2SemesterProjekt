@@ -18,24 +18,39 @@ namespace _2SemesterProjekt.Services
             _cageRepository = cageRepository;
         }
 
-        public async Task CreateCageBookingAsync(CageBooking cageBooking)
+        public async Task<decimal> GetTotalPriceForCage(string petSpecies, DateTime startDate, DateTime estimatedEndDate)
         {
-            await IsFullyBooked(cageBooking);
+            decimal basePrice = await _cageRepository.GetBasePriceForPetCageAsync(petSpecies);
 
+            decimal totalPrice = (startDate - estimatedEndDate).Days * basePrice; // Calculates estimated total price.
+
+            return totalPrice;
         }
 
-        private async Task IsFullyBooked(CageBooking booking)
+        public async Task IsFullyBooked(string petSpecies, DateTime startDate, DateTime estimatedEndDate)
         {
-            IEnumerable<CageBooking> listOfCageBookingsOnDate = await _cageRepository.GetAllCageBookingsOnDate(booking.StartDate);
+            IEnumerable<CageBooking> listOfCageBookingsOnDate = await _cageRepository.GetAllCageBookingsOnDate(startDate);
 
             int numberOfCatBookingsOnDate = listOfCageBookingsOnDate.Count(cBooking => cBooking.Cage.Species == "Kat");
             int numberOfDogBookingsOnDate = listOfCageBookingsOnDate.Count(cBooking => cBooking.Cage.Species == "Hund");
 
-            if (numberOfCatBookingsOnDate >= 4 && booking.Cage.Species == "Kat" ||
-                numberOfDogBookingsOnDate >= 4 && booking.Cage.Species == "Hund")
+            if (numberOfCatBookingsOnDate >= 4 && petSpecies == "Kat" ||
+                numberOfDogBookingsOnDate >= 4 && petSpecies == "Hund")
             {
-                throw new ArgumentException($"Der er ikke flere ledige bure a typen {booking.Cage.Species} på denne dato");
+                throw new ArgumentException($"Der er ikke flere ledige bure a typen {petSpecies} på denne dato");
             }
+        }
+
+        public async Task<int> CreateCageBookingAsync(CageBooking cageBooking)
+        {
+            return await _cageRepository.CreateBookingAsync(cageBooking);
+        }
+
+        public async Task<int> GetPetCageIdAsync(string petSpecies)
+        {
+            var cageID = await _cageRepository.GetPetCageIdAsync(petSpecies);
+
+            return cageID;
         }
     }
 }

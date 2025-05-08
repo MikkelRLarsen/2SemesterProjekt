@@ -18,9 +18,22 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             _db = db;
         }
 
-        public Task CreateBookingAsync(CageBooking booking)
+        public async Task<int> CreateBookingAsync(CageBooking booking)
         {
-            throw new NotImplementedException();
+            await _db.CageBookings
+                .AddAsync(booking);
+
+            await _db.SaveChangesAsync();
+
+            return booking.CageBookingID;
+        }
+
+        public async Task<decimal> GetBasePriceForPetCageAsync(string petSpecies)
+        {
+            var cage = _db.Cages
+                .First(ca => ca.Species == petSpecies);
+
+            return cage.Price;
         }
 
         public async Task<IEnumerable<CageBooking>> GetAllCageBookingsOnDate(DateTime date)
@@ -36,6 +49,14 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             {
                 return Enumerable.Empty<CageBooking>(); // Returns empty list
             }
+        }
+
+        public async Task<int> GetPetCageIdAsync(string petSpecies)
+        {
+            var cage = _db.Cages
+                .First(ca => ca.Species == petSpecies);
+
+            return cage.CageID;
         }
     }
 }
