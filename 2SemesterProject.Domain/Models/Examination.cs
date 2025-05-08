@@ -69,5 +69,10 @@ namespace _2SemesterProjekt.Domain.Models
 				throw new ArgumentException("Price had to many digits");
 			}
 		}
+
+		public void SetCageBookingID(int cageBookingID)
+		{
+			CageBookingID = cageBookingID;
+		}
 	}
 }

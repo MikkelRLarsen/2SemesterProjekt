@@ -18,14 +18,14 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             _db = db;
         }
 
-        public async Task<int> CreateBookingAsync(CageBooking booking)
+        public async Task<CageBooking> CreateBookingAsync(CageBooking booking)
         {
-            await _db.CageBookings
-                .AddAsync(booking);
+            _db.CageBookings
+                .Add(booking);
 
-            await _db.SaveChangesAsync();
+            _db.Entry(booking).GetDatabaseValues();
 
-            return booking.CageBookingID;
+            return booking;
         }
 
         public async Task<decimal> GetBasePriceForPetCageAsync(string petSpecies)
@@ -43,6 +43,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 return await _db.CageBookings
                     // Filtrates and returns all bookings, where the desired dato falls in between.
                     .Where(cBooking => cBooking.StartDate <= date && cBooking.EndDate >= date)
+                    .Include(cBooking => cBooking.Cage)
                     .ToListAsync();
             }
             catch (Exception)
@@ -51,12 +52,12 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             }
         }
 
-        public async Task<int> GetPetCageIdAsync(string petSpecies)
+        public async Task<Cage> GetPetCageAsync(string petSpecies)
         {
             var cage = _db.Cages
                 .First(ca => ca.Species == petSpecies);
 
-            return cage.CageID;
+            return cage;
         }
     }
 }

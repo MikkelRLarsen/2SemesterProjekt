@@ -148,16 +148,17 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                         estimatedEndOfCageBooking
                     );
 
-					int cageID = await _cageService.GetPetCageIdAsync(chosenPet.Species);
+					Cage cage = await _cageService.GetPetCageAsync(chosenPet.Species);
 
                     CageBooking booking = new CageBooking(
 						chosenExaminationDate,
 						estimatedEndOfCageBooking,
 						totalPrice,
-						cageID
+						cage.CageID
 					);
 
-					int cageBookingID = await _cageService.CreateCageBookingAsync(booking);
+					// SKAL GEMMES FØR!
+					CageBooking cageBookingID = await _cageService.CreateCageBookingAsync(booking);
 
                     newExamination = new Examination(
                         chosenPet.PetID,

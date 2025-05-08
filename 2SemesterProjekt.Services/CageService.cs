@@ -41,16 +41,16 @@ namespace _2SemesterProjekt.Services
             }
         }
 
-        public async Task<int> CreateCageBookingAsync(CageBooking cageBooking)
+        public async Task<CageBooking> CreateCageBookingAsync(CageBooking cageBooking)
         {
             return await _cageRepository.CreateBookingAsync(cageBooking);
         }
 
-        public async Task<int> GetPetCageIdAsync(string petSpecies)
+        public async Task<Cage> GetPetCageAsync(string petSpecies)
         {
-            var cageID = await _cageRepository.GetPetCageIdAsync(petSpecies);
+            var cage = await _cageRepository.GetPetCageAsync(petSpecies);
 
-            return cageID;
+            return cage;
         }
     }
 }
