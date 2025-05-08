@@ -29,14 +29,18 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
             return order.OrderID;
         }
-        public Task CreateOrderAsync(decimal totalPrice)
+        public async Task<int> CreateOrderAsync(decimal totalPrice)
         {
-            throw new NotImplementedException();
-        }
+            Order order = new Order(
+                DateTime.Now,
+                totalPrice);
 
-        public Task<int> GetOrderID()
-        {
-            throw new NotImplementedException();
+            _db.Orders.Add(order);
+
+            _db.Entry(order).GetDatabaseValues();
+            _db.SaveChanges();
+
+            return order.OrderID;
         }
     }
 }

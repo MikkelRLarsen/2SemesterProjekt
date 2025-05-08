@@ -90,14 +90,22 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 {
                     return;
                 }
+                else
+                {
+                    
+                }
             }
-            else if (customerPhoneNumberTextbox == null || customerNameLabel.Text == "Kunne ikke finde kunden.")
+            else if (_customer == null)
             {
-                DialogResult messageBoxResult = MessageBox.Show("Du har ikke indtastet et telefonnummer, som findes i systemet. Vil du stadigvæk fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult messageBoxResult = MessageBox.Show("Du har ikke tilføjet en kunde, som findes i systemet. Vil du stadigvæk fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (messageBoxResult == DialogResult.No)
                 {
                     return;
+                }
+                else
+                {
+
                 }
             }
             else
@@ -110,7 +118,9 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 }
                 else
                 {
-
+                    int orderID = await _orderService.CreateOrderAsync(_totalPrice);
+                    await _productLineService.CreateProductLinesAsync(orderID, _order.ToList());
+                    DialogResult messageBoxResult = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }

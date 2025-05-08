@@ -16,9 +16,9 @@ namespace _2SemesterProjekt.Services
         {
             _orderRepository = orderRepository;
         }
-        public async Task CreateOrderAsync(decimal totalPrice)
+        public async Task<int> CreateOrderAsync(decimal totalPrice)
         {
-            await _orderRepository.CreateOrderAsync(totalPrice);
+            return await _orderRepository.CreateOrderAsync(totalPrice);
         }
 
         public async Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice)
