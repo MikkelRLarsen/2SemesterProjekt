@@ -14,10 +14,10 @@ namespace _2SemesterProjekt.Domain.Models
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public Order Order { get; }
+        public Product Product { get; }
 
-        public ProductLine(int productLineID, int productID, int orderID, int quantity, decimal price)
+        public ProductLine(int productID, int orderID, int quantity, decimal price)
         {
-            ProductLineID = productLineID;
             ProductID = productID;
             OrderID = orderID;
             Quantity = quantity;

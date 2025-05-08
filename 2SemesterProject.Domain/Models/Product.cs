@@ -22,6 +22,7 @@ namespace _2SemesterProjekt.Domain.Models
         public int QuantityInOrder { get; set; }
         [NotMapped]
         public decimal TotalPrice { get; set; }
+        public List<ProductLine> ProductLines { get; }
         public string ProductInfo { get {return $"{Name} [{NumberInStock} på lager] - {PricePerUnit} kr. [EAN: {EAN}"; } }
         public string ProductInOrderInfo { get { return $"{QuantityInOrder}x {Name} - {TotalPrice} kr. [max. {NumberInStock}]"; } }
 

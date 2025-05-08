@@ -85,6 +85,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.WithOne(prLine => prLine.Order)
 				.HasForeignKey(prLine => prLine.OrderID);
 
+			modelBuilder.Entity<Product>()
+				.HasMany(p => p.ProductLines)
+				.WithOne(prLine => prLine.Product)
+				.HasForeignKey(prLine => prLine.ProductID);
+
 
 
 

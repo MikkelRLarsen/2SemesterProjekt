@@ -14,17 +14,16 @@ namespace _2SemesterProjekt.Domain.Models
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }
         public List<ProductLine> ProductLines { get; }
+        public Customer Customer { get; }
 
-        public Order(int orderID, int? customerID, DateTime orderDate, decimal totalPrice)
+        public Order(int? customerID, DateTime orderDate, decimal totalPrice)
         {
-            OrderID = orderID;
             CustomerID = customerID;
             OrderDate = orderDate;
             TotalPrice = totalPrice;
         }
-        public Order(int orderID, DateTime orderDate, decimal totalPrice)
+        public Order(DateTime orderDate, decimal totalPrice)
         {
-            OrderID = orderID;
             OrderDate = orderDate;
             TotalPrice = totalPrice;
         }

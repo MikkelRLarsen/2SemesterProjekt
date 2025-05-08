@@ -19,6 +19,8 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         FlowLayoutPanel _orderPanel;
         private readonly IProductService _productService;
         private readonly ICustomerService _customerService;
+        private readonly IOrderService _orderService;
+        private readonly IProductLineService _productLineService;
         private decimal _totalPrice;
         private BindingList<Domain.Models.Product> _order;
         private BindingList<Domain.Models.Product> _allProducts;
@@ -31,6 +33,8 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             _orderPanel = orderPanel;
             _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
+            _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>();
+            _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>();
             _order = new BindingList<Domain.Models.Product>();
         }
 
@@ -76,7 +80,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         }
 
 
-        private void createOrderButton_Click(object sender, EventArgs e)
+        private async void createOrderButton_Click(object sender, EventArgs e)
         {
             if (discountNumericUpDown.Value >= 60)
             {
@@ -87,7 +91,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                     return;
                 }
             }
-            else if (customerPhoneNumberTextbox != null || customerNameLabel.Text == "Kunne ikke finde kunden.")
+            else if (customerPhoneNumberTextbox == null || customerNameLabel.Text == "Kunne ikke finde kunden.")
             {
                 DialogResult messageBoxResult = MessageBox.Show("Du har ikke indtastet et telefonnummer, som findes i systemet. Vil du stadigvæk fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -101,7 +105,12 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 if (_customer != null)
                 {
                     int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice);
-                    _productLineService.CreateProductLinesAsync(orderID, _order);
+                    await _productLineService.CreateProductLinesAsync(orderID, _order.ToList());
+                    DialogResult messageBoxResult = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+
                 }
             }
         }

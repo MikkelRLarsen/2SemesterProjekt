@@ -9,7 +9,7 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 {
     public interface IOrderService
     {
-        public Task CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice);
+        public Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice);
         public Task CreateOrderAsync(decimal totalPrice);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
+using _2SemesterProjekt.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,26 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             _db = db;
         }
+        public async Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice)
+        {
+            Order order = new Order(
+                customerID,
+                DateTime.Now,
+                totalPrice);
 
+            _db.Orders.Add(order);
+            
+            _db.Entry(order).GetDatabaseValues();
+            _db.SaveChanges();
+
+            return order.OrderID;
+        }
         public Task CreateOrderAsync(decimal totalPrice)
         {
             throw new NotImplementedException();
         }
 
-        public Task CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice)
+        public Task<int> GetOrderID()
         {
             throw new NotImplementedException();
         }

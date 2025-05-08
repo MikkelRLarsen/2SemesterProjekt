@@ -1,5 +1,6 @@
 ﻿using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,9 @@ namespace _2SemesterProjekt.Services
             await _orderRepository.CreateOrderAsync(totalPrice);
         }
 
-        public async Task CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice)
+        public async Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice)
         {
-            await _orderRepository.CreateOrderWithCustomerIDAsync(customerID, totalPrice);
+            return await _orderRepository.CreateOrderWithCustomerIDAsync(customerID, totalPrice);
         }
     }
 }
