@@ -34,6 +34,7 @@ namespace _2SemesterProjekt.Pages
 		{
 			CRUDPanel.Controls.Add(new ButtonPanel("Find", Color.MediumAquamarine, FindExamination_Click));
 			CRUDPanel.Controls.Add(new ButtonPanel("Opret", Color.MediumSeaGreen, CreateExamination_Click));
+			CRUDPanel.Controls.Add(new ButtonPanel("Tilføj medicin", "", Color.MediumPurple, AddMedicine_Click));
 		}
 
 		private async void FindExamination_Click(object sender, EventArgs e)
@@ -103,5 +104,10 @@ namespace _2SemesterProjekt.Pages
 				return true;
 			}
 		}
-	}
+        private void AddMedicine_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show("Nothing here yet");
+		}
+
+    }
 }
