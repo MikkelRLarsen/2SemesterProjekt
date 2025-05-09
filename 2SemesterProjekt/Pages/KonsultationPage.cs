@@ -18,6 +18,7 @@ namespace _2SemesterProjekt.Pages
 	public partial class KonsultationPage : UserControl
 	{
 		private readonly IExaminationService _examinationService;
+		public ExaminationCard ExaminationCard { get; set; }
 		public KonsultationPage()
 		{
 			InitializeComponent();
@@ -34,11 +35,11 @@ namespace _2SemesterProjekt.Pages
 		{
 			CRUDPanel.Controls.Add(new ButtonPanel("Find", Color.MediumAquamarine, FindExamination_Click));
 			CRUDPanel.Controls.Add(new ButtonPanel("Opret", Color.MediumSeaGreen, CreateExamination_Click));
-		}
+            CRUDPanel.Controls.Add(new ButtonPanel("Opret faktura", Color.MediumBlue, CreateInvoice_Click));
+        }
 
 		private async void FindExamination_Click(object sender, EventArgs e)
 		{
-
 			try
 			{
 				// Checks if phonenumber is valid
@@ -57,7 +58,7 @@ namespace _2SemesterProjekt.Pages
 
 					foreach (var examination in allCustomerExamination)
 					{
-						ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination));
+						ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
 					}
 				}
 				else // If ValidPhoneNumberTextBox == False
@@ -69,7 +70,7 @@ namespace _2SemesterProjekt.Pages
 
 					foreach (var examination in allExaminations)
 					{
-						ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination));
+						ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
 					}
 				}
 
@@ -102,6 +103,11 @@ namespace _2SemesterProjekt.Pages
 			{
 				return true;
 			}
+		}
+
+		private async void CreateInvoice_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
