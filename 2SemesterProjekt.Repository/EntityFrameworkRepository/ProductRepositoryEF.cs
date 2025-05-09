@@ -32,11 +32,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             foreach (Product product in products)
             {
-                int newNumberInStock = product.NumberInStock - product.QuantityInOrder;
+                int newNumberInStock = product.NumberInStock - product.QuantityInOrder; // Subtracts the quantity in order from the quantity in stock
                 await _db.Products
                     .Where(pr => pr.ProductID == product.ProductID)
                     .ExecuteUpdateAsync(pr
-                    => pr.SetProperty(pr => pr.NumberInStock, newNumberInStock));
+                    => pr.SetProperty(pr => pr.NumberInStock, newNumberInStock)); // Sets the result of newNumberInStock as the products stock quantity.
             }
         }
     }
