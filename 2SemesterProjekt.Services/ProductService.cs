@@ -38,7 +38,7 @@ namespace _2SemesterProjekt.Services
 
         public async Task UpdateSeveralProductsAsync(IEnumerable<Product> products)
         {
-            await _productRepository.UpdateSeveralProductsAsync(products);
+            await _productRepository.UpdateSeveralProductsQuantityAsync(products); // Updates the stock quantity of several products in the DB
         }
     }
 }

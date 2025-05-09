@@ -27,12 +27,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .Where(pr => pr.NumberInStock > 0)
                 .ToListAsync();
         }
-        public async Task<Product> GetProductByEANAsync(long eAN)
-        {
-            return await _db.Products.FirstOrDefaultAsync(pr => pr.EAN == eAN);
-        }
 
-        public async Task UpdateSeveralProductsAsync(IEnumerable<Product> products)
+        public async Task UpdateSeveralProductsQuantityAsync(IEnumerable<Product> products)
         {
             foreach (Product product in products)
             {
