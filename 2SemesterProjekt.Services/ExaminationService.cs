@@ -15,12 +15,13 @@ namespace _2SemesterProjekt.Services
 
         public async Task CreateExaminationAsync(Examination examination)
         {
-			//Checks if the examination is a Double Booking that specific Date. Returns error if Pet or Employee is booked
-			await IsDoubleBooked(examination);
+            //Checks if the examination is a Double Booking that specific Date. Returns error if Pet or Employee is booked
+            await IsDoubleBooked(examination);
             await _examinationRepository.CreateExaminationAsync(examination);
         }
 
-		public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
+
+        public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
 		{
 			return await _examinationRepository.GetAllExaminationOnCustomerPhoneNumber(customerPhoneNumber);
 		}
@@ -57,8 +58,8 @@ namespace _2SemesterProjekt.Services
 
                 if (examinationOnDate.PetID == examination.PetID)
                 {
-					throw new ArgumentException("Pet is already booked that day");
-				}
+                    throw new ArgumentException("Pet is already booked that day");
+                }
             }
         }
         public async Task<IEnumerable<Examination>> GetAllInactivesAsync()
