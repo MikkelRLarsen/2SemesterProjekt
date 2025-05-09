@@ -75,7 +75,11 @@ namespace _2SemesterProjekt.Domain.Models
         /// </summary>
         public void SetCageBookingID(int cageBookingID)
         {
-            if (cageBookingID > 0)
+            if (cageBookingID <= 0)
+            {
+                throw new ArgumentException("CageBooking was 0");
+            }
+            else
             {
                 CageBookingID = cageBookingID;
             }
