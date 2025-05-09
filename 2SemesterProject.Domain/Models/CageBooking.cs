@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using _2SemesterProjekt.Domain.Models;
@@ -23,6 +25,42 @@ namespace _2SemesterProjekt.Domain.Models
             EndDate = endDate;
             TotalPrice = totalPrice;
             CageID = cageID;
+
+            InformationValid();
+        }
+
+        /// <summary>
+		/// Acceptcriteria:
+		/// StartDate can't be before today
+        /// Decimal
+		/// <returns>Bool</returns>
+		protected void InformationValid()
+        {
+            // Validate startDate
+            if (StartDate.Date < DateTime.Today)
+            {
+                throw new ArgumentException("Startdate is invalid");
+            }
+
+            ValidateTotalPrice();
+
+            if (CageID <= 0)
+            {
+                throw new ArgumentException("Cage was 0 or null");
+            }
+        }
+
+        /// <summary>
+        /// Checks if Price got decimals
+        /// Also checks if it contains decimals that it doesn't have more than 2 decimals
+        /// </summary>
+        /// <returns></returns>
+        protected void ValidateTotalPrice()
+        {
+            if (decimal.Round(TotalPrice, 2) != TotalPrice)
+            {
+                throw new ArgumentException("Price had to many digits");
+            }
         }
     }
 }

@@ -36,15 +36,15 @@ namespace _2SemesterProjekt.Services
             // If there isn't space for the pet => throw error
             // Max is hardcoded for now => refactoring in another sprint
             if (numberOfCatBookingsOnDate >= 4 && petSpecies == "Kat" ||
-                numberOfDogBookingsOnDate >= 4 && petSpecies == "Hund")
+                numberOfDogBookingsOnDate >= 3 && petSpecies == "Hund")
             {
                 throw new ArgumentException($"Der er ikke flere ledige bure a typen {petSpecies} på denne dato");
             }
         }
 
-        public async Task<CageBooking> CreateCageBookingAsync(CageBooking cageBooking)
+        public async Task CreateCageBookingAsync(CageBooking cageBooking)
         {
-            return await _cageRepository.CreateBookingAsync(cageBooking);
+            await _cageRepository.CreateBookingAsync(cageBooking);
         }
 
         public async Task<Cage> GetPetCageAsync(string petSpecies)

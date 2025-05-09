@@ -76,7 +76,15 @@ public class ExaminationTest
 		Assert.AreEqual(validPriceWithTwoDecimals, exam.Price);
 	}
 
-	[TestMethod]
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void Constructor_CageBookingIdZero_ShouldThrowException()
+    {
+        // Act
+        _ = new Examination(PetID, EmployeeID, Date, ExaminationTypeID, Price, 0);
+    }
+
+    [TestMethod]
 	[ExpectedException(typeof(ArgumentException))]
 	public void Validation_AddingInvalidCageBookingToExam_ShouldThrowException()
 	{

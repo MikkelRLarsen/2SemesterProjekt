@@ -54,6 +54,11 @@ namespace _2SemesterProjekt.Domain.Models
                 throw new ArgumentException("Employee was 0 or null");
             }
 
+            if (CageBookingID <= 0)
+            {
+                throw new ArgumentException("CageBooking was 0 or null");
+            }
+
             Validate_Double_More_Than_2_Digits();
         }
 

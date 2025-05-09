@@ -18,14 +18,12 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             _db = db;
         }
 
-        public async Task<CageBooking> CreateBookingAsync(CageBooking booking)
+        public async Task CreateBookingAsync(CageBooking booking)
         {
             await _db.CageBookings
                 .AddAsync(booking);
 
             await _db.SaveChangesAsync();
-
-            return booking;
         }
 
         public async Task<decimal> GetBasePriceForPetCageAsync(string petSpecies)

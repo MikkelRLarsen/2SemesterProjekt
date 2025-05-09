@@ -11,7 +11,7 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
     {
         public Task<decimal> GetTotalPriceForCage(string petSpecies, DateTime startDate, DateTime estimatedEndDate);
         public Task IsFullyBooked(string petSpecies, DateTime startDate, DateTime estimatedEndDate);
-        public Task<CageBooking> CreateCageBookingAsync(CageBooking cageBooking);
+        public Task CreateCageBookingAsync(CageBooking cageBooking);
         public Task<Cage> GetPetCageAsync(string petSpecies);
     }
 }
