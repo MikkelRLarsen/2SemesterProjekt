@@ -33,12 +33,7 @@ namespace _2SemesterProjekt.Services
 
         public async Task<IEnumerable<Product>> GetAllProductsInStockAsync()
         {
-            return await _productRepository.GetAllProductsInStockAsync();
-        }
-
-        public async Task<Product> GetProductByEANAsync(long eAN)
-        {
-            return await _productRepository.GetProductByEANAsync(eAN);
+            return await _productRepository.GetAllProductsInStockAsync(); // Retrieves a list of products in stock from the DB
         }
 
         public async Task UpdateSeveralProductsAsync(IEnumerable<Product> products)
