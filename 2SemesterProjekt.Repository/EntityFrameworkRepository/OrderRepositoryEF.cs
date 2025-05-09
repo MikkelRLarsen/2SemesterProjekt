@@ -35,10 +35,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 DateTime.Now,
                 totalPrice);
 
-            await _db.Orders.AddAsync(order);
+            _db.Orders.Add(order);
 
             _db.Entry(order).GetDatabaseValues();
-            await _db.SaveChangesAsync();
+            _db.SaveChanges();
 
             return order.OrderID;
         }

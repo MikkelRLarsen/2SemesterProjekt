@@ -9,8 +9,8 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 {
     public interface IOrderService
     {
-        public Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice);
-        public Task<int> CreateOrderAsync(decimal totalPrice);
+        public Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice, decimal totalPriceWithDiscount);
+        public Task<int> CreateOrderAsync(decimal totalPrice, decimal totalPriceWithDiscount);
         public Task<bool> CheckIfOrderCanBeCreated(List<Product> order);
     }
 }

@@ -3,7 +3,9 @@ using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,14 +31,28 @@ namespace _2SemesterProjekt.Services
             return Task.FromResult(true);
         }
 
-        public async Task<int> CreateOrderAsync(decimal totalPrice)
+        public async Task<int> CreateOrderAsync(decimal totalPrice, decimal totalPriceWithDiscount)
         {
-            return await _orderRepository.CreateOrderAsync(totalPrice);
+            if (totalPriceWithDiscount != -1)
+            {
+                return await _orderRepository.CreateOrderAsync(totalPriceWithDiscount);
+            }
+            else
+            {
+                return await _orderRepository.CreateOrderAsync(totalPrice);
+            }
         }
 
-        public async Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice)
+        public async Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice, decimal totalPriceWithDiscount)
         {
-            return await _orderRepository.CreateOrderWithCustomerIDAsync(customerID, totalPrice);
+            if (totalPriceWithDiscount != -1)
+            {
+                return await _orderRepository.CreateOrderWithCustomerIDAsync(customerID, totalPriceWithDiscount);
+            }
+            else
+            {
+                return await _orderRepository.CreateOrderWithCustomerIDAsync(customerID, totalPrice);
+            }
         }
     }
 }

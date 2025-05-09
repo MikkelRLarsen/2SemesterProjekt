@@ -22,6 +22,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         private readonly IOrderService _orderService;
         private readonly IProductLineService _productLineService;
         private decimal _totalPrice;
+        private decimal _totalPriceWithDiscount = -1;
         private BindingList<Domain.Models.Product> _order;
         private BindingList<Domain.Models.Product> _allProducts;
         private Domain.Models.Product _selectedProduct;
@@ -120,7 +121,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                     }
                     else
                     {
-                        int orderID = await _orderService.CreateOrderAsync(_totalPrice);
+                        int orderID = await _orderService.CreateOrderAsync(_totalPrice, _totalPriceWithDiscount);
                         await _productLineService.CreateProductLinesAsync(orderID, _order.ToList());
                         await _productService.UpdateSeveralProductsAsync(_order.ToList());
                         DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -130,7 +131,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 }
                 if (_customer != null)
                 {
-                    int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice);
+                    int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice, _totalPriceWithDiscount);
                     await _productLineService.CreateProductLinesAsync(orderID, _order.ToList());
                     await _productService.UpdateSeveralProductsAsync(_order.ToList());
                     DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -151,6 +152,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             {
                 decimal discount = (_totalPrice * ((100 - discountNumericUpDown.Value) / 100));
                 totalPriceInfoLabel.Text = discount.ToString();
+                _totalPriceWithDiscount = discount;
             }
         }
 
