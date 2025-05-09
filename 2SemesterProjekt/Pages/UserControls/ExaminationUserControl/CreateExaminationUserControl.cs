@@ -153,8 +153,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
                     // Creates cageBooking to validate information
                     cageBooking = new CageBooking(
-                        chosenExaminationDate,
-                        estimatedEndOfCageBooking,
+                        chosenExaminationDate.Date,
+                        estimatedEndOfCageBooking.Date,
                         totalPrice,
                         cage.CageID
                     );
@@ -309,8 +309,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             if (ExaminationTypeDropdown.SelectedItem != null)
             {
                 if ((ExaminationTypeDropdown.SelectedItem as ExaminationType)!.ExaminationTag.DescriptionTag == "Operation" &&
-                    (PetExaminationDropdown.SelectedItem as Pet)!.Species == "Kat" ||
-                    (PetExaminationDropdown.SelectedItem as Pet)!.Species == "Hund")
+                    ((PetExaminationDropdown.SelectedItem as Pet)!.Species == "Kat" ||
+                    (PetExaminationDropdown.SelectedItem as Pet)!.Species == "Hund"))
                 {
                     checkBoxCageBooking.Visible = true;
                     labelCageBookingDays.Visible = true;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
+﻿using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
 
@@ -29,11 +24,17 @@ namespace _2SemesterProjekt.Services
 
         public async Task IsFullyBooked(string petSpecies, DateTime startDate, DateTime estimatedEndDate)
         {
-            IEnumerable<CageBooking> listOfCageBookingsOnDate = await _cageRepository.GetAllCageBookingsOnDate(startDate);
+            // Gets all petcages bookings in booking interval
+            IEnumerable<CageBooking> listOfCageBookingsInInterval = await _cageRepository.GetAllCageBookingsOnDate(startDate, estimatedEndDate);
 
-            int numberOfCatBookingsOnDate = listOfCageBookingsOnDate.Count(cBooking => cBooking.Cage.Species == "Kat");
-            int numberOfDogBookingsOnDate = listOfCageBookingsOnDate.Count(cBooking => cBooking.Cage.Species == "Hund");
+            // Counts number of cat cages in interval
+            int numberOfCatBookingsOnDate = listOfCageBookingsInInterval.Count(cBooking => cBooking.Cage.Species == "Kat");
 
+            // Counts number of dog cages in interval
+            int numberOfDogBookingsOnDate = listOfCageBookingsInInterval.Count(cBooking => cBooking.Cage.Species == "Hund");
+
+            // If there isn't space for the pet => throw error
+            // Max is hardcoded for now => refactoring in another sprint
             if (numberOfCatBookingsOnDate >= 4 && petSpecies == "Kat" ||
                 numberOfDogBookingsOnDate >= 4 && petSpecies == "Hund")
             {

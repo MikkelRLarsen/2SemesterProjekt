@@ -41,14 +41,14 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             return cage.Price;
         }
 
-        public async Task<IEnumerable<CageBooking>> GetAllCageBookingsOnDate(DateTime date)
+        public async Task<IEnumerable<CageBooking>> GetAllCageBookingsOnDate(DateTime startDate, DateTime endDate)
         {
             try
             {
                 return await _db.CageBookings
-                    // Filtrates and returns all bookings, where the desired dato falls in between.
-                    .Where(cBooking => cBooking.StartDate <= date && cBooking.EndDate >= date)
-                    .Include(cBooking => cBooking.Cage)
+                    // Checks if there is any hits that overlaps the requested booking interval
+                    .Where(cBooking => cBooking.StartDate < endDate.Date && cBooking.EndDate > startDate.Date)
+                    .Include(cBooking => cBooking.Cage) // Include the cage for capacity-check for the specified pet
                     .ToListAsync();
             }
             catch (Exception)
