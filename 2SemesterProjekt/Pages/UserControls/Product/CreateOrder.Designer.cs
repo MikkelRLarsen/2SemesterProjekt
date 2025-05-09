@@ -231,7 +231,6 @@
             allProductsListBox.Name = "allProductsListBox";
             allProductsListBox.Size = new Size(268, 199);
             allProductsListBox.TabIndex = 26;
-            allProductsListBox.SelectedIndexChanged += allProductsListBox_SelectedIndexChanged;
             // 
             // orderProductsListBox
             // 
@@ -241,7 +240,6 @@
             orderProductsListBox.Name = "orderProductsListBox";
             orderProductsListBox.Size = new Size(210, 139);
             orderProductsListBox.TabIndex = 27;
-            orderProductsListBox.SelectedIndexChanged += orderProductsListBox_SelectedIndexChanged;
             // 
             // addMoreButton
             // 

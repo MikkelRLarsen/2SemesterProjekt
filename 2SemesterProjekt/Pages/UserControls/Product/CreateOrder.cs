@@ -68,7 +68,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         {
             int phoneNumber = Convert.ToInt32(customerPhoneNumberTextbox.Text);
             Customer customer = await _customerService.GetCustomerByPhoneNumberAsync(phoneNumber); // retrieve customer by phone number
-            if (customer == null)
+            if (customer == null) // Customer with this phone number doesn't exist in the DB
             {
                 customerNameLabel.Text = "Kunne ikke finde kunden.";
                 customerNameLabel.Visible = true;
@@ -76,7 +76,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 customerEmailLabel.Visible = false;
                 _customer = null;
             }
-            else
+            else // Customer with this phone number exists
             {
                 customerNameLabel.Text = $"{customer.FirstName} {customer.LastName}";
                 customerAddressLabel.Text = $"{customer.Address}";
@@ -164,14 +164,6 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             }
         }
 
-        private void allProductsListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (_allProducts.Count == 0)
-            {
-                addToOrderButton.Enabled = false; // This button will be deactivated if there are no products left in the listbox.
-            }
-        }
-
         private async void addToOrderButton_Click(object sender, EventArgs e)
         {
             _selectedProduct = (Domain.Models.Product)allProductsListBox.SelectedItem; // Sets the product, that is selected in the listbox, as the product that will get added to the order.
@@ -228,26 +220,20 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             orderProductsListBox.Refresh();
         }
 
-        private void orderProductsListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ListBox lb = (ListBox)sender;
-            _selectedProductInOrder = (Domain.Models.Product)lb.SelectedItem;
-        }
-
         private void removeFromOrder_Click(object sender, EventArgs e)
         {
-            _selectedProductInOrder = (Domain.Models.Product)orderProductsListBox.SelectedItem;
+            _selectedProductInOrder = (Domain.Models.Product)orderProductsListBox.SelectedItem; // Sets the product, that is selected in the listbox, as the product that will get added to the order.
 
             if (_selectedProductInOrder == null)
             {
-                orderProductsListBox.SetSelected(0, true);
+                orderProductsListBox.SetSelected(0, true); // The first product in the listbox is set as the selected item.
             }
 
-            _totalPrice -= _selectedProductInOrder.TotalPrice;
-            _selectedProductInOrder.QuantityInOrder = 0;
-            _selectedProductInOrder.TotalPrice = 0;
-            _allProducts.Add(_selectedProductInOrder);
-            _order.Remove(_selectedProductInOrder);
+            _totalPrice -= _selectedProductInOrder.TotalPrice; // Substracts the total order price of the product(s) from the total price of the order.
+            _selectedProductInOrder.QuantityInOrder = 0; // Sets quantity in order to 0.
+            _selectedProductInOrder.TotalPrice = 0; // Sets total order price of the product to 0
+            _allProducts.Add(_selectedProductInOrder); // The products moves back to the list of products in stock
+            _order.Remove(_selectedProductInOrder); // The product gets removed from the order.
 
             _order.ResetBindings();
             allProductsListBox.Refresh();
@@ -255,13 +241,13 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
             totalPriceInfoLabel.Refresh();
 
-            if (_order.Count == 0)
+            if (_order.Count == 0) // Buttons get disabled if there are no products left in the order.
             {
                 removeFromOrderButton.Enabled = false;
                 addMoreButton.Enabled = false;
                 createOrderButton.Enabled = false;
             }
-            if (!addToOrderButton.Enabled)
+            if (!addToOrderButton.Enabled) // Enables this button so the user can add products to the order again
             {
                 addToOrderButton.Enabled = true;
             }
