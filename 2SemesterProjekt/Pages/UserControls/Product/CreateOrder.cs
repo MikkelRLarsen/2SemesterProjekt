@@ -82,45 +82,71 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
         private async void createOrderButton_Click(object sender, EventArgs e)
         {
-            if (discountNumericUpDown.Value >= 60)
+            bool continueOrderCreation = false;
+            bool orderCanBeCreated = await _orderService.CheckIfOrderCanBeCreated(_order.ToList());
+
+            if (!orderCanBeCreated)
             {
-                DialogResult messageBoxResult = MessageBox.Show("Indtastet rabat er over 60%. Er du sikker på, at du vil fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                if (messageBoxResult == DialogResult.No)
-                {
-                    return;
-                }
-                else
-                {
-                    
-                }
-            }
-            else if (_customer == null)
-            {
-                DialogResult messageBoxResult = MessageBox.Show("Du har ikke tilføjet en kunde, som findes i systemet. Vil du stadigvæk fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (messageBoxResult == DialogResult.No)
-                {
-                    return;
-                }
-                else
-                {
-
-                }
+                DialogResult messageBoxConfirmation = MessageBox.Show("Ordren kan ikke oprettes, da der ikke kan tilføjes det ønskede antal af en/nogle af produkterne til ordren. Tjek venligst lagerbeholdning.", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
+                continueOrderCreation = true;
+            }
+
+            while (continueOrderCreation)
+            {
+                if (discountNumericUpDown.Value >= 60)
+                {
+                    DialogResult messageBoxResult = MessageBox.Show("Indtastet rabat er over 60%. Er du sikker på, at du vil fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (messageBoxResult == DialogResult.No)
+                    {
+                        continueOrderCreation = false;
+                        return;
+                    }
+                    else
+                    {
+                        continueOrderCreation = true;
+                    }
+                }
+                if (_customer == null)
+                {
+                    DialogResult messageBoxResult = MessageBox.Show("Du har ikke tilføjet en kunde, som findes i systemet. Vil du stadigvæk fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (messageBoxResult == DialogResult.No)
+                    {
+                        continueOrderCreation = false;
+                        return;
+                    }
+                    else
+                    {
+                        int orderID = await _orderService.CreateOrderAsync(_totalPrice);
+                        await _productLineService.CreateProductLinesAsync(orderID, _order.ToList());
+                        await _productService.UpdateSeveralProductsAsync(_order.ToList());
+                        DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        _order.Clear();
+                        orderProductsListBox.Refresh();
+                        _allProducts.Clear();
+                        _allProducts = new BindingList<Domain.Models.Product>((List<Domain.Models.Product>)await _productService.GetAllProductsInStockAsync());
+                        allProductsListBox.DataSource = _allProducts;
+                        allProductsListBox.Refresh();
+                        return;
+                    }
+                }
                 if (_customer != null)
                 {
                     int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice);
                     await _productLineService.CreateProductLinesAsync(orderID, _order.ToList());
-                    DialogResult messageBoxResult = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    int orderID = await _orderService.CreateOrderAsync(_totalPrice);
-                    await _productLineService.CreateProductLinesAsync(orderID, _order.ToList());
-                    DialogResult messageBoxResult = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await _productService.UpdateSeveralProductsAsync(_order.ToList());
+                    DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _order.Clear();
+                    orderProductsListBox.Refresh();
+                    _allProducts.Clear();
+                    _allProducts = new BindingList<Domain.Models.Product>((List<Domain.Models.Product>)await _productService.GetAllProductsInStockAsync());
+                    allProductsListBox.DataSource = _allProducts;
+                    allProductsListBox.Refresh();
+                    return;
                 }
             }
         }

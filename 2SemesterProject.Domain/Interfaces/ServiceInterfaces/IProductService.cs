@@ -13,5 +13,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
         public void ExportStockStatusToTxtAsync(string fileName);
         public Task<IEnumerable<Product>> GetAllProductsInStockAsync();
         public Task<Product> GetProductByEANAsync(long eAN);
+        public Task UpdateSeveralProductsAsync(IEnumerable<Product> products);
     }
 }

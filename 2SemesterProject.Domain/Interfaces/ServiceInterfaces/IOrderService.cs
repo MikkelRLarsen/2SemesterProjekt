@@ -11,5 +11,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
     {
         public Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice);
         public Task<int> CreateOrderAsync(decimal totalPrice);
+        public Task<bool> CheckIfOrderCanBeCreated(List<Product> order);
     }
 }

@@ -22,10 +22,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 DateTime.Now,
                 totalPrice);
 
-            _db.Orders.Add(order);
+            await _db.Orders.AddAsync(order);
             
             _db.Entry(order).GetDatabaseValues();
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
 
             return order.OrderID;
         }
@@ -35,10 +35,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 DateTime.Now,
                 totalPrice);
 
-            _db.Orders.Add(order);
+            await _db.Orders.AddAsync(order);
 
             _db.Entry(order).GetDatabaseValues();
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
 
             return order.OrderID;
         }

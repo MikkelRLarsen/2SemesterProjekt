@@ -40,5 +40,10 @@ namespace _2SemesterProjekt.Services
         {
             return await _productRepository.GetProductByEANAsync(eAN);
         }
+
+        public async Task UpdateSeveralProductsAsync(IEnumerable<Product> products)
+        {
+            await _productRepository.UpdateSeveralProductsAsync(products);
+        }
     }
 }

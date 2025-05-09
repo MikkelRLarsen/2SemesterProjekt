@@ -31,5 +31,17 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             return await _db.Products.FirstOrDefaultAsync(pr => pr.EAN == eAN);
         }
+
+        public async Task UpdateSeveralProductsAsync(IEnumerable<Product> products)
+        {
+            foreach (Product product in products)
+            {
+                int newNumberInStock = product.NumberInStock - product.QuantityInOrder;
+                await _db.Products
+                    .Where(pr => pr.ProductID == product.ProductID)
+                    .ExecuteUpdateAsync(pr
+                    => pr.SetProperty(pr => pr.NumberInStock, newNumberInStock));
+            }
+        }
     }
 }
