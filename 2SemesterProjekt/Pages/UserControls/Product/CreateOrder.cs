@@ -21,30 +21,38 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         private readonly ICustomerService _customerService;
         private readonly IOrderService _orderService;
         private readonly IProductLineService _productLineService;
-        private decimal _totalPrice;
-        private decimal _totalPriceWithDiscount = -1;
-        private BindingList<Domain.Models.Product> _order;
-        private BindingList<Domain.Models.Product> _allProducts;
-        private Domain.Models.Product _selectedProduct;
-        private Domain.Models.Product _selectedProductInOrder;
-        private Customer _customer;
+
+        private decimal _totalPrice; // The total price for the order is stored here.
+        private decimal _totalPriceWithDiscount = -1; /* The total price for the order with an added discount is
+                                                       * stored here. If there is no added discount, the default
+                                                       * value remains -1. */
+
+        private BindingList<Domain.Models.Product> _order; // Products in the order is stored here.
+        private BindingList<Domain.Models.Product> _allProducts; // Products in stock is stored here.
+
+        private Domain.Models.Product _selectedProduct; // Selected product in the allProductsListBox
+        private Domain.Models.Product _selectedProductInOrder; // Selected product in the orderProductsListbox
+
+        private Customer _customer; // The customer, whose ID will be associated with the order, is stored here.
         public CreateOrder(FlowLayoutPanel orderPanel)
         {
             InitializeComponent();
             _orderPanel = orderPanel;
+
             _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
             _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>();
             _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>();
+
             _order = new BindingList<Domain.Models.Product>();
         }
 
         private async void CreateOrder_Load(object sender, EventArgs e)
         {
-            _allProducts = new BindingList<Domain.Models.Product>((List<Domain.Models.Product>)await _productService.GetAllProductsInStockAsync());
-            allProductsListBox.DataSource = _allProducts;
+            _allProducts = new BindingList<Domain.Models.Product>((List<Domain.Models.Product>)await _productService.GetAllProductsInStockAsync()); // Add products in stock to list
+            allProductsListBox.DataSource = _allProducts; // This listbox will show the products in stock
             allProductsListBox.DisplayMember = "ProductInfo";
-            orderProductsListBox.DataSource = _order;
+            orderProductsListBox.DataSource = _order; // This listbox will show the products added to the order
             orderProductsListBox.DisplayMember = "ProductInOrderInfo";
         }
 
@@ -59,7 +67,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         private async void getCustomerButton_Click(object sender, EventArgs e)
         {
             int phoneNumber = Convert.ToInt32(customerPhoneNumberTextbox.Text);
-            Customer customer = await _customerService.GetCustomerByPhoneNumberAsync(phoneNumber);
+            Customer customer = await _customerService.GetCustomerByPhoneNumberAsync(phoneNumber); // retrieve customer by phone number
             if (customer == null)
             {
                 customerNameLabel.Text = "Kunne ikke finde kunden.";
@@ -83,20 +91,20 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         private async void createOrderButton_Click(object sender, EventArgs e)
         {
             bool continueOrderCreation = false;
-            bool orderCanBeCreated = await _orderService.CheckIfOrderCanBeCreated(_order.ToList());
+            bool orderCanBeCreated = await _orderService.CheckIfOrderCanBeCreated(_order.ToList()); // Checks if the added quantities of each product can be added to the order.
 
-            if (!orderCanBeCreated)
+            if (!orderCanBeCreated) // Quantity in order > quantity in stock
             {
                 DialogResult messageBoxConfirmation = MessageBox.Show("Ordren kan ikke oprettes, da der ikke kan tilføjes det ønskede antal af en/nogle af produkterne til ordren. Tjek venligst lagerbeholdning.", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else
+            else // Quantity in order < quantity in stock
             {
                 continueOrderCreation = true;
             }
 
             while (continueOrderCreation)
             {
-                if (discountNumericUpDown.Value >= 60)
+                if (discountNumericUpDown.Value >= 60) // Discount warning box
                 {
                     DialogResult messageBoxResult = MessageBox.Show("Indtastet rabat er over 60%. Er du sikker på, at du vil fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
@@ -110,7 +118,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                         continueOrderCreation = true;
                     }
                 }
-                if (_customer == null)
+                if (_customer == null) // The user didn't enter a customer's phone number.
                 {
                     DialogResult messageBoxResult = MessageBox.Show("Du har ikke tilføjet en kunde, som findes i systemet. Vil du stadigvæk fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -119,21 +127,21 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                         continueOrderCreation = false;
                         return;
                     }
-                    else
+                    else // An order will be created without a customerID.
                     {
-                        int orderID = await _orderService.CreateOrderAsync(_totalPrice, _totalPriceWithDiscount);
-                        await _productLineService.CreateProductLinesAsync(orderID, _order.ToList());
-                        await _productService.UpdateSeveralProductsAsync(_order.ToList());
+                        int orderID = await _orderService.CreateOrderAsync(_totalPrice, _totalPriceWithDiscount); // Creates an order and returns the ID.
+                        await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
+                        await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
                         DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Parent.Controls.Clear();
                         return;
                     }
                 }
-                if (_customer != null)
+                if (_customer != null) // An order will be created with a customerID.
                 {
-                    int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice, _totalPriceWithDiscount);
-                    await _productLineService.CreateProductLinesAsync(orderID, _order.ToList());
-                    await _productService.UpdateSeveralProductsAsync(_order.ToList());
+                    int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice, _totalPriceWithDiscount); // Creates an order associated with the customer and returns the ID.
+                    await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
+                    await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
                     DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Parent.Controls.Clear();
                     return;
@@ -151,8 +159,8 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             if (_totalPrice != 0)
             {
                 decimal discount = (_totalPrice * ((100 - discountNumericUpDown.Value) / 100));
-                totalPriceInfoLabel.Text = discount.ToString();
-                _totalPriceWithDiscount = discount;
+                totalPriceInfoLabel.Text = discount.ToString(); // Updates UI
+                _totalPriceWithDiscount = discount; // Updates the total price with the added discount
             }
         }
 
@@ -160,42 +168,41 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         {
             if (_allProducts.Count == 0)
             {
-                addToOrderButton.Enabled = false;
+                addToOrderButton.Enabled = false; // This button will be deactivated if there are no products left in the listbox.
             }
         }
 
         private async void addToOrderButton_Click(object sender, EventArgs e)
         {
-            _selectedProduct = (Domain.Models.Product)allProductsListBox.SelectedItem;
+            _selectedProduct = (Domain.Models.Product)allProductsListBox.SelectedItem; // Sets the product, that is selected in the listbox, as the product that will get added to the order.
 
             if (_selectedProduct == null)
             {
-                allProductsListBox.SetSelected(0, true);
+                allProductsListBox.SetSelected(0, true); // The first product in the listbox is set as the selected item.
             }
 
-            long eAN = _selectedProduct.EAN;
-            Domain.Models.Product productToSell = await _productService.GetProductByEANAsync(eAN);
-
-            if (_order.Any(pr => pr.EAN == productToSell.EAN))
+            if (_order.Any(pr => pr.EAN == _selectedProduct.EAN)) // If the order already contains the product, nothing will happen.
             {
                 return;
             }
-            else if (productToSell != null)
+            else if (_selectedProduct != null)
             {
-                productToSell.QuantityInOrder = 1;
-                productToSell.TotalPrice = productToSell.QuantityInOrder * productToSell.PricePerUnit;
-                _order.Add(productToSell);
-                orderProductsListBox.DataSource = _order;
-                orderProductsListBox.Refresh();
-                _allProducts.Remove(productToSell);
+                _selectedProduct.QuantityInOrder = 1; // Update quantity
+                _selectedProduct.TotalPrice = _selectedProduct.QuantityInOrder * _selectedProduct.PricePerUnit; // Update total price
+                _order.Add(_selectedProduct); // Add to order
+
+                orderProductsListBox.DataSource = _order; // Update order listbox data source
+                orderProductsListBox.Refresh(); // Update control
+
+                _allProducts.Remove(_selectedProduct); // Remove product from the listbox that shows products in stock
                 _allProducts.ResetBindings();
                 allProductsListBox.Refresh();
 
-                _totalPrice += productToSell.PricePerUnit;
+                _totalPrice += _selectedProduct.PricePerUnit; // Update the total price for the order
                 totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
                 totalPriceInfoLabel.Refresh();
             }
-            if (removeFromOrderButton.Enabled == false || addMoreButton.Enabled == false || createOrderButton.Enabled == false)
+            if (removeFromOrderButton.Enabled == false || addMoreButton.Enabled == false || createOrderButton.Enabled == false) // Enable buttons
             {
                 removeFromOrderButton.Enabled = true;
                 addMoreButton.Enabled = true;
@@ -207,11 +214,12 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         {
             if (_selectedProductInOrder == null)
             {
-                orderProductsListBox.SetSelected(0, true);
+                orderProductsListBox.SetSelected(0, true); // The first product in the listbox is set as the selected item.
             }
-            _selectedProductInOrder.QuantityInOrder += 1;
-            _selectedProductInOrder.TotalPrice += _selectedProductInOrder.PricePerUnit;
-            _totalPrice += _selectedProductInOrder.PricePerUnit;
+
+            _selectedProductInOrder.QuantityInOrder += 1; // Updates the quantity of the product in the order
+            _selectedProductInOrder.TotalPrice += _selectedProductInOrder.PricePerUnit; // Updates the total price of the product in the order
+            _totalPrice += _selectedProductInOrder.PricePerUnit; // Updates the total price of the order
 
             totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
             totalPriceInfoLabel.Refresh();
