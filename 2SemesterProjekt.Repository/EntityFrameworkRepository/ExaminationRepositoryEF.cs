@@ -63,6 +63,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .Include(e => e.Pet)
                 .ThenInclude(p => p.Customer)
                 .Include(e => e.Employee)
+				.Include(me => me.Medicine)
                 .Include(e => e.ExaminationType)
                 .ToListAsync();
 		}

@@ -104,6 +104,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			//Resets ErrorMessage when retrying
 			ErrorMessageExamination.Text = "";
+			Medicine medicine = null;
 
 			// Creates a messagebox if Discount is higher then 60% to confirm the booking of examination
 			if (DiscountNumericUpDown.Value >= 60)
@@ -122,6 +123,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				// Creates the new Examination as a local variable to run validate Information.
 				Examination newExamination = new Examination((PetExaminationDropdown.SelectedItem as Pet).PetID
 					, (EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID
+					, medicine.MedicineID
 					, DateTimePickerExamination.Value
 					, (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTypeID
 					, Convert.ToDecimal(PriceExaminationDisplay.Text));

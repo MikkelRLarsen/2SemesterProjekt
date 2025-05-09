@@ -36,6 +36,7 @@ namespace _2SemesterProjekt
 			services.AddTransient<IPetRepository, PetRepositoryEF>();
 			services.AddTransient<IExaminationRepository, ExaminationRepositoryEF>();
 			services.AddTransient<IProductRepository, ProductRepositoryEF>();
+			services.AddTransient<IMedicineRepository,  MedicineRepositoryEF>();
 
 
 			_serviceProvider = services.BuildServiceProvider();

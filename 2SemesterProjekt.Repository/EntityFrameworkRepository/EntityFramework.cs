@@ -13,6 +13,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		public DbSet<ExaminationType> ExaminationTypes { get; set;}
 		public DbSet<ExaminationTag> ExaminationTags { get; set;}
 		public DbSet<Product> Products { get; set;}
+		public DbSet<Medicine> Medicines { get; set;}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -39,6 +40,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<ExaminationType>().ToTable("ExaminationType");
 			modelBuilder.Entity<ExaminationTag>().ToTable("ExaminationTag");
 			modelBuilder.Entity<Product>().ToTable("Product");
+			modelBuilder.Entity<Medicine>().ToTable("Medicine");
 
 			//Relations
 			modelBuilder.Entity<Customer>()
@@ -71,6 +73,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.WithOne(eType => eType.ExaminationTag)
 				.HasForeignKey(eType => eType.ExaminationTagID);
 
+			modelBuilder.Entity<Examination>()
+				.HasOne(ex => ex.Medicine)
+				.WithMany(p => p.Examinations)
+				.HasForeignKey(ex => ex.MedicineID);
+
 			// Primary Keys
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
 			modelBuilder.Entity<Pet>().HasKey(p => p.PetID);
@@ -79,6 +86,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<ExaminationType>().HasKey(eType => eType.ExaminationTypeID);
 			modelBuilder.Entity<ExaminationTag>().HasKey(eTag => eTag.ExaminationTagID);
 			modelBuilder.Entity<Product>().HasKey(pr => pr.ProductID);
+			modelBuilder.Entity<Medicine>().HasKey(me => me.MedicineID);
 		}
 	}
 }

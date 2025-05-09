@@ -7,17 +7,20 @@ namespace _2SemesterProjekt.Domain.Models
 		public int ExaminationID { get; private set; }
 		public int PetID { get; private set; }
 		public int EmployeeID { get; private set; }
-		public DateTime Date { get; private set; }
+        public int? MedicineID { get; private set; }
+        public DateTime Date { get; private set; }
 		public int ExaminationTypeID { get; private set; }
 		public decimal Price { get; private set; }
 		public Pet Pet { get; }
 		public Employee Employee { get; }
 		public ExaminationType ExaminationType { get; }
+		public Medicine? Medicine { get; }
 
-		public Examination(int petID, int employeeID, DateTime date, int examinationTypeID, decimal price)
+		public Examination(int petID, int employeeID, int? medicineID, DateTime date, int examinationTypeID, decimal price)
 		{
 			PetID = petID;
 			EmployeeID = employeeID;
+			MedicineID = medicineID;
 			Date = date;
 			ExaminationTypeID = examinationTypeID;
 			Price = price;
