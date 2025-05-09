@@ -143,6 +143,7 @@
             // createOrderButton
             // 
             createOrderButton.BackColor = Color.DarkGray;
+            createOrderButton.Enabled = false;
             createOrderButton.FlatStyle = FlatStyle.Popup;
             createOrderButton.Location = new Point(383, 470);
             createOrderButton.Name = "createOrderButton";
@@ -244,26 +245,30 @@
             // 
             // addMoreButton
             // 
+            addMoreButton.BackColor = Color.PaleGreen;
             addMoreButton.Enabled = false;
             addMoreButton.FlatStyle = FlatStyle.Popup;
-            addMoreButton.Location = new Point(33, 243);
+            addMoreButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            addMoreButton.Location = new Point(78, 316);
             addMoreButton.Name = "addMoreButton";
-            addMoreButton.Size = new Size(75, 79);
+            addMoreButton.Size = new Size(30, 30);
             addMoreButton.TabIndex = 28;
-            addMoreButton.Text = "Tilføj flere af det valgte produkt";
-            addMoreButton.UseVisualStyleBackColor = true;
+            addMoreButton.Text = "+";
+            addMoreButton.UseVisualStyleBackColor = false;
             addMoreButton.Click += AddMoreButton_Click;
             // 
             // removeFromOrderButton
             // 
+            removeFromOrderButton.BackColor = Color.IndianRed;
             removeFromOrderButton.Enabled = false;
             removeFromOrderButton.FlatStyle = FlatStyle.Popup;
-            removeFromOrderButton.Location = new Point(33, 328);
+            removeFromOrderButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            removeFromOrderButton.Location = new Point(78, 352);
             removeFromOrderButton.Name = "removeFromOrderButton";
-            removeFromOrderButton.Size = new Size(75, 54);
+            removeFromOrderButton.Size = new Size(30, 30);
             removeFromOrderButton.TabIndex = 29;
-            removeFromOrderButton.Text = "Fjern det valgte produkt";
-            removeFromOrderButton.UseVisualStyleBackColor = true;
+            removeFromOrderButton.Text = "-";
+            removeFromOrderButton.UseVisualStyleBackColor = false;
             removeFromOrderButton.Click += removeFromOrder_Click;
             // 
             // CreateOrder

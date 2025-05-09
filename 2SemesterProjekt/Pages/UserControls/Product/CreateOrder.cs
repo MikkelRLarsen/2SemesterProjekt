@@ -79,7 +79,6 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             }
         }
 
-
         private async void createOrderButton_Click(object sender, EventArgs e)
         {
             bool continueOrderCreation = false;
@@ -125,12 +124,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                         await _productLineService.CreateProductLinesAsync(orderID, _order.ToList());
                         await _productService.UpdateSeveralProductsAsync(_order.ToList());
                         DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        _order.Clear();
-                        orderProductsListBox.Refresh();
-                        _allProducts.Clear();
-                        _allProducts = new BindingList<Domain.Models.Product>((List<Domain.Models.Product>)await _productService.GetAllProductsInStockAsync());
-                        allProductsListBox.DataSource = _allProducts;
-                        allProductsListBox.Refresh();
+                        this.Parent.Controls.Clear();
                         return;
                     }
                 }
@@ -140,12 +134,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                     await _productLineService.CreateProductLinesAsync(orderID, _order.ToList());
                     await _productService.UpdateSeveralProductsAsync(_order.ToList());
                     DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    _order.Clear();
-                    orderProductsListBox.Refresh();
-                    _allProducts.Clear();
-                    _allProducts = new BindingList<Domain.Models.Product>((List<Domain.Models.Product>)await _productService.GetAllProductsInStockAsync());
-                    allProductsListBox.DataSource = _allProducts;
-                    allProductsListBox.Refresh();
+                    this.Parent.Controls.Clear();
                     return;
                 }
             }
@@ -167,8 +156,10 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
         private void allProductsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListBox lb = (ListBox)sender;
-            _selectedProduct = (Domain.Models.Product)lb.SelectedItem;
+            if (_allProducts.Count == 0)
+            {
+                addToOrderButton.Enabled = false;
+            }
         }
 
         private async void addToOrderButton_Click(object sender, EventArgs e)
@@ -202,10 +193,11 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
                 totalPriceInfoLabel.Refresh();
             }
-            if (removeFromOrderButton.Enabled == false || addMoreButton.Enabled == false)
+            if (removeFromOrderButton.Enabled == false || addMoreButton.Enabled == false || createOrderButton.Enabled == false)
             {
                 removeFromOrderButton.Enabled = true;
                 addMoreButton.Enabled = true;
+                createOrderButton.Enabled = true;
             }
         }
 
@@ -257,6 +249,11 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             {
                 removeFromOrderButton.Enabled = false;
                 addMoreButton.Enabled = false;
+                createOrderButton.Enabled = false;
+            }
+            if (!addToOrderButton.Enabled)
+            {
+                addToOrderButton.Enabled = true;
             }
         }
     }
