@@ -162,6 +162,7 @@
             OrdineretDropdownBox.Name = "OrdineretDropdownBox";
             OrdineretDropdownBox.Size = new Size(121, 23);
             OrdineretDropdownBox.TabIndex = 20;
+            OrdineretDropdownBox.SelectionChangeCommitted += OrdineretDropdownBox_SelectionChangeCommitted;
             // 
             // PetNameTextBox
             // 

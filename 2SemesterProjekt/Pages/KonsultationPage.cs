@@ -12,6 +12,7 @@ using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Pages.UserControls.MedicineUserControl;
 
 namespace _2SemesterProjekt.Pages
 {
@@ -29,12 +30,17 @@ namespace _2SemesterProjekt.Pages
 			ExaminationFlowPanel.Controls.Clear();
 			ExaminationFlowPanel.Controls.Add(new CreateExaminationUserControl(ExaminationFlowPanel));
 		}
+        private void Medicine_Click(object sender, EventArgs e)
+        {
+			ExaminationFlowPanel.Controls.Clear();
+			ExaminationFlowPanel.Controls.Add(new MedicineUserControl(ExaminationFlowPanel));
 
-		private void KonsultationPage_Load(object sender, EventArgs e)
+        }
+        private void KonsultationPage_Load(object sender, EventArgs e)
 		{
 			CRUDPanel.Controls.Add(new ButtonPanel("Find", Color.MediumAquamarine, FindExamination_Click));
 			CRUDPanel.Controls.Add(new ButtonPanel("Opret", Color.MediumSeaGreen, CreateExamination_Click));
-			CRUDPanel.Controls.Add(new ButtonPanel("Tilføj medicin", Color.MediumPurple, AddMedicine_Click));
+			CRUDPanel.Controls.Add(new ButtonPanel("Medicin", Color.MediumPurple, Medicine_Click));
 		}
 
 		private async void FindExamination_Click(object sender, EventArgs e)
@@ -104,10 +110,7 @@ namespace _2SemesterProjekt.Pages
 				return true;
 			}
 		}
-        private void AddMedicine_Click(object sender, EventArgs e)
-		{
-			MessageBox.Show("Nothing here yet");
-		}
+        
 
     }
 }
