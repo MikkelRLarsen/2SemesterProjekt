@@ -22,7 +22,7 @@ namespace _2SemesterProjekt.Services
         {
             decimal basePrice = await _cageRepository.GetBasePriceForPetCageAsync(petSpecies);
 
-            decimal totalPrice = (startDate - estimatedEndDate).Days * basePrice; // Calculates estimated total price.
+            decimal totalPrice = (estimatedEndDate - startDate).Days * basePrice; // Calculates estimated total price.
 
             return totalPrice;
         }

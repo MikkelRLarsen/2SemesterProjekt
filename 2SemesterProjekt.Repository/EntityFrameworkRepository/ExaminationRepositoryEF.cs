@@ -21,7 +21,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         public async Task CreateExaminationAsync(Examination examination)
         {
             await _db.Examinations.AddAsync(examination);
-            _db.SaveChanges();
+
+			await _db.SaveChangesAsync();
         }
 
 		public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)

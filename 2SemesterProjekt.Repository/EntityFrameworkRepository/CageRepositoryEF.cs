@@ -20,18 +20,23 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
         public async Task<CageBooking> CreateBookingAsync(CageBooking booking)
         {
-            _db.CageBookings
-                .Add(booking);
+            await _db.CageBookings
+                .AddAsync(booking);
 
-            _db.Entry(booking).GetDatabaseValues();
+            await _db.SaveChangesAsync();
 
             return booking;
         }
 
         public async Task<decimal> GetBasePriceForPetCageAsync(string petSpecies)
         {
-            var cage = _db.Cages
-                .First(ca => ca.Species == petSpecies);
+            var cage = await _db.Cages
+                .FirstOrDefaultAsync(ca => ca.Species == petSpecies);
+
+            if (cage == null)
+            {
+                throw new ArgumentException("Kunne ikke finde nogen bure");
+            }
 
             return cage.Price;
         }
@@ -54,8 +59,13 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
         public async Task<Cage> GetPetCageAsync(string petSpecies)
         {
-            var cage = _db.Cages
-                .First(ca => ca.Species == petSpecies);
+            var cage = await _db.Cages
+                .FirstOrDefaultAsync(ca => ca.Species == petSpecies);
+            
+            if (cage == null)
+            {
+                throw new ArgumentException("Kunne ikke finde nogen bure");
+            }
 
             return cage;
         }
