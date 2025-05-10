@@ -13,7 +13,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
     public partial class ExaminationCard : UserControl
     {
-        private readonly Examination _examination;
+        public Examination _examination; //AGK: Changed from "private readonly" to "public".
         private KonsultationPage _examinationPage;
 
         public ExaminationCard(Examination examination, KonsultationPage examinationPage)
