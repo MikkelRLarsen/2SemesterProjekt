@@ -51,6 +51,8 @@
             label9 = new Label();
             EmployeeNameLabel = new Label();
             BirthdayLabel = new Label();
+            label10 = new Label();
+            MedicineStatusLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)PetPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)CollapsePictureBox).BeginInit();
             SuspendLayout();
@@ -161,7 +163,7 @@
             // 
             CollapsePictureBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             CollapsePictureBox.Location = new Point(626, 178);
-            CollapsePictureBox.Margin = new Padding(2, 2, 2, 2);
+            CollapsePictureBox.Margin = new Padding(2);
             CollapsePictureBox.Name = "CollapsePictureBox";
             CollapsePictureBox.Size = new Size(60, 45);
             CollapsePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -276,11 +278,34 @@
             BirthdayLabel.Text = "##/##/####";
             BirthdayLabel.UseMnemonic = false;
             // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.Location = new Point(350, 113);
+            label10.Name = "label10";
+            label10.Size = new Size(68, 19);
+            label10.TabIndex = 35;
+            label10.Text = "Medicin:";
+            // 
+            // MedicineStatusLabel
+            // 
+            MedicineStatusLabel.AutoSize = true;
+            MedicineStatusLabel.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            MedicineStatusLabel.Location = new Point(454, 113);
+            MedicineStatusLabel.Name = "MedicineStatusLabel";
+            MedicineStatusLabel.Size = new Size(180, 19);
+            MedicineStatusLabel.TabIndex = 36;
+            MedicineStatusLabel.Text = "Ja/Nej/Vides ikke endnu";
+            MedicineStatusLabel.UseMnemonic = false;
+            // 
             // ExaminationCard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BorderStyle = BorderStyle.FixedSingle;
+            Controls.Add(MedicineStatusLabel);
+            Controls.Add(label10);
             Controls.Add(BirthdayLabel);
             Controls.Add(label9);
             Controls.Add(EmployeeNameLabel);
@@ -336,5 +361,7 @@
 		private Label label9;
 		private Label EmployeeNameLabel;
 		private Label BirthdayLabel;
-	}
+        private Label label10;
+        private Label MedicineStatusLabel;
+    }
 }
