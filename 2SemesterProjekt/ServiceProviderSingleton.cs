@@ -25,6 +25,7 @@ namespace _2SemesterProjekt
 			services.AddScoped<IExaminationService, ExaminationService>();
             services.AddScoped<IProductService, ProductService>();
 			services.AddScoped<IExportService, ExportService>();
+			services.AddScoped<ICageService, CageService>();
 
 
 
@@ -36,6 +37,7 @@ namespace _2SemesterProjekt
 			services.AddTransient<IPetRepository, PetRepositoryEF>();
 			services.AddTransient<IExaminationRepository, ExaminationRepositoryEF>();
 			services.AddTransient<IProductRepository, ProductRepositoryEF>();
+			services.AddTransient<ICageRepository, CageRepositoryEF>();
 
 
 			_serviceProvider = services.BuildServiceProvider();
