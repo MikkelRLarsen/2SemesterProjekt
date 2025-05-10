@@ -253,9 +253,9 @@
             label9.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label9.Location = new Point(350, 172);
             label9.Name = "label9";
-            label9.Size = new Size(120, 19);
+            label9.Size = new Size(112, 19);
             label9.TabIndex = 32;
-            label9.Text = "Dyrelæge Navn:";
+            label9.Text = "Dyrlæge Navn:";
             // 
             // EmployeeNameLabel
             // 
@@ -294,9 +294,9 @@
             MedicineStatusLabel.Font = new Font("Gadugi", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             MedicineStatusLabel.Location = new Point(454, 113);
             MedicineStatusLabel.Name = "MedicineStatusLabel";
-            MedicineStatusLabel.Size = new Size(180, 19);
+            MedicineStatusLabel.Size = new Size(113, 19);
             MedicineStatusLabel.TabIndex = 36;
-            MedicineStatusLabel.Text = "Ja/Nej/Vides ikke endnu";
+            MedicineStatusLabel.Text = "Ja/Nej/Ukendt";
             MedicineStatusLabel.UseMnemonic = false;
             // 
             // ExaminationCard

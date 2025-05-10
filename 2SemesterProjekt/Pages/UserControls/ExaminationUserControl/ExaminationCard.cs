@@ -41,6 +41,19 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             EmployeeNameLabel.Text = _examination.Employee.FirstName;
 
             PetPicture.Image = GetImage(_examination.Pet.Species);
+
+            if (_examination.Date > DateTime.Now)
+            {
+                MedicineStatusLabel.Text = "Ukendt";
+            }
+            else if (_examination.Medicine?.MedicineID != null)
+            {
+                MedicineStatusLabel.Text = "Ja";
+            }
+            else
+            {
+                MedicineStatusLabel.Text = "Nej";
+            }
         }
 
         private void CollapsePictureBox_Click(object sender, EventArgs e)
