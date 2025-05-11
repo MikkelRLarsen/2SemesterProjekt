@@ -13,12 +13,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
     public partial class ExaminationCard : UserControl
     {
-        private readonly Examination _examination;
+        public Examination Examination { get; }
         private KonsultationPage _examinationPage;
 
         public ExaminationCard(Examination examination, KonsultationPage examinationPage)
         {
-            _examination = examination;
+            Examination = examination;
             _examinationPage = examinationPage;
             InitializeComponent();
             InitializeUIDesign();
@@ -27,20 +27,20 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private void InitializeUIDesign()
         {
             // Sets all information on Card based on Examination
-            PetNameLabel.Text = _examination.Pet.Name;
-            PetSpeciesLabel.Text = _examination.Pet.Species;
-            BirthdayLabel.Text = _examination.Pet.Birthday.ToShortDateString();
+            PetNameLabel.Text = Examination.Pet.Name;
+            PetSpeciesLabel.Text = Examination.Pet.Species;
+            BirthdayLabel.Text = Examination.Pet.Birthday.ToShortDateString();
 
-            ExaminationLabel.Text = _examination.ExaminationType.Description;
-            DateLabel.Text = _examination.Date.ToShortDateString();
-            StatusLabel.Text = DateTime.Now > _examination.Date ? "Fuldført" : "Kommende";
+            ExaminationLabel.Text = Examination.ExaminationType.Description;
+            DateLabel.Text = Examination.Date.ToShortDateString();
+            StatusLabel.Text = DateTime.Now > Examination.Date ? "Fuldført" : "Kommende";
 
-            CustomerNameLabel.Text = _examination.Pet.Customer.FirstName;
-            CustomerPhoneNumberLabel.Text = _examination.Pet.Customer.PhoneNumber.ToString();
+            CustomerNameLabel.Text = Examination.Pet.Customer.FirstName;
+            CustomerPhoneNumberLabel.Text = Examination.Pet.Customer.PhoneNumber.ToString();
 
-            EmployeeNameLabel.Text = _examination.Employee.FirstName;
+            EmployeeNameLabel.Text = Examination.Employee.FirstName;
 
-            PetPicture.Image = GetImage(_examination.Pet.Species);
+            PetPicture.Image = GetImage(Examination.Pet.Species);
         }
 
         private void CollapsePictureBox_Click(object sender, EventArgs e)

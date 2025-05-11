@@ -52,5 +52,20 @@ namespace _2SemesterProjekt.Services
             ExportToTxtAsync(txtData, fileName);
             // Calls the file creation method.
         }
+
+        public async void ExportInvoiceToTxtAsync(Examination examination, string fileName)
+        {
+            string invoice = $"FAKTURA FOR {examination.ExaminationType.Description.ToUpper()} AF {examination.Pet.Name.ToUpper()}\n" +
+                             $"Kundenavn: {examination.Pet.Customer.FirstName} {examination.Pet.Customer.LastName}\n" +
+                             $"Kæledyr: {examination.Pet.Name}\n" +
+                             $"Udført behandling: {examination.ExaminationTypeID} {examination.ExaminationType.Description} {examination.Price}\n" +
+                             $"Udført den: {examination.Date}\n" +
+                             $"Totalpris: {examination.Price}\n" +
+                             $"Betalingsbetingelser: Netto 7 dage {DateTime.Now.AddDays(7)}\n\n" +
+                             $"Beløbet indbetales på bankkonto:\n" +
+                             $"Bank / Reg.nr. 1234 / Kontonr. 12345678";
+
+            ExportToTxtAsync(invoice, fileName);
+        }
     }
 }
