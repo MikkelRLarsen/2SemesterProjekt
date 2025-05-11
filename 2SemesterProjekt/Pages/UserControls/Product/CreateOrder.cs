@@ -40,7 +40,6 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             _orderPanel = orderPanel;
 
             IServiceScope scope = ServiceProviderSingleton.GetServiceProvider().CreateScope();
-
             _productService = scope.ServiceProvider.GetService<IProductService>();
 
             //_productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();
