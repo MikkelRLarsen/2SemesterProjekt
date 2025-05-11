@@ -15,6 +15,7 @@ namespace _2SemesterProjekt.Domain.Models
         public int DoseMiligram { get; private set; }
         public int DosesTake24Hours { get; private set; }
         public int DoseDurationDays { get; private set; }
+        public DateTime? ManualStartDate { get; set; } = null; // Can't be private, correct?
         public List<Examination> Examinations { get; }
 
         public Medicine(string name, string type, int doseMiligram, int dosesTake24Hours, int doseDurationDays)
