@@ -15,12 +15,13 @@ namespace _2SemesterProjekt.Services
 
         public async Task CreateExaminationAsync(Examination examination)
         {
-			//Checks if the examination is a Double Booking that specific Date. Returns error if Pet or Employee is booked
-			await IsDoubleBooked(examination);
+            //Checks if the examination is a Double Booking that specific Date. Returns error if Pet or Employee is booked
+            await IsDoubleBooked(examination);
             await _examinationRepository.CreateExaminationAsync(examination);
         }
 
-		public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
+
+        public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
 		{
 			return await _examinationRepository.GetAllExaminationOnCustomerPhoneNumber(customerPhoneNumber);
 		}
@@ -57,9 +58,33 @@ namespace _2SemesterProjekt.Services
 
                 if (examinationOnDate.PetID == examination.PetID)
                 {
-					throw new ArgumentException("Pet is already booked that day");
-				}
+                    throw new ArgumentException("Pet is already booked that day");
+                }
             }
+        }
+        public async Task<IEnumerable<Examination>> GetAllInactivesAsync()
+        {
+            IEnumerable<Examination> allExaminations = await _examinationRepository.GetAllInactivesAsync();
+
+            List<Examination> distinctListWithOnlyOneExaminationPrPet = new List<Examination> {};
+
+            // Removes every examination except the first foreach pet
+            int currentPetID = 0; // Keeps track of which pet is being checked right now
+            foreach (Examination examinaion in allExaminations)
+            {
+                if (examinaion.PetID != currentPetID)
+                {
+                    currentPetID = examinaion.PetID;
+                    distinctListWithOnlyOneExaminationPrPet.Add(examinaion);
+                }
+            }
+
+            if (allExaminations == null || allExaminations.Count() == 0)
+            {
+                throw new Exception();
+            }
+
+            return distinctListWithOnlyOneExaminationPrPet;
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using _2SemesterProjekt.Domain.Models;
+﻿using _2SemesterProjekt.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
@@ -15,22 +15,24 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		public DbSet<Product> Products { get; set;}
 		public DbSet<Order> Orders { get; set;}
 		public DbSet<ProductLine> ProductLines { get; set;}
+        public DbSet<CageBooking> CageBookings { get; set; }
+        public DbSet<Cage> Cages { get; set; }
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			optionsBuilder.UseSqlServer(GetConnectionString());
-		}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(GetConnectionString());
+        }
 
-		/// <summary>
-		/// Gets Connectionstring from local folder on Desktop
-		/// </summary>
-		/// <returns></returns>
-		protected static string GetConnectionString()
-		{
-			string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-			string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString.txt");
-			return File.ReadAllText(fullName);
-		}
+        /// <summary>
+        /// Gets Connectionstring from local folder on Desktop
+        /// </summary>
+        /// <returns></returns>
+        protected static string GetConnectionString()
+        {
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string fullName = Path.Combine(desktopPath, "RecipeAppConnectionString.txt");
+            return File.ReadAllText(fullName);
+        }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -43,12 +45,14 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<Product>().ToTable("Product");
 			modelBuilder.Entity<Order>().ToTable("Order");
 			modelBuilder.Entity<ProductLine>().ToTable("ProductLine");
+            modelBuilder.Entity<CageBooking>().ToTable("CageBooking");
+            modelBuilder.Entity<Cage>().ToTable("Cage");
 
-			//Relations
-			modelBuilder.Entity<Customer>()
-				.HasMany(c => c.Pets)
-				.WithOne(p => p.Customer)
-				.HasForeignKey(p => p.CustomerID);
+            //Relations
+            modelBuilder.Entity<Customer>()
+                .HasMany(c => c.Pets)
+                .WithOne(p => p.Customer)
+                .HasForeignKey(p => p.CustomerID);
 
 			modelBuilder.Entity<Customer>()
 				.HasMany(c => c.Orders)
@@ -60,25 +64,25 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.WithOne(p => p.Employee)
 				.HasForeignKey(p => p.EmployeeID);
 
-			modelBuilder.Entity<Examination>()
-				.HasOne(ex => ex.Pet)
-				.WithMany(p => p.Examinations)
-				.HasForeignKey(ex => ex.PetID);
+            modelBuilder.Entity<Examination>()
+                .HasOne(ex => ex.Pet)
+                .WithMany(p => p.Examinations)
+                .HasForeignKey(ex => ex.PetID);
 
-			modelBuilder.Entity<Examination>()
-				.HasOne(ex => ex.Employee)
-				.WithMany(em => em.Examinations)
-				.HasForeignKey(ex => ex.EmployeeID);
+            modelBuilder.Entity<Examination>()
+                .HasOne(ex => ex.Employee)
+                .WithMany(em => em.Examinations)
+                .HasForeignKey(ex => ex.EmployeeID);
 
-			modelBuilder.Entity<ExaminationType>()
-				.HasMany(eType  => eType.Examinations)
-				.WithOne(ex => ex.ExaminationType)
-				.HasForeignKey(ex => ex.ExaminationTypeID);
+            modelBuilder.Entity<Examination>()
+                .HasOne(ex => ex.CageBooking)
+                .WithOne(ca => ca.Examination)
+                .HasForeignKey<Examination>(ex => ex.CageBookingID);
 
-			modelBuilder.Entity<ExaminationTag>()
-				.HasMany(eTag => eTag.ExaminationTypes)
-				.WithOne(eType => eType.ExaminationTag)
-				.HasForeignKey(eType => eType.ExaminationTagID);
+            modelBuilder.Entity<ExaminationType>()
+                .HasMany(eType => eType.Examinations)
+                .WithOne(ex => ex.ExaminationType)
+                .HasForeignKey(ex => ex.ExaminationTypeID);
 
 			modelBuilder.Entity<Order>()
 				.HasMany(o => o.ProductLines)
@@ -89,6 +93,21 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.HasMany(p => p.ProductLines)
 				.WithOne(prLine => prLine.Product)
 				.HasForeignKey(prLine => prLine.ProductID);
+
+            modelBuilder.Entity<ExaminationTag>()
+                .HasMany(eTag => eTag.ExaminationTypes)
+                .WithOne(eType => eType.ExaminationTag)
+                .HasForeignKey(eType => eType.ExaminationTagID);
+
+            modelBuilder.Entity<Cage>()
+                .HasMany(ca => ca.Bookings)
+                .WithOne(cBooking => cBooking.Cage)
+                .HasForeignKey(cBooking => cBooking.CageID);
+
+            modelBuilder.Entity<CageBooking>()
+                .HasOne(ca => ca.Examination)
+                .WithOne(ex => ex.CageBooking)
+                .HasForeignKey<Examination>(ex => ex.CageBookingID);
 
 
 
@@ -103,6 +122,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<Product>().HasKey(pr => pr.ProductID);
 			modelBuilder.Entity<Order>().HasKey(o => o.OrderID);
 			modelBuilder.Entity<ProductLine>().HasKey(prLine => prLine.ProductLineID);
+            modelBuilder.Entity<CageBooking>().HasKey(cBooking => cBooking.CageBookingID);
+            modelBuilder.Entity<Cage>().HasKey(ca => ca.CageID);
 		}
 	}
 }
