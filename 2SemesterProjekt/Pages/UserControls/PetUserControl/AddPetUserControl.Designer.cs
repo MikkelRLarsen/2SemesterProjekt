@@ -31,6 +31,7 @@
             pageNameLabel = new Label();
             petNameTextbox = new TextBox();
             label1 = new Label();
+            label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -39,8 +40,8 @@
             cancelButton = new Button();
             createButton = new Button();
             petBirthdaySelector = new DateTimePicker();
-            ownerPhoneNumberTextbox = new TextBox();
             comboBoxSpecies = new ComboBox();
+            label1 = new Label();
             SuspendLayout();
             // 
             // pageNameLabel
@@ -53,7 +54,6 @@
             pageNameLabel.TabIndex = 3;
             pageNameLabel.Text = "Tilføj et nyt kæledyr";
             pageNameLabel.TextAlign = ContentAlignment.TopCenter;
-            // 
             // petNameTextbox
             // 
             petNameTextbox.Location = new Point(288, 208);
@@ -70,6 +70,7 @@
             label1.Size = new Size(35, 15);
             label1.TabIndex = 7;
             label1.Text = "Navn";
+            // 
             // 
             // label2
             // 
@@ -155,7 +156,6 @@
             ownerPhoneNumberTextbox.Size = new Size(238, 23);
             ownerPhoneNumberTextbox.TabIndex = 18;
             ownerPhoneNumberTextbox.KeyPress += ownerPhoneNumberTextbox_KeyPress;
-            // 
             // comboBoxSpecies
             // 
             comboBoxSpecies.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -164,6 +164,7 @@
             comboBoxSpecies.Name = "comboBoxSpecies";
             comboBoxSpecies.Size = new Size(238, 23);
             comboBoxSpecies.TabIndex = 19;
+            // 
             // 
             // AddPetUserControl
             // 
@@ -191,8 +192,8 @@
 
         #endregion
 
-        private Label pageNameLabel;
         private TextBox petNameTextbox;
+        private Label label1;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -203,7 +204,7 @@
         private Button cancelButton;
         private Button createButton;
         private DateTimePicker petBirthdaySelector;
-        private TextBox ownerPhoneNumberTextbox;
         private ComboBox comboBoxSpecies;
+        private TextBox ownerPhoneNumberTextbox;
     }
 }

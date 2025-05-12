@@ -7,10 +7,12 @@ namespace _2SemesterProjekt.Services
 	public class ExaminationService : IExaminationService
     {
         private readonly IExaminationRepository _examinationRepository;
+        private readonly IExportService _exportService;
 
-		public ExaminationService(IExaminationRepository examinationRepository)
+		public ExaminationService(IExaminationRepository examinationRepository, IExportService exportService)
 		{
 			_examinationRepository = examinationRepository;
+            _exportService = exportService;
 		}
 
         public async Task CreateExaminationAsync(Examination examination)
@@ -19,7 +21,6 @@ namespace _2SemesterProjekt.Services
             await IsDoubleBooked(examination);
             await _examinationRepository.CreateExaminationAsync(examination);
         }
-
 
         public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
 		{
@@ -85,6 +86,27 @@ namespace _2SemesterProjekt.Services
             }
 
             return distinctListWithOnlyOneExaminationPrPet;
+        }
+
+        public async Task DeleteExaminationAsync(Examination examination)
+        {
+            await _examinationRepository.DeleteExaminationAsync(examination);
+        }
+
+        public async Task<bool> CheckIfExaminationCanBeDeleted(DateTime examinationTime)
+        {
+            if (examinationTime <= DateTime.UtcNow)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public async Task ExportInvoiceToTxtAsync(Invoice invoiceExamination, string fileName)
+        {
+            await _exportService.ExportInvoiceToTxtAsync(invoiceExamination, fileName);
         }
     }
 }

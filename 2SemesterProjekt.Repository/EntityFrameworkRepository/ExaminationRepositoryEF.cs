@@ -26,7 +26,25 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			await _db.SaveChangesAsync();
         }
 
-		public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
+        public async Task DeleteExaminationAsync(Examination examination)
+        {
+
+            try
+            {
+                Examination examinationToDelete = await (from ex in _db.Examinations
+                                                         where ex.ExaminationID == examination.ExaminationID
+                                                         select ex).FirstOrDefaultAsync();
+
+                _db.Examinations.Remove(examinationToDelete);
+                await _db.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new ArgumentException("Examination could not be found.");
+            }
+        }
+
+        public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
 		{
 			try
 			{
@@ -38,6 +56,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 						.ThenInclude(p => p.Species)
                     .Include(e => e.Employee)
 					.Include(e => e.ExaminationType)
+					.Include(e => e.CageBooking)
 					.ToListAsync();
 			}
 			catch (Exception)
@@ -68,7 +87,9 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.Include(e => e.Pet)
 					.ThenInclude(p => p.Species)
                 .Include(e => e.Employee)
+				.Include(me => me.Medicine)
                 .Include(e => e.ExaminationType)
+				.Include (e => e.CageBooking)
                 .ToListAsync();
 		}
 
