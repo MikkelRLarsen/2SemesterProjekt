@@ -41,6 +41,8 @@
             totalPriceTextBox = new TextBox();
             labelCageBooking = new Label();
             cageBookingTextBox = new TextBox();
+            createButton = new Button();
+            cancelButton = new Button();
             SuspendLayout();
             // 
             // pageNameLabel
@@ -152,10 +154,36 @@
             cageBookingTextBox.TabIndex = 19;
             cageBookingTextBox.Visible = false;
             // 
+            // createButton
+            // 
+            createButton.BackColor = Color.MediumAquamarine;
+            createButton.FlatStyle = FlatStyle.Popup;
+            createButton.Location = new Point(707, 593);
+            createButton.Name = "createButton";
+            createButton.Size = new Size(169, 58);
+            createButton.TabIndex = 20;
+            createButton.Text = "Opret faktura";
+            createButton.UseVisualStyleBackColor = false;
+            createButton.Click += createButton_Click;
+            // 
+            // cancelButton
+            // 
+            cancelButton.BackColor = Color.IndianRed;
+            cancelButton.FlatStyle = FlatStyle.Popup;
+            cancelButton.Location = new Point(294, 593);
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new Size(169, 58);
+            cancelButton.TabIndex = 21;
+            cancelButton.Text = "Annuller";
+            cancelButton.UseVisualStyleBackColor = false;
+            cancelButton.Click += cancelButton_Click;
+            // 
             // ExaminationInvoice
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(cancelButton);
+            Controls.Add(createButton);
             Controls.Add(cageBookingTextBox);
             Controls.Add(labelCageBooking);
             Controls.Add(label5);
@@ -191,5 +219,7 @@
         private TextBox totalPriceTextBox;
         private Label labelCageBooking;
         private TextBox cageBookingTextBox;
+        private Button createButton;
+        private Button cancelButton;
     }
 }

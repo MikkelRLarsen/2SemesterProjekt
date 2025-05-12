@@ -11,13 +11,13 @@ namespace _2SemesterProjekt.Services
 {
     public class ExportService : IExportService
     {
-        public async void ExportToTxtAsync(string txtData, string fileName)
+        public async Task ExportToTxtAsync(string txtData, string fileName)
         {
-            File.WriteAllText(fileName, txtData);
+            await File.WriteAllTextAsync(fileName, txtData);
             // Creates a textfile.
         }
 
-        public async void ExportStockStatusToTxtAsync(IEnumerable<Product> products, string fileName)
+        public async Task ExportStockStatusToTxtAsync(IEnumerable<Product> products, string fileName)
         {
             string productList = ""; // Info about the products will get saved here.
             decimal stockWorth = 0; // The worth of the stock will get saved here.
@@ -49,23 +49,24 @@ namespace _2SemesterProjekt.Services
             string txtData = productList.Insert(0, $"Værdi af lagerbeholdning: {stockWorth}\n\n");
             // The Insert()-method inserts the string at index 0 in productList.
 
-            ExportToTxtAsync(txtData, fileName);
+            await ExportToTxtAsync(txtData, fileName);
             // Calls the file creation method.
         }
 
-        public async void ExportInvoiceToTxtAsync(Examination examination, string fileName)
+        public async Task ExportInvoiceToTxtAsync(Invoice invoiceExamination, string fileName)
         {
-            string invoice = $"FAKTURA FOR {examination.ExaminationType.Description.ToUpper()} AF {examination.Pet.Name.ToUpper()}\n" +
-                             $"Kundenavn: {examination.Pet.Customer.FirstName} {examination.Pet.Customer.LastName}\n" +
-                             $"Kæledyr: {examination.Pet.Name}\n" +
-                             $"Udført behandling: {examination.ExaminationTypeID} {examination.ExaminationType.Description} {examination.Price}\n" +
-                             $"Udført den: {examination.Date}\n" +
-                             $"Totalpris: {examination.Price}\n" +
-                             $"Betalingsbetingelser: Netto 7 dage {DateTime.Now.AddDays(7)}\n\n" +
+            string invoice = $"FAKTURA FOR {invoiceExamination.ExaminationDescription.ToUpper()} AF {invoiceExamination.PetName.ToUpper()}\n" +
+                             $"Kundenavn: {invoiceExamination.CustomerName}\n" +
+                             $"Kæledyr: {invoiceExamination.PetName}\n" +
+                             $"Udført behandling: {invoiceExamination.ExaminationDescription}\n" +
+                             $"Udført den: {invoiceExamination.Date:dd-MM-yyyy}\n" +
+                             $"Totalpris: {invoiceExamination.TotalPrice}\n" +
+                             $"Betalingsbetingelser: Netto 7 dage {DateTime.Now.AddDays(7):dd-MM-yyyy}\n\n" +
                              $"Beløbet indbetales på bankkonto:\n" +
                              $"Bank / Reg.nr. 1234 / Kontonr. 12345678";
 
-            ExportToTxtAsync(invoice, fileName);
+            await ExportToTxtAsync(invoice, fileName);
+            // Calls the file creation method.
         }
     }
 }

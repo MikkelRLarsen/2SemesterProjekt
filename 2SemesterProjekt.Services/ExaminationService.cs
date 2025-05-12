@@ -7,10 +7,12 @@ namespace _2SemesterProjekt.Services
 	public class ExaminationService : IExaminationService
     {
         private readonly IExaminationRepository _examinationRepository;
+        private readonly IExportService _exportService;
 
-		public ExaminationService(IExaminationRepository examinationRepository)
+		public ExaminationService(IExaminationRepository examinationRepository, IExportService exportService)
 		{
 			_examinationRepository = examinationRepository;
+            _exportService = exportService;
 		}
 
         public async Task CreateExaminationAsync(Examination examination)
@@ -85,6 +87,11 @@ namespace _2SemesterProjekt.Services
             }
 
             return distinctListWithOnlyOneExaminationPrPet;
+        }
+
+        public async Task ExportInvoiceToTxtAsync(Invoice invoiceExamination, string fileName)
+        {
+            await _exportService.ExportInvoiceToTxtAsync(invoiceExamination, fileName);
         }
     }
 }

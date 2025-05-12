@@ -36,12 +36,6 @@ namespace _2SemesterProjekt.Domain.Models
 		/// <returns>Bool</returns>
 		protected void InformationValid()
         {
-            // Validate startDate
-            if (StartDate.Date < DateTime.Today)
-            {
-                throw new ArgumentException("Startdate is invalid");
-            }
-
             ValidateTotalPrice();
 
             if (CageID <= 0)

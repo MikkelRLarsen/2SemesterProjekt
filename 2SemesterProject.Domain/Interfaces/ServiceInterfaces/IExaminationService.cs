@@ -9,5 +9,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 		public Task<IEnumerable<Examination>> GetAllInactivesAsync();
 		public Task<IEnumerable<Examination>> GetAllExaminationsAsync();
 		public Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber);
+		public Task ExportInvoiceToTxtAsync(Invoice invoiceExamination, string fileName);
     }
 }
