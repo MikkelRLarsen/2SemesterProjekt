@@ -40,13 +40,6 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             }
         }
 
-        public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
-        {
-			return await _db.Customers
-	            .Include(c => c.Pets)
-	            .ToListAsync();
-		}
-
 		public int GetCustomerIDByPhoneNumber(int ownerPhoneNumber)
 		{
 			var owner = _db.Customers.FirstOrDefault(c => c.PhoneNumber == ownerPhoneNumber);

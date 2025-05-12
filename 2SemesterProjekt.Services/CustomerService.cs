@@ -24,11 +24,6 @@ namespace _2SemesterProjekt.Services
 			await _customerRepository.CreateCustomerAsync(customer);
 		}
 
-		public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
-		{
-			return await _customerRepository.GetAllCustomersAsync();
-		}
-
 		public string[] GetCustomerTypes()
 		{
 			return _customerTypes;
