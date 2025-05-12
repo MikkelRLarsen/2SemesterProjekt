@@ -47,7 +47,7 @@ namespace _2SemesterProjekt.Pages
         {
             if (!await _examinationService.CheckIfExaminationCanBeDeleted(examinationCard._examination.Date))
 			{
-                DialogResult messageBoxWarning = MessageBox.Show("Du kan ikke slette fremtidige konsultationstider!", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult messageBoxWarning = MessageBox.Show("Du kan ikke slette ældre konsultationstider!", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
             }
 

@@ -94,7 +94,7 @@ namespace _2SemesterProjekt.Services
 
         public async Task<bool> CheckIfExaminationCanBeDeleted(DateTime examinationTime)
         {
-            if (examinationTime > DateTime.UtcNow)
+            if (examinationTime <= DateTime.UtcNow)
             {
                 return false;
             }
