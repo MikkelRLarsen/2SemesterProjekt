@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
+namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 {
-    public interface IMedicineRepository
+    public interface IMedicineService
     {
         public Task UpdateMedicineAsync(Medicine medicine);
     }

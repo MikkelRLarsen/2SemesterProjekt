@@ -8,7 +8,7 @@ namespace _2SemesterProjekt.Domain.Models
 		public int PetID { get; private set; }
 		public int EmployeeID { get; private set; }
         public int? MedicineID { get; private set; }
-        public DateTime Date { get; set; } //AGK: Deleted private.
+        public DateTime Date { get; private set; }
 		public int ExaminationTypeID { get; private set; }
 		public decimal Price { get; private set; }
 		public Pet Pet { get; }

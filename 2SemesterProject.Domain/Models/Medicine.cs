@@ -15,7 +15,7 @@ namespace _2SemesterProjekt.Domain.Models
         public int DoseMiligram { get; private set; }
         public int DosesTake24Hours { get; private set; }
         public int DoseDurationDays { get; private set; }
-        public DateTime? ManualStartDate { get; set; } = null; // Can't be private, correct?
+        public DateTime? StartDate { get; private set; }
         public List<Examination> Examinations { get; }
 
         public Medicine(string name, string type, int doseMiligram, int dosesTake24Hours, int doseDurationDays)
@@ -25,6 +25,21 @@ namespace _2SemesterProjekt.Domain.Models
             DoseMiligram = doseMiligram;
             DosesTake24Hours = dosesTake24Hours;
             DoseDurationDays = doseDurationDays;
+        }
+        public void UpdateMedicineStartDate(DateTime newDate)
+        {
+            string displayMessage = "Dato er ikke gyldig.";
+            try
+            {
+                if (newDate < DateTime.Now)
+                {
+                    StartDate = newDate;
+                }
+            }
+            catch (Exception ex)
+            {
+                displayMessage += $"{ex}";
+            }
         }
     }
 

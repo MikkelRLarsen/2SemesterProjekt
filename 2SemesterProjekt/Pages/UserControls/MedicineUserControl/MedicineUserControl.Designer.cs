@@ -52,6 +52,7 @@
             ActualMedicineEndDateLabel = new Label();
             ManualDateTimePicker = new DateTimePicker();
             ManualDateTimePickerLabel = new Label();
+            ChangeStartDateButton = new Button();
             SuspendLayout();
             // 
             // MedicineLabel
@@ -286,10 +287,21 @@
             ManualDateTimePickerLabel.TabIndex = 42;
             ManualDateTimePickerLabel.Text = "Vælg ny dato:";
             // 
+            // ChangeStartDateButton
+            // 
+            ChangeStartDateButton.Location = new Point(606, 510);
+            ChangeStartDateButton.Name = "ChangeStartDateButton";
+            ChangeStartDateButton.Size = new Size(100, 23);
+            ChangeStartDateButton.TabIndex = 43;
+            ChangeStartDateButton.Text = "Opret ny dato";
+            ChangeStartDateButton.UseVisualStyleBackColor = true;
+            ChangeStartDateButton.Click += ChangeStartDateButton_Click;
+            // 
             // MedicineUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(ChangeStartDateButton);
             Controls.Add(ManualDateTimePickerLabel);
             Controls.Add(ManualDateTimePicker);
             Controls.Add(ActualMedicineEndDateLabel);
@@ -346,5 +358,6 @@
         private Label ActualMedicineEndDateLabel;
         private DateTimePicker ManualDateTimePicker;
         private Label ManualDateTimePickerLabel;
+        private Button ChangeStartDateButton;
     }
 }

@@ -18,10 +18,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             _db = db;
         }
-        public async Task<IEnumerable<Medicine>> GetAllMedicinesAsync()
+        public async Task UpdateMedicineAsync(Medicine medicine)
         {
-            return await _db.Medicines
-                .ToListAsync();
+            _db.Update(medicine);
+            await _db.SaveChangesAsync();
         }
+
     }
 }

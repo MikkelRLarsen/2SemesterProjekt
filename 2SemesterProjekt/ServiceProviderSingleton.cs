@@ -25,7 +25,7 @@ namespace _2SemesterProjekt
 			services.AddScoped<IExaminationService, ExaminationService>();
             services.AddScoped<IProductService, ProductService>();
 			services.AddScoped<IExportService, ExportService>();
-
+			services.AddScoped<IMedicineService, MedicineService>();
 
 
 
