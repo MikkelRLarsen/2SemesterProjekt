@@ -11,5 +11,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
     {
         public void ExportToTxtAsync(string exportType, string fileName);
         public void ExportStockStatusToTxtAsync(IEnumerable<Product> products, string fileName);
+        public void ExportInvoiceToTxtAsync(Examination examination, string fileName);
     }
 }
