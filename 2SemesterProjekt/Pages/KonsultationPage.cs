@@ -43,14 +43,20 @@ namespace _2SemesterProjekt.Pages
             }
         }
 
-		private void ExaminationDeletion(ExaminationCard examinationCard)
-		{
+		private async void ExaminationDeletion(ExaminationCard examinationCard)
+        {
+            if (!await _examinationService.CheckIfExaminationCanBeDeleted(examinationCard._examination.Date))
+			{
+                DialogResult messageBoxWarning = MessageBox.Show("Du kan ikke slette fremtidige konsultationstider!", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+            }
+
             DialogResult messageBoxResult = MessageBox.Show("Er du sikker på, at denne konsultationstid skal slettes?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             if (messageBoxResult == DialogResult.Yes)
             {
 				// Call examination deletion method from service
-				_examinationService.DeleteExaminationAsync(examinationCard._examination);
+				await _examinationService.DeleteExaminationAsync(examinationCard._examination);
 				MessageBox.Show("Konsultationstiden er blevet slettet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				ReloadPage();
             }

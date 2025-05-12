@@ -91,5 +91,17 @@ namespace _2SemesterProjekt.Services
         {
             await _examinationRepository.DeleteExaminationAsync(examination);
         }
+
+        public async Task<bool> CheckIfExaminationCanBeDeleted(DateTime examinationTime)
+        {
+            if (examinationTime > DateTime.UtcNow)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
