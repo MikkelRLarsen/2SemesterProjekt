@@ -19,8 +19,6 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
 
             await _db.Orders.AddAsync(order);
-
-            _db.Entry(order).GetDatabaseValues();
             await _db.SaveChangesAsync();
 
             return order.OrderID;
