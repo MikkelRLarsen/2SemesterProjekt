@@ -9,14 +9,15 @@ namespace _2SemesterProjekt.Domain.Models
     public class Cage
     {
         public int CageID { get; init; }
-        public string Species { get; private set; }
+        public int SpeciesID { get; private set; }
         public decimal Price { get; private set; }
+        public Species Species { get; }
         public List<CageBooking> Bookings { get; }
 
-        public Cage(int cageID, string species, decimal price)
+        public Cage(int cageID, int speciesID, decimal price)
         {
             CageID = cageID;
-            Species = species;
+            SpeciesID = speciesID;
             Price = price;
         }
     }

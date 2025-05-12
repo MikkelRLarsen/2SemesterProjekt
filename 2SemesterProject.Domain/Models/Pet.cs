@@ -5,19 +5,20 @@
         public int PetID { get; init; }
         public int CustomerID { get; protected set; }
         public int? EmployeeID { get; protected set; }
+        public int SpeciesID { get; protected set; }
         public string Name { get; protected set; }
-        public string Species { get; protected set; }
         public DateTime Birthday { get; protected set; }
 
         public Customer Customer { get; }
         public Employee? Employee { get; }
+        public Species Species { get; }
         public List<Examination> Examinations { get; }
 
-        public Pet(int customerID, string name, string species, DateTime birthday, int? employeeID)
+        public Pet(int customerID, string name, int speciesID, DateTime birthday, int? employeeID)
         {
             CustomerID = customerID;
             Name = name;
-            Species = species;
+            SpeciesID = speciesID;
             Birthday = birthday;
             EmployeeID = employeeID;
 
