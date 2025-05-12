@@ -15,11 +15,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 	{
 		// private readonly Examination _examination;
 
+		private readonly KonsultationPage _examinationPage;
 		public Examination _examination { get; }
 
-		public ExaminationCard(Examination examination)
+		public ExaminationCard(Examination examination, KonsultationPage examinationPage)
 		{
 			_examination = examination;
+			_examinationPage = examinationPage;
 			InitializeComponent();
 			InitializeUIDesign();
 		}
@@ -64,5 +66,17 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			return image;
 		}
+
+		private async void ExaminationCard_Click(object sender, EventArgs e)
+		{
+            if (_examinationPage.ExaminationCard != null) // protects against null reference exceptions the first time it's clicked
+            {
+                _examinationPage.ExaminationCard.BackColor = SystemColors.Window; // If a card was previously selected, reset its background color
+            }
+
+            _examinationPage.ExaminationCard = this; // Set the currently clicked card as the new selected card
+
+            this.BackColor = SystemColors.ActiveBorder;
+        }
 	}
 }

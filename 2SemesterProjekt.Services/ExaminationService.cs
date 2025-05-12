@@ -87,9 +87,9 @@ namespace _2SemesterProjekt.Services
             return distinctListWithOnlyOneExaminationPrPet;
         }
 
-        public Task DeleteExaminationAsync(Examination examination)
+        public async Task DeleteExaminationAsync(Examination examination)
         {
-            throw new NotImplementedException();
+            await _examinationRepository.DeleteExaminationAsync(examination);
         }
     }
 }

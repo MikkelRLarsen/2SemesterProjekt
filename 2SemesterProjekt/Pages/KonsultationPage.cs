@@ -51,6 +51,8 @@ namespace _2SemesterProjekt.Pages
             {
 				// Call examination deletion method from service
 				_examinationService.DeleteExaminationAsync(examinationCard._examination);
+				MessageBox.Show("Konsultationstiden er blevet slettet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				ReloadPage();
             }
 			else if (messageBoxResult == DialogResult.No)
 			{
@@ -86,7 +88,7 @@ namespace _2SemesterProjekt.Pages
 
 					foreach (var examination in allCustomerExamination)
 					{
-						ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination));
+						ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
 					}
 				}
 				else // If ValidPhoneNumberTextBox == False
@@ -98,7 +100,7 @@ namespace _2SemesterProjekt.Pages
 
 					foreach (var examination in allExaminations)
 					{
-						ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination));
+						ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
 					}
 				}
 
@@ -111,6 +113,18 @@ namespace _2SemesterProjekt.Pages
 			}
 
 		}
+
+		private async void ReloadPage()
+		{
+            IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
+
+            ExaminationFlowPanel.Controls.Clear();
+
+            foreach (var examination in allExaminations)
+            {
+                ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
+            }
+        }
 
 		private bool ValidPhoneNumberTextBox()
 		{

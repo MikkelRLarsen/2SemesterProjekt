@@ -28,11 +28,20 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
         public async Task DeleteExaminationAsync(Examination examination)
         {
-            Examination examinationToDelete = await (from ex in _db.Examinations
-                                              where ex.ExaminationID == examination.ExaminationID
-                                              select ex).FirstOrDefaultAsync();
 
-            _db.Examinations.Remove(examinationToDelete);
+            try
+            {
+                Examination examinationToDelete = await (from ex in _db.Examinations
+                                                         where ex.ExaminationID == examination.ExaminationID
+                                                         select ex).FirstOrDefaultAsync();
+
+                _db.Examinations.Remove(examinationToDelete);
+                await _db.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new ArgumentException("Examination could not be found.");
+            }
         }
 
         public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
