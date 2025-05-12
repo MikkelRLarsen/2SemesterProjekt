@@ -55,7 +55,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             _invoice.PetName = petNameTextBox.Text;
             _invoice.Date = dateTextBox.Text;
             _invoice.ExaminationDescription = examinationTextBox.Text;
-            _invoice.TotalPrice = totalPriceTextBox;
+            _invoice.TotalPrice = totalPriceTextBox.ToString();
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Tekstfil|*.txt";
