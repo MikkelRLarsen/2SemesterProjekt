@@ -8,11 +8,11 @@ namespace _2SemesterProjekt.Domain.Models
 {
     public class ProductLine
     {
-        public int ProductLineID { get; set; }
-        public int ProductID { get; set; }
-        public int OrderID { get; set; }
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
+        public int ProductLineID { get; private set; }
+        public int ProductID { get; private set; }
+        public int OrderID { get; private set; }
+        public int Quantity { get; private set; }
+        public decimal Price { get; private set; }
         public Order Order { get; }
         public Product Product { get; }
 
