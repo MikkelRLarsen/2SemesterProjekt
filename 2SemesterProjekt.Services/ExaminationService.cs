@@ -22,7 +22,6 @@ namespace _2SemesterProjekt.Services
             await _examinationRepository.CreateExaminationAsync(examination);
         }
 
-
         public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
 		{
 			return await _examinationRepository.GetAllExaminationOnCustomerPhoneNumber(customerPhoneNumber);

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace _2SemesterProjekt.Domain.Models
 {
+    // Model for exporting invoice
     public class Invoice
     {
         public int InvoiceID { get; init; }
@@ -16,6 +17,7 @@ namespace _2SemesterProjekt.Domain.Models
         public string? CageBookingInfo { get; set; }
         public string TotalPrice { get; set; }
 
+        // Static method to call from UI
         public static Invoice FromExamination(Examination examination)
         {
             string cageBookingInfo = string.Empty;

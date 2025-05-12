@@ -55,6 +55,7 @@ namespace _2SemesterProjekt.Services
 
         public async Task ExportInvoiceToTxtAsync(Invoice invoiceExamination, string fileName)
         {
+            // Sets the txt file with relevant text
             string invoice = $"FAKTURA FOR {invoiceExamination.ExaminationDescription.ToUpper()} AF {invoiceExamination.PetName.ToUpper()}\n" +
                              $"Kundenavn: {invoiceExamination.CustomerName}\n" +
                              $"Kæledyr: {invoiceExamination.PetName}\n" +
@@ -65,8 +66,8 @@ namespace _2SemesterProjekt.Services
                              $"Beløbet indbetales på bankkonto:\n" +
                              $"Bank / Reg.nr. 1234 / Kontonr. 12345678";
 
-            await ExportToTxtAsync(invoice, fileName);
             // Calls the file creation method.
+            await ExportToTxtAsync(invoice, fileName);
         }
     }
 }

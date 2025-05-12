@@ -29,11 +29,6 @@ namespace _2SemesterProjekt.Domain.Models
             InformationValid();
         }
 
-        /// <summary>
-		/// Acceptcriteria:
-		/// StartDate can't be before today
-        /// Decimal
-		/// <returns>Bool</returns>
 		protected void InformationValid()
         {
             ValidateTotalPrice();

@@ -28,17 +28,19 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
         private void ExaminationInvoice_Load(object sender, EventArgs e)
         {
-            _invoice = Invoice.FromExamination(ExaminationCard.Examination);
+            _invoice = Invoice.FromExamination(ExaminationCard.Examination); // Converts Examination to an editable invoice
 
-            pageNameLabel.Text = $"Faktura for {_invoice.PetName}";
-            pageNameLabel.Location = new Point((this.Width - pageNameLabel.Width) / 2, pageNameLabel.Location.Y);
+            pageNameLabel.Text = $"Faktura for {_invoice.PetName}"; // Pagetitel
+            pageNameLabel.Location = new Point((this.Width - pageNameLabel.Width) / 2, pageNameLabel.Location.Y); // Sets pagetitel in middel of page
 
+            // Adds the invoice information
             customerNameTextbox.Text = $"{_invoice.CustomerName}";
             petNameTextBox.Text = _invoice.PetName;
             dateTextBox.Text = _invoice.Date;
             examinationTextBox.Text = _invoice.ExaminationDescription;
             totalPriceTextBox.Text = _invoice.TotalPrice.ToString();
 
+            // Adds the cagebooking info if added
             if (!string.IsNullOrEmpty(_invoice.CageBookingInfo))
             {
                 labelCageBooking.Visible = true;
@@ -49,19 +51,20 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            string displayMessage = string.Empty;
-
+            // Sets the changed information for the invoice
             _invoice.CustomerName = customerNameTextbox.Text;
             _invoice.PetName = petNameTextBox.Text;
             _invoice.Date = dateTextBox.Text;
             _invoice.ExaminationDescription = examinationTextBox.Text;
             _invoice.TotalPrice = totalPriceTextBox.ToString();
 
+            // Creates savefile dialog to make user chose være they wan't to save file
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Tekstfil|*.txt";
             saveFileDialog.FileName = $"Faktura for {_invoice.ExaminationDescription.ToLower()} af {_invoice.PetName}.txt";
             saveFileDialog.Title = "Gem din tekstfil";
 
+            // Execute if user presses OK
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 _examinationService.ExportInvoiceToTxtAsync(_invoice, saveFileDialog.FileName);
