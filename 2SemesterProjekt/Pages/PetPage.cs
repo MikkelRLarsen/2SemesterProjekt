@@ -42,7 +42,7 @@ namespace _2SemesterProjekt.Pages
         }
         private void ShowPetCreation(object sender, EventArgs e)
         {
-            var addPetControl = new AddPetUserControl();
+            var addPetControl = new AddPetUserControl(this);
             this.Controls.Add(addPetControl); // Load the new page
 			addPetControl.BringToFront();
         }

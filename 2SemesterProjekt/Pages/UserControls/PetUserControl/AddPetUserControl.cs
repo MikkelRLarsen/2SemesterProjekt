@@ -11,13 +11,15 @@ namespace _2SemesterProjekt.Pages
         private readonly IPetService _petService;
         private readonly ICustomerService _customerService;
         private readonly IEmployeeService _employeeService;
-        public AddPetUserControl()
+        private readonly PetPage _petPage;
+        public AddPetUserControl(PetPage petPage)
         {
             InitializeComponent();
             petBirthdaySelector.MaxDate = DateTime.Today;
             _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>()!;
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
             _employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
+            _petPage = petPage;
         }
 
         private async void AddPetPage_Load(object sender, EventArgs e)
@@ -133,7 +135,8 @@ namespace _2SemesterProjekt.Pages
                     {
                         await _petService.CreatePetAsync(pet); // The newly instantiated Pet object gets added to the DB.
                         displayMessage += $"{pet.Name} er blevet tilføjet til systemet.";
-                        
+                        _petPage.RefreshPetList(); // Refresh PetPages petlist to reflect changes
+                        this.Parent!.Controls.Remove(this); // Clear existing content (Parent is PetPage)
                     }
                 }
                 catch (Exception ex)
