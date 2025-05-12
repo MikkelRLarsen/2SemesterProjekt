@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,32 @@ namespace _2SemesterProjekt.Domain.Models
             CustomerID = customerID;
             OrderDate = orderDate;
             TotalPrice = totalPrice;
+
+            CustomerValid();
+            PriceValid();
         }
         public Order(DateTime orderDate, decimal totalPrice)
         {
             OrderDate = orderDate;
             TotalPrice = totalPrice;
+
+            PriceValid();
+        }
+
+        protected void CustomerValid()
+        {
+            if (CustomerID == 0)
+            {
+                throw new ArgumentException("CustomerID is 0");
+            }
+        }
+
+        protected void PriceValid()
+        {
+            if (TotalPrice < 0)
+            {
+                throw new ArgumentException("TotalPrice is a negative number");
+            }
         }
     }
 }
