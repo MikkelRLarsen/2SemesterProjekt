@@ -19,7 +19,16 @@ namespace _2SemesterProjekt.Services
 
         public async Task CreateProductLinesAsync(int orderID, List<Product> products)
         {
-            await _productLineRepository.CreateProductLinesAsync(orderID, products);
+            foreach (var product in products)
+            {
+                ProductLine productLine = new ProductLine(
+                    product.ProductID,
+                    orderID,
+                    product.QuantityInOrder,
+                    product.TotalPrice);
+
+                await _productLineRepository.CreateProductLinesAsync(productLine);
+            }
         }
     }
 }

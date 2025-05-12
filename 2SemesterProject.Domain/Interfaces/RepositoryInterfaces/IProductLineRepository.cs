@@ -9,6 +9,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 {
     public interface IProductLineRepository
     {
-        public Task CreateProductLinesAsync(int orderID, List<Product> products);
+        public Task CreateProductLinesAsync(ProductLine productLine);
     }
 }

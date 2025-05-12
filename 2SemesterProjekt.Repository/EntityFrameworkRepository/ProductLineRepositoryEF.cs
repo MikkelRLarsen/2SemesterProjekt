@@ -16,19 +16,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             _db = db;
         }
 
-        public async Task CreateProductLinesAsync(int orderID, List<Product> products)
+        public async Task CreateProductLinesAsync(ProductLine productLine)
         {
-            foreach (var product in products)
-            {
-                ProductLine productLine = new ProductLine(
-                    product.ProductID,
-                    orderID,
-                    product.QuantityInOrder,
-                    product.TotalPrice);
-
-                await _db.AddAsync(productLine);
-                await _db.SaveChangesAsync();
-            }
+            await _db.AddAsync(productLine);
+            await _db.SaveChangesAsync();
         }
     }
 }
