@@ -133,6 +133,7 @@ namespace _2SemesterProjekt.Pages
                     {
                         await _petService.CreatePetAsync(pet); // The newly instantiated Pet object gets added to the DB.
                         displayMessage += $"{pet.Name} er blevet tilføjet til systemet.";
+                        
                     }
                 }
                 catch (Exception ex)

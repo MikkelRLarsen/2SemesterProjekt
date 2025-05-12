@@ -183,5 +183,15 @@ namespace _2SemesterProjekt.Pages
                 textBoxCustomerPhoneNumber.ForeColor = SystemColors.WindowText;
             }
         }
+
+        public async void RefreshPetList()
+        {
+            _listOfPets = await _petService.GetAllPetsAsync();
+            flowLayoutPanel1.Controls.Clear();
+            foreach (var pet in _listOfPets)
+            {
+                flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
+            }
+        }
     }
 }
