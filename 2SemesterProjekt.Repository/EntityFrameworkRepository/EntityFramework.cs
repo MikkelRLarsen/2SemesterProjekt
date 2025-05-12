@@ -4,17 +4,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
-    public class EntityFramework : DbContext
-    {
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Pet> Pets { get; set; }
-        public DbSet<Examination> Examinations { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<ExaminationType> ExaminationTypes { get; set; }
-        public DbSet<ExaminationTag> ExaminationTags { get; set; }
-        public DbSet<Product> Products { get; set; }
+	public class EntityFramework : DbContext
+	{
+		public DbSet<Customer> Customers { get; set;}
+		public DbSet<Pet> Pets { get; set;}
+		public DbSet<Examination> Examinations { get; set;}
+		public DbSet<Employee> Employees { get; set;}
+		public DbSet<ExaminationType> ExaminationTypes { get; set;}
+		public DbSet<ExaminationTag> ExaminationTags { get; set;}
+		public DbSet<Product> Products { get; set;}
+		public DbSet<Medicine> Medicines { get; set;}
+		public DbSet<Order> Orders { get; set;}
+		public DbSet<ProductLine> ProductLines { get; set;}
         public DbSet<CageBooking> CageBookings { get; set; }
         public DbSet<Cage> Cages { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,15 +36,18 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             return File.ReadAllText(fullName);
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Customer>().ToTable("Customer");
-            modelBuilder.Entity<Pet>().ToTable("Pet");
-            modelBuilder.Entity<Examination>().ToTable("Examination");
-            modelBuilder.Entity<Employee>().ToTable("Employee");
-            modelBuilder.Entity<ExaminationType>().ToTable("ExaminationType");
-            modelBuilder.Entity<ExaminationTag>().ToTable("ExaminationTag");
-            modelBuilder.Entity<Product>().ToTable("Product");
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Customer>().ToTable("Customer");
+			modelBuilder.Entity<Pet>().ToTable("Pet");
+			modelBuilder.Entity<Examination>().ToTable("Examination");
+			modelBuilder.Entity<Employee>().ToTable("Employee");
+			modelBuilder.Entity<ExaminationType>().ToTable("ExaminationType");
+			modelBuilder.Entity<ExaminationTag>().ToTable("ExaminationTag");
+			modelBuilder.Entity<Product>().ToTable("Product");
+			modelBuilder.Entity<Medicine>().ToTable("Medicine");
+			modelBuilder.Entity<Order>().ToTable("Order");
+			modelBuilder.Entity<ProductLine>().ToTable("ProductLine");
             modelBuilder.Entity<CageBooking>().ToTable("CageBooking");
             modelBuilder.Entity<Cage>().ToTable("Cage");
 
@@ -50,10 +57,15 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .WithOne(p => p.Customer)
                 .HasForeignKey(p => p.CustomerID);
 
-            modelBuilder.Entity<Employee>()
-                .HasMany(em => em.Pets)
-                .WithOne(p => p.Employee)
-                .HasForeignKey(p => p.EmployeeID);
+			modelBuilder.Entity<Customer>()
+				.HasMany(c => c.Orders)
+				.WithOne(o => o.Customer)
+				.HasForeignKey(o => o.CustomerID);
+
+			modelBuilder.Entity<Employee>()
+				.HasMany(em => em.Pets)
+				.WithOne(p => p.Employee)
+				.HasForeignKey(p => p.EmployeeID);
 
             modelBuilder.Entity<Examination>()
                 .HasOne(ex => ex.Pet)
@@ -75,6 +87,16 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .WithOne(ex => ex.ExaminationType)
                 .HasForeignKey(ex => ex.ExaminationTypeID);
 
+			modelBuilder.Entity<Order>()
+				.HasMany(o => o.ProductLines)
+				.WithOne(prLine => prLine.Order)
+				.HasForeignKey(prLine => prLine.OrderID);
+
+			modelBuilder.Entity<Product>()
+				.HasMany(p => p.ProductLines)
+				.WithOne(prLine => prLine.Product)
+				.HasForeignKey(prLine => prLine.ProductID);
+
             modelBuilder.Entity<ExaminationTag>()
                 .HasMany(eTag => eTag.ExaminationTypes)
                 .WithOne(eType => eType.ExaminationTag)
@@ -90,16 +112,28 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .WithOne(ex => ex.CageBooking)
                 .HasForeignKey<Examination>(ex => ex.CageBookingID);
 
-            // Primary Keys
-            modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
-            modelBuilder.Entity<Pet>().HasKey(p => p.PetID);
-            modelBuilder.Entity<Examination>().HasKey(ex => ex.ExaminationID);
-            modelBuilder.Entity<Employee>().HasKey(em => em.EmployeeID);
-            modelBuilder.Entity<ExaminationType>().HasKey(eType => eType.ExaminationTypeID);
-            modelBuilder.Entity<ExaminationTag>().HasKey(eTag => eTag.ExaminationTagID);
-            modelBuilder.Entity<Product>().HasKey(pr => pr.ProductID);
+			modelBuilder.Entity<Examination>()
+				.HasOne(ex => ex.Medicine)
+				.WithMany(p => p.Examinations)
+				.HasForeignKey(ex => ex.MedicineID);
+
+			// Primary Keys
+			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
+			modelBuilder.Entity<Pet>().HasKey(p => p.PetID);
+			modelBuilder.Entity<Examination>().HasKey(ex => ex.ExaminationID);
+			modelBuilder.Entity<Employee>().HasKey(em => em.EmployeeID);
+			modelBuilder.Entity<ExaminationType>().HasKey(eType => eType.ExaminationTypeID);
+			modelBuilder.Entity<ExaminationTag>().HasKey(eTag => eTag.ExaminationTagID);
+			modelBuilder.Entity<Product>().HasKey(pr => pr.ProductID);
+			modelBuilder.Entity<Medicine>().HasKey(me => me.MedicineID);
+			modelBuilder.Entity<Order>().HasKey(o => o.OrderID);
+			modelBuilder.Entity<ProductLine>().HasKey(prLine => prLine.ProductLineID);
             modelBuilder.Entity<CageBooking>().HasKey(cBooking => cBooking.CageBookingID);
             modelBuilder.Entity<Cage>().HasKey(ca => ca.CageID);
-        }
-    }
+
+            // Ignoring properties that don't exist in the DB
+            modelBuilder.Entity<Product>().Ignore(pr => pr.QuantityInOrder);
+            modelBuilder.Entity<Product>().Ignore(pr => pr.TotalPrice);
+		}
+	}
 }

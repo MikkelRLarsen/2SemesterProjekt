@@ -11,5 +11,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 		public Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber);
 		public Task DeleteExaminationAsync(Examination examination);
 		public Task<bool> CheckIfExaminationCanBeDeleted(DateTime examinationTime);
+		public Task ExportInvoiceToTxtAsync(Invoice invoiceExamination, string fileName);
     }
 }
