@@ -34,6 +34,10 @@ namespace _2SemesterProjekt.Domain.Models
         /// </summary>
         private CageBooking() { }
 
+        /// <summary>
+		/// Acceptcriteria:
+		/// StartDate can't be before today
+		/// <returns>Bool</returns>
 		protected void InformationValid()
         {
             ValidateTotalPrice();
