@@ -19,13 +19,46 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         FlowLayoutPanel _orderPanel;
         private readonly IProductService _productService;
         private readonly ICustomerService _customerService;
-        private decimal _totalPrice;
+        private readonly IOrderService _orderService;
+        private readonly IProductLineService _productLineService;
+
+        private decimal _totalPrice; // The total price for the order is stored here.
+        private decimal _discount; // Discount is stored here.
+        private decimal _totalPriceWithDiscount = -1; /* The total price for the order with an added discount is
+                                                       * stored here. If there is no added discount, the default
+                                                       * value remains -1. */
+
+        private BindingList<Domain.Models.Product> _order; // Products in the order is stored here.
+        private BindingList<Domain.Models.Product> _allProducts; // Products in stock is stored here.
+
+        private Domain.Models.Product _selectedProduct; // Selected product in the allProductsListBox
+        private Domain.Models.Product _selectedProductInOrder; // Selected product in the orderProductsListbox
+
+        private Customer _customer; // The customer, whose ID will be associated with the order, is stored here.
         public CreateOrder(FlowLayoutPanel orderPanel)
         {
             InitializeComponent();
             _orderPanel = orderPanel;
-            _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();
+
+            IServiceScope scope = ServiceProviderSingleton.GetServiceProvider().CreateScope();
+            _productService = scope.ServiceProvider.GetService<IProductService>(); /* This ensure that the Listbox gets the newest
+                                                                                    * data everytime the user wants to create an order.*/
+
+
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
+            _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>();
+            _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>();
+
+            _order = new BindingList<Domain.Models.Product>();
+        }
+
+        private async void CreateOrder_Load(object sender, EventArgs e)
+        {
+            _allProducts = new BindingList<Domain.Models.Product>((List<Domain.Models.Product>)await _productService.GetAllProductsInStockAsync()); // Add products in stock to list
+            allProductsListBox.DataSource = _allProducts; // This listbox will show the products in stock
+            allProductsListBox.DisplayMember = "ProductInfo";
+            orderProductsListBox.DataSource = _order; // This listbox will show the products added to the order
+            orderProductsListBox.DisplayMember = "ProductInOrderInfo";
         }
 
         private void customerPhoneNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)
@@ -38,23 +71,26 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
         private async void getCustomerButton_Click(object sender, EventArgs e)
         {
-            int phoneNumber = Convert.ToInt32(customerPhoneNumberTextbox.Text);
-            Customer customer = await _customerService.GetCustomerByPhoneNumberAsync(phoneNumber);
-            if (customer == null)
+            Customer customer = null;
+            if (string.IsNullOrWhiteSpace(customerPhoneNumberTextbox.Text) || customerPhoneNumberTextbox.Text.Length <= 7 || customerPhoneNumberTextbox.Text.Length >= 9)
+            {
+                DialogResult messageBoxError = MessageBox.Show("Invalidt telefonnummer. Prøv igen", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                int phoneNumber = Convert.ToInt32(customerPhoneNumberTextbox.Text);
+                customer = await _customerService.GetCustomerByPhoneNumberAsync(phoneNumber);
+            }
+            // retrieve customer by phone number
+            if (customer == null) // Customer with this phone number doesn't exist in the DB
             {
                 customerNameLabel.Text = "Kunne ikke finde kunden.";
                 customerNameLabel.Visible = true;
                 customerAddressLabel.Visible = false;
                 customerEmailLabel.Visible = false;
-                orderListBox.Enabled = false;
-                discountNumericUpDown.Enabled = false;
-                addToOrderButton.Enabled = false;
-                productSearchButton.Enabled = false;
-                productSearchTextbox.Enabled = false;
-                productsListBox.Enabled = false;
-                createOrderButton.Enabled = false;
+                _customer = null;
             }
-            else
+            else // Customer with this phone number exists
             {
                 customerNameLabel.Text = $"{customer.FirstName} {customer.LastName}";
                 customerAddressLabel.Text = $"{customer.Address}";
@@ -62,20 +98,21 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 customerNameLabel.Visible = true;
                 customerAddressLabel.Visible = true;
                 customerEmailLabel.Visible = true;
-                orderListBox.Enabled = true;
-                discountNumericUpDown.Enabled = true;
-                addToOrderButton.Enabled = true;
-                productSearchButton.Enabled = true;
-                productSearchTextbox.Enabled = true;
-                productsListBox.Enabled = true;
-                createOrderButton.Enabled = true;
+                _customer = customer;
             }
         }
 
-
-        private void createOrderButton_Click(object sender, EventArgs e)
+        private async void createOrderButton_Click(object sender, EventArgs e)
         {
-            if (discountNumericUpDown.Value >= 60)
+            bool orderCanBeCreated = await _orderService.CheckIfOrderCanBeCreated(_order.ToList()); // Checks if the added quantities of each product can be added to the order.
+
+            if (!orderCanBeCreated) // Quantity in order > quantity in stock
+            {
+                DialogResult messageBoxError = MessageBox.Show("Ordren kan ikke oprettes, da der ikke kan tilføjes det ønskede antal af en/nogle af produkterne til ordren. Tjek venligst lagerbeholdning.", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (discountNumericUpDown.Value >= 60) // Discount warning box
             {
                 DialogResult messageBoxResult = MessageBox.Show("Indtastet rabat er over 60%. Er du sikker på, at du vil fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
@@ -84,7 +121,47 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                     return;
                 }
             }
+
+            if (_customer == null) // The user didn't enter a customer's phone number.
+            {
+                await CreateOrderWithoutCustomerInfo();
+            }
+
+            if (_customer != null) // An order will be created with a customerID.
+            {
+                await CreateOrderWithCustomerInfo();
+            }
         }
+
+        private async Task CreateOrderWithoutCustomerInfo()
+        {
+            DialogResult messageBoxResult = MessageBox.Show("Du har ikke tilføjet en kunde, som findes i systemet. Vil du stadigvæk fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (messageBoxResult == DialogResult.No)
+            {
+                return;
+            }
+            else // An order will be created without a customerID.
+            {
+                int orderID = await _orderService.CreateOrderAsync(_totalPrice, _totalPriceWithDiscount); // Creates an order and returns the ID.
+                await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
+                await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
+                DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Parent.Controls.Clear();
+            }
+        }
+
+        private async Task CreateOrderWithCustomerInfo()
+        {
+            int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice, _totalPriceWithDiscount); // Creates an order associated with the customer and returns the ID.
+            await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
+            await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
+            DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Parent.Controls.Clear();
+            return;
+        }
+
+
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
@@ -95,9 +172,138 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         {
             if (_totalPrice != 0)
             {
-                _totalPrice = (_totalPrice * ((100 - discountNumericUpDown.Value) / 100));
-                totalPriceInfoLabel.Text = _totalPrice.ToString();
+                _discount = discountNumericUpDown.Value;
+                _totalPriceWithDiscount = (_totalPrice * ((100 - _discount) / 100)); // Updates the total price with the added discount
+                totalPriceInfoLabel.Text = _totalPriceWithDiscount.ToString(); // Updates UI
             }
+        }
+
+        private async void addToOrderButton_Click(object sender, EventArgs e)
+        {
+            _selectedProduct = (Domain.Models.Product)allProductsListBox.SelectedItem; // Sets the product, that is selected in the listbox, as the product that will get added to the order.
+
+            if (_selectedProduct == null)
+            {
+                allProductsListBox.SetSelected(0, true); // The first product in the listbox is set as the selected item.
+                _selectedProduct = (Domain.Models.Product)allProductsListBox.SelectedItem;
+            }
+
+            if (_order.Any(pr => pr.EAN == _selectedProduct.EAN)) // If the order already contains the product, nothing will happen.
+            {
+                return;
+            }
+            else if (_selectedProduct != null)
+            {
+                _selectedProduct.UpdateQuantityInOrder(); // Update quantity
+                _selectedProduct.UpdateTotalPriceOfProductInOrder(); // Update total price
+
+                _order.Add(_selectedProduct); // Add to order
+
+                orderProductsListBox.DataSource = _order; // Update order listbox data source
+                orderProductsListBox.Refresh(); // Update control
+
+                _totalPrice += _selectedProduct.PricePerUnit; // Update the total price for the order
+                totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
+
+                if (_discount != 0) // if there is an added discount
+                {
+                    _totalPriceWithDiscount = (_totalPrice * ((100 - _discount) / 100));
+                    totalPriceInfoLabel.Text = $"{_totalPriceWithDiscount.ToString()} kr.";
+                }
+
+                totalPriceInfoLabel.Refresh();
+
+                _allProducts.Remove(_selectedProduct); // Remove product from the listbox that shows products in stock
+                _allProducts.ResetBindings();
+                allProductsListBox.Refresh();
+
+                if (_allProducts.Count == 0)
+                {
+                    addToOrderButton.Enabled = false;
+                }
+            }
+            if (removeFromOrderButton.Enabled == false || addMoreButton.Enabled == false || createOrderButton.Enabled == false) // Enable buttons
+            {
+                removeFromOrderButton.Enabled = true;
+                addMoreButton.Enabled = true;
+                createOrderButton.Enabled = true;
+            }
+        }
+
+        private void AddMoreButton_Click(object sender, EventArgs e)
+        {
+            if (_selectedProductInOrder == null)
+            {
+                orderProductsListBox.SetSelected(0, true); // The first product in the listbox is set as the selected item.
+                _selectedProductInOrder = (Domain.Models.Product)orderProductsListBox.SelectedItem;
+            }
+
+            _selectedProductInOrder.UpdateQuantityInOrder(); // Updates the quantity of the product in the order
+            _selectedProductInOrder.UpdateTotalPriceOfProductInOrder(); // Updates the total price of the product in the order
+            _totalPrice += _selectedProductInOrder.PricePerUnit; // Updates the total price of the order
+
+            totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
+
+            if (_discount != 0) // If there is an added discount
+            {
+                _totalPriceWithDiscount = (_totalPrice * ((100 - _discount) / 100));
+                totalPriceInfoLabel.Text = $"{_totalPriceWithDiscount.ToString()} kr.";
+            }
+
+            totalPriceInfoLabel.Refresh();
+            _order.ResetBindings();
+            orderProductsListBox.DataSource = _order;
+            orderProductsListBox.Refresh();
+        }
+
+        private void removeFromOrder_Click(object sender, EventArgs e)
+        {
+            _selectedProductInOrder = (Domain.Models.Product)orderProductsListBox.SelectedItem; // Sets the product, that is selected in the listbox, as the product that will get added to the order.
+
+            if (_selectedProductInOrder == null)
+            {
+                orderProductsListBox.SetSelected(0, true); // The first product in the listbox is set as the selected item.
+            }
+
+            _totalPrice -= _selectedProductInOrder.TotalPrice; // Substracts the total order price of the product(s) from the total price of the order.
+            _selectedProductInOrder.RemoveQuantityInOrder(); // Sets quantity in order to 0.
+            _selectedProductInOrder.RemoveTotalOrderPrice(); // Sets total order price of the product to 0
+            _allProducts.Add(_selectedProductInOrder); // The products moves back to the list of products in stock
+            _order.Remove(_selectedProductInOrder); // The product gets removed from the order.
+
+            _order.ResetBindings();
+            allProductsListBox.Refresh();
+            orderProductsListBox.Refresh();
+            totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
+
+            if (_discount != 0) // if there is an added discount
+            {
+                _totalPriceWithDiscount = (_totalPrice * ((100 - _discount) / 100));
+                totalPriceInfoLabel.Text = $"{_totalPriceWithDiscount.ToString()} kr.";
+            }
+
+            totalPriceInfoLabel.Refresh();
+
+            if (_order.Count == 0) // Buttons get disabled if there are no products left in the order.
+            {
+                removeFromOrderButton.Enabled = false;
+                addMoreButton.Enabled = false;
+                createOrderButton.Enabled = false;
+            }
+            if (!addToOrderButton.Enabled) // Enables this button so the user can add products to the order again
+            {
+                addToOrderButton.Enabled = true;
+            }
+        }
+
+        private void allProductsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedProduct = (Domain.Models.Product)allProductsListBox.SelectedItem;
+        }
+
+        private void orderProductsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedProductInOrder = (Domain.Models.Product)orderProductsListBox.SelectedItem;
         }
     }
 }

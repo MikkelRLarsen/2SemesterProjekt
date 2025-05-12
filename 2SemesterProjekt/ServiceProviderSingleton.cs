@@ -25,6 +25,8 @@ namespace _2SemesterProjekt
 			services.AddScoped<IExaminationService, ExaminationService>();
             services.AddScoped<IProductService, ProductService>();
 			services.AddScoped<IExportService, ExportService>();
+			services.AddScoped<IOrderService, OrderService>();
+			services.AddScoped<IProductLineService, ProductLineService>();
 			services.AddScoped<ICageService, CageService>();
 
 
@@ -37,6 +39,8 @@ namespace _2SemesterProjekt
 			services.AddTransient<IPetRepository, PetRepositoryEF>();
 			services.AddTransient<IExaminationRepository, ExaminationRepositoryEF>();
 			services.AddTransient<IProductRepository, ProductRepositoryEF>();
+			services.AddTransient<IOrderRepository, OrderRepositoryEF>();
+			services.AddTransient<IProductLineRepository, ProductLineRepositoryEF>();
 			services.AddTransient<ICageRepository, CageRepositoryEF>();
 
 
