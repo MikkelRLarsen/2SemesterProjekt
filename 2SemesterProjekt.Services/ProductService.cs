@@ -24,10 +24,10 @@ namespace _2SemesterProjekt.Services
             return await _productRepository.GetAllProductsAsync(); // Retrieves a list of products from the DB
         }
 
-        public async void ExportStockStatusToTxtAsync(string fileName)
+        public async Task ExportStockStatusToTxtAsync(string fileName)
         {
             var productList = await _productRepository.GetAllProductsAsync(); // Retrieves a list of products
-            _exportService.ExportStockStatusToTxtAsync(productList, fileName); /* The productList gets passed into the called method,
+            await _exportService.ExportStockStatusToTxtAsync(productList, fileName); /* The productList gets passed into the called method,
                                                                                 * which will then be added to a textfile. */
         }
 

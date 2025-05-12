@@ -36,6 +36,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 					.ThenInclude(p => p.Customer)
 					.Include(e => e.Employee)
 					.Include(e => e.ExaminationType)
+					.Include(e => e.CageBooking)
 					.ToListAsync();
 			}
 			catch (Exception)
@@ -65,6 +66,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .ThenInclude(p => p.Customer)
                 .Include(e => e.Employee)
                 .Include(e => e.ExaminationType)
+				.Include (e => e.CageBooking)
                 .ToListAsync();
 		}
 

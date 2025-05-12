@@ -30,19 +30,23 @@ namespace _2SemesterProjekt.Domain.Models
         }
 
         /// <summary>
+        /// Enables EF to get all cagebookings => REFACTOR LATER!
+        /// </summary>
+        private CageBooking() { }
+
+        /// <summary>
 		/// Acceptcriteria:
 		/// StartDate can't be before today
-        /// Decimal
 		/// <returns>Bool</returns>
 		protected void InformationValid()
         {
+            ValidateTotalPrice();
+
             // Validate startDate
             if (StartDate.Date < DateTime.Today)
             {
                 throw new ArgumentException("Startdate is invalid");
             }
-
-            ValidateTotalPrice();
 
             if (CageID <= 0)
             {
