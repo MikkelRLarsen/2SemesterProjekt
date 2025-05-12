@@ -9,11 +9,11 @@ namespace _2SemesterProjekt.Domain.Models
 {
     public class Order
     {
-        public int OrderID { get; set; }
-        public int? CustomerID { get; set; }
+        public int OrderID { get; private set; }
+        public int? CustomerID { get; private set; }
         
-        public DateTime OrderDate { get; set; }
-        public decimal TotalPrice { get; set; }
+        public DateTime OrderDate { get; private set; }
+        public decimal TotalPrice { get; private set; }
         public List<ProductLine> ProductLines { get; }
         public Customer Customer { get; }
 
