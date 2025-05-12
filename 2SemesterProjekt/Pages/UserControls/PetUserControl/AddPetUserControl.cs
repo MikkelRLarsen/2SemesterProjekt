@@ -120,7 +120,7 @@ namespace _2SemesterProjekt.Pages
                     var pet = new Pet(
                         customerId,
                         petNameTextbox.Text,
-                        (comboBoxSpecies.SelectedValue as Species).SpeciesID,
+                        (comboBoxSpecies.SelectedItem as Species).SpeciesID,
                         petBirthdaySelector.Value,
                         selectedVet?.EmployeeID
                     ); /* Instantiating a Pet object with

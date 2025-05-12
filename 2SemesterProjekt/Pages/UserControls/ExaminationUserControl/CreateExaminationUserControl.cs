@@ -265,7 +265,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             if (pet.EmployeeID != null) // If pet have a primary vet - codes executes
             {
-                EmployeeExaminationDropdown.DataSource = VeterinarianListBuilder.GetVeterinariansWithPrimaryFirst(_employees, pet.EmployeeID);
+                EmployeeExaminationDropdown.DataSource = ListBuilder.GetVeterinariansWithPrimaryFirst(_employees, pet.EmployeeID);
             }
         }
 
