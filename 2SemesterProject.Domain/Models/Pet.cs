@@ -34,11 +34,15 @@
             {
                 return false;
             }
-            else if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Species)) // Invalid if Name or Species is empty
+            else if (string.IsNullOrWhiteSpace(Name)) // Invalid if Name is empty
             {
                 return false;
             }
             else if (Birthday == null) // Invalid if Birthday is null
+            {
+                return false;
+            }
+            else if (SpeciesID == 0) // Invalid if speciesID is 0
             {
                 return false;
             }
@@ -52,12 +56,16 @@
         /// Validate pet name input
         /// </summary>
         /// <param name="newPetName"></param>
-        public void UpdatePetData(string newPetName, string species, DateTime birthday, int? employeeID)
+        public void UpdatePetData(string newPetName, int speciesID, DateTime birthday, int? employeeID)
         {
-            if (string.IsNullOrWhiteSpace(newPetName) == false || string.IsNullOrWhiteSpace(species) == false)
+            if (string.IsNullOrWhiteSpace(newPetName) == false)
             {
                 Name = newPetName;
-                Species = species;
+            }
+
+            if (SpeciesID != 0)
+            {
+                SpeciesID = speciesID;
             }
 
             Birthday = birthday;

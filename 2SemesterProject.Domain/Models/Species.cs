@@ -11,6 +11,9 @@ namespace _2SemesterProjekt.Domain.Models
         public int SpeciesID { get; protected set; }
         public string Name { get; protected set; }
 
+        public List<Pet> Pets { get; }
+        public List<Cage> Cages { get; }
+
         public Species(int speciesID, string name)
         {
             SpeciesID = speciesID;

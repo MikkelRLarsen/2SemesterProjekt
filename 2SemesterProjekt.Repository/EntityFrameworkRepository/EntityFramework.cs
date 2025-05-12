@@ -15,6 +15,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         public DbSet<Product> Products { get; set; }
         public DbSet<CageBooking> CageBookings { get; set; }
         public DbSet<Cage> Cages { get; set; }
+        public DbSet<Species> Species { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -43,6 +44,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             modelBuilder.Entity<Product>().ToTable("Product");
             modelBuilder.Entity<CageBooking>().ToTable("CageBooking");
             modelBuilder.Entity<Cage>().ToTable("Cage");
+            modelBuilder.Entity<Species>().ToTable("Species");
 
             //Relations
             modelBuilder.Entity<Customer>()
@@ -89,6 +91,13 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .HasOne(ca => ca.Examination)
                 .WithOne(ex => ex.CageBooking)
                 .HasForeignKey<Examination>(ex => ex.CageBookingID);
+
+            modelBuilder.Entity<Species>()
+                .HasMany(s => s.Pets)
+                .WithOne(p => p.Species)
+                .HasForeignKey(s => s.SpeciesID);
+                
+
 
             // Primary Keys
             modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
