@@ -136,20 +136,20 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
                     // Checks that the booking is possible by space
                     await _cageService.IsFullyBooked(
-                        chosenPet.Species, // Pet species
+                        chosenPet.SpeciesID, // Pet species
                         chosenExaminationDate, // Startdate of cagebooking
                         estimatedEndOfCageBooking // Estimated enddate of booking
                     );
 
                     // Creates estimated totalprice for the cage
                     decimal totalPrice = await _cageService.GetTotalPriceForCage(
-                        chosenPet.Species,
+                        chosenPet.SpeciesID,
                         chosenExaminationDate,
                         estimatedEndOfCageBooking
                     );
 
                     // Gets the cageID paired up with the chosen pet
-                    Cage cage = await _cageService.GetPetCageAsync(chosenPet.Species);
+                    Cage cage = await _cageService.GetPetCageAsync(chosenPet.SpeciesID);
 
                     // Creates cageBooking to validate information
                     cageBooking = new CageBooking(
@@ -309,8 +309,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             if (ExaminationTypeDropdown.SelectedItem != null)
             {
                 if ((ExaminationTypeDropdown.SelectedItem as ExaminationType)!.ExaminationTag.DescriptionTag == "Operation" &&
-                    ((PetExaminationDropdown.SelectedItem as Pet)!.Species == "Kat" ||
-                    (PetExaminationDropdown.SelectedItem as Pet)!.Species == "Hund"))
+                    ((PetExaminationDropdown.SelectedItem as Pet)!.SpeciesID == 2 ||
+                    (PetExaminationDropdown.SelectedItem as Pet)!.SpeciesID == 1))
                 {
                     checkBoxCageBooking.Visible = true;
                     labelCageBookingDays.Visible = true;

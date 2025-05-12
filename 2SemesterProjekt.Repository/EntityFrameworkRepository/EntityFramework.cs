@@ -96,8 +96,6 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .HasMany(s => s.Pets)
                 .WithOne(p => p.Species)
                 .HasForeignKey(s => s.SpeciesID);
-                
-
 
             // Primary Keys
             modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
@@ -109,6 +107,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             modelBuilder.Entity<Product>().HasKey(pr => pr.ProductID);
             modelBuilder.Entity<CageBooking>().HasKey(cBooking => cBooking.CageBookingID);
             modelBuilder.Entity<Cage>().HasKey(ca => ca.CageID);
+            modelBuilder.Entity<Species>().HasKey(s => s.SpeciesID);
         }
     }
 }

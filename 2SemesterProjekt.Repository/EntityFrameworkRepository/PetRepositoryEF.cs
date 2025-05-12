@@ -43,6 +43,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             return await _db.Pets
                 .Include(p => p.Customer)
                 .Include(p => p.Employee)
+                .Include(p => p.Species)
                 .ToListAsync();
         }
 

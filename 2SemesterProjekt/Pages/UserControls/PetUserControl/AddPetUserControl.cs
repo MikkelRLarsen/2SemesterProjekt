@@ -127,7 +127,7 @@ namespace _2SemesterProjekt.Pages
                     var pet = new Pet(
                         customerId,
                         petNameTextbox.Text,
-                        petSpeciesTextbox.Text,
+                        Convert.ToInt32(petSpeciesTextbox.Text),
                         petBirthdaySelector.Value,
                         selectedVet?.EmployeeID
                     ); /* Instantiating a Pet object with

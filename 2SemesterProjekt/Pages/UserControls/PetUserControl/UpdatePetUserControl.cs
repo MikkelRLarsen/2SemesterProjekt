@@ -35,7 +35,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 		{
 			// Set ups PetCard
 			petNameTextbox.Text = PetCard.Pet.Name;
-			petSpeciesTextbox.Text = PetCard.Pet.Species;
+			petSpeciesTextbox.Text = PetCard.Pet.Species.Name;
 			ownerPhoneNumberTextbox.Text = PetCard.Pet.Customer.PhoneNumber.ToString();
 			petBirthdaySelector.Text = PetCard.Pet.Birthday.ToString();
 			var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
@@ -145,7 +145,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 			{
 				try
 				{
-					PetCard.Pet.UpdatePetData(petNameTextbox.Text, petSpeciesTextbox.Text, petBirthdaySelector.Value, (comboBoxPrimaryVeterinarian.SelectedItem as Employee).EmployeeID);
+					PetCard.Pet.UpdatePetData(petNameTextbox.Text, Convert.ToInt32(petSpeciesTextbox.Text), petBirthdaySelector.Value, (comboBoxPrimaryVeterinarian.SelectedItem as Employee).EmployeeID);
 
 					if (_petService.CheckIfPetExists(PetCard.Pet)) // Error message if the pet already exists
 					{

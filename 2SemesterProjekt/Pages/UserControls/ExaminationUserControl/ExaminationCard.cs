@@ -26,7 +26,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			// Sets all information on Card based on Examination
 			PetNameLabel.Text = _examination.Pet.Name;
-			PetSpeciesLabel.Text = _examination.Pet.Species;
+			PetSpeciesLabel.Text = _examination.Pet.Species.Name;
 			BirthdayLabel.Text = _examination.Pet.Birthday.ToShortDateString();
 
 			ExaminationLabel.Text = _examination.ExaminationType.Description;
@@ -38,7 +38,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			EmployeeNameLabel.Text = _examination.Employee.FirstName;
 
-			PetPicture.Image = GetImage(_examination.Pet.Species);
+			PetPicture.Image = GetImage(_examination.Pet.Species.Name);
 		}
 
 		private void CollapsePictureBox_Click(object sender, EventArgs e)

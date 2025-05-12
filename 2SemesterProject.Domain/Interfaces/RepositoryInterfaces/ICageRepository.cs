@@ -11,7 +11,7 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
     {
         public Task CreateBookingAsync(CageBooking booking);
         public Task<IEnumerable<CageBooking>> GetAllCageBookingsOnDate(DateTime startDate, DateTime endDate);
-        public Task<decimal> GetBasePriceForPetCageAsync(string petSpecies);
-        public Task<Cage> GetPetCageAsync(string petSpecies);
+        public Task<decimal> GetBasePriceForPetCageAsync(int petSpeciesID);
+        public Task<Cage> GetPetCageAsync(int petSpeciesID);
     }
 }

@@ -13,32 +13,32 @@ namespace _2SemesterProjekt.Services
             _cageRepository = cageRepository;
         }
 
-        public async Task<decimal> GetTotalPriceForCage(string petSpecies, DateTime startDate, DateTime estimatedEndDate)
+        public async Task<decimal> GetTotalPriceForCage(int petSpeciesID, DateTime startDate, DateTime estimatedEndDate)
         {
-            decimal basePrice = await _cageRepository.GetBasePriceForPetCageAsync(petSpecies);
+            decimal basePrice = await _cageRepository.GetBasePriceForPetCageAsync(petSpeciesID);
 
             decimal totalPrice = (estimatedEndDate - startDate).Days * basePrice; // Calculates estimated total price.
 
             return totalPrice;
         }
 
-        public async Task IsFullyBooked(string petSpecies, DateTime startDate, DateTime estimatedEndDate)
+        public async Task IsFullyBooked(int petSpeciesID, DateTime startDate, DateTime estimatedEndDate)
         {
             // Gets all petcages bookings in booking interval
             IEnumerable<CageBooking> listOfCageBookingsInInterval = await _cageRepository.GetAllCageBookingsOnDate(startDate, estimatedEndDate);
 
-            // Counts number of cat cages in interval
-            int numberOfCatBookingsOnDate = listOfCageBookingsInInterval.Count(cBooking => cBooking.Cage.Species == "Kat");
-
             // Counts number of dog cages in interval
-            int numberOfDogBookingsOnDate = listOfCageBookingsInInterval.Count(cBooking => cBooking.Cage.Species == "Hund");
+            int numberOfDogBookingsOnDate = listOfCageBookingsInInterval.Count(cBooking => cBooking.Cage.SpeciesID == 1);
+
+            // Counts number of cat cages in interval
+            int numberOfCatBookingsOnDate = listOfCageBookingsInInterval.Count(cBooking => cBooking.Cage.SpeciesID == 2);
 
             // If there isn't space for the pet => throw error
             // Max is hardcoded for now => refactoring in another sprint
-            if (numberOfCatBookingsOnDate >= 4 && petSpecies == "Kat" ||
-                numberOfDogBookingsOnDate >= 3 && petSpecies == "Hund")
+            if (numberOfCatBookingsOnDate >= 4 && petSpeciesID == 2 ||
+                numberOfDogBookingsOnDate >= 3 && petSpeciesID == 1)
             {
-                throw new ArgumentException($"Der er ikke flere ledige bure a typen {petSpecies} på denne dato");
+                throw new ArgumentException($"Der er ikke flere ledige bure a typen {2} på denne dato");
             }
         }
 
@@ -47,9 +47,9 @@ namespace _2SemesterProjekt.Services
             await _cageRepository.CreateBookingAsync(cageBooking);
         }
 
-        public async Task<Cage> GetPetCageAsync(string petSpecies)
+        public async Task<Cage> GetPetCageAsync(int petSpeciesID)
         {
-            var cage = await _cageRepository.GetPetCageAsync(petSpecies);
+            var cage = await _cageRepository.GetPetCageAsync(petSpeciesID);
 
             return cage;
         }
