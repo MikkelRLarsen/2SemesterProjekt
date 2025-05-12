@@ -17,6 +17,7 @@ namespace _2SemesterProjekt.Pages
 {
 	public partial class KonsultationPage : UserControl
 	{
+		public ExaminationCard ExaminationCard { get; set; }
 		private readonly IExaminationService _examinationService;
 		public KonsultationPage()
 		{
@@ -30,10 +31,37 @@ namespace _2SemesterProjekt.Pages
 			ExaminationFlowPanel.Controls.Add(new CreateExaminationUserControl(ExaminationFlowPanel));
 		}
 
+		private void DeleteExamination_Click(object sender, EventArgs e)
+		{
+			if (this.ExaminationCard != null)
+			{
+				ExaminationDeletion(ExaminationCard);
+			}
+			else
+			{
+                MessageBox.Show("Vælg venligst den konsultationstid, der skal slettes.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+		private void ExaminationDeletion(ExaminationCard examinationCard)
+		{
+            DialogResult messageBoxResult = MessageBox.Show("Er du sikker på, at denne konsultationstid skal slettes?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if (messageBoxResult == DialogResult.Yes)
+            {
+				// Call examination deletion method from service
+            }
+			else if (messageBoxResult == DialogResult.No)
+			{
+				return;
+			}
+        }
+
 		private void KonsultationPage_Load(object sender, EventArgs e)
 		{
 			CRUDPanel.Controls.Add(new ButtonPanel("Find", Color.MediumAquamarine, FindExamination_Click));
 			CRUDPanel.Controls.Add(new ButtonPanel("Opret", Color.MediumSeaGreen, CreateExamination_Click));
+			CRUDPanel.Controls.Add(new ButtonPanel("Slet", Color.IndianRed, DeleteExamination_Click));
 		}
 
 		private async void FindExamination_Click(object sender, EventArgs e)
