@@ -41,7 +41,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
             EmployeeNameLabel.Text = Examination.Employee.FirstName;
 
-            if (Examination.Date > DateTime.Now)
+            if (Examination.Date > DateTime.Now) // Brugervenlighed: Status er ikke beskrivende nok til medicin med ja/nej/ukendt tilknyttet.
             {
                 MedicineStatusLabel.Text = "Ukendt";
             }

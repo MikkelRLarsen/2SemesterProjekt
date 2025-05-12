@@ -35,14 +35,14 @@ namespace _2SemesterProjekt.Domain.Models
             string displayMessage = "Dato er ikke gyldig.";
             try
             {
-                if (newDate < DateTime.Now)
+                if (newDate < DateTime.Now) // Skal nok slettes - er blevet overflødigt pga. min dato sat til konsultationsdato.
                 {
                     StartDate = newDate;
                 }
             }
             catch (Exception ex)
             {
-                displayMessage += $"{ex}";
+                displayMessage += $"{ex}"; // MessageBox.Show() mangler.
             }
         }
     }
