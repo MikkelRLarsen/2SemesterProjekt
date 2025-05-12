@@ -35,7 +35,7 @@ namespace _2SemesterProjekt.Pages
 		{
 			if (this.ExaminationCard != null)
 			{
-				ExaminationDeletion(ExaminationCard);
+				ExaminationDeletion(this.ExaminationCard);
 			}
 			else
 			{
@@ -50,6 +50,7 @@ namespace _2SemesterProjekt.Pages
             if (messageBoxResult == DialogResult.Yes)
             {
 				// Call examination deletion method from service
+				_examinationService.DeleteExaminationAsync(examinationCard._examination);
             }
 			else if (messageBoxResult == DialogResult.No)
 			{

@@ -13,7 +13,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
 	public partial class ExaminationCard : UserControl
 	{
-		private readonly Examination _examination;
+		// private readonly Examination _examination;
+
+		public Examination _examination { get; }
 
 		public ExaminationCard(Examination examination)
 		{

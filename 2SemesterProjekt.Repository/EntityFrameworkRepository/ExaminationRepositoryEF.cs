@@ -26,7 +26,16 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			await _db.SaveChangesAsync();
         }
 
-		public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
+        public async Task DeleteExaminationAsync(Examination examination)
+        {
+            Examination examinationToDelete = await (from ex in _db.Examinations
+                                              where ex.ExaminationID == examination.ExaminationID
+                                              select ex).FirstOrDefaultAsync();
+
+            _db.Examinations.Remove(examinationToDelete);
+        }
+
+        public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
 		{
 			try
 			{
