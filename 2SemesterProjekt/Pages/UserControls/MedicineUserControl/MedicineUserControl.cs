@@ -31,11 +31,11 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
             _medicineService = ServiceProviderSingleton.GetServiceProvider().GetService<IMedicineService>()!;
 
             // Display general information:
-            PetNameLabel.Text = ExaminationCard._examination.Pet.Name;
+            PetNameLabel.Text = ExaminationCard.Examination.Pet.Name;
             
 
             // Display status (ja/nej/ukendt) along with different kinds of information based on status:
-            if (ExaminationCard._examination.Date > DateTime.Now)
+            if (ExaminationCard.Examination.Date > DateTime.Now)
             {
                 MedicineStatusLabel.Text = "Ukendt";
                 ActualMedicineNameLabel.Text = "Ukendt";
@@ -48,23 +48,23 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
                 ManualDateTimePicker.Enabled = false;
                 ChangeStartDateButton.Enabled = false;
             }
-            else if (ExaminationCard._examination.Medicine?.MedicineID != null)
+            else if (ExaminationCard.Examination.Medicine?.MedicineID != null)
             {
                 MedicineStatusLabel.Text = "Ja";
-                ActualMedicineNameLabel.Text = examinationCard._examination.Medicine.Name;
-                ActualMedicineTypeLabel.Text = examinationCard._examination.Medicine.Type;
-                ActualMedicineMilligramLabel.Text = examinationCard._examination.Medicine.DoseMiligram.ToString();
-                ActualMedicineDosesPerDayLabel.Text = examinationCard._examination.Medicine.DosesTake24Hours.ToString();
-                ActualMedicineNumberOfDaysLabel.Text = examinationCard._examination.Medicine.DoseDurationDays.ToString();
-                ActualMedicineStartDateLabel.Text = examinationCard._examination.Date.ToShortDateString();
+                ActualMedicineNameLabel.Text = examinationCard.Examination.Medicine.Name;
+                ActualMedicineTypeLabel.Text = examinationCard.Examination.Medicine.Type;
+                ActualMedicineMilligramLabel.Text = examinationCard.Examination.Medicine.DoseMiligram.ToString();
+                ActualMedicineDosesPerDayLabel.Text = examinationCard.Examination.Medicine.DosesTake24Hours.ToString();
+                ActualMedicineNumberOfDaysLabel.Text = examinationCard.Examination.Medicine.DoseDurationDays.ToString();
+                ActualMedicineStartDateLabel.Text = examinationCard.Examination.Date.ToShortDateString();
                 // End date:
-                DateTime startDate = examinationCard._examination.Date;
-                int durationDays = examinationCard._examination.Medicine.DoseDurationDays;
+                DateTime startDate = examinationCard.Examination.Date;
+                int durationDays = examinationCard.Examination.Medicine.DoseDurationDays;
                 DateTime endDate = startDate.AddDays(durationDays - 1);
                 ActualMedicineEndDateLabel.Text = endDate.ToShortDateString();
                 // Manual date:
-                ManualDateTimePicker.MinDate = examinationCard._examination.Date; // You cannot set a date in the past.
-                ManualDateTimePicker.Value = examinationCard._examination.Date; // Default medicine start date is the date of the examination.
+                ManualDateTimePicker.MinDate = examinationCard.Examination.Date; // You cannot set a date in the past.
+                ManualDateTimePicker.Value = examinationCard.Examination.Date; // Default medicine start date is the date of the examination.
             }
             else
             {
@@ -87,16 +87,16 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
         /// <param name="e"></param>
         private void ManualDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            if (ExaminationCard._examination.Medicine != null)
+            if (ExaminationCard.Examination.Medicine != null)
             {
                 DateTime startDate = ManualDateTimePicker.Value;
-                int durationDays = ExaminationCard._examination.Medicine.DoseDurationDays;
+                int durationDays = ExaminationCard.Examination.Medicine.DoseDurationDays;
                 DateTime endDate = startDate.AddDays(durationDays - 1); // -1 to include the starting day.
                 ActualMedicineStartDateLabel.Text = startDate.ToShortDateString();
                 ActualMedicineEndDateLabel.Text = endDate.ToShortDateString();
 
                 // Set the manually picked date as the new start date:
-                ExaminationCard._examination.Medicine.UpdateMedicineStartDate(startDate);
+                ExaminationCard.Examination.Medicine.UpdateMedicineStartDate(startDate);
             }
         }
         /// <summary>
@@ -106,7 +106,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
         /// <param name="e"></param>
         private async void ChangeStartDateButton_Click(object sender, EventArgs e)
         {
-            await _medicineService.UpdateMedicineAsync(ExaminationCard._examination.Medicine);
+            await _medicineService.UpdateMedicineAsync(ExaminationCard.Examination.Medicine);
             MessageBox.Show("Datoen for start af medicin er blevet ændret.");
             _konsultationPanel.Controls.Clear();
         }
