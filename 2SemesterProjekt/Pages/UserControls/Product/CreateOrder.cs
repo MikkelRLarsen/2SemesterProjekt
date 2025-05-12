@@ -70,7 +70,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         private async void getCustomerButton_Click(object sender, EventArgs e)
         {
             Customer customer = null;
-            if (string.IsNullOrWhiteSpace(customerPhoneNumberTextbox.Text) || customerPhoneNumberTextbox.Text.Length <= 7)
+            if (string.IsNullOrWhiteSpace(customerPhoneNumberTextbox.Text) || customerPhoneNumberTextbox.Text.Length <= 7 || customerPhoneNumberTextbox.Text.Length >= 9)
             {
                 DialogResult messageBoxError = MessageBox.Show("Invalidt telefonnummer. Prøv igen", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -79,7 +79,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 int phoneNumber = Convert.ToInt32(customerPhoneNumberTextbox.Text);
                 customer = await _customerService.GetCustomerByPhoneNumberAsync(phoneNumber);
             }
-             // retrieve customer by phone number
+            // retrieve customer by phone number
             if (customer == null) // Customer with this phone number doesn't exist in the DB
             {
                 customerNameLabel.Text = "Kunne ikke finde kunden.";

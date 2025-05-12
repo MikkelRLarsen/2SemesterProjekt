@@ -66,9 +66,11 @@
             // 
             customerPhoneNumberTextbox.BorderStyle = BorderStyle.FixedSingle;
             customerPhoneNumberTextbox.Location = new Point(114, 145);
+            customerPhoneNumberTextbox.MaxLength = 8;
             customerPhoneNumberTextbox.Name = "customerPhoneNumberTextbox";
             customerPhoneNumberTextbox.Size = new Size(118, 23);
             customerPhoneNumberTextbox.TabIndex = 7;
+            customerPhoneNumberTextbox.KeyPress += customerPhoneNumberTextbox_KeyPress;
             // 
             // label2
             // 
