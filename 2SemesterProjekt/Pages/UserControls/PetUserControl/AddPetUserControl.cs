@@ -23,8 +23,9 @@ namespace _2SemesterProjekt.Pages
         private async void AddPetPage_Load(object sender, EventArgs e)
         {
             // Species dropdown load
-            var petSpecies = await _petService.GetAllPetSpecies();
+            var petSpecies = await _petService.GetAllPetSpeciesAsync();
             comboBoxSpecies.DataSource = petSpecies;
+            comboBoxSpecies.DisplayMember = "Name";
 
             // Veterinarians dropdown load
             var dropDownItems = new List<object> { "Ikke valgt" }; // Add not chosen option
@@ -79,13 +80,6 @@ namespace _2SemesterProjekt.Pages
             petNameTextbox.BackColor = SystemColors.Window;
         }
 
-        private void petSpeciesTextbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Resets textbox after error message
-            petSpeciesTextbox.ForeColor = SystemColors.WindowText;
-            petSpeciesTextbox.BackColor = SystemColors.Window;
-        }
-
         private async void createButton_Click(object sender, EventArgs e)
         {
             string displayMessage = string.Empty;
@@ -106,14 +100,6 @@ namespace _2SemesterProjekt.Pages
                 displayMessage += "Indtast et gyldigt kæledyrsnavn.\n";
             }
 
-            // Validate pet name input
-            if (string.IsNullOrWhiteSpace(petSpeciesTextbox.Text))
-            {
-                petSpeciesTextbox.ForeColor = Color.White;
-                petSpeciesTextbox.BackColor = Color.LightCoral;
-                displayMessage += "Indtast en dyreart.\n";
-            }
-
             int customerId = _customerService.GetCustomerIDByPhoneNumber(phoneNumber); // Retrieves the customer's ID by using the entered phone number.
 
             if (customerId == 0) // Customer ID validation
@@ -132,7 +118,7 @@ namespace _2SemesterProjekt.Pages
                     var pet = new Pet(
                         customerId,
                         petNameTextbox.Text,
-                        Convert.ToInt32(petSpeciesTextbox.Text),
+                        (comboBoxSpecies.SelectedValue as Species).SpeciesID,
                         petBirthdaySelector.Value,
                         selectedVet?.EmployeeID
                     ); /* Instantiating a Pet object with
