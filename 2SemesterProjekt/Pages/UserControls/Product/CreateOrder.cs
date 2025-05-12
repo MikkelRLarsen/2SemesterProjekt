@@ -69,8 +69,17 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
         private async void getCustomerButton_Click(object sender, EventArgs e)
         {
-            int phoneNumber = Convert.ToInt32(customerPhoneNumberTextbox.Text);
-            Customer customer = await _customerService.GetCustomerByPhoneNumberAsync(phoneNumber); // retrieve customer by phone number
+            Customer customer = null;
+            if (string.IsNullOrWhiteSpace(customerPhoneNumberTextbox.Text) || customerPhoneNumberTextbox.Text.Length <= 7)
+            {
+                DialogResult messageBoxError = MessageBox.Show("Invalidt telefonnummer. Prøv igen", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                int phoneNumber = Convert.ToInt32(customerPhoneNumberTextbox.Text);
+                customer = await _customerService.GetCustomerByPhoneNumberAsync(phoneNumber);
+            }
+             // retrieve customer by phone number
             if (customer == null) // Customer with this phone number doesn't exist in the DB
             {
                 customerNameLabel.Text = "Kunne ikke finde kunden.";
@@ -98,7 +107,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
             if (!orderCanBeCreated) // Quantity in order > quantity in stock
             {
-                DialogResult messageBoxConfirmation = MessageBox.Show("Ordren kan ikke oprettes, da der ikke kan tilføjes det ønskede antal af en/nogle af produkterne til ordren. Tjek venligst lagerbeholdning.", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogResult messageBoxError = MessageBox.Show("Ordren kan ikke oprettes, da der ikke kan tilføjes det ønskede antal af en/nogle af produkterne til ordren. Tjek venligst lagerbeholdning.", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else // Quantity in order < quantity in stock
             {
@@ -174,6 +183,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             if (_selectedProduct == null)
             {
                 allProductsListBox.SetSelected(0, true); // The first product in the listbox is set as the selected item.
+                _selectedProduct = (Domain.Models.Product)allProductsListBox.SelectedItem;
             }
 
             if (_order.Any(pr => pr.EAN == _selectedProduct.EAN)) // If the order already contains the product, nothing will happen.
@@ -189,13 +199,18 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 orderProductsListBox.DataSource = _order; // Update order listbox data source
                 orderProductsListBox.Refresh(); // Update control
 
+                _totalPrice += _selectedProduct.PricePerUnit; // Update the total price for the order
+                totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
+                totalPriceInfoLabel.Refresh();
+
                 _allProducts.Remove(_selectedProduct); // Remove product from the listbox that shows products in stock
                 _allProducts.ResetBindings();
                 allProductsListBox.Refresh();
 
-                _totalPrice += _selectedProduct.PricePerUnit; // Update the total price for the order
-                totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
-                totalPriceInfoLabel.Refresh();
+                if (_allProducts.Count == 0)
+                {
+                    addToOrderButton.Enabled = false;
+                }
             }
             if (removeFromOrderButton.Enabled == false || addMoreButton.Enabled == false || createOrderButton.Enabled == false) // Enable buttons
             {
@@ -210,6 +225,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             if (_selectedProductInOrder == null)
             {
                 orderProductsListBox.SetSelected(0, true); // The first product in the listbox is set as the selected item.
+                _selectedProductInOrder = (Domain.Models.Product)orderProductsListBox.SelectedItem;
             }
 
             _selectedProductInOrder.QuantityInOrder += 1; // Updates the quantity of the product in the order
@@ -254,6 +270,16 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             {
                 addToOrderButton.Enabled = true;
             }
+        }
+
+        private void allProductsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedProduct = (Domain.Models.Product)allProductsListBox.SelectedItem;
+        }
+
+        private void orderProductsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedProductInOrder = (Domain.Models.Product)orderProductsListBox.SelectedItem;
         }
     }
 }
