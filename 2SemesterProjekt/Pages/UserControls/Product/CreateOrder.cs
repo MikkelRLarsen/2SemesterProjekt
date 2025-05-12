@@ -41,7 +41,8 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             _orderPanel = orderPanel;
 
             IServiceScope scope = ServiceProviderSingleton.GetServiceProvider().CreateScope();
-            _productService = scope.ServiceProvider.GetService<IProductService>();
+            _productService = scope.ServiceProvider.GetService<IProductService>(); /* This ensure that the Listbox gets the newest
+                                                                                    * data everytime the user wants to create an order.*/
 
 
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
