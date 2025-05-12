@@ -33,8 +33,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				return await _db.Examinations
 					.Where(e => e.Pet.Customer.PhoneNumber == customerPhoneNumber)
 					.Include(e => e.Pet)
-					.ThenInclude(p => p.Customer)
-					.Include(e => e.Employee)
+						.ThenInclude(p => p.Customer)
+                    .Include(e => e.Pet)
+						.ThenInclude(p => p.Species)
+                    .Include(e => e.Employee)
 					.Include(e => e.ExaminationType)
 					.ToListAsync();
 			}
@@ -62,7 +64,9 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		{
             return await _db.Examinations
                 .Include(e => e.Pet)
-                .ThenInclude(p => p.Customer)
+					.ThenInclude(p => p.Customer)
+				.Include(e => e.Pet)
+					.ThenInclude(p => p.Species)
                 .Include(e => e.Employee)
                 .Include(e => e.ExaminationType)
                 .ToListAsync();
@@ -97,6 +101,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 // All in all: query returns all examinations that are older than 12 months and where the pet haven't had an examination within 12 months.
 				.Include(e => e.Pet)
 					.ThenInclude(p => p.Customer)
+				.Include(e => e.Pet)
+					.ThenInclude(p => p.Species)
 				.OrderBy(e => e.PetID)
 				.ThenByDescending(e => e.Date)
 				.ToListAsync();

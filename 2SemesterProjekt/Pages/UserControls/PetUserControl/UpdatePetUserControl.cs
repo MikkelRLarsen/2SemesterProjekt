@@ -19,31 +19,33 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         private readonly IPetService _petService;
         private readonly ICustomerService _customerService;
         private readonly IEmployeeService _employeeService;
-        private PetCard PetCard;
+        private readonly PetPage _petPage;
+        private readonly PetCard _petCard;
 
-        public UpdatePetUserControl(PetCard petCard)
+        public UpdatePetUserControl(PetCard petCard, PetPage petPage)
         {
             InitializeComponent();
             petBirthdaySelector.MaxDate = DateTime.Today;
             _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>()!;
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
             _employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
-            PetCard = petCard;
+            _petCard = petCard;
+            _petPage = petPage;
         }
 
         private async void UpdatePetUserControl_Load(object sender, EventArgs e)
         {
             // Set ups PetCard
-            petNameTextbox.Text = PetCard.Pet.Name;
-            ownerPhoneNumberTextbox.Text = PetCard.Pet.Customer.PhoneNumber.ToString();
-            petBirthdaySelector.Text = PetCard.Pet.Birthday.ToString();
+            petNameTextbox.Text = _petCard.Pet.Name;
+            ownerPhoneNumberTextbox.Text = _petCard.Pet.Customer.PhoneNumber.ToString();
+            petBirthdaySelector.Text = _petCard.Pet.Birthday.ToString();
             var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
             var petSpecies = await _petService.GetAllPetSpeciesAsync();
 
-            comboBoxPetSpecies.DataSource = ListBuilder.GetSpeciesWithCurrentFirst(petSpecies, PetCard.Pet.SpeciesID);
+            comboBoxPetSpecies.DataSource = ListBuilder.GetSpeciesWithCurrentFirst(petSpecies, _petCard.Pet.SpeciesID);
             comboBoxPetSpecies.DisplayMember = "Name";
 
-            if (PetCard.Pet.Employee == null) // If the pet doesn't have a primary vet
+            if (_petCard.Pet.Employee == null) // If the pet doesn't have a primary vet
             {
                 var dropDownItems = new List<object> { "Ikke valgt" }; // Not chosen at index 0
                 dropDownItems.AddRange(veterinarians); // Vets being added to list, to being able to being selected
@@ -51,7 +53,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             }
             else
             {
-                comboBoxPrimaryVeterinarian.DataSource = ListBuilder.GetVeterinariansWithPrimaryFirst(veterinarians, PetCard.Pet.EmployeeID);
+                comboBoxPrimaryVeterinarian.DataSource = ListBuilder.GetVeterinariansWithPrimaryFirst(veterinarians, _petCard.Pet.EmployeeID);
             }
 
             comboBoxPrimaryVeterinarian.Format += ComboBoxPrimaryVeterinarian_Format!;
@@ -133,16 +135,17 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             {
                 try
                 {
-                    PetCard.Pet.UpdatePetData(
+                    _petCard.Pet.UpdatePetData(
                         petNameTextbox.Text,
                         (comboBoxPetSpecies.SelectedItem as Species).SpeciesID,
                         petBirthdaySelector.Value,
                         (comboBoxPrimaryVeterinarian.SelectedItem as Employee).EmployeeID
                     );
 
-                    await _petService.UpdatePetASync(PetCard.Pet); // The newly instantiated Pet object gets added to the DB.
-                    displayMessage += $"{PetCard.Pet.Name} er blevet ændret i systemet.";
-
+                    await _petService.UpdatePetASync(_petCard.Pet); // The newly instantiated Pet object gets added to the DB.
+                    displayMessage += $"{_petCard.Pet.Name} er blevet ændret i systemet.";
+                    _petPage.RefreshPetList(); // Refresh PetPages petlist to reflect changes
+                    this.Parent!.Controls.Remove(this); // Clear existing content (Parent is PetPage)
                 }
                 catch (Exception ex)
                 {
