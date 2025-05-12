@@ -26,6 +26,10 @@ namespace _2SemesterProjekt.Domain.Models
             DosesTake24Hours = dosesTake24Hours;
             DoseDurationDays = doseDurationDays;
         }
+        /// <summary>
+        /// Used if a new start date for medicine is manually set - which is different from the default start date.
+        /// </summary>
+        /// <param name="newDate"></param>
         public void UpdateMedicineStartDate(DateTime newDate)
         {
             string displayMessage = "Dato er ikke gyldig.";

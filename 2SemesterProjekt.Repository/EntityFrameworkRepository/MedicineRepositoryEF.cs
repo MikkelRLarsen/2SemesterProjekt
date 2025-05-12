@@ -18,6 +18,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             _db = db;
         }
+        /// <summary>
+        /// Updates medicine
+        /// </summary>
+        /// <param name="medicine"></param>
+        /// <returns></returns>
         public async Task UpdateMedicineAsync(Medicine medicine)
         {
             _db.Update(medicine);

@@ -17,6 +17,11 @@ namespace _2SemesterProjekt.Services
         {
             _medicineRepository = medicineRepository;
         }
+        /// <summary>
+        /// Updates medicine
+        /// </summary>
+        /// <param name="medicine"></param>
+        /// <returns></returns>
         public async Task UpdateMedicineAsync(Medicine medicine)
         {
             await _medicineRepository.UpdateMedicineAsync(medicine);
