@@ -25,12 +25,10 @@ namespace _2SemesterProjekt
 			services.AddScoped<IExaminationService, ExaminationService>();
             services.AddScoped<IProductService, ProductService>();
 			services.AddScoped<IExportService, ExportService>();
+			services.AddScoped<IMedicineService, MedicineService>();
 			services.AddScoped<IOrderService, OrderService>();
 			services.AddScoped<IProductLineService, ProductLineService>();
 			services.AddScoped<ICageService, CageService>();
-
-
-
 
             // Dal Services
             services.AddTransient<EntityFramework>();
@@ -39,10 +37,10 @@ namespace _2SemesterProjekt
 			services.AddTransient<IPetRepository, PetRepositoryEF>();
 			services.AddTransient<IExaminationRepository, ExaminationRepositoryEF>();
 			services.AddTransient<IProductRepository, ProductRepositoryEF>();
+			services.AddTransient<IMedicineRepository,  MedicineRepositoryEF>();
 			services.AddTransient<IOrderRepository, OrderRepositoryEF>();
 			services.AddTransient<IProductLineRepository, ProductLineRepositoryEF>();
 			services.AddTransient<ICageRepository, CageRepositoryEF>();
-
 
 			_serviceProvider = services.BuildServiceProvider();
 		}

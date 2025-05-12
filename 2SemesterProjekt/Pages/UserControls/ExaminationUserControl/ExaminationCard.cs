@@ -14,6 +14,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
     public partial class ExaminationCard : UserControl
     {
         public Examination Examination { get; }
+
         private KonsultationPage _examinationPage;
 
         public ExaminationCard(Examination examination, KonsultationPage examinationPage)
@@ -40,7 +41,21 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
             EmployeeNameLabel.Text = Examination.Employee.FirstName;
 
+            if (Examination.Date > DateTime.Now) // Brugervenlighed: Status er ikke beskrivende nok til medicin med ja/nej/ukendt tilknyttet.
+            {
+                MedicineStatusLabel.Text = "Ukendt";
+            }
+            else if (Examination.Medicine?.MedicineID != null)
+            {
+                MedicineStatusLabel.Text = "Ja";
+            }
+            else
+            {
+                MedicineStatusLabel.Text = "Nej";
+            }
+
             PetPicture.Image = GetImage(Examination.Pet.Species);
+
         }
 
         private void CollapsePictureBox_Click(object sender, EventArgs e)

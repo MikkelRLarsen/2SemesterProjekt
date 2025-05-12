@@ -7,6 +7,7 @@ namespace _2SemesterProjekt.Domain.Models
         public int ExaminationID { get; private set; }
         public int PetID { get; private set; }
         public int EmployeeID { get; private set; }
+        public int? MedicineID { get; private set; }
         public DateTime Date { get; private set; }
         public int ExaminationTypeID { get; private set; }
         public int? CageBookingID { get; private set; }
@@ -15,11 +16,13 @@ namespace _2SemesterProjekt.Domain.Models
         public Employee Employee { get; }
         public ExaminationType ExaminationType { get; }
         public CageBooking CageBooking { get; }
+        public Medicine? Medicine { get; }
 
-        public Examination(int petID, int employeeID, DateTime date, int examinationTypeID, decimal price, int? cageBookingID)
+        public Examination(int petID, int employeeID, DateTime date, int? medicineID, int examinationTypeID, decimal price, int? cageBookingID)
         {
             PetID = petID;
             EmployeeID = employeeID;
+            MedicineID = medicineID;
             Date = date;
             ExaminationTypeID = examinationTypeID;
             Price = price;
@@ -27,10 +30,6 @@ namespace _2SemesterProjekt.Domain.Models
 
             InformationValid();
         }
-
-
-
-
         /// <summary>
         /// Checks and validate Examination Object. 
         /// Check if PetID or EmployeeID is null or 0
