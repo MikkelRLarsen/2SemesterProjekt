@@ -22,33 +22,19 @@ namespace _2SemesterProjekt.Services
             return totalPrice;
         }
 
-        public async Task IsFullyBooked(Pet pet, DateTime startDate, DateTime estimatedEndDate)
-        {
-            // Gets all petcages
-            IEnumerable<Cage> totalCages = await _cageRepository.GetAllCagesAsync();
-            
-            // Gets all petcages bookings in booking interval
-            IEnumerable<CageBooking> cageBookingsInInterval = await _cageRepository.GetAllCageBookingsOnDate(startDate, estimatedEndDate);
-
-            // Counts number of total cages and booked cages in interval
-            int totalCagesForSpecies = totalCages.Count(c => c.SpeciesID == pet.SpeciesID);
-            int bookedCagesForSpecies = cageBookingsInInterval.Count(cBooking => cBooking.Cage.SpeciesID == pet.SpeciesID);
-
-            // If there isn't space for the pet => throw error
-            if (bookedCagesForSpecies >= totalCagesForSpecies)
-            {
-                throw new ArgumentException($"Der er ikke flere ledige bure a typen {pet.Species.Name} på denne dato");
-            }
-        }
-
         public async Task CreateCageBookingAsync(CageBooking cageBooking)
         {
             await _cageRepository.CreateBookingAsync(cageBooking);
         }
 
-        public async Task<Cage> GetPetCageAsync(Pet pet)
+        public async Task<Cage> GetAvailableCageAsync(Pet pet, DateTime startDate, DateTime endDate)
         {
-            var cage = await _cageRepository.GetPetCageAsync(pet);
+            var cage = await _cageRepository.GetAvailableCageAsync(pet, startDate, endDate);
+
+            if (cage == null)
+            {
+                throw new ArgumentException($"Der er ikke flere ledige bure a typen {pet.Species.Name} på denne dato");
+            }
 
             return cage;
         }
