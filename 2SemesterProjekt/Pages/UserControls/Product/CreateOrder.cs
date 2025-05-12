@@ -101,64 +101,64 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
         private async void createOrderButton_Click(object sender, EventArgs e)
         {
-            bool continueOrderCreation = false;
             bool orderCanBeCreated = await _orderService.CheckIfOrderCanBeCreated(_order.ToList()); // Checks if the added quantities of each product can be added to the order.
 
             if (!orderCanBeCreated) // Quantity in order > quantity in stock
             {
                 DialogResult messageBoxError = MessageBox.Show("Ordren kan ikke oprettes, da der ikke kan tilføjes det ønskede antal af en/nogle af produkterne til ordren. Tjek venligst lagerbeholdning.", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else // Quantity in order < quantity in stock
-            {
-                continueOrderCreation = true;
+                return;
             }
 
-            while (continueOrderCreation)
+            if (discountNumericUpDown.Value >= 60) // Discount warning box
             {
-                if (discountNumericUpDown.Value >= 60) // Discount warning box
-                {
-                    DialogResult messageBoxResult = MessageBox.Show("Indtastet rabat er over 60%. Er du sikker på, at du vil fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                DialogResult messageBoxResult = MessageBox.Show("Indtastet rabat er over 60%. Er du sikker på, at du vil fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
-                    if (messageBoxResult == DialogResult.No)
-                    {
-                        continueOrderCreation = false;
-                        return;
-                    }
-                    else
-                    {
-                        continueOrderCreation = true;
-                    }
-                }
-                if (_customer == null) // The user didn't enter a customer's phone number.
+                if (messageBoxResult == DialogResult.No)
                 {
-                    DialogResult messageBoxResult = MessageBox.Show("Du har ikke tilføjet en kunde, som findes i systemet. Vil du stadigvæk fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    if (messageBoxResult == DialogResult.No)
-                    {
-                        continueOrderCreation = false;
-                        return;
-                    }
-                    else // An order will be created without a customerID.
-                    {
-                        int orderID = await _orderService.CreateOrderAsync(_totalPrice, _totalPriceWithDiscount); // Creates an order and returns the ID.
-                        await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
-                        await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
-                        DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Parent.Controls.Clear();
-                        return;
-                    }
-                }
-                if (_customer != null) // An order will be created with a customerID.
-                {
-                    int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice, _totalPriceWithDiscount); // Creates an order associated with the customer and returns the ID.
-                    await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
-                    await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
-                    DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Parent.Controls.Clear();
                     return;
                 }
             }
+
+            if (_customer == null) // The user didn't enter a customer's phone number.
+            {
+                await CreateOrderWithoutCustomerInfo();
+            }
+
+            if (_customer != null) // An order will be created with a customerID.
+            {
+                await CreateOrderWithCustomerInfo();
+            }
         }
+
+        private async Task CreateOrderWithoutCustomerInfo()
+        {
+            DialogResult messageBoxResult = MessageBox.Show("Du har ikke tilføjet en kunde, som findes i systemet. Vil du stadigvæk fortsætte?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (messageBoxResult == DialogResult.No)
+            {
+                return;
+            }
+            else // An order will be created without a customerID.
+            {
+                int orderID = await _orderService.CreateOrderAsync(_totalPrice, _totalPriceWithDiscount); // Creates an order and returns the ID.
+                await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
+                await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
+                DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Parent.Controls.Clear();
+            }
+        }
+
+        private async Task CreateOrderWithCustomerInfo()
+        {
+            int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice, _totalPriceWithDiscount); // Creates an order associated with the customer and returns the ID.
+            await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
+            await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
+            DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Parent.Controls.Clear();
+            return;
+        }
+
+
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
