@@ -35,11 +35,17 @@ namespace _2SemesterProjekt.Services
         {
             if (totalPriceWithDiscount != -1)
             {
-                return await _orderRepository.CreateOrderAsync(totalPriceWithDiscount);
+                Order order = new Order(
+                DateTime.Now,
+                totalPriceWithDiscount);
+                return await _orderRepository.CreateOrderAsync(order);
             }
             else
             {
-                return await _orderRepository.CreateOrderAsync(totalPrice);
+                Order order = new Order(
+                DateTime.Now,
+                totalPrice);
+                return await _orderRepository.CreateOrderAsync(order);
             }
         }
 
@@ -47,11 +53,19 @@ namespace _2SemesterProjekt.Services
         {
             if (totalPriceWithDiscount != -1)
             {
-                return await _orderRepository.CreateOrderWithCustomerIDAsync(customerID, totalPriceWithDiscount);
+                Order order = new Order(
+                customerID,
+                DateTime.Now,
+                totalPriceWithDiscount);
+                return await _orderRepository.CreateOrderAsync(order);
             }
             else
             {
-                return await _orderRepository.CreateOrderWithCustomerIDAsync(customerID, totalPrice);
+                Order order = new Order(
+                customerID,
+                DateTime.Now,
+                totalPrice);
+                return await _orderRepository.CreateOrderAsync(order);
             }
         }
     }

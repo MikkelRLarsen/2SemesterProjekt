@@ -15,30 +15,13 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             _db = db;
         }
-        public async Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice)
+        public async Task<int> CreateOrderAsync(Order order)
         {
-            Order order = new Order(
-                customerID,
-                DateTime.Now,
-                totalPrice);
 
             await _db.Orders.AddAsync(order);
-            
+
             _db.Entry(order).GetDatabaseValues();
             await _db.SaveChangesAsync();
-
-            return order.OrderID;
-        }
-        public async Task<int> CreateOrderAsync(decimal totalPrice)
-        {
-            Order order = new Order(
-                DateTime.Now,
-                totalPrice);
-
-            _db.Orders.Add(order);
-
-            _db.Entry(order).GetDatabaseValues();
-            _db.SaveChanges();
 
             return order.OrderID;
         }

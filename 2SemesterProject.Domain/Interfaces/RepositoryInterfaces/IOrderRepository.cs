@@ -9,7 +9,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 {
     public interface IOrderRepository
     {
-        public Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice);
-        public Task<int> CreateOrderAsync(decimal totalPrice);
+        public Task<int> CreateOrderAsync(Order order);
     }
 }
