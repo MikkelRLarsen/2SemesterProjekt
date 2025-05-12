@@ -69,9 +69,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 		private async void ExaminationCard_Click(object sender, EventArgs e)
 		{
-            if (_examinationPage.ExaminationCard != null) // protects against null reference exceptions the first time it's clicked
+            if (_examinationPage.ExaminationCard != null)
             {
-                _examinationPage.ExaminationCard.BackColor = SystemColors.Window; // If a card was previously selected, reset its background color
+                _examinationPage.ExaminationCard.BackColor = SystemColors.Window;
             }
 
             _examinationPage.ExaminationCard = this; // Set the currently clicked card as the new selected card
