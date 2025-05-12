@@ -30,7 +30,7 @@ namespace _2SemesterProjekt.Domain.Models
         }
 
         /// <summary>
-        /// Enables EF to get all cagebookings
+        /// Enables EF to get all cagebookings => REFACTOR LATER!
         /// </summary>
         private CageBooking() { }
 

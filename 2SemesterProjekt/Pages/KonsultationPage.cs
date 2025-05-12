@@ -46,7 +46,7 @@ namespace _2SemesterProjekt.Pages
                 // Checks if phonenumber is valid
                 if (ValidPhoneNumberTextBox() == true)
                 {
-                    // If valid then retrieve all Examination a customers pet have
+                    // If valid then retrieve all examination a customer's pet possess
                     IEnumerable<Examination> allCustomerExamination = await _examinationService.GetAllExaminationOnCustomerPhoneNumber(Convert.ToInt32(textBoxCustomerPhoneNumber.Text));
 
                     // If the customer doens't exist or they dont have any pets throw error which will be caught in Catch
@@ -87,7 +87,7 @@ namespace _2SemesterProjekt.Pages
 
         private bool ValidPhoneNumberTextBox()
         {
-            // If User haven't input any text into TextBox and will therefore return false -> Retrieves all Customers
+            // If User hasn't input any text into Textbox which will therefore return false -> Retrieve all Customers
             if (textBoxCustomerPhoneNumber.Text == String.Empty)
             {
                 return false;
@@ -116,7 +116,7 @@ namespace _2SemesterProjekt.Pages
             }
             else if (DateTime.Now < ExaminationCard.Examination.Date)
             {
-                displayMessage += "Du kan ikke oprette en faktura for en ikke fuldført konsulation";
+                displayMessage += "Du kan ikke oprette en faktura for en ikke fuldført konsultation";
             }
 
             if (displayMessage == string.Empty)
