@@ -52,5 +52,13 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             _db.Update(pet);
             await _db.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Species>> GetAllPetSpeciesAsync()
+        {
+            var petSpecies = await _db.Species
+                .ToListAsync();
+
+            return petSpecies;
+        }
     }
 }

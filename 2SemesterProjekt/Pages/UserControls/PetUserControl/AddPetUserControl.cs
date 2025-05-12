@@ -22,6 +22,11 @@ namespace _2SemesterProjekt.Pages
 
         private async void AddPetPage_Load(object sender, EventArgs e)
         {
+            // Species dropdown load
+            var petSpecies = await _petService.GetAllPetSpecies();
+            comboBoxSpecies.DataSource = petSpecies;
+
+            // Veterinarians dropdown load
             var dropDownItems = new List<object> { "Ikke valgt" }; // Add not chosen option
             var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
 

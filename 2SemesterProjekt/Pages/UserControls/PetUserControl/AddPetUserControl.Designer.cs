@@ -30,7 +30,6 @@
         {
             pageNameLabel = new Label();
             petNameTextbox = new TextBox();
-            petSpeciesTextbox = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -41,6 +40,7 @@
             createButton = new Button();
             petBirthdaySelector = new DateTimePicker();
             ownerPhoneNumberTextbox = new TextBox();
+            comboBoxSpecies = new ComboBox();
             SuspendLayout();
             // 
             // pageNameLabel
@@ -61,14 +61,6 @@
             petNameTextbox.Size = new Size(238, 23);
             petNameTextbox.TabIndex = 4;
             petNameTextbox.KeyPress += petNameTextbox_KeyPress;
-            // 
-            // petSpeciesTextbox
-            // 
-            petSpeciesTextbox.Location = new Point(288, 255);
-            petSpeciesTextbox.Name = "petSpeciesTextbox";
-            petSpeciesTextbox.Size = new Size(238, 23);
-            petSpeciesTextbox.TabIndex = 5;
-            petSpeciesTextbox.KeyPress += petSpeciesTextbox_KeyPress;
             // 
             // label1
             // 
@@ -164,10 +156,20 @@
             ownerPhoneNumberTextbox.TabIndex = 18;
             ownerPhoneNumberTextbox.KeyPress += ownerPhoneNumberTextbox_KeyPress;
             // 
+            // comboBoxSpecies
+            // 
+            comboBoxSpecies.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxSpecies.FormattingEnabled = true;
+            comboBoxSpecies.Location = new Point(288, 255);
+            comboBoxSpecies.Name = "comboBoxSpecies";
+            comboBoxSpecies.Size = new Size(238, 23);
+            comboBoxSpecies.TabIndex = 19;
+            // 
             // AddPetUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(comboBoxSpecies);
             Controls.Add(ownerPhoneNumberTextbox);
             Controls.Add(petBirthdaySelector);
             Controls.Add(createButton);
@@ -178,7 +180,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(petSpeciesTextbox);
             Controls.Add(petNameTextbox);
             Controls.Add(pageNameLabel);
             Name = "AddPetUserControl";
@@ -192,7 +193,6 @@
 
         private Label pageNameLabel;
         private TextBox petNameTextbox;
-        private TextBox petSpeciesTextbox;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -204,5 +204,6 @@
         private Button createButton;
         private DateTimePicker petBirthdaySelector;
         private TextBox ownerPhoneNumberTextbox;
+        private ComboBox comboBoxSpecies;
     }
 }
