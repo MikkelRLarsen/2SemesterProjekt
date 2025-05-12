@@ -38,14 +38,15 @@ namespace _2SemesterProjekt.Domain.Models
         {
             ValidateTotalPrice();
 
+            // Validate startDate
+            if (StartDate.Date < DateTime.Today)
+            {
+                throw new ArgumentException("Startdate is invalid");
+            }
+
             if (CageID <= 0)
             {
                 throw new ArgumentException("Cage was 0 or null");
-            }
-
-            if (StartDate.Date < DateTime.Today)
-            {
-                throw new ArgumentException("StartDate cannot be in the past");
             }
         }
 
