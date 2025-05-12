@@ -58,7 +58,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                 examinationTextBox.Text, 
                 dateTextBox.Text, 
                 cageBookingTextBox.Text, 
-                totalPriceTextBox.ToString()
+                totalPriceTextBox.Text.ToString()
             );
 
             // Creates savefile dialog to make user chose være they wan't to save file
