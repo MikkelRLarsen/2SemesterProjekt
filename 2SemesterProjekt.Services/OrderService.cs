@@ -33,7 +33,7 @@ namespace _2SemesterProjekt.Services
 
         public async Task<int> CreateOrderAsync(decimal totalPrice, decimal totalPriceWithDiscount)
         {
-            if (totalPriceWithDiscount != -1)
+            if (totalPriceWithDiscount != -1) // If the totalPriceWithDiscount field doesn't remain its default value
             {
                 Order order = new Order(
                 DateTime.Now,
