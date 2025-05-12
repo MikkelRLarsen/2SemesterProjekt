@@ -45,5 +45,12 @@ namespace _2SemesterProjekt.Services
 		{
 			return await _customerRepository.GetCustomerByPhoneNumberAsync(phoneNumber);
 		}
+
+		public async Task<IEnumerable<Customer>> GetAllCustomersWithPetsAsync()
+		{
+			var customersWithPets = await _customerRepository.GetAllCustomersWithPetsAsync();
+
+			return customersWithPets;
+		}
     }
 }

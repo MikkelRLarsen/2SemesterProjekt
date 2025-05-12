@@ -91,7 +91,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .Include(e => e.ExaminationType)
 				.Include (e => e.CageBooking)
                 .ToListAsync();
-		}
+        }
 
         public async Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync()
         {

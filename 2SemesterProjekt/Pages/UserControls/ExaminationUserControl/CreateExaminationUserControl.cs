@@ -112,7 +112,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             // Creates a messagebox if Discount is higher then 60% to confirm the booking of examination
             if (DiscountNumericUpDown.Value >= 60)
             {
-                DialogResult resultFromMessageBox = MessageBox.Show("Er du sikkker på at du vil forsætte?", "Valgt rabat er over 60%", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                DialogResult resultFromMessageBox = MessageBox.Show("Er du sikker på at du vil forsætte?", "Valgt rabat er over 60%", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                 // If the user press No then abort booking
                 if (resultFromMessageBox == DialogResult.No)
@@ -136,20 +136,20 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
                     // Checks that the booking is possible by space
                     await _cageService.IsFullyBooked(
-                        chosenPet.SpeciesID, // Pet species
+                        chosenPet, // Pet species
                         chosenExaminationDate, // Startdate of cagebooking
                         estimatedEndOfCageBooking // Estimated enddate of booking
                     );
 
                     // Creates estimated totalprice for the cage
                     decimal totalPrice = await _cageService.GetTotalPriceForCage(
-                        chosenPet.SpeciesID,
+                        chosenPet,
                         chosenExaminationDate,
                         estimatedEndOfCageBooking
                     );
 
                     // Gets the cageID paired up with the chosen pet
-                    Cage cage = await _cageService.GetPetCageAsync(chosenPet.SpeciesID);
+                    Cage cage = await _cageService.GetPetCageAsync(chosenPet);
 
                     // Creates cageBooking to validate information
                     cageBooking = new CageBooking(
@@ -224,7 +224,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             SetAllDisplayMembers();
             DateTimePickerExamination.MinDate = DateTime.Now;
 
-            CustomerExaminationDropdown.DataSource = await _customerService.GetAllCustomersAsync();
+            CustomerExaminationDropdown.DataSource = await _customerService.GetAllCustomersWithPetsAsync();
         }
 
         /// <summary>

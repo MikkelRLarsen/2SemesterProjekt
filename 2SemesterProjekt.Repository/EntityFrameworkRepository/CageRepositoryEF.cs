@@ -26,10 +26,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             await _db.SaveChangesAsync();
         }
 
-        public async Task<decimal> GetBasePriceForPetCageAsync(int petSpeciesID)
+        public async Task<decimal> GetBasePriceForPetCageAsync(Pet pet)
         {
             var cage = await _db.Cages
-                .FirstOrDefaultAsync(ca => ca.SpeciesID == petSpeciesID);
+                .FirstOrDefaultAsync(ca => ca.SpeciesID == pet.SpeciesID);
 
             if (cage == null)
             {
@@ -55,10 +55,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             }
         }
 
-        public async Task<Cage> GetPetCageAsync(int petSpeciesID)
+        public async Task<Cage> GetPetCageAsync(Pet pet)
         {
             var cage = await _db.Cages
-                .FirstOrDefaultAsync(ca => ca.SpeciesID == petSpeciesID);
+                .FirstOrDefaultAsync(ca => ca.SpeciesID == pet.SpeciesID);
             
             if (cage == null)
             {
@@ -66,6 +66,14 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             }
 
             return cage;
+        }
+
+        public async Task<IEnumerable<Cage>> GetAllCagesAsync()
+        {
+            var listOfCages = await _db.Cages
+                .ToListAsync();
+
+            return listOfCages;
         }
     }
 }
