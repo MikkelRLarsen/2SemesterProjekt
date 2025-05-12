@@ -24,6 +24,7 @@ namespace _2SemesterProjekt.Domain.Models
 
             if (examination.CageBooking != null)
             {
+                // Sets CageBookingInfo if there is any
                 cageBookingInfo = $"{examination.CageBooking.StartDate:dd-MM-yyyy} til {examination.CageBooking.EndDate:dd-MM-yyyy}";
             }
 
@@ -34,7 +35,8 @@ namespace _2SemesterProjekt.Domain.Models
                 ExaminationDescription = examination.ExaminationType.Description,
                 Date = examination.Date.ToString("dd-MM-yyyy"),
                 CageBookingInfo = cageBookingInfo,
-                TotalPrice = (examination.Price + (examination.CageBooking?.TotalPrice ?? 0)).ToString()
+                // Fallback value is 0 if CageBooking doesn't exist on current pet
+                TotalPrice = (examination.Price + (examination.CageBooking?.TotalPrice ?? 0)).ToString() 
             };
         }
     }
