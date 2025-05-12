@@ -103,6 +103,7 @@ namespace _2SemesterProjekt.Services
             {
                 return true;
             }
+        }
         public async Task ExportInvoiceToTxtAsync(Invoice invoiceExamination, string fileName)
         {
             await _exportService.ExportInvoiceToTxtAsync(invoiceExamination, fileName);

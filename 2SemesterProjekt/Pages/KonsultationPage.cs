@@ -33,8 +33,9 @@ namespace _2SemesterProjekt.Pages
 		}
         private void Medicine_Click(object sender, EventArgs e)
         {
-			ExaminationFlowPanel.Controls.Clear();
-			ExaminationFlowPanel.Controls.Add(new MedicineUserControl(ExaminationFlowPanel, ExaminationCard));
+            ExaminationFlowPanel.Controls.Clear();
+            ExaminationFlowPanel.Controls.Add(new MedicineUserControl(ExaminationFlowPanel, ExaminationCard));
+        }
 
 		private void DeleteExamination_Click(object sender, EventArgs e)
 		{
@@ -50,7 +51,7 @@ namespace _2SemesterProjekt.Pages
 
 		private async void ExaminationDeletion(ExaminationCard examinationCard)
         {
-            if (!await _examinationService.CheckIfExaminationCanBeDeleted(examinationCard._examination.Date))
+            if (!await _examinationService.CheckIfExaminationCanBeDeleted(examinationCard.Examination.Date))
 			{
                 DialogResult messageBoxWarning = MessageBox.Show("Du kan ikke slette ældre konsultationstider!", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
@@ -61,7 +62,7 @@ namespace _2SemesterProjekt.Pages
             if (messageBoxResult == DialogResult.Yes)
             {
 				// Call examination deletion method from service
-				await _examinationService.DeleteExaminationAsync(examinationCard._examination);
+				await _examinationService.DeleteExaminationAsync(examinationCard.Examination);
 				MessageBox.Show("Konsultationstiden er blevet slettet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				ReloadPage();
             }
@@ -103,16 +104,7 @@ namespace _2SemesterProjekt.Pages
                         ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
                     }
                 }
-                else // If ValidPhoneNumberTextBox == False
-                {
-                    // Retrieve all Examinations
-                    IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
 
-					foreach (var examination in allCustomerExamination)
-					{
-						ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
-					}
-				}
 				else // If ValidPhoneNumberTextBox == False
 				{
 					// Retrieve all Examinations
@@ -136,31 +128,11 @@ namespace _2SemesterProjekt.Pages
 
         private bool ValidPhoneNumberTextBox()
         {
-            // If User hasn't input any text into Textbox which will therefore return false -> Retrieve all Customers
+            // If User haven't input any text into TextBox and will therefore return false -> Retrieves all Customers
             if (textBoxCustomerPhoneNumber.Text == String.Empty)
             {
                 return false;
             }
-
-		private async void ReloadPage()
-		{
-            IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
-
-            ExaminationFlowPanel.Controls.Clear();
-
-            foreach (var examination in allExaminations)
-            {
-                ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
-            }
-        }
-
-		private bool ValidPhoneNumberTextBox()
-		{
-			// If User haven't input any text into TextBox and will therefore return false -> Retrieves all Customers
-			if(textBoxCustomerPhoneNumber.Text == String.Empty)
-			{
-				return false;
-			}
             // Validate phonenumber: only numbers and 8-digit long.
             if (!Int32.TryParse(textBoxCustomerPhoneNumber.Text, out int phoneNumber) || textBoxCustomerPhoneNumber.Text[0] == '0' || phoneNumber < 10000000 || phoneNumber > 99999999)
             {
@@ -173,6 +145,20 @@ namespace _2SemesterProjekt.Pages
                 return true;
             }
         }
+
+        private async void ReloadPage()
+		{
+            IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
+
+            ExaminationFlowPanel.Controls.Clear();
+
+            foreach (var examination in allExaminations)
+            {
+                ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
+            }
+        }
+
+		
 
         private async void CreateInvoice_Click(object sender, EventArgs e)
         {
