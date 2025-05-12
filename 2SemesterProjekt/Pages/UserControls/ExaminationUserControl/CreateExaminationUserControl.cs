@@ -281,7 +281,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     DiscountLabel.Visible = true;
                     DiscountNumericUpDown.Visible = true;
                 }
-                else
+                // Checks if selected Customer is Erhverv
+                else if ((CustomerExaminationDropdown.SelectedItem as Customer).Type == "Erhverv")
+                {
+					DiscountLabel.Visible = true;
+					DiscountNumericUpDown.Visible = true;
+				}
+
+				else
                 {
                     DiscountLabel.Visible = false;
                     DiscountNumericUpDown.Visible = false;
