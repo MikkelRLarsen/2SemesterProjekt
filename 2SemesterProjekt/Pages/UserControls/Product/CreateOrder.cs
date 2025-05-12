@@ -193,8 +193,9 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             }
             else if (_selectedProduct != null)
             {
-                _selectedProduct.QuantityInOrder = 1; // Update quantity
-                _selectedProduct.TotalPrice = _selectedProduct.QuantityInOrder * _selectedProduct.PricePerUnit; // Update total price
+                _selectedProduct.UpdateQuantityInOrder(); // Update quantity
+                _selectedProduct.UpdateTotalPriceOfProductInOrder(); // Update total price
+
                 _order.Add(_selectedProduct); // Add to order
 
                 orderProductsListBox.DataSource = _order; // Update order listbox data source
@@ -236,8 +237,8 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 _selectedProductInOrder = (Domain.Models.Product)orderProductsListBox.SelectedItem;
             }
 
-            _selectedProductInOrder.QuantityInOrder += 1; // Updates the quantity of the product in the order
-            _selectedProductInOrder.TotalPrice += _selectedProductInOrder.PricePerUnit; // Updates the total price of the product in the order
+            _selectedProductInOrder.UpdateQuantityInOrder(); // Updates the quantity of the product in the order
+            _selectedProductInOrder.UpdateTotalPriceOfProductInOrder(); // Updates the total price of the product in the order
             _totalPrice += _selectedProductInOrder.PricePerUnit; // Updates the total price of the order
 
             totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
@@ -264,8 +265,8 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             }
 
             _totalPrice -= _selectedProductInOrder.TotalPrice; // Substracts the total order price of the product(s) from the total price of the order.
-            _selectedProductInOrder.QuantityInOrder = 0; // Sets quantity in order to 0.
-            _selectedProductInOrder.TotalPrice = 0; // Sets total order price of the product to 0
+            _selectedProductInOrder.RemoveQuantityInOrder(); // Sets quantity in order to 0.
+            _selectedProductInOrder.RemoveTotalOrderPrice(); // Sets total order price of the product to 0
             _allProducts.Add(_selectedProductInOrder); // The products moves back to the list of products in stock
             _order.Remove(_selectedProductInOrder); // The product gets removed from the order.
 

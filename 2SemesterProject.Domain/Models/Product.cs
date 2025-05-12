@@ -18,8 +18,8 @@ namespace _2SemesterProjekt.Domain.Models
         public decimal PricePerUnit { get; private set; }
         public int NumberInStock { get; private set; }
         public int MinNumberInStock { get; private set; }
-        public int QuantityInOrder { get; set; }
-        public decimal TotalPrice { get; set; }
+        public int QuantityInOrder { get; private set; }
+        public decimal TotalPrice { get; private set; }
         public List<ProductLine> ProductLines { get; }
         public string ProductInfo { get {return $"{Name} [{NumberInStock} på lager] - {PricePerUnit} kr. [EAN: {EAN}"; } } // This will only be used for a WinForms listbox
         public string ProductInOrderInfo { get { return $"{QuantityInOrder}x {Name} - {TotalPrice} kr. [max. {NumberInStock}]"; } } // This will only be used for a WinForms listbox
@@ -32,6 +32,22 @@ namespace _2SemesterProjekt.Domain.Models
             PricePerUnit = pricePerUnit;
             NumberInStock = numberInStock;
             MinNumberInStock = minNumberInStock;
+        }
+        public void UpdateQuantityInOrder()
+        {
+            QuantityInOrder += 1;
+        }
+        public void UpdateTotalPriceOfProductInOrder()
+        {
+            TotalPrice = QuantityInOrder * PricePerUnit;
+        }
+        public void RemoveQuantityInOrder()
+        {
+            QuantityInOrder = 0;
+        }
+        public void RemoveTotalOrderPrice()
+        {
+            TotalPrice = 0;
         }
     }
 }
