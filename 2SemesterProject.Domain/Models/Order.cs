@@ -23,27 +23,22 @@ namespace _2SemesterProjekt.Domain.Models
             OrderDate = orderDate;
             TotalPrice = totalPrice;
 
-            CustomerValid();
-            PriceValid();
+            ValidateInformation();
         }
         public Order(DateTime orderDate, decimal totalPrice)
         {
             OrderDate = orderDate;
             TotalPrice = totalPrice;
 
-            PriceValid();
+            ValidateInformation();
         }
 
-        protected void CustomerValid()
+        protected void ValidateInformation()
         {
             if (CustomerID == 0)
             {
-                throw new ArgumentException("CustomerID is 0");
+                throw new ArgumentException("CustomerID is 0.");
             }
-        }
-
-        protected void PriceValid()
-        {
             if (TotalPrice < 0)
             {
                 throw new ArgumentException("TotalPrice is a negative number");

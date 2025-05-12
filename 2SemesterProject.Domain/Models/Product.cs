@@ -18,10 +18,8 @@ namespace _2SemesterProjekt.Domain.Models
         public decimal PricePerUnit { get; private set; }
         public int NumberInStock { get; private set; }
         public int MinNumberInStock { get; private set; }
-        [NotMapped]
-        public int QuantityInOrder { get; set; } // Not a property in DB, used when creating an order
-        [NotMapped]
-        public decimal TotalPrice { get; set; } // Not a property in DB, user when creating an order
+        public int QuantityInOrder { get; set; }
+        public decimal TotalPrice { get; set; }
         public List<ProductLine> ProductLines { get; }
         public string ProductInfo { get {return $"{Name} [{NumberInStock} på lager] - {PricePerUnit} kr. [EAN: {EAN}"; } } // This will only be used for a WinForms listbox
         public string ProductInOrderInfo { get { return $"{QuantityInOrder}x {Name} - {TotalPrice} kr. [max. {NumberInStock}]"; } } // This will only be used for a WinForms listbox

@@ -124,6 +124,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<ProductLine>().HasKey(prLine => prLine.ProductLineID);
             modelBuilder.Entity<CageBooking>().HasKey(cBooking => cBooking.CageBookingID);
             modelBuilder.Entity<Cage>().HasKey(ca => ca.CageID);
+
+            // Ignoring properties that don't exist in the DB
+            modelBuilder.Entity<Product>().Ignore(pr => pr.QuantityInOrder);
+            modelBuilder.Entity<Product>().Ignore(pr => pr.TotalPrice);
 		}
 	}
 }
