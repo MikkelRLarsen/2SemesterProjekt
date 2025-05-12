@@ -23,6 +23,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         private readonly IProductLineService _productLineService;
 
         private decimal _totalPrice; // The total price for the order is stored here.
+        private decimal _discount; // Discount is stored here.
         private decimal _totalPriceWithDiscount = -1; /* The total price for the order with an added discount is
                                                        * stored here. If there is no added discount, the default
                                                        * value remains -1. */
@@ -170,9 +171,9 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
         {
             if (_totalPrice != 0)
             {
-                decimal discount = (_totalPrice * ((100 - discountNumericUpDown.Value) / 100));
-                totalPriceInfoLabel.Text = discount.ToString(); // Updates UI
-                _totalPriceWithDiscount = discount; // Updates the total price with the added discount
+                _discount = discountNumericUpDown.Value;
+                _totalPriceWithDiscount = (_totalPrice * ((100 - _discount) / 100)); // Updates the total price with the added discount
+                totalPriceInfoLabel.Text = _totalPriceWithDiscount.ToString(); // Updates UI
             }
         }
 
@@ -201,6 +202,13 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
                 _totalPrice += _selectedProduct.PricePerUnit; // Update the total price for the order
                 totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
+
+                if (_discount != 0) // if there is an added discount
+                {
+                    _totalPriceWithDiscount = (_totalPrice * ((100 - _discount) / 100));
+                    totalPriceInfoLabel.Text = $"{_totalPriceWithDiscount.ToString()} kr.";
+                }
+
                 totalPriceInfoLabel.Refresh();
 
                 _allProducts.Remove(_selectedProduct); // Remove product from the listbox that shows products in stock
@@ -233,6 +241,13 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             _totalPrice += _selectedProductInOrder.PricePerUnit; // Updates the total price of the order
 
             totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
+
+            if (_discount != 0) // If there is an added discount
+            {
+                _totalPriceWithDiscount = (_totalPrice * ((100 - _discount) / 100));
+                totalPriceInfoLabel.Text = $"{_totalPriceWithDiscount.ToString()} kr.";
+            }
+
             totalPriceInfoLabel.Refresh();
             _order.ResetBindings();
             orderProductsListBox.DataSource = _order;
@@ -258,6 +273,13 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             allProductsListBox.Refresh();
             orderProductsListBox.Refresh();
             totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
+
+            if (_discount != 0) // if there is an added discount
+            {
+                _totalPriceWithDiscount = (_totalPrice * ((100 - _discount) / 100));
+                totalPriceInfoLabel.Text = $"{_totalPriceWithDiscount.ToString()} kr.";
+            }
+
             totalPriceInfoLabel.Refresh();
 
             if (_order.Count == 0) // Buttons get disabled if there are no products left in the order.
