@@ -42,8 +42,6 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
             IServiceScope scope = ServiceProviderSingleton.GetServiceProvider().CreateScope();
             _productService = scope.ServiceProvider.GetService<IProductService>();
-
-            //_productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
             _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>();
             _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>();
