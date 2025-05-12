@@ -29,6 +29,11 @@ namespace _2SemesterProjekt.Domain.Models
             InformationValid();
         }
 
+        /// <summary>
+        /// Enables EF to get all cagebookings
+        /// </summary>
+        private CageBooking() { }
+
 		protected void InformationValid()
         {
             ValidateTotalPrice();
@@ -36,6 +41,11 @@ namespace _2SemesterProjekt.Domain.Models
             if (CageID <= 0)
             {
                 throw new ArgumentException("Cage was 0 or null");
+            }
+
+            if (StartDate.Date < DateTime.Today)
+            {
+                throw new ArgumentException("StartDate cannot be in the past");
             }
         }
 
