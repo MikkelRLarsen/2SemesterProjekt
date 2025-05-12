@@ -33,16 +33,52 @@ namespace _2SemesterProjekt.Pages
 		}
         private void Medicine_Click(object sender, EventArgs e)
         {
-			ExaminationFlowPanel.Controls.Clear();
-			ExaminationFlowPanel.Controls.Add(new MedicineUserControl(ExaminationFlowPanel, ExaminationCard));
-
+            ExaminationFlowPanel.Controls.Clear();
+            ExaminationFlowPanel.Controls.Add(new MedicineUserControl(ExaminationFlowPanel, ExaminationCard));
         }
-        private void KonsultationPage_Load(object sender, EventArgs e)
+
+		private void DeleteExamination_Click(object sender, EventArgs e)
+		{
+			if (this.ExaminationCard != null)
+			{
+				ExaminationDeletion(this.ExaminationCard);
+			}
+			else
+			{
+                MessageBox.Show("Vælg venligst den konsultationstid, der skal slettes.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+		private async void ExaminationDeletion(ExaminationCard examinationCard)
         {
-            CRUDPanel.Controls.Add(new ButtonPanel("Find", Color.MediumAquamarine, FindExamination_Click));
-            CRUDPanel.Controls.Add(new ButtonPanel("Opret", Color.MediumSeaGreen, CreateExamination_Click));
+            if (!await _examinationService.CheckIfExaminationCanBeDeleted(examinationCard.Examination.Date))
+			{
+                DialogResult messageBoxWarning = MessageBox.Show("Du kan ikke slette ældre konsultationstider!", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+            }
+
+            DialogResult messageBoxResult = MessageBox.Show("Er du sikker på, at denne konsultationstid skal slettes?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if (messageBoxResult == DialogResult.Yes)
+            {
+				// Call examination deletion method from service
+				await _examinationService.DeleteExaminationAsync(examinationCard.Examination);
+				MessageBox.Show("Konsultationstiden er blevet slettet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				ReloadPage();
+            }
+			else if (messageBoxResult == DialogResult.No)
+			{
+				return;
+			}
+        }
+
+		private void KonsultationPage_Load(object sender, EventArgs e)
+		{
+			CRUDPanel.Controls.Add(new ButtonPanel("Find", Color.MediumAquamarine, FindExamination_Click));
+			CRUDPanel.Controls.Add(new ButtonPanel("Opret", Color.MediumSeaGreen, CreateExamination_Click));
             CRUDPanel.Controls.Add(new ButtonPanel("Opret faktura", Color.MediumBlue, CreateInvoice_Click));
 			CRUDPanel.Controls.Add(new ButtonPanel("Medicin", Color.MediumPurple, Medicine_Click));
+			CRUDPanel.Controls.Add(new ButtonPanel("Slet", Color.IndianRed, DeleteExamination_Click));
 		}
 
         private async void FindExamination_Click(object sender, EventArgs e)
@@ -68,11 +104,11 @@ namespace _2SemesterProjekt.Pages
                         ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
                     }
                 }
-                else // If ValidPhoneNumberTextBox == False
-                {
-                    // Retrieve all Examinations
-                    IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
 
+				else // If ValidPhoneNumberTextBox == False
+				{
+					// Retrieve all Examinations
+					IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
                     ExaminationFlowPanel.Controls.Clear();
 
                     foreach (var examination in allExaminations)
@@ -80,7 +116,6 @@ namespace _2SemesterProjekt.Pages
                         ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
                     }
                 }
-
                 textBoxCustomerPhoneNumber.Text = string.Empty;
                 textBoxCustomerPhoneNumber.BackColor = Color.White;
             }
@@ -93,12 +128,11 @@ namespace _2SemesterProjekt.Pages
 
         private bool ValidPhoneNumberTextBox()
         {
-            // If User hasn't input any text into Textbox which will therefore return false -> Retrieve all Customers
+            // If User haven't input any text into TextBox and will therefore return false -> Retrieves all Customers
             if (textBoxCustomerPhoneNumber.Text == String.Empty)
             {
                 return false;
             }
-
             // Validate phonenumber: only numbers and 8-digit long.
             if (!Int32.TryParse(textBoxCustomerPhoneNumber.Text, out int phoneNumber) || textBoxCustomerPhoneNumber.Text[0] == '0' || phoneNumber < 10000000 || phoneNumber > 99999999)
             {
@@ -111,6 +145,20 @@ namespace _2SemesterProjekt.Pages
                 return true;
             }
         }
+
+        private async void ReloadPage()
+		{
+            IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
+
+            ExaminationFlowPanel.Controls.Clear();
+
+            foreach (var examination in allExaminations)
+            {
+                ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
+            }
+        }
+
+		
 
         private async void CreateInvoice_Click(object sender, EventArgs e)
         {

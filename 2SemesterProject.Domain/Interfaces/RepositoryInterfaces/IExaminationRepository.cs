@@ -13,5 +13,7 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 		public Task<IEnumerable<Examination>> GetAllInactivesAsync();
 		public Task<IEnumerable<Examination>> GetAllExaminationsAsync();
 		public Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber);
+
+		public Task DeleteExaminationAsync(Examination examination);
 	}
 }

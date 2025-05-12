@@ -88,6 +88,22 @@ namespace _2SemesterProjekt.Services
             return distinctListWithOnlyOneExaminationPrPet;
         }
 
+        public async Task DeleteExaminationAsync(Examination examination)
+        {
+            await _examinationRepository.DeleteExaminationAsync(examination);
+        }
+
+        public async Task<bool> CheckIfExaminationCanBeDeleted(DateTime examinationTime)
+        {
+            if (examinationTime <= DateTime.UtcNow)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         public async Task ExportInvoiceToTxtAsync(Invoice invoiceExamination, string fileName)
         {
             await _exportService.ExportInvoiceToTxtAsync(invoiceExamination, fileName);

@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
-    public partial class ExaminationCard : UserControl
-    {
-        public Examination Examination { get; }
+	public partial class ExaminationCard : UserControl
+	{
+		public Examination Examination { get; }
 
         private KonsultationPage _examinationPage;
 
