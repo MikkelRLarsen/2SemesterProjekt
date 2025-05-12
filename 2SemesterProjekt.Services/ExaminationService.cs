@@ -7,20 +7,22 @@ namespace _2SemesterProjekt.Services
 	public class ExaminationService : IExaminationService
     {
         private readonly IExaminationRepository _examinationRepository;
+        private readonly IExportService _exportService;
 
-		public ExaminationService(IExaminationRepository examinationRepository)
+		public ExaminationService(IExaminationRepository examinationRepository, IExportService exportService)
 		{
 			_examinationRepository = examinationRepository;
+            _exportService = exportService;
 		}
 
         public async Task CreateExaminationAsync(Examination examination)
         {
-			//Checks if the examination is a Double Booking that specific Date. Returns error if Pet or Employee is booked
-			await IsDoubleBooked(examination);
+            //Checks if the examination is a Double Booking that specific Date. Returns error if Pet or Employee is booked
+            await IsDoubleBooked(examination);
             await _examinationRepository.CreateExaminationAsync(examination);
         }
 
-		public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
+        public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
 		{
 			return await _examinationRepository.GetAllExaminationOnCustomerPhoneNumber(customerPhoneNumber);
 		}
@@ -57,8 +59,8 @@ namespace _2SemesterProjekt.Services
 
                 if (examinationOnDate.PetID == examination.PetID)
                 {
-					throw new ArgumentException("Pet is already booked that day");
-				}
+                    throw new ArgumentException("Pet is already booked that day");
+                }
             }
         }
         public async Task<IEnumerable<Examination>> GetAllInactivesAsync()
@@ -84,6 +86,11 @@ namespace _2SemesterProjekt.Services
             }
 
             return distinctListWithOnlyOneExaminationPrPet;
+        }
+
+        public async Task ExportInvoiceToTxtAsync(Invoice invoiceExamination, string fileName)
+        {
+            await _exportService.ExportInvoiceToTxtAsync(invoiceExamination, fileName);
         }
     }
 }

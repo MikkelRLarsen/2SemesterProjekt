@@ -22,7 +22,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         public async Task CreateExaminationAsync(Examination examination)
         {
             await _db.Examinations.AddAsync(examination);
-            _db.SaveChanges();
+
+			await _db.SaveChangesAsync();
         }
 
 		public async Task<IEnumerable<Examination>> GetAllExaminationOnCustomerPhoneNumber(int customerPhoneNumber)
@@ -35,6 +36,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 					.ThenInclude(p => p.Customer)
 					.Include(e => e.Employee)
 					.Include(e => e.ExaminationType)
+					.Include(e => e.CageBooking)
 					.ToListAsync();
 			}
 			catch (Exception)
@@ -65,6 +67,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .Include(e => e.Employee)
 				.Include(me => me.Medicine)
                 .Include(e => e.ExaminationType)
+				.Include (e => e.CageBooking)
                 .ToListAsync();
 		}
 
