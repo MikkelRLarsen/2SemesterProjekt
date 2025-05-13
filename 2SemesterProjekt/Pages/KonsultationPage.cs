@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using _2SemesterProjekt.Domain.Models;
 using _2SemesterProjekt.Pages.UserControls.MedicineUserControl;
 using _2SemesterProjekt.Pages.UserControls.PetUserControl;
+using System.Runtime.CompilerServices;
 
 namespace _2SemesterProjekt.Pages
 {
@@ -81,12 +82,19 @@ namespace _2SemesterProjekt.Pages
 		{
 			CRUDPanel.Controls.Add(new ButtonPanel("Find", Color.MediumAquamarine, FindExamination_Click));
 			CRUDPanel.Controls.Add(new ButtonPanel("Opret", Color.MediumSeaGreen, CreateExamination_Click));
+			CRUDPanel.Controls.Add(new ButtonPanel("Ændre", Color.Maroon, UpdateExamination_Click));
+			CRUDPanel.Controls.Add(new ButtonPanel("Slet", Color.IndianRed, DeleteExamination_Click));
             CRUDPanel.Controls.Add(new ButtonPanel("Opret faktura", Color.MediumBlue, CreateInvoice_Click));
 			CRUDPanel.Controls.Add(new ButtonPanel("Medicin", Color.MediumPurple, Medicine_Click));
-			CRUDPanel.Controls.Add(new ButtonPanel("Slet", Color.IndianRed, DeleteExamination_Click));
 
-            Task.Run(() => FindAndSetAllExaminationsAsync());
+
+			Task.Run(() => FindAndSetAllExaminationsAsync());
 		}
+
+        private async void UpdateExamination_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private async void FindAndSetAllExaminationsAsync()
         {
@@ -156,13 +164,9 @@ namespace _2SemesterProjekt.Pages
 
         private async void LoadAndShowExaminationCards(IEnumerable<ExaminationCard> examinationCardsToBeLoaded)
 		{
+            // Clears the panel and then adds the wanted ExaminationCards
 			ExaminationFlowPanel.Controls.Clear();
             ExaminationFlowPanel.Controls.AddRange(examinationCardsToBeLoaded.ToArray());
-
-			//foreach (var examinationCard in examinationCardsToBeLoaded)
-			//{
-			//	ExaminationFlowPanel.Controls.Add(examinationCard);
-			//}
 		}
 
         private async void CreateInvoice_Click(object sender, EventArgs e)
