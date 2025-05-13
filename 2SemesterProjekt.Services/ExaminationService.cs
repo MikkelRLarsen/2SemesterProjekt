@@ -111,7 +111,7 @@ namespace _2SemesterProjekt.Services
 
 		public async Task UpdateExamination(Examination examination)
 		{
-			throw new NotImplementedException();
+			await _examinationRepository.UpdateExamination(examination);
 		}
 	}
 }

@@ -130,5 +130,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
 			return result;
         }
-    }
+
+		public async Task UpdateExamination(Examination examination)
+		{
+            _db.Examinations.Update(examination);
+            await _db.SaveChangesAsync();
+		}
+	}
 }

@@ -65,9 +65,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 						_examination.Price, 
 						_examination.CageBookingID);
 
-				_examination.UpdateExamination(examinationWithUpdatetInformation);
+				_examination.UpdateExaminationProperties(examinationWithUpdatetInformation);
 
-
+				_examinationService.UpdateExamination(_examination);
 			}
 		}
 	}

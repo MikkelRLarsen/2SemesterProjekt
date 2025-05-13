@@ -95,7 +95,7 @@ namespace _2SemesterProjekt.Domain.Models
         /// Validate examination and then upadate chosen examination to mirror given examination (This does NOT include ExaminationID)
         /// </summary>
         /// <param name="examination"></param>
-        public void UpdateExamination(Examination examination)
+        public void UpdateExaminationProperties(Examination examination)
         {
             examination.InformationValid();
 
