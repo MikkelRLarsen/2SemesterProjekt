@@ -158,7 +158,7 @@ namespace _2SemesterProjekt.Pages
 		{
 			ExaminationFlowPanel.Controls.Clear();
 
-			foreach (var examinationCard in allExaminationCards)
+			foreach (var examinationCard in examinationCardsToBeLoaded)
 			{
 				ExaminationFlowPanel.Controls.Add(examinationCard);
 			}
