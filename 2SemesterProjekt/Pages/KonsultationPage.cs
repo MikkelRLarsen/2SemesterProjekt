@@ -28,11 +28,13 @@ namespace _2SemesterProjekt.Pages
             InitializeComponent();
             _examinationService = ServiceProviderSingleton.GetServiceProvider().GetService<IExaminationService>();
         }
+
 		private void CreateExamination_Click(object sender, EventArgs e)
 		{
 			ExaminationFlowPanel.Controls.Clear();
 			ExaminationFlowPanel.Controls.Add(new CreateExaminationUserControl(ExaminationFlowPanel));
 		}
+
         private void Medicine_Click(object sender, EventArgs e)
         {
             if (this.ExaminationCard != null)
@@ -69,12 +71,10 @@ namespace _2SemesterProjekt.Pages
 				// Call examination deletion method from service
 				await _examinationService.DeleteExaminationAsync(examinationCard.Examination);
 				MessageBox.Show("Konsultationstiden er blevet slettet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				ReloadPage();
+
+                allExaminationCards.Remove(examinationCard);
+				LoadAndShowExaminationCards(allExaminationCards);
             }
-			else if (messageBoxResult == DialogResult.No)
-			{
-				return;
-			}
         }
 
 		private void KonsultationPage_Load(object sender, EventArgs e)
@@ -105,8 +105,6 @@ namespace _2SemesterProjekt.Pages
                 // Checks if phonenumber is valid
                 if (ValidPhoneNumberTextBox() == true)
                 {
-                    ExaminationFlowPanel.Controls.Clear();
-
 					// Finds all examination where Examination.Pet.Customers phonenumber == input phonenumber
 					IEnumerable<ExaminationCard> allExaminationWithCustomerPhonenumber = allExaminationCards.Where(ex => ex.Examination.Pet.Customer.PhoneNumber == Convert.ToInt32(textBoxCustomerPhoneNumber.Text));
 
@@ -116,21 +114,14 @@ namespace _2SemesterProjekt.Pages
                         throw new ArgumentException("Kunden er ikke registeret i databasen eller ikke har nogen kæledyr");
                     }
 
-					// Addeds all examination to flowpanel and display them
-					foreach (var examinationCard in allExaminationWithCustomerPhonenumber)
-                    {
-						ExaminationFlowPanel.Controls.Add(examinationCard);
-					}
+					// Addeds all relevant examination to flowpanel and display them
+					LoadAndShowExaminationCards(allExaminationWithCustomerPhonenumber);
                 }
 
 				else // If ValidPhoneNumberTextBox == False
 				{
-                    ExaminationFlowPanel.Controls.Clear();
-
-                    foreach (var examinationCard in allExaminationCards)
-                    {
-                        ExaminationFlowPanel.Controls.Add(examinationCard);
-                    }
+					// Addeds all examination to flowpanel and display them
+					LoadAndShowExaminationCards(allExaminationCards);
                 }
 
                 textBoxCustomerPhoneNumber.Text = string.Empty;
@@ -163,17 +154,15 @@ namespace _2SemesterProjekt.Pages
             }
         }
 
-        private async void ReloadPage()
+        private async void LoadAndShowExaminationCards(IEnumerable<ExaminationCard> examinationCardsToBeLoaded)
 		{
-            IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
+			ExaminationFlowPanel.Controls.Clear();
 
-            ExaminationFlowPanel.Controls.Clear();
-
-            foreach (var examination in allExaminations)
-            {
-                ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
-            }
-        }
+			foreach (var examinationCard in allExaminationCards)
+			{
+				ExaminationFlowPanel.Controls.Add(examinationCard);
+			}
+		}
 
         private async void CreateInvoice_Click(object sender, EventArgs e)
         {
