@@ -108,5 +108,10 @@ namespace _2SemesterProjekt.Services
         {
             await _exportService.ExportInvoiceToTxtAsync(invoiceExamination, fileName);
         }
-    }
+
+		public async Task UpdateExamination(Examination examination)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
