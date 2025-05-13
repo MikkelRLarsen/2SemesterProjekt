@@ -1,4 +1,6 @@
 ﻿using _2SemesterProjekt.Domain.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Diagnostics;
 
 namespace _2SemesterProjekt.Domain.Models
 {
@@ -88,5 +90,22 @@ namespace _2SemesterProjekt.Domain.Models
                 CageBookingID = cageBookingID;
             }
         }
+
+        /// <summary>
+        /// Validate examination and then upadate chosen examination to mirror given examination (This does NOT include ExaminationID)
+        /// </summary>
+        /// <param name="examination"></param>
+        public void UpdateExamination(Examination examination)
+        {
+            examination.InformationValid();
+
+			EmployeeID = examination.EmployeeID;
+			MedicineID = examination.MedicineID;
+			Date = examination.Date;
+			ExaminationTypeID = examination.ExaminationTypeID;
+			Price = examination.Price;
+			CageBookingID = examination.CageBookingID;
+
+		}
     }
 }

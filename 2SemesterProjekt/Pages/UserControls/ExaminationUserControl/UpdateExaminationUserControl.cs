@@ -32,6 +32,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			EmployeeExaminationDropdown.DataSource = (await GetListOfEmployeeWithExaminationEmployeeFirst(_examination)).ToList();
 			EmployeeExaminationDropdown.DisplayMember = "FirstName";
+
+			DateTimePickerExamination.Value = _examination.Date;
+			DateTimePickerExamination.MinDate = DateTime.UtcNow;
 		}
 
 		private async Task<IEnumerable<Employee>> GetListOfEmployeeWithExaminationEmployeeFirst(Examination examination)
@@ -40,13 +43,32 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			IEnumerable<Employee> allPetDocterFromDatabase = await _employeeService.GetAllPetDoctorsAsync();
 
 			// Creates a Dictonary from said PetDoctors, so its easier to manipulate data in constant time, rather than linear time if List was used
-			var allPetDoctorsInDict = allPetDocterFromDatabase.ToDictionary(em => em.EmployeeID, em  => em);
+			var allPetDoctorsInDict = allPetDocterFromDatabase.ToDictionary(em => em.EmployeeID, em => em);
 
 			// Removes said employee from Dictonary
 			allPetDoctorsInDict.Remove(examination.EmployeeID);
 
 			// Makes the Dictonary to List and Prepend examination employee as first and lastly returns list
 			return allPetDoctorsInDict.Values.ToList().Prepend(examination.Employee);
+		}
+
+		private void CreateExaminationButton_Click(object sender, EventArgs e)
+		{
+			if (EmployeeExaminationDropdown.SelectedItem != _examination.Employee as Employee
+				|| DateTimePickerExamination.Value.ToShortDateString != _examination.Date.ToShortDateString)
+			{
+				Examination examinationWithUpdatetInformation = new Examination(
+						_examination.PetID, 
+						(EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID, 
+						DateTimePickerExamination.Value, _examination.MedicineID, 
+						_examination.ExaminationTypeID, 
+						_examination.Price, 
+						_examination.CageBookingID);
+
+				_examination.UpdateExamination(examinationWithUpdatetInformation);
+
+
+			}
 		}
 	}
 }

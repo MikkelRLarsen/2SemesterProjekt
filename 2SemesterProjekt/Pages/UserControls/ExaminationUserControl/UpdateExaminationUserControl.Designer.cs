@@ -54,8 +54,7 @@
 			// 
 			// CreateExaminationButton
 			// 
-			CreateExaminationButton.BackColor = Color.DarkGray;
-			CreateExaminationButton.Enabled = false;
+			CreateExaminationButton.BackColor = Color.MediumSeaGreen;
 			CreateExaminationButton.FlatStyle = FlatStyle.Popup;
 			CreateExaminationButton.Location = new Point(406, 486);
 			CreateExaminationButton.Name = "CreateExaminationButton";
@@ -63,6 +62,7 @@
 			CreateExaminationButton.TabIndex = 29;
 			CreateExaminationButton.Text = "Gem";
 			CreateExaminationButton.UseVisualStyleBackColor = false;
+			CreateExaminationButton.Click += CreateExaminationButton_Click;
 			// 
 			// CancelExaminationButton
 			// 
