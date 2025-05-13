@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pageNameLabel = new Label();
-            petSpeciesTextbox = new TextBox();
+            petNameTextbox = new TextBox();
+            label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -38,29 +38,27 @@
             cancelButton = new Button();
             createButton = new Button();
             petBirthdaySelector = new DateTimePicker();
+            comboBoxSpecies = new ComboBox();
             ownerPhoneNumberTextbox = new TextBox();
-            petNameTextbox = new TextBox();
-            label1 = new Label();
+            pageNameLabel = new Label();
             SuspendLayout();
             // 
-            // pageNameLabel
+            // petNameTextbox
             // 
-            pageNameLabel.AutoSize = true;
-            pageNameLabel.Font = new Font("Gadugi", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            pageNameLabel.Location = new Point(288, 36);
-            pageNameLabel.Name = "pageNameLabel";
-            pageNameLabel.Size = new Size(642, 77);
-            pageNameLabel.TabIndex = 3;
-            pageNameLabel.Text = "Tilføj et nyt kæledyr";
-            pageNameLabel.TextAlign = ContentAlignment.TopCenter;
+            petNameTextbox.Location = new Point(288, 208);
+            petNameTextbox.Name = "petNameTextbox";
+            petNameTextbox.Size = new Size(238, 23);
+            petNameTextbox.TabIndex = 4;
+            petNameTextbox.KeyPress += petNameTextbox_KeyPress;
             // 
-            // petSpeciesTextbox
+            // label1
             // 
-            petSpeciesTextbox.Location = new Point(288, 255);
-            petSpeciesTextbox.Name = "petSpeciesTextbox";
-            petSpeciesTextbox.Size = new Size(238, 23);
-            petSpeciesTextbox.TabIndex = 5;
-            petSpeciesTextbox.KeyPress += petSpeciesTextbox_KeyPress;
+            label1.AutoSize = true;
+            label1.Location = new Point(248, 211);
+            label1.Name = "label1";
+            label1.Size = new Size(35, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Navn";
             // 
             // label2
             // 
@@ -138,37 +136,42 @@
             petBirthdaySelector.Size = new Size(236, 23);
             petBirthdaySelector.TabIndex = 17;
             // 
+            // comboBoxSpecies
+            // 
+            comboBoxSpecies.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxSpecies.FormattingEnabled = true;
+            comboBoxSpecies.Location = new Point(288, 255);
+            comboBoxSpecies.Name = "comboBoxSpecies";
+            comboBoxSpecies.Size = new Size(238, 23);
+            comboBoxSpecies.TabIndex = 19;
+            // 
             // ownerPhoneNumberTextbox
             // 
             ownerPhoneNumberTextbox.Location = new Point(659, 208);
             ownerPhoneNumberTextbox.MaxLength = 8;
             ownerPhoneNumberTextbox.Name = "ownerPhoneNumberTextbox";
             ownerPhoneNumberTextbox.Size = new Size(238, 23);
-            ownerPhoneNumberTextbox.TabIndex = 18;
+            ownerPhoneNumberTextbox.TabIndex = 20;
             ownerPhoneNumberTextbox.KeyPress += ownerPhoneNumberTextbox_KeyPress;
             // 
-            // petNameTextbox
+            // pageNameLabel
             // 
-            petNameTextbox.Location = new Point(288, 208);
-            petNameTextbox.Name = "petNameTextbox";
-            petNameTextbox.Size = new Size(238, 23);
-            petNameTextbox.TabIndex = 4;
-            petNameTextbox.KeyPress += petNameTextbox_KeyPress;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(248, 211);
-            label1.Name = "label1";
-            label1.Size = new Size(35, 15);
-            label1.TabIndex = 7;
-            label1.Text = "Navn";
+            pageNameLabel.AutoSize = true;
+            pageNameLabel.Font = new Font("Gadugi", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            pageNameLabel.Location = new Point(336, 39);
+            pageNameLabel.Name = "pageNameLabel";
+            pageNameLabel.Size = new Size(448, 77);
+            pageNameLabel.TabIndex = 21;
+            pageNameLabel.Text = "Tilføj kæledyr";
+            pageNameLabel.TextAlign = ContentAlignment.TopCenter;
             // 
             // AddPetUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(pageNameLabel);
             Controls.Add(ownerPhoneNumberTextbox);
+            Controls.Add(comboBoxSpecies);
             Controls.Add(petBirthdaySelector);
             Controls.Add(createButton);
             Controls.Add(cancelButton);
@@ -178,9 +181,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(petSpeciesTextbox);
             Controls.Add(petNameTextbox);
-            Controls.Add(pageNameLabel);
             Name = "AddPetUserControl";
             Size = new Size(1200, 825);
             Load += AddPetPage_Load;
@@ -190,8 +191,8 @@
 
         #endregion
 
-        private Label pageNameLabel;
-        private TextBox petSpeciesTextbox;
+        private TextBox petNameTextbox;
+        private Label label1;
         private Label label2;
         private Label label3;
         private Label label4;
@@ -201,8 +202,8 @@
         private Button cancelButton;
         private Button createButton;
         private DateTimePicker petBirthdaySelector;
+        private ComboBox comboBoxSpecies;
         private TextBox ownerPhoneNumberTextbox;
-        private TextBox petNameTextbox;
-        private Label label1;
+        private Label pageNameLabel;
     }
 }

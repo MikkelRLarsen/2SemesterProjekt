@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
 using _2SemesterProjekt.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Abstractions;
 
 namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 {
@@ -26,10 +27,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             await _db.SaveChangesAsync();
         }
 
-        public async Task<decimal> GetBasePriceForPetCageAsync(string petSpecies)
+        public async Task<decimal> GetBasePriceForPetCageAsync(Cage availableCage)
         {
             var cage = await _db.Cages
-                .FirstOrDefaultAsync(ca => ca.Species == petSpecies);
+                .FirstOrDefaultAsync(ca => ca.CageID == availableCage.CageID);
 
             if (cage == null)
             {
@@ -39,33 +40,30 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             return cage.Price;
         }
 
-        public async Task<IEnumerable<CageBooking>> GetAllCageBookingsOnDate(DateTime startDate, DateTime endDate)
+        public async Task<Cage?> GetAvailableCageAsync(Pet pet, DateTime startDate, DateTime endDate)
         {
-            try
-            {
-                return await _db.CageBookings
-                    // Checks if there is any hits that overlaps the requested booking interval
-                    .Where(cBooking => cBooking.StartDate < endDate.Date && cBooking.EndDate > startDate.Date)
-                    .Include(cBooking => cBooking.Cage) // Include the cage for capacity-check for the specified pet
-                    .ToListAsync();
-            }
-            catch (Exception)
-            {
-                return Enumerable.Empty<CageBooking>(); // Returns empty list
-            }
-        }
-
-        public async Task<Cage> GetPetCageAsync(string petSpecies)
-        {
-            var cage = await _db.Cages
-                .FirstOrDefaultAsync(ca => ca.Species == petSpecies);
+            var cages = await _db.Cages
+                .Where(c => c.Species == pet.Species)
+                .ToListAsync();
             
-            if (cage == null)
+            // Iterates through cages to find the first available
+            foreach (var cage in cages)
             {
-                throw new ArgumentException("Kunne ikke finde nogen bure");
+                bool isBooked = await _db.CageBookings
+                    // Finds the ID in DB to check if its booked in interval
+                    .AnyAsync(cb => cb.CageID == cage.CageID &&
+                    startDate < cb.EndDate &&
+                    endDate > cb.StartDate);
+
+                // If hit then return the cage
+                if (isBooked == false)
+                {
+                    return cage;
+                }
             }
 
-            return cage;
+            // Return null if there isn't any cage available
+            return null;
         }
     }
 }

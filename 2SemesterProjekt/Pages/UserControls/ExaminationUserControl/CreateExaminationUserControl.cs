@@ -112,7 +112,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             // Creates a messagebox if Discount is higher then 60% to confirm the booking of examination
             if (DiscountNumericUpDown.Value >= 60)
             {
-                DialogResult resultFromMessageBox = MessageBox.Show("Er du sikkker på at du vil forsætte?", "Valgt rabat er over 60%", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                DialogResult resultFromMessageBox = MessageBox.Show("Er du sikker på at du vil forsætte?", "Valgt rabat er over 60%", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                 // If the user press No then abort booking
                 if (resultFromMessageBox == DialogResult.No)
@@ -134,29 +134,22 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     // Validate the cagebooking before creating examination - to ensure no errors is thrown before the creation
                     DateTime estimatedEndOfCageBooking = DateTimePickerExamination.Value.AddDays(Convert.ToDouble(NumberOfDaysUpDown.Value));
 
-                    // Checks that the booking is possible by space
-                    await _cageService.IsFullyBooked(
-                        chosenPet.Species, // Pet species
-                        chosenExaminationDate, // Startdate of cagebooking
-                        estimatedEndOfCageBooking // Estimated enddate of booking
-                    );
+                    // Gets the available cage for the chosen pet => throws error if nothing is available
+                    Cage availableCage = await _cageService.GetAvailableCageAsync(chosenPet, chosenExaminationDate, estimatedEndOfCageBooking);
 
                     // Creates estimated totalprice for the cage
                     decimal totalPrice = await _cageService.GetTotalPriceForCage(
-                        chosenPet.Species,
+                        availableCage,
                         chosenExaminationDate,
                         estimatedEndOfCageBooking
                     );
-
-                    // Gets the cageID paired up with the chosen pet
-                    Cage cage = await _cageService.GetPetCageAsync(chosenPet.Species);
 
                     // Creates cageBooking to validate information
                     cageBooking = new CageBooking(
                         chosenExaminationDate.Date,
                         estimatedEndOfCageBooking.Date,
                         totalPrice,
-                        cage.CageID
+                        availableCage.CageID
                     );
 
                     // Creates the new Examination as a local variable to run validate Information.
@@ -224,7 +217,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             SetAllDisplayMembers();
             DateTimePickerExamination.MinDate = DateTime.Now;
 
-            CustomerExaminationDropdown.DataSource = await _customerService.GetAllCustomersAsync();
+            CustomerExaminationDropdown.DataSource = await _customerService.GetAllCustomersWithPetsAsync();
         }
 
         /// <summary>
@@ -267,7 +260,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             if (pet.EmployeeID != null) // If pet have a primary vet - codes executes
             {
-                EmployeeExaminationDropdown.DataSource = VeterinarianListBuilder.GetVeterinariansWithPrimaryFirst(_employees, pet.EmployeeID);
+                EmployeeExaminationDropdown.DataSource = ListBuilder.GetVeterinariansWithPrimaryFirst(_employees, pet.EmployeeID);
             }
         }
 
@@ -318,8 +311,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             if (ExaminationTypeDropdown.SelectedItem != null)
             {
                 if ((ExaminationTypeDropdown.SelectedItem as ExaminationType)!.ExaminationTag.DescriptionTag == "Operation" &&
-                    ((PetExaminationDropdown.SelectedItem as Pet)!.Species == "Kat" ||
-                    (PetExaminationDropdown.SelectedItem as Pet)!.Species == "Hund"))
+                    ((PetExaminationDropdown.SelectedItem as Pet)!.SpeciesID == 1 || // ID 1 = dog
+                    (PetExaminationDropdown.SelectedItem as Pet)!.SpeciesID == 2)) // ID 2 = cat
                 {
                     checkBoxCageBooking.Visible = true;
                     labelCageBookingDays.Visible = true;
