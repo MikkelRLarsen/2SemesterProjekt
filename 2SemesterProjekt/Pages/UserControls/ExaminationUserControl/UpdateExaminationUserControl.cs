@@ -52,7 +52,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			return allPetDoctorsInDict.Values.ToList().Prepend(examination.Employee);
 		}
 
-		private void CreateExaminationButton_Click(object sender, EventArgs e)
+		private void GemExaminationButton_Click(object sender, EventArgs e)
 		{
 			if (EmployeeExaminationDropdown.SelectedItem != _examination.Employee as Employee
 				|| DateTimePickerExamination.Value.ToShortDateString != _examination.Date.ToShortDateString)

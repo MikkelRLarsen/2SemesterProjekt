@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			DateTimePickerExamination = new DateTimePicker();
-			CreateExaminationButton = new Button();
+			GemExaminationButton = new Button();
 			CancelExaminationButton = new Button();
 			EmployeeExaminationDropdown = new ComboBox();
 			label7 = new Label();
@@ -52,17 +52,17 @@
 			DateTimePickerExamination.Size = new Size(207, 23);
 			DateTimePickerExamination.TabIndex = 30;
 			// 
-			// CreateExaminationButton
+			// GemExaminationButton
 			// 
-			CreateExaminationButton.BackColor = Color.MediumSeaGreen;
-			CreateExaminationButton.FlatStyle = FlatStyle.Popup;
-			CreateExaminationButton.Location = new Point(406, 486);
-			CreateExaminationButton.Name = "CreateExaminationButton";
-			CreateExaminationButton.Size = new Size(170, 58);
-			CreateExaminationButton.TabIndex = 29;
-			CreateExaminationButton.Text = "Gem";
-			CreateExaminationButton.UseVisualStyleBackColor = false;
-			CreateExaminationButton.Click += CreateExaminationButton_Click;
+			GemExaminationButton.BackColor = Color.MediumSeaGreen;
+			GemExaminationButton.FlatStyle = FlatStyle.Popup;
+			GemExaminationButton.Location = new Point(406, 486);
+			GemExaminationButton.Name = "GemExaminationButton";
+			GemExaminationButton.Size = new Size(170, 58);
+			GemExaminationButton.TabIndex = 29;
+			GemExaminationButton.Text = "Gem";
+			GemExaminationButton.UseVisualStyleBackColor = false;
+			GemExaminationButton.Click += GemExaminationButton_Click;
 			// 
 			// CancelExaminationButton
 			// 
@@ -203,7 +203,7 @@
 			Controls.Add(PetExaminationDropdown);
 			Controls.Add(CustomerExaminationDropdown);
 			Controls.Add(DateTimePickerExamination);
-			Controls.Add(CreateExaminationButton);
+			Controls.Add(GemExaminationButton);
 			Controls.Add(CancelExaminationButton);
 			Controls.Add(EmployeeExaminationDropdown);
 			Controls.Add(label7);
@@ -223,7 +223,7 @@
 		#endregion
 
 		private DateTimePicker DateTimePickerExamination;
-		private Button CreateExaminationButton;
+		private Button GemExaminationButton;
 		private Button CancelExaminationButton;
 		private ComboBox EmployeeExaminationDropdown;
 		private Label label7;
