@@ -21,6 +21,8 @@ namespace _2SemesterProjekt.Pages
     {
         private readonly IExaminationService _examinationService;
         public ExaminationCard ExaminationCard { get; set; }
+
+        private LinkedList<ExaminationCard> allExaminationCards = new LinkedList<ExaminationCard>();
         public KonsultationPage()
         {
             InitializeComponent();
@@ -78,7 +80,19 @@ namespace _2SemesterProjekt.Pages
 			CRUDPanel.Controls.Add(new ButtonPanel("Opret", Color.MediumSeaGreen, CreateExamination_Click));
             CRUDPanel.Controls.Add(new ButtonPanel("Opret faktura", Color.MediumBlue, CreateInvoice_Click));
 			CRUDPanel.Controls.Add(new ButtonPanel("Medicin", Color.MediumPurple, Medicine_Click));
-			CRUDPanel.Controls.Add(new ButtonPanel("Slet", Color.IndianRed, DeleteExamination_Click));
+			CRUDPanel.Controls.Add(new ButtonPanel("Slet", Color.IndianRed, DeleteExamination_Click)); 
+            
+            FindAndSetAllExaminationsAsync();
+		}
+
+        private async void FindAndSetAllExaminationsAsync()
+        {
+			IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
+
+			foreach (var examination in allExaminations)
+			{
+                allExaminationCards.AddLast(new ExaminationCard(examination, this));
+			}
 		}
 
         private async void FindExamination_Click(object sender, EventArgs e)
@@ -88,34 +102,34 @@ namespace _2SemesterProjekt.Pages
                 // Checks if phonenumber is valid
                 if (ValidPhoneNumberTextBox() == true)
                 {
-                    // If valid then retrieve all examination a customer's pet possess
-                    IEnumerable<Examination> allCustomerExamination = await _examinationService.GetAllExaminationOnCustomerPhoneNumber(Convert.ToInt32(textBoxCustomerPhoneNumber.Text));
+                    ExaminationFlowPanel.Controls.Clear();
 
-                    // If the customer doens't exist or they dont have any pets throw error which will be caught in Catch
-                    if (allCustomerExamination.Count() == 0)
+					// Finds all examination where Examination.Pet.Customers phonenumber == input phonenumber
+					IEnumerable<ExaminationCard> allExaminationWithCustomerPhonenumber = allExaminationCards.Where(ex => ex.Examination.Pet.Customer.PhoneNumber == Convert.ToInt32(textBoxCustomerPhoneNumber.Text));
+
+                    // If there wasn't any examination with customer phonenumber
+                    if (allExaminationWithCustomerPhonenumber.Count() == 0)
                     {
                         throw new ArgumentException("Kunden er ikke registeret i databasen eller ikke har nogen kæledyr");
                     }
 
-                    ExaminationFlowPanel.Controls.Clear();
-
-                    foreach (var examination in allCustomerExamination)
+					// Addeds all examination to flowpanel and display them
+					foreach (var examinationCard in allExaminationWithCustomerPhonenumber)
                     {
-                        ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
-                    }
+						ExaminationFlowPanel.Controls.Add(examinationCard);
+					}
                 }
 
 				else // If ValidPhoneNumberTextBox == False
 				{
-					// Retrieve all Examinations
-					IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
                     ExaminationFlowPanel.Controls.Clear();
 
-                    foreach (var examination in allExaminations)
+                    foreach (var examinationCard in allExaminationCards)
                     {
-                        ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
+                        ExaminationFlowPanel.Controls.Add(examinationCard);
                     }
                 }
+
                 textBoxCustomerPhoneNumber.Text = string.Empty;
                 textBoxCustomerPhoneNumber.BackColor = Color.White;
             }
