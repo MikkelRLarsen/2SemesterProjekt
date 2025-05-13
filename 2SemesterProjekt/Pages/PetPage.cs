@@ -199,6 +199,7 @@ namespace _2SemesterProjekt.Pages
             flowLayoutPanel1.Controls.Clear();
             foreach (var pet in _listOfPets)
             {
+                // This = PetPage
                 flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
             }
         }

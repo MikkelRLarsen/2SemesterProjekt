@@ -58,9 +58,9 @@ namespace _2SemesterProjekt.Pages
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            if (this.Parent != null)
+            if (_petPage != null)
             {
-                this.Parent.Controls.Remove(this); // Clear existing content (Parent is PetPage)
+                _petPage.Controls.Remove(this); // Clear existing content
             }
         }
 
@@ -136,7 +136,7 @@ namespace _2SemesterProjekt.Pages
                         await _petService.CreatePetAsync(pet); // The newly instantiated Pet object gets added to the DB.
                         displayMessage += $"{pet.Name} er blevet tilføjet til systemet.";
                         _petPage.RefreshPetList(); // Refresh PetPages petlist to reflect changes
-                        this.Parent!.Controls.Remove(this); // Clear existing content (Parent is PetPage)
+                        _petPage.Controls.Remove(this); // Clear existing content
                     }
                 }
                 catch (Exception ex)
