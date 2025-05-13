@@ -24,14 +24,14 @@ public class PetTest
 
     // Accept criteria: Species is not empty or does not only contain whitespace.
     [TestMethod]
-    [DataRow(1)]
-    [DataRow(2)]
+    [DataRow(1)] // Dog
+    [DataRow(2)] // Cat
     public void SpeciesIsValid(int validSpecies)
     {
         var pet = new Pet(1, "Connor", validSpecies, DateTime.Now, null);
     }
     [TestMethod]
-    [DataRow(0)]
+    [DataRow(0)] // Invalid
     public void SpeciesIsInvalid(int invalidSpecies)
     {
         Assert.ThrowsException<ArgumentException>(() =>
