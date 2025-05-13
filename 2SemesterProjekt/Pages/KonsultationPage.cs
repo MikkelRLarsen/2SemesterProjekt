@@ -80,9 +80,9 @@ namespace _2SemesterProjekt.Pages
 			CRUDPanel.Controls.Add(new ButtonPanel("Opret", Color.MediumSeaGreen, CreateExamination_Click));
             CRUDPanel.Controls.Add(new ButtonPanel("Opret faktura", Color.MediumBlue, CreateInvoice_Click));
 			CRUDPanel.Controls.Add(new ButtonPanel("Medicin", Color.MediumPurple, Medicine_Click));
-			CRUDPanel.Controls.Add(new ButtonPanel("Slet", Color.IndianRed, DeleteExamination_Click)); 
-            
-            FindAndSetAllExaminationsAsync();
+			CRUDPanel.Controls.Add(new ButtonPanel("Slet", Color.IndianRed, DeleteExamination_Click));
+
+            Task.Run(() => FindAndSetAllExaminationsAsync());
 		}
 
         private async void FindAndSetAllExaminationsAsync()
