@@ -33,8 +33,11 @@ namespace _2SemesterProjekt.Pages
 		}
         private void Medicine_Click(object sender, EventArgs e)
         {
-            ExaminationFlowPanel.Controls.Clear();
-            ExaminationFlowPanel.Controls.Add(new MedicineUserControl(ExaminationFlowPanel, ExaminationCard));
+            if (this.ExaminationCard != null)
+            {
+                ExaminationFlowPanel.Controls.Clear();
+                ExaminationFlowPanel.Controls.Add(new MedicineUserControl(ExaminationFlowPanel, this.ExaminationCard));
+            }
         }
 
 		private void DeleteExamination_Click(object sender, EventArgs e)
@@ -157,8 +160,6 @@ namespace _2SemesterProjekt.Pages
                 ExaminationFlowPanel.Controls.Add(new ExaminationCard(examination, this));
             }
         }
-
-		
 
         private async void CreateInvoice_Click(object sender, EventArgs e)
         {

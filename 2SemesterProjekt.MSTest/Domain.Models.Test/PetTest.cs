@@ -10,7 +10,7 @@ public class PetTest
     [DataRow("Connor")]
     public void PetNameIsValid(string validPetName)
     {
-        var pet = new Pet(1, validPetName, "Hund", DateTime.Now, null);
+        var pet = new Pet(1, validPetName, 1, DateTime.Now, null);
     }
 
     [TestMethod]
@@ -19,21 +19,20 @@ public class PetTest
     public void PetNameIsInvalid(string invalidPetName)
     {
         Assert.ThrowsException<ArgumentException>(() =>
-        new Pet(1, invalidPetName, "Hund", DateTime.Now, null));
+        new Pet(1, invalidPetName, 1, DateTime.Now, null));
     }
 
     // Accept criteria: Species is not empty or does not only contain whitespace.
     [TestMethod]
-    [DataRow("Hund")]
-    [DataRow("Kat")]
-    public void SpeciesIsValid(string validSpecies)
+    [DataRow(1)] // Dog
+    [DataRow(2)] // Cat
+    public void SpeciesIsValid(int validSpecies)
     {
         var pet = new Pet(1, "Connor", validSpecies, DateTime.Now, null);
     }
     [TestMethod]
-    [DataRow("")]
-    [DataRow("     ")]
-    public void SpeciesIsInvalid(string invalidSpecies)
+    [DataRow(0)] // Invalid
+    public void SpeciesIsInvalid(int invalidSpecies)
     {
         Assert.ThrowsException<ArgumentException>(() =>
         new Pet(1, "Connor", invalidSpecies, DateTime.Now, null));
@@ -44,7 +43,7 @@ public class PetTest
     [DataRow(1)]
     public void CustomerIDIsValid(int validCustomerID)
     {
-        var pet = new Pet(validCustomerID, "Connor", "Hund", DateTime.Now, null);
+        var pet = new Pet(validCustomerID, "Connor", 1, DateTime.Now, null);
     }
 
     [TestMethod]
@@ -52,6 +51,6 @@ public class PetTest
     public void CustomerIDIsInvalid(int invalidCustomerID)
     {
         Assert.ThrowsException<ArgumentException>(() =>
-        new Pet(invalidCustomerID, "Connor", "Hund", DateTime.Now, null));
+        new Pet(invalidCustomerID, "Connor", 1, DateTime.Now, null));
     }
 }

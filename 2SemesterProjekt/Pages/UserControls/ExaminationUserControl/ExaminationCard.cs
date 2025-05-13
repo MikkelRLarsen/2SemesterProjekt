@@ -29,7 +29,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             // Sets all information on Card based on Examination
             PetNameLabel.Text = Examination.Pet.Name;
-            PetSpeciesLabel.Text = Examination.Pet.Species;
+            PetSpeciesLabel.Text = Examination.Pet.Species.Name;
             BirthdayLabel.Text = Examination.Pet.Birthday.ToShortDateString();
 
             ExaminationLabel.Text = Examination.ExaminationType.Description;
@@ -54,7 +54,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                 MedicineStatusLabel.Text = "Nej";
             }
 
-            PetPicture.Image = GetImage(Examination.Pet.Species);
+            PetPicture.Image = GetImage(Examination.Pet.Species.Name);
 
         }
 
