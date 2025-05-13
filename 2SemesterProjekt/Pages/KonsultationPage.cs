@@ -36,7 +36,7 @@ namespace _2SemesterProjekt.Pages
             if (this.ExaminationCard != null)
             {
                 ExaminationFlowPanel.Controls.Clear();
-                ExaminationFlowPanel.Controls.Add(new MedicineUserControl(ExaminationFlowPanel, ExaminationCard));
+                ExaminationFlowPanel.Controls.Add(new MedicineUserControl(ExaminationFlowPanel, this.ExaminationCard));
             }
         }
 

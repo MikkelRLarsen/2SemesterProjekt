@@ -27,10 +27,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             await _db.SaveChangesAsync();
         }
 
-        public async Task<decimal> GetBasePriceForPetCageAsync(Pet pet)
+        public async Task<decimal> GetBasePriceForPetCageAsync(Cage availableCage)
         {
             var cage = await _db.Cages
-                .FirstOrDefaultAsync(ca => ca.SpeciesID == pet.SpeciesID);
+                .FirstOrDefaultAsync(ca => ca.CageID == availableCage.CageID);
 
             if (cage == null)
             {

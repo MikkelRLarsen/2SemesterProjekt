@@ -13,9 +13,9 @@ namespace _2SemesterProjekt.Services
             _cageRepository = cageRepository;
         }
 
-        public async Task<decimal> GetTotalPriceForCage(Pet pet, DateTime startDate, DateTime estimatedEndDate)
+        public async Task<decimal> GetTotalPriceForCage(Cage availableCage, DateTime startDate, DateTime estimatedEndDate)
         {
-            decimal basePrice = await _cageRepository.GetBasePriceForPetCageAsync(pet);
+            decimal basePrice = await _cageRepository.GetBasePriceForPetCageAsync(availableCage);
 
             decimal totalPrice = (estimatedEndDate - startDate).Days * basePrice; // Calculates estimated total price.
 

@@ -134,22 +134,22 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     // Validate the cagebooking before creating examination - to ensure no errors is thrown before the creation
                     DateTime estimatedEndOfCageBooking = DateTimePickerExamination.Value.AddDays(Convert.ToDouble(NumberOfDaysUpDown.Value));
 
+                    // Gets the available cage for the chosen pet => throws error if nothing is available
+                    Cage availableCage = await _cageService.GetAvailableCageAsync(chosenPet, chosenExaminationDate, estimatedEndOfCageBooking);
+
                     // Creates estimated totalprice for the cage
                     decimal totalPrice = await _cageService.GetTotalPriceForCage(
-                        chosenPet,
+                        availableCage,
                         chosenExaminationDate,
                         estimatedEndOfCageBooking
                     );
-
-                    // Gets the available cage for the chosen pet => throws error if nothing is available
-                    Cage cage = await _cageService.GetAvailableCageAsync(chosenPet, chosenExaminationDate, estimatedEndOfCageBooking);
 
                     // Creates cageBooking to validate information
                     cageBooking = new CageBooking(
                         chosenExaminationDate.Date,
                         estimatedEndOfCageBooking.Date,
                         totalPrice,
-                        cage.CageID
+                        availableCage.CageID
                     );
 
                     // Creates the new Examination as a local variable to run validate Information.

@@ -3,11 +3,11 @@
     public class Pet
     {
         public int PetID { get; init; }
-        public int CustomerID { get; protected set; }
-        public int? EmployeeID { get; protected set; }
-        public int SpeciesID { get; protected set; }
-        public string Name { get; protected set; }
-        public DateTime Birthday { get; protected set; }
+        public int CustomerID { get; private set; }
+        public int? EmployeeID { get; private set; }
+        public int SpeciesID { get; private set; }
+        public string Name { get; private set; }
+        public DateTime Birthday { get; private set; }
 
         public Customer Customer { get; }
         public Employee? Employee { get; }
