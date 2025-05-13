@@ -93,8 +93,9 @@ namespace _2SemesterProjekt.Pages
 
         private async void UpdateExamination_Click(object sender, EventArgs e)
         {
-
-        }
+			ExaminationFlowPanel.Controls.Clear();
+			ExaminationFlowPanel.Controls.Add(new UpdateExaminationUserControl(this.ExaminationCard.Examination));
+		}
 
         private async void FindAndSetAllExaminationsAsync()
         {
