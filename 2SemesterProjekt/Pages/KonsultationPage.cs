@@ -157,11 +157,12 @@ namespace _2SemesterProjekt.Pages
         private async void LoadAndShowExaminationCards(IEnumerable<ExaminationCard> examinationCardsToBeLoaded)
 		{
 			ExaminationFlowPanel.Controls.Clear();
+            ExaminationFlowPanel.Controls.AddRange(examinationCardsToBeLoaded.ToArray());
 
-			foreach (var examinationCard in examinationCardsToBeLoaded)
-			{
-				ExaminationFlowPanel.Controls.Add(examinationCard);
-			}
+			//foreach (var examinationCard in examinationCardsToBeLoaded)
+			//{
+			//	ExaminationFlowPanel.Controls.Add(examinationCard);
+			//}
 		}
 
         private async void CreateInvoice_Click(object sender, EventArgs e)
