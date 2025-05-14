@@ -63,8 +63,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			try
 			{
-				// Creates a new examinations with updatet information, which validates the information
-				Examination examinationWithUpdatetInformation = new Examination(
+				// Creates a new examinations with updated information, which validates the information
+				Examination examinationWithupdatedInformation = new Examination(
 						_examination.PetID,
 						(EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID,
 						DateTimePickerExamination.Value, _examination.MedicineID,
@@ -79,8 +79,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 					return;
 				}
 
-				// Validates information again and set the new properties
-				_examination.UpdateExaminationProperties(examinationWithUpdatetInformation);
+				// Validates information again and sets the new properties
+				_examination.UpdateExaminationProperties(examinationWithupdatedInformation);
 
 				// Updates Examination in Database
 				_examinationService.UpdateExamination(_examination);
@@ -90,10 +90,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				// Finds the index of the ExaminationCard to replace
 				int index = _konsultationPage.AllExaminationCards.FindIndex(exCard => exCard.Examination.ExaminationID == _examination.ExaminationID);
 
-				// Replaces ExaminationCard with a new one with the updatet information
+				// Replaces ExaminationCard with a new one with the updated information
 				_konsultationPage.AllExaminationCards[index] = new ExaminationCard(_examination, _konsultationPage);
 
-				// Set the selected ExaminationCard to null, so its no longer highlightet
+				// Set the selected ExaminationCard to null, so its no longer highligted
 				_konsultationPage.ExaminationCard = null;
 
 				// Return to show all pets
