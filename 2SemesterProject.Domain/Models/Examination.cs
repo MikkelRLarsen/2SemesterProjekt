@@ -1,8 +1,4 @@
-﻿using _2SemesterProjekt.Domain.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Diagnostics;
-
-namespace _2SemesterProjekt.Domain.Models
+﻿namespace _2SemesterProjekt.Domain.Models
 {
     public class Examination
     {
@@ -92,7 +88,7 @@ namespace _2SemesterProjekt.Domain.Models
         }
 
         /// <summary>
-        /// Validate examination and then upadate chosen examination to mirror given examination (This does NOT include ExaminationID)
+        /// Validate examination and then update chosen examination to mirror given examination (This does NOT include ExaminationID)
         /// </summary>
         /// <param name="examination"></param>
         public void UpdateExaminationProperties(Examination examination)
