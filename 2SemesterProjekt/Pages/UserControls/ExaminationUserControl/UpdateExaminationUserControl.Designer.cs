@@ -39,10 +39,10 @@
 			label2 = new Label();
 			label1 = new Label();
 			label5 = new Label();
-			PriceExaminationDisplay = new TextBox();
-			ExaminationTypeDropdown = new ComboBox();
-			PetExaminationDropdown = new ComboBox();
-			CustomerExaminationDropdown = new ComboBox();
+			CustomerTextBox = new TextBox();
+			PetTextBox = new TextBox();
+			ExaminationTextBox = new TextBox();
+			PriceTextBox = new TextBox();
 			SuspendLayout();
 			// 
 			// DateTimePickerExamination
@@ -74,6 +74,7 @@
 			CancelExaminationButton.TabIndex = 28;
 			CancelExaminationButton.Text = "Annuller";
 			CancelExaminationButton.UseVisualStyleBackColor = false;
+			CancelExaminationButton.Click += CancelExaminationButton_Click;
 			// 
 			// EmployeeExaminationDropdown
 			// 
@@ -154,54 +155,46 @@
 			label5.TabIndex = 20;
 			label5.Text = "Kunde:";
 			// 
-			// PriceExaminationDisplay
+			// CustomerTextBox
 			// 
-			PriceExaminationDisplay.BorderStyle = BorderStyle.FixedSingle;
-			PriceExaminationDisplay.Enabled = false;
-			PriceExaminationDisplay.ForeColor = Color.Black;
-			PriceExaminationDisplay.Location = new Point(257, 280);
-			PriceExaminationDisplay.Name = "PriceExaminationDisplay";
-			PriceExaminationDisplay.Size = new Size(207, 23);
-			PriceExaminationDisplay.TabIndex = 34;
+			CustomerTextBox.Enabled = false;
+			CustomerTextBox.Location = new Point(257, 155);
+			CustomerTextBox.Name = "CustomerTextBox";
+			CustomerTextBox.Size = new Size(206, 23);
+			CustomerTextBox.TabIndex = 35;
 			// 
-			// ExaminationTypeDropdown
+			// PetTextBox
 			// 
-			ExaminationTypeDropdown.DropDownStyle = ComboBoxStyle.DropDownList;
-			ExaminationTypeDropdown.Enabled = false;
-			ExaminationTypeDropdown.FormattingEnabled = true;
-			ExaminationTypeDropdown.Location = new Point(257, 236);
-			ExaminationTypeDropdown.Name = "ExaminationTypeDropdown";
-			ExaminationTypeDropdown.Size = new Size(207, 23);
-			ExaminationTypeDropdown.TabIndex = 33;
+			PetTextBox.Enabled = false;
+			PetTextBox.Location = new Point(258, 194);
+			PetTextBox.Name = "PetTextBox";
+			PetTextBox.Size = new Size(206, 23);
+			PetTextBox.TabIndex = 36;
 			// 
-			// PetExaminationDropdown
+			// ExaminationTextBox
 			// 
-			PetExaminationDropdown.DropDownStyle = ComboBoxStyle.DropDownList;
-			PetExaminationDropdown.Enabled = false;
-			PetExaminationDropdown.FormattingEnabled = true;
-			PetExaminationDropdown.Location = new Point(257, 195);
-			PetExaminationDropdown.Name = "PetExaminationDropdown";
-			PetExaminationDropdown.Size = new Size(207, 23);
-			PetExaminationDropdown.TabIndex = 32;
+			ExaminationTextBox.Enabled = false;
+			ExaminationTextBox.Location = new Point(258, 235);
+			ExaminationTextBox.Name = "ExaminationTextBox";
+			ExaminationTextBox.Size = new Size(206, 23);
+			ExaminationTextBox.TabIndex = 37;
 			// 
-			// CustomerExaminationDropdown
+			// PriceTextBox
 			// 
-			CustomerExaminationDropdown.DropDownStyle = ComboBoxStyle.DropDownList;
-			CustomerExaminationDropdown.Enabled = false;
-			CustomerExaminationDropdown.FormattingEnabled = true;
-			CustomerExaminationDropdown.Location = new Point(257, 155);
-			CustomerExaminationDropdown.Name = "CustomerExaminationDropdown";
-			CustomerExaminationDropdown.Size = new Size(207, 23);
-			CustomerExaminationDropdown.TabIndex = 31;
+			PriceTextBox.Enabled = false;
+			PriceTextBox.Location = new Point(258, 279);
+			PriceTextBox.Name = "PriceTextBox";
+			PriceTextBox.Size = new Size(206, 23);
+			PriceTextBox.TabIndex = 38;
 			// 
 			// UpdateExaminationUserControl
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			Controls.Add(PriceExaminationDisplay);
-			Controls.Add(ExaminationTypeDropdown);
-			Controls.Add(PetExaminationDropdown);
-			Controls.Add(CustomerExaminationDropdown);
+			Controls.Add(PriceTextBox);
+			Controls.Add(ExaminationTextBox);
+			Controls.Add(PetTextBox);
+			Controls.Add(CustomerTextBox);
 			Controls.Add(DateTimePickerExamination);
 			Controls.Add(GemExaminationButton);
 			Controls.Add(CancelExaminationButton);
@@ -233,9 +226,9 @@
 		private Label label2;
 		private Label label1;
 		private Label label5;
-		private TextBox PriceExaminationDisplay;
-		private ComboBox ExaminationTypeDropdown;
-		private ComboBox PetExaminationDropdown;
-		private ComboBox CustomerExaminationDropdown;
+		private TextBox CustomerTextBox;
+		private TextBox PetTextBox;
+		private TextBox ExaminationTextBox;
+		private TextBox PriceTextBox;
 	}
 }

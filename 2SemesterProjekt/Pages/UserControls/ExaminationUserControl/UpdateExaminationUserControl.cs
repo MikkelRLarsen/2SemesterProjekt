@@ -19,13 +19,15 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		private readonly IExaminationService _examinationService;
 		private readonly IEmployeeService _employeeService;
 		private readonly Examination _examination;
-		public UpdateExaminationUserControl(Examination examination)
+		private readonly KonsultationPage _konsultationPage;
+		public UpdateExaminationUserControl(Examination examination, KonsultationPage konsultationPage)
 		{
 			InitializeComponent();
 			_examination = examination;
 
 			_examinationService = ServiceProviderSingleton.GetServiceProvider().GetService<IExaminationService>()!;
 			_employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
+			_konsultationPage = konsultationPage;
 		}
 
 		private async void UpdateExaminationUserControl_Load(object sender, EventArgs e)
@@ -35,6 +37,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 			DateTimePickerExamination.Value = _examination.Date;
 			DateTimePickerExamination.MinDate = DateTime.UtcNow;
+
+			CustomerTextBox.Text = _examination.Pet.Customer.FirstName;
+			PetTextBox.Text = _examination.Pet.Name;
+			ExaminationTextBox.Text = _examination.ExaminationType.Description;
+			PriceTextBox.Text = _examination.Price.ToString();
 		}
 
 		private async Task<IEnumerable<Employee>> GetListOfEmployeeWithExaminationEmployeeFirst(Examination examination)
@@ -54,21 +61,41 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 		private void GemExaminationButton_Click(object sender, EventArgs e)
 		{
-			if (EmployeeExaminationDropdown.SelectedItem != _examination.Employee as Employee
-				|| DateTimePickerExamination.Value.ToShortDateString != _examination.Date.ToShortDateString)
+			try
 			{
 				Examination examinationWithUpdatetInformation = new Examination(
-						_examination.PetID, 
-						(EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID, 
-						DateTimePickerExamination.Value, _examination.MedicineID, 
-						_examination.ExaminationTypeID, 
-						_examination.Price, 
+						_examination.PetID,
+						(EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID,
+						DateTimePickerExamination.Value, _examination.MedicineID,
+						_examination.ExaminationTypeID,
+						_examination.Price,
 						_examination.CageBookingID);
+
+				DialogResult messageBoxResult = MessageBox.Show("Er du sikker på, at denne konsultationstid skal ændres?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+				if (messageBoxResult != DialogResult.Yes)
+				{
+					return;
+				}
 
 				_examination.UpdateExaminationProperties(examinationWithUpdatetInformation);
 
 				_examinationService.UpdateExamination(_examination);
+
+				MessageBox.Show("Konsultationen er blevet opdateret", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		private void CancelExaminationButton_Click(object sender, EventArgs e)
+		{
+			_konsultationPage.AllExaminationCards.First(exCard => exCard.Examination.ExaminationID == _examination.ExaminationID);
+
+
+			_konsultationPage.LoadAndShowExaminationCards(_konsultationPage.AllExaminationCards);
 		}
 	}
 }

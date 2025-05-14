@@ -22,8 +22,8 @@ namespace _2SemesterProjekt.Pages
     {
         private readonly IExaminationService _examinationService;
         public ExaminationCard ExaminationCard { get; set; }
+        public LinkedList<ExaminationCard> AllExaminationCards { get; set; } = new LinkedList<ExaminationCard>();
 
-        private LinkedList<ExaminationCard> allExaminationCards = new LinkedList<ExaminationCard>();
         public KonsultationPage()
         {
             InitializeComponent();
@@ -73,8 +73,8 @@ namespace _2SemesterProjekt.Pages
 				await _examinationService.DeleteExaminationAsync(examinationCard.Examination);
 				MessageBox.Show("Konsultationstiden er blevet slettet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                allExaminationCards.Remove(examinationCard);
-				LoadAndShowExaminationCards(allExaminationCards);
+                AllExaminationCards.Remove(examinationCard);
+				LoadAndShowExaminationCards(AllExaminationCards);
             }
         }
 
@@ -93,8 +93,20 @@ namespace _2SemesterProjekt.Pages
 
         private async void UpdateExamination_Click(object sender, EventArgs e)
         {
+            if (this.ExaminationCard == null)
+            {
+				MessageBox.Show("Vælg venligst den konsultationstid, der skal ændres.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+			}
+
+			if (this.ExaminationCard.Examination.Date < DateTime.Now)
+            {
+				DialogResult messageBoxWarning = MessageBox.Show("Du kan ikke ændre en fuldført konsultationstid!", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
 			ExaminationFlowPanel.Controls.Clear();
-			ExaminationFlowPanel.Controls.Add(new UpdateExaminationUserControl(this.ExaminationCard.Examination));
+			ExaminationFlowPanel.Controls.Add(new UpdateExaminationUserControl(this.ExaminationCard.Examination, this));
 		}
 
         private async void FindAndSetAllExaminationsAsync()
@@ -103,7 +115,7 @@ namespace _2SemesterProjekt.Pages
 
 			foreach (var examination in allExaminations)
 			{
-                allExaminationCards.AddLast(new ExaminationCard(examination, this));
+                AllExaminationCards.AddLast(new ExaminationCard(examination, this));
 			}
 		}
 
@@ -115,7 +127,7 @@ namespace _2SemesterProjekt.Pages
                 if (ValidPhoneNumberTextBox() == true)
                 {
 					// Finds all examination where Examination.Pet.Customers phonenumber == input phonenumber
-					IEnumerable<ExaminationCard> allExaminationWithCustomerPhonenumber = allExaminationCards.Where(ex => ex.Examination.Pet.Customer.PhoneNumber == Convert.ToInt32(textBoxCustomerPhoneNumber.Text));
+					IEnumerable<ExaminationCard> allExaminationWithCustomerPhonenumber = AllExaminationCards.Where(ex => ex.Examination.Pet.Customer.PhoneNumber == Convert.ToInt32(textBoxCustomerPhoneNumber.Text));
 
                     // If there wasn't any examination with customer phonenumber
                     if (allExaminationWithCustomerPhonenumber.Count() == 0)
@@ -130,7 +142,7 @@ namespace _2SemesterProjekt.Pages
 				else // If ValidPhoneNumberTextBox == False
 				{
 					// Addeds all examination to flowpanel and display them
-					LoadAndShowExaminationCards(allExaminationCards);
+					LoadAndShowExaminationCards(AllExaminationCards);
                 }
 
                 textBoxCustomerPhoneNumber.Text = string.Empty;
@@ -163,7 +175,7 @@ namespace _2SemesterProjekt.Pages
             }
         }
 
-        private async void LoadAndShowExaminationCards(IEnumerable<ExaminationCard> examinationCardsToBeLoaded)
+        public async void LoadAndShowExaminationCards(IEnumerable<ExaminationCard> examinationCardsToBeLoaded)
 		{
             // Clears the panel and then adds the wanted ExaminationCards
 			ExaminationFlowPanel.Controls.Clear();
