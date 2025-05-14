@@ -63,6 +63,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		{
 			try
 			{
+				// Creates a new examinations with updatet information, which validates the information
 				Examination examinationWithUpdatetInformation = new Examination(
 						_examination.PetID,
 						(EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID,
@@ -78,11 +79,25 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 					return;
 				}
 
+				// Validates information again and set the new properties
 				_examination.UpdateExaminationProperties(examinationWithUpdatetInformation);
 
+				// Updates Examination in Database
 				_examinationService.UpdateExamination(_examination);
 
 				MessageBox.Show("Konsultationen er blevet opdateret", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+				// Finds the index of the ExaminationCard to replace
+				int index = _konsultationPage.AllExaminationCards.FindIndex(exCard => exCard.Examination.ExaminationID == _examination.ExaminationID);
+
+				// Replaces ExaminationCard with a new one with the updatet information
+				_konsultationPage.AllExaminationCards[index] = new ExaminationCard(_examination, _konsultationPage);
+
+				// Set the selected ExaminationCard to null, so its no longer highlightet
+				_konsultationPage.ExaminationCard = null;
+
+				// Return to show all pets
+				_konsultationPage.LoadAndShowExaminationCards(_konsultationPage.AllExaminationCards);
 			}
 			catch (Exception ex)
 			{
@@ -92,9 +107,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
 		private void CancelExaminationButton_Click(object sender, EventArgs e)
 		{
-			_konsultationPage.AllExaminationCards.First(exCard => exCard.Examination.ExaminationID == _examination.ExaminationID);
-
-
 			_konsultationPage.LoadAndShowExaminationCards(_konsultationPage.AllExaminationCards);
 		}
 	}

@@ -22,7 +22,7 @@ namespace _2SemesterProjekt.Pages
     {
         private readonly IExaminationService _examinationService;
         public ExaminationCard ExaminationCard { get; set; }
-        public LinkedList<ExaminationCard> AllExaminationCards { get; set; } = new LinkedList<ExaminationCard>();
+        public List<ExaminationCard> AllExaminationCards { get; set; } = new List<ExaminationCard>();
 
         public KonsultationPage()
         {
@@ -78,7 +78,7 @@ namespace _2SemesterProjekt.Pages
             }
         }
 
-		private void KonsultationPage_Load(object sender, EventArgs e)
+		private async void KonsultationPage_Load(object sender, EventArgs e)
 		{
 			CRUDPanel.Controls.Add(new ButtonPanel("Find", Color.MediumAquamarine, FindExamination_Click));
 			CRUDPanel.Controls.Add(new ButtonPanel("Opret", Color.MediumSeaGreen, CreateExamination_Click));
@@ -86,7 +86,6 @@ namespace _2SemesterProjekt.Pages
 			CRUDPanel.Controls.Add(new ButtonPanel("Slet", Color.IndianRed, DeleteExamination_Click));
             CRUDPanel.Controls.Add(new ButtonPanel("Opret faktura", Color.MediumBlue, CreateInvoice_Click));
 			CRUDPanel.Controls.Add(new ButtonPanel("Medicin", Color.MediumPurple, Medicine_Click));
-
 
 			Task.Run(() => FindAndSetAllExaminationsAsync());
 		}
@@ -115,7 +114,7 @@ namespace _2SemesterProjekt.Pages
 
 			foreach (var examination in allExaminations)
 			{
-                AllExaminationCards.AddLast(new ExaminationCard(examination, this));
+                AllExaminationCards.Add(new ExaminationCard(examination, this));
 			}
 		}
 
