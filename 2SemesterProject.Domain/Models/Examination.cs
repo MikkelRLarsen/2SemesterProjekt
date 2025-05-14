@@ -1,6 +1,4 @@
-﻿using _2SemesterProjekt.Domain.Models;
-
-namespace _2SemesterProjekt.Domain.Models
+﻿namespace _2SemesterProjekt.Domain.Models
 {
     public class Examination
     {
@@ -88,5 +86,22 @@ namespace _2SemesterProjekt.Domain.Models
                 CageBookingID = cageBookingID;
             }
         }
+
+        /// <summary>
+        /// Validate examination and then update chosen examination to mirror given examination (This does NOT include ExaminationID)
+        /// </summary>
+        /// <param name="examination"></param>
+        public void UpdateExaminationProperties(Examination examination)
+        {
+            examination.InformationValid();
+
+			EmployeeID = examination.EmployeeID;
+			MedicineID = examination.MedicineID;
+			Date = examination.Date;
+			ExaminationTypeID = examination.ExaminationTypeID;
+			Price = examination.Price;
+			CageBookingID = examination.CageBookingID;
+
+		}
     }
 }
