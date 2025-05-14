@@ -74,10 +74,10 @@ namespace _2SemesterProjekt.Pages
 				await _examinationService.DeleteExaminationAsync(examinationCard.Examination);
 				MessageBox.Show("Konsultationstiden er blevet slettet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Removes ExamiantionCard from allExaminations
+				// Removes ExaminationCard from allExaminations
 				AllExaminationCards.Remove(examinationCard);
 
-				// Set the selected ExaminationCard to null, so its no longer highlightet
+				// Set the selected ExaminationCard to null, so its no longer highlighted
 				this.ExaminationCard = null;
 
 				// Return to show all pets
