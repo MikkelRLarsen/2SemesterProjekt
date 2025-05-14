@@ -14,12 +14,14 @@ namespace _2SemesterProjekt
     public partial class CustomerCard : UserControl
     {
         private Customer _customer; // Holds Customer data
+        private CustomerPage _customerCard;
 
-        public CustomerCard(Customer customer)
+        public CustomerCard(Customer customer, CustomerPage customerPage)
         {
             InitializeComponent();
             _customer = customer;
             InitializeUIDesign();
+            _customerCard = customerPage;
         }
         private void InitializeUIDesign()
         {
