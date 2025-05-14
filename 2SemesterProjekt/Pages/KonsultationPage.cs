@@ -141,13 +141,13 @@ namespace _2SemesterProjekt.Pages
                         throw new ArgumentException("Kunden er ikke registeret i databasen eller ikke har nogen kæledyr");
                     }
 
-					// Addeds all relevant examination to flowpanel and display them
+					// Adds all relevant examination to flowpanel and display them
 					LoadAndShowExaminationCards(allExaminationWithCustomerPhonenumber);
                 }
 
 				else // If ValidPhoneNumberTextBox == False
 				{
-					// Addeds all examination to flowpanel and display them
+					// Adds all examination to flowpanel and display them
 					LoadAndShowExaminationCards(AllExaminationCards);
                 }
 
