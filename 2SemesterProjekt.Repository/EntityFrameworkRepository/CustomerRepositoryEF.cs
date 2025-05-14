@@ -40,20 +40,6 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             }
         }
 
-		public int GetCustomerIDByPhoneNumber(int ownerPhoneNumber)
-		{
-			var owner = _db.Customers.FirstOrDefault(c => c.PhoneNumber == ownerPhoneNumber);
-            /* owner will be set to null if there isn't a customer with
-            the specific phone number in the DB. */
-			if (owner != null){
-                return owner.CustomerID;
-            }
-			else
-			{
-				return 0;
-			}
-		}
-
         public async Task<Customer> GetCustomerByPhoneNumberAsync(int phoneNumber)
         {
             var customer = await _db.Customers

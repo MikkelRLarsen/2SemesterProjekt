@@ -34,7 +34,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         public async Task CreatePetAsync(Pet pet)
         {
             await _db.Pets.AddAsync(pet);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
             // The pet has been added to the DB.
         }
 
