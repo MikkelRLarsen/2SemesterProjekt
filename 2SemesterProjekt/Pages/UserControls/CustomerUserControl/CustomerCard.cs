@@ -27,6 +27,8 @@ namespace _2SemesterProjekt
         {
             customerIdLabel.Text = _customer.CustomerID.ToString();
             customerNameLabel.Text = _customer.FirstName;
+            customerPhoneNumberLabel.Text = _customer.PhoneNumber.ToString();
+            customerEmailLabel.Text = _customer.Email;
         }
     }
 }

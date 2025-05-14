@@ -70,6 +70,7 @@
             Controls.Add(customerFlowPanel);
             Name = "CustomerPage";
             Size = new Size(1200, 825);
+            Load += CustomerPage_Load;
             ResumeLayout(false);
             PerformLayout();
         }

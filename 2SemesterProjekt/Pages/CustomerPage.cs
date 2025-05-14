@@ -11,34 +11,46 @@ using _2SemesterProjekt.Domain.Models;
 using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using Microsoft.Extensions.DependencyInjection;
+using _2SemesterProjekt.Services;
 
 namespace _2SemesterProjekt
 {
 	public partial class CustomerPage : UserControl
 	{
 		private readonly ICustomerService _customerService;
-		public CustomerPage()
+        //public CustomerCard CustomerCard { get; set; }
+        public List<CustomerCard> AllCustomerCards { get; set; } = new List<CustomerCard>();
+        public CustomerPage()
 		{
 			InitializeComponent();
-
-			// Button with a click event handler
-			buttonFlowPanel.Controls.Add(new ButtonPanel("Vis alle", "", Color.MediumAquamarine, ShowAllCustomersButton_Click));
-			buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kunde", "AddCustomer.png", Color.MediumSeaGreen, AddCustomerButton_Click));
-
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
         }
-		// Eventhandler with "Show All Customers" when button is clicked
-		private async void ShowAllCustomersButton_Click(object? sender, EventArgs e)
-		{
-            // Retrieve all Customers
+        private async void CustomerPage_Load(object sender, EventArgs e)
+        {
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Vis alle", Color.MediumAquamarine, ShowAllCustomersButton_Click));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kunde", "AddCustomer.png", Color.MediumSeaGreen, AddCustomerButton_Click));
+
+            Task.Run(() => FindAndSetAllCustomersAsync());
+        }
+        private async void FindAndSetAllCustomersAsync()
+        {
             IEnumerable<Customer> allCustomers = await _customerService.GetAllCustomersAsync();
-            
-			customerFlowPanel.Controls.Clear(); // Clears exisiting content, so customers can be loaded in:
-            
+
             foreach (var customer in allCustomers)
             {
-                customerFlowPanel.Controls.Add(new CustomerCard(customer, this));
+                AllCustomerCards.Add(new CustomerCard(customer, this));
             }
+        }
+
+        // Eventhandler when "Find Alle"-button is clicked:
+        private async void ShowAllCustomersButton_Click(object? sender, EventArgs e)
+		{
+            LoadAndShowCustomerCards(AllCustomerCards);
+        }
+		public async void LoadAndShowCustomerCards(IEnumerable<CustomerCard> customerCardsToBeLoaded)
+		{
+            customerFlowPanel.Controls.Clear();
+            customerFlowPanel.Controls.AddRange(customerCardsToBeLoaded.ToArray());
         }
 
         // Event handler with "Add Customer" when button is clicked
