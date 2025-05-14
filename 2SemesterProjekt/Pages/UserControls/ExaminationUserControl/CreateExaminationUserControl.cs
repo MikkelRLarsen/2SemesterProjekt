@@ -16,11 +16,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         FlowLayoutPanel _konsultationPanel;
         private IEnumerable<Employee> _employees;
         private decimal? _basePriceForExamination;
+        private readonly KonsultationPage _konsultationPage;
 
-        public CreateExaminationUserControl(FlowLayoutPanel konsultationPanel)
+        public CreateExaminationUserControl(FlowLayoutPanel konsultationPanel, KonsultationPage konsultationPage)
         {
             InitializeComponent();
             _konsultationPanel = konsultationPanel;
+            _konsultationPage = konsultationPage;
         }
 
         /// <summary>
@@ -171,7 +173,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
                     // Connects cagebooking to examination
                     newExamination.SetCageBookingID(cageBooking.CageBookingID);
-                }
+
+					// Add the new examination to AllExaminationCard on KonsultationPage, so it shows when reloaded
+					_konsultationPage.AllExaminationCards.Add(new ExaminationCard(newExamination, _konsultationPage));
+
+					// Return to show all pets
+					_konsultationPage.LoadAndShowExaminationCards(_konsultationPage.AllExaminationCards);
+				}
                 else // Don't create cagebooking
                 {
                     // Creates the new Examination as a local variable to run validate Information.
@@ -186,7 +194,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     );
 
                     await _examinationService.CreateExaminationAsync(newExamination);
-                }
+
+                    // Add the new examination to AllExaminationCard on KonsultationPage, so it shows when reloaded
+					_konsultationPage.AllExaminationCards.Add(new ExaminationCard(newExamination, _konsultationPage));
+
+					// Return to show all pets
+					_konsultationPage.LoadAndShowExaminationCards(_konsultationPage.AllExaminationCards);
+				}
 
                 //Shows a message that the creation has been completed
                 ErrorMessageExamination.Visible = true;

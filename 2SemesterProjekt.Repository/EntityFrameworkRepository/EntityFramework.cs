@@ -114,6 +114,11 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .WithOne(ex => ex.CageBooking)
                 .HasForeignKey<Examination>(ex => ex.CageBookingID);
 
+			modelBuilder.Entity<Cage>()
+				.HasOne(ca => ca.Species)
+				.WithMany(p => p.Cages)
+				.HasForeignKey(p => p.CageID);
+
 			modelBuilder.Entity<Examination>()
 				.HasOne(ex => ex.Medicine)
 				.WithMany(p => p.Examinations)
