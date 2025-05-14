@@ -1,7 +1,24 @@
 ﻿@page "/"
 
 <PageTitle>HundOgKat kørselsregistering</PageTitle>
+<header>
+	<img class="center-image" src="img\logo2.png" />
+	<h1 class="center-text">Kørselsregistrering</h1>
+</header>
 
-<img src="img\logo2.png" />
-<h1>Kørselsregistrering</h1>
+<div class="destination-div">
+	<button type="submit" value="Posthus (Strandgade)" @onclick="() => RegisterDrivingActivity() ">✉️ Posthus (Strandgade)</button>
+	<button type="submit" value="Harald Nyborg">🛠️ Harald Nyborg</button>
+	<button type="submit" value="Ugleapoteket">💊Ugleapoteket</button>
+	<button type="submit" value="Kennel">🐶 Kennel</button>
+	<button type="submit" value="Maxi Zoo">🐕‍🦺 Maxi Zoo</button>
+	<button type="submit" value="Krematorie">🪦 Krematorie</button>
+	<button type="submit" value="Silvan">🛠️ Silvan</button>
+	<button type="submit" value="brugerdefineret">❓ Ukendt</button>
+</div>
 
+@code{
+	private void RegisterDrivingActivity(string destination){
+
+	}
+}
