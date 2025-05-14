@@ -15,6 +15,7 @@ using _2SemesterProjekt.Domain.Models;
 using _2SemesterProjekt.Pages.UserControls.MedicineUserControl;
 using _2SemesterProjekt.Pages.UserControls.PetUserControl;
 using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace _2SemesterProjekt.Pages
 {
@@ -33,7 +34,7 @@ namespace _2SemesterProjekt.Pages
 		private void CreateExamination_Click(object sender, EventArgs e)
 		{
 			ExaminationFlowPanel.Controls.Clear();
-			ExaminationFlowPanel.Controls.Add(new CreateExaminationUserControl(ExaminationFlowPanel));
+			ExaminationFlowPanel.Controls.Add(new CreateExaminationUserControl(ExaminationFlowPanel, this));
 		}
 
         private void Medicine_Click(object sender, EventArgs e)
@@ -73,9 +74,15 @@ namespace _2SemesterProjekt.Pages
 				await _examinationService.DeleteExaminationAsync(examinationCard.Examination);
 				MessageBox.Show("Konsultationstiden er blevet slettet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                AllExaminationCards.Remove(examinationCard);
+                // Removes ExamiantionCard from allExaminations
+				AllExaminationCards.Remove(examinationCard);
+
+				// Set the selected ExaminationCard to null, so its no longer highlightet
+				this.ExaminationCard = null;
+
+				// Return to show all pets
 				LoadAndShowExaminationCards(AllExaminationCards);
-            }
+			}
         }
 
 		private async void KonsultationPage_Load(object sender, EventArgs e)
