@@ -4,6 +4,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 {
 	public interface IEmployeeRepository
 	{
-		public Task<IEnumerable<Employee>> GetAllPetDoctorsAsync();
+		public Task<IEnumerable<Employee>> GetAllEmployeeWithTypeAsync(string employeeType);
 	}
 }
