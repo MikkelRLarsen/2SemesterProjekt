@@ -23,14 +23,14 @@
 <div id="destination-selection">
 	<h1 class="center-text">Vælg destination.</h1>
 	<div class="destination-div justify-content-center">
-		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Posthus (strandgade)", 5.3))">✉️ Posthus (Strandgade)</button></a>
-		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Harald Nyborg", 6.4))">🛠️ Harald Nyborg</button></a>
-		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Ugleapoteket", 2.2))">💊Ugleapoteket</button></a>
-		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Kennel", 13.1))">🐶 Kennel</button></a>
-		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Maxi Zoo", 17.5))">🐕‍🦺 Maxi Zoo</button></a>
-		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Krematorie", 30.8))">🪦 Krematorie</button></a>
-		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Silvan", 10.9))">🛠️ Silvan</button></a>
-		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Andet", 0))">❓ Andet</button></a>
+		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Posthus (strandgade)", "5.3"))">✉️ Posthus (Strandgade)</button></a>
+		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Harald Nyborg", "6.4"))">🛠️ Harald Nyborg</button></a>
+		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Ugleapoteket", "2.2"))">💊Ugleapoteket</button></a>
+		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Kennel", "13.1"))">🐶 Kennel</button></a>
+		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Maxi Zoo", "17.5"))">🐕‍🦺 Maxi Zoo</button></a>
+		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Krematorie", "30.8"))">🪦 Krematorie</button></a>
+		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Silvan", "10.9"))">🛠️ Silvan</button></a>
+		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("ANGIV DESTINATION", "ANGIV AFSTAND I"))">❓ Andet</button></a>
 	</div>
 </div>
 
@@ -48,7 +48,7 @@
 		_driver = driver;
 	}
 
-	private void RegisterDrivingActivity(string selectedDestination, double km){
+	private void RegisterDrivingActivity(string selectedDestination, string km){
 		string destination = selectedDestination;
 		string destinationKm = km.ToString() + " km";
 		string date = DateTime.Now.ToString();
