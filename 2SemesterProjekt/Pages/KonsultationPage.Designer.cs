@@ -38,10 +38,9 @@
 			// 
 			pageNameLabel.AutoSize = true;
 			pageNameLabel.Font = new Font("Gadugi", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			pageNameLabel.Location = new Point(566, 65);
-			pageNameLabel.Margin = new Padding(4, 0, 4, 0);
+			pageNameLabel.Location = new Point(396, 39);
 			pageNameLabel.Name = "pageNameLabel";
-			pageNameLabel.Size = new Size(625, 115);
+			pageNameLabel.Size = new Size(418, 77);
 			pageNameLabel.TabIndex = 2;
 			pageNameLabel.Text = "Konsultation";
 			// 
@@ -50,39 +49,37 @@
 			ExaminationFlowPanel.AutoScroll = true;
 			ExaminationFlowPanel.BackColor = SystemColors.ControlLightLight;
 			ExaminationFlowPanel.BorderStyle = BorderStyle.FixedSingle;
-			ExaminationFlowPanel.Location = new Point(357, 250);
-			ExaminationFlowPanel.Margin = new Padding(4, 5, 4, 5);
+			ExaminationFlowPanel.Location = new Point(250, 150);
 			ExaminationFlowPanel.Name = "ExaminationFlowPanel";
-			ExaminationFlowPanel.Size = new Size(1012, 965);
+			ExaminationFlowPanel.Size = new Size(709, 580);
 			ExaminationFlowPanel.TabIndex = 3;
 			// 
 			// CRUDPanel
 			// 
-			CRUDPanel.Location = new Point(1399, 715);
-			CRUDPanel.Margin = new Padding(4, 5, 4, 5);
+			CRUDPanel.Location = new Point(979, 351);
 			CRUDPanel.Name = "CRUDPanel";
-			CRUDPanel.Size = new Size(299, 502);
+			CRUDPanel.Size = new Size(209, 379);
 			CRUDPanel.TabIndex = 4;
 			// 
 			// textBoxCustomerPhoneNumber
 			// 
-			textBoxCustomerPhoneNumber.Location = new Point(1399, 673);
+			textBoxCustomerPhoneNumber.Location = new Point(979, 326);
+			textBoxCustomerPhoneNumber.Margin = new Padding(2, 2, 2, 2);
 			textBoxCustomerPhoneNumber.Name = "textBoxCustomerPhoneNumber";
 			textBoxCustomerPhoneNumber.PlaceholderText = "Indtast tlf på kunde";
-			textBoxCustomerPhoneNumber.Size = new Size(299, 31);
+			textBoxCustomerPhoneNumber.Size = new Size(210, 23);
 			textBoxCustomerPhoneNumber.TabIndex = 5;
 			// 
 			// KonsultationPage
 			// 
-			AutoScaleDimensions = new SizeF(10F, 25F);
+			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			Controls.Add(textBoxCustomerPhoneNumber);
 			Controls.Add(CRUDPanel);
 			Controls.Add(ExaminationFlowPanel);
 			Controls.Add(pageNameLabel);
-			Margin = new Padding(4, 5, 4, 5);
 			Name = "KonsultationPage";
-			Size = new Size(1714, 1375);
+			Size = new Size(1200, 825);
 			Load += KonsultationPage_Load;
 			ResumeLayout(false);
 			PerformLayout();

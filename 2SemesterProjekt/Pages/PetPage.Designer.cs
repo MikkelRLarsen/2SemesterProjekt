@@ -20,7 +20,7 @@
 			base.Dispose(disposing);
 		}
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
         /// <summary> 
         /// Required method for Designer support - do not modify 
@@ -88,9 +88,9 @@
             PerformLayout();
         }
 
-        #endregion
+		#endregion
 
-        private Label pageNameLabel;
+		private Label pageNameLabel;
 		private FlowLayoutPanel flowLayoutPanel1;
         private FlowLayoutPanel buttonFlowPanel;
         private TextBox textBoxCustomerPhoneNumber;

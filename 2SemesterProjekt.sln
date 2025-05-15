@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2SemesterProjekt.Repository
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2SemesterProjekt.MSTest", "2SemesterProjekt.MSTest\2SemesterProjekt.MSTest.csproj", "{D95E90EC-6EA1-4F0E-B4F8-5630D577FF21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2SemesterProjekt.BlazorWebAssembly", "2SemesterProjekt.BlazorWebAssembly\2SemesterProjekt.BlazorWebAssembly.csproj", "{CCBF585D-2978-4350-B9F4-5503C5941053}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{D95E90EC-6EA1-4F0E-B4F8-5630D577FF21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D95E90EC-6EA1-4F0E-B4F8-5630D577FF21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D95E90EC-6EA1-4F0E-B4F8-5630D577FF21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCBF585D-2978-4350-B9F4-5503C5941053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCBF585D-2978-4350-B9F4-5503C5941053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCBF585D-2978-4350-B9F4-5503C5941053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCBF585D-2978-4350-B9F4-5503C5941053}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,6 +14,7 @@ namespace _2SemesterProjekt.Domain.Models
 		public int PhoneNumber { get; private set; }
 
 		public List<Pet>? Pets { get; } = new();
+		public List<Order>? Orders { get; } = new();
 
 		public Customer(string firstName, string lastName, string email, string address, string type, int phoneNumber)
 		{

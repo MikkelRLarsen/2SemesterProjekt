@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 
 namespace _2SemesterProjekt.Services
 {
@@ -38,6 +39,13 @@ namespace _2SemesterProjekt.Services
         {
             
             await _petRepository.UpdatePetAsync(pet);
+        }
+
+        public async Task<IEnumerable<Species>> GetAllPetSpeciesAsync()
+        {
+            var petSpecies = await _petRepository.GetAllPetSpeciesAsync();
+
+            return petSpecies;
         }
     }
 }

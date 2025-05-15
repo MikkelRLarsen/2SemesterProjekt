@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pageNameLabel = new Label();
             petNameTextbox = new TextBox();
-            petSpeciesTextbox = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -40,19 +38,10 @@
             cancelButton = new Button();
             createButton = new Button();
             petBirthdaySelector = new DateTimePicker();
+            comboBoxSpecies = new ComboBox();
             ownerPhoneNumberTextbox = new TextBox();
+            pageNameLabel = new Label();
             SuspendLayout();
-            // 
-            // pageNameLabel
-            // 
-            pageNameLabel.AutoSize = true;
-            pageNameLabel.Font = new Font("Gadugi", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            pageNameLabel.Location = new Point(288, 36);
-            pageNameLabel.Name = "pageNameLabel";
-            pageNameLabel.Size = new Size(642, 77);
-            pageNameLabel.TabIndex = 3;
-            pageNameLabel.Text = "Tilføj et nyt kæledyr";
-            pageNameLabel.TextAlign = ContentAlignment.TopCenter;
             // 
             // petNameTextbox
             // 
@@ -61,14 +50,6 @@
             petNameTextbox.Size = new Size(238, 23);
             petNameTextbox.TabIndex = 4;
             petNameTextbox.KeyPress += petNameTextbox_KeyPress;
-            // 
-            // petSpeciesTextbox
-            // 
-            petSpeciesTextbox.Location = new Point(288, 255);
-            petSpeciesTextbox.Name = "petSpeciesTextbox";
-            petSpeciesTextbox.Size = new Size(238, 23);
-            petSpeciesTextbox.TabIndex = 5;
-            petSpeciesTextbox.KeyPress += petSpeciesTextbox_KeyPress;
             // 
             // label1
             // 
@@ -155,20 +136,42 @@
             petBirthdaySelector.Size = new Size(236, 23);
             petBirthdaySelector.TabIndex = 17;
             // 
+            // comboBoxSpecies
+            // 
+            comboBoxSpecies.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxSpecies.FormattingEnabled = true;
+            comboBoxSpecies.Location = new Point(288, 255);
+            comboBoxSpecies.Name = "comboBoxSpecies";
+            comboBoxSpecies.Size = new Size(238, 23);
+            comboBoxSpecies.TabIndex = 19;
+            // 
             // ownerPhoneNumberTextbox
             // 
             ownerPhoneNumberTextbox.Location = new Point(659, 208);
             ownerPhoneNumberTextbox.MaxLength = 8;
             ownerPhoneNumberTextbox.Name = "ownerPhoneNumberTextbox";
             ownerPhoneNumberTextbox.Size = new Size(238, 23);
-            ownerPhoneNumberTextbox.TabIndex = 18;
+            ownerPhoneNumberTextbox.TabIndex = 20;
             ownerPhoneNumberTextbox.KeyPress += ownerPhoneNumberTextbox_KeyPress;
+            // 
+            // pageNameLabel
+            // 
+            pageNameLabel.AutoSize = true;
+            pageNameLabel.Font = new Font("Gadugi", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            pageNameLabel.Location = new Point(336, 39);
+            pageNameLabel.Name = "pageNameLabel";
+            pageNameLabel.Size = new Size(448, 77);
+            pageNameLabel.TabIndex = 21;
+            pageNameLabel.Text = "Tilføj kæledyr";
+            pageNameLabel.TextAlign = ContentAlignment.TopCenter;
             // 
             // AddPetUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(pageNameLabel);
             Controls.Add(ownerPhoneNumberTextbox);
+            Controls.Add(comboBoxSpecies);
             Controls.Add(petBirthdaySelector);
             Controls.Add(createButton);
             Controls.Add(cancelButton);
@@ -178,9 +181,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(petSpeciesTextbox);
             Controls.Add(petNameTextbox);
-            Controls.Add(pageNameLabel);
             Name = "AddPetUserControl";
             Size = new Size(1200, 825);
             Load += AddPetPage_Load;
@@ -190,9 +191,7 @@
 
         #endregion
 
-        private Label pageNameLabel;
         private TextBox petNameTextbox;
-        private TextBox petSpeciesTextbox;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -203,6 +202,8 @@
         private Button cancelButton;
         private Button createButton;
         private DateTimePicker petBirthdaySelector;
+        private ComboBox comboBoxSpecies;
         private TextBox ownerPhoneNumberTextbox;
+        private Label pageNameLabel;
     }
 }

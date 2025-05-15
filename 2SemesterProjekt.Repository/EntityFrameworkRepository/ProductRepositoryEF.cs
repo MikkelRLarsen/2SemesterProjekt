@@ -21,5 +21,23 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             return await _db.Products.ToListAsync();
         }
+        public async Task<IEnumerable<Product>> GetAllProductsInStockAsync()
+        {
+            return await _db.Products
+                .Where(pr => pr.NumberInStock > 0)
+                .ToListAsync();
+        }
+
+        public async Task UpdateSeveralProductsQuantityAsync(IEnumerable<Product> products)
+        {
+            foreach (Product product in products)
+            {
+                int newNumberInStock = product.NumberInStock - product.QuantityInOrder; // Subtracts the quantity in order from the quantity in stock
+                await _db.Products
+                    .Where(pr => pr.ProductID == product.ProductID)
+                    .ExecuteUpdateAsync(pr
+                    => pr.SetProperty(pr => pr.NumberInStock, newNumberInStock)); // Sets the result of newNumberInStock as the products stock quantity.
+            }
+        }
     }
 }

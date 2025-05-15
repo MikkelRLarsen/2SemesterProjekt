@@ -31,7 +31,6 @@
             pageNameLabel = new Label();
             petNameTextbox = new TextBox();
             label1 = new Label();
-            petSpeciesTextbox = new TextBox();
             label2 = new Label();
             petBirthdaySelector = new DateTimePicker();
             label3 = new Label();
@@ -41,6 +40,7 @@
             comboBoxPrimaryVeterinarian = new ComboBox();
             cancelButton = new Button();
             updateButton = new Button();
+            comboBoxPetSpecies = new ComboBox();
             SuspendLayout();
             // 
             // pageNameLabel
@@ -70,14 +70,6 @@
             label1.Size = new Size(35, 15);
             label1.TabIndex = 8;
             label1.Text = "Navn";
-            // 
-            // petSpeciesTextbox
-            // 
-            petSpeciesTextbox.Location = new Point(288, 255);
-            petSpeciesTextbox.Name = "petSpeciesTextbox";
-            petSpeciesTextbox.Size = new Size(238, 23);
-            petSpeciesTextbox.TabIndex = 9;
-            petSpeciesTextbox.KeyPress += petSpeciesTextbox_KeyPress;
             // 
             // label2
             // 
@@ -164,10 +156,20 @@
             updateButton.UseVisualStyleBackColor = false;
             updateButton.Click += updateButton_Click;
             // 
+            // comboBoxPetSpecies
+            // 
+            comboBoxPetSpecies.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxPetSpecies.FormattingEnabled = true;
+            comboBoxPetSpecies.Location = new Point(288, 255);
+            comboBoxPetSpecies.Name = "comboBoxPetSpecies";
+            comboBoxPetSpecies.Size = new Size(238, 23);
+            comboBoxPetSpecies.TabIndex = 26;
+            // 
             // UpdatePetUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(comboBoxPetSpecies);
             Controls.Add(updateButton);
             Controls.Add(cancelButton);
             Controls.Add(comboBoxPrimaryVeterinarian);
@@ -177,7 +179,6 @@
             Controls.Add(label3);
             Controls.Add(petBirthdaySelector);
             Controls.Add(label2);
-            Controls.Add(petSpeciesTextbox);
             Controls.Add(label1);
             Controls.Add(petNameTextbox);
             Controls.Add(pageNameLabel);
@@ -193,7 +194,6 @@
         private Label pageNameLabel;
         private TextBox petNameTextbox;
         private Label label1;
-        private TextBox petSpeciesTextbox;
         private Label label2;
         private DateTimePicker petBirthdaySelector;
         private Label label3;
@@ -203,5 +203,6 @@
         private ComboBox comboBoxPrimaryVeterinarian;
         private Button cancelButton;
         private Button updateButton;
+        private ComboBox comboBoxPetSpecies;
     }
 }

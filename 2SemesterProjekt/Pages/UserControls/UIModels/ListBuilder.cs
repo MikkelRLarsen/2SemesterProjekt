@@ -8,7 +8,7 @@ using _2SemesterProjekt.Domain.Models;
 
 namespace _2SemesterProjekt.Pages.UserControls.UIModels
 {
-    internal static class VeterinarianListBuilder
+    internal static class ListBuilder
     {
         /// <summary>
         /// Returns a new list of veterinarians with the primary veterinarian placed first,
@@ -35,6 +35,26 @@ namespace _2SemesterProjekt.Pages.UserControls.UIModels
             listWithPrimaryVetOnTop.AddRange(vetList);
 
             return listWithPrimaryVetOnTop;
+        }
+
+        public static List<Species> GetSpeciesWithCurrentFirst(IEnumerable<Species> species, int speciesId)
+        {
+            // Creates species to a manupilative list
+            var speciesList = species.ToList();
+
+            // Gets current species by ID
+            Species primarySpecies = species.First(s => s.SpeciesID == speciesId);
+
+            // Removes current species from the list so we can add it as range
+            speciesList.Remove(primarySpecies);
+
+            // Creates a new list with current species on index 0
+            var listWithCurrentSpeciesOnTop = new List<Species>() { primarySpecies };
+
+            // Adds the other species to the new list
+            listWithCurrentSpeciesOnTop.AddRange(speciesList);
+
+            return listWithCurrentSpeciesOnTop;
         }
     }
 }

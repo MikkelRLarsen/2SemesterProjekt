@@ -10,6 +10,8 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
     public interface IProductService
     {
         public Task<IEnumerable<Product>> GetAllProductsAsync();
-        public void ExportStockStatusToTxtAsync(string fileName);
+        public Task ExportStockStatusToTxtAsync(string fileName);
+        public Task<IEnumerable<Product>> GetAllProductsInStockAsync();
+        public Task UpdateSeveralProductsAsync(IEnumerable<Product> products);
     }
 }

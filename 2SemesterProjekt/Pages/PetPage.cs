@@ -22,6 +22,7 @@ namespace _2SemesterProjekt.Pages
         private IPetService _petService;
         private ICustomerService _customerService;
         private IEnumerable<Pet> _listOfPets;
+        private IExaminationService _examinationService;
         public PetCard PetCard { get; set; }
 
         public PetPage()
@@ -29,23 +30,30 @@ namespace _2SemesterProjekt.Pages
             InitializeComponent();
             buttonFlowPanel.Controls.Add(new ButtonPanel("Find kæledyr", Color.MediumAquamarine, SearchForPetByPhoneNumber));
             buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kæledyr", Color.MediumSeaGreen, ShowPetCreation));
+
+            // Clicking the "Vis inaktiv liste"-button loads any inactive pets via method: "ShowInactivePets".
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Vis inaktiv liste", Color.MediumVioletRed, ShowInactivePets));
+
             buttonFlowPanel.Controls.Add(new ButtonPanel("Redigér kæledyr", Color.Goldenrod, ShowPetUpdate));
+
             _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>()!;
+            _examinationService = ServiceProviderSingleton.GetServiceProvider().GetService<IExaminationService>()!;
+
         }
         private void ShowPetCreation(object sender, EventArgs e)
         {
-            var addPetControl = new AddPetUserControl();
+            var addPetControl = new AddPetUserControl(this);
             this.Controls.Add(addPetControl); // Load the new page
-			addPetControl.BringToFront();
+            addPetControl.BringToFront();
         }
 
         private void ShowPetUpdate(object sender, EventArgs e)
         {
             if (this.PetCard != null)
             {
-                var updatePetControl = new UpdatePetUserControl(PetCard);
-				this.Controls.Add(updatePetControl); // Load the new page
-				updatePetControl.BringToFront();
+                var updatePetControl = new UpdatePetUserControl(this.PetCard, this); // This = PetPage
+                this.Controls.Add(updatePetControl); // Load the new page
+                updatePetControl.BringToFront();
             }
             else
             {
@@ -59,7 +67,7 @@ namespace _2SemesterProjekt.Pages
             _listOfPets = await _petService.GetAllPetsAsync();
             foreach (var pet in _listOfPets)
             {
-                flowLayoutPanel1.Controls.Add(new PetCard(this, pet));
+                flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
             }
         }
 
@@ -86,18 +94,20 @@ namespace _2SemesterProjekt.Pages
             {
                 // Finds all pets of the specific customer
                 var customerPets = _listOfPets.Where(p => p.Customer.PhoneNumber == phoneNumber).ToList();
-                
+
                 // Clear flowpanel and add the customers pets
                 flowLayoutPanel1.Controls.Clear();
                 foreach (var pet in customerPets)
                 {
-                    flowLayoutPanel1.Controls.Add(new PetCard(this, pet));
+                    flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
                 }
 
                 // Checks if the button already exists before adding
                 if (!buttonFlowPanel.Controls.OfType<ButtonPanel>().Any(b => b.Text == "Vis alle kæledyr"))
-                // Add option for resetting the flowpanel
-                buttonFlowPanel.Controls.Add(new ButtonPanel("Vis alle kæledyr", Color.MediumVioletRed, ShowAllPets));
+                {
+                    // Add option for resetting the flowpanel
+                    buttonFlowPanel.Controls.Add(new ButtonPanel("Vis alle kæledyr", Color.MediumVioletRed, ShowAllPets));
+                }
             }
             else // Throw error message in UI
             {
@@ -129,7 +139,33 @@ namespace _2SemesterProjekt.Pages
             // Show all pets in flowpanel
             foreach (var pet in _listOfPets)
             {
-                flowLayoutPanel1.Controls.Add(new PetCard(this, pet));
+                flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
+            }
+        }
+        private async void ShowInactivePets(object sender, EventArgs e)
+        {
+            // Clears the panel of potential existing content.
+            flowLayoutPanel1.Controls.Clear();
+
+            // If any, loads the inactive-pet-information onto PetCard.
+            try
+            {
+                var listOfPets = await _examinationService.GetAllInactivesAsync();
+                foreach (var examination in listOfPets)
+                {
+                    flowLayoutPanel1.Controls.Add(new PetCard(this, examination, PetCardType.InactivePet));
+                }
+
+                // Checks if the button already exists before adding
+                if (!buttonFlowPanel.Controls.OfType<ButtonPanel>().Any(b => b.Text == "Vis alle kæledyr"))
+                {
+                    // Add option for resetting the flowpanel
+                    buttonFlowPanel.Controls.Add(new ButtonPanel("Vis alle kæledyr", Color.MediumVioletRed, ShowAllPets));
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Der findes ingen inaktive kæledyr.");
             }
         }
 
@@ -154,6 +190,17 @@ namespace _2SemesterProjekt.Pages
             {
                 textBoxCustomerPhoneNumber.Text = string.Empty;
                 textBoxCustomerPhoneNumber.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        public async void RefreshPetList()
+        {
+            _listOfPets = await _petService.GetAllPetsAsync();
+            flowLayoutPanel1.Controls.Clear();
+            foreach (var pet in _listOfPets)
+            {
+                // This = PetPage
+                flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
             }
         }
     }

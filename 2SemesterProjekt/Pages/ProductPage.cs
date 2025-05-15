@@ -42,11 +42,11 @@ namespace _2SemesterProjekt.Pages
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                _productService.ExportStockStatusToTxtAsync(saveFileDialog.FileName);
+                await _productService.ExportStockStatusToTxtAsync(saveFileDialog.FileName);
                 NotificationMessage("Filen er blevet oprettet.");
             }
-            
         }
+
         private void NotificationMessage(string typeOfMsg)
         {
             MessageBox.Show(typeOfMsg, "Information", MessageBoxButtons.OK);
