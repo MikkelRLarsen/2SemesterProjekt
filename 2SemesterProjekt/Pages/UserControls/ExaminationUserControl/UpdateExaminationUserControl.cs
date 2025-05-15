@@ -47,7 +47,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 		private async Task<IEnumerable<Employee>> GetListOfEmployeeWithExaminationEmployeeFirst(Examination examination)
 		{
 			// Gets all PetDoctorsFromDatabase
-			IEnumerable<Employee> allPetDocterFromDatabase = await _employeeService.GetAllPetDoctorsAsync();
+			IEnumerable<Employee> allPetDocterFromDatabase = await _employeeService.GetAllEmployeeWithTypeAsync("Dyrlæge");
 
 			// Creates a new IEnumerable without examinations employee
 			var filteredList = allPetDocterFromDatabase.Where(em => em.EmployeeID != examination.EmployeeID);

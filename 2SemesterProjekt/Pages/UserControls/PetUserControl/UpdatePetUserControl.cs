@@ -39,7 +39,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             petNameTextbox.Text = _petCard.Pet.Name;
             ownerPhoneNumberTextbox.Text = _petCard.Pet.Customer.PhoneNumber.ToString();
             petBirthdaySelector.Text = _petCard.Pet.Birthday.ToString();
-            var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
+            var veterinarians = await _employeeService.GetAllEmployeeWithTypeAsync("Dyrlæge");
             var petSpecies = await _petService.GetAllPetSpeciesAsync();
 
             comboBoxPetSpecies.DataSource = ListBuilder.GetSpeciesWithCurrentFirst(petSpecies, _petCard.Pet.SpeciesID);

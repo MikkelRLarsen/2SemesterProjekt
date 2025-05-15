@@ -31,7 +31,7 @@ namespace _2SemesterProjekt.Pages
 
             // Veterinarians dropdown load
             var dropDownItems = new List<object> { "Ikke valgt" }; // Add not chosen option
-            var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
+            var veterinarians = await _employeeService.GetAllEmployeeWithTypeAsync("Dyrlæge");
 
             dropDownItems.AddRange(veterinarians);
 
