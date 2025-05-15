@@ -49,14 +49,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 			// Gets all PetDoctorsFromDatabase
 			IEnumerable<Employee> allPetDocterFromDatabase = await _employeeService.GetAllPetDoctorsAsync();
 
-			// Creates a Dictonary from said PetDoctors, so its easier to manipulate data in constant time, rather than linear time if List was used
-			var allPetDoctorsInDict = allPetDocterFromDatabase.ToDictionary(em => em.EmployeeID, em => em);
+			// Creates a new IEnumerable without examinations employee
+			var filteredList = allPetDocterFromDatabase.Where(em => em.EmployeeID != examination.EmployeeID);
 
-			// Removes said employee from Dictonary
-			allPetDoctorsInDict.Remove(examination.EmployeeID);
-
-			// Makes the Dictonary to List and Prepend examination employee as first and lastly returns list
-			return allPetDoctorsInDict.Values.ToList().Prepend(examination.Employee);
+			// Adds the Employee back, but first in the IEnumerable
+			return filteredList.Prepend(examination.Employee);
 		}
 
 		private void GemExaminationButton_Click(object sender, EventArgs e)
