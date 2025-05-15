@@ -1,4 +1,5 @@
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Models;
 using _2SemesterProjekt.Pages.UserControls.Product;
 using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,13 +19,38 @@ namespace _2SemesterProjekt.Pages
     {
         private readonly IProductService _productService;
         private readonly IExportService _exportService;
+        public ProductCard ProductCard { get; set; }
+        public List<ProductCard> AllProductCards { get; set; } = new List<ProductCard>();
         public ProductPage()
         {
             InitializeComponent();
             _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();
             _exportService = ServiceProviderSingleton.GetServiceProvider().GetService<IExportService>();
+            
+        }
+
+        private async void ProductPage_Load()
+        {
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Vis produkter", "", Color.AliceBlue, ViewAllProducts));
             buttonFlowPanel.Controls.Add(new ButtonPanel("Opret ordre", "", Color.MediumSeaGreen, CreateOrder));
             buttonFlowPanel.Controls.Add(new ButtonPanel("Eksporter til .txt", "", Color.MediumSlateBlue, ExportToTxt_Click));
+
+            Task.Run(() => GetAllProductsAsync());
+        }
+
+        private async void GetAllProductsAsync()
+        {
+            IEnumerable<Product> allProducts = await _productService.GetAllProductsAsync();
+
+            foreach (Product product in allProducts)
+            {
+                AllProductCards.Add(new ProductCard(product, this));
+            }
+        }
+
+        private void ViewAllProducts(object sender, EventArgs e)
+        {
+
         }
 
         private void CreateOrder(object sender, EventArgs e)

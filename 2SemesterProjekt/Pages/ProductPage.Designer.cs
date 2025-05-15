@@ -69,6 +69,7 @@
             Controls.Add(pageNameLabel);
             Name = "ProductPage";
             Size = new Size(1200, 825);
+            Load += this.ProductPage_Load;
             ResumeLayout(false);
             PerformLayout();
         }
