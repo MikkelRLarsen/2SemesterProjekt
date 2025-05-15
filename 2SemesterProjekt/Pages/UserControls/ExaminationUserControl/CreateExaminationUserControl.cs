@@ -85,9 +85,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             EmployeeExaminationDropdown.Enabled = true;
 
-            _employees = await _employeeService.GetAllPetDoctorsAsync();
+            _employees = await _employeeService.GetAllEmployeeWithTypeAsync("Dyrlæge");
 
-            EmployeeExaminationDropdown.DataSource = _employees;
+
+			EmployeeExaminationDropdown.DataSource = _employees;
         }
 
         /// <summary>
