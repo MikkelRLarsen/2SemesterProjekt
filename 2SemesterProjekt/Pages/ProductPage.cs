@@ -29,9 +29,9 @@ namespace _2SemesterProjekt.Pages
             
         }
 
-        private async void ProductPage_Load()
+        private async void ProductPage_Load(object sender, EventArgs e)
         {
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Vis produkter", "", Color.AliceBlue, ViewAllProducts));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Vis produkter", "", Color.Goldenrod, ViewAllProducts));
             buttonFlowPanel.Controls.Add(new ButtonPanel("Opret ordre", "", Color.MediumSeaGreen, CreateOrder));
             buttonFlowPanel.Controls.Add(new ButtonPanel("Eksporter til .txt", "", Color.MediumSlateBlue, ExportToTxt_Click));
 
@@ -50,7 +50,8 @@ namespace _2SemesterProjekt.Pages
 
         private void ViewAllProducts(object sender, EventArgs e)
         {
-
+            productFlowPanel.Controls.Clear();
+            productFlowPanel.Controls.AddRange(AllProductCards.ToArray());
         }
 
         private void CreateOrder(object sender, EventArgs e)

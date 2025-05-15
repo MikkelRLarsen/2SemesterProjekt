@@ -28,7 +28,7 @@ namespace _2SemesterProjekt.Services
                     productList += $"(VAREN HAR RAMT MINIMUMSBEHOLDNING)\n" +
                                   $"Varenummer: {product.EAN},\n" +
                                   $"Produktnavn: {product.Name},\n" +
-                                  $"Pris pr. styk: {product.PricePerUnit},\n" +
+                                  $"Pris pr. styk: {product.SalesPricePerUnit},\n" +
                                   $"Antal på lager: {product.NumberInStock},\n" +
                                   $"Minimumsantal: {product.MinNumberInStock}\n\n" +
                                   "******************************************\n\n";
@@ -38,12 +38,12 @@ namespace _2SemesterProjekt.Services
                 {
                     productList += $"Varenummer: {product.EAN},\n" +
                                   $"Produktnavn: {product.Name},\n" +
-                                  $"Pris pr. styk: {product.PricePerUnit},\n" +
+                                  $"Pris pr. styk: {product.SalesPricePerUnit},\n" +
                                   $"Antal på lager: {product.NumberInStock},\n" +
                                   $"Minimumsantal: {product.MinNumberInStock}\n\n" +
                                   "******************************************\n\n";
                 }
-                stockWorth += product.NumberInStock * product.PricePerUnit;
+                stockWorth += product.NumberInStock * product.SalesPricePerUnit;
             }
 
             string txtData = productList.Insert(0, $"Værdi af lagerbeholdning: {stockWorth}\n\n");
