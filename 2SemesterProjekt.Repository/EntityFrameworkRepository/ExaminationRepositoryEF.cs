@@ -51,8 +51,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				return await _db.Examinations
 					.Where(e => e.Pet.Customer.PhoneNumber == customerPhoneNumber)
 					.Include(e => e.Pet)
-					.ThenInclude(p => p.Customer)
-					.Include(e => e.Employee)
+						.ThenInclude(p => p.Customer)
+                    .Include(e => e.Pet)
+						.ThenInclude(p => p.Species)
+                    .Include(e => e.Employee)
 					.Include(e => e.ExaminationType)
 					.Include(e => e.CageBooking)
 					.ToListAsync();
@@ -81,13 +83,15 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		{
             return await _db.Examinations
                 .Include(e => e.Pet)
-                .ThenInclude(p => p.Customer)
+					.ThenInclude(p => p.Customer)
+				.Include(e => e.Pet)
+					.ThenInclude(p => p.Species)
                 .Include(e => e.Employee)
 				.Include(me => me.Medicine)
                 .Include(e => e.ExaminationType)
 				.Include (e => e.CageBooking)
                 .ToListAsync();
-		}
+        }
 
         public async Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync()
         {
@@ -118,11 +122,19 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 // All in all: query returns all examinations that are older than 12 months and where the pet haven't had an examination within 12 months.
 				.Include(e => e.Pet)
 					.ThenInclude(p => p.Customer)
+				.Include(e => e.Pet)
+					.ThenInclude(p => p.Species)
 				.OrderBy(e => e.PetID)
 				.ThenByDescending(e => e.Date)
 				.ToListAsync();
 
 			return result;
         }
-    }
+
+		public async Task UpdateExamination(Examination examination)
+		{
+            _db.Examinations.Update(examination);
+            await _db.SaveChangesAsync();
+		}
+	}
 }

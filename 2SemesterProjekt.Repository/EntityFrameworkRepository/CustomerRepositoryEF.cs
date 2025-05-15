@@ -21,8 +21,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             try
             {
                 // Check if the customer is already in DB
-                existingCustomer = _db.Customers
-                    .First(c => c.PhoneNumber == customer.PhoneNumber);
+                existingCustomer = await _db.Customers
+                    .FirstAsync(c => c.PhoneNumber == customer.PhoneNumber);
             }
             catch
             {
@@ -31,21 +31,14 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
             if (existingCustomer == null) // Add to DB
             {
-                _db.Customers.Add(customer);
-                _db.SaveChanges();
+                await _db.Customers.AddAsync(customer);
+                await _db.SaveChangesAsync();
             }
             else // If hit return and dont add it to DB
             {
                 throw new ArgumentException($"{customer.FirstName} {customer.LastName} findes allerde i databasen.");
             }
         }
-
-        public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
-        {
-			return await _db.Customers
-	            .Include(c => c.Pets)
-	            .ToListAsync();
-		}
 
 		public int GetCustomerIDByPhoneNumber(int ownerPhoneNumber)
 		{
@@ -63,8 +56,33 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
         public async Task<Customer> GetCustomerByPhoneNumberAsync(int phoneNumber)
         {
-            var customer = _db.Customers.FirstOrDefault(c => c.PhoneNumber == phoneNumber);
-            return customer;
+            var customer = await _db.Customers
+                .FirstOrDefaultAsync(c => c.PhoneNumber == phoneNumber);
+
+            if (customer != null)
+            {
+                return customer;
+            }
+            else
+            {
+                throw new ArgumentException($"Der findes ingen kunde i databasen med {phoneNumber}");
+            }
+        }
+
+        public async Task<IEnumerable<Customer>> GetAllCustomersWithPetsAsync()
+        {
+            var customersWithPets = await _db.Customers
+                .Where(c => c.Pets!.Any())
+                .Include(c => c.Pets!)
+                    .ThenInclude(p => p.Species)
+                .ToListAsync();
+
+            return customersWithPets;
+        }
+        public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
+        {
+            return await _db.Customers
+                .ToListAsync();
         }
     }
 }

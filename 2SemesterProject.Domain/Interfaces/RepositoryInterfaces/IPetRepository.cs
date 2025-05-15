@@ -8,5 +8,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
         public bool CheckIfPetExists(Pet pet);
         public Task<IEnumerable<Pet>> GetAllPetsAsync();
         public Task UpdatePetAsync(Pet pet);
+        public Task<IEnumerable<Species>> GetAllPetSpeciesAsync();
     }
 }

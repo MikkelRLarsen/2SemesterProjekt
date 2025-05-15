@@ -3,21 +3,22 @@
     public class Pet
     {
         public int PetID { get; init; }
-        public int CustomerID { get; protected set; }
-        public int? EmployeeID { get; protected set; }
-        public string Name { get; protected set; }
-        public string Species { get; protected set; }
-        public DateTime Birthday { get; protected set; }
+        public int CustomerID { get; private set; }
+        public int? EmployeeID { get; private set; }
+        public int SpeciesID { get; private set; }
+        public string Name { get; private set; }
+        public DateTime Birthday { get; private set; }
 
         public Customer Customer { get; }
         public Employee? Employee { get; }
+        public Species Species { get; }
         public List<Examination> Examinations { get; }
 
-        public Pet(int customerID, string name, string species, DateTime birthday, int? employeeID)
+        public Pet(int customerID, string name, int speciesID, DateTime birthday, int? employeeID)
         {
             CustomerID = customerID;
             Name = name;
-            Species = species;
+            SpeciesID = speciesID;
             Birthday = birthday;
             EmployeeID = employeeID;
 
@@ -33,11 +34,15 @@
             {
                 return false;
             }
-            else if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Species)) // Invalid if Name or Species is empty
+            else if (string.IsNullOrWhiteSpace(Name)) // Invalid if Name is empty
             {
                 return false;
             }
             else if (Birthday == null) // Invalid if Birthday is null
+            {
+                return false;
+            }
+            else if (SpeciesID == 0) // Invalid if speciesID is 0
             {
                 return false;
             }
@@ -51,12 +56,16 @@
         /// Validate pet name input
         /// </summary>
         /// <param name="newPetName"></param>
-        public void UpdatePetData(string newPetName, string species, DateTime birthday, int? employeeID)
+        public void UpdatePetData(string newPetName, int speciesID, DateTime birthday, int? employeeID)
         {
-            if (string.IsNullOrWhiteSpace(newPetName) == false || string.IsNullOrWhiteSpace(species) == false)
+            if (string.IsNullOrWhiteSpace(newPetName) == false)
             {
                 Name = newPetName;
-                Species = species;
+            }
+
+            if (SpeciesID != 0)
+            {
+                SpeciesID = speciesID;
             }
 
             Birthday = birthday;

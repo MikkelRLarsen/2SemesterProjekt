@@ -40,5 +40,12 @@ namespace _2SemesterProjekt.Services
             
             await _petRepository.UpdatePetAsync(pet);
         }
+
+        public async Task<IEnumerable<Species>> GetAllPetSpeciesAsync()
+        {
+            var petSpecies = await _petRepository.GetAllPetSpeciesAsync();
+
+            return petSpecies;
+        }
     }
 }

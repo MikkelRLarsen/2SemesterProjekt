@@ -78,7 +78,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 }
 
                 labelPetBirth.Text = Pet.Birthday.ToString("dd-MM-yyyy");
-                labelPetSpecies.Text = Pet.Species;
+                labelPetSpecies.Text = Pet.Species.Name;
             }
 
             if (_petCardType == PetCardType.InactivePet)
@@ -100,7 +100,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 labelPetSpecies.Visible = false;
             }
 
-			profilePicture.Image = GetImage(Pet.Species);
+			profilePicture.Image = GetImage(Pet.Species.Name);
 		}
 
 		private async void PetCard_Click(object sender, EventArgs e)

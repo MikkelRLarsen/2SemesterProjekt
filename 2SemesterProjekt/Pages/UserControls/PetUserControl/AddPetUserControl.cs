@@ -11,17 +11,25 @@ namespace _2SemesterProjekt.Pages
         private readonly IPetService _petService;
         private readonly ICustomerService _customerService;
         private readonly IEmployeeService _employeeService;
-        public AddPetUserControl()
+        private readonly PetPage _petPage;
+        public AddPetUserControl(PetPage petPage)
         {
             InitializeComponent();
             petBirthdaySelector.MaxDate = DateTime.Today;
             _petService = ServiceProviderSingleton.GetServiceProvider().GetService<IPetService>()!;
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
             _employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
+            _petPage = petPage;
         }
 
         private async void AddPetPage_Load(object sender, EventArgs e)
         {
+            // Species dropdown load
+            var petSpecies = await _petService.GetAllPetSpeciesAsync();
+            comboBoxSpecies.DataSource = petSpecies;
+            comboBoxSpecies.DisplayMember = "Name";
+
+            // Veterinarians dropdown load
             var dropDownItems = new List<object> { "Ikke valgt" }; // Add not chosen option
             var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
 
@@ -50,11 +58,11 @@ namespace _2SemesterProjekt.Pages
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-			if (this.Parent != null)
-			{
-				this.Parent.Controls.Remove(this); // Clear existing content (Parent is PetPage)
-			}
-		}
+            if (_petPage != null)
+            {
+                _petPage.Controls.Remove(this); // Clear existing content
+            }
+        }
 
         private void ownerPhoneNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -72,13 +80,6 @@ namespace _2SemesterProjekt.Pages
             // Resets textbox after error message
             petNameTextbox.ForeColor = SystemColors.WindowText;
             petNameTextbox.BackColor = SystemColors.Window;
-        }
-
-        private void petSpeciesTextbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Resets textbox after error message
-            petSpeciesTextbox.ForeColor = SystemColors.WindowText;
-            petSpeciesTextbox.BackColor = SystemColors.Window;
         }
 
         private async void createButton_Click(object sender, EventArgs e)
@@ -101,14 +102,6 @@ namespace _2SemesterProjekt.Pages
                 displayMessage += "Indtast et gyldigt kæledyrsnavn.\n";
             }
 
-            // Validate pet name input
-            if (string.IsNullOrWhiteSpace(petSpeciesTextbox.Text))
-            {
-                petSpeciesTextbox.ForeColor = Color.White;
-                petSpeciesTextbox.BackColor = Color.LightCoral;
-                displayMessage += "Indtast en dyreart.\n";
-            }
-
             int customerId = _customerService.GetCustomerIDByPhoneNumber(phoneNumber); // Retrieves the customer's ID by using the entered phone number.
 
             if (customerId == 0) // Customer ID validation
@@ -127,7 +120,7 @@ namespace _2SemesterProjekt.Pages
                     var pet = new Pet(
                         customerId,
                         petNameTextbox.Text,
-                        petSpeciesTextbox.Text,
+                        (comboBoxSpecies.SelectedItem as Species).SpeciesID,
                         petBirthdaySelector.Value,
                         selectedVet?.EmployeeID
                     ); /* Instantiating a Pet object with
@@ -142,6 +135,8 @@ namespace _2SemesterProjekt.Pages
                     {
                         await _petService.CreatePetAsync(pet); // The newly instantiated Pet object gets added to the DB.
                         displayMessage += $"{pet.Name} er blevet tilføjet til systemet.";
+                        _petPage.RefreshPetList(); // Refresh PetPages petlist to reflect changes
+                        _petPage.Controls.Remove(this); // Clear existing content
                     }
                 }
                 catch (Exception ex)

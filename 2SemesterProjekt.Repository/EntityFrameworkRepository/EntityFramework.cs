@@ -18,6 +18,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		public DbSet<ProductLine> ProductLines { get; set;}
         public DbSet<CageBooking> CageBookings { get; set; }
         public DbSet<Cage> Cages { get; set; }
+        public DbSet<Species> Species { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -50,6 +51,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<ProductLine>().ToTable("ProductLine");
             modelBuilder.Entity<CageBooking>().ToTable("CageBooking");
             modelBuilder.Entity<Cage>().ToTable("Cage");
+            modelBuilder.Entity<Species>().ToTable("Species");
 
             //Relations
             modelBuilder.Entity<Customer>()
@@ -112,10 +114,20 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .WithOne(ex => ex.CageBooking)
                 .HasForeignKey<Examination>(ex => ex.CageBookingID);
 
+			modelBuilder.Entity<Cage>()
+				.HasOne(ca => ca.Species)
+				.WithMany(p => p.Cages)
+				.HasForeignKey(p => p.CageID);
+
 			modelBuilder.Entity<Examination>()
 				.HasOne(ex => ex.Medicine)
 				.WithMany(p => p.Examinations)
 				.HasForeignKey(ex => ex.MedicineID);
+
+            modelBuilder.Entity<Species>()
+                .HasMany(s => s.Pets)
+                .WithOne(p => p.Species)
+                .HasForeignKey(p => p.SpeciesID);
 
 			// Primary Keys
 			modelBuilder.Entity<Customer>().HasKey(c => c.CustomerID);
@@ -130,6 +142,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<ProductLine>().HasKey(prLine => prLine.ProductLineID);
             modelBuilder.Entity<CageBooking>().HasKey(cBooking => cBooking.CageBookingID);
             modelBuilder.Entity<Cage>().HasKey(ca => ca.CageID);
+            modelBuilder.Entity<Species>().HasKey(s => s.SpeciesID);
 
             // Ignoring properties that don't exist in the DB
             modelBuilder.Entity<Product>().Ignore(pr => pr.QuantityInOrder);
