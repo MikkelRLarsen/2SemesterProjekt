@@ -40,7 +40,7 @@ namespace _2SemesterProjekt
 
             foreach (var customer in allCustomers)
             {
-                AllCustomerCards.Add(new CustomerCard(customer, this));
+                AllCustomerCards.Add(new CustomerCard(customer));
             }
         }
 
@@ -64,7 +64,7 @@ namespace _2SemesterProjekt
         }
 
         // Event handler with "Add Customer" when button is clicked
-        private void AddCustomerButton_Click(object? sender, EventArgs e)
+        private void AddCustomerButton_Click(object sender, EventArgs e)
 		{
 			this.Controls.Clear();
 			this.Controls.Add(new AddCustomer());
