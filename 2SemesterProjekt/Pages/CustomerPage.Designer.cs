@@ -69,7 +69,7 @@
             textBoxCustomerSearch.Name = "textBoxCustomerSearch";
             textBoxCustomerSearch.Size = new Size(209, 29);
             textBoxCustomerSearch.TabIndex = 6;
-            textBoxCustomerSearch.Text = "Søg efter kunde";
+            textBoxCustomerSearch.Text = "Søg på navn eller ID";
             // 
             // CustomerPage
             // 

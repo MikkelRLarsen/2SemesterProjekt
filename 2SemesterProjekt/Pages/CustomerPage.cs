@@ -51,7 +51,7 @@ namespace _2SemesterProjekt
         /// <param name="e"></param>
         private async void ShowAllCustomersButton_Click(object sender, EventArgs e)
 		{
-            if (textBoxCustomerSearch.Text == "Søg efter kunde")
+            if (textBoxCustomerSearch.Text == "Søg på navn eller ID" || string.IsNullOrEmpty(textBoxCustomerSearch.Text))
             {
                 LoadAndShowCustomerCards(AllCustomerCards);
             }
