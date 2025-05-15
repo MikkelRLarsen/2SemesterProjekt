@@ -70,6 +70,8 @@
             textBoxCustomerSearch.Size = new Size(209, 29);
             textBoxCustomerSearch.TabIndex = 6;
             textBoxCustomerSearch.Text = "Søg på navn eller ID";
+            textBoxCustomerSearch.Click += textBoxCustomerSearch_Click;
+            textBoxCustomerSearch.KeyPress += textBoxCustomerSearch_KeyPress;
             // 
             // CustomerPage
             // 

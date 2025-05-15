@@ -15,18 +15,21 @@ using _2SemesterProjekt.Services;
 
 namespace _2SemesterProjekt
 {
-	public partial class CustomerPage : UserControl
-	{
-		private readonly ICustomerService _customerService;
+    public partial class CustomerPage : UserControl
+    {
+        private ButtonPanel _showButton;
+        private readonly ICustomerService _customerService;
         public List<CustomerCard> AllCustomerCards { get; set; } = new List<CustomerCard>();
         public CustomerPage()
-		{
-			InitializeComponent();
+        {
+            InitializeComponent();
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
         }
         private async void CustomerPage_Load(object sender, EventArgs e)
         {
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Vis alle", Color.MediumAquamarine, ShowAllCustomersButton_Click));
+            ButtonPanel showButton = new ButtonPanel("Vis alle", Color.MediumAquamarine, ShowAllCustomersButton_Click);
+            _showButton = showButton;
+            buttonFlowPanel.Controls.Add(showButton);
             buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kunde", "AddCustomer.png", Color.MediumSeaGreen, AddCustomerButton_Click));
 
             Task.Run(() => FindAndSetAllCustomersAsync()); // New thread calling the method below.
@@ -50,7 +53,7 @@ namespace _2SemesterProjekt
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void ShowAllCustomersButton_Click(object sender, EventArgs e)
-		{
+        {
             if (textBoxCustomerSearch.Text == "Søg på navn eller ID" || string.IsNullOrEmpty(textBoxCustomerSearch.Text))
             {
                 LoadAndShowCustomerCards(AllCustomerCards);
@@ -65,17 +68,23 @@ namespace _2SemesterProjekt
         /// </summary>
         /// <param name="customerCardsToBeLoaded"></param>
 		public async void LoadAndShowCustomerCards(IEnumerable<CustomerCard> customerCardsToBeLoaded)
-		{
+        {
             customerFlowPanel.Controls.Clear();
             customerFlowPanel.Controls.AddRange(customerCardsToBeLoaded.ToArray());
+
+            if (_showButton.ButtonText.Text == "Vis alle")
+            {
+                _showButton.ButtonText.Text = "Søg";
+                _showButton.CenterLabel();
+            }
         }
 
         // Event handler with "Add Customer" when button is clicked
         private void AddCustomerButton_Click(object sender, EventArgs e)
-		{
-			this.Controls.Clear();
-			this.Controls.Add(new AddCustomer());
-		}
+        {
+            this.Controls.Clear();
+            this.Controls.Add(new AddCustomer());
+        }
 
         private void ShowCustomerByPhoneNumberOrName()
         {
@@ -90,16 +99,30 @@ namespace _2SemesterProjekt
                     customerFlowPanel.Controls.Clear();
 
                     customerFlowPanel.Controls.Add(customerCard);
+
+                    if (_showButton.ButtonText.Text == "Søg")
+                    {
+                        _showButton.ButtonText.Text = "Vis alle";
+                        _showButton.CenterLabel();
+                    }
                 }
-                else 
+                else
                 {
                     // Search by name
-                    IEnumerable<CustomerCard> customerCards = AllCustomerCards.Where(c => c.Customer.FirstName.Contains(textBoxCustomerSearch.Text));
+                    IEnumerable<CustomerCard> customerCards = AllCustomerCards
+                        .Where(c => c.Customer.FirstName.Contains(textBoxCustomerSearch.Text));
+
                     customerFlowPanel.Controls.Clear();
 
                     foreach (var customerCard in customerCards)
                     {
                         customerFlowPanel.Controls.Add(customerCard);
+                    }
+
+                    if (_showButton.ButtonText.Text == "Søg")
+                    {
+                        _showButton.ButtonText.Text = "Vis alle";
+                        _showButton.CenterLabel();
                     }
                 }
 
@@ -116,5 +139,22 @@ namespace _2SemesterProjekt
                 MessageBox.Show(ex.Message, "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-	}
+
+        private void textBoxCustomerSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar))
+            {
+                e.Handled = true; // The user is only able to enter numbers and letters in the textbox.
+            }
+        }
+
+        private void textBoxCustomerSearch_Click(object sender, EventArgs e)
+        {
+            if (textBoxCustomerSearch.Text == "Søg på navn eller ID")
+            {
+                textBoxCustomerSearch.Text = string.Empty;
+                textBoxCustomerSearch.ForeColor = SystemColors.WindowText;
+            }
+        }
+    }
 }
