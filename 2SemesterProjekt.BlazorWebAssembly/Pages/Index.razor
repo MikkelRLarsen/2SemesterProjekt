@@ -20,7 +20,7 @@
 
 <br />
 
-<div id="destination-selection">
+<div id="destination-selection" hidden="@_isHidden">
 	<h1 class="center-text">Vælg destination.</h1>
 	<div class="destination-div justify-content-center">
 		<a href="@_mailTo"><button type="submit" @onclick="@(() => RegisterDrivingActivity("Posthus (strandgade)", "5.3"))">✉️ Posthus (Strandgade)</button></a>
@@ -35,8 +35,7 @@
 </div>
 
 @code{
-
-
+	bool _isHidden = true;
 
 	string _driver;
 	string _mailContent;
@@ -46,6 +45,8 @@
 
 	private void RegisterDriver(string driver){
 		_driver = driver;
+
+		_isHidden = false;
 	}
 
 	private void RegisterDrivingActivity(string selectedDestination, string km){
@@ -58,9 +59,9 @@
 
 	private void GenerateMailContent(string destination, string destinationKm, string date){
 		_mailContent = $"Chauffør: {_driver} %0D%0A" + // %0D%0A is the HTML equivalent of \n.
-					   $"Destination: {destination} %0D%0A" +
-					   $"Antal km kørt: {destinationKm} %0D%0A" +
-					   $"Dato for kørsel: {date}";
+								$"Destination: {destination} %0D%0A" +
+								$"Antal km kørt: {destinationKm} %0D%0A" +
+								$"Dato for kørsel: {date}";
 
 		_date = DateTime.Now.ToString();
 
@@ -68,5 +69,7 @@
 		_mailTo = $"mailto:{_mailAddress}?subject=Kørselsregistering {_date}&body={_mailContent}";
 
 
+
+		_isHidden = true;
 	}
 }
