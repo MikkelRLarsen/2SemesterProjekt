@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using System.Net.Mail
+@using System.Net
 
 <PageTitle>HundOgKat kørselsregistering</PageTitle>
 <header>
@@ -6,19 +8,48 @@
 	<h1 class="center-text">Kørselsregistrering</h1>
 </header>
 
-<div class="destination-div">
-	<button type="submit" value="Posthus (Strandgade)" @onclick="() => RegisterDrivingActivity() ">✉️ Posthus (Strandgade)</button>
-	<button type="submit" value="Harald Nyborg">🛠️ Harald Nyborg</button>
-	<button type="submit" value="Ugleapoteket">💊Ugleapoteket</button>
-	<button type="submit" value="Kennel">🐶 Kennel</button>
-	<button type="submit" value="Maxi Zoo">🐕‍🦺 Maxi Zoo</button>
-	<button type="submit" value="Krematorie">🪦 Krematorie</button>
-	<button type="submit" value="Silvan">🛠️ Silvan</button>
-	<button type="submit" value="brugerdefineret">❓ Ukendt</button>
+<br />
+<div id="driver-selection">
+	<h1 class="center-text">Hvem er ude og køre?</h1>
+	<div class="driver-div justify-content-center">
+		<button class="driver-btn" type="submit" @onclick="@(() => RegisterDriver("Birthe"))">Birthe</button>
+		<button class="driver-btn" type="submit" @onclick="@(() => RegisterDriver("Hans"))">Hans</button>
+		<button class="driver-btn" type="submit" @onclick="@(() => RegisterDriver("Klaus"))">Klaus</button>
+	</div>
+</div>
+
+<br />
+<div id="destination-selection">
+	<h1 class="center-text">Vælg destination.</h1>
+	<div class="destination-div justify-content-center">
+		<button type="submit" @onclick="@(() => RegisterDrivingActivity("Posthus (strandgade)", 5.3))">✉️ Posthus (Strandgade)</button>
+		<button type="submit" @onclick="@(() => RegisterDrivingActivity("Harald Nyborg", 6.4))">🛠️ Harald Nyborg</button>
+		<button type="submit" @onclick="@(() => RegisterDrivingActivity("Ugleapoteket", 2.2))">💊Ugleapoteket</button>
+		<button type="submit" @onclick="@(() => RegisterDrivingActivity("Kennel", 13.1))">🐶 Kennel</button>
+		<button type="submit" @onclick="@(() => RegisterDrivingActivity("Maxi Zoo", 17.5))">🐕‍🦺 Maxi Zoo</button>
+		<button type="submit" @onclick="@(() => RegisterDrivingActivity("Krematorie", 30.8))">🪦 Krematorie</button>
+		<button type="submit" @onclick="@(() => RegisterDrivingActivity("Silvan", 10.9))">🛠️ Silvan</button>
+		<button type="submit" @onclick="@(() => RegisterDrivingActivity("Ukendt", 0))">❓ Ukendt</button>
+	</div>
 </div>
 
 @code{
-	private void RegisterDrivingActivity(string destination){
+	string _driver;
 
+	private void RegisterDriver(string driver){
+		_driver = driver;
+
+	}
+
+	private void RegisterDrivingActivity(string selectedDestination, double km){
+		if (selectedDestination == "Ukendt"){
+
+		}
+		else{
+			string driver = _driver;
+			string destination = selectedDestination;
+			string destinationKm = km.ToString() + " km";
+			string date = DateTime.UtcNow.ToString();
+		}
 	}
 }
