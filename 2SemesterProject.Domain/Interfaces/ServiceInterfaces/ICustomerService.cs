@@ -8,5 +8,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 		public string[] GetCustomerTypes();
 		public Task CreateCustomerAsync(Customer customer);
 		public Task<Customer> GetCustomerByPhoneNumberAsync(int phoneNumber);
+		public Task<IEnumerable<Customer>> GetAllCustomersAsync();
 	}
 }

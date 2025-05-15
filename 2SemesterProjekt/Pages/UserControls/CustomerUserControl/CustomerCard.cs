@@ -14,7 +14,6 @@ namespace _2SemesterProjekt
     public partial class CustomerCard : UserControl
     {
         private Customer _customer; // Holds Customer data
-
         public CustomerCard(Customer customer)
         {
             InitializeComponent();
@@ -25,6 +24,8 @@ namespace _2SemesterProjekt
         {
             customerIdLabel.Text = _customer.CustomerID.ToString();
             customerNameLabel.Text = _customer.FirstName;
+            customerPhoneNumberLabel.Text = _customer.PhoneNumber.ToString();
+            customerEmailLabel.Text = _customer.Email;
         }
     }
 }

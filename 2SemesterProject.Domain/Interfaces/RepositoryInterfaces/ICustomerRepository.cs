@@ -7,5 +7,8 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
         public Task<IEnumerable<Customer>> GetAllCustomersWithPetsAsync();
 		public Task CreateCustomerAsync(Customer customer);
 		public Task<Customer> GetCustomerByPhoneNumberAsync(int phoneNumber);
-	}
+
+        public Task<IEnumerable<Customer>> GetAllCustomersAsync();
+
+    }
 }
