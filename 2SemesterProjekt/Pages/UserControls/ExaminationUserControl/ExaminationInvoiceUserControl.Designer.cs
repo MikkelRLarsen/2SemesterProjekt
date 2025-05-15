@@ -1,6 +1,6 @@
 ﻿namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
-    partial class ExaminationInvoice
+    partial class ExaminationInvoiceUserControl
     {
         /// <summary> 
         /// Required designer variable.

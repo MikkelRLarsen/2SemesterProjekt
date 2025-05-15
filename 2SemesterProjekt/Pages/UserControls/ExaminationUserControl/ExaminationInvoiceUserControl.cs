@@ -14,12 +14,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
-    public partial class ExaminationInvoice : UserControl
+    public partial class ExaminationInvoiceUserControl : UserControl
     {
-        private Domain.Models.ExaminationInvoice _invoice;
+        private ExaminationInvoice _invoice;
         private ExaminationCard ExaminationCard;
         private readonly IExaminationService _examinationService;
-        public ExaminationInvoice(ExaminationCard examinationCard)
+        public ExaminationInvoiceUserControl(ExaminationCard examinationCard)
         {
             InitializeComponent();
             ExaminationCard = examinationCard;
@@ -28,7 +28,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
         private void ExaminationInvoice_Load(object sender, EventArgs e)
         {
-			_invoice = Domain.Models.ExaminationInvoice.FromExamination(ExaminationCard.Examination); // Converts Examination to an editable invoice
+			_invoice = ExaminationInvoice.FromExamination(ExaminationCard.Examination); // Converts Examination to an editable invoice
 
             pageNameLabel.Text = $"Faktura for {_invoice.PetName}"; // Page title
             pageNameLabel.Location = new Point((this.Width - pageNameLabel.Width) / 2, pageNameLabel.Location.Y); // Sets page title in middle of page
@@ -52,7 +52,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private void createButton_Click(object sender, EventArgs e)
         {
             // Sets the changed information for the invoice
-            var invoice = new Domain.Models.ExaminationInvoice(
+            var invoice = new ExaminationInvoice(
 				customerNameTextbox.Text,
 				petNameTextBox.Text,
 				examinationTextBox.Text,
