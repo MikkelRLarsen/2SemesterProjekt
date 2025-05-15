@@ -23,9 +23,10 @@ namespace _2SemesterProjekt
         private void InitializeUIDesign()
         {
             customerIdLabel.Text = Customer.CustomerID.ToString();
-            customerNameLabel.Text = Customer.FirstName;
+            customerNameLabel.Text = $"{Customer.FirstName} {Customer.LastName}";
             customerPhoneNumberLabel.Text = Customer.PhoneNumber.ToString();
             customerEmailLabel.Text = Customer.Email;
+            customerAddressLabel.Text = Customer.Address;
         }
     }
 }

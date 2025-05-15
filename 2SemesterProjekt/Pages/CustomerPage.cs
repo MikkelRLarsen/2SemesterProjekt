@@ -23,7 +23,7 @@ namespace _2SemesterProjekt
         public CustomerPage()
         {
             InitializeComponent();
-            _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
+            _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
         }
         private async void CustomerPage_Load(object sender, EventArgs e)
         {
@@ -34,10 +34,11 @@ namespace _2SemesterProjekt
 
             Task.Run(() => FindAndSetAllCustomersAsync()); // New thread calling the method below.
         }
+
         /// <summary>
         /// Loads all customers on customerPage click, making them ready for "Vis alle"-click. 
         /// </summary>
-        private async void FindAndSetAllCustomersAsync() // 
+        private async void FindAndSetAllCustomersAsync()
         {
             IEnumerable<Customer> allCustomers = await _customerService.GetAllCustomersAsync();
 
@@ -63,6 +64,7 @@ namespace _2SemesterProjekt
                 ShowCustomerByPhoneNumberOrName();
             }
         }
+
         /// <summary>
         /// Responsible for adding the userControl CustomerCards to the customerFlowPanel.
         /// </summary>
@@ -71,12 +73,6 @@ namespace _2SemesterProjekt
         {
             customerFlowPanel.Controls.Clear();
             customerFlowPanel.Controls.AddRange(customerCardsToBeLoaded.ToArray());
-
-            if (_showButton.ButtonText.Text == "Vis alle")
-            {
-                _showButton.ButtonText.Text = "Søg";
-                _showButton.CenterLabel();
-            }
         }
 
         // Event handler with "Add Customer" when button is clicked
@@ -86,16 +82,22 @@ namespace _2SemesterProjekt
             this.Controls.Add(new AddCustomer());
         }
 
-        private void ShowCustomerByPhoneNumberOrName()
+        /// <summary>
+        /// Searches for a customer by phonenumber or name (first or last).
+        /// If numbers is entered, search by phonenumber.
+        /// </summary>
+        private async void ShowCustomerByPhoneNumberOrName()
         {
             try
             {
                 string input = textBoxCustomerSearch.Text.Trim();
 
-                if (Int32.TryParse(input, out int customerId))
+                if (Int32.TryParse(input, out int customerPhoneNumber))
                 {
                     // Search by ID
-                    CustomerCard customerCard = AllCustomerCards.First(c => c.Customer.CustomerID == customerId);
+                    CustomerCard customerCard = AllCustomerCards
+                        .First(c => c.Customer.PhoneNumber == customerPhoneNumber);
+
                     customerFlowPanel.Controls.Clear();
 
                     customerFlowPanel.Controls.Add(customerCard);
@@ -110,14 +112,12 @@ namespace _2SemesterProjekt
                 {
                     // Search by name
                     IEnumerable<CustomerCard> customerCards = AllCustomerCards
-                        .Where(c => c.Customer.FirstName.Contains(textBoxCustomerSearch.Text));
+                        .Where(c => c.Customer.FirstName.Contains(textBoxCustomerSearch.Text, StringComparison.OrdinalIgnoreCase) || 
+                                    c.Customer.LastName.Contains(textBoxCustomerSearch.Text, StringComparison.OrdinalIgnoreCase));
 
                     customerFlowPanel.Controls.Clear();
 
-                    foreach (var customerCard in customerCards)
-                    {
-                        customerFlowPanel.Controls.Add(customerCard);
-                    }
+                    LoadAndShowCustomerCards(customerCards);
 
                     if (_showButton.ButtonText.Text == "Søg")
                     {
@@ -148,12 +148,38 @@ namespace _2SemesterProjekt
             }
         }
 
+        /// <summary>
+        /// Prepares the textbox for input by clearing the placeholder text when clicked.
+        /// </summary>
         private void textBoxCustomerSearch_Click(object sender, EventArgs e)
         {
             if (textBoxCustomerSearch.Text == "Søg på navn eller ID")
             {
                 textBoxCustomerSearch.Text = string.Empty;
                 textBoxCustomerSearch.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        /// <summary>
+        /// Changes search textbox when user writes.
+        /// </summary>
+        private void textBoxCustomerSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxCustomerSearch.Text.Length > 0) // No characters = show all
+            {
+                if (_showButton.ButtonText.Text == "Vis alle")
+                {
+                    _showButton.ButtonText.Text = "Søg";
+                    _showButton.CenterLabel();
+                }
+            }
+            else // Characters = show search
+            {
+                if (_showButton.ButtonText.Text == "Søg")
+                {
+                    _showButton.ButtonText.Text = "Vis alle";
+                    _showButton.CenterLabel();
+                }
             }
         }
     }
