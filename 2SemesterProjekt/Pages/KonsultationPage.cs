@@ -203,7 +203,7 @@ namespace _2SemesterProjekt.Pages
 
             if (displayMessage == string.Empty)
             {
-                var createInvoiceControl = new ExaminationInvoice(ExaminationCard!);
+                var createInvoiceControl = new ExaminationInvoiceUserControl(ExaminationCard!);
                 this.Controls.Add(createInvoiceControl); // Load the new page
                 createInvoiceControl.BringToFront();
             }

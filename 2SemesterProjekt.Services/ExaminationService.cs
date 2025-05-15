@@ -104,7 +104,7 @@ namespace _2SemesterProjekt.Services
                 return true;
             }
         }
-        public async Task ExportInvoiceToTxtAsync(Invoice invoiceExamination, string fileName)
+        public async Task ExportInvoiceToTxtAsync(ExaminationInvoice invoiceExamination, string fileName)
         {
             await _exportService.ExportInvoiceToTxtAsync(invoiceExamination, fileName);
         }

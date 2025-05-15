@@ -39,7 +39,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             petNameTextbox.Text = _petCard.Pet.Name;
             ownerPhoneNumberTextbox.Text = _petCard.Pet.Customer.PhoneNumber.ToString();
             petBirthdaySelector.Text = _petCard.Pet.Birthday.ToString();
-            var veterinarians = await _employeeService.GetAllPetDoctorsAsync();
+            var veterinarians = await _employeeService.GetAllEmployeeWithTypeAsync("Dyrlæge");
             var petSpecies = await _petService.GetAllPetSpeciesAsync();
 
             comboBoxPetSpecies.DataSource = ListBuilder.GetSpeciesWithCurrentFirst(petSpecies, _petCard.Pet.SpeciesID);
@@ -120,16 +120,21 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 displayMessage += "Indtast et gyldigt kæledyrsnavn.\n";
             }
 
-            int customerId = _customerService.GetCustomerIDByPhoneNumber(phoneNumber); // Retrieves the customer's ID by using the entered phone number.
+			int customerId;
+			try
+			{
+				customerId = (await _customerService.GetCustomerByPhoneNumberAsync(phoneNumber)).CustomerID; // Retrieves the customer's ID by using the entered phone number.
+			}
+			catch (Exception)
+			{
 
-            if (customerId == 0) // Customer ID validation
-            {
-                ownerPhoneNumberTextbox.ForeColor = Color.White;
-                ownerPhoneNumberTextbox.BackColor = Color.LightCoral;
-                displayMessage += "Kunden med dette telefonnummer findes ikke i systemet.";
-            }
+				ownerPhoneNumberTextbox.ForeColor = Color.White;
+				ownerPhoneNumberTextbox.BackColor = Color.LightCoral;
+				displayMessage += "Kunden med dette telefonnummer findes ikke i systemet.";
+				customerId = 0; //Place holder value
+			}
 
-            var selectedVet = comboBoxPrimaryVeterinarian.SelectedItem as Employee;
+			var selectedVet = comboBoxPrimaryVeterinarian.SelectedItem as Employee;
 
             if (displayMessage == string.Empty)
             {

@@ -1,4 +1,5 @@
-﻿using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
+﻿using _2SemesterProjekt.Domain.Interfaces;
+using _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
 using System;
@@ -53,21 +54,10 @@ namespace _2SemesterProjekt.Services
             // Calls the file creation method.
         }
 
-        public async Task ExportInvoiceToTxtAsync(Invoice invoiceExamination, string fileName)
+        public async Task ExportInvoiceToTxtAsync(IExport invoice, string fileName)
         {
-            // Sets the txt file with relevant text
-            string invoice = $"FAKTURA FOR {invoiceExamination.ExaminationDescription.ToUpper()} AF {invoiceExamination.PetName.ToUpper()}\n" +
-                             $"Kundenavn: {invoiceExamination.CustomerName}\n" +
-                             $"Kæledyr: {invoiceExamination.PetName}\n" +
-                             $"Udført behandling: {invoiceExamination.ExaminationDescription}\n" +
-                             $"Udført den: {invoiceExamination.Date:dd-MM-yyyy}\n" +
-                             $"Totalpris: {invoiceExamination.TotalPrice}\n" +
-                             $"Betalingsbetingelser: Netto 7 dage {DateTime.Now.AddDays(7):dd-MM-yyyy}\n\n" +
-                             $"Beløbet indbetales på bankkonto:\n" +
-                             $"Bank / Reg.nr. 1234 / Kontonr. 12345678";
-
             // Calls the file creation method.
-            await ExportToTxtAsync(invoice, fileName);
+            await ExportToTxtAsync(invoice.GetExportDetails(), fileName);
         }
     }
 }
