@@ -49,7 +49,7 @@ namespace _2SemesterProjekt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void ShowAllCustomersButton_Click(object? sender, EventArgs e)
+        private async void ShowAllCustomersButton_Click(object sender, EventArgs e)
 		{
             LoadAndShowCustomerCards(AllCustomerCards);
         }
