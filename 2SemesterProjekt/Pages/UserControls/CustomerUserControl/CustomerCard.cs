@@ -13,19 +13,19 @@ namespace _2SemesterProjekt
 {
     public partial class CustomerCard : UserControl
     {
-        private Customer _customer; // Holds Customer data
+        public Customer Customer { get; private set; } // Holds Customer data
         public CustomerCard(Customer customer)
         {
             InitializeComponent();
-            _customer = customer;
+            Customer = customer;
             InitializeUIDesign();
         }
         private void InitializeUIDesign()
         {
-            customerIdLabel.Text = _customer.CustomerID.ToString();
-            customerNameLabel.Text = _customer.FirstName;
-            customerPhoneNumberLabel.Text = _customer.PhoneNumber.ToString();
-            customerEmailLabel.Text = _customer.Email;
+            customerIdLabel.Text = Customer.CustomerID.ToString();
+            customerNameLabel.Text = Customer.FirstName;
+            customerPhoneNumberLabel.Text = Customer.PhoneNumber.ToString();
+            customerEmailLabel.Text = Customer.Email;
         }
     }
 }

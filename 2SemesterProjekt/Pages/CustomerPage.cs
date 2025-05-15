@@ -51,7 +51,14 @@ namespace _2SemesterProjekt
         /// <param name="e"></param>
         private async void ShowAllCustomersButton_Click(object sender, EventArgs e)
 		{
-            LoadAndShowCustomerCards(AllCustomerCards);
+            if (textBoxCustomerSearch.Text == "Søg efter kunde")
+            {
+                LoadAndShowCustomerCards(AllCustomerCards);
+            }
+            else
+            {
+                ShowCustomerByPhoneNumberOrName();
+            }
         }
         /// <summary>
         /// Responsible for adding the userControl CustomerCards to the customerFlowPanel.
@@ -69,5 +76,45 @@ namespace _2SemesterProjekt
 			this.Controls.Clear();
 			this.Controls.Add(new AddCustomer());
 		}
+
+        private void ShowCustomerByPhoneNumberOrName()
+        {
+            try
+            {
+                string input = textBoxCustomerSearch.Text.Trim();
+
+                if (Int32.TryParse(input, out int customerId))
+                {
+                    // Search by ID
+                    CustomerCard customerCard = AllCustomerCards.First(c => c.Customer.CustomerID == customerId);
+                    customerFlowPanel.Controls.Clear();
+
+                    customerFlowPanel.Controls.Add(customerCard);
+                }
+                else 
+                {
+                    // Search by name
+                    IEnumerable<CustomerCard> customerCards = AllCustomerCards.Where(c => c.Customer.FirstName.Contains(textBoxCustomerSearch.Text));
+                    customerFlowPanel.Controls.Clear();
+
+                    foreach (var customerCard in customerCards)
+                    {
+                        customerFlowPanel.Controls.Add(customerCard);
+                    }
+                }
+
+                // No hits - show user
+                if (customerFlowPanel.Controls.Count == 0)
+                {
+                    MessageBox.Show($"Ingen hits på \"{textBoxCustomerSearch.Text}\"", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                textBoxCustomerSearch.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 	}
 }
