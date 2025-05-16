@@ -115,8 +115,6 @@ namespace _2SemesterProjekt
                         .Where(c => c.Customer.FirstName.Contains(textBoxCustomerSearch.Text, StringComparison.OrdinalIgnoreCase) || 
                                     c.Customer.LastName.Contains(textBoxCustomerSearch.Text, StringComparison.OrdinalIgnoreCase));
 
-                    customerFlowPanel.Controls.Clear();
-
                     LoadAndShowCustomerCards(customerCards);
 
                     if (_showButton.ButtonText.Text == "Søg")
