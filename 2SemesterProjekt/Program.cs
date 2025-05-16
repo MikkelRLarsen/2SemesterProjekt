@@ -1,3 +1,4 @@
+using _2SemesterProjekt.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -16,7 +17,7 @@ namespace _2SemesterProjektWinForms
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             Initialize();
-            Application.Run(new FrontPage());
+            Application.Run(new Page());
         }
 
 		private static void Initialize()
