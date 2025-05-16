@@ -18,7 +18,6 @@ namespace _2SemesterProjekt.Pages
     public partial class ProductPage : UserControl
     {
         private readonly IProductService _productService;
-        public ProductCard ProductCard { get; set; }
         public List<ProductCard> AllProductCards { get; set; } = new List<ProductCard>();
         public ProductPage()
         {
@@ -41,7 +40,7 @@ namespace _2SemesterProjekt.Pages
 
             foreach (Product product in allProducts)
             {
-                AllProductCards.Add(new ProductCard(product, this));
+                AllProductCards.Add(new ProductCard(product));
             }
         }
 

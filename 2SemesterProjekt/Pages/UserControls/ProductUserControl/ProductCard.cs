@@ -15,12 +15,10 @@ namespace _2SemesterProjekt
     public partial class ProductCard : UserControl
     {
         private Product _product; // Holds Product data
-        private ProductPage _productPage;
 
-        public ProductCard(Product product, ProductPage productPage)
+        public ProductCard(Product product)
         {
             _product = product;
-            _productPage = productPage;
             InitializeComponent();
             InitializeUIDesign();
         }
