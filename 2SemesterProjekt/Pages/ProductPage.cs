@@ -18,15 +18,12 @@ namespace _2SemesterProjekt.Pages
     public partial class ProductPage : UserControl
     {
         private readonly IProductService _productService;
-        private readonly IExportService _exportService;
         public ProductCard ProductCard { get; set; }
         public List<ProductCard> AllProductCards { get; set; } = new List<ProductCard>();
         public ProductPage()
         {
             InitializeComponent();
-            _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();
-            _exportService = ServiceProviderSingleton.GetServiceProvider().GetService<IExportService>();
-            
+            _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();            
         }
 
         private async void ProductPage_Load(object sender, EventArgs e)
