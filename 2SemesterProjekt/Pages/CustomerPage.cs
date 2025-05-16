@@ -101,12 +101,6 @@ namespace _2SemesterProjekt
                     customerFlowPanel.Controls.Clear();
 
                     customerFlowPanel.Controls.Add(customerCard);
-
-                    if (_showButton.ButtonText.Text == "Søg")
-                    {
-                        _showButton.ButtonText.Text = "Vis alle";
-                        _showButton.CenterLabel();
-                    }
                 }
                 else
                 {
@@ -116,12 +110,6 @@ namespace _2SemesterProjekt
                                     c.Customer.LastName.Contains(textBoxCustomerSearch.Text, StringComparison.OrdinalIgnoreCase));
 
                     LoadAndShowCustomerCards(customerCards);
-
-                    if (_showButton.ButtonText.Text == "Søg")
-                    {
-                        _showButton.ButtonText.Text = "Vis alle";
-                        _showButton.CenterLabel();
-                    }
                 }
 
                 // No hits - show user
