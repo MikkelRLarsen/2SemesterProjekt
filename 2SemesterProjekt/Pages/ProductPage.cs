@@ -1,4 +1,5 @@
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Models;
 using _2SemesterProjekt.Pages.UserControls.Product;
 using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,14 +18,36 @@ namespace _2SemesterProjekt.Pages
     public partial class ProductPage : UserControl
     {
         private readonly IProductService _productService;
-        private readonly IExportService _exportService;
+        public List<ProductCard> AllProductCards { get; set; } = new List<ProductCard>();
         public ProductPage()
         {
             InitializeComponent();
-            _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();
-            _exportService = ServiceProviderSingleton.GetServiceProvider().GetService<IExportService>();
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Opret ordre", "", Color.MediumSeaGreen, CreateOrder));
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Eksporter til .txt", "", Color.MediumSlateBlue, ExportToTxt_Click));
+            _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>();            
+        }
+
+        private async void ProductPage_Load(object sender, EventArgs e)
+        {
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Vis produkter", Color.Goldenrod, ViewAllProducts));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Opret ordre", Color.MediumSeaGreen, CreateOrder));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Eksporter til .txt", Color.MediumSlateBlue, ExportToTxt_Click));
+
+            Task.Run(() => GetAllProductsAsync());
+        }
+
+        private async void GetAllProductsAsync()
+        {
+            IEnumerable<Product> allProducts = await _productService.GetAllProductsAsync();
+
+            foreach (Product product in allProducts)
+            {
+                AllProductCards.Add(new ProductCard(product));
+            }
+        }
+
+        private void ViewAllProducts(object sender, EventArgs e)
+        {
+            productFlowPanel.Controls.Clear();
+            productFlowPanel.Controls.AddRange(AllProductCards.ToArray());
         }
 
         private void CreateOrder(object sender, EventArgs e)

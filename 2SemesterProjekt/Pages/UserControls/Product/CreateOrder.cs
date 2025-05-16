@@ -202,7 +202,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 orderProductsListBox.DataSource = _order; // Update order listbox data source
                 orderProductsListBox.Refresh(); // Update control
 
-                _totalPrice += _selectedProduct.PricePerUnit; // Update the total price for the order
+                _totalPrice += _selectedProduct.SalesPricePerUnit; // Update the total price for the order
                 totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
 
                 if (_discount != 0) // if there is an added discount
@@ -240,7 +240,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
 
             _selectedProductInOrder.UpdateQuantityInOrder(); // Updates the quantity of the product in the order
             _selectedProductInOrder.UpdateTotalPriceOfProductInOrder(); // Updates the total price of the product in the order
-            _totalPrice += _selectedProductInOrder.PricePerUnit; // Updates the total price of the order
+            _totalPrice += _selectedProductInOrder.SalesPricePerUnit; // Updates the total price of the order
 
             totalPriceInfoLabel.Text = $"{_totalPrice.ToString()} kr.";
 
