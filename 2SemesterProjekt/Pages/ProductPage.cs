@@ -31,9 +31,9 @@ namespace _2SemesterProjekt.Pages
 
         private async void ProductPage_Load(object sender, EventArgs e)
         {
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Vis produkter", "", Color.Goldenrod, ViewAllProducts));
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Opret ordre", "", Color.MediumSeaGreen, CreateOrder));
-            buttonFlowPanel.Controls.Add(new ButtonPanel("Eksporter til .txt", "", Color.MediumSlateBlue, ExportToTxt_Click));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Vis produkter", Color.Goldenrod, ViewAllProducts));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Opret ordre", Color.MediumSeaGreen, CreateOrder));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Eksporter til .txt", Color.MediumSlateBlue, ExportToTxt_Click));
 
             Task.Run(() => GetAllProductsAsync());
         }
