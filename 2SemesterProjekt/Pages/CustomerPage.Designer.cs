@@ -31,6 +31,7 @@
             customerFlowPanel = new FlowLayoutPanel();
             pageNameLabel = new Label();
             buttonFlowPanel = new FlowLayoutPanel();
+            textBoxCustomerSearch = new TextBox();
             SuspendLayout();
             // 
             // customerFlowPanel
@@ -60,11 +61,25 @@
             buttonFlowPanel.Size = new Size(209, 301);
             buttonFlowPanel.TabIndex = 3;
             // 
+            // textBoxCustomerSearch
+            // 
+            textBoxCustomerSearch.Font = new Font("Gadugi", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBoxCustomerSearch.ForeColor = SystemColors.InactiveCaption;
+            textBoxCustomerSearch.Location = new Point(976, 394);
+            textBoxCustomerSearch.Name = "textBoxCustomerSearch";
+            textBoxCustomerSearch.Size = new Size(209, 29);
+            textBoxCustomerSearch.TabIndex = 6;
+            textBoxCustomerSearch.Text = "Søg på navn eller ID";
+            textBoxCustomerSearch.Click += textBoxCustomerSearch_Click;
+            textBoxCustomerSearch.TextChanged += textBoxCustomerSearch_TextChanged;
+            textBoxCustomerSearch.KeyPress += textBoxCustomerSearch_KeyPress;
+            // 
             // CustomerPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
+            Controls.Add(textBoxCustomerSearch);
             Controls.Add(buttonFlowPanel);
             Controls.Add(pageNameLabel);
             Controls.Add(customerFlowPanel);
@@ -80,5 +95,6 @@
         private FlowLayoutPanel customerFlowPanel;
 		private Label pageNameLabel;
 		private FlowLayoutPanel buttonFlowPanel;
-	}
+        private TextBox textBoxCustomerSearch;
+    }
 }
