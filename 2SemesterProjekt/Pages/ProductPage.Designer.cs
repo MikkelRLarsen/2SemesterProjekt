@@ -45,9 +45,9 @@
             // 
             // productFlowPanel
             // 
+            productFlowPanel.AutoScroll = true;
             productFlowPanel.BackColor = SystemColors.ControlLightLight;
             productFlowPanel.BorderStyle = BorderStyle.FixedSingle;
-            productFlowPanel.FlowDirection = FlowDirection.TopDown;
             productFlowPanel.Location = new Point(250, 150);
             productFlowPanel.Name = "productFlowPanel";
             productFlowPanel.Size = new Size(709, 580);
@@ -69,6 +69,7 @@
             Controls.Add(pageNameLabel);
             Name = "ProductPage";
             Size = new Size(1200, 825);
+            Load += ProductPage_Load;
             ResumeLayout(false);
             PerformLayout();
         }
