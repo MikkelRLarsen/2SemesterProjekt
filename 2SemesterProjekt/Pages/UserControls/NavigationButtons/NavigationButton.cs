@@ -107,5 +107,12 @@ namespace _2SemesterProjekt.Pages.UserControls.NavigationButtons
 			// Adds the HoverEvents to option
 			RegisterHoverEvents(option);
 		}
+
+		private void ButtonLabel_Resize(object sender, EventArgs e)
+		{
+			// WHen changing the text in ButtonLabel, then its Resized and this centeres the Text to the middle on the User Control
+			ButtonLabel.Left = (this.ClientSize.Width - ButtonLabel.Width) / 2;
+			ButtonLabel.Top = (this.ClientSize.Height - ButtonLabel.Height) / 2;
+		}
 	}
 }

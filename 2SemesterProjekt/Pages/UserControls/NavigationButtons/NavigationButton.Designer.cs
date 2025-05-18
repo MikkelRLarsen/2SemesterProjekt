@@ -47,6 +47,7 @@
 			ButtonLabel.TabIndex = 0;
 			ButtonLabel.Text = "Konsultation";
 			ButtonLabel.TextAlign = ContentAlignment.MiddleCenter;
+			ButtonLabel.Resize += ButtonLabel_Resize;
 			// 
 			// panel1
 			// 
@@ -72,7 +73,7 @@
 			BackColor = Color.DodgerBlue;
 			Controls.Add(panel1);
 			Controls.Add(ButtonLabel);
-			Margin = new Padding(0, 0, 0, 0);
+			Margin = new Padding(0);
 			Name = "NavigationButton";
 			Size = new Size(300, 70);
 			ResumeLayout(false);
