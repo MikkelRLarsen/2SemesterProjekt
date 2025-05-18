@@ -23,7 +23,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
     }
     public partial class PetCard : UserControl
     {
-        private PetPage _petPage;
+        private FindPetPage _petPage;
         private PetCardType _petCardType;
         private IPetService _petService;
         public Pet Pet { get; }
@@ -35,7 +35,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         /// <param name="petPage"></param>
         /// <param name="pet"></param>
         /// <param name="petCardType"></param>
-        public PetCard(PetPage petPage, Pet pet, PetCardType petCardType)
+        public PetCard(FindPetPage petPage, Pet pet, PetCardType petCardType)
         {
             InitializeComponent();
             _petPage = petPage;
@@ -50,7 +50,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         /// <param name="petPage"></param>
         /// <param name="examination"></param>
         /// <param name="petCardType"></param>
-        public PetCard(PetPage petPage, Examination examination, PetCardType petCardType)
+        public PetCard(FindPetPage petPage, Examination examination, PetCardType petCardType)
         {
             InitializeComponent();
             _petPage = petPage;

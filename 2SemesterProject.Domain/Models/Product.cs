@@ -35,9 +35,13 @@ namespace _2SemesterProjekt.Domain.Models
             NumberInStock = numberInStock;
             MinNumberInStock = minNumberInStock;
         }
-        public void UpdateQuantityInOrder()
+        public void AddQuantityToOrder(int amount)
         {
-            QuantityInOrder += 1;
+            QuantityInOrder += amount;
+        }
+        public void RemoveQuantityFromOrder(int amount)
+        { 
+            QuantityInOrder -= amount;
         }
         public void UpdateTotalPriceOfProductInOrder()
         {
@@ -50,6 +54,14 @@ namespace _2SemesterProjekt.Domain.Models
         public void RemoveTotalOrderPrice()
         {
             TotalPrice = 0;
+        }
+        public void DecreaseInStock(int amount)
+        {
+            NumberInStock -= amount;
+        }
+        public void IncreaseInStock(int amount)
+        {
+            NumberInStock += amount;
         }
     }
 }

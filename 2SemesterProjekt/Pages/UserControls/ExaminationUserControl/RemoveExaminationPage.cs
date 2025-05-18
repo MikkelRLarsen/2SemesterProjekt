@@ -14,42 +14,23 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
-    public partial class ChangeExaminationPage : UserControl, IExaminationCardHost
+    public partial class RemoveExaminationPage : UserControl, IExaminationCardHost
     {
         private readonly IExaminationService _examinationService;
         private readonly Panel _mainPagePanel;
         public ExaminationCardUpdated ExaminationCard { get; set; }
         public List<ExaminationCardUpdated> AllExaminationCards { get; set; } = new List<ExaminationCardUpdated>();
 
-        public ChangeExaminationPage(Panel mainPagePanel)
+        public RemoveExaminationPage(Panel mainPagePanel)
         {
             InitializeComponent();
             _mainPagePanel = mainPagePanel;
             _examinationService = ServiceProviderSingleton.GetServiceProvider().GetService<IExaminationService>();
         }
 
-        private void UpdateExaminationPage_Load(object sender, EventArgs e)
+        private void RemoveExaminationPage_Load(object sender, EventArgs e)
         {
             Task.Run(() => FindAndSetAllExaminationsAsync());
-        }
-
-        private void changeButton_Click(object sender, EventArgs e)
-        {
-            if (this.ExaminationCard == null)
-            {
-                MessageBox.Show("Vælg venligst den konsultationstid, der skal ændres.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (this.ExaminationCard.Examination.Date < DateTime.Now)
-            {
-                DialogResult messageBoxWarning = MessageBox.Show("Du kan ikke ændre en fuldført konsultationstid!", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            _mainPagePanel.Controls.Clear();
-            _mainPagePanel.Controls.Add(new UpdateExaminationPage(this.ExaminationCard.Examination, this));
-            changeButton.Image = Properties.Resources.ChangeButtonGreyedOut;
         }
 
         private async void FindAndSetAllExaminationsAsync()
@@ -124,6 +105,46 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             LoadAndShowExaminationCards(AllExaminationCards);
         }
 
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            if (this.ExaminationCard != null)
+            {
+                ExaminationDeletion(this.ExaminationCard);
+            }
+            else
+            {
+                MessageBox.Show("Vælg venligst den konsultationstid, der skal slettes.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void ExaminationDeletion(ExaminationCardUpdated examinationCard)
+        {
+            if (!await _examinationService.CheckIfExaminationCanBeDeleted(examinationCard.Examination.Date))
+            {
+                DialogResult messageBoxWarning = MessageBox.Show("Du kan ikke slette ældre konsultationstider!", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DialogResult messageBoxResult = MessageBox.Show("Er du sikker på, at denne konsultationstid skal slettes?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if (messageBoxResult == DialogResult.Yes)
+            {
+                // Call examination deletion method from service
+                await _examinationService.DeleteExaminationAsync(examinationCard.Examination);
+                MessageBox.Show("Konsultationstiden er blevet slettet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Removes ExaminationCard from allExaminations
+                AllExaminationCards.Remove(examinationCard);
+
+                // Set the selected ExaminationCard to null, so its no longer highlighted
+                this.ExaminationCard = null;
+                deleteButton.Image = Properties.Resources.DeleteButtonGreyedOut;
+
+                // Return to show all pets
+                LoadAndShowExaminationCards(AllExaminationCards);
+            }
+        }
+
         public void OnCardSelected(ExaminationCardUpdated selectedCard)
         {
             if (ExaminationCard != null)
@@ -134,7 +155,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             ExaminationCard = selectedCard;
             ExaminationCard.SetSelected(true);
 
-            changeButton.Image = Properties.Resources.ChangeButton;
+            deleteButton.Image = Properties.Resources.DeleteButton;
         }
     }
 }

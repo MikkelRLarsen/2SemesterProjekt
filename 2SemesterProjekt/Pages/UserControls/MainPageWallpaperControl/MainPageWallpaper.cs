@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _2SemesterProjekt.Pages.UserControls.MainPageWallpaper
+namespace _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl
 {
     public partial class MainPageWallpaper : UserControl
     {

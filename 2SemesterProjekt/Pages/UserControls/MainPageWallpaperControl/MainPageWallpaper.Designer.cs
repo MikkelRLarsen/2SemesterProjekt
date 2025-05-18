@@ -1,4 +1,4 @@
-﻿namespace _2SemesterProjekt.Pages.UserControls.MainPageWallpaper
+﻿namespace _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl
 {
     partial class MainPageWallpaper
     {
@@ -35,10 +35,9 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.HomeScreenPicture;
-            pictureBox1.Location = new Point(-309, 0);
-            pictureBox1.Margin = new Padding(0);
+            pictureBox1.Location = new Point(-313, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(2809, 1580);
+            pictureBox1.Size = new Size(2835, 1580);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 

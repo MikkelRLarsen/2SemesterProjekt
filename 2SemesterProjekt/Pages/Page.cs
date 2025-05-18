@@ -1,7 +1,9 @@
 ﻿using _2SemesterProjekt.Pages.UserControls.CustomerUserControl;
 using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
-using _2SemesterProjekt.Pages.UserControls.MainPageWallpaper;
+using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using _2SemesterProjekt.Pages.UserControls.NavigationButtons;
+using _2SemesterProjekt.Pages.UserControls.PetUserControl;
+using _2SemesterProjekt.Pages.UserControls.ProductUserControl;
 
 namespace _2SemesterProjekt.Pages
 {
@@ -39,7 +41,7 @@ namespace _2SemesterProjekt.Pages
         private async void CreateKonsultationPage(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
-            MainPanel.Controls.Add(new CreateExaminationPage());
+            MainPanel.Controls.Add(new CreateExaminationPage(this.MainPanel));
         }
         private async void FindKonsultationPage(object sender, EventArgs e)
         {
@@ -53,9 +55,8 @@ namespace _2SemesterProjekt.Pages
         }
         private async void RemoveKonsultationPage(object sender, EventArgs e)
         {
-            //Example
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new RemoveExaminationPage(this.MainPanel));
         }
 
 
@@ -87,9 +88,8 @@ namespace _2SemesterProjekt.Pages
         }
         private async void CreateSalePage(object sender, EventArgs e)
         {
-            //Example
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new CreateOrderPage(this.MainPanel)); // Mangler at opdatere når man går tilbage
         }
 
 
@@ -112,16 +112,14 @@ namespace _2SemesterProjekt.Pages
 
         private async void FindCustomerPage(object sender, EventArgs e)
         {
-            //Example
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new FindCustomerPage()); // Mangler søge mekanisme
         }
 
         private async void UpdateCustomerPage(object sender, EventArgs e)
         {
-            //Example
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new ChangeCustomerPage());
         }
 
 
@@ -139,21 +137,18 @@ namespace _2SemesterProjekt.Pages
 
         private async void CreatePetPage(object sender, EventArgs e)
         {
-            //Example
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new CreatePetPage());
         }
         private async void FindPetPage(object sender, EventArgs e)
         {
-            //Example
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new FindPetPage());
         }
         private async void UpdatePetPage(object sender, EventArgs e)
         {
-            //Example
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new UpdatePetPage());
         }
 
 
@@ -169,13 +164,11 @@ namespace _2SemesterProjekt.Pages
         }
         private async void CreateEmployee(object sender, EventArgs e)
         {
-            //Example
             //MainPanel.Controls.Clear();
             //MainPanel.Controls.Add(new KonsultationPage());
         }
         private async void StorageStatus(object sender, EventArgs e)
         {
-            //Example
             //MainPanel.Controls.Clear();
             //MainPanel.Controls.Add(new KonsultationPage());
         }

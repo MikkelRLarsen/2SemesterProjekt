@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using _2SemesterProjekt.Pages.UserControls.UIModels;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,18 +21,16 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         IEmployeeService _employeeService;
         IExaminationService _examinationService;
         ICageService _cageService;
-        FlowLayoutPanel _konsultationPanel;
         private IEnumerable<Employee> _employees;
         private decimal? _basePriceForExamination;
         private bool _cageBookingIsChecked;
+        private Panel _mainPagePanel;
         private Customer _customer;
-        private readonly KonsultationPage _konsultationPage;
 
-        public CreateExaminationPage()
+        public CreateExaminationPage(Panel mainPagePanel)
         {
             InitializeComponent();
-            //_konsultationPanel = konsultationPanel;
-            //_konsultationPage = konsultationPage;
+            _mainPagePanel = mainPagePanel;
         }
 
         private void CreateExaminationUserControlUpdate_Load(object sender, EventArgs e)
@@ -180,10 +179,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     newExamination.SetCageBookingID(cageBooking.CageBookingID);
 
                     // Add the new examination to AllExaminationCard on KonsultationPage, so it shows when reloaded
-                    _konsultationPage.AllExaminationCards.Add(new ExaminationCard(newExamination, _konsultationPage));
+                    //_konsultationPage.AllExaminationCards.Add(new ExaminationCard(newExamination, _konsultationPage));
 
                     // Return to show all pets
-                    _konsultationPage.LoadAndShowExaminationCards(_konsultationPage.AllExaminationCards);
+                    //_konsultationPage.LoadAndShowExaminationCards(_konsultationPage.AllExaminationCards);
                 }
                 else // Don't create cagebooking
                 {
@@ -201,10 +200,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     await _examinationService.CreateExaminationAsync(newExamination);
 
                     // Add the new examination to AllExaminationCard on KonsultationPage, so it shows when reloaded
-                    _konsultationPage.AllExaminationCards.Add(new ExaminationCard(newExamination, _konsultationPage));
+                    //_konsultationPage.AllExaminationCards.Add(new ExaminationCard(newExamination, _konsultationPage));
 
                     // Return to show all pets
-                    _konsultationPage.LoadAndShowExaminationCards(_konsultationPage.AllExaminationCards);
+                    //_konsultationPage.LoadAndShowExaminationCards(_konsultationPage.AllExaminationCards);
                 }
 
                 //Shows a message that the creation has been completed
@@ -235,7 +234,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         /// <param name="e"></param>
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            _konsultationPanel.Controls.Clear();
+            //_konsultationPanel.Controls.Clear();
+            _mainPagePanel.Controls.Remove(this);
+            _mainPagePanel.Controls.Add(new MainPageWallpaper());
+
         }
 
         private void PriceExaminationDisplay_TextChanged(object sender, EventArgs e)

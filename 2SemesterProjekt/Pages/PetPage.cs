@@ -67,7 +67,7 @@ namespace _2SemesterProjekt.Pages
             _listOfPets = await _petService.GetAllPetsAsync();
             foreach (var pet in _listOfPets)
             {
-                flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
+                //flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
             }
         }
 
@@ -99,7 +99,7 @@ namespace _2SemesterProjekt.Pages
                 flowLayoutPanel1.Controls.Clear();
                 foreach (var pet in customerPets)
                 {
-                    flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
+                    //flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
                 }
 
                 // Checks if the button already exists before adding
@@ -139,7 +139,7 @@ namespace _2SemesterProjekt.Pages
             // Show all pets in flowpanel
             foreach (var pet in _listOfPets)
             {
-                flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
+                //flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
             }
         }
         private async void ShowInactivePets(object sender, EventArgs e)
@@ -153,7 +153,7 @@ namespace _2SemesterProjekt.Pages
                 var listOfPets = await _examinationService.GetAllInactivesAsync();
                 foreach (var examination in listOfPets)
                 {
-                    flowLayoutPanel1.Controls.Add(new PetCard(this, examination, PetCardType.InactivePet));
+                    //flowLayoutPanel1.Controls.Add(new PetCard(this, examination, PetCardType.InactivePet));
                 }
 
                 // Checks if the button already exists before adding
@@ -200,7 +200,7 @@ namespace _2SemesterProjekt.Pages
             foreach (var pet in _listOfPets)
             {
                 // This = PetPage
-                flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
+                //flowLayoutPanel1.Controls.Add(new PetCard(this, pet, PetCardType.WholePet));
             }
         }
     }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,11 +18,13 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
     public partial class CreateCustomerUpdate : UserControl
     {
         private readonly ICustomerService _customerService;
+        private readonly Panel _mainPagePanel;
 
-        public CreateCustomerUpdate()
+        public CreateCustomerUpdate(Panel mainPagePanel)
         {
             InitializeComponent();
 
+            _mainPagePanel = mainPagePanel;
             // Get the customer service from the service provider
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
 
@@ -32,8 +35,8 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            this.Controls.Clear();
-            this.Controls.Add(new CustomerPage());
+            _mainPagePanel.Controls.Remove(this);
+            _mainPagePanel.Controls.Add(new MainPageWallpaper());
         }
 
         private void customerSearchTextBox_KeyPress(object sender, KeyPressEventArgs e)

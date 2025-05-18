@@ -143,22 +143,22 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             }
             else // An order will be created without a customerID.
             {
-                int orderID = await _orderService.CreateOrderAsync(_totalPrice, _totalPriceWithDiscount); // Creates an order and returns the ID.
-                await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
+                //int orderID = await _orderService.CreateOrderAsync(_totalPrice, _totalPriceWithDiscount); // Creates an order and returns the ID.
+                //await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
                 await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
-                DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Parent.Controls.Clear();
             }
         }
 
         private async Task CreateOrderWithCustomerInfo()
         {
-            int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice, _totalPriceWithDiscount); // Creates an order associated with the customer and returns the ID.
-            await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
-            await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
-            DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Parent.Controls.Clear();
-            return;
+            //int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, _totalPrice, _totalPriceWithDiscount); // Creates an order associated with the customer and returns the ID.
+            //await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
+            //await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
+            //DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //this.Parent.Controls.Clear();
+            //return;
         }
 
 
@@ -194,7 +194,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
             }
             else if (_selectedProduct != null)
             {
-                _selectedProduct.UpdateQuantityInOrder(); // Update quantity
+                //_selectedProduct.UpdateQuantityInOrder(); // Update quantity
                 _selectedProduct.UpdateTotalPriceOfProductInOrder(); // Update total price
 
                 _order.Add(_selectedProduct); // Add to order
@@ -238,7 +238,7 @@ namespace _2SemesterProjekt.Pages.UserControls.Product
                 _selectedProductInOrder = (Domain.Models.Product)orderProductsListBox.SelectedItem;
             }
 
-            _selectedProductInOrder.UpdateQuantityInOrder(); // Updates the quantity of the product in the order
+            /*_selectedProductInOrder.UpdateQuantityInOrder();*/ // Updates the quantity of the product in the order
             _selectedProductInOrder.UpdateTotalPriceOfProductInOrder(); // Updates the total price of the product in the order
             _totalPrice += _selectedProductInOrder.SalesPricePerUnit; // Updates the total price of the order
 

@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Pages.UserControls.UserControlInterfaces;
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 {
     public partial class ExaminationCardUpdated : UserControl
     {
         public Examination Examination { get; }
-        private readonly ChangeExaminationPage _examinationPage;
+        private readonly IExaminationCardHost _host;
 
         public ExaminationCardUpdated(Examination examination)
         {
@@ -23,10 +24,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             InitializeUIDesign();
         }
 
-        public ExaminationCardUpdated(Examination examination, ChangeExaminationPage examinationPage)
+        public ExaminationCardUpdated(Examination examination, IExaminationCardHost host)
         {
             Examination = examination;
-            _examinationPage = examinationPage;
+            _host = host;
             InitializeComponent();
             InitializeUIDesign();
         }
@@ -75,14 +76,19 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
         private void pictureBox_Click(object sender, EventArgs e)
         {
-            if (_examinationPage.ExaminationCard != null) // protects against null reference exceptions the first time it's clicked
+            _host.OnCardSelected(this);
+        }
+
+        public void SetSelected(bool selected)
+        {
+            if (selected == true)
             {
-                _examinationPage.ExaminationCard.pictureBox.Image = Properties.Resources.CardExamination; // If a card was previously selected, reset its background color
+                pictureBox.Image = Properties.Resources.CardExaminationSelected;
             }
-
-            _examinationPage.ExaminationCard = this; // Set the currently clicked card as the new selected card
-
-            this.pictureBox.Image = Properties.Resources.CardExaminationSelected;
+            else
+            {
+                pictureBox.Image = Properties.Resources.CardExamination;
+            }
         }
     }
 }
