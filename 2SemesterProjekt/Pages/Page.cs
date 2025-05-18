@@ -28,6 +28,8 @@ namespace _2SemesterProjekt.Pages
 			CreateAndKundeMenu();
 			CreateAndPetMenu();
 			CreateAndSetAdministrationMenu();
+
+			AddMoveHandlers(NavPanel);
 		}
 
 		//KonsultationMenu
@@ -35,6 +37,7 @@ namespace _2SemesterProjekt.Pages
 		{
 			ExaminationNav.ButtonLabel.Text = "Konsultation";
 			ExaminationNav.BringToFront();
+			AddMoveHandlers(ExaminationNav);
 
 			ExaminationNav.AddOption(new NavigationButtonOption(CreateKonsultationPage, "Opret"));
 			ExaminationNav.AddOption(new NavigationButtonOption(FindKonsultationPage, "Find"));
@@ -72,6 +75,7 @@ namespace _2SemesterProjekt.Pages
 		{
 			MedicinNavn.ButtonLabel.Text = "Medicin";
 			MedicinNavn.BringToFront();
+			AddMoveHandlers(MedicinNavn);
 
 			MedicinNavn.AddOption(new NavigationButtonOption(FindMedicinPage, "Find"));
 		}
@@ -88,6 +92,7 @@ namespace _2SemesterProjekt.Pages
 		{
 			SalesNav.ButtonLabel.Text = "Salg";
 			SalesNav.BringToFront();
+			AddMoveHandlers(SalesNav);
 
 			SalesNav.AddOption(new NavigationButtonOption(CreateSalePage, "Opret"));
 		}
@@ -104,6 +109,7 @@ namespace _2SemesterProjekt.Pages
 		{
 			CustomerNav.ButtonLabel.Text = "Kunde";
 			CustomerNav.BringToFront();
+			AddMoveHandlers(CustomerNav);
 
 			CustomerNav.AddOption(new NavigationButtonOption(CreateCustomerPage, "Opret"));
 			CustomerNav.AddOption(new NavigationButtonOption(FindCustomerPage, "Find"));
@@ -136,6 +142,7 @@ namespace _2SemesterProjekt.Pages
 		{
 			PetNav.ButtonLabel.Text = "Kældedyr";
 			PetNav.BringToFront();
+			AddMoveHandlers(PetNav);
 
 			PetNav.AddOption(new NavigationButtonOption(CreatePetPage, "Opret"));
 			PetNav.AddOption(new NavigationButtonOption(FindPetPage, "Find"));
@@ -167,6 +174,7 @@ namespace _2SemesterProjekt.Pages
 		{
 			AdministrationNav.ButtonLabel.Text = "Administation";
 			AdministrationNav.BringToFront();
+			AddMoveHandlers(AdministrationNav);
 
 			AdministrationNav.AddOption(new NavigationButtonOption(CreateEmployee, "Opret Ansat"));
 			AdministrationNav.AddOption(new NavigationButtonOption(StorageStatus, "Lagerstatus"));
@@ -185,6 +193,19 @@ namespace _2SemesterProjekt.Pages
 		}
 
 		// MoveHandler
+		private void AddMoveHandlers(Control control)
+		{
+			control.MouseDown += Page_MouseDown;
+			control.MouseUp += Page_MouseUp;
+			control.MouseMove += Page_MouseMove;
+
+			// Add the same handler to each of the control.Controls, so that you can also move if mousedown on labels
+			foreach (Control child  in control.Controls)
+			{
+				AddMoveHandlers(child);
+			}
+		}
+
 		private void Page_MouseDown(object sender, MouseEventArgs e)
 		{
 			mouseDown = true;

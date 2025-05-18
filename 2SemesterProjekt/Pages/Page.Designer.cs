@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			panel1 = new Panel();
+			NavPanel = new Panel();
 			MainPanel = new Panel();
 			ExaminationNav = new _2SemesterProjekt.Pages.UserControls.NavigationButtons.NavigationButton();
 			MedicinNavn = new _2SemesterProjekt.Pages.UserControls.NavigationButtons.NavigationButton();
@@ -40,14 +40,14 @@
 			PetNav = new _2SemesterProjekt.Pages.UserControls.NavigationButtons.NavigationButton();
 			SuspendLayout();
 			// 
-			// panel1
+			// NavPanel
 			// 
-			panel1.BackColor = Color.DodgerBlue;
-			panel1.Location = new Point(1900, 0);
-			panel1.Margin = new Padding(0);
-			panel1.Name = "panel1";
-			panel1.Size = new Size(300, 70);
-			panel1.TabIndex = 0;
+			NavPanel.BackColor = Color.DodgerBlue;
+			NavPanel.Location = new Point(1900, 0);
+			NavPanel.Margin = new Padding(0);
+			NavPanel.Name = "NavPanel";
+			NavPanel.Size = new Size(300, 70);
+			NavPanel.TabIndex = 0;
 			// 
 			// MainPanel
 			// 
@@ -141,7 +141,7 @@
 			Controls.Add(MedicinNavn);
 			Controls.Add(ExaminationNav);
 			Controls.Add(MainPanel);
-			Controls.Add(panel1);
+			Controls.Add(NavPanel);
 			FormBorderStyle = FormBorderStyle.None;
 			Name = "Page";
 			Text = "Page";
@@ -153,7 +153,7 @@
 
 		#endregion
 
-		private Panel panel1;
+		private Panel NavPanel;
 		private Panel MainPanel;
 		private UserControls.NavigationButtons.NavigationButton ExaminationNav;
 		private UserControls.NavigationButtons.NavigationButton MedicinNavn;
