@@ -1,6 +1,6 @@
-﻿namespace _2SemesterProjekt
+﻿namespace _2SemesterProjekt.Pages.UserControls.NavigationButtons
 {
-	partial class NavigationButton
+	partial class NavigationButtonOption
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -28,34 +28,36 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			buttonNameLabel = new Label();
+			ButtonLabel = new Label();
 			SuspendLayout();
 			// 
-			// buttonNameLabel
+			// ButtonLabel
 			// 
-			buttonNameLabel.AutoSize = true;
-			buttonNameLabel.BackColor = Color.Transparent;
-			buttonNameLabel.Font = new Font("Gadugi", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			buttonNameLabel.ForeColor = SystemColors.ControlLight;
-			buttonNameLabel.Location = new Point(56, 18);
-			buttonNameLabel.Name = "buttonNameLabel";
-			buttonNameLabel.Size = new Size(120, 38);
-			buttonNameLabel.TabIndex = 0;
-			buttonNameLabel.Text = "Button";
+			ButtonLabel.Anchor = AnchorStyles.Right;
+			ButtonLabel.AutoSize = true;
+			ButtonLabel.Font = new Font("Segoe UI", 22F);
+			ButtonLabel.ForeColor = SystemColors.HighlightText;
+			ButtonLabel.Location = new Point(72, 11);
+			ButtonLabel.Name = "ButtonLabel";
+			ButtonLabel.Size = new Size(228, 50);
+			ButtonLabel.TabIndex = 1;
+			ButtonLabel.Text = "Konsultation";
+			ButtonLabel.TextAlign = ContentAlignment.MiddleCenter;
 			// 
-			// NavigationButton
+			// NavigationButtonOption
 			// 
-			AutoScaleDimensions = new SizeF(7F, 15F);
+			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
-			Controls.Add(buttonNameLabel);
-			Name = "NavigationButton";
-			Size = new Size(238, 75);
+			BackColor = Color.DodgerBlue;
+			Controls.Add(ButtonLabel);
+			Name = "NavigationButtonOption";
+			Size = new Size(300, 70);
 			ResumeLayout(false);
 			PerformLayout();
 		}
 
 		#endregion
 
-		private Label buttonNameLabel;
+		public Label ButtonLabel;
 	}
 }
