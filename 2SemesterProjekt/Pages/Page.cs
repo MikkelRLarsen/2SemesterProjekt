@@ -44,10 +44,5 @@ namespace _2SemesterProjekt.Pages
         {
             mouseDown = false;
         }
-
-        private void Page_Load(object sender, EventArgs e)
-        {
-            panel2.Controls.Add(new CreateExaminationUserControlUpdate());
-        }
     }
 }
