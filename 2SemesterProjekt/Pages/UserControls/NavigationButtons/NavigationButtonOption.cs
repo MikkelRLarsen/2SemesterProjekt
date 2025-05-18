@@ -13,10 +13,11 @@ namespace _2SemesterProjekt.Pages.UserControls.NavigationButtons
 {
 	public partial class NavigationButtonOption : UserControl
 	{
-		public NavigationButtonOption(EventHandler onClick)
+		public NavigationButtonOption(EventHandler onClick, string labelText)
 		{
 			InitializeComponent();
 			AddEventHandler(onClick, this);
+			ButtonLabel.Text = labelText;
 		}
 
 		private void AddEventHandler(EventHandler onClick, Control parent)

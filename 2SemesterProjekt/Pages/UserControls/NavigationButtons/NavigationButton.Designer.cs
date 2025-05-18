@@ -72,8 +72,9 @@
 			BackColor = Color.DodgerBlue;
 			Controls.Add(panel1);
 			Controls.Add(ButtonLabel);
+			Margin = new Padding(0, 0, 0, 0);
 			Name = "NavigationButton";
-			Size = new Size(300, 409);
+			Size = new Size(300, 70);
 			ResumeLayout(false);
 			PerformLayout();
 		}
