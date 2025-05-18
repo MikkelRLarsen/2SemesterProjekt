@@ -12,6 +12,8 @@ using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using Microsoft.Extensions.DependencyInjection;
 using _2SemesterProjekt.Services;
+using _2SemesterProjekt.Pages.UserControls.PetUserControl;
+using _2SemesterProjekt.Pages.UserControls.CustomerUserControl;
 
 namespace _2SemesterProjekt
 {
@@ -32,6 +34,7 @@ namespace _2SemesterProjekt
             _showButton = showButton;
             buttonFlowPanel.Controls.Add(showButton);
             buttonFlowPanel.Controls.Add(new ButtonPanel("Tilføj kunde", "AddCustomer.png", Color.MediumSeaGreen, AddCustomerButton_Click));
+            buttonFlowPanel.Controls.Add(new ButtonPanel("Ændre kunde", "", Color.MediumAquamarine, ChangeCustomerButton_Click));
 
             Task.Run(() => FindAndSetAllCustomersAsync()); // New thread calling the method below.
         }
@@ -39,7 +42,7 @@ namespace _2SemesterProjekt
         /// <summary>
         /// Loads all customers on customerPage click, making them ready for "Vis alle"-click. 
         /// </summary>
-        private async void FindAndSetAllCustomersAsync()
+        public async void FindAndSetAllCustomersAsync()
         {
             IEnumerable<Customer> allCustomers = await _customerService.GetAllCustomersAsync();
 
@@ -167,6 +170,19 @@ namespace _2SemesterProjekt
                     _showButton.ButtonText.Text = "Vis alle";
                     _showButton.CenterLabel();
                 }
+            }
+        }
+        private void ChangeCustomerButton_Click(object sender, EventArgs e)
+        {
+            if (this.CustomerCard != null)
+            {
+                var updateCustomerUserControl = new UpdateCustomerUserControl(this, this.CustomerCard.Customer); // This = CustomerPage
+                this.Controls.Add(updateCustomerUserControl); // Load the new page
+                updateCustomerUserControl.BringToFront();
+            }
+            else
+            {
+                MessageBox.Show("Vælg en kunde hvis du vil ændre", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

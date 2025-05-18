@@ -9,6 +9,7 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 		public Task<Customer> GetCustomerByPhoneNumberAsync(int phoneNumber);
 
         public Task<IEnumerable<Customer>> GetAllCustomersAsync();
+        public Task UpdateCustomer(Customer customer);
 
     }
 }

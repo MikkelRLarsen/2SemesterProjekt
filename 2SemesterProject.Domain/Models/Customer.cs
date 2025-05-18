@@ -84,5 +84,16 @@ namespace _2SemesterProjekt.Domain.Models
 
 			return true;
 		}
+		public void UpdateCustomerProperties(Customer customer)
+		{
+			customer.InformationValid();
+
+			FirstName = customer.FirstName;
+			LastName = customer.LastName;
+			Email = customer.Email;
+			PhoneNumber = customer.PhoneNumber;
+			Address = customer.Address;
+			Type = customer.Type;
+		}
 	}
 }
