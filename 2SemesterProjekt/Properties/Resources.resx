@@ -118,12 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="OpretNyeKonsultationerInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OpretNyeKonsultationerInput.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CancelButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CancelButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Hund" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Hund.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -142,26 +136,23 @@
   <data name="Kanin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Kanin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PageBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PageBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="SaveButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SaveButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RemoveCustomer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RemoveCustomer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CreateExaminationInput" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CreateExaminationInput.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CheckBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NumberOfDaysLabel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NumberOfDaysLabel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DiscountLabel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DiscountLabel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CancelButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CancelButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Marsvin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Marsvin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CheckBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CheckBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Kat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Kat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,19 +160,22 @@
   <data name="SearchButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="TitelBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TitelBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PageBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PageBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PageTitelBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PageTitelBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="member" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\member.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="OpretNyeKonsultationer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OpretNyeKonsultationer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ExaminationBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ExaminationBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CheckBoxClicked" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxClicked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CageBookingLabel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CageBookingLabel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SaveButtonGreyedOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SaveButtonGreyedOut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

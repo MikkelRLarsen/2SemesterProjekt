@@ -64,6 +64,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                 FilterEmployeeList();
                 UpdateDiscountStatus();
                 UpdateCageBookingCheckbox();
+                customerSearchTextBox.Text = $"{_customer.FirstName} {_customer.LastName}";
+                customerSearchButton.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -105,6 +107,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private void employeeDropdown_SelectionChangeCommitted(object sender, EventArgs e)
         {
             submitButton.Enabled = true;
+            submitButton.Image = Properties.Resources.SaveButton;
             submitButton.BackColor = Color.MediumAquamarine;
         }
 
@@ -323,6 +326,70 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private void customerSearchButton_MouseLeave(object sender, EventArgs e)
         {
             Cursor = Cursors.Default;
+        }
+
+        private void cancelButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void cancelButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void submitButton_MouseEnter(object sender, EventArgs e)
+        {
+            if (submitButton.Enabled == true)
+            {
+                Cursor = Cursors.Hand;
+            }
+        }
+
+        private void submitButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void cageBookingCheckBox_Click(object sender, EventArgs e)
+        {
+            _cageBookingIsChecked = !_cageBookingIsChecked;
+
+            if (_cageBookingIsChecked == true)
+            {
+                cageBookingCheckBox.Image = Properties.Resources.CheckBoxClicked;
+            }
+            else
+            {
+                cageBookingCheckBox.Image = Properties.Resources.CheckBox;
+            }
+        }
+
+        private void cageBookingCheckBox_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void cageBookingCheckBox_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void customerSearchTextBox_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(customerSearchTextBox.Text) && !Int32.TryParse(customerSearchTextBox.Text, out int _))
+            {
+                customerSearchTextBox.Text = string.Empty;
+                customerSearchButton.Enabled = true;
+            }
+        }
+
+        private void customerSearchTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // The user is only able to enter numbers in the textbox.
+            }
         }
     }
 }

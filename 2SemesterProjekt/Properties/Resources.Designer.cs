@@ -133,35 +133,23 @@ namespace _2SemesterProjekt.Properties {
         /// <summary>
 		///   Looks up a localized resource of type System.Drawing.Bitmap.
 		/// </summary>
-		internal static System.Drawing.Bitmap OpretNyeKonsultationer
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("OpretNyeKonsultationer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-		///   Looks up a localized resource of type System.Drawing.Bitmap.
-		/// </summary>
-		internal static System.Drawing.Bitmap OpretNyeKonsultationerInput
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("OpretNyeKonsultationerInput", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-		///   Looks up a localized resource of type System.Drawing.Bitmap.
-		/// </summary>
 		internal static System.Drawing.Bitmap SaveButton
         {
             get
             {
                 object obj = ResourceManager.GetObject("SaveButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap SaveButtonGreyedOut
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("SaveButtonGreyedOut", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,15 +201,15 @@ namespace _2SemesterProjekt.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap NumberOfDaysLabel
+        internal static System.Drawing.Bitmap PageBackground
         {
             get
             {
-                object obj = ResourceManager.GetObject("NumberOfDaysLabel", resourceCulture);
+                object obj = ResourceManager.GetObject("PageBackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -229,11 +217,11 @@ namespace _2SemesterProjekt.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CreateExaminationInput
+        internal static System.Drawing.Bitmap PageBox
         {
             get
             {
-                object obj = ResourceManager.GetObject("CreateExaminationInput", resourceCulture);
+                object obj = ResourceManager.GetObject("PageBox", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -241,35 +229,11 @@ namespace _2SemesterProjekt.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ExaminationBox
+        internal static System.Drawing.Bitmap PageTitelBackground
         {
             get
             {
-                object obj = ResourceManager.GetObject("ExaminationBox", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DiscountLabel
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("DiscountLabel", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap CageBookingLabel
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("CageBookingLabel", resourceCulture);
+                object obj = ResourceManager.GetObject("PageTitelBackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
