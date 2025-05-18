@@ -40,12 +40,12 @@
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
-            customerSearchTextBox = new TextBox();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
+            textBoxFirstName = new TextBox();
+            textBoxLastName = new TextBox();
+            textBoxAddress = new TextBox();
+            textBoxEmail = new TextBox();
+            textBoxPhoneNumber = new TextBox();
+            comboBoxType = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)submitButton).BeginInit();
@@ -93,7 +93,7 @@
             submitButton.Size = new Size(400, 92);
             submitButton.TabIndex = 26;
             submitButton.TabStop = false;
-            submitButton.Click += this.submitButton_Click;
+            submitButton.Click += submitButton_Click;
             // 
             // cancelButton
             // 
@@ -189,76 +189,79 @@
             label7.TabIndex = 33;
             label7.Text = "K U N D E T Y P E";
             // 
-            // customerSearchTextBox
+            // textBoxFirstName
             // 
-            customerSearchTextBox.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            customerSearchTextBox.Location = new Point(1336, 464);
-            customerSearchTextBox.Margin = new Padding(3, 4, 3, 4);
-            customerSearchTextBox.MaxLength = 8;
-            customerSearchTextBox.Name = "customerSearchTextBox";
-            customerSearchTextBox.Size = new Size(355, 42);
-            customerSearchTextBox.TabIndex = 34;
+            textBoxFirstName.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxFirstName.Location = new Point(1336, 464);
+            textBoxFirstName.Margin = new Padding(3, 4, 3, 4);
+            textBoxFirstName.Name = "textBoxFirstName";
+            textBoxFirstName.Size = new Size(355, 42);
+            textBoxFirstName.TabIndex = 34;
+            textBoxFirstName.KeyPress += customerSearchTextBox_KeyPress;
             // 
-            // textBox1
+            // textBoxLastName
             // 
-            textBox1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(1336, 562);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.MaxLength = 8;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(355, 42);
-            textBox1.TabIndex = 35;
+            textBoxLastName.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxLastName.Location = new Point(1336, 562);
+            textBoxLastName.Margin = new Padding(3, 4, 3, 4);
+            textBoxLastName.Name = "textBoxLastName";
+            textBoxLastName.Size = new Size(355, 42);
+            textBoxLastName.TabIndex = 35;
+            textBoxLastName.KeyPress += textBoxLastName_KeyPress;
             // 
-            // textBox2
+            // textBoxAddress
             // 
-            textBox2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(1336, 660);
-            textBox2.Margin = new Padding(3, 4, 3, 4);
-            textBox2.MaxLength = 8;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(355, 42);
-            textBox2.TabIndex = 36;
+            textBoxAddress.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxAddress.Location = new Point(1336, 660);
+            textBoxAddress.Margin = new Padding(3, 4, 3, 4);
+            textBoxAddress.Name = "textBoxAddress";
+            textBoxAddress.Size = new Size(355, 42);
+            textBoxAddress.TabIndex = 36;
+            textBoxAddress.KeyPress += textBoxAddress_KeyPress;
             // 
-            // textBox3
+            // textBoxEmail
             // 
-            textBox3.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox3.Location = new Point(1336, 758);
-            textBox3.Margin = new Padding(3, 4, 3, 4);
-            textBox3.MaxLength = 8;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(355, 42);
-            textBox3.TabIndex = 37;
+            textBoxEmail.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxEmail.Location = new Point(1336, 758);
+            textBoxEmail.Margin = new Padding(3, 4, 3, 4);
+            textBoxEmail.Name = "textBoxEmail";
+            textBoxEmail.Size = new Size(355, 42);
+            textBoxEmail.TabIndex = 37;
+            textBoxEmail.KeyPress += textBoxEmail_KeyPress;
             // 
-            // textBox4
+            // textBoxPhoneNumber
             // 
-            textBox4.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox4.Location = new Point(1336, 856);
-            textBox4.Margin = new Padding(3, 4, 3, 4);
-            textBox4.MaxLength = 8;
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(355, 42);
-            textBox4.TabIndex = 38;
+            textBoxPhoneNumber.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxPhoneNumber.Location = new Point(1336, 856);
+            textBoxPhoneNumber.Margin = new Padding(3, 4, 3, 4);
+            textBoxPhoneNumber.MaxLength = 8;
+            textBoxPhoneNumber.Name = "textBoxPhoneNumber";
+            textBoxPhoneNumber.Size = new Size(355, 42);
+            textBoxPhoneNumber.TabIndex = 38;
+            textBoxPhoneNumber.KeyPress += textBoxPhoneNumber_KeyPress;
             // 
-            // textBox5
+            // comboBoxType
             // 
-            textBox5.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox5.Location = new Point(1336, 954);
-            textBox5.Margin = new Padding(3, 4, 3, 4);
-            textBox5.MaxLength = 8;
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(355, 42);
-            textBox5.TabIndex = 39;
+            comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxType.Enabled = false;
+            comboBoxType.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            comboBoxType.FormattingEnabled = true;
+            comboBoxType.Location = new Point(1336, 954);
+            comboBoxType.Margin = new Padding(3, 4, 3, 4);
+            comboBoxType.Name = "comboBoxType";
+            comboBoxType.Size = new Size(355, 44);
+            comboBoxType.TabIndex = 40;
             // 
             // CreateCustomerUpdate
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(customerSearchTextBox);
+            Controls.Add(comboBoxType);
+            Controls.Add(textBoxPhoneNumber);
+            Controls.Add(textBoxEmail);
+            Controls.Add(textBoxAddress);
+            Controls.Add(textBoxLastName);
+            Controls.Add(textBoxFirstName);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -297,11 +300,11 @@
         private Label label5;
         private Label label6;
         private Label label7;
-        private TextBox customerSearchTextBox;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
+        private TextBox textBoxFirstName;
+        private TextBox textBoxLastName;
+        private TextBox textBoxAddress;
+        private TextBox textBoxEmail;
+        private TextBox textBoxPhoneNumber;
+        private ComboBox comboBoxType;
     }
 }

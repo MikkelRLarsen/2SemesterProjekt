@@ -225,6 +225,18 @@ namespace _2SemesterProjekt.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PageCreateBox
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("PageCreateBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
 
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -234,6 +246,30 @@ namespace _2SemesterProjekt.Properties {
             get
             {
                 object obj = ResourceManager.GetObject("PageTitelBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CreateButton
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("CreateButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CreateButtonGreyedOut
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("CreateButtonGreyedOut", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
