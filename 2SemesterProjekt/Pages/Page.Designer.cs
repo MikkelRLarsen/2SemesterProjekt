@@ -28,15 +28,25 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			panel1 = new Panel();
 			SuspendLayout();
+			// 
+			// panel1
+			// 
+			panel1.BackColor = SystemColors.Highlight;
+			panel1.Location = new Point(0, 0);
+			panel1.Margin = new Padding(2);
+			panel1.Name = "panel1";
+			panel1.Size = new Size(2500, 70);
+			panel1.TabIndex = 0;
 			// 
 			// Page
 			// 
-			AutoScaleDimensions = new SizeF(10F, 25F);
+			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(2906, 1826);
+			ClientSize = new Size(2500, 1650);
+			Controls.Add(panel1);
 			FormBorderStyle = FormBorderStyle.None;
-			Margin = new Padding(4, 4, 4, 4);
 			Name = "Page";
 			Text = "Page";
 			MouseDown += Page_MouseDown;
@@ -46,5 +56,7 @@
 		}
 
 		#endregion
+
+		private Panel panel1;
 	}
 }
