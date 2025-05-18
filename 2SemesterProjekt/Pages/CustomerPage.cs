@@ -45,7 +45,7 @@ namespace _2SemesterProjekt
 
             foreach (var customer in allCustomers)
             {
-                AllCustomerCards.Add(new CustomerCard(customer));
+                AllCustomerCards.Add(new CustomerCard(customer, this));
             }
         }
 
