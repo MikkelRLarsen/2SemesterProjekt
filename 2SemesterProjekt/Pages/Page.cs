@@ -107,7 +107,7 @@ namespace _2SemesterProjekt.Pages
         private async void CreateCustomerPage(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
-            MainPanel.Controls.Add(new CreateCustomerUpdate());
+            MainPanel.Controls.Add(new CreateCustomerUpdate(this.MainPanel));
         }
 
         private async void FindCustomerPage(object sender, EventArgs e)
