@@ -43,6 +43,8 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         public async Task<Customer> GetCustomerByPhoneNumberAsync(int phoneNumber)
         {
             var customer = await _db.Customers
+                .Include(c => c.Pets!)
+                    .ThenInclude(p => p.Species)
                 .FirstOrDefaultAsync(c => c.PhoneNumber == phoneNumber);
 
             if (customer != null)

@@ -35,6 +35,8 @@ namespace _2SemesterProjekt.Pages
 		{
 			ExaminationFlowPanel.Controls.Clear();
 			ExaminationFlowPanel.Controls.Add(new CreateExaminationUserControl(ExaminationFlowPanel, this));
+            var page = new CreateExaminationUserControlUpdate();
+            page.Show();
 		}
 
         private void Medicine_Click(object sender, EventArgs e)

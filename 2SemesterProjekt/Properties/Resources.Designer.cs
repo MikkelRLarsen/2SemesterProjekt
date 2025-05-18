@@ -129,5 +129,149 @@ namespace _2SemesterProjekt.Properties {
 				return ((System.Drawing.Bitmap)(obj));
 			}
 		}
-	}
+
+        /// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap OpretNyeKonsultationer
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("OpretNyeKonsultationer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap OpretNyeKonsultationerInput
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("OpretNyeKonsultationerInput", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap SaveButton
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("SaveButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap CancelButton
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("CancelButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchButton
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("SearchButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CheckBox
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("CheckBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CheckBoxClicked
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("CheckBoxClicked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NumberOfDaysLabel
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("NumberOfDaysLabel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CreateExaminationInput
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("CreateExaminationInput", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ExaminationBox
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("ExaminationBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DiscountLabel
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("DiscountLabel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CageBookingLabel
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("CageBookingLabel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+    }
 }
