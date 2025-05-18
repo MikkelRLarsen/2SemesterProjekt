@@ -33,10 +33,24 @@
             pictureBox2 = new PictureBox();
             submitButton = new PictureBox();
             cancelButton = new PictureBox();
+            pictureBox3 = new PictureBox();
+            label1 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
+            customerSearchTextBox = new TextBox();
+            textBox1 = new TextBox();
+            textBox2 = new TextBox();
+            textBox3 = new TextBox();
+            textBox4 = new TextBox();
+            textBox5 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)submitButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cancelButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -72,7 +86,7 @@
             // submitButton
             // 
             submitButton.Enabled = false;
-            submitButton.Image = Properties.Resources.SaveButtonGreyedOut;
+            submitButton.Image = Properties.Resources.CreateButtonGreyedOut;
             submitButton.Location = new Point(1691, 1422);
             submitButton.Margin = new Padding(3, 4, 3, 4);
             submitButton.Name = "submitButton";
@@ -92,10 +106,166 @@
             cancelButton.TabStop = false;
             cancelButton.Click += cancelButton_Click;
             // 
+            // pictureBox3
+            // 
+            pictureBox3.BackColor = Color.Linen;
+            pictureBox3.Image = Properties.Resources.PageCreateBox;
+            pictureBox3.Location = new Point(609, 277);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(1282, 1047);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 27;
+            pictureBox3.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.AntiqueWhite;
+            label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.SaddleBrown;
+            label1.Location = new Point(809, 471);
+            label1.Name = "label1";
+            label1.Size = new Size(161, 31);
+            label1.TabIndex = 28;
+            label1.Text = "F O R N A V N";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.AntiqueWhite;
+            label3.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.SaddleBrown;
+            label3.Location = new Point(809, 569);
+            label3.Name = "label3";
+            label3.Size = new Size(193, 31);
+            label3.TabIndex = 29;
+            label3.Text = "E F T E R N A V N";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.AntiqueWhite;
+            label4.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.SaddleBrown;
+            label4.Location = new Point(809, 667);
+            label4.Name = "label4";
+            label4.Size = new Size(148, 31);
+            label4.TabIndex = 30;
+            label4.Text = "A D R E S S E";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = Color.AntiqueWhite;
+            label5.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.SaddleBrown;
+            label5.Location = new Point(809, 765);
+            label5.Name = "label5";
+            label5.Size = new Size(107, 31);
+            label5.TabIndex = 31;
+            label5.Text = "E M A I L";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = Color.AntiqueWhite;
+            label6.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.SaddleBrown;
+            label6.Location = new Point(809, 863);
+            label6.Name = "label6";
+            label6.Size = new Size(288, 31);
+            label6.TabIndex = 32;
+            label6.Text = "T E L E F O N N U M M E R";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.BackColor = Color.AntiqueWhite;
+            label7.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.SaddleBrown;
+            label7.Location = new Point(809, 961);
+            label7.Name = "label7";
+            label7.Size = new Size(194, 31);
+            label7.TabIndex = 33;
+            label7.Text = "K U N D E T Y P E";
+            // 
+            // customerSearchTextBox
+            // 
+            customerSearchTextBox.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            customerSearchTextBox.Location = new Point(1336, 464);
+            customerSearchTextBox.Margin = new Padding(3, 4, 3, 4);
+            customerSearchTextBox.MaxLength = 8;
+            customerSearchTextBox.Name = "customerSearchTextBox";
+            customerSearchTextBox.Size = new Size(355, 42);
+            customerSearchTextBox.TabIndex = 34;
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.Location = new Point(1336, 562);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
+            textBox1.MaxLength = 8;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(355, 42);
+            textBox1.TabIndex = 35;
+            // 
+            // textBox2
+            // 
+            textBox2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox2.Location = new Point(1336, 660);
+            textBox2.Margin = new Padding(3, 4, 3, 4);
+            textBox2.MaxLength = 8;
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(355, 42);
+            textBox2.TabIndex = 36;
+            // 
+            // textBox3
+            // 
+            textBox3.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox3.Location = new Point(1336, 758);
+            textBox3.Margin = new Padding(3, 4, 3, 4);
+            textBox3.MaxLength = 8;
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(355, 42);
+            textBox3.TabIndex = 37;
+            // 
+            // textBox4
+            // 
+            textBox4.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox4.Location = new Point(1336, 856);
+            textBox4.Margin = new Padding(3, 4, 3, 4);
+            textBox4.MaxLength = 8;
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(355, 42);
+            textBox4.TabIndex = 38;
+            // 
+            // textBox5
+            // 
+            textBox5.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox5.Location = new Point(1336, 954);
+            textBox5.Margin = new Padding(3, 4, 3, 4);
+            textBox5.MaxLength = 8;
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(355, 42);
+            textBox5.TabIndex = 39;
+            // 
             // CreateCustomerUpdate
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(textBox5);
+            Controls.Add(textBox4);
+            Controls.Add(textBox3);
+            Controls.Add(textBox2);
+            Controls.Add(textBox1);
+            Controls.Add(customerSearchTextBox);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label1);
+            Controls.Add(pictureBox3);
             Controls.Add(submitButton);
             Controls.Add(cancelButton);
             Controls.Add(pictureBox2);
@@ -108,6 +278,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)submitButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)cancelButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -119,5 +290,18 @@
         private PictureBox pictureBox2;
         private PictureBox submitButton;
         private PictureBox cancelButton;
+        private PictureBox pictureBox3;
+        private Label label1;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private TextBox customerSearchTextBox;
+        private TextBox textBox1;
+        private TextBox textBox2;
+        private TextBox textBox3;
+        private TextBox textBox4;
+        private TextBox textBox5;
     }
 }
