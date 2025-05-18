@@ -35,7 +35,7 @@ namespace _2SemesterProjekt.Pages
 		{
 			ExaminationFlowPanel.Controls.Clear();
 			ExaminationFlowPanel.Controls.Add(new CreateExaminationUserControl(ExaminationFlowPanel, this));
-            var page = new CreateExaminationUserControlUpdate();
+            var page = new CreateExaminationPage();
             page.Show();
 		}
 
