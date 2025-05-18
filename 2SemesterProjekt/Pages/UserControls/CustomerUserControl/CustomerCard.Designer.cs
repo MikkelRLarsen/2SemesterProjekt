@@ -186,6 +186,7 @@
             Controls.Add(customerIdLabel);
             Name = "CustomerCard";
             Size = new Size(700, 110);
+            Click += CustomerCard_Click;
             ((System.ComponentModel.ISupportInitialize)profilePicture).EndInit();
             ResumeLayout(false);
             PerformLayout();

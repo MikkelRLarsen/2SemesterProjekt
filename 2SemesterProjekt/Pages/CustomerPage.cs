@@ -20,6 +20,7 @@ namespace _2SemesterProjekt
         private ButtonPanel _showButton;
         private readonly ICustomerService _customerService;
         public List<CustomerCard> AllCustomerCards { get; set; } = new List<CustomerCard>();
+        public CustomerCard CustomerCard { get; set; }
         public CustomerPage()
         {
             InitializeComponent();
