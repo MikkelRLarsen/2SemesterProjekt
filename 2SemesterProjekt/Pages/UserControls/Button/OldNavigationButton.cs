@@ -12,12 +12,12 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace _2SemesterProjekt
 {
     // Navigation button including hover effects and click-based page navigation
-    public partial class NavigationButton : UserControl
+    public partial class OldNavigationButton : UserControl
     {
 		private Panel? _targetPanel; // The panel where the user control (_targetPage) will be loaded
         private UserControl? _targetPage; // The user control (page) to navigate to
 
-        public NavigationButton(string buttonName, Panel targetPanel, UserControl targetPage)
+        public OldNavigationButton(string buttonName, Panel targetPanel, UserControl targetPage)
         {
             InitializeComponent();
             buttonNameLabel.Text = buttonName;
@@ -39,7 +39,7 @@ namespace _2SemesterProjekt
 		}
 
         // Overloaded constructor for use without navigation (Exit button)
-        public NavigationButton(string buttonName)
+        public OldNavigationButton(string buttonName)
 		{
 			InitializeComponent();
 			buttonNameLabel.Text = buttonName;

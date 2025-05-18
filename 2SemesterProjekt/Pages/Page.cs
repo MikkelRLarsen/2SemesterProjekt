@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2SemesterProjekt.Pages.UserControls.NavigationButtons;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,11 +16,35 @@ namespace _2SemesterProjekt.Pages
 		private bool mouseDown;
 		private Point lastLocation;
 
+
 		public Page()
 		{
 			InitializeComponent();
+
+			KonsultationNav.AddOption(new NavigationButtonOption(OpenPageClick));
+			KonsultationNav.AddOption(new NavigationButtonOption(OpenPageClick));
+			KonsultationNav.ButtonLabel.Text = "Examination";
+			KonsultationNav.BringToFront();
 		}
 
+		//KonsultationMenu
+
+		private async void OpenPageClick(object sender, EventArgs e)
+		{
+			MainPanel.Controls.Clear();
+			MainPanel.Controls.Add(new KonsultationPage());
+		}
+
+		//MedicinMenu
+
+		//SalgMenu
+
+		//KundeMenu
+
+		//AdministrationMenu
+
+
+		// MoveHandler
 		private void Page_MouseDown(object sender, MouseEventArgs e)
 		{
 			mouseDown = true;
