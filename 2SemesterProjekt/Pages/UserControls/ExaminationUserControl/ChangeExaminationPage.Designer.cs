@@ -142,7 +142,6 @@
             // 
             // changeButton
             // 
-            changeButton.Enabled = false;
             changeButton.Image = Properties.Resources.ChangeButtonGreyedOut;
             changeButton.Location = new Point(1691, 1422);
             changeButton.Margin = new Padding(3, 4, 3, 4);
@@ -152,7 +151,7 @@
             changeButton.TabStop = false;
             changeButton.Click += changeButton_Click;
             // 
-            // UpdateExaminationPage
+            // ChangeExaminationPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -167,7 +166,7 @@
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox4);
             Margin = new Padding(0);
-            Name = "UpdateExaminationPage";
+            Name = "ChangeExaminationPage";
             Size = new Size(2500, 1580);
             Load += UpdateExaminationPage_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

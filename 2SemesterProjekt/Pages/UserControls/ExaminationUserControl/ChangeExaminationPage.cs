@@ -16,12 +16,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
     public partial class ChangeExaminationPage : UserControl
     {
         private readonly IExaminationService _examinationService;
+        private readonly Panel _mainPagePanel;
         public ExaminationCardUpdated ExaminationCard { get; set; }
         public List<ExaminationCardUpdated> AllExaminationCards { get; set; } = new List<ExaminationCardUpdated>();
 
-        public ChangeExaminationPage()
+        public ChangeExaminationPage(Panel mainPagePanel)
         {
             InitializeComponent();
+            _mainPagePanel = mainPagePanel;
             _examinationService = ServiceProviderSingleton.GetServiceProvider().GetService<IExaminationService>();
         }
 
@@ -44,8 +46,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                 return;
             }
 
-            flowPanel.Controls.Clear();
-            flowPanel.Controls.Add(new UpdateExaminationPage(this.ExaminationCard.Examination, this));
+            _mainPagePanel.Controls.Clear();
+            _mainPagePanel.Controls.Add(new UpdateExaminationPage(this.ExaminationCard.Examination, this));
         }
 
         private async void FindAndSetAllExaminationsAsync()

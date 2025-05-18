@@ -10,7 +10,6 @@ namespace _2SemesterProjekt.Pages
         private bool mouseDown;
         private Point lastLocation;
 
-
         public Page()
         {
             InitializeComponent();
@@ -50,7 +49,7 @@ namespace _2SemesterProjekt.Pages
         private async void UpdateKonsultationPage(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
-            MainPanel.Controls.Add(new ChangeExaminationPage());
+            MainPanel.Controls.Add(new ChangeExaminationPage(this.MainPanel)); // Skal rettes til!!!
         }
         private async void RemoveKonsultationPage(object sender, EventArgs e)
         {
