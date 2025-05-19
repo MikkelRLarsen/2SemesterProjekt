@@ -25,10 +25,15 @@ namespace _2SemesterProjekt.Domain.Models
 			Type = type;
 			PhoneNumber = phoneNumber;
 
+			InformationValid();
+
+			/*
 			if (InformationValid() == false)
 			{
 				throw new ArgumentException("Pre-conditions not met: invalid customer data.");
 			}
+			*/
+			
 		}
 
 		/// <summary>
@@ -53,7 +58,7 @@ namespace _2SemesterProjekt.Domain.Models
 			if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) ||
 				!FirstName.All(char.IsLetter) || !LastName.All(char.IsLetter))
 			{
-				return false;
+				throw new ArgumentException("Fornavn eller efternavn må ikke indeholde mellemrum");
 			}
 
 			// Validate email: "@" and "." in correct order.
@@ -61,26 +66,26 @@ namespace _2SemesterProjekt.Domain.Models
 			int dotIndex = Email.LastIndexOf('.');
 			if (string.IsNullOrWhiteSpace(Email) || atIndex <= 0 || dotIndex <= atIndex + 1 || dotIndex == Email.Length - 1)
 			{
-				return false;
-			}
+                throw new ArgumentException("Fejl i @ og/eller .");
+            }
 
 			// Validate address: only letters and digits.
 			if (string.IsNullOrWhiteSpace(Address) || Address.All(char.IsLetterOrDigit))
 			{
-				return false;
-			}
+                throw new ArgumentException("Adresse må kun indeholde bogstaver og tal");
+            }
 
 			// Validate type: either "Privat" or "Erhverv".
 			if (string.IsNullOrWhiteSpace(Type) || (Type != "Privat" && Type != "Erhverv"))
 			{
-				return false;
-			}
+                throw new ArgumentException("Kundetype skal enten være 'Privat' eller 'Erhverv'");
+            }
 
 			// Validate phonenumber: 8-digit long.
 			if (PhoneNumber < 10000000 || PhoneNumber > 99999999)
 			{
-				return false;
-			}
+                throw new ArgumentException("Telefonnummer skal være 8 tal");
+            }
 
 			return true;
 		}

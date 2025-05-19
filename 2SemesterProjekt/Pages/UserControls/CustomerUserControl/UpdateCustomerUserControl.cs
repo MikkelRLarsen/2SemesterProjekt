@@ -30,7 +30,6 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             _customerPage = customerPage;
             _customer = customer;
 
-
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
 
             panelCancel.Controls.Add(new ButtonPanel("Annuller", "", Color.IndianRed, CancelButton_Click));
@@ -44,8 +43,6 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             textBoxEmail.Text = _customer.Email;
             textBoxAddress.Text = _customer.Address;
             textBoxPhoneNumber.Text = _customer.PhoneNumber.ToString();
-            //comboBoxCustomerType.Text = _customer.Type;
-
         }
 
         private void CancelButton_Click(object? sender, EventArgs e)
@@ -58,12 +55,14 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
 
         private async void ConfirmButton_Click(object? sender, EventArgs e)
         {
-            Customer updatedCustomer = new Customer(
+            try
+            {
+                Customer updatedCustomer = new Customer(
                 textBoxFirstName.Text,
                 textBoxLastName.Text,
                 textBoxEmail.Text,
                 textBoxAddress.Text,
-                _customer.Type,
+                _customer.Type, // Not used - you are not able to change customer type.
                 int.Parse(textBoxPhoneNumber.Text)
                 );
 
@@ -73,14 +72,20 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             {
                 return;
             }
-            _customer.UpdateCustomerProperties(updatedCustomer);
+                _customer.UpdateCustomerProperties(updatedCustomer);
+            }
+            catch (Exception ex)
+            {
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+                return;
+            }
 
             _customerService.UpdateCustomer(_customer);
-            
+
             MessageBox.Show("Kunden blev opdateret", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            _customerPage.LoadAndShowCustomerCards(_customerPage.AllCustomerCards);
-
+            
             int index = _customerPage.AllCustomerCards.FindIndex(cusCard => cusCard.Customer.CustomerID == _customer.CustomerID);
 
             // Replaces ExaminationCard with a new one with the updated information
@@ -88,7 +93,9 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
 
             // Set the selected ExaminationCard to null, so its no longer highligted
             _customerPage.CustomerCard = null;
-
+            
+            _customerPage.LoadAndShowCustomerCards(_customerPage.AllCustomerCards);
+            
             this.Parent.Controls.Remove(this); // Clear existing content (Parent is CustomerPage)
         }
 
