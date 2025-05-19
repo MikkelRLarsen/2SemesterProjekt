@@ -258,7 +258,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.PageTitelBackground;
-            pictureBox1.Location = new Point(84, 20);
+            pictureBox1.Location = new Point(101, 20);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(1399, 86);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -268,7 +268,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.PageBackground;
-            pictureBox2.Location = new Point(84, 124);
+            pictureBox2.Location = new Point(101, 124);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(1399, 705);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
