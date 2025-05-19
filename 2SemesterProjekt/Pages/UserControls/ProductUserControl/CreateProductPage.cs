@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
+namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 {
-    public partial class CreatePetPage : UserControl
+    public partial class CreateProductPage : UserControl
     {
-        public CreatePetPage()
+        public CreateProductPage()
         {
             InitializeComponent();
-        }
-
-        private void submitButton_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
