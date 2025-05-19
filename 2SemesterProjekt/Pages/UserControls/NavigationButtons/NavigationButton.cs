@@ -13,8 +13,8 @@ namespace _2SemesterProjekt.Pages.UserControls.NavigationButtons
 	public partial class NavigationButton : UserControl
 	{
 		private LinkedList<NavigationButtonOption> _navOptions = new LinkedList<NavigationButtonOption>();
-		private int minHeight = 70;
-		private int maxHeight = 70;
+		private int minHeight = 35;
+		private int maxHeight = 35;
 		public NavigationButton()
 		{
 			InitializeComponent();
@@ -93,12 +93,12 @@ namespace _2SemesterProjekt.Pages.UserControls.NavigationButtons
 		public void AddOption(NavigationButtonOption option)
 		{
 			// Sets Layout for option
-			option.Size = new Size(this.Width, 70);
-			option.Location = new Point(0, (_navOptions.Count * 70) + 75);
+			option.Size = new Size(this.Width, 35);
+			option.Location = new Point(0, (_navOptions.Count * 35) + 40);
 
 			// Adds option to _navOptions, so its easier to add more options in the future
 			_navOptions.AddLast(option);
-			maxHeight = (_navOptions.Count * 70) + 75; // Is Base Height + 5 for Black Underline
+			maxHeight = (_navOptions.Count * 35) + 40; // Is Base Height + 5 for Black Underline
 
 			// Needed to show the option
 			this.Controls.Add(option);

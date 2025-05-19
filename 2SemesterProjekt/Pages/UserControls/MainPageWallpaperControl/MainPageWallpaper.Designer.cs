@@ -20,41 +20,42 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.HomeScreenPicture;
-            pictureBox1.Location = new Point(-313, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(2835, 1580);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            // 
-            // MainPageWallpaper
-            // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(pictureBox1);
-            Margin = new Padding(0);
-            Name = "MainPageWallpaper";
-            Size = new Size(2500, 1580);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ResumeLayout(false);
-        }
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			pictureBox1 = new PictureBox();
+			((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+			SuspendLayout();
+			// 
+			// pictureBox1
+			// 
+			pictureBox1.Image = Properties.Resources.HomeScreenPicture;
+			pictureBox1.Location = new Point(0, 0);
+			pictureBox1.Margin = new Padding(3, 2, 3, 2);
+			pictureBox1.Name = "pictureBox1";
+			pictureBox1.Size = new Size(1600, 845);
+			pictureBox1.TabIndex = 0;
+			pictureBox1.TabStop = false;
+			// 
+			// MainPageWallpaper
+			// 
+			AutoScaleDimensions = new SizeF(7F, 15F);
+			AutoScaleMode = AutoScaleMode.Font;
+			Controls.Add(pictureBox1);
+			Margin = new Padding(0);
+			Name = "MainPageWallpaper";
+			Size = new Size(1600, 845);
+			((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+			ResumeLayout(false);
+		}
 
-        #endregion
+		#endregion
 
-        private PictureBox pictureBox1;
+		private PictureBox pictureBox1;
     }
 }
