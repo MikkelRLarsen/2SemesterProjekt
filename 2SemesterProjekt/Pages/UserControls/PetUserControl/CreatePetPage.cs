@@ -16,10 +16,5 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         {
             InitializeComponent();
         }
-
-        private void submitButton_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

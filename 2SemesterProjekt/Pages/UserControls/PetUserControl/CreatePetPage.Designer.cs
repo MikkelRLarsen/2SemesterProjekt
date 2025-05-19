@@ -82,7 +82,6 @@
             submitButton.Size = new Size(350, 69);
             submitButton.TabIndex = 30;
             submitButton.TabStop = false;
-            submitButton.Click += submitButton_Click;
             // 
             // cancelButton
             // 
