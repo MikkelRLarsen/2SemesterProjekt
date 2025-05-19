@@ -11,10 +11,30 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 		private IExaminationService _examinationService;
 		private List<ExaminationCardUpdated> _allExaminationCards = new List<ExaminationCardUpdated>();
 		private ExaminationCardUpdated _selectedExaminationCard;
+		private Panel _panel;
 
-		public FindMedicinPage()
+		public FindMedicinPage(Panel panel)
 		{
 			InitializeComponent();
+			_panel = panel;
+		}
+
+		private void AddEventHandlerToExaminationCard(Control control)
+		{
+			control.DoubleClick += DoubleClickEventHandler;
+
+			// Add the same handler to each of the control.Controls
+			// If I didn't then the event wouldn't happend if i pressed on any of the labels or pictureboxes
+			foreach (Control child in control.Controls)
+			{
+				AddEventHandlerToExaminationCard(child);
+			}
+		}
+
+		private void DoubleClickEventHandler(object sender, EventArgs e)
+		{
+			_panel.Controls.Clear();
+			_panel.Controls.Add(new SeeMedicinDetails(_selectedExaminationCard.Examination, this, _panel));
 		}
 
 		private async void findAllButton_Click(object sender, EventArgs e)
@@ -33,7 +53,8 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 		{
 			var allExaminations = await _examinationService.GetAllExaminationsAsync();
 
-			foreach (var exam in allExaminations.Where(ex => ex.Date < DateTime.Now))
+			// Adds exam to all examination if they are completed and have a Medicine Presription. For this page you shouldn't need exam which have yet to be completed and doesn't have medicine
+			foreach (var exam in allExaminations.Where(ex => ex.Date < DateTime.Now && ex.Medicine != null))
 			{
 				_allExaminationCards.Add(new ExaminationCardUpdated(exam, this));
 			}
@@ -42,6 +63,13 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 		public async Task LoadAndShowExaminationCards(IEnumerable<ExaminationCardUpdated> examinationCardsToBeLoaded)
 		{
 			flowPanel.Controls.Clear();
+
+			// Want a Eventhandler to be added to the cards, but only from this page, and will NOT add it on the original ExaminationCard
+			foreach (ExaminationCardUpdated card in examinationCardsToBeLoaded)
+			{
+				AddEventHandlerToExaminationCard(card);
+			}
+
 			flowPanel.Controls.AddRange(examinationCardsToBeLoaded.ToArray());
 		}
 
