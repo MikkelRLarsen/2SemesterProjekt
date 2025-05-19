@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using _2SemesterProjekt.Domain.Models;
 
 namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 {
@@ -77,7 +78,17 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             }
             else
             {
-                //display message here if error
+                Domain.Models.Product product = new Domain.Models.Product(
+                                                textBoxProductName.Text,
+                                                Convert.ToInt64(textBoxEAN.Text),
+                                                textBoxProductType.Text,
+                                                Convert.ToDecimal(textBoxPurchasePrice.Text),
+                                                Convert.ToDecimal(textBoxSalesPrice.Text),
+                                                Convert.ToInt32(textBoxNumberInStock.Text),
+                                                Convert.ToInt32(textBoxMinInStock.Text)
+                                                );
+
+                _productService.CreateProductAsync(product);
             }
         }
 
@@ -86,12 +97,52 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             string errorMessage = null;
             if (string.IsNullOrWhiteSpace(textBoxEAN.Text) || string.IsNullOrWhiteSpace(textBoxProductName.Text) || string.IsNullOrWhiteSpace(textBoxProductType.Text) || string.IsNullOrWhiteSpace(textBoxPurchasePrice.Text) || string.IsNullOrWhiteSpace(textBoxSalesPrice.Text) || string.IsNullOrWhiteSpace(textBoxNumberInStock.Text) || string.IsNullOrWhiteSpace(textBoxMinInStock.Text))
             {
-                errorMessage += "Indtast venligst alle informationerne.\n";
+                errorMessage = "Indtast venligst alle informationerne.\n";
             }
             try
             {
                 Convert.ToInt64(textBoxEAN.Text);
+            }
+            catch
+            {
+                errorMessage = "Indtast venligst et gyldigt tal.";
+                textBoxEAN.BackColor = Color.IndianRed;
+            }
+            try
+            {
                 Convert.ToInt32(textBoxMinInStock.Text);
+            }
+            catch
+            {
+                errorMessage = "Indtast venligst et gyldigt tal.";
+                textBoxMinInStock.BackColor = Color.IndianRed;
+            }
+            try
+            {
+                Convert.ToInt32(textBoxNumberInStock.Text);
+            }
+            catch
+            {
+                errorMessage = "Indtast venligst et gyldigt tal.";
+                textBoxNumberInStock.BackColor = Color.IndianRed;
+            }
+            try
+            {
+                Convert.ToDecimal(textBoxPurchasePrice.Text);
+            }
+            catch
+            {
+                errorMessage = "Indtast venligst et gyldigt tal.";
+                textBoxPurchasePrice.BackColor = Color.IndianRed;
+            }
+            try
+            {
+                Convert.ToDecimal(textBoxSalesPrice.Text);
+            }
+            catch
+            {
+                errorMessage = "Indtast venligst et gyldigt tal.";
+                textBoxSalesPrice.BackColor = Color.IndianRed;
             }
 
             return errorMessage;
