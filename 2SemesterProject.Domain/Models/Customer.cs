@@ -24,11 +24,12 @@ namespace _2SemesterProjekt.Domain.Models
 			Address = address;
 			Type = type;
 			PhoneNumber = phoneNumber;
-
-			if (InformationValid() == false)
-			{
-				throw new ArgumentException("Pre-conditions not met: invalid customer data.");
-			}
+			
+			//if (InformationValid() == false)
+			//{
+			//	throw new ArgumentException("Pre-conditions not met: invalid customer data.");
+			//}
+			
 		}
 
 		/// <summary>
