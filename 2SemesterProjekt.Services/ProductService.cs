@@ -40,5 +40,10 @@ namespace _2SemesterProjekt.Services
         {
             await _productRepository.UpdateSeveralProductsQuantityAsync(products); // Updates the stock quantity of several products in the DB
         }
+
+        public Task CreateProductAsync(Product product)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

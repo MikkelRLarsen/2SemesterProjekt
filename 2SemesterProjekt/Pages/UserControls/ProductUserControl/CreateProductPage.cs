@@ -88,7 +88,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                                                 Convert.ToInt32(textBoxMinInStock.Text)
                                                 );
 
-                _productService.CreateProductAsync(product);
+                //_productService.CreateProductAsync(product);
             }
         }
 
