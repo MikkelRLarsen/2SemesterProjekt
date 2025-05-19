@@ -39,11 +39,11 @@
 			// 
 			ButtonLabel.Anchor = AnchorStyles.Top;
 			ButtonLabel.AutoSize = true;
-			ButtonLabel.Font = new Font("Segoe UI", 16F);
+			ButtonLabel.Font = new Font("Segoe UI", 12F);
 			ButtonLabel.ForeColor = SystemColors.HighlightText;
-			ButtonLabel.Location = new Point(32, 3);
+			ButtonLabel.Location = new Point(34, 4);
 			ButtonLabel.Name = "ButtonLabel";
-			ButtonLabel.Size = new Size(131, 30);
+			ButtonLabel.Size = new Size(123, 28);
 			ButtonLabel.TabIndex = 0;
 			ButtonLabel.Text = "Konsultation";
 			ButtonLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -53,10 +53,9 @@
 			// 
 			panel1.BackColor = SystemColors.Desktop;
 			panel1.ForeColor = Color.Black;
-			panel1.Location = new Point(10, 35);
-			panel1.Margin = new Padding(3, 2, 3, 2);
+			panel1.Location = new Point(11, 47);
 			panel1.Name = "panel1";
-			panel1.Size = new Size(180, 5);
+			panel1.Size = new Size(206, 7);
 			panel1.TabIndex = 1;
 			// 
 			// collapseTimer
@@ -69,7 +68,7 @@
 			// 
 			// NavigationButton
 			// 
-			AutoScaleDimensions = new SizeF(7F, 15F);
+			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.DodgerBlue;
 			Controls.Add(panel1);

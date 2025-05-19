@@ -79,7 +79,6 @@
 			// 
 			panel2.BackColor = SystemColors.ActiveCaptionText;
 			panel2.Location = new Point(0, 0);
-			panel2.Margin = new Padding(3, 2, 3, 2);
 			panel2.Name = "panel2";
 			panel2.Size = new Size(100, 35);
 			panel2.TabIndex = 5;
@@ -114,10 +113,9 @@
 			// panel3
 			// 
 			panel3.BackColor = SystemColors.ActiveCaptionText;
-			panel3.Location = new Point(1925, 0);
-			panel3.Margin = new Padding(3, 2, 3, 2);
+			panel3.Location = new Point(2200, 0);
 			panel3.Name = "panel3";
-			panel3.Size = new Size(262, 52);
+			panel3.Size = new Size(299, 69);
 			panel3.TabIndex = 6;
 			// 
 			// PetNav
@@ -131,7 +129,7 @@
 			// 
 			// Page
 			// 
-			AutoScaleDimensions = new SizeF(7F, 15F);
+			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(1600, 880);
 			Controls.Add(PetNav);
@@ -145,7 +143,6 @@
 			Controls.Add(MainPanel);
 			Controls.Add(NavPanel);
 			FormBorderStyle = FormBorderStyle.None;
-			Margin = new Padding(3, 2, 3, 2);
 			Name = "Page";
 			Text = "Page";
 			Load += Page_Load;
