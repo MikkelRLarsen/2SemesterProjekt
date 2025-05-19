@@ -48,10 +48,11 @@ namespace _2SemesterProjekt.Domain.Models
 			Debug.Assert(PhoneNumber != 0, "PhoneNumber was null");
 			
 			// Validate first and last name: only letters
-			if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) ||
-				!FirstName.All(char.IsLetter) || !LastName.All(char.IsLetter))
-			{
-				throw new ArgumentException("Fornavn og efternavn må kun indeholde bogstaver");
+			if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) || 
+				!FirstName.Replace(" ", "").Replace("-", "").All(char.IsLetter) ||
+				!LastName.Replace(" ", "").Replace("-", "").All(char.IsLetter))
+            {
+				throw new ArgumentException("Fornavn og efternavn må kun indeholde bogstaver, mellemrum og bindestreger");
 			}
 			
 			// Validate email: "@" and "." in correct order.
