@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 
 namespace _2SemesterProjekt.Domain.Models
@@ -25,15 +26,7 @@ namespace _2SemesterProjekt.Domain.Models
 			Type = type;
 			PhoneNumber = phoneNumber;
 
-			InformationValid();
-
-			/*
-			if (InformationValid() == false)
-			{
-				throw new ArgumentException("Pre-conditions not met: invalid customer data.");
-			}
-			*/
-			
+			InformationValid();	
 		}
 
 		/// <summary>
@@ -53,14 +46,14 @@ namespace _2SemesterProjekt.Domain.Models
 			Debug.Assert(Address != null, "Adress was null");
 			Debug.Assert(Type != null, "Type was null");
 			Debug.Assert(PhoneNumber != 0, "PhoneNumber was null");
-
+			
 			// Validate first and last name: only letters
 			if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) ||
 				!FirstName.All(char.IsLetter) || !LastName.All(char.IsLetter))
 			{
-				throw new ArgumentException("Fornavn eller efternavn må ikke indeholde mellemrum");
+				throw new ArgumentException("Fornavn og efternavn må kun indeholde bogstaver");
 			}
-
+			
 			// Validate email: "@" and "." in correct order.
 			int atIndex = Email.IndexOf('@');
 			int dotIndex = Email.LastIndexOf('.');
@@ -68,7 +61,7 @@ namespace _2SemesterProjekt.Domain.Models
 			{
                 throw new ArgumentException("Fejl i @ og/eller .");
             }
-
+			
 			// Validate address: only letters and digits.
 			if (string.IsNullOrWhiteSpace(Address) || Address.All(char.IsLetterOrDigit))
 			{
@@ -93,8 +86,8 @@ namespace _2SemesterProjekt.Domain.Models
 		{
 			customer.InformationValid();
 
-			FirstName = customer.FirstName;
-			LastName = customer.LastName;
+			FirstName = Regex.Replace(customer.FirstName.Trim(), @"\s+", " "); // Removes unnecessary spaces, but still allows you to type space.
+			LastName = Regex.Replace(customer.LastName.Trim(), @"\s+", " ");
 			Email = customer.Email;
 			PhoneNumber = customer.PhoneNumber;
 			Address = customer.Address;

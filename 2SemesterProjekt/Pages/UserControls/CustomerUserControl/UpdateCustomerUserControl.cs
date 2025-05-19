@@ -12,6 +12,7 @@ using _2SemesterProjekt.Domain.Models;
 using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
 using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
+using System.Text.RegularExpressions;
 
 namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
 {
@@ -26,7 +27,6 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
         public UpdateCustomerUserControl(CustomerPage customerPage, Customer customer)
         {
             InitializeComponent();
-            //_customerCard = customerCard;
             _customerPage = customerPage;
             _customer = customer;
 
