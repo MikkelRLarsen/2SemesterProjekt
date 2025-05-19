@@ -30,20 +30,20 @@
         {
             label2 = new Label();
             pictureBox1 = new PictureBox();
-            textBoxLastName = new TextBox();
-            textBoxFirstName = new TextBox();
+            textBoxProductName = new TextBox();
+            textBoxEAN = new TextBox();
             label3 = new Label();
             label1 = new Label();
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
-            textBoxPhoneNumber = new TextBox();
-            textBoxEmail = new TextBox();
-            textBoxAddress = new TextBox();
+            textBoxSalesPrice = new TextBox();
+            textBoxPurchasePrice = new TextBox();
+            textBoxProductType = new TextBox();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            textBoxMinInStock = new TextBox();
+            textBoxNumberInStock = new TextBox();
             label7 = new Label();
             label8 = new Label();
             submitButton = new PictureBox();
@@ -77,21 +77,22 @@
             pictureBox1.TabIndex = 25;
             pictureBox1.TabStop = false;
             // 
-            // textBoxLastName
+            // textBoxProductName
             // 
-            textBoxLastName.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxLastName.Location = new Point(1169, 422);
-            textBoxLastName.Name = "textBoxLastName";
-            textBoxLastName.Size = new Size(311, 35);
-            textBoxLastName.TabIndex = 51;
+            textBoxProductName.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxProductName.Location = new Point(1169, 422);
+            textBoxProductName.Name = "textBoxProductName";
+            textBoxProductName.Size = new Size(311, 35);
+            textBoxProductName.TabIndex = 51;
             // 
-            // textBoxFirstName
+            // textBoxEAN
             // 
-            textBoxFirstName.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxFirstName.Location = new Point(1169, 348);
-            textBoxFirstName.Name = "textBoxFirstName";
-            textBoxFirstName.Size = new Size(311, 35);
-            textBoxFirstName.TabIndex = 50;
+            textBoxEAN.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxEAN.Location = new Point(1169, 348);
+            textBoxEAN.Name = "textBoxEAN";
+            textBoxEAN.Size = new Size(311, 35);
+            textBoxEAN.TabIndex = 50;
+            textBoxEAN.KeyPress += textBoxEAN_KeyPress;
             // 
             // label3
             // 
@@ -139,30 +140,32 @@
             pictureBox2.TabIndex = 46;
             pictureBox2.TabStop = false;
             // 
-            // textBoxPhoneNumber
+            // textBoxSalesPrice
             // 
-            textBoxPhoneNumber.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxPhoneNumber.Location = new Point(1169, 638);
-            textBoxPhoneNumber.MaxLength = 8;
-            textBoxPhoneNumber.Name = "textBoxPhoneNumber";
-            textBoxPhoneNumber.Size = new Size(311, 35);
-            textBoxPhoneNumber.TabIndex = 57;
+            textBoxSalesPrice.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxSalesPrice.Location = new Point(1169, 638);
+            textBoxSalesPrice.MaxLength = 8;
+            textBoxSalesPrice.Name = "textBoxSalesPrice";
+            textBoxSalesPrice.Size = new Size(311, 35);
+            textBoxSalesPrice.TabIndex = 57;
+            textBoxSalesPrice.KeyPress += textBoxSalesPrice_KeyPress;
             // 
-            // textBoxEmail
+            // textBoxPurchasePrice
             // 
-            textBoxEmail.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxEmail.Location = new Point(1169, 567);
-            textBoxEmail.Name = "textBoxEmail";
-            textBoxEmail.Size = new Size(311, 35);
-            textBoxEmail.TabIndex = 56;
+            textBoxPurchasePrice.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxPurchasePrice.Location = new Point(1169, 567);
+            textBoxPurchasePrice.Name = "textBoxPurchasePrice";
+            textBoxPurchasePrice.Size = new Size(311, 35);
+            textBoxPurchasePrice.TabIndex = 56;
+            textBoxPurchasePrice.KeyPress += textBoxPurchasePrice_KeyPress;
             // 
-            // textBoxAddress
+            // textBoxProductType
             // 
-            textBoxAddress.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxAddress.Location = new Point(1171, 495);
-            textBoxAddress.Name = "textBoxAddress";
-            textBoxAddress.Size = new Size(311, 35);
-            textBoxAddress.TabIndex = 55;
+            textBoxProductType.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxProductType.Location = new Point(1171, 495);
+            textBoxProductType.Name = "textBoxProductType";
+            textBoxProductType.Size = new Size(311, 35);
+            textBoxProductType.TabIndex = 55;
             // 
             // label6
             // 
@@ -200,22 +203,24 @@
             label4.TabIndex = 52;
             label4.Text = "P R O D U K T T Y P E";
             // 
-            // textBox1
+            // textBoxMinInStock
             // 
-            textBox1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(1163, 764);
-            textBox1.MaxLength = 8;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(153, 35);
-            textBox1.TabIndex = 61;
+            textBoxMinInStock.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxMinInStock.Location = new Point(1163, 764);
+            textBoxMinInStock.MaxLength = 8;
+            textBoxMinInStock.Name = "textBoxMinInStock";
+            textBoxMinInStock.Size = new Size(153, 35);
+            textBoxMinInStock.TabIndex = 61;
+            textBoxMinInStock.KeyPress += textBoxMinInStock_KeyPress;
             // 
-            // textBox2
+            // textBoxNumberInStock
             // 
-            textBox2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(821, 764);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(153, 35);
-            textBox2.TabIndex = 60;
+            textBoxNumberInStock.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxNumberInStock.Location = new Point(821, 764);
+            textBoxNumberInStock.Name = "textBoxNumberInStock";
+            textBoxNumberInStock.Size = new Size(153, 35);
+            textBoxNumberInStock.TabIndex = 60;
+            textBoxNumberInStock.KeyPress += textBoxNumberInStock_KeyPress;
             // 
             // label7
             // 
@@ -250,6 +255,7 @@
             submitButton.Size = new Size(350, 69);
             submitButton.TabIndex = 63;
             submitButton.TabStop = false;
+            submitButton.Click += submitButton_Click;
             // 
             // cancelButton
             // 
@@ -266,18 +272,18 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(submitButton);
             Controls.Add(cancelButton);
-            Controls.Add(textBox1);
-            Controls.Add(textBox2);
+            Controls.Add(textBoxMinInStock);
+            Controls.Add(textBoxNumberInStock);
             Controls.Add(label7);
             Controls.Add(label8);
-            Controls.Add(textBoxPhoneNumber);
-            Controls.Add(textBoxEmail);
-            Controls.Add(textBoxAddress);
+            Controls.Add(textBoxSalesPrice);
+            Controls.Add(textBoxPurchasePrice);
+            Controls.Add(textBoxProductType);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(textBoxLastName);
-            Controls.Add(textBoxFirstName);
+            Controls.Add(textBoxProductName);
+            Controls.Add(textBoxEAN);
             Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
@@ -299,20 +305,20 @@
 
         private Label label2;
         private PictureBox pictureBox1;
-        private TextBox textBoxLastName;
-        private TextBox textBoxFirstName;
+        private TextBox textBoxProductName;
+        private TextBox textBoxEAN;
         private Label label3;
         private Label label1;
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
-        private TextBox textBoxPhoneNumber;
-        private TextBox textBoxEmail;
-        private TextBox textBoxAddress;
+        private TextBox textBoxSalesPrice;
+        private TextBox textBoxPurchasePrice;
+        private TextBox textBoxProductType;
         private Label label6;
         private Label label5;
         private Label label4;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox textBoxMinInStock;
+        private TextBox textBoxNumberInStock;
         private Label label7;
         private Label label8;
         private PictureBox submitButton;
