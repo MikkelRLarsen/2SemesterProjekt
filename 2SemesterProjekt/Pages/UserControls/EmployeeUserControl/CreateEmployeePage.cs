@@ -1,4 +1,7 @@
-﻿using System;
+﻿using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
+using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +13,47 @@ using System.Windows.Forms;
 
 namespace _2SemesterProjekt.Pages.UserControls.EmployeeUserControl
 {
-    public partial class CreateEmployeePage : UserControl
-    {
-        public CreateEmployeePage()
-        {
-            InitializeComponent();
-        }
-    }
+	public partial class CreateEmployeePage : UserControl
+	{
+		private readonly Panel _mainPagePanel;
+		private IEmployeeService _employeeService;
+		public CreateEmployeePage(Panel mainPagePanel)
+		{
+			InitializeComponent();
+			_mainPagePanel = mainPagePanel;
+		}
+
+		private void comboBoxType_SelectionChangeCommitted(object sender, EventArgs e)
+		{
+			submitButton.Enabled = true;
+		}
+
+		private async void submitButton_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				Employee newEmployee = new Employee(0, textBoxFirstName.Text, textBoxLastName.Text, comboBoxType.SelectedItem.ToString());
+
+				await _employeeService.CreateEmployeeAsync(newEmployee);
+
+				MessageBox.Show("Oprettelse fuldført");
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show(ex.Message);
+			}
+		}
+
+		private void cancelButton_Click(object sender, EventArgs e)
+		{
+			_mainPagePanel.Controls.Remove(this);
+			_mainPagePanel.Controls.Add(new MainPageWallpaper());
+		}
+
+		private void CreateEmployeePage_Load(object sender, EventArgs e)
+		{
+			comboBoxType.DataSource = _employeeService.GetAllEmployeeTypesAsync();
+		}
+	}
 }
