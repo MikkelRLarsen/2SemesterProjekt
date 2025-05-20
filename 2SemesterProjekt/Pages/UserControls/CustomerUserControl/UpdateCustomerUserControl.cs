@@ -58,8 +58,8 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             try
             {
                 Customer updatedCustomer = new Customer(
-                textBoxFirstName.Text,
-                textBoxLastName.Text,
+                Regex.Replace(textBoxFirstName.Text.Trim(), @"\s+", " "), // Removes unnecessary spaces, but still allows you to type space.
+                Regex.Replace(textBoxLastName.Text.Trim(), @"\s+", " "),
                 textBoxEmail.Text,
                 textBoxAddress.Text,
                 _customer.Type, // Not used - you are not able to change customer type.

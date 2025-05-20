@@ -47,12 +47,14 @@ namespace _2SemesterProjekt.Domain.Models
 			Debug.Assert(Type != null, "Type was null");
 			Debug.Assert(PhoneNumber != 0, "PhoneNumber was null");
 			
-			// Validate first and last name: only letters
+			// Validate first and last name: only letters, single space(s), hyphens & apostrophes.
 			if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) || 
-				!FirstName.Replace(" ", "").Replace("-", "").All(char.IsLetter) ||
-				!LastName.Replace(" ", "").Replace("-", "").All(char.IsLetter))
+				// Checks if names are null (no reference to an object), empty or only spaces.
+				!FirstName.Replace(" ", "").Replace("-", "").Replace("'", "").All(char.IsLetter) || 
+				!LastName.Replace(" ", "").Replace("-", "").Replace("'", "").All(char.IsLetter))
+				//Removes all characters that are not letters, except spaces, hyphens & apostrophes.
             {
-				throw new ArgumentException("Fornavn og efternavn må kun indeholde bogstaver, mellemrum og bindestreger");
+                throw new ArgumentException("Fornavn og efternavn må kun indeholde bogstaver, mellemrum og bindestreger");
 			}
 			
 			// Validate email: "@" and "." in correct order.
@@ -87,8 +89,8 @@ namespace _2SemesterProjekt.Domain.Models
 		{
 			customer.InformationValid();
 
-			FirstName = Regex.Replace(customer.FirstName.Trim(), @"\s+", " "); // Removes unnecessary spaces, but still allows you to type space.
-			LastName = Regex.Replace(customer.LastName.Trim(), @"\s+", " ");
+			FirstName = customer.FirstName;
+			LastName = customer.LastName;
 			Email = customer.Email;
 			PhoneNumber = customer.PhoneNumber;
 			Address = customer.Address;
