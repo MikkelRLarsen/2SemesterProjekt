@@ -169,8 +169,8 @@ namespace _2SemesterProjekt.Pages
         }
         private async void StorageStatus(object sender, EventArgs e)
         {
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new AllProductsPage());
         }
 
         // MoveHandler

@@ -27,15 +27,20 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             InitializeUIDesign();
         }
 
+        public ProductCardUpdated(Domain.Models.Product product)
+        {
+            _product = product;
+        }
+
         private void InitializeUIDesign()
         {
             productEANLabel.Text = _product.EAN.ToString();
             productNameLabel.Text = _product.Name;
             productPurchasePriceLabel.Text = _product.PurchasePricePerUnit.ToString();
             productSalesPriceLabel.Text = _product.SalesPricePerUnit.ToString();
-            inStockLabel.Text = _product.NumberInStock.ToString();
-            minStockLabel.Text = _product.MinNumberInStock.ToString();
-            categoryLabel.Text = _product.Type;
+            productNumberInStockLabel.Text = _product.NumberInStock.ToString();
+            productMinInStockLabel.Text = _product.MinNumberInStock.ToString();
+            productCategoryLabel.Text = _product.Type;
         }
 
         private void pictureBox_DoubleClick(object sender, EventArgs e)
@@ -57,7 +62,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
                 _createOrderPage.IncrementItemsInCart(dialogBox.Amount);
 
-                inStockLabel.Text = _product.NumberInStock.ToString();
+                productNumberInStockLabel.Text = _product.NumberInStock.ToString();
             }
         }
     }

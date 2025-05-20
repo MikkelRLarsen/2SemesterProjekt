@@ -161,7 +161,6 @@
             // 
             // submitButton
             // 
-            submitButton.Enabled = false;
             submitButton.Image = Properties.Resources.SaveButtonGreyedOut;
             submitButton.Location = new Point(945, 759);
             submitButton.Margin = new Padding(3, 4, 3, 4);
@@ -332,7 +331,7 @@
             textBoxPhoneNumber.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBoxPhoneNumber.Location = new Point(663, 593);
             textBoxPhoneNumber.Margin = new Padding(3, 4, 3, 4);
-            textBoxPhoneNumber.MaxLength = 0;
+            textBoxPhoneNumber.MaxLength = 8;
             textBoxPhoneNumber.Name = "textBoxPhoneNumber";
             textBoxPhoneNumber.Size = new Size(274, 27);
             textBoxPhoneNumber.TabIndex = 62;
