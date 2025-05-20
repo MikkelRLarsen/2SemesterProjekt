@@ -35,11 +35,11 @@
 			// 
 			ButtonLabel.Anchor = AnchorStyles.Right;
 			ButtonLabel.AutoSize = true;
-			ButtonLabel.Font = new Font("Segoe UI", 22F);
+			ButtonLabel.Font = new Font("Segoe UI", 12F);
 			ButtonLabel.ForeColor = SystemColors.HighlightText;
-			ButtonLabel.Location = new Point(72, 11);
+			ButtonLabel.Location = new Point(30, 4);
 			ButtonLabel.Name = "ButtonLabel";
-			ButtonLabel.Size = new Size(228, 50);
+			ButtonLabel.Size = new Size(123, 28);
 			ButtonLabel.TabIndex = 1;
 			ButtonLabel.Text = "Konsultation";
 			ButtonLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -51,7 +51,7 @@
 			BackColor = Color.DodgerBlue;
 			Controls.Add(ButtonLabel);
 			Name = "NavigationButtonOption";
-			Size = new Size(300, 70);
+			Size = new Size(200, 35);
 			ResumeLayout(false);
 			PerformLayout();
 		}
