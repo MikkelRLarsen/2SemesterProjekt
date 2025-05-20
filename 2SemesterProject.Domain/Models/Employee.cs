@@ -20,20 +20,20 @@
 
 		protected void InformationValid()
 		{
-			if (FirstName.Any(ch => !char.IsLetterOrDigit(ch)))
+			if (string.IsNullOrWhiteSpace(FirstName) || !FirstName.All(char.IsLetter))
 			{
-				throw new ArgumentException("FirstName indeholder tal eller speciel tegn");
+				throw new ArgumentException("FirstName indeholder tal, speciel tegn eller er tom");
 			}
 
-			if (LastName.Any(ch => !char.IsLetterOrDigit(ch)))
+			if (string.IsNullOrWhiteSpace(LastName) || !LastName.All(char.IsLetter))
 			{
-				throw new ArgumentException("LastName indeholder tal eller speciel tegn");
+				throw new ArgumentException("LastName indeholder tal, speciel tegn eller er tom");
 			}
 
-			if (Type != "Dyrelæge" && Type != "Assistent" && Type != "Receptionist")
-			{
-				throw new ArgumentException("Type var ikke en af de foruddefineret roller");
-			}
+			//if (Type != "Dyrelæge" && Type != "Assistent" && Type != "Receptionist")
+			//{
+			//	throw new ArgumentException("Type var ikke en af de foruddefineret roller");
+			//}
 		}
 	}
 }
