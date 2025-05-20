@@ -88,7 +88,7 @@
             label3.BackColor = Color.AntiqueWhite;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.SaddleBrown;
-            label3.Location = new Point(117, 60);
+            label3.Location = new Point(344, 35);
             label3.Name = "label3";
             label3.Size = new Size(73, 20);
             label3.TabIndex = 44;
@@ -112,7 +112,7 @@
             label5.BackColor = Color.AntiqueWhite;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label5.ForeColor = Color.SaddleBrown;
-            label5.Location = new Point(344, 35);
+            label5.Location = new Point(117, 60);
             label5.Name = "label5";
             label5.Size = new Size(75, 20);
             label5.TabIndex = 46;
@@ -170,11 +170,11 @@
             // 
             productNameLabel.AutoSize = true;
             productNameLabel.BackColor = Color.AntiqueWhite;
-            productNameLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            productNameLabel.ForeColor = Color.SaddleBrown;
-            productNameLabel.Location = new Point(315, 7);
+            productNameLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            productNameLabel.ForeColor = Color.Black;
+            productNameLabel.Location = new Point(315, 5);
             productNameLabel.Name = "productNameLabel";
-            productNameLabel.Size = new Size(30, 23);
+            productNameLabel.Size = new Size(34, 25);
             productNameLabel.TabIndex = 50;
             productNameLabel.Text = "##";
             // 
@@ -184,7 +184,7 @@
             categoryLabel.BackColor = Color.AntiqueWhite;
             categoryLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             categoryLabel.ForeColor = Color.SaddleBrown;
-            categoryLabel.Location = new Point(228, 60);
+            categoryLabel.Location = new Point(517, 35);
             categoryLabel.Name = "categoryLabel";
             categoryLabel.Size = new Size(27, 20);
             categoryLabel.TabIndex = 51;
@@ -220,7 +220,7 @@
             productSalesPriceLabel.BackColor = Color.AntiqueWhite;
             productSalesPriceLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             productSalesPriceLabel.ForeColor = Color.SaddleBrown;
-            productSalesPriceLabel.Location = new Point(517, 35);
+            productSalesPriceLabel.Location = new Point(228, 60);
             productSalesPriceLabel.Name = "productSalesPriceLabel";
             productSalesPriceLabel.Size = new Size(27, 20);
             productSalesPriceLabel.TabIndex = 54;
@@ -245,7 +245,7 @@
             Controls.Add(label1);
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox);
-            Margin = new Padding(80, 10, 10, 10);
+            Margin = new Padding(60, 5, 5, 5);
             Name = "ProductCardUpdated";
             Size = new Size(660, 114);
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();

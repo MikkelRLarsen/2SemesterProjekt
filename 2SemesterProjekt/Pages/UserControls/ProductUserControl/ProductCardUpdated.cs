@@ -48,6 +48,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             productEANLabel.Text = _product.EAN.ToString();
             productNameLabel.Text = _product.Name;
+            CenterLabelHorizontally(productNameLabel);
             productPurchasePriceLabel.Text = _product.PurchasePricePerUnit.ToString();
             productSalesPriceLabel.Text = _product.SalesPricePerUnit.ToString();
             inStockLabel.Text = _product.NumberInStock.ToString();
@@ -143,6 +144,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         public void SetInCartWrapper(InCartProductCardUpdated wrapper)
         {
             _inCartWrapper = wrapper;
+        }
+
+        private void CenterLabelHorizontally(Label label)
+        {
+            int formWidth = this.Width;
+            int labelX = (formWidth - label.Width) / 2;
+            label.Location = new Point(labelX, label.Location.Y);
         }
     }
 }
