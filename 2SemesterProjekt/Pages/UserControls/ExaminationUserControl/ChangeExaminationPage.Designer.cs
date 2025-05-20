@@ -52,7 +52,7 @@
             label2.BackColor = Color.Linen;
             label2.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.SaddleBrown;
-            label2.Location = new Point(367, 37);
+            label2.Location = new Point(429, 37);
             label2.Name = "label2";
             label2.Size = new Size(743, 50);
             label2.TabIndex = 24;
