@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             amountLabel = new Label();
-            panel1 = new Panel();
+            cardPanel = new Panel();
             SuspendLayout();
             // 
             // amountLabel
@@ -44,18 +44,18 @@
             amountLabel.TabIndex = 69;
             amountLabel.Text = "#";
             // 
-            // panel1
+            // cardPanel
             // 
-            panel1.Location = new Point(60, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(660, 114);
-            panel1.TabIndex = 70;
+            cardPanel.Location = new Point(60, 0);
+            cardPanel.Name = "cardPanel";
+            cardPanel.Size = new Size(660, 114);
+            cardPanel.TabIndex = 70;
             // 
             // InCartProductCardUpdated
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(panel1);
+            Controls.Add(cardPanel);
             Controls.Add(amountLabel);
             Name = "InCartProductCardUpdated";
             Size = new Size(720, 114);
@@ -65,6 +65,6 @@
 
         #endregion
         private Label amountLabel;
-        private Panel panel1;
+        private Panel cardPanel;
     }
 }
