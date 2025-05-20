@@ -51,11 +51,11 @@
 			label2.BackColor = Color.Linen;
 			label2.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label2.ForeColor = Color.SaddleBrown;
-			label2.Location = new Point(367, 34);
+			label2.Location = new Point(608, 34);
 			label2.Name = "label2";
-			label2.Size = new Size(743, 50);
+			label2.Size = new Size(373, 50);
 			label2.TabIndex = 47;
-			label2.Text = "O P D A T E R   K O N S U L T A T I O N E R";
+			label2.Text = "O P R E T   A N S A T";
 			// 
 			// pictureBox1
 			// 
@@ -106,7 +106,6 @@
 			// comboBoxType
 			// 
 			comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
-			comboBoxType.Enabled = false;
 			comboBoxType.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			comboBoxType.FormattingEnabled = true;
 			comboBoxType.Location = new Point(886, 355);

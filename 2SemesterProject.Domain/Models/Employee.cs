@@ -1,36 +1,39 @@
-﻿using System.Diagnostics;
-
-namespace _2SemesterProjekt.Domain.Models
+﻿namespace _2SemesterProjekt.Domain.Models
 {
 	public class Employee
 	{
 		public int EmployeeID { get; private set; }
-		public string? FirstName { get; private set; }
-		public string? LastName { get; private set; }
+		public string FirstName { get; private set; }
+		public string LastName { get; private set; }
 		public string Type { get; private set; }
-		public List<Pet> Pets { get; }
-		public List<Examination> Examinations { get; }
+		public List<Pet>? Pets { get; }
+		public List<Examination>? Examinations { get; }
 
-		public Employee(int employeeID, string? firstName, string? lastName, string type)
+		public Employee(string firstName, string lastName, string type)
 		{
-			EmployeeID = employeeID;
 			FirstName = firstName;
 			LastName = lastName;
 			Type = type;
 
-			if (!InformationValid()) throw new ArgumentException("Employee Information not valid");
+			InformationValid();
 		}
 
-		protected bool InformationValid()
+		protected void InformationValid()
 		{
-			Debug.Assert(EmployeeID != null, "EmployeeID was null");
-			Debug.Assert(FirstName != null, "EmployeeName was null");
+			if (FirstName.Any(ch => !char.IsLetterOrDigit(ch)))
+			{
+				throw new ArgumentException("FirstName indeholder tal eller speciel tegn");
+			}
 
-			if (EmployeeID == 0) return false;
-			if (FirstName.Any(ch => !char.IsLetterOrDigit(ch))) return false;
-			//if (FirstName.Any(ch => !char.IsDigit(ch))) return false;
+			if (LastName.Any(ch => !char.IsLetterOrDigit(ch)))
+			{
+				throw new ArgumentException("LastName indeholder tal eller speciel tegn");
+			}
 
-			return true;
+			if (Type != "Dyrelæge" && Type != "Assistent" && Type != "Receptionist")
+			{
+				throw new ArgumentException("Type var ikke en af de foruddefineret roller");
+			}
 		}
 	}
 }

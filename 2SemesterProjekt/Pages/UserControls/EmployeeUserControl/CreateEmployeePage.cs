@@ -1,6 +1,8 @@
 ﻿using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
 using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
+using _2SemesterProjekt.Properties;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,13 +28,14 @@ namespace _2SemesterProjekt.Pages.UserControls.EmployeeUserControl
 		private void comboBoxType_SelectionChangeCommitted(object sender, EventArgs e)
 		{
 			submitButton.Enabled = true;
+			submitButton.Image = Resources.CreateButton;
 		}
 
 		private async void submitButton_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				Employee newEmployee = new Employee(0, textBoxFirstName.Text, textBoxLastName.Text, comboBoxType.SelectedItem.ToString());
+				Employee newEmployee = new Employee(textBoxFirstName.Text, textBoxLastName.Text, comboBoxType.SelectedItem.ToString());
 
 				await _employeeService.CreateEmployeeAsync(newEmployee);
 
@@ -51,9 +54,10 @@ namespace _2SemesterProjekt.Pages.UserControls.EmployeeUserControl
 			_mainPagePanel.Controls.Add(new MainPageWallpaper());
 		}
 
-		private void CreateEmployeePage_Load(object sender, EventArgs e)
+		private async void CreateEmployeePage_Load(object sender, EventArgs e)
 		{
-			comboBoxType.DataSource = _employeeService.GetAllEmployeeTypesAsync();
+			_employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
+			comboBoxType.DataSource = await _employeeService.GetAllEmployeeTypesAsync();
 		}
 	}
 }
