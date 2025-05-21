@@ -54,24 +54,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             }
         }
 
-        private void textBoxNumberInStock_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Only numbers are allowed
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void textBoxMinInStock_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Only numbers are allowed
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
         private async void submitButton_Click(object sender, EventArgs e)
         {
             string displayMessage = CheckIfInformationIsValid();

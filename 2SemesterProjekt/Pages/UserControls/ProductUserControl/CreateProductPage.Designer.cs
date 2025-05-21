@@ -135,6 +135,7 @@
             textBoxEAN.Size = new Size(274, 27);
             textBoxEAN.TabIndex = 64;
             textBoxEAN.TextChanged += textBoxEAN_TextChanged;
+            textBoxEAN.KeyPress += textBoxEAN_KeyPress;
             // 
             // submitButton
             // 
@@ -311,6 +312,7 @@
             textBoxPurchasePrice.Size = new Size(92, 27);
             textBoxPurchasePrice.TabIndex = 86;
             textBoxPurchasePrice.TextChanged += textBoxPurchasePrice_TextChanged;
+            textBoxPurchasePrice.KeyPress += textBoxPurchasePrice_KeyPress;
             // 
             // textBoxSalesPrice
             // 
@@ -319,6 +321,7 @@
             textBoxSalesPrice.Size = new Size(92, 27);
             textBoxSalesPrice.TabIndex = 89;
             textBoxSalesPrice.TextChanged += textBoxSalesPrice_TextChanged;
+            textBoxSalesPrice.KeyPress += textBoxSalesPrice_KeyPress;
             // 
             // label8
             // 
