@@ -158,10 +158,10 @@
             textBoxFirstName.Name = "textBoxFirstName";
             textBoxFirstName.Size = new Size(274, 27);
             textBoxFirstName.TabIndex = 43;
+            textBoxFirstName.KeyPress += textBoxFirstName_KeyPress;
             // 
             // submitButton
             // 
-            submitButton.Image = Properties.Resources.SaveButtonGreyedOut;
             submitButton.Location = new Point(945, 759);
             submitButton.Margin = new Padding(3, 4, 3, 4);
             submitButton.Name = "submitButton";
@@ -173,7 +173,6 @@
             // 
             // cancelButton
             // 
-            cancelButton.Image = Properties.Resources.CancelButton;
             cancelButton.Location = new Point(416, 759);
             cancelButton.Margin = new Padding(3, 4, 3, 4);
             cancelButton.Name = "cancelButton";
@@ -185,7 +184,6 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.PageTitelBackground;
             pictureBox1.Location = new Point(101, 20);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(1399, 85);
@@ -196,7 +194,6 @@
             // pictureBox3
             // 
             pictureBox3.BackColor = Color.Linen;
-            pictureBox3.Image = Properties.Resources.PageBox;
             pictureBox3.Location = new Point(416, 149);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(769, 88);
@@ -207,7 +204,6 @@
             // pictureBox9
             // 
             pictureBox9.BackColor = Color.Linen;
-            pictureBox9.Image = Properties.Resources.PageBox;
             pictureBox9.Location = new Point(416, 249);
             pictureBox9.Name = "pictureBox9";
             pictureBox9.Size = new Size(769, 88);
@@ -218,7 +214,6 @@
             // pictureBox4
             // 
             pictureBox4.BackColor = Color.Linen;
-            pictureBox4.Image = Properties.Resources.PageBox;
             pictureBox4.Location = new Point(416, 349);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(769, 88);
@@ -229,7 +224,6 @@
             // pictureBox5
             // 
             pictureBox5.BackColor = Color.Linen;
-            pictureBox5.Image = Properties.Resources.PageBox;
             pictureBox5.Location = new Point(416, 449);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(769, 88);
@@ -240,7 +234,6 @@
             // pictureBox6
             // 
             pictureBox6.BackColor = Color.Linen;
-            pictureBox6.Image = Properties.Resources.PageBox;
             pictureBox6.Location = new Point(416, 549);
             pictureBox6.Name = "pictureBox6";
             pictureBox6.Size = new Size(769, 88);
@@ -250,7 +243,6 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Properties.Resources.PageBackground;
             pictureBox2.Location = new Point(101, 124);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(1399, 705);
@@ -273,7 +265,6 @@
             // pictureBox7
             // 
             pictureBox7.BackColor = Color.Linen;
-            pictureBox7.Image = Properties.Resources.PageBox;
             pictureBox7.Location = new Point(416, 649);
             pictureBox7.Name = "pictureBox7";
             pictureBox7.Size = new Size(769, 88);
