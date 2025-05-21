@@ -19,24 +19,6 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			_panel = panel;
 		}
 
-		private void AddEventHandlerToExaminationCard(Control control)
-		{
-			control.DoubleClick += DoubleClickEventHandler;
-
-			// Add the same handler to each of the control.Controls
-			// If I didn't then the event wouldn't happend if i pressed on any of the labels or pictureboxes
-			foreach (Control child in control.Controls)
-			{
-				AddEventHandlerToExaminationCard(child);
-			}
-		}
-
-		private void DoubleClickEventHandler(object sender, EventArgs e)
-		{
-			_panel.Controls.Clear();
-			_panel.Controls.Add(new SeeMedicinDetails(_selectedExaminationCard.Examination, this, _panel));
-		}
-
 		private async void findAllButton_Click(object sender, EventArgs e)
 		{
 			await LoadAndShowExaminationCards(_allExaminationCards);
@@ -63,12 +45,6 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 		public async Task LoadAndShowExaminationCards(IEnumerable<ExaminationCardUpdated> examinationCardsToBeLoaded)
 		{
 			flowPanel.Controls.Clear();
-
-			// Want a Eventhandler to be added to the cards, but only from this page, and will NOT add it on the original ExaminationCard
-			foreach (ExaminationCardUpdated card in examinationCardsToBeLoaded)
-			{
-				AddEventHandlerToExaminationCard(card);
-			}
 
 			flowPanel.Controls.AddRange(examinationCardsToBeLoaded.ToArray());
 		}
@@ -135,6 +111,13 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 
 			_selectedExaminationCard = selectedCard;
 			_selectedExaminationCard.SetSelected(true);
+		}
+
+		private async void changeButton_Click(object sender, EventArgs e)
+		{
+			_panel.Controls.Clear();
+			_panel.Controls.Add(new SeeMedicinDetails(_selectedExaminationCard.Examination, this, _panel));
+
 		}
 	}
 }
