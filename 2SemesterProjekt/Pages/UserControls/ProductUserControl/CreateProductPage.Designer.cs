@@ -135,6 +135,7 @@
             textBoxEAN.Name = "textBoxEAN";
             textBoxEAN.Size = new Size(274, 27);
             textBoxEAN.TabIndex = 64;
+            textBoxEAN.TextChanged += textBoxEAN_TextChanged;
             // 
             // submitButton
             // 

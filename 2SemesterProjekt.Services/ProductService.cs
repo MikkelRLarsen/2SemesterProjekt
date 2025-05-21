@@ -41,9 +41,23 @@ namespace _2SemesterProjekt.Services
             await _productRepository.UpdateSeveralProductsQuantityAsync(products); // Updates the stock quantity of several products in the DB
         }
 
-        public Task CreateProductAsync(Product product)
+        public async Task CreateProductAsync(Product product)
         {
-            throw new NotImplementedException();
+            Product checkIfProductExists = await GetProductByEANAsync(product.EAN);
+
+            if (checkIfProductExists != null)
+            {
+                throw new ArgumentException("The product with the given EAN already exists.");
+            }
+            else
+            {
+                await _productRepository.CreateProductAsync(product);
+            }
+        }
+
+        public async Task<Product> GetProductByEANAsync(long eAN)
+        {
+            return await _productRepository.GetProductByEANAsync(eAN);
         }
     }
 }

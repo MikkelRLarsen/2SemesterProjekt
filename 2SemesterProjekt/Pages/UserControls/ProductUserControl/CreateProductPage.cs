@@ -75,7 +75,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             if (displayMessage != null)
             {
-
+                MessageBox.Show($"{displayMessage}", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -90,6 +90,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                                                 );
 
                 _productService.CreateProductAsync(product);
+                MessageBox.Show($"{product.Name} er blevet oprettet i databasen.", "Produkt oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -147,6 +148,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             }
 
             return errorMessage;
+        }
+
+        private void textBoxEAN_TextChanged(object sender, EventArgs e)
+        {
+            textBoxEAN.BackColor = SystemColors.Window;
         }
     }
 }
