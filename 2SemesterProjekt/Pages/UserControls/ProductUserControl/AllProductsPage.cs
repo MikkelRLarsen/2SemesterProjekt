@@ -37,8 +37,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 AllProductCards.Add(new ProductCardUpdated(product));
             }
         }
+        private void findAllButton_Click(object sender, EventArgs e)
+        {
+            ViewAllProducts();
+        }
 
-        private void ViewAllProducts(object sender, EventArgs e)
+        private void ViewAllProducts()
         {
             flowPanel.Controls.Clear();
             flowPanel.Controls.AddRange(AllProductCards.ToArray());

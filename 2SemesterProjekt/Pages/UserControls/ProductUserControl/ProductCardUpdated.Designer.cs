@@ -257,7 +257,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(pictureBox);
-            Margin = new Padding(80, 10, 10, 10);
+            Margin = new Padding(50, 10, 10, 10);
             Name = "ProductCardUpdated";
             Size = new Size(655, 132);
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();

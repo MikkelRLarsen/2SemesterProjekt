@@ -117,7 +117,7 @@
             findAllButton.SizeMode = PictureBoxSizeMode.StretchImage;
             findAllButton.TabIndex = 53;
             findAllButton.TabStop = false;
-            findAllButton.Click += ViewAllProducts;
+            findAllButton.Click += findAllButton_Click;
             // 
             // label1
             // 

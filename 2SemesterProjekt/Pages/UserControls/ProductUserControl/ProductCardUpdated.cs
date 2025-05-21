@@ -30,6 +30,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         public ProductCardUpdated(Domain.Models.Product product)
         {
             _product = product;
+            InitializeComponent();
+            InitializeUIDesign();
         }
 
         private void InitializeUIDesign()
