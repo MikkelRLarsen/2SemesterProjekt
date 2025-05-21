@@ -72,8 +72,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private void submitButton_Click(object sender, EventArgs e)
         {
             string displayMessage = CheckIfInformationIsValid();
-            
-            if (displayMessage == null)
+
+            if (displayMessage != null)
             {
 
             }
@@ -85,18 +85,18 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                                                 textBoxProductType.Text,
                                                 Convert.ToDecimal(textBoxPurchasePrice.Text),
                                                 Convert.ToDecimal(textBoxSalesPrice.Text),
-                                                Convert.ToInt32(textBoxNumberInStock.Text),
-                                                Convert.ToInt32(textBoxMinInStock.Text)
+                                                Convert.ToInt32(numericNumberInStock.Value),
+                                                Convert.ToInt32(numericMinInStock.Value)
                                                 );
 
-                //_productService.CreateProductAsync(product);
+                _productService.CreateProductAsync(product);
             }
         }
 
         private string CheckIfInformationIsValid()
         {
             string errorMessage = null;
-            if (string.IsNullOrWhiteSpace(textBoxEAN.Text) || string.IsNullOrWhiteSpace(textBoxProductName.Text) || string.IsNullOrWhiteSpace(textBoxProductType.Text) || string.IsNullOrWhiteSpace(textBoxPurchasePrice.Text) || string.IsNullOrWhiteSpace(textBoxSalesPrice.Text) || string.IsNullOrWhiteSpace(textBoxNumberInStock.Text) || string.IsNullOrWhiteSpace(textBoxMinInStock.Text))
+            if (string.IsNullOrWhiteSpace(textBoxEAN.Text) || string.IsNullOrWhiteSpace(textBoxProductName.Text))
             {
                 errorMessage = "Indtast venligst alle informationerne.\n";
             }
@@ -111,21 +111,21 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             }
             try
             {
-                Convert.ToInt32(textBoxMinInStock.Text);
+                Convert.ToInt32(numericMinInStock.Value);
             }
             catch
             {
                 errorMessage = "Indtast venligst et gyldigt tal.";
-                textBoxMinInStock.BackColor = Color.IndianRed;
+                numericMinInStock.BackColor = Color.IndianRed;
             }
             try
             {
-                Convert.ToInt32(textBoxNumberInStock.Text);
+                Convert.ToInt32(numericMinInStock.Value);
             }
             catch
             {
                 errorMessage = "Indtast venligst et gyldigt tal.";
-                textBoxNumberInStock.BackColor = Color.IndianRed;
+                numericNumberInStock.BackColor = Color.IndianRed;
             }
             try
             {

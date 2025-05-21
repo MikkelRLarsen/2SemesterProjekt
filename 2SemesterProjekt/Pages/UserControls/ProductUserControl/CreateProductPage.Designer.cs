@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             label4 = new Label();
-            textBoxPetName = new TextBox();
+            textBoxProductType = new TextBox();
             pictureBox7 = new PictureBox();
             label2 = new Label();
             label1 = new Label();
-            textBoxPhoneNumber = new TextBox();
+            textBoxEAN = new TextBox();
             submitButton = new PictureBox();
             cancelButton = new PictureBox();
             pictureBox1 = new PictureBox();
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
             label3 = new Label();
-            textBox1 = new TextBox();
+            textBoxProductName = new TextBox();
             pictureBox4 = new PictureBox();
             label5 = new Label();
             pictureBox5 = new PictureBox();
             pictureBox6 = new PictureBox();
-            numericUpDown1 = new NumericUpDown();
-            numericUpDown2 = new NumericUpDown();
+            numericNumberInStock = new NumericUpDown();
+            numericMinInStock = new NumericUpDown();
             label6 = new Label();
             label7 = new Label();
             pictureBox8 = new PictureBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            textBoxPurchasePrice = new TextBox();
+            textBoxSalesPrice = new TextBox();
             label8 = new Label();
             pictureBox9 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
@@ -63,8 +63,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericNumberInStock).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericMinInStock).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
             SuspendLayout();
@@ -81,15 +81,15 @@
             label4.TabIndex = 71;
             label4.Text = "A N G I V   P R O D U K T T Y P E";
             // 
-            // textBoxPetName
+            // textBoxProductType
             // 
-            textBoxPetName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxPetName.Location = new Point(660, 391);
-            textBoxPetName.Margin = new Padding(3, 4, 3, 4);
-            textBoxPetName.MaxLength = 8;
-            textBoxPetName.Name = "textBoxPetName";
-            textBoxPetName.Size = new Size(278, 27);
-            textBoxPetName.TabIndex = 70;
+            textBoxProductType.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxProductType.Location = new Point(660, 391);
+            textBoxProductType.Margin = new Padding(3, 4, 3, 4);
+            textBoxProductType.MaxLength = 0;
+            textBoxProductType.Name = "textBoxProductType";
+            textBoxProductType.Size = new Size(278, 27);
+            textBoxProductType.TabIndex = 70;
             // 
             // pictureBox7
             // 
@@ -126,19 +126,18 @@
             label1.TabIndex = 65;
             label1.Text = "A N G I V   V A R E N U M M E R";
             // 
-            // textBoxPhoneNumber
+            // textBoxEAN
             // 
-            textBoxPhoneNumber.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxPhoneNumber.Location = new Point(663, 191);
-            textBoxPhoneNumber.Margin = new Padding(3, 4, 3, 4);
-            textBoxPhoneNumber.MaxLength = 8;
-            textBoxPhoneNumber.Name = "textBoxPhoneNumber";
-            textBoxPhoneNumber.Size = new Size(274, 27);
-            textBoxPhoneNumber.TabIndex = 64;
+            textBoxEAN.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxEAN.Location = new Point(663, 191);
+            textBoxEAN.Margin = new Padding(3, 4, 3, 4);
+            textBoxEAN.MaxLength = 13;
+            textBoxEAN.Name = "textBoxEAN";
+            textBoxEAN.Size = new Size(274, 27);
+            textBoxEAN.TabIndex = 64;
             // 
             // submitButton
             // 
-            submitButton.Enabled = false;
             submitButton.Image = Properties.Resources.SaveButtonGreyedOut;
             submitButton.Location = new Point(945, 749);
             submitButton.Margin = new Padding(3, 4, 3, 4);
@@ -147,6 +146,7 @@
             submitButton.SizeMode = PictureBoxSizeMode.StretchImage;
             submitButton.TabIndex = 63;
             submitButton.TabStop = false;
+            submitButton.Click += submitButton_Click;
             // 
             // cancelButton
             // 
@@ -202,15 +202,15 @@
             label3.TabIndex = 74;
             label3.Text = "A N G I V   P R O D U K T N A V N";
             // 
-            // textBox1
+            // textBoxProductName
             // 
-            textBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(663, 288);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.MaxLength = 8;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(274, 27);
-            textBox1.TabIndex = 73;
+            textBoxProductName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxProductName.Location = new Point(663, 288);
+            textBoxProductName.Margin = new Padding(3, 4, 3, 4);
+            textBoxProductName.MaxLength = 0;
+            textBoxProductName.Name = "textBoxProductName";
+            textBoxProductName.Size = new Size(274, 27);
+            textBoxProductName.TabIndex = 73;
             // 
             // pictureBox4
             // 
@@ -257,19 +257,21 @@
             pictureBox6.TabIndex = 79;
             pictureBox6.TabStop = false;
             // 
-            // numericUpDown1
+            // numericNumberInStock
             // 
-            numericUpDown1.Location = new Point(556, 492);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(92, 27);
-            numericUpDown1.TabIndex = 80;
+            numericNumberInStock.Location = new Point(556, 492);
+            numericNumberInStock.Maximum = new decimal(new int[] { 20000, 0, 0, 0 });
+            numericNumberInStock.Name = "numericNumberInStock";
+            numericNumberInStock.Size = new Size(92, 27);
+            numericNumberInStock.TabIndex = 80;
             // 
-            // numericUpDown2
+            // numericMinInStock
             // 
-            numericUpDown2.Location = new Point(953, 492);
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(92, 27);
-            numericUpDown2.TabIndex = 81;
+            numericMinInStock.Location = new Point(953, 492);
+            numericMinInStock.Maximum = new decimal(new int[] { 20000, 0, 0, 0 });
+            numericMinInStock.Name = "numericMinInStock";
+            numericMinInStock.Size = new Size(92, 27);
+            numericMinInStock.TabIndex = 81;
             // 
             // label6
             // 
@@ -306,19 +308,19 @@
             pictureBox8.TabIndex = 84;
             pictureBox8.TabStop = false;
             // 
-            // textBox2
+            // textBoxPurchasePrice
             // 
-            textBox2.Location = new Point(556, 597);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(92, 27);
-            textBox2.TabIndex = 86;
+            textBoxPurchasePrice.Location = new Point(556, 597);
+            textBoxPurchasePrice.Name = "textBoxPurchasePrice";
+            textBoxPurchasePrice.Size = new Size(92, 27);
+            textBoxPurchasePrice.TabIndex = 86;
             // 
-            // textBox3
+            // textBoxSalesPrice
             // 
-            textBox3.Location = new Point(953, 597);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(92, 27);
-            textBox3.TabIndex = 89;
+            textBoxSalesPrice.Location = new Point(953, 597);
+            textBoxSalesPrice.Name = "textBoxSalesPrice";
+            textBoxSalesPrice.Size = new Size(92, 27);
+            textBoxSalesPrice.TabIndex = 89;
             // 
             // label8
             // 
@@ -347,27 +349,27 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(textBox3);
+            Controls.Add(textBoxSalesPrice);
             Controls.Add(label8);
             Controls.Add(pictureBox9);
-            Controls.Add(textBox2);
+            Controls.Add(textBoxPurchasePrice);
             Controls.Add(label7);
             Controls.Add(pictureBox8);
             Controls.Add(label6);
-            Controls.Add(numericUpDown2);
-            Controls.Add(numericUpDown1);
+            Controls.Add(numericMinInStock);
+            Controls.Add(numericNumberInStock);
             Controls.Add(pictureBox6);
             Controls.Add(label5);
             Controls.Add(pictureBox5);
             Controls.Add(label3);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxProductName);
             Controls.Add(pictureBox4);
             Controls.Add(label4);
-            Controls.Add(textBoxPetName);
+            Controls.Add(textBoxProductType);
             Controls.Add(pictureBox7);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBoxPhoneNumber);
+            Controls.Add(textBoxEAN);
             Controls.Add(submitButton);
             Controls.Add(cancelButton);
             Controls.Add(pictureBox1);
@@ -384,8 +386,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericNumberInStock).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericMinInStock).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
             ResumeLayout(false);
@@ -395,29 +397,29 @@
         #endregion
 
         private Label label4;
-        private TextBox textBoxPetName;
+        private TextBox textBoxProductType;
         private PictureBox pictureBox7;
         private Label label2;
         private Label label1;
-        private TextBox textBoxPhoneNumber;
+        private TextBox textBoxEAN;
         private PictureBox submitButton;
         private PictureBox cancelButton;
         private PictureBox pictureBox1;
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private Label label3;
-        private TextBox textBox1;
+        private TextBox textBoxProductName;
         private PictureBox pictureBox4;
         private Label label5;
         private PictureBox pictureBox5;
         private PictureBox pictureBox6;
-        private NumericUpDown numericUpDown1;
-        private NumericUpDown numericUpDown2;
+        private NumericUpDown numericNumberInStock;
+        private NumericUpDown numericMinInStock;
         private Label label6;
         private Label label7;
         private PictureBox pictureBox8;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private TextBox textBoxPurchasePrice;
+        private TextBox textBoxSalesPrice;
         private Label label8;
         private PictureBox pictureBox9;
     }

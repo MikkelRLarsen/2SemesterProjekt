@@ -161,6 +161,7 @@ namespace _2SemesterProjekt.Pages
 
             AdministrationNav.AddOption(new NavigationButtonOption(CreateEmployee, "Opret Ansat"));
             AdministrationNav.AddOption(new NavigationButtonOption(StorageStatus, "Lagerstatus"));
+            AdministrationNav.AddOption(new NavigationButtonOption(CreateProduct, "Opret nyt produkt"));
         }
         private async void CreateEmployee(object sender, EventArgs e)
         {
@@ -171,6 +172,11 @@ namespace _2SemesterProjekt.Pages
         {
             MainPanel.Controls.Clear();
             MainPanel.Controls.Add(new AllProductsPage());
+        }
+        private async void CreateProduct(object sender, EventArgs e)
+        {
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new CreateProductPage());
         }
 
         // MoveHandler
