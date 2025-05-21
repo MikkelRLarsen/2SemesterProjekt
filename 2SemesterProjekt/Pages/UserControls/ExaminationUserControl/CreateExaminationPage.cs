@@ -393,5 +393,27 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                 e.Handled = true; // The user is only able to enter numbers in the textbox.
             }
         }
+
+        // AUTO FILL-IN:
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        // ProcessCmdKey is a method in the Control class (inherited by UserControl and Form)
+        // that intercepts keyboard commands before they are sent to the focused control.
+        // This makes it ideal for global shortcuts, like Ctrl+F, regardless of which control has focus.
+        {
+            if (keyData == (Keys.Control | Keys.F))
+            {
+                customerSearchTextBox.Focus();
+                TriggerAutoCustomerSearchFillIn();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        private void TriggerAutoCustomerSearchFillIn()
+        {
+            customerSearchTextBox.Text = "12345678";
+
+            customerSearchButton.Enabled = true;
+        }
     }
 }
