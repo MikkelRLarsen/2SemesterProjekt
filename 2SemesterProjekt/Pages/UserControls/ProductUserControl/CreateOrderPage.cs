@@ -7,8 +7,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 {
     public partial class CreateOrderPage : UserControl
     {
-        public List<Domain.Models.Product> _order; // Products in the order is stored here.
-        public BindingList<Domain.Models.Product> _allProducts; // Products in stock is stored here.
+        public List<Product> _order; // Products in the order is stored here.
+        public BindingList<Product> _allProducts; // Products in stock is stored here.
         private readonly IProductService _productService;
         private readonly ICustomerService _customerService;
         private readonly IOrderService _orderService;
@@ -16,21 +16,18 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private int _itemsInCart;
         private Panel _mainPagePanel;
         private CustomerCartPage _customerCartPage;
-        public List<ProductCardUpdated> AllProductCards { get; set; } = new List<ProductCardUpdated>();
+        public List<ProductCard> AllProductCards { get; set; } = new List<ProductCard>();
 
         public CreateOrderPage(Panel mainPagePanel)
         {
             InitializeComponent();
             _mainPagePanel = mainPagePanel;
 
-            IServiceScope scope = ServiceProviderSingleton.GetServiceProvider().CreateScope();
-            _productService = scope.ServiceProvider.GetService<IProductService>(); /* This ensure that the Listbox gets the newest
-                                                                                    * data everytime the user wants to create an order.*/
-            _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
-            _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>();
-            _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>();
+            _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
+            _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>()!;
+            _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>()!;
 
-            _order = new List<Domain.Models.Product>();
+            _order = new List<Product>();
             _customerCartPage = new CustomerCartPage(_order, _mainPagePanel, this);
         }
 
@@ -41,23 +38,27 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private async void FindAndSetAllProductsAsync()
         {
-            IEnumerable<Domain.Models.Product> allProductsInStock = await _productService.GetAllProductsInStockAsync();
+            IEnumerable<Product> allProductsInStock = await _productService.GetAllProductsInStockAsync();
 
             foreach (var product in allProductsInStock)
             {
-                AllProductCards.Add(new ProductCardUpdated(this, _customerCartPage, this.flowPanel, product, ProductCardUpdated.ProductCardMode.AddToCart));
+                AllProductCards.Add(new ProductCard(this, _customerCartPage, this.flowPanel, product, ProductCard.CardMode.AddToCart));
             }
+
+            findAllButton.Image = Properties.Resources.FindAllButton;
         }
 
-        public async void LoadAndShowProductCards(IEnumerable<ProductCardUpdated> productCardsToBeLoaded)
+        public async void LoadAndShowProductCards(IEnumerable<ProductCard> productCardsToBeLoaded)
         {
             // Clears the panel and then adds the wanted ExaminationCards
             flowPanel.Controls.Clear();
             flowPanel.Controls.AddRange(productCardsToBeLoaded.ToArray());
+            Cursor = Cursors.Default;
         }
 
         private void findAllButton_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
             LoadAndShowProductCards(AllProductCards);
         }
 
@@ -80,6 +81,16 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _mainPagePanel.Controls.Add(_customerCartPage);
 
             _customerCartPage.BringToFront();
+        }
+
+        private void findAllButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void findAllButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
         }
     }
 }

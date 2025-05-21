@@ -17,34 +17,39 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 {
     public partial class CustomerCartPage : UserControl
     {
-        public List<Domain.Models.Product> _order;
-        public List<ProductCardUpdated> _productCardsInOrder = new List<ProductCardUpdated>();
-        private CreateOrderPage _createOrderPage;
+        public List<Product> _productsInCart;
+        public List<InCartProductCard> _cartProductCards = new List<InCartProductCard>();
+        private CreateOrderPage _orderPage;
         private Panel _mainPagePanel;
         private Customer _customer;
+
         private readonly IOrderService _orderService;
         private readonly ICustomerService _customerService;
         private readonly IProductLineService _productLineService;
         private readonly IProductService _productService;
 
-        public CustomerCartPage(List<Domain.Models.Product> order, Panel mainPagePanel, CreateOrderPage createOrderPage)
+        public CustomerCartPage(List<Product> order, Panel mainPagePanel, CreateOrderPage createOrderPage)
         {
             InitializeComponent();
             _mainPagePanel = mainPagePanel;
-            _createOrderPage = createOrderPage;
-            _order = order;
+            _orderPage = createOrderPage;
+            _productsInCart = order;
 
             _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>()!;
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
             _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>()!;
             _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>()!;
+
+            IServiceScope scope = ServiceProviderSingleton.GetServiceProvider().CreateScope();
+            _productService = scope.ServiceProvider.GetService<IProductService>()!; /* This ensure that the Listbox gets the newest
+                                                                                    * data everytime the user wants to create an order.*/
         }
 
         private void CustomerCartPage_Load(object sender, EventArgs e)
         {
-            foreach (var productCard in _productCardsInOrder)
+            foreach (var productCard in _cartProductCards)
             {
-                flowPanel.Controls.Add(new InCartProductCardUpdated(productCard));
+                flowPanel.Controls.Add(productCard);
             }
 
             UpdateTotalPrice();
@@ -52,9 +57,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private async void createOrderButton_Click(object sender, EventArgs e)
         {
-            bool orderCanBeCreated = await _orderService.CheckIfOrderCanBeCreated(_order.ToList()); // Checks if the added quantities of each product can be added to the order.
+            // Checks if the added quantities of each product can be added to the order.
+            bool orderCanBeCreated = await _orderService.CheckIfOrderCanBeCreated(_productsInCart.ToList()); 
 
-            if (!orderCanBeCreated) // Quantity in order > quantity in stock
+            if (orderCanBeCreated == false) // Quantity in order > quantity in stock
             {
                 DialogResult messageBoxError = MessageBox.Show("Ordren kan ikke oprettes, da der ikke kan tilføjes det ønskede antal af en/nogle af produkterne til ordren. Tjek venligst lagerbeholdning.", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -84,6 +90,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private async void searchForCustomerButton_Click(object sender, EventArgs e)
         {
             Customer customer = null;
+
             if (string.IsNullOrWhiteSpace(customerPhoneNumberTextbox.Text) || customerPhoneNumberTextbox.Text.Length <= 7 || customerPhoneNumberTextbox.Text.Length >= 9)
             {
                 DialogResult messageBoxError = MessageBox.Show("Invalidt telefonnummer. Prøv igen", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -132,18 +139,29 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             }
             else // An order will be created without a customerID.
             {
-                int orderID = await _orderService.CreateOrderAsync(Convert.ToDecimal(totalPriceTextBox.Text)); // Creates an order and returns the ID.
-                await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
-                await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
+                // Creates an order and returns the ID.
+                int orderID = await _orderService.CreateOrderAsync(Convert.ToDecimal(totalPriceTextBox.Text));
+
+                // Creates product lines associated with the order for each product in the order.
+                await _productLineService.CreateProductLinesAsync(orderID, _productsInCart.ToList());
+
+                // Updates the stock status of each product in the order.
+                await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList()); 
                 DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private async Task CreateOrderWithCustomerInfo()
         {
-            int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, Convert.ToDecimal(totalPriceTextBox.Text)); // Creates an order associated with the customer and returns the ID.
-            await _productLineService.CreateProductLinesAsync(orderID, _order.ToList()); // Creates product lines associated with the order for each product in the order.
-            await _productService.UpdateSeveralProductsAsync(_order.ToList()); // Updates the stock status of each product in the order.
+            // Creates an order associated with the customer and returns the ID.
+            int orderID = await _orderService.CreateOrderWithCustomerIDAsync(_customer.CustomerID, Convert.ToDecimal(totalPriceTextBox.Text));
+
+            // Creates product lines associated with the order for each product in the order.
+            await _productLineService.CreateProductLinesAsync(orderID, _productsInCart.ToList());
+
+            // Updates the stock status of each product in the order.
+            await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList()); 
+
             DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
@@ -157,11 +175,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             }
         }
 
+        /// <summary>
+        /// Calculates total price without discount
+        /// </summary>
         private decimal CalculateTotalPrice()
         {
             decimal totalPrice = 0;
 
-            foreach (var product in _order)
+            foreach (var product in _productsInCart)
             {
                 totalPrice += product.SalesPricePerUnit * product.QuantityInOrder;
             }
@@ -169,6 +190,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             return totalPrice;
         }
 
+        /// <summary>
+        /// Updates total price textbox based on products and discount
+        /// </summary>
         public void UpdateTotalPrice()
         {
             decimal basePrice = CalculateTotalPrice();
@@ -181,6 +205,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private async void cancelButton_Click(object sender, EventArgs e)
         {
             _mainPagePanel.Controls.Remove(this);
+        }
+
+        public FlowLayoutPanel GetFlowLayoutPanelFromCustomerCart()
+        {
+            return flowPanel;
         }
     }
 }

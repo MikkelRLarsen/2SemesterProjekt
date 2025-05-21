@@ -1,6 +1,6 @@
 ﻿namespace _2SemesterProjekt
 {
-	partial class ProductCard
+	partial class OldProductCard
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductCard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OldProductCard));
             productPicture = new PictureBox();
             label = new Label();
             productEANLabel = new Label();

@@ -107,14 +107,15 @@
             // 
             // findAllButton
             // 
-            findAllButton.Image = Properties.Resources.FindAllButton;
+            findAllButton.Image = Properties.Resources.FindAllButtonGreyedOut;
             findAllButton.Location = new Point(931, 197);
             findAllButton.Name = "findAllButton";
             findAllButton.Size = new Size(99, 21);
-            findAllButton.SizeMode = PictureBoxSizeMode.StretchImage;
             findAllButton.TabIndex = 46;
             findAllButton.TabStop = false;
             findAllButton.Click += findAllButton_Click;
+            findAllButton.MouseEnter += findAllButton_MouseEnter;
+            findAllButton.MouseLeave += findAllButton_MouseLeave;
             // 
             // label1
             // 
