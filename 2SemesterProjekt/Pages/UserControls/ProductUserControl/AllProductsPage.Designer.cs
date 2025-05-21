@@ -32,14 +32,11 @@
             label2 = new Label();
             pictureBox1 = new PictureBox();
             pictureBox4 = new PictureBox();
-            textBoxCustomerPhoneNumberOrName = new TextBox();
-            customerSearchButton = new PictureBox();
             findAllButton = new PictureBox();
             label1 = new Label();
             pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customerSearchButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)findAllButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
@@ -86,32 +83,10 @@
             pictureBox4.TabIndex = 50;
             pictureBox4.TabStop = false;
             // 
-            // textBoxCustomerPhoneNumberOrName
-            // 
-            textBoxCustomerPhoneNumberOrName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxCustomerPhoneNumberOrName.Location = new Point(570, 176);
-            textBoxCustomerPhoneNumberOrName.Margin = new Padding(3, 4, 3, 4);
-            textBoxCustomerPhoneNumberOrName.MaxLength = 8;
-            textBoxCustomerPhoneNumberOrName.Name = "textBoxCustomerPhoneNumberOrName";
-            textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
-            textBoxCustomerPhoneNumberOrName.TabIndex = 55;
-            // 
-            // customerSearchButton
-            // 
-            customerSearchButton.BackColor = Color.AntiqueWhite;
-            customerSearchButton.Image = Properties.Resources.SearchButton;
-            customerSearchButton.Location = new Point(850, 179);
-            customerSearchButton.Margin = new Padding(3, 4, 3, 4);
-            customerSearchButton.Name = "customerSearchButton";
-            customerSearchButton.Size = new Size(47, 21);
-            customerSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
-            customerSearchButton.TabIndex = 54;
-            customerSearchButton.TabStop = false;
-            // 
             // findAllButton
             // 
             findAllButton.Image = Properties.Resources.FindAllButton;
-            findAllButton.Location = new Point(931, 179);
+            findAllButton.Location = new Point(751, 184);
             findAllButton.Name = "findAllButton";
             findAllButton.Size = new Size(99, 21);
             findAllButton.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -125,11 +100,11 @@
             label1.BackColor = Color.AntiqueWhite;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.SaddleBrown;
-            label1.Location = new Point(555, 151);
+            label1.Location = new Point(557, 151);
             label1.Name = "label1";
-            label1.Size = new Size(490, 20);
+            label1.Size = new Size(487, 20);
             label1.TabIndex = 52;
-            label1.Text = "T R Y K   F I N D   A L L E   E L L E R   S Ø G   P Å   V A R E N U M M E R";
+            label1.Text = "T R Y K   F I N D   A L L E   F O R   A T   S E   A L L E   P R O D U K T E R";
             // 
             // pictureBox3
             // 
@@ -146,8 +121,6 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(textBoxCustomerPhoneNumberOrName);
-            Controls.Add(customerSearchButton);
             Controls.Add(findAllButton);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
@@ -160,7 +133,6 @@
             Load += ProductPage_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customerSearchButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)findAllButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
@@ -173,8 +145,6 @@
         private Label label2;
         private PictureBox pictureBox1;
         private PictureBox pictureBox4;
-        private TextBox textBoxCustomerPhoneNumberOrName;
-        private PictureBox customerSearchButton;
         private PictureBox findAllButton;
         private Label label1;
         private PictureBox pictureBox3;
