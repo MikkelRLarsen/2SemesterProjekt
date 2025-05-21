@@ -90,6 +90,7 @@
             // exitButton
             // 
             exitButton.BackColor = Color.IndianRed;
+            exitButton.BackgroundImage = Properties.Resources.exit;
             exitButton.BackgroundImageLayout = ImageLayout.Center;
             exitButton.FlatStyle = FlatStyle.Flat;
             exitButton.Location = new Point(3, 2);
