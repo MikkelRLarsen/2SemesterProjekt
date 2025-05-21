@@ -315,6 +315,7 @@
             textBoxPurchasePrice.Name = "textBoxPurchasePrice";
             textBoxPurchasePrice.Size = new Size(92, 27);
             textBoxPurchasePrice.TabIndex = 86;
+            textBoxPurchasePrice.TextChanged += textBoxPurchasePrice_TextChanged;
             // 
             // textBoxSalesPrice
             // 
@@ -322,6 +323,7 @@
             textBoxSalesPrice.Name = "textBoxSalesPrice";
             textBoxSalesPrice.Size = new Size(92, 27);
             textBoxSalesPrice.TabIndex = 89;
+            textBoxSalesPrice.TextChanged += textBoxSalesPrice_TextChanged;
             // 
             // label8
             // 

@@ -69,7 +69,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             }
         }
 
-        private void submitButton_Click(object sender, EventArgs e)
+        private async void submitButton_Click(object sender, EventArgs e)
         {
             string displayMessage = CheckIfInformationIsValid();
 
@@ -79,18 +79,25 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             }
             else
             {
-                Domain.Models.Product product = new Domain.Models.Product(
-                                                textBoxProductName.Text,
-                                                Convert.ToInt64(textBoxEAN.Text),
-                                                textBoxProductType.Text,
-                                                Convert.ToDecimal(textBoxPurchasePrice.Text),
-                                                Convert.ToDecimal(textBoxSalesPrice.Text),
-                                                Convert.ToInt32(numericNumberInStock.Value),
-                                                Convert.ToInt32(numericMinInStock.Value)
-                                                );
+                try
+                {
+                    Domain.Models.Product product = new Domain.Models.Product(
+                                                    textBoxProductName.Text,
+                                                    Convert.ToInt64(textBoxEAN.Text),
+                                                    textBoxProductType.Text,
+                                                    Convert.ToDecimal(textBoxPurchasePrice.Text),
+                                                    Convert.ToDecimal(textBoxSalesPrice.Text),
+                                                    Convert.ToInt32(numericNumberInStock.Value),
+                                                    Convert.ToInt32(numericMinInStock.Value)
+                                                    );
 
-                _productService.CreateProductAsync(product);
-                MessageBox.Show($"{product.Name} er blevet oprettet i databasen.", "Produkt oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await _productService.CreateProductAsync(product);
+                    MessageBox.Show($"{product.Name} er blevet oprettet i databasen.", "Produkt oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -153,6 +160,21 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private void textBoxEAN_TextChanged(object sender, EventArgs e)
         {
             textBoxEAN.BackColor = SystemColors.Window;
+        }
+
+        private void textBoxProductName_TextChanged(object sender, EventArgs e)
+        {
+            textBoxProductName.BackColor = SystemColors.Window;
+        }
+
+        private void textBoxPurchasePrice_TextChanged(object sender, EventArgs e)
+        {
+            textBoxPurchasePrice.BackColor = SystemColors.Window;
+        }
+
+        private void textBoxSalesPrice_TextChanged(object sender, EventArgs e)
+        {
+            textBoxSalesPrice.BackColor = SystemColors.Window;
         }
     }
 }
