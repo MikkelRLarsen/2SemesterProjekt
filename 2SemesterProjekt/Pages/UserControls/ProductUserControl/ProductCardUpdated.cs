@@ -58,9 +58,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             CenterLabelHorizontally(productNameLabel);
             productPurchasePriceLabel.Text = _product.PurchasePricePerUnit.ToString();
             productSalesPriceLabel.Text = _product.SalesPricePerUnit.ToString();
-            productNumberInStockLabel.Text = _product.NumberInStock.ToString();
-            productMinInStockLabel.Text = _product.MinNumberInStock.ToString();
-            productCategoryLabel.Text = _product.Type;
+            inStockLabel.Text = _product.NumberInStock.ToString();
+            minStockLabel.Text = _product.MinNumberInStock.ToString();
+            categoryLabel.Text = _product.Type;
         }
 
         private void pictureBox_DoubleClick(object sender, EventArgs e)
@@ -98,7 +98,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 }
 
                 _createOrderPage.IncrementItemsInCart(dialogBox.Amount);
-                productNumberInStockLabel.Text = _product.NumberInStock.ToString();
+                inStockLabel.Text = _product.NumberInStock.ToString();
             }
             else if (_mode == ProductCardMode.RemoveFromCart)
             {

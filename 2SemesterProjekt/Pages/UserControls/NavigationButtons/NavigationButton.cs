@@ -64,7 +64,7 @@ namespace _2SemesterProjekt.Pages.UserControls.NavigationButtons
 		{
 			collapseTimer.Stop();
 
-			UpdateColor(Color.MidnightBlue);
+			UpdateColor(Color.SeaShell);
 
 			expandTimer.Start();
 		}
@@ -73,7 +73,7 @@ namespace _2SemesterProjekt.Pages.UserControls.NavigationButtons
 		{
 			expandTimer.Stop();
 
-			UpdateColor(Color.DodgerBlue);
+			UpdateColor(Color.Moccasin);
 
 			collapseTimer.Start();
 		}

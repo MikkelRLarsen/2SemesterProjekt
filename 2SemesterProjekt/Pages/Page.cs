@@ -215,5 +215,10 @@ namespace _2SemesterProjekt.Pages
         {
             MainPanel.Controls.Add(new MainPageWallpaper());
         }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
