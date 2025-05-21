@@ -35,9 +35,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.HomeScreenPicture;
-            pictureBox1.Location = new Point(-313, 0);
+            pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(2835, 1580);
+            pictureBox1.Size = new Size(1600, 845);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
@@ -48,7 +49,7 @@
             Controls.Add(pictureBox1);
             Margin = new Padding(0);
             Name = "MainPageWallpaper";
-            Size = new Size(2500, 1580);
+            Size = new Size(1600, 845);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }

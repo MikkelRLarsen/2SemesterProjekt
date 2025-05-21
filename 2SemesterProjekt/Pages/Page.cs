@@ -1,6 +1,7 @@
 ﻿using _2SemesterProjekt.Pages.UserControls.CustomerUserControl;
 using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
 using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
+using _2SemesterProjekt.Pages.UserControls.MedicineUserControl;
 using _2SemesterProjekt.Pages.UserControls.NavigationButtons;
 using _2SemesterProjekt.Pages.UserControls.PetUserControl;
 using _2SemesterProjekt.Pages.UserControls.ProductUserControl;
@@ -71,9 +72,8 @@ namespace _2SemesterProjekt.Pages
         }
         private async void FindMedicinPage(object sender, EventArgs e)
         {
-            //Example
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new FindMedicinPage(MainPanel));
         }
 
 
@@ -126,7 +126,7 @@ namespace _2SemesterProjekt.Pages
         // PetMenu
         private void CreateAndPetMenu()
         {
-            PetNav.ButtonLabel.Text = "Kældedyr";
+            PetNav.ButtonLabel.Text = "Kæledyr";
             PetNav.BringToFront();
             AddMoveHandlers(PetNav);
 
@@ -169,8 +169,8 @@ namespace _2SemesterProjekt.Pages
         }
         private async void StorageStatus(object sender, EventArgs e)
         {
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new AllProductsPage());
         }
 
         // MoveHandler
@@ -214,6 +214,11 @@ namespace _2SemesterProjekt.Pages
         private void Page_Load(object sender, EventArgs e)
         {
             MainPanel.Controls.Add(new MainPageWallpaper());
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

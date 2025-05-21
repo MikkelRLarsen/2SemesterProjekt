@@ -39,17 +39,17 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             _mainPagePanel.Controls.Add(new MainPageWallpaper());
         }
 
-        private void customerSearchTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Allow only letters, control keys (backspace), and separators (space)
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsSeparator(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            // Resets textbox after error message
-            textBoxFirstName.ForeColor = SystemColors.WindowText;
-            textBoxFirstName.BackColor = SystemColors.Window;
-        }
+        //private void customerSearchTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    // Allow only letters, control keys (backspace), and separators (space)
+        //    if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsSeparator(e.KeyChar))
+        //    {
+        //        e.Handled = true;
+        //    }
+        //    // Resets textbox after error message
+        //    textBoxFirstName.ForeColor = SystemColors.WindowText;
+        //    textBoxFirstName.BackColor = SystemColors.Window;
+        //}
 
         private void textBoxLastName_KeyPress(object sender, KeyPressEventArgs e)
         {

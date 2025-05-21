@@ -15,6 +15,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private readonly IProductLineService _productLineService;
         private int _itemsInCart;
         private Panel _mainPagePanel;
+        private CustomerCartPage _customerCartPage;
         public List<ProductCardUpdated> AllProductCards { get; set; } = new List<ProductCardUpdated>();
 
         public CreateOrderPage(Panel mainPagePanel)
@@ -30,6 +31,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>();
 
             _order = new List<Domain.Models.Product>();
+            _customerCartPage = new CustomerCartPage(_order, _mainPagePanel, this);
         }
 
         private async void CreateOrderPage_Load(object sender, EventArgs e)
@@ -43,7 +45,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             foreach (var product in allProductsInStock)
             {
-                AllProductCards.Add(new ProductCardUpdated(this, this.flowPanel, product));
+                AllProductCards.Add(new ProductCardUpdated(this, _customerCartPage, this.flowPanel, product, ProductCardUpdated.ProductCardMode.AddToCart));
             }
         }
 
@@ -66,20 +68,18 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             itemsInCart.Text = _itemsInCart.ToString();
         }
 
-        public void DecreaseItemsInCart(InCartProductCardUpdated productCard)
+        public void DecreaseItemsInCart(int amount)
         {
-            _itemsInCart -= productCard._product.NumberInStock;
+            _itemsInCart -= amount;
 
             itemsInCart.Text = _itemsInCart.ToString();
         }
 
         private void goToCartButton_Click(object sender, EventArgs e)
         {
-            var cartPage = new CustomerCartPage(_order, _mainPagePanel, this);
+            _mainPagePanel.Controls.Add(_customerCartPage);
 
-            _mainPagePanel.Controls.Add(cartPage);
-
-            cartPage.BringToFront();
+            _customerCartPage.BringToFront();
         }
     }
 }
