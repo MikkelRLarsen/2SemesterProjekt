@@ -47,7 +47,7 @@ namespace _2SemesterProjekt.Services
 
             if (checkIfProductExists != null)
             {
-                throw new ArgumentException("The product with the given EAN already exists.");
+                throw new ArgumentException("Produktet med det angivne varenummer eksisterer allerede i databasen.");
             }
             else
             {
