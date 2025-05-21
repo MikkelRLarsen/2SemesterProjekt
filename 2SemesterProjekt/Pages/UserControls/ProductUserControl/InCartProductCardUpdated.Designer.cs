@@ -28,276 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pictureBox = new PictureBox();
-            pictureBox1 = new PictureBox();
-            productSalesPriceLabel = new Label();
-            minStockLabel = new Label();
-            productPurchasePriceLabel = new Label();
-            categoryLabel = new Label();
-            productNameLabel = new Label();
-            inStockLabel = new Label();
-            productEANLabel = new Label();
-            label7 = new Label();
-            label6 = new Label();
-            label5 = new Label();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
             amountLabel = new Label();
-            ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            cardPanel = new Panel();
             SuspendLayout();
-            // 
-            // pictureBox
-            // 
-            pictureBox.Image = Properties.Resources.CardExamination;
-            pictureBox.Location = new Point(100, 0);
-            pictureBox.Margin = new Padding(0);
-            pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(1100, 190);
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox.TabIndex = 41;
-            pictureBox.TabStop = false;
-            pictureBox.DoubleClick += pictureBox_DoubleClick;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackColor = Color.AntiqueWhite;
-            pictureBox1.Image = Properties.Resources.Product;
-            pictureBox1.Location = new Point(123, 23);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(134, 137);
-            pictureBox1.TabIndex = 42;
-            pictureBox1.TabStop = false;
-            // 
-            // productSalesPriceLabel
-            // 
-            productSalesPriceLabel.AutoSize = true;
-            productSalesPriceLabel.BackColor = Color.AntiqueWhite;
-            productSalesPriceLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            productSalesPriceLabel.ForeColor = Color.SaddleBrown;
-            productSalesPriceLabel.Location = new Point(945, 20);
-            productSalesPriceLabel.Name = "productSalesPriceLabel";
-            productSalesPriceLabel.Size = new Size(42, 31);
-            productSalesPriceLabel.TabIndex = 68;
-            productSalesPriceLabel.Text = "##";
-            // 
-            // minStockLabel
-            // 
-            minStockLabel.AutoSize = true;
-            minStockLabel.BackColor = Color.AntiqueWhite;
-            minStockLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            minStockLabel.ForeColor = Color.SaddleBrown;
-            minStockLabel.Location = new Point(945, 96);
-            minStockLabel.Name = "minStockLabel";
-            minStockLabel.Size = new Size(42, 31);
-            minStockLabel.TabIndex = 67;
-            minStockLabel.Text = "##";
-            // 
-            // productPurchasePriceLabel
-            // 
-            productPurchasePriceLabel.AutoSize = true;
-            productPurchasePriceLabel.BackColor = Color.AntiqueWhite;
-            productPurchasePriceLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            productPurchasePriceLabel.ForeColor = Color.SaddleBrown;
-            productPurchasePriceLabel.Location = new Point(469, 134);
-            productPurchasePriceLabel.Name = "productPurchasePriceLabel";
-            productPurchasePriceLabel.Size = new Size(42, 31);
-            productPurchasePriceLabel.TabIndex = 66;
-            productPurchasePriceLabel.Text = "##";
-            // 
-            // categoryLabel
-            // 
-            categoryLabel.AutoSize = true;
-            categoryLabel.BackColor = Color.AntiqueWhite;
-            categoryLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            categoryLabel.ForeColor = Color.SaddleBrown;
-            categoryLabel.Location = new Point(469, 96);
-            categoryLabel.Name = "categoryLabel";
-            categoryLabel.Size = new Size(42, 31);
-            categoryLabel.TabIndex = 65;
-            categoryLabel.Text = "##";
-            // 
-            // productNameLabel
-            // 
-            productNameLabel.AutoSize = true;
-            productNameLabel.BackColor = Color.AntiqueWhite;
-            productNameLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            productNameLabel.ForeColor = Color.SaddleBrown;
-            productNameLabel.Location = new Point(469, 58);
-            productNameLabel.Name = "productNameLabel";
-            productNameLabel.Size = new Size(42, 31);
-            productNameLabel.TabIndex = 63;
-            productNameLabel.Text = "##";
-            // 
-            // inStockLabel
-            // 
-            inStockLabel.AutoSize = true;
-            inStockLabel.BackColor = Color.AntiqueWhite;
-            inStockLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            inStockLabel.ForeColor = Color.SaddleBrown;
-            inStockLabel.Location = new Point(945, 58);
-            inStockLabel.Name = "inStockLabel";
-            inStockLabel.Size = new Size(42, 31);
-            inStockLabel.TabIndex = 64;
-            inStockLabel.Text = "##";
-            // 
-            // productEANLabel
-            // 
-            productEANLabel.AutoSize = true;
-            productEANLabel.BackColor = Color.AntiqueWhite;
-            productEANLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            productEANLabel.ForeColor = Color.SaddleBrown;
-            productEANLabel.Location = new Point(469, 23);
-            productEANLabel.Name = "productEANLabel";
-            productEANLabel.Size = new Size(42, 31);
-            productEANLabel.TabIndex = 62;
-            productEANLabel.Text = "##";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.AntiqueWhite;
-            label7.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.ForeColor = Color.SaddleBrown;
-            label7.Location = new Point(674, 96);
-            label7.Name = "label7";
-            label7.Size = new Size(260, 31);
-            label7.TabIndex = 61;
-            label7.Text = "Minimumsbeholdning:";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.AntiqueWhite;
-            label6.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.SaddleBrown;
-            label6.Location = new Point(674, 58);
-            label6.Name = "label6";
-            label6.Size = new Size(143, 31);
-            label6.TabIndex = 60;
-            label6.Text = "Lagerstatus:";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.AntiqueWhite;
-            label5.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.SaddleBrown;
-            label5.Location = new Point(674, 20);
-            label5.Name = "label5";
-            label5.Size = new Size(116, 31);
-            label5.TabIndex = 59;
-            label5.Text = "Salgspris:";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.AntiqueWhite;
-            label4.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.SaddleBrown;
-            label4.Location = new Point(295, 134);
-            label4.Name = "label4";
-            label4.Size = new Size(146, 31);
-            label4.TabIndex = 58;
-            label4.Text = "Indkøbspris:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.AntiqueWhite;
-            label3.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.SaddleBrown;
-            label3.Location = new Point(295, 96);
-            label3.Name = "label3";
-            label3.Size = new Size(112, 31);
-            label3.TabIndex = 57;
-            label3.Text = "Kategori:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.AntiqueWhite;
-            label2.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.SaddleBrown;
-            label2.Location = new Point(295, 58);
-            label2.Name = "label2";
-            label2.Size = new Size(159, 31);
-            label2.TabIndex = 56;
-            label2.Text = "Produktnavn:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.AntiqueWhite;
-            label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.SaddleBrown;
-            label1.Location = new Point(295, 20);
-            label1.Name = "label1";
-            label1.Size = new Size(158, 31);
-            label1.TabIndex = 55;
-            label1.Text = "Varenummer:";
             // 
             // amountLabel
             // 
             amountLabel.AutoSize = true;
             amountLabel.BackColor = Color.Linen;
-            amountLabel.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            amountLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             amountLabel.ForeColor = Color.SaddleBrown;
-            amountLabel.Location = new Point(24, 65);
+            amountLabel.Location = new Point(12, 37);
             amountLabel.Name = "amountLabel";
-            amountLabel.Size = new Size(51, 60);
+            amountLabel.Size = new Size(36, 41);
             amountLabel.TabIndex = 69;
             amountLabel.Text = "#";
+            // 
+            // cardPanel
+            // 
+            cardPanel.Location = new Point(60, 0);
+            cardPanel.Name = "cardPanel";
+            cardPanel.Size = new Size(660, 114);
+            cardPanel.TabIndex = 70;
             // 
             // InCartProductCardUpdated
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(cardPanel);
             Controls.Add(amountLabel);
-            Controls.Add(productSalesPriceLabel);
-            Controls.Add(minStockLabel);
-            Controls.Add(productPurchasePriceLabel);
-            Controls.Add(categoryLabel);
-            Controls.Add(productNameLabel);
-            Controls.Add(inStockLabel);
-            Controls.Add(productEANLabel);
-            Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(pictureBox1);
-            Controls.Add(pictureBox);
             Name = "InCartProductCardUpdated";
-            Size = new Size(1200, 190);
-            ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            Size = new Size(720, 114);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private PictureBox pictureBox;
-        private PictureBox pictureBox1;
-        private Label productSalesPriceLabel;
-        private Label minStockLabel;
-        private Label productPurchasePriceLabel;
-        private Label categoryLabel;
-        private Label productNameLabel;
-        private Label inStockLabel;
-        private Label productEANLabel;
-        private Label label7;
-        private Label label6;
-        private Label label5;
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private Label label1;
         private Label amountLabel;
+        private Panel cardPanel;
     }
 }
