@@ -70,5 +70,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             return await _db.Customers
                 .ToListAsync();
         }
+        public async Task UpdateCustomer(Customer customer)
+        {
+            _db.Customers.Update(customer);
+            await _db.SaveChangesAsync();
+        }
     }
 }

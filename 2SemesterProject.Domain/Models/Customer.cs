@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 
 namespace _2SemesterProjekt.Domain.Models
@@ -25,10 +26,7 @@ namespace _2SemesterProjekt.Domain.Models
 			Type = type;
 			PhoneNumber = phoneNumber;
 
-			if (InformationValid() == false)
-			{
-				throw new ArgumentException("Pre-conditions not met: invalid customer data.");
-			}
+			InformationValid();	
 		}
 
 		/// <summary>
@@ -48,41 +46,55 @@ namespace _2SemesterProjekt.Domain.Models
 			Debug.Assert(Address != null, "Adress was null");
 			Debug.Assert(Type != null, "Type was null");
 			Debug.Assert(PhoneNumber != 0, "PhoneNumber was null");
-
-			// Validate first and last name: only letters
-			if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) ||
-				!FirstName.All(char.IsLetter) || !LastName.All(char.IsLetter))
-			{
-				return false;
+			
+			// Validate first and last name: only letters, single space(s), hyphens & apostrophes.
+			if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) || 
+				// Checks if names are null (no reference to an object), empty or only spaces.
+				!FirstName.Replace(" ", "").Replace("-", "").Replace("'", "").All(char.IsLetter) || 
+				!LastName.Replace(" ", "").Replace("-", "").Replace("'", "").All(char.IsLetter))
+				//Removes all characters that are not letters, except spaces, hyphens & apostrophes.
+            {
+                throw new ArgumentException("Fornavn og efternavn må kun indeholde bogstaver, mellemrum og bindestreger");
 			}
-
+			
 			// Validate email: "@" and "." in correct order.
 			int atIndex = Email.IndexOf('@');
 			int dotIndex = Email.LastIndexOf('.');
 			if (string.IsNullOrWhiteSpace(Email) || atIndex <= 0 || dotIndex <= atIndex + 1 || dotIndex == Email.Length - 1)
 			{
-				return false;
-			}
-
+                throw new ArgumentException("Fejl i @ og/eller .");
+            }
+			
 			// Validate address: only letters and digits.
 			if (string.IsNullOrWhiteSpace(Address) || Address.All(char.IsLetterOrDigit))
 			{
-				return false;
-			}
+                throw new ArgumentException("Adresse må kun indeholde bogstaver og tal");
+            }
 
 			// Validate type: either "Privat" or "Erhverv".
 			if (string.IsNullOrWhiteSpace(Type) || (Type != "Privat" && Type != "Erhverv"))
 			{
-				return false;
-			}
+                throw new ArgumentException("Kundetype skal enten være 'Privat' eller 'Erhverv'");
+            }
 
 			// Validate phonenumber: 8-digit long.
 			if (PhoneNumber < 10000000 || PhoneNumber > 99999999)
 			{
-				return false;
-			}
+                throw new ArgumentException("Telefonnummer skal være 8 tal");
+            }
 
 			return true;
+		}
+		public void UpdateCustomerProperties(Customer customer)
+		{
+			customer.InformationValid();
+
+			FirstName = customer.FirstName;
+			LastName = customer.LastName;
+			Email = customer.Email;
+			PhoneNumber = customer.PhoneNumber;
+			Address = customer.Address;
+			Type = customer.Type;
 		}
 	}
 }

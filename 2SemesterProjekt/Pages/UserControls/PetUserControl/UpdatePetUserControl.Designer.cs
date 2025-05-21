@@ -119,9 +119,9 @@
             label5.AutoSize = true;
             label5.Location = new Point(596, 258);
             label5.Name = "label5";
-            label5.Size = new Size(57, 15);
+            label5.Size = new Size(51, 15);
             label5.TabIndex = 22;
-            label5.Text = "Dyrelæge";
+            label5.Text = "Dyrlæge";
             // 
             // comboBoxPrimaryVeterinarian
             // 
