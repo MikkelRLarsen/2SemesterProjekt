@@ -11,6 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
+using _2SemesterProjekt.Pages.UserControls.CustomerUserControl;
+using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 
 namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 {
@@ -93,6 +96,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
                     await _productService.CreateProductAsync(product);
                     MessageBox.Show($"{product.Name} er blevet oprettet i databasen.", "Produkt oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Controls.Clear();
+                    this.Controls.Add(new MainPageWallpaper());
                 }
                 catch (Exception ex)
                 {
@@ -175,6 +180,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private void textBoxSalesPrice_TextChanged(object sender, EventArgs e)
         {
             textBoxSalesPrice.BackColor = SystemColors.Window;
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Controls.Clear();
+            this.Controls.Add(new MainPageWallpaper());
         }
     }
 }

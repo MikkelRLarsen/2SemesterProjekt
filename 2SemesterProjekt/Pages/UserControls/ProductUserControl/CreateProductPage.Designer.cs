@@ -94,7 +94,6 @@
             // pictureBox7
             // 
             pictureBox7.BackColor = Color.Linen;
-            pictureBox7.Image = Properties.Resources.PageBox;
             pictureBox7.Location = new Point(416, 346);
             pictureBox7.Name = "pictureBox7";
             pictureBox7.Size = new Size(769, 88);
@@ -139,7 +138,8 @@
             // 
             // submitButton
             // 
-            submitButton.Image = Properties.Resources.SaveButtonGreyedOut;
+            submitButton.BackgroundImage = Properties.Resources.SaveButton;
+            submitButton.BackgroundImageLayout = ImageLayout.Stretch;
             submitButton.Location = new Point(945, 749);
             submitButton.Margin = new Padding(3, 4, 3, 4);
             submitButton.Name = "submitButton";
@@ -151,7 +151,8 @@
             // 
             // cancelButton
             // 
-            cancelButton.Image = Properties.Resources.CancelButton;
+            cancelButton.BackgroundImage = Properties.Resources.CancelButton;
+            cancelButton.BackgroundImageLayout = ImageLayout.Stretch;
             cancelButton.Location = new Point(416, 749);
             cancelButton.Margin = new Padding(3, 4, 3, 4);
             cancelButton.Name = "cancelButton";
@@ -159,10 +160,10 @@
             cancelButton.SizeMode = PictureBoxSizeMode.StretchImage;
             cancelButton.TabIndex = 62;
             cancelButton.TabStop = false;
+            cancelButton.Click += cancelButton_Click;
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.PageTitelBackground;
             pictureBox1.Location = new Point(101, 18);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(1399, 86);
@@ -173,7 +174,6 @@
             // pictureBox3
             // 
             pictureBox3.BackColor = Color.Linen;
-            pictureBox3.Image = Properties.Resources.PageBox;
             pictureBox3.Location = new Point(416, 147);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(769, 88);
@@ -183,7 +183,6 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Properties.Resources.PageBackground;
             pictureBox2.Location = new Point(101, 122);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(1399, 705);
@@ -216,7 +215,6 @@
             // pictureBox4
             // 
             pictureBox4.BackColor = Color.Linen;
-            pictureBox4.Image = Properties.Resources.PageBox;
             pictureBox4.Location = new Point(416, 245);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(769, 88);
@@ -239,7 +237,6 @@
             // pictureBox5
             // 
             pictureBox5.BackColor = Color.Linen;
-            pictureBox5.Image = Properties.Resources.PageBox;
             pictureBox5.Location = new Point(416, 448);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(372, 88);
@@ -250,7 +247,6 @@
             // pictureBox6
             // 
             pictureBox6.BackColor = Color.Linen;
-            pictureBox6.Image = Properties.Resources.PageBox;
             pictureBox6.Location = new Point(813, 448);
             pictureBox6.Name = "pictureBox6";
             pictureBox6.Size = new Size(372, 88);
@@ -301,7 +297,6 @@
             // pictureBox8
             // 
             pictureBox8.BackColor = Color.Linen;
-            pictureBox8.Image = Properties.Resources.PageBox;
             pictureBox8.Location = new Point(416, 553);
             pictureBox8.Name = "pictureBox8";
             pictureBox8.Size = new Size(372, 88);
@@ -340,7 +335,6 @@
             // pictureBox9
             // 
             pictureBox9.BackColor = Color.Linen;
-            pictureBox9.Image = Properties.Resources.PageBox;
             pictureBox9.Location = new Point(813, 553);
             pictureBox9.Name = "pictureBox9";
             pictureBox9.Size = new Size(372, 88);

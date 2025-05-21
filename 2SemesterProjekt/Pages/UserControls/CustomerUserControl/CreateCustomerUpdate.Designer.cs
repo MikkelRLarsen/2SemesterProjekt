@@ -162,6 +162,8 @@
             // 
             // submitButton
             // 
+            submitButton.BackgroundImage = Properties.Resources.SaveButton;
+            submitButton.BackgroundImageLayout = ImageLayout.Stretch;
             submitButton.Location = new Point(945, 759);
             submitButton.Margin = new Padding(3, 4, 3, 4);
             submitButton.Name = "submitButton";
@@ -173,11 +175,12 @@
             // 
             // cancelButton
             // 
+            cancelButton.BackgroundImage = Properties.Resources.CancelButton;
+            cancelButton.BackgroundImageLayout = ImageLayout.Stretch;
             cancelButton.Location = new Point(416, 759);
             cancelButton.Margin = new Padding(3, 4, 3, 4);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(240, 55);
-            cancelButton.SizeMode = PictureBoxSizeMode.StretchImage;
             cancelButton.TabIndex = 40;
             cancelButton.TabStop = false;
             cancelButton.Click += cancelButton_Click;
