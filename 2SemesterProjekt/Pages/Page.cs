@@ -126,7 +126,7 @@ namespace _2SemesterProjekt.Pages
         // PetMenu
         private void CreateAndPetMenu()
         {
-            PetNav.ButtonLabel.Text = "Kældedyr";
+            PetNav.ButtonLabel.Text = "Kæledyr";
             PetNav.BringToFront();
             AddMoveHandlers(PetNav);
 
