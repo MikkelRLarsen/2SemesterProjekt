@@ -22,6 +22,7 @@ namespace _2SemesterProjekt.Pages
             CreateAndSetSalgMenu();
             CreateAndKundeMenu();
             CreateAndPetMenu();
+            CreateAndSetStockMenu();
             CreateAndSetAdministrationMenu();
 
             AddMoveHandlers(NavPanel);
@@ -151,22 +152,15 @@ namespace _2SemesterProjekt.Pages
             MainPanel.Controls.Add(new UpdatePetPage());
         }
 
-
-        //AdministrationMenu
-        private void CreateAndSetAdministrationMenu()
+        //StockMenu
+        private void CreateAndSetStockMenu()
         {
-            AdministrationNav.ButtonLabel.Text = "Administation";
-            AdministrationNav.BringToFront();
-            AddMoveHandlers(AdministrationNav);
+            StockNav.ButtonLabel.Text = "Lagerbeholdning";
+            StockNav.BringToFront();
+            AddMoveHandlers(StockNav);
 
-            AdministrationNav.AddOption(new NavigationButtonOption(CreateEmployee, "Opret Ansat"));
-            AdministrationNav.AddOption(new NavigationButtonOption(StorageStatus, "Lagerstatus"));
-            AdministrationNav.AddOption(new NavigationButtonOption(CreateProduct, "Opret nyt produkt"));
-        }
-        private async void CreateEmployee(object sender, EventArgs e)
-        {
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
+            StockNav.AddOption(new NavigationButtonOption(StorageStatus, "Lagerstatus"));
+            StockNav.AddOption(new NavigationButtonOption(CreateProduct, "Opret produkt"));
         }
         private async void StorageStatus(object sender, EventArgs e)
         {
@@ -177,6 +171,22 @@ namespace _2SemesterProjekt.Pages
         {
             MainPanel.Controls.Clear();
             MainPanel.Controls.Add(new CreateProductPage());
+        }
+
+
+        //AdministrationMenu
+        private void CreateAndSetAdministrationMenu()
+        {
+            AdministrationNav.ButtonLabel.Text = "Administation";
+            AdministrationNav.BringToFront();
+            AddMoveHandlers(AdministrationNav);
+
+            AdministrationNav.AddOption(new NavigationButtonOption(CreateEmployee, "Opret Ansat"));
+        }
+        private async void CreateEmployee(object sender, EventArgs e)
+        {
+            //MainPanel.Controls.Clear();
+            //MainPanel.Controls.Add(new KonsultationPage());
         }
 
         // MoveHandler

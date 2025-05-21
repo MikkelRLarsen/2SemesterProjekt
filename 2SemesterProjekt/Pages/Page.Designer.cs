@@ -40,16 +40,17 @@
             panel3 = new Panel();
             PetNav = new UserControls.NavigationButtons.NavigationButton();
             sqlCommandBuilder1 = new Microsoft.Data.SqlClient.SqlCommandBuilder();
+            StockNav = new UserControls.NavigationButtons.NavigationButton();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
             // NavPanel
             // 
             NavPanel.BackColor = Color.Moccasin;
-            NavPanel.Location = new Point(1236, 0);
+            NavPanel.Location = new Point(1436, 0);
             NavPanel.Margin = new Padding(0);
             NavPanel.Name = "NavPanel";
-            NavPanel.Size = new Size(364, 35);
+            NavPanel.Size = new Size(164, 35);
             NavPanel.TabIndex = 0;
             // 
             // MainPanel
@@ -121,7 +122,7 @@
             // AdministrationNav
             // 
             AdministrationNav.BackColor = Color.Moccasin;
-            AdministrationNav.Location = new Point(1036, 0);
+            AdministrationNav.Location = new Point(1236, 0);
             AdministrationNav.Margin = new Padding(0);
             AdministrationNav.Name = "AdministrationNav";
             AdministrationNav.Size = new Size(200, 35);
@@ -144,11 +145,21 @@
             PetNav.Size = new Size(200, 35);
             PetNav.TabIndex = 8;
             // 
+            // StockNav
+            // 
+            StockNav.BackColor = Color.Moccasin;
+            StockNav.Location = new Point(1036, 0);
+            StockNav.Margin = new Padding(0);
+            StockNav.Name = "StockNav";
+            StockNav.Size = new Size(200, 35);
+            StockNav.TabIndex = 0;
+            // 
             // Page
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1600, 880);
+            Controls.Add(StockNav);
             Controls.Add(PetNav);
             Controls.Add(panel3);
             Controls.Add(AdministrationNav);
@@ -184,5 +195,6 @@
 		private UserControls.NavigationButtons.NavigationButton PetNav;
         private Microsoft.Data.SqlClient.SqlCommandBuilder sqlCommandBuilder1;
         private Button exitButton;
+        private UserControls.NavigationButtons.NavigationButton StockNav;
     }
 }
