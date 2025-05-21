@@ -115,6 +115,11 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 
 		private async void changeButton_Click(object sender, EventArgs e)
 		{
+			if (_selectedExaminationCard == null)
+			{
+				MessageBox.Show("Du skal vælge en konsultation for at se medicin detaljer");
+				return;
+			}
 			_panel.Controls.Clear();
 			_panel.Controls.Add(new SeeMedicinDetails(_selectedExaminationCard.Examination, this, _panel));
 
