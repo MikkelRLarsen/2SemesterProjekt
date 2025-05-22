@@ -18,11 +18,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private readonly IProductLineService _productLineService;
         private readonly IProductService _productService;
 
-        public CustomerCartPage(List<Product> order, Panel mainPagePanel, CreateOrderPage createOrderPage)
+        public CustomerCartPage(List<Product> order, Panel mainPagePanel)
         {
             InitializeComponent();
             _mainPagePanel = mainPagePanel;
-            _orderPage = createOrderPage;
             _productsInCart = order;
 
             _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>()!;
@@ -244,14 +243,20 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             }
         }
 
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // META-VALIDATION METHODS (FOR THE INDIVIDUEL USER CONTROL BOXES):
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+
         private void textBoxProduct_Enter(object sender, EventArgs e)
         {
+            // Removes placeholder text from textbox
             textBoxProduct.ForeColor = SystemColors.WindowText;
             textBoxProduct.Text = string.Empty;
         }
 
-        private void textBoxProduct_Leave_1(object sender, EventArgs e)
+        private void textBoxProduct_Leave(object sender, EventArgs e)
         {
+            // Adds placeholder text to textbox
             if (textBoxProduct.Text == String.Empty)
             {
                 textBoxProduct.ForeColor = SystemColors.InactiveCaption;

@@ -104,7 +104,7 @@
             textBoxProduct.Text = "Søg på produktnavn";
             textBoxProduct.Enter += textBoxProduct_Enter;
             textBoxProduct.KeyPress += textBoxProduct_KeyPress;
-            textBoxProduct.Leave += textBoxProduct_Leave_1;
+            textBoxProduct.Leave += textBoxProduct_Leave;
             // 
             // productSearchButton
             // 

@@ -23,7 +23,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>()!;
 
             _order = new List<Product>();
-            _customerCartPage = new CustomerCartPage(_order, _mainPagePanel, this);
+            _customerCartPage = new CustomerCartPage(_order, _mainPagePanel);
         }
 
         private async void CreateOrderPage_Load(object sender, EventArgs e)
@@ -105,6 +105,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 MessageBox.Show(ex.Message, "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // META-VALIDATION METHODS (FOR THE INDIVIDUEL USER CONTROL BOXES):
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
 
         private void textBoxProduct_Enter(object sender, EventArgs e)
         {
