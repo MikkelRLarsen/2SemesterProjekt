@@ -9,7 +9,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
     public partial class CreateOrderPage : UserControl
     {
         public List<Product> _order; // Products in the order is stored here.
-        public BindingList<Product> _allProducts; // Products in stock is stored here.
         private readonly IProductService _productService;
         private int _itemsInCart;
         private Panel _mainPagePanel;
