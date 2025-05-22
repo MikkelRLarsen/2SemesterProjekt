@@ -18,6 +18,12 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			_db = db;
 		}
 
+		public async Task CreateEmployeeAsync(Employee employee)
+		{
+			await _db.Employees.AddAsync(employee);
+			await _db.SaveChangesAsync();
+		}
+
 		public async Task<IEnumerable<Employee>> GetAllEmployeeWithTypeAsync(string employeeType)
 		{
 			return await _db.Employees
