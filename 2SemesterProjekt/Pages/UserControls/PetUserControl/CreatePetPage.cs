@@ -50,10 +50,10 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 			{
 				e.Value = employee.FirstName;
 			}
-			else // Make the item to a string
-			{
-				e.Value = e.ListItem!.ToString();
-			}
+			//else // Make the item to a string
+			//{
+			//	e.Value = e.ListItem!.ToString();
+			//}
 		}
 
 		private void textBoxPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
@@ -87,6 +87,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 			}
 
 			submitButton.Image = Properties.Resources.SaveButton;
+			submitButton.Enabled = true;
 		}
 
 		private async void submitButton_Click(object sender, EventArgs e)
@@ -160,6 +161,8 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
 			MessageBox.Show(displayMessage, "Information", MessageBoxButtons.OK);
 		}
+		
+		// AUTO FILL-IN BEGIN!
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         // ProcessCmdKey is a method in the Control class (inherited by UserControl and Form)
         // that intercepts keyboard commands before they are sent to the focused control.
@@ -174,12 +177,26 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-		private void TriggerAutoCustomerSearchFillIn()
+		private async void TriggerAutoCustomerSearchFillIn()
 		{
+			/// Phone number to fill in:
             textBoxPhoneNumber.Text = "12345678";
-			ComboBoxPetSpecies.Text = "Kat";
-			textBoxPetName.Text = "Kjartan";
-			DateTimePickerBirthday.Value = DateTime.Today;
+
+			/// Pet species to fill in:
+            var petSpecies = await _petService.GetAllPetSpeciesAsync();
+            ComboBoxPetSpecies.DataSource = petSpecies;
+            var speciesToSelect = petSpecies.FirstOrDefault(s => s.Name == "Kat");
+            if (speciesToSelect != null)
+            {
+                ComboBoxPetSpecies.SelectedItem = speciesToSelect;
+            }
+
+			/// Pet name to fill in:
+            textBoxPetName.Text = "Kjartan";
+			
+			/// Pet birthday to fill in:
+			DateTimePickerBirthday.Value = DateTime.Today.AddDays(-1);
         }
+		// AUTO FILL-IN END!
     }
 }
