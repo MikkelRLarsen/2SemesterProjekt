@@ -36,9 +36,7 @@
             textBoxEAN = new TextBox();
             submitButton = new PictureBox();
             cancelButton = new PictureBox();
-            pictureBox1 = new PictureBox();
             pictureBox3 = new PictureBox();
-            pictureBox2 = new PictureBox();
             label3 = new Label();
             textBoxProductName = new TextBox();
             pictureBox4 = new PictureBox();
@@ -54,12 +52,12 @@
             textBoxSalesPrice = new TextBox();
             label8 = new Label();
             pictureBox9 = new PictureBox();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)submitButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cancelButton).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
@@ -67,6 +65,8 @@
             ((System.ComponentModel.ISupportInitialize)numericMinInStock).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // label4
@@ -163,15 +163,6 @@
             cancelButton.TabStop = false;
             cancelButton.Click += cancelButton_Click;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(101, 18);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1399, 86);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 67;
-            pictureBox1.TabStop = false;
-            // 
             // pictureBox3
             // 
             pictureBox3.BackColor = Color.Linen;
@@ -181,15 +172,6 @@
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 69;
             pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Location = new Point(101, 122);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(1399, 705);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 68;
-            pictureBox2.TabStop = false;
             // 
             // label3
             // 
@@ -345,6 +327,26 @@
             pictureBox9.TabIndex = 88;
             pictureBox9.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.PageTitelBackground;
+            pictureBox1.Location = new Point(101, 18);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(1399, 86);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 90;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.PageBackground;
+            pictureBox2.Location = new Point(101, 122);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(1399, 705);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 91;
+            pictureBox2.TabStop = false;
+            // 
             // CreateProductPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -372,17 +374,15 @@
             Controls.Add(textBoxEAN);
             Controls.Add(submitButton);
             Controls.Add(cancelButton);
-            Controls.Add(pictureBox1);
             Controls.Add(pictureBox3);
+            Controls.Add(pictureBox1);
             Controls.Add(pictureBox2);
             Name = "CreateProductPage";
             Size = new Size(1600, 845);
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ((System.ComponentModel.ISupportInitialize)submitButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)cancelButton).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
@@ -390,6 +390,8 @@
             ((System.ComponentModel.ISupportInitialize)numericMinInStock).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -404,9 +406,7 @@
         private TextBox textBoxEAN;
         private PictureBox submitButton;
         private PictureBox cancelButton;
-        private PictureBox pictureBox1;
         private PictureBox pictureBox3;
-        private PictureBox pictureBox2;
         private Label label3;
         private TextBox textBoxProductName;
         private PictureBox pictureBox4;
@@ -422,5 +422,7 @@
         private TextBox textBoxSalesPrice;
         private Label label8;
         private PictureBox pictureBox9;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }

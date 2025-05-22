@@ -38,13 +38,11 @@
             textBoxFirstName = new TextBox();
             submitButton = new PictureBox();
             cancelButton = new PictureBox();
-            pictureBox1 = new PictureBox();
             pictureBox3 = new PictureBox();
             pictureBox9 = new PictureBox();
             pictureBox4 = new PictureBox();
             pictureBox5 = new PictureBox();
             pictureBox6 = new PictureBox();
-            pictureBox2 = new PictureBox();
             label8 = new Label();
             pictureBox7 = new PictureBox();
             label9 = new Label();
@@ -53,16 +51,18 @@
             textBoxAddress = new TextBox();
             textBoxPhoneNumber = new TextBox();
             comboBoxType = new ComboBox();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)submitButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cancelButton).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // label6
@@ -185,15 +185,6 @@
             cancelButton.TabStop = false;
             cancelButton.Click += cancelButton_Click;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(101, 20);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1399, 85);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 45;
-            pictureBox1.TabStop = false;
-            // 
             // pictureBox3
             // 
             pictureBox3.BackColor = Color.Linen;
@@ -243,15 +234,6 @@
             pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox6.TabIndex = 55;
             pictureBox6.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Location = new Point(101, 124);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(1399, 705);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 46;
-            pictureBox2.TabStop = false;
             // 
             // label8
             // 
@@ -340,6 +322,26 @@
             comboBoxType.Size = new Size(274, 28);
             comboBoxType.TabIndex = 64;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.PageTitelBackground;
+            pictureBox1.Location = new Point(101, 18);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(1399, 86);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 65;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.PageBackground;
+            pictureBox2.Location = new Point(101, 122);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(1399, 705);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 66;
+            pictureBox2.TabStop = false;
+            // 
             // CreateCustomerUpdate
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -360,28 +362,28 @@
             Controls.Add(textBoxFirstName);
             Controls.Add(submitButton);
             Controls.Add(cancelButton);
-            Controls.Add(pictureBox1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox9);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox5);
             Controls.Add(pictureBox6);
-            Controls.Add(pictureBox2);
             Controls.Add(label7);
             Controls.Add(label6);
+            Controls.Add(pictureBox1);
+            Controls.Add(pictureBox2);
             Margin = new Padding(0);
             Name = "CreateCustomerUpdate";
             Size = new Size(1600, 845);
             ((System.ComponentModel.ISupportInitialize)submitButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)cancelButton).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -397,13 +399,11 @@
         private TextBox textBoxFirstName;
         private PictureBox submitButton;
         private PictureBox cancelButton;
-        private PictureBox pictureBox1;
         private PictureBox pictureBox3;
         private PictureBox pictureBox9;
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
         private PictureBox pictureBox6;
-        private PictureBox pictureBox2;
         private Label label8;
         private PictureBox pictureBox7;
         private Label label9;
@@ -412,5 +412,7 @@
         private TextBox textBoxAddress;
         private TextBox textBoxPhoneNumber;
         private ComboBox comboBoxType;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }
