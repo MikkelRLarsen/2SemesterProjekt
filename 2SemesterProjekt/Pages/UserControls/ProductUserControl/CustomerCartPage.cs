@@ -9,7 +9,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
     {
         public List<Product> _productsInCart;
         public List<InCartProductCard> _cartProductCards = new List<InCartProductCard>();
-        private CreateOrderPage _orderPage;
         private Panel _mainPagePanel;
         private Customer _customer;
 
