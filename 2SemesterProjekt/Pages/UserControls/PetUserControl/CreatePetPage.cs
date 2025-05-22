@@ -170,14 +170,13 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         {
             if (keyData == (Keys.Control | Keys.F))
             {
-                textBoxPhoneNumber.Focus();
-                TriggerAutoCustomerSearchFillIn();
+                TriggerAutoPetFillIn();
                 return true;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-		private async void TriggerAutoCustomerSearchFillIn()
+		private async void TriggerAutoPetFillIn()
 		{
 			/// Phone number to fill in:
             textBoxPhoneNumber.Text = "12345678";
