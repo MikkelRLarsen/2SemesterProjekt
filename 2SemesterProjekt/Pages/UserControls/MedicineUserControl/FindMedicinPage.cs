@@ -133,5 +133,10 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			_panel.Controls.Add(new SeeMedicinDetails(_selectedExaminationCard.Examination, this, _panel));
 
 		}
+
+		private void textBoxCustomerPhoneNumberOrName_TextChanged(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
