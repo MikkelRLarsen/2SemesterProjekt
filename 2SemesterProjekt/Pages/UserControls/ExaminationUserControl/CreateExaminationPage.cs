@@ -402,18 +402,16 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             if (keyData == (Keys.Control | Keys.F))
             {
-                customerSearchTextBox.Focus();
                 TriggerAutoCustomerSearchFillIn();
                 return true;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-        private void TriggerAutoCustomerSearchFillIn()
+        private async void TriggerAutoCustomerSearchFillIn()
         {
+            ///Customer phonenumber to fill in:
             customerSearchTextBox.Text = "12345678";
-
-            customerSearchButton.Enabled = true;
         }
     }
 }
