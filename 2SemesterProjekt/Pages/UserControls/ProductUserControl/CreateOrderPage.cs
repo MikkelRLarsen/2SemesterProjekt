@@ -78,50 +78,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _customerCartPage.BringToFront();
         }
 
-        private void findAllButton_MouseEnter(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Hand;
-        }
-
-        private void findAllButton_MouseLeave(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Default;
-        }
-
-        private void goToCartButton_MouseEnter(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Hand;
-        }
-
-        private void goToCartButton_MouseLeave(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Default;
-        }
-
         private void cancelButton_Click(object sender, EventArgs e)
         {
             _mainPagePanel.Controls.Remove(this);
             _mainPagePanel.Controls.Add(new MainPageWallpaper());
-        }
-
-        private void cancelButton_MouseEnter(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Hand;
-        }
-
-        private void cancelButton_MouseLeave(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Default;
-        }
-
-        private void customerSearchButton_MouseEnter(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Hand;
-        }
-
-        private void customerSearchButton_MouseLeave(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Default;
         }
 
         private void customerSearchButton_Click(object sender, EventArgs e)
@@ -161,6 +121,46 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 textBoxProduct.ForeColor = SystemColors.InactiveCaption;
                 textBoxProduct.Text = "Søg på produktnavn";
             }
+        }
+
+        private void cancelButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void cancelButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void customerSearchButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void customerSearchButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void findAllButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void findAllButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void goToCartButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void goToCartButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
         }
     }
 }

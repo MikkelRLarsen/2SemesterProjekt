@@ -269,8 +269,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             }
         }
 
-
-
         private void productSearchButton_MouseEnter(object sender, EventArgs e)
         {
             Cursor = Cursors.Hand;
