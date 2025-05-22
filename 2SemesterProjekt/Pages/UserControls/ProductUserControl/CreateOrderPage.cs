@@ -1,37 +1,29 @@
 ﻿using System.ComponentModel;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 {
     public partial class CreateOrderPage : UserControl
     {
-        public List<Domain.Models.Product> _order; // Products in the order is stored here.
-        public BindingList<Domain.Models.Product> _allProducts; // Products in stock is stored here.
+        public List<Product> _order; // Products in the order is stored here.
         private readonly IProductService _productService;
-        private readonly ICustomerService _customerService;
-        private readonly IOrderService _orderService;
-        private readonly IProductLineService _productLineService;
         private int _itemsInCart;
         private Panel _mainPagePanel;
         private CustomerCartPage _customerCartPage;
-        public List<ProductCardUpdated> AllProductCards { get; set; } = new List<ProductCardUpdated>();
+        public List<ProductCard> _allProductCards = new List<ProductCard>();
 
         public CreateOrderPage(Panel mainPagePanel)
         {
             InitializeComponent();
             _mainPagePanel = mainPagePanel;
 
-            IServiceScope scope = ServiceProviderSingleton.GetServiceProvider().CreateScope();
-            _productService = scope.ServiceProvider.GetService<IProductService>(); /* This ensure that the Listbox gets the newest
-                                                                                    * data everytime the user wants to create an order.*/
-            _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>();
-            _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>();
-            _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>();
+            _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>()!;
 
-            _order = new List<Domain.Models.Product>();
-            _customerCartPage = new CustomerCartPage(_order, _mainPagePanel, this);
+            _order = new List<Product>();
+            _customerCartPage = new CustomerCartPage(_order, _mainPagePanel);
         }
 
         private async void CreateOrderPage_Load(object sender, EventArgs e)
@@ -41,15 +33,17 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private async void FindAndSetAllProductsAsync()
         {
-            IEnumerable<Domain.Models.Product> allProductsInStock = await _productService.GetAllProductsInStockAsync();
+            IEnumerable<Product> allProductsInStock = await _productService.GetAllProductsInStockAsync();
 
             foreach (var product in allProductsInStock)
             {
-                AllProductCards.Add(new ProductCardUpdated(this, _customerCartPage, this.flowPanel, product, ProductCardUpdated.ProductCardMode.AddToCart));
+                _allProductCards.Add(new ProductCard(this, _customerCartPage, this.flowPanel, product, ProductCard.CardMode.AddToCart));
             }
+
+            findAllButton.Image = Properties.Resources.FindAllButton;
         }
 
-        public async void LoadAndShowProductCards(IEnumerable<ProductCardUpdated> productCardsToBeLoaded)
+        public async void LoadAndShowProductCards(IEnumerable<ProductCard> productCardsToBeLoaded)
         {
             // Clears the panel and then adds the wanted ExaminationCards
             flowPanel.Controls.Clear();
@@ -58,7 +52,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private void findAllButton_Click(object sender, EventArgs e)
         {
-            LoadAndShowProductCards(AllProductCards);
+            LoadAndShowProductCards(_allProductCards);
         }
 
         public void IncrementItemsInCart(int amount)
@@ -80,6 +74,105 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _mainPagePanel.Controls.Add(_customerCartPage);
 
             _customerCartPage.BringToFront();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            _mainPagePanel.Controls.Remove(this);
+            _mainPagePanel.Controls.Add(new MainPageWallpaper());
+        }
+
+        private void productSearchButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Search by name
+                IEnumerable<ProductCard> productCards = _allProductCards
+                    .Where(p => p._productData.Name.Contains(textBoxProduct.Text, StringComparison.OrdinalIgnoreCase));
+
+                LoadAndShowProductCards(productCards);
+
+                // No hits - show user
+                if (flowPanel.Controls.Count == 0)
+                {
+                    MessageBox.Show($"Ingen hits på \"{textBoxProduct.Text}\"", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                textBoxProduct.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // META-VALIDATION METHODS (FOR THE INDIVIDUEL USER CONTROL BOXES):
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+        private void textBoxProduct_Enter(object sender, EventArgs e)
+        {
+            // Removes placeholder text from textbox
+            textBoxProduct.ForeColor = SystemColors.WindowText;
+            textBoxProduct.Text = string.Empty;
+        }
+
+        private void textBoxProduct_Leave(object sender, EventArgs e)
+        {
+            // Adds placeholder text to textbox
+            if (textBoxProduct.Text == String.Empty)
+            {
+                textBoxProduct.ForeColor = SystemColors.InactiveCaption;
+                textBoxProduct.Text = "Søg på produktnavn";
+            }
+        }
+
+        private void cancelButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void cancelButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void customerSearchButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void customerSearchButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void findAllButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void findAllButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void goToCartButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void goToCartButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void textBoxProduct_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                productSearchButton_Click(sender, e);
+            }
         }
     }
 }

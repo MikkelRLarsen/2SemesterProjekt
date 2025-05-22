@@ -325,6 +325,18 @@ namespace _2SemesterProjekt.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FindAllButtonGreyedOut
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("FindAllButtonGreyedOut", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ChangeButtonGreyedOut
         {
             get
@@ -462,6 +474,42 @@ namespace _2SemesterProjekt.Properties {
             get
             {
                 object obj = ResourceManager.GetObject("ExportToTxtButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AddToCartButton
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("AddToCartButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RemoveFromCartButton
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("RemoveFromCartButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ProductCard
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("ProductCard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -12,11 +12,11 @@ using _2SemesterProjekt.Pages;
 
 namespace _2SemesterProjekt
 {
-    public partial class ProductCard : UserControl
+    public partial class OldProductCard : UserControl
     {
         private Product _product; // Holds Product data
 
-        public ProductCard(Product product)
+        public OldProductCard(Product product)
         {
             _product = product;
             InitializeComponent();

@@ -31,8 +31,8 @@
             label2 = new Label();
             pictureBox1 = new PictureBox();
             flowPanel = new FlowLayoutPanel();
-            textBoxCustomerPhoneNumberOrName = new TextBox();
-            customerSearchButton = new PictureBox();
+            textBoxProduct = new TextBox();
+            productSearchButton = new PictureBox();
             findAllButton = new PictureBox();
             label1 = new Label();
             pictureBox3 = new PictureBox();
@@ -42,7 +42,7 @@
             pictureBox2 = new PictureBox();
             itemsInCart = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customerSearchButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)productSearchButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)findAllButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -83,38 +83,47 @@
             flowPanel.Size = new Size(769, 501);
             flowPanel.TabIndex = 49;
             // 
-            // textBoxCustomerPhoneNumberOrName
+            // textBoxProduct
             // 
-            textBoxCustomerPhoneNumberOrName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxCustomerPhoneNumberOrName.Location = new Point(570, 194);
-            textBoxCustomerPhoneNumberOrName.Margin = new Padding(3, 4, 3, 4);
-            textBoxCustomerPhoneNumberOrName.MaxLength = 8;
-            textBoxCustomerPhoneNumberOrName.Name = "textBoxCustomerPhoneNumberOrName";
-            textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
-            textBoxCustomerPhoneNumberOrName.TabIndex = 48;
+            textBoxProduct.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxProduct.ForeColor = SystemColors.InactiveCaption;
+            textBoxProduct.Location = new Point(570, 194);
+            textBoxProduct.Margin = new Padding(3, 4, 3, 4);
+            textBoxProduct.MaxLength = 8;
+            textBoxProduct.Name = "textBoxProduct";
+            textBoxProduct.Size = new Size(274, 27);
+            textBoxProduct.TabIndex = 48;
+            textBoxProduct.Text = "Søg på produktnavn";
+            textBoxProduct.Enter += textBoxProduct_Enter;
+            textBoxProduct.KeyPress += textBoxProduct_KeyPress;
+            textBoxProduct.Leave += textBoxProduct_Leave;
             // 
-            // customerSearchButton
+            // productSearchButton
             // 
-            customerSearchButton.BackColor = Color.AntiqueWhite;
-            customerSearchButton.Image = Properties.Resources.SearchButton;
-            customerSearchButton.Location = new Point(850, 197);
-            customerSearchButton.Margin = new Padding(3, 4, 3, 4);
-            customerSearchButton.Name = "customerSearchButton";
-            customerSearchButton.Size = new Size(47, 21);
-            customerSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
-            customerSearchButton.TabIndex = 47;
-            customerSearchButton.TabStop = false;
+            productSearchButton.BackColor = Color.AntiqueWhite;
+            productSearchButton.Image = Properties.Resources.SearchButton;
+            productSearchButton.Location = new Point(850, 197);
+            productSearchButton.Margin = new Padding(3, 4, 3, 4);
+            productSearchButton.Name = "productSearchButton";
+            productSearchButton.Size = new Size(47, 21);
+            productSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
+            productSearchButton.TabIndex = 47;
+            productSearchButton.TabStop = false;
+            productSearchButton.Click += productSearchButton_Click;
+            productSearchButton.MouseEnter += customerSearchButton_MouseEnter;
+            productSearchButton.MouseLeave += customerSearchButton_MouseLeave;
             // 
             // findAllButton
             // 
-            findAllButton.Image = Properties.Resources.FindAllButton;
+            findAllButton.Image = Properties.Resources.FindAllButtonGreyedOut;
             findAllButton.Location = new Point(931, 197);
             findAllButton.Name = "findAllButton";
             findAllButton.Size = new Size(99, 21);
-            findAllButton.SizeMode = PictureBoxSizeMode.StretchImage;
             findAllButton.TabIndex = 46;
             findAllButton.TabStop = false;
             findAllButton.Click += findAllButton_Click;
+            findAllButton.MouseEnter += findAllButton_MouseEnter;
+            findAllButton.MouseLeave += findAllButton_MouseLeave;
             // 
             // label1
             // 
@@ -122,7 +131,7 @@
             label1.BackColor = Color.AntiqueWhite;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.SaddleBrown;
-            label1.Location = new Point(483, 169);
+            label1.Location = new Point(549, 169);
             label1.Name = "label1";
             label1.Size = new Size(502, 20);
             label1.TabIndex = 45;
@@ -160,6 +169,8 @@
             goToCartButton.TabIndex = 52;
             goToCartButton.TabStop = false;
             goToCartButton.Click += goToCartButton_Click;
+            goToCartButton.MouseEnter += goToCartButton_MouseEnter;
+            goToCartButton.MouseLeave += goToCartButton_MouseLeave;
             // 
             // cancelButton
             // 
@@ -171,6 +182,9 @@
             cancelButton.SizeMode = PictureBoxSizeMode.StretchImage;
             cancelButton.TabIndex = 51;
             cancelButton.TabStop = false;
+            cancelButton.Click += cancelButton_Click;
+            cancelButton.MouseEnter += cancelButton_MouseEnter;
+            cancelButton.MouseLeave += cancelButton_MouseLeave;
             // 
             // pictureBox2
             // 
@@ -204,8 +218,8 @@
             Controls.Add(goToCartButton);
             Controls.Add(cancelButton);
             Controls.Add(flowPanel);
-            Controls.Add(textBoxCustomerPhoneNumberOrName);
-            Controls.Add(customerSearchButton);
+            Controls.Add(textBoxProduct);
+            Controls.Add(productSearchButton);
             Controls.Add(findAllButton);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
@@ -217,7 +231,7 @@
             Size = new Size(1600, 845);
             Load += CreateOrderPage_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customerSearchButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)productSearchButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)findAllButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
@@ -233,8 +247,8 @@
         private Label label2;
         private PictureBox pictureBox1;
         private FlowLayoutPanel flowPanel;
-        private TextBox textBoxCustomerPhoneNumberOrName;
-        private PictureBox customerSearchButton;
+        private TextBox textBoxProduct;
+        private PictureBox productSearchButton;
         private PictureBox findAllButton;
         private Label label1;
         private PictureBox pictureBox3;
