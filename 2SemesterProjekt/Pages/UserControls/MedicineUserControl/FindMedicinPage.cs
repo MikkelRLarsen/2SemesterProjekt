@@ -10,7 +10,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 	{
 		private IExaminationService _examinationService;
 		private List<MedicineCard> _allExaminationCards = new List<MedicineCard>();
-		private MedicineCard _selectedExaminationCard;
+		private ExaminationCard _selectedExaminationCard;
 		private Panel _panel;
 
 		public FindMedicinPage(Panel panel)
@@ -38,7 +38,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 				var allExaminations = await _examinationService.GetAllExaminationsAsync();
 
 				// Adds exam to all examination if they are completed and have a Medicine Presription. For this page you shouldn't need exam which have yet to be completed and doesn't have medicine
-				foreach (var exam in allExaminations.Where(ex => ex.Date < DateTime.Now && ex.Medicine != null))
+				foreach (var exam in allExaminations.Where(ex => ex.Date < DateTime.Now && ex.MedicinePrescriptions != null))
 				{
 					_allExaminationCards.Add(new ExaminationCardUpdated(exam, this));
 				}
@@ -112,13 +112,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 
 		public void OnCardSelected(MedicineCard selectedCard)
 		{
-			if (_selectedExaminationCard != null)
-			{
-				_selectedExaminationCard.SetSelected(false);
-			}
 
-			_selectedExaminationCard = selectedCard;
-			_selectedExaminationCard.SetSelected(true);
 		}
 
 		private async void changeButton_Click(object sender, EventArgs e)
@@ -137,6 +131,17 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 		private void textBoxCustomerPhoneNumberOrName_TextChanged(object sender, EventArgs e)
 		{
 
+		}
+
+		public void OnCardSelected(ExaminationCardUpdated selectedCard)
+		{
+			if (_selectedExaminationCard != null)
+			{
+				_selectedExaminationCard.SetSelected(false);
+			}
+
+			_selectedExaminationCard = selectedCard;
+			_selectedExaminationCard.SetSelected(true);
 		}
 	}
 }

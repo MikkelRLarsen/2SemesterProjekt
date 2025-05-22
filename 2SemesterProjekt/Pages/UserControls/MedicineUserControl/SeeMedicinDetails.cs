@@ -1,14 +1,4 @@
 ﻿using _2SemesterProjekt.Domain.Models;
-using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 {
@@ -17,7 +7,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 		private readonly FindMedicinPage _findMedicinPage;
 		private readonly Panel _panel;
 		private readonly Examination _examination;
-		private List<MedicineCard> _medicineCards = new List<MedicineCard>();
+		private Dictionary<string, MedicineCard> _medicineCards = new Dictionary<string, MedicineCard>();
 		public SeeMedicinDetails(Examination examination, FindMedicinPage previousPage, Panel panel)
 		{
 			InitializeComponent();
@@ -38,18 +28,16 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			try
 			{
 				// Finds all examination where Examination.Pet.Customers phonenumber == input phonenumber
-				IEnumerable<MedicineCard> allMedicineCardsWithMedicineName = _medicineCards
-																					.Where();
+				MedicineCard? medicineCardsWithMedicineName = _medicineCards.GetValueOrDefault(SearchMedicineTextBox.Text);
 
 				// If there wasn't any examination with customer phonenumber
-				if (allMedicineCardsWithMedicineName.Count() == 0)
+				if (medicineCardsWithMedicineName == null)
 				{
-					throw new ArgumentException("Kunden er ikke registeret i databasen eller ikke har nogen kæledyr");
+					throw new ArgumentException("Der er ikke nogen medicine detaljer med det navn");
 				}
 
 				// Adds all relevant MedicineCard to flowpanel and display them
-				LoadAndShow(_medicineCards);
-
+				LoadAndShow(_medicineCards.Values);
 			}
 			catch (Exception ex)
 			{
@@ -57,14 +45,16 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			}
 		}
 
-		private async Task SeeMedicinDetails_Load(object sender, EventArgs e)
+		private async void SeeMedicinDetails_Load(object sender, EventArgs e)
 		{
+
+
 			foreach (MedicinePrescription medicinePrescription in _examination.MedicinePrescriptions)
 			{
-				_medicineCards.Add(new MedicineCard(medicinePrescription));
+				_medicineCards.Add(medicinePrescription.MedicineDetails.MedicineType.Name, new MedicineCard(medicinePrescription));
 			}
 
-			LoadAndShow(_medicineCards);
+			LoadAndShow(_medicineCards.Values);
 		}
 
 		private void LoadAndShow(IEnumerable<MedicineCard> medicineCards)

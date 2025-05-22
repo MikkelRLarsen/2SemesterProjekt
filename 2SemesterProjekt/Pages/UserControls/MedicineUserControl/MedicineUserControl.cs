@@ -106,9 +106,10 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
         /// <param name="e"></param>
         private async void ChangeStartDateButton_Click(object sender, EventArgs e)
         {
-            await _medicineService.UpdateMedicineAsync(ExaminationCard.Examination.Medicine);
+            //await _medicineService.UpdateMedicineAsync(ExaminationCard.Examination.Medicine);
             MessageBox.Show("Datoen for start af medicin er blevet ændret.");
             _konsultationPanel.Controls.Clear();
+            this.Dispose();
         }
     }
 }

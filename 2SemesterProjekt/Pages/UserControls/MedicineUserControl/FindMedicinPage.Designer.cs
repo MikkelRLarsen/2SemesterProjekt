@@ -1,4 +1,5 @@
-﻿namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
+﻿
+namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 {
 	partial class FindMedicinPage
 	{
@@ -186,6 +187,21 @@
 			((System.ComponentModel.ISupportInitialize)changeButton).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
+		}
+
+		private void flowPanel_Paint(object sender, PaintEventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
+		private void pictureBox3_Click(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
+		private void label1_Click(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
 		}
 
 		#endregion

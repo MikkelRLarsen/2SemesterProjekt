@@ -30,7 +30,7 @@
 		{
 			cancelButton = new PictureBox();
 			flowPanel = new FlowLayoutPanel();
-			textBoxCustomerPhoneNumberOrName = new TextBox();
+			SearchMedicineTextBox = new TextBox();
 			customerSearchButton = new PictureBox();
 			label1 = new Label();
 			pictureBox3 = new PictureBox();
@@ -68,15 +68,15 @@
 			flowPanel.Size = new Size(769, 562);
 			flowPanel.TabIndex = 71;
 			// 
-			// textBoxCustomerPhoneNumberOrName
+			// SearchMedicineTextBox
 			// 
-			textBoxCustomerPhoneNumberOrName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			textBoxCustomerPhoneNumberOrName.Location = new Point(570, 191);
-			textBoxCustomerPhoneNumberOrName.Margin = new Padding(3, 4, 3, 4);
-			textBoxCustomerPhoneNumberOrName.MaxLength = 8;
-			textBoxCustomerPhoneNumberOrName.Name = "textBoxCustomerPhoneNumberOrName";
-			textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
-			textBoxCustomerPhoneNumberOrName.TabIndex = 70;
+			SearchMedicineTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			SearchMedicineTextBox.Location = new Point(570, 191);
+			SearchMedicineTextBox.Margin = new Padding(3, 4, 3, 4);
+			SearchMedicineTextBox.MaxLength = 8;
+			SearchMedicineTextBox.Name = "SearchMedicineTextBox";
+			SearchMedicineTextBox.Size = new Size(274, 27);
+			SearchMedicineTextBox.TabIndex = 70;
 			// 
 			// customerSearchButton
 			// 
@@ -162,7 +162,7 @@
 			AutoScaleMode = AutoScaleMode.Font;
 			Controls.Add(cancelButton);
 			Controls.Add(flowPanel);
-			Controls.Add(textBoxCustomerPhoneNumberOrName);
+			Controls.Add(SearchMedicineTextBox);
 			Controls.Add(customerSearchButton);
 			Controls.Add(findAllButton);
 			Controls.Add(label1);
@@ -186,7 +186,7 @@
 		#endregion
 		private PictureBox cancelButton;
 		private FlowLayoutPanel flowPanel;
-		private TextBox textBoxCustomerPhoneNumberOrName;
+		private TextBox SearchMedicineTextBox;
 		private PictureBox customerSearchButton;
 		private Label label1;
 		private PictureBox pictureBox3;
