@@ -48,7 +48,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             flowPanel.Controls.AddRange(AllProductCards.ToArray());
         }
 
-        private async void ExportToTxt_Click(object sender, EventArgs e)
+        private async void ExportToTxtButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Tekstfil|*.txt";

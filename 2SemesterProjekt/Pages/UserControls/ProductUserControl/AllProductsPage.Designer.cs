@@ -35,10 +35,12 @@
             findAllButton = new PictureBox();
             label1 = new Label();
             pictureBox3 = new PictureBox();
+            exportToTxtButton = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)findAllButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)exportToTxtButton).BeginInit();
             SuspendLayout();
             // 
             // flowPanel
@@ -117,10 +119,21 @@
             pictureBox3.TabIndex = 51;
             pictureBox3.TabStop = false;
             // 
+            // exportToTxtButton
+            // 
+            exportToTxtButton.Image = Properties.Resources.ExportToTxtButton;
+            exportToTxtButton.Location = new Point(1191, 780);
+            exportToTxtButton.Name = "exportToTxtButton";
+            exportToTxtButton.Size = new Size(170, 21);
+            exportToTxtButton.TabIndex = 54;
+            exportToTxtButton.TabStop = false;
+            exportToTxtButton.Click += ExportToTxtButton_Click;
+            // 
             // AllProductsPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(exportToTxtButton);
             Controls.Add(findAllButton);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
@@ -135,6 +148,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)findAllButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)exportToTxtButton).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -148,5 +162,6 @@
         private PictureBox findAllButton;
         private Label label1;
         private PictureBox pictureBox3;
+        private PictureBox exportToTxtButton;
     }
 }
