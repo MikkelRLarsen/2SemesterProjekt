@@ -300,13 +300,14 @@
             label6.ForeColor = Color.SaddleBrown;
             label6.Location = new Point(1199, 570);
             label6.Name = "label6";
-            label6.Size = new Size(156, 20);
+            label6.Size = new Size(190, 20);
             label6.TabIndex = 69;
-            label6.Text = "T I L F Ø J   R A B A T";
+            label6.Text = "T I L F Ø J   R A B A T  I  %";
             // 
             // discountNumericUpDown
             // 
             discountNumericUpDown.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            discountNumericUpDown.Increment = new decimal(new int[] { 5, 0, 0, 0 });
             discountNumericUpDown.Location = new Point(1199, 593);
             discountNumericUpDown.Name = "discountNumericUpDown";
             discountNumericUpDown.Size = new Size(204, 27);
