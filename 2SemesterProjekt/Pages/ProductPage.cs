@@ -52,7 +52,7 @@ namespace _2SemesterProjekt.Pages
         private void CreateOrder(object sender, EventArgs e)
         {
             productFlowPanel.Controls.Clear(); // Clear existing content
-           // productFlowPanel.Controls.Add(new CreateOrder(productFlowPanel)); // Load the new page
+           // productFlowPanel.Controls.Add(new CreateOrder(productFlowPanel)); // Load the new page - From old branch before UI update
         }
 
         private async void ExportToTxt_Click(object sender, EventArgs e)
