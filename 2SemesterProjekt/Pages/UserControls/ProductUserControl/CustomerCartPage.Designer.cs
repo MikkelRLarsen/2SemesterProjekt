@@ -64,20 +64,20 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Linen;
-            label2.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.SaddleBrown;
-            label2.Location = new Point(934, 108);
+            label2.Location = new Point(614, 38);
             label2.Name = "label2";
-            label2.Size = new Size(632, 81);
+            label2.Size = new Size(387, 50);
             label2.TabIndex = 24;
             label2.Text = "I N D K Ø B S K U R V";
             // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.PageTitelBackground;
-            pictureBox1.Location = new Point(84, 77);
+            pictureBox1.Location = new Point(101, 20);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(2332, 144);
+            pictureBox1.Size = new Size(1399, 86);
             pictureBox1.TabIndex = 25;
             pictureBox1.TabStop = false;
             // 
@@ -86,29 +86,30 @@
             flowPanel.AutoScroll = true;
             flowPanel.BackColor = Color.Linen;
             flowPanel.BorderStyle = BorderStyle.FixedSingle;
-            flowPanel.Location = new Point(409, 452);
+            flowPanel.Location = new Point(416, 243);
             flowPanel.Name = "flowPanel";
-            flowPanel.Size = new Size(1282, 867);
+            flowPanel.Size = new Size(769, 501);
             flowPanel.TabIndex = 56;
             // 
             // textBoxCustomerPhoneNumberOrName
             // 
-            textBoxCustomerPhoneNumberOrName.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxCustomerPhoneNumberOrName.Location = new Point(772, 355);
+            textBoxCustomerPhoneNumberOrName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxCustomerPhoneNumberOrName.Location = new Point(637, 194);
             textBoxCustomerPhoneNumberOrName.Margin = new Padding(3, 4, 3, 4);
             textBoxCustomerPhoneNumberOrName.MaxLength = 8;
             textBoxCustomerPhoneNumberOrName.Name = "textBoxCustomerPhoneNumberOrName";
-            textBoxCustomerPhoneNumberOrName.Size = new Size(457, 42);
+            textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
             textBoxCustomerPhoneNumberOrName.TabIndex = 55;
             // 
             // customerSearchButton
             // 
             customerSearchButton.BackColor = Color.AntiqueWhite;
             customerSearchButton.Image = Properties.Resources.SearchButton;
-            customerSearchButton.Location = new Point(1250, 359);
+            customerSearchButton.Location = new Point(917, 197);
             customerSearchButton.Margin = new Padding(3, 4, 3, 4);
             customerSearchButton.Name = "customerSearchButton";
-            customerSearchButton.Size = new Size(79, 35);
+            customerSearchButton.Size = new Size(47, 21);
+            customerSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
             customerSearchButton.TabIndex = 54;
             customerSearchButton.TabStop = false;
             // 
@@ -116,11 +117,11 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.AntiqueWhite;
-            label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.SaddleBrown;
-            label1.Location = new Point(858, 307);
+            label1.Location = new Point(673, 169);
             label1.Name = "label1";
-            label1.Size = new Size(385, 31);
+            label1.Size = new Size(255, 20);
             label1.TabIndex = 52;
             label1.Text = " S Ø G   P Å   P R O D U K T N A V N";
             // 
@@ -128,18 +129,18 @@
             // 
             pictureBox3.BackColor = Color.Linen;
             pictureBox3.Image = Properties.Resources.PageBox;
-            pictureBox3.Location = new Point(409, 277);
+            pictureBox3.Location = new Point(416, 149);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(1282, 148);
+            pictureBox3.Size = new Size(769, 88);
             pictureBox3.TabIndex = 51;
             pictureBox3.TabStop = false;
             // 
             // pictureBox4
             // 
             pictureBox4.Image = Properties.Resources.PageBackground;
-            pictureBox4.Location = new Point(84, 242);
+            pictureBox4.Location = new Point(101, 124);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(2332, 1116);
+            pictureBox4.Size = new Size(1399, 705);
             pictureBox4.TabIndex = 57;
             pictureBox4.TabStop = false;
             // 
@@ -147,10 +148,11 @@
             // 
             createOrderButton.Enabled = false;
             createOrderButton.Image = Properties.Resources.CreateOrderButton;
-            createOrderButton.Location = new Point(1691, 1422);
+            createOrderButton.Location = new Point(945, 751);
             createOrderButton.Margin = new Padding(3, 4, 3, 4);
             createOrderButton.Name = "createOrderButton";
-            createOrderButton.Size = new Size(400, 92);
+            createOrderButton.Size = new Size(240, 55);
+            createOrderButton.SizeMode = PictureBoxSizeMode.StretchImage;
             createOrderButton.TabIndex = 58;
             createOrderButton.TabStop = false;
             createOrderButton.Click += createOrderButton_Click;
@@ -158,10 +160,11 @@
             // cancelButton
             // 
             cancelButton.Image = Properties.Resources.CancelButton;
-            cancelButton.Location = new Point(409, 1422);
+            cancelButton.Location = new Point(416, 751);
             cancelButton.Margin = new Padding(3, 4, 3, 4);
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(400, 92);
+            cancelButton.Size = new Size(240, 55);
+            cancelButton.SizeMode = PictureBoxSizeMode.StretchImage;
             cancelButton.TabIndex = 59;
             cancelButton.TabStop = false;
             cancelButton.Click += cancelButton_Click;
@@ -170,44 +173,44 @@
             // 
             pictureBox2.BackColor = Color.Linen;
             pictureBox2.Image = Properties.Resources.CartBox;
-            pictureBox2.Location = new Point(1717, 277);
+            pictureBox2.Location = new Point(1191, 149);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(374, 1042);
+            pictureBox2.Size = new Size(244, 595);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 60;
             pictureBox2.TabStop = false;
             // 
             // totalPriceTextBox
             // 
-            totalPriceTextBox.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            totalPriceTextBox.Location = new Point(1734, 1264);
+            totalPriceTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            totalPriceTextBox.Location = new Point(1199, 708);
             totalPriceTextBox.Margin = new Padding(3, 4, 3, 4);
             totalPriceTextBox.MaxLength = 8;
             totalPriceTextBox.Name = "totalPriceTextBox";
             totalPriceTextBox.ReadOnly = true;
-            totalPriceTextBox.Size = new Size(340, 42);
+            totalPriceTextBox.Size = new Size(204, 27);
             totalPriceTextBox.TabIndex = 61;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.AntiqueWhite;
-            label3.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.SaddleBrown;
-            label3.Location = new Point(1734, 1229);
+            label3.Location = new Point(1199, 684);
             label3.Name = "label3";
-            label3.Size = new Size(188, 31);
+            label3.Size = new Size(125, 20);
             label3.TabIndex = 62;
             label3.Text = "T O T A L  P R I S";
             // 
             // customerPhoneNumberTextbox
             // 
-            customerPhoneNumberTextbox.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            customerPhoneNumberTextbox.Location = new Point(1734, 355);
+            customerPhoneNumberTextbox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            customerPhoneNumberTextbox.Location = new Point(1199, 193);
             customerPhoneNumberTextbox.Margin = new Padding(3, 4, 3, 4);
             customerPhoneNumberTextbox.MaxLength = 8;
             customerPhoneNumberTextbox.Name = "customerPhoneNumberTextbox";
-            customerPhoneNumberTextbox.Size = new Size(255, 42);
+            customerPhoneNumberTextbox.Size = new Size(153, 27);
             customerPhoneNumberTextbox.TabIndex = 63;
             customerPhoneNumberTextbox.KeyPress += customerPhoneNumberTextbox_KeyPress;
             // 
@@ -215,10 +218,11 @@
             // 
             searchForCustomerButton.BackColor = Color.AntiqueWhite;
             searchForCustomerButton.Image = Properties.Resources.SearchButton;
-            searchForCustomerButton.Location = new Point(1995, 359);
+            searchForCustomerButton.Location = new Point(1356, 197);
             searchForCustomerButton.Margin = new Padding(3, 4, 3, 4);
             searchForCustomerButton.Name = "searchForCustomerButton";
-            searchForCustomerButton.Size = new Size(79, 35);
+            searchForCustomerButton.Size = new Size(47, 21);
+            searchForCustomerButton.SizeMode = PictureBoxSizeMode.StretchImage;
             searchForCustomerButton.TabIndex = 64;
             searchForCustomerButton.TabStop = false;
             searchForCustomerButton.Click += searchForCustomerButton_Click;
@@ -227,11 +231,11 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.AntiqueWhite;
-            label4.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.SaddleBrown;
-            label4.Location = new Point(1734, 307);
+            label4.Location = new Point(1199, 169);
             label4.Name = "label4";
-            label4.Size = new Size(236, 31);
+            label4.Size = new Size(157, 20);
             label4.TabIndex = 65;
             label4.Text = "T I L F Ø J   K U N D E";
             // 
@@ -239,11 +243,11 @@
             // 
             customerNameLabel.AutoSize = true;
             customerNameLabel.BackColor = Color.AntiqueWhite;
-            customerNameLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            customerNameLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             customerNameLabel.ForeColor = Color.SaddleBrown;
-            customerNameLabel.Location = new Point(1734, 413);
+            customerNameLabel.Location = new Point(1199, 243);
             customerNameLabel.Name = "customerNameLabel";
-            customerNameLabel.Size = new Size(135, 31);
+            customerNameLabel.Size = new Size(88, 20);
             customerNameLabel.TabIndex = 66;
             customerNameLabel.Text = "Kundenavn";
             customerNameLabel.Visible = false;
@@ -252,11 +256,11 @@
             // 
             customerAddressLabel.AutoSize = true;
             customerAddressLabel.BackColor = Color.AntiqueWhite;
-            customerAddressLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            customerAddressLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             customerAddressLabel.ForeColor = Color.SaddleBrown;
-            customerAddressLabel.Location = new Point(1734, 452);
+            customerAddressLabel.Location = new Point(1199, 266);
             customerAddressLabel.Name = "customerAddressLabel";
-            customerAddressLabel.Size = new Size(166, 31);
+            customerAddressLabel.Size = new Size(110, 20);
             customerAddressLabel.TabIndex = 67;
             customerAddressLabel.Text = "KundeAdresse";
             customerAddressLabel.Visible = false;
@@ -265,11 +269,11 @@
             // 
             customerEmailLabel.AutoSize = true;
             customerEmailLabel.BackColor = Color.AntiqueWhite;
-            customerEmailLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            customerEmailLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             customerEmailLabel.ForeColor = Color.SaddleBrown;
-            customerEmailLabel.Location = new Point(1734, 491);
+            customerEmailLabel.Location = new Point(1199, 289);
             customerEmailLabel.Name = "customerEmailLabel";
-            customerEmailLabel.Size = new Size(142, 31);
+            customerEmailLabel.Size = new Size(92, 20);
             customerEmailLabel.TabIndex = 68;
             customerEmailLabel.Text = "KundeEmail";
             customerEmailLabel.Visible = false;
@@ -278,20 +282,20 @@
             // 
             label6.AutoSize = true;
             label6.BackColor = Color.AntiqueWhite;
-            label6.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.SaddleBrown;
-            label6.Location = new Point(1734, 1045);
+            label6.Location = new Point(1199, 570);
             label6.Name = "label6";
-            label6.Size = new Size(232, 31);
+            label6.Size = new Size(156, 20);
             label6.TabIndex = 69;
             label6.Text = "T I L F Ø J   R A B A T";
             // 
             // discountNumericUpDown
             // 
-            discountNumericUpDown.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            discountNumericUpDown.Location = new Point(1734, 1088);
+            discountNumericUpDown.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            discountNumericUpDown.Location = new Point(1199, 593);
             discountNumericUpDown.Name = "discountNumericUpDown";
-            discountNumericUpDown.Size = new Size(340, 43);
+            discountNumericUpDown.Size = new Size(204, 27);
             discountNumericUpDown.TabIndex = 70;
             discountNumericUpDown.ValueChanged += discountNumericUpDown_ValueChanged;
             // 
@@ -322,7 +326,7 @@
             Controls.Add(pictureBox1);
             Margin = new Padding(0);
             Name = "CustomerCartPage";
-            Size = new Size(2500, 1580);
+            Size = new Size(1600, 845);
             Load += CustomerCartPage_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)customerSearchButton).EndInit();
