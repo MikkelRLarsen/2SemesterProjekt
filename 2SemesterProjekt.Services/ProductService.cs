@@ -40,5 +40,31 @@ namespace _2SemesterProjekt.Services
         {
             await _productRepository.UpdateSeveralProductsQuantityAsync(products); // Updates the stock quantity of several products in the DB
         }
+
+        public async Task CreateProductAsync(Product product)
+        {
+            Product checkIfProductExists = await GetProductByEANAsync(product.EAN);
+
+            if (checkIfProductExists != null)
+            {
+                throw new ArgumentException("Produktet med det angivne varenummer eksisterer allerede i databasen.");
+            }
+            else
+            {
+                try
+                {
+                    await _productRepository.CreateProductAsync(product);
+                }
+                catch (Exception)
+                {
+                    throw new ArgumentException("Der opstod en fejl.");
+                }
+            }
+        }
+
+        public async Task<Product> GetProductByEANAsync(long eAN)
+        {
+            return await _productRepository.GetProductByEANAsync(eAN);
+        }
     }
 }
