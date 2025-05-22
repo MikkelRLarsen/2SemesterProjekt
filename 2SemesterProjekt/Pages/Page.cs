@@ -189,11 +189,6 @@ namespace _2SemesterProjekt.Pages
 			MainPanel.Controls.Clear();
 			MainPanel.Controls.Add(new CreateEmployeePage(MainPanel));
 		}
-		private async void StorageStatus(object sender, EventArgs e)
-        {
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
-        }
 
         // MoveHandler
         private void AddMoveHandlers(Control control)

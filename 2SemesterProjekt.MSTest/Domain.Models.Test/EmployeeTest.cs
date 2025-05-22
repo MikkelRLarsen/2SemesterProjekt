@@ -19,7 +19,7 @@ public class EmployeeTest
 	public void Given_First_Name_Is_Valid__Then_Entity_Is_Created(string validFirstName)
 	{
 		// Act
-		var employee = new Employee(validFirstName, _lastName, "Dyrelæge");
+		var employee = new Employee(validFirstName, _lastName, "Dyrlæge");
 	}
 
 	[TestMethod]
@@ -32,7 +32,7 @@ public class EmployeeTest
 	{
 		// Act & Assert
 		Assert.ThrowsException<ArgumentException>(() =>
-			new Employee(invalidFirstName, _lastName, "Assistent")
+			new Employee(invalidFirstName, _lastName, "Dyrlægeklinikassistent")
 		);
 	}
 
@@ -66,8 +66,8 @@ public class EmployeeTest
 	/// Accept criteria: Type must be either "Dyrelæge", "Assistent", or "Receptionist"
 	/// </summary>
 	[TestMethod]
-	[DataRow("Dyrelæge")]
-	[DataRow("Assistent")]
+	[DataRow("Dyrlæge")]
+	[DataRow("Dyrlægeklinikassistent")]
 	[DataRow("Receptionist")]
 	public void Given_Type_Is_Valid__Then_Entity_Is_Created(string validType)
 	{

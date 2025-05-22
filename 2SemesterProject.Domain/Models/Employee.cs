@@ -30,10 +30,10 @@
 				throw new ArgumentException("LastName indeholder tal, speciel tegn eller er tom");
 			}
 
-			//if (Type != "Dyrelæge" && Type != "Assistent" && Type != "Receptionist")
-			//{
-			//	throw new ArgumentException("Type var ikke en af de foruddefineret roller");
-			//}
+			if (Type != "Dyrlæge" && Type != "Dyrlægeklinikassistent" && Type != "Receptionist")
+			{
+				throw new ArgumentException("Type var ikke en af de foruddefineret roller");
+			}
 		}
 	}
 }

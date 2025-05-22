@@ -25,7 +25,7 @@ namespace _2SemesterProjekt.Services
 
 		public async Task<IEnumerable<string>> GetAllEmployeeTypesAsync()
 		{
-			string[] arr = { "Dyrelæge", "Assistent", "Receptionist" };
+			string[] arr = { "Dyrlæge", "Dyrlægeklinikassistent", "Receptionist" };
 			return arr;
 		}
 
