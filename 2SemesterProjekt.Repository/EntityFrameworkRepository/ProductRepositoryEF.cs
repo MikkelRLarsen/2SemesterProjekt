@@ -17,6 +17,13 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         {
             _db = db;
         }
+
+        public async Task CreateProductAsync(Product product)
+        {
+            await _db.Products.AddAsync(product);
+            await _db.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
             return await _db.Products.ToListAsync();
@@ -26,6 +33,12 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             return await _db.Products
                 .Where(pr => pr.NumberInStock > 0)
                 .ToListAsync();
+        }
+
+        public async Task<Product> GetProductByEANAsync(long eAN)
+        {
+            Product product = await _db.Products.Where(pr => pr.EAN == eAN).FirstOrDefaultAsync();
+            return product;
         }
 
         public async Task UpdateSeveralProductsQuantityAsync(IEnumerable<Product> products)
