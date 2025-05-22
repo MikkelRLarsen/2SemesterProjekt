@@ -205,8 +205,6 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 				ComboBoxPetDoctor.SelectedItem = doctorToSelect;
 			}
 			CheckAndEnableButton();
-
-			// AUTO FILL-IN END!
-		}
-	}
+        }// AUTO FILL-IN END!
+    }
 }

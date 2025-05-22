@@ -394,7 +394,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             }
         }
 
-        // AUTO FILL-IN:
+        // AUTO FILL-IN BEGIN:
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         // ProcessCmdKey is a method in the Control class (inherited by UserControl and Form)
         // that intercepts keyboard commands before they are sent to the focused control.
@@ -412,6 +412,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             ///Customer phonenumber to fill in:
             customerSearchTextBox.Text = "12345678";
-        }
+        }// AUTO FILL-IN END:
     }
 }
