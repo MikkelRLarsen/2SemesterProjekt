@@ -47,8 +47,17 @@ namespace _2SemesterProjekt.Pages.UserControls.EmployeeUserControl
 
 		private async void CreateEmployeePage_Load(object sender, EventArgs e)
 		{
-			_employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
-			comboBoxType.DataSource = await _employeeService.GetAllEmployeeTypesAsync();
+			try
+			{
+				_employeeService = ServiceProviderSingleton.GetServiceProvider().CreateScope().
+											ServiceProvider.GetRequiredService<IEmployeeService>();
+
+				comboBoxType.DataSource = await _employeeService.GetAllEmployeeTypesAsync();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
 		}
 	}
 }
