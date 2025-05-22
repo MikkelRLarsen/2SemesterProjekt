@@ -16,7 +16,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
     public partial class AllProductsPage : UserControl
     {
         private readonly IProductService _productService;
-        public List<ProductCardUpdated> AllProductCards { get; set; } = new List<ProductCardUpdated>();
+        private List<ProductCardUpdated> AllProductCards = new List<ProductCardUpdated>();
         public AllProductsPage()
         {
             InitializeComponent();
