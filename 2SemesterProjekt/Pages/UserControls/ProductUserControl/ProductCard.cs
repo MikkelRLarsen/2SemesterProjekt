@@ -34,6 +34,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             RemoveFromCart
         }
 
+        // For CreateOrderPage
         public ProductCard(
             CreateOrderPage createOrderPage,
             CustomerCartPage customerCartPage,
@@ -51,6 +52,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             InitializeComponent();
             InitializeUIDesign();
+        }
+
+        // For find product
+        public ProductCard(Product product)
+        {
+            _productData = product;
         }
 
         /// <summary>

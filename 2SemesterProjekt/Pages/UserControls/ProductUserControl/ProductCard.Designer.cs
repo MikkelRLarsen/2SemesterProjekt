@@ -250,7 +250,7 @@
             amountUpDown.Size = new Size(44, 27);
             amountUpDown.TabIndex = 56;
             // 
-            // ProductCardUpdated
+            // ProductCard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -272,7 +272,7 @@
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox);
             Margin = new Padding(60, 5, 5, 5);
-            Name = "ProductCardUpdated";
+            Name = "ProductCard";
             Size = new Size(660, 150);
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

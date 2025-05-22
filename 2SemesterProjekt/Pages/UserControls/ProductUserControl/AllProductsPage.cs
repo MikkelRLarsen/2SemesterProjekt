@@ -1,5 +1,4 @@
 ﻿using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
-using _2SemesterProjekt.Pages.UserControls.Product;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
     public partial class AllProductsPage : UserControl
     {
         private readonly IProductService _productService;
-        private List<ProductCardUpdated> _allProductCards = new List<ProductCardUpdated>();
+        private List<ProductCard> _allProductCards = new List<ProductCard>();
         public AllProductsPage()
         {
             InitializeComponent();
@@ -34,7 +33,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             foreach (Domain.Models.Product product in allProducts)
             {
-                _allProductCards.Add(new ProductCardUpdated(product));
+                _allProductCards.Add(new ProductCard(product));
             }
         }
         private void findAllButton_Click(object sender, EventArgs e)
