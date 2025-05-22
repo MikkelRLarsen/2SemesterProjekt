@@ -115,6 +115,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 
 		private async void changeButton_Click(object sender, EventArgs e)
 		{
+			// Picture is a place holder until better picture and refactoring of Medicine
 			if (_selectedExaminationCard == null)
 			{
 				MessageBox.Show("Du skal vælge en konsultation for at se medicin detaljer");
