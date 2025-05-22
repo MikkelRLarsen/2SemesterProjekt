@@ -161,41 +161,52 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
 			MessageBox.Show(displayMessage, "Information", MessageBoxButtons.OK);
 		}
-		
-		// AUTO FILL-IN BEGIN!
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        // ProcessCmdKey is a method in the Control class (inherited by UserControl and Form)
-        // that intercepts keyboard commands before they are sent to the focused control.
-        // This makes it ideal for global shortcuts, like Ctrl+F, regardless of which control has focus.
-        {
-            if (keyData == (Keys.Control | Keys.F))
-            {
-                TriggerAutoPetFillIn();
-                return true;
-            }
 
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
+		// AUTO FILL-IN BEGIN!
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		// ProcessCmdKey is a method in the Control class (inherited by UserControl and Form)
+		// that intercepts keyboard commands before they are sent to the focused control.
+		// This makes it ideal for global shortcuts, like Ctrl+F, regardless of which control has focus.
+		{
+			if (keyData == (Keys.Control | Keys.F))
+			{
+				TriggerAutoPetFillIn();
+				return true;
+			}
+
+			return base.ProcessCmdKey(ref msg, keyData);
+		}
 		private async void TriggerAutoPetFillIn()
 		{
 			/// Phone number to fill in:
-            textBoxPhoneNumber.Text = "12345678";
+			textBoxPhoneNumber.Text = "12345678";
 
 			/// Pet species to fill in:
-            var petSpecies = await _petService.GetAllPetSpeciesAsync();
-            ComboBoxPetSpecies.DataSource = petSpecies;
-            var speciesToSelect = petSpecies.FirstOrDefault(s => s.Name == "Kat");
-            if (speciesToSelect != null)
-            {
-                ComboBoxPetSpecies.SelectedItem = speciesToSelect;
-            }
+			var petSpecies = await _petService.GetAllPetSpeciesAsync();
+			ComboBoxPetSpecies.DataSource = petSpecies;
+			var speciesToSelect = petSpecies.FirstOrDefault(s => s.Name == "Kat");
+			if (speciesToSelect != null)
+			{
+				ComboBoxPetSpecies.SelectedItem = speciesToSelect;
+			}
 
 			/// Pet name to fill in:
-            textBoxPetName.Text = "Kjartan";
-			
+			textBoxPetName.Text = "Kjartan";
+
 			/// Pet birthday to fill in:
 			DateTimePickerBirthday.Value = DateTime.Today.AddDays(-1);
-        }
-		// AUTO FILL-IN END!
-    }
+
+			/// Pet doctor to fill in:
+			var petDoctor = await _employeeService.GetAllEmployeeWithTypeAsync("Dyrlæge");
+			ComboBoxPetDoctor.DataSource = petDoctor;
+			var doctorToSelect = petDoctor.FirstOrDefault(e => e.FirstName == "Peter");
+			if (doctorToSelect != null)
+			{
+				ComboBoxPetDoctor.SelectedItem = doctorToSelect;
+			}
+			CheckAndEnableButton();
+
+			// AUTO FILL-IN END!
+		}
+	}
 }
