@@ -19,34 +19,24 @@ namespace _2SemesterProjekt.Services
             _orderRepository = orderRepository;
         }
 
-        //public Task<bool> CheckIfOrderCanBeCreated(List<Product> order)
-        //{
-        //    foreach (Product product in order)
-        //    {
-        //        if (product.QuantityInOrder > product.NumberInStock)
-        //        {
-        //            return Task.FromResult(false);
-        //        }
-        //    }
-        //    return Task.FromResult(true);
-        //}
-
-        public async Task<int> CreateOrderAsync(decimal totalPrice/*, decimal totalPriceWithDiscount*/)
+        public Task<bool> CheckIfOrderCanBeCreated(List<Product> order)
         {
-            //if (totalPriceWithDiscount != -1) // If the totalPriceWithDiscount field doesn't remain its default value
-            //{
-            //    Order order = new Order(
-            //    DateTime.Now,
-            //    totalPriceWithDiscount);
-            //    return await _orderRepository.CreateOrderAsync(order);
-            //}
-            //else
-            //{
-                Order order = new Order(
-                DateTime.Now,
-                totalPrice);
-                return await _orderRepository.CreateOrderAsync(order);
-            //}
+            foreach (Product product in order)
+            {
+                if (product.QuantityInOrder > product.NumberInStock)
+                {
+                    return Task.FromResult(false);
+                }
+            }
+            return Task.FromResult(true);
+        }
+
+        public async Task<int> CreateOrderAsync(decimal totalPrice)
+        {
+            Order order = new Order(
+            DateTime.Now,
+            totalPrice);
+            return await _orderRepository.CreateOrderAsync(order);
         }
 
         public async Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice)

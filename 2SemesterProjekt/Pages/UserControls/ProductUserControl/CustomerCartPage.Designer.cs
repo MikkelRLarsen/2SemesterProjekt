@@ -237,6 +237,8 @@
             searchForCustomerButton.TabIndex = 64;
             searchForCustomerButton.TabStop = false;
             searchForCustomerButton.Click += searchForCustomerButton_Click;
+            searchForCustomerButton.MouseEnter += searchForCustomerButton_MouseEnter;
+            searchForCustomerButton.MouseLeave += searchForCustomerButton_MouseLeave;
             // 
             // label4
             // 

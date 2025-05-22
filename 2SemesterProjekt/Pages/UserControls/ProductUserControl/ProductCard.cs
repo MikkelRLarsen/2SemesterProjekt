@@ -117,7 +117,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 RemoveProductFromCart(quantity);
             }
 
-            inStockLabel.Text = _productData.NumberInStock.ToString();
             amountUpDown.Value = 0;
         }
 
@@ -128,7 +127,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             // Updates the model for later order creation
             _productData.AddQuantityToOrder(quantity);
-            _productData.DecreaseInStock(quantity);
+            int newStock = _productData.NumberInStock - quantity;
+            inStockLabel.Text = newStock.ToString();
             _productData.UpdateTotalPriceOfProductInOrder();
 
             // Checks if the card already exists in the cart, if not => create and add new card
@@ -142,14 +142,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             }
 
             // Removes card from the add-panel if the product is out of stock
-            if (_productData.NumberInStock == 0)
+            if (newStock == 0)
             {
                 _addProductPanel.Controls.Remove(this);
             }
 
-
             _orderPage.IncrementItemsInCart(quantity);
-            amountUpDown.Maximum = _productData.NumberInStock;
+            amountUpDown.Maximum = newStock;
             _orderPage.Refresh();
         }
 
@@ -159,7 +158,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private void RemoveProductFromCart(int quantity)
         {
             _productData.RemoveQuantityFromOrder(quantity);
-            _productData.IncreaseInStock(quantity);
             _productData.UpdateTotalPriceOfProductInOrder();
 
             // Checks if the card was removed earlier to re-add it to the add-panel
@@ -184,7 +182,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             cartProductCard.UpdateAmountLabel();
             cartProductCard.UpdateAmountUpDown(quantity);
 
-            UpdateInStockLabelInAddProductCard();
+            UpdateInStockLabelInAddProductCard(quantity);
         }
 
         /// <summary>
@@ -252,7 +250,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         /// <summary>
         /// Updates in-stock label in the add-panel
         /// </summary>
-        private void UpdateInStockLabelInAddProductCard()
+        private void UpdateInStockLabelInAddProductCard(int quantity)
         {
             var addToOrderCard = _orderPage.AllProductCards
                 .First(c => c._productData.ProductID == _productData.ProductID);
@@ -263,7 +261,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 // Find the label named "inStockLabel" that displays number in stock
                 .First(l => l.Name == "inStockLabel");
 
-            labelInSpecificCard.Text = _productData.NumberInStock.ToString();
+            labelInSpecificCard.Text = (_productData.NumberInStock + quantity).ToString();
         }
 
         private void cardButton_MouseEnter(object sender, EventArgs e)

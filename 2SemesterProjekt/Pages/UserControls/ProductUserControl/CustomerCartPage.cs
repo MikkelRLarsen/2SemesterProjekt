@@ -58,13 +58,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private async void createOrderButton_Click(object sender, EventArgs e)
         {
             // Checks if the added quantities of each product can be added to the order.
-            //bool orderCanBeCreated = await _orderService.CheckIfOrderCanBeCreated(_productsInCart.ToList());
+            bool orderCanBeCreated = await _orderService.CheckIfOrderCanBeCreated(_productsInCart.ToList());
 
-            //if (orderCanBeCreated == false) // Quantity in order > quantity in stock
-            //{
-                //DialogResult messageBoxError = MessageBox.Show("Ordren kan ikke oprettes, da der ikke kan tilføjes det ønskede antal af en/nogle af produkterne til ordren. Tjek venligst lagerbeholdning.", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //return;
-            //}
+            if (orderCanBeCreated == false) // Quantity in order > quantity in stock
+            {
+                DialogResult messageBoxError = MessageBox.Show("Ordren kan ikke oprettes, da der ikke kan tilføjes det ønskede antal af en/nogle af produkterne til ordren. Tjek venligst lagerbeholdning.", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (discountNumericUpDown.Value >= 60) // Discount warning box
             {
@@ -85,6 +85,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             {
                 await CreateOrderWithCustomerInfo();
             }
+
+            _cartProductCards = new List<InCartProductCard>();
+            LoadAndShowProductCards(_cartProductCards);
         }
 
         private async void searchForCustomerButton_Click(object sender, EventArgs e)
@@ -243,7 +246,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
                     textBoxProduct.Text = string.Empty;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -265,6 +268,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 textBoxProduct.Text = "Søg på produktnavn";
             }
         }
+
+
 
         private void productSearchButton_MouseEnter(object sender, EventArgs e)
         {
@@ -292,6 +297,16 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         }
 
         private void cancelButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void searchForCustomerButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void searchForCustomerButton_MouseLeave(object sender, EventArgs e)
         {
             Cursor = Cursors.Default;
         }
