@@ -160,5 +160,26 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
 			MessageBox.Show(displayMessage, "Information", MessageBoxButtons.OK);
 		}
-	}
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        // ProcessCmdKey is a method in the Control class (inherited by UserControl and Form)
+        // that intercepts keyboard commands before they are sent to the focused control.
+        // This makes it ideal for global shortcuts, like Ctrl+F, regardless of which control has focus.
+        {
+            if (keyData == (Keys.Control | Keys.F))
+            {
+                textBoxPhoneNumber.Focus();
+                TriggerAutoCustomerSearchFillIn();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+		private void TriggerAutoCustomerSearchFillIn()
+		{
+            textBoxPhoneNumber.Text = "12345678";
+			ComboBoxPetSpecies.Text = "Kat";
+			textBoxPetName.Text = "Kjartan";
+			DateTimePickerBirthday.Value = DateTime.Today;
+        }
+    }
 }
