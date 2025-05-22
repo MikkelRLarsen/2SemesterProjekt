@@ -93,6 +93,20 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             int quantity = Convert.ToInt32(amountUpDown.Value);
 
+            if (quantity <= 0)
+            {
+                if (_cardMode == CardMode.AddToCart)
+                {
+                    MessageBox.Show("Indtast et tal over 0 for at tilføje til kurven.", "Ugyldigt input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("Indtast et tal over 0 for at fjerne fra kurven.", "Ugyldigt input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                return; // Stopper videre kørsel
+            }
+
             // Based on card-type (add or remove)
             if (_cardMode == CardMode.AddToCart)
             {
