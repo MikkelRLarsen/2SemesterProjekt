@@ -16,7 +16,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
     public partial class AllProductsPage : UserControl
     {
         private readonly IProductService _productService;
-        private List<ProductCardUpdated> AllProductCards = new List<ProductCardUpdated>();
+        private List<ProductCardUpdated> _allProductCards = new List<ProductCardUpdated>();
         public AllProductsPage()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             foreach (Domain.Models.Product product in allProducts)
             {
-                AllProductCards.Add(new ProductCardUpdated(product));
+                _allProductCards.Add(new ProductCardUpdated(product));
             }
         }
         private void findAllButton_Click(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private void ViewAllProducts()
         {
             flowPanel.Controls.Clear();
-            flowPanel.Controls.AddRange(AllProductCards.ToArray());
+            flowPanel.Controls.AddRange(_allProductCards.ToArray());
         }
 
         private async void ExportToTxtButton_Click(object sender, EventArgs e)
