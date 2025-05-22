@@ -1,18 +1,5 @@
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using _2SemesterProjekt.Domain.Models;
-using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
-using _2SemesterProjekt.Pages.UserControls.CustomerUserControl;
 using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 
 namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl

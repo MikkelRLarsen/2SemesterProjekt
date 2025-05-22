@@ -47,21 +47,5 @@ namespace _2SemesterProjekt.Domain.Models
         {
             TotalPrice = QuantityInOrder * SalesPricePerUnit;
         }
-        public void RemoveQuantityInOrder()
-        {
-            QuantityInOrder = 0;
-        }
-        public void RemoveTotalOrderPrice()
-        {
-            TotalPrice = 0;
-        }
-        public void DecreaseInStock(int amount)
-        {
-            NumberInStock -= amount;
-        }
-        public void IncreaseInStock(int amount)
-        {
-            NumberInStock += amount;
-        }
     }
 }
