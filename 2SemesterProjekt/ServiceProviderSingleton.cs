@@ -31,7 +31,7 @@ namespace _2SemesterProjekt
 			services.AddScoped<ICageService, CageService>();
 
             // Dal Services
-            services.AddTransient<EntityFramework>();
+			services.AddDbContext<EntityFramework>();
 			services.AddTransient<ICustomerRepository, CustomerRepositoryEF>();
 			services.AddTransient<IEmployeeRepository,  EmployeeRepositoryEF>();
 			services.AddTransient<IPetRepository, PetRepositoryEF>();
