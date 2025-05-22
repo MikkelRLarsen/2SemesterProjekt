@@ -19,24 +19,6 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			_panel = panel;
 		}
 
-		private void AddEventHandlerToExaminationCard(Control control)
-		{
-			control.DoubleClick += DoubleClickEventHandler;
-
-			// Add the same handler to each of the control.Controls
-			// If I didn't then the event wouldn't happend if i pressed on any of the labels or pictureboxes
-			foreach (Control child in control.Controls)
-			{
-				AddEventHandlerToExaminationCard(child);
-			}
-		}
-
-		private void DoubleClickEventHandler(object sender, EventArgs e)
-		{
-			_panel.Controls.Clear();
-			_panel.Controls.Add(new SeeMedicinDetails(_selectedExaminationCard.Examination, this, _panel));
-		}
-
 		private async void findAllButton_Click(object sender, EventArgs e)
 		{
 			await LoadAndShowExaminationCards(_allExaminationCards);
@@ -51,24 +33,26 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 
 		private async Task GetAllExaminationCardsAsync()
 		{
-			var allExaminations = await _examinationService.GetAllExaminationsAsync();
-
-			// Adds exam to all examination if they are completed and have a Medicine Presription. For this page you shouldn't need exam which have yet to be completed and doesn't have medicine
-			foreach (var exam in allExaminations.Where(ex => ex.Date < DateTime.Now && ex.Medicine != null))
+			try
 			{
-				_allExaminationCards.Add(new ExaminationCardUpdated(exam, this));
+				var allExaminations = await _examinationService.GetAllExaminationsAsync();
+
+				// Adds exam to all examination if they are completed and have a Medicine Presription. For this page you shouldn't need exam which have yet to be completed and doesn't have medicine
+				foreach (var exam in allExaminations.Where(ex => ex.Date < DateTime.Now && ex.Medicine != null))
+				{
+					_allExaminationCards.Add(new ExaminationCardUpdated(exam, this));
+				}
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show(ex.Message);
 			}
 		}
 
 		public async Task LoadAndShowExaminationCards(IEnumerable<ExaminationCardUpdated> examinationCardsToBeLoaded)
 		{
 			flowPanel.Controls.Clear();
-
-			// Want a Eventhandler to be added to the cards, but only from this page, and will NOT add it on the original ExaminationCard
-			foreach (ExaminationCardUpdated card in examinationCardsToBeLoaded)
-			{
-				AddEventHandlerToExaminationCard(card);
-			}
 
 			flowPanel.Controls.AddRange(examinationCardsToBeLoaded.ToArray());
 		}
@@ -135,6 +119,19 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 
 			_selectedExaminationCard = selectedCard;
 			_selectedExaminationCard.SetSelected(true);
+		}
+
+		private async void changeButton_Click(object sender, EventArgs e)
+		{
+			// Picture is a place holder until better picture and refactoring of Medicine
+			if (_selectedExaminationCard == null)
+			{
+				MessageBox.Show("Du skal vælge en konsultation for at se medicin detaljer");
+				return;
+			}
+			_panel.Controls.Clear();
+			_panel.Controls.Add(new SeeMedicinDetails(_selectedExaminationCard.Examination, this, _panel));
+
 		}
 	}
 }

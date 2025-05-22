@@ -1,4 +1,5 @@
 ﻿using _2SemesterProjekt.Pages.UserControls.CustomerUserControl;
+using _2SemesterProjekt.Pages.UserControls.EmployeeUserControl;
 using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
 using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using _2SemesterProjekt.Pages.UserControls.MedicineUserControl;
@@ -22,6 +23,7 @@ namespace _2SemesterProjekt.Pages
             CreateAndSetSalgMenu();
             CreateAndKundeMenu();
             CreateAndPetMenu();
+            CreateAndSetStockMenu();
             CreateAndSetAdministrationMenu();
 
             AddMoveHandlers(NavPanel);
@@ -126,7 +128,7 @@ namespace _2SemesterProjekt.Pages
         // PetMenu
         private void CreateAndPetMenu()
         {
-            PetNav.ButtonLabel.Text = "Kældedyr";
+            PetNav.ButtonLabel.Text = "Kæledyr";
             PetNav.BringToFront();
             AddMoveHandlers(PetNav);
 
@@ -151,6 +153,27 @@ namespace _2SemesterProjekt.Pages
             MainPanel.Controls.Add(new UpdatePetPage());
         }
 
+        //StockMenu
+        private void CreateAndSetStockMenu()
+        {
+            StockNav.ButtonLabel.Text = "Lagerbeholdning";
+            StockNav.BringToFront();
+            AddMoveHandlers(StockNav);
+
+            StockNav.AddOption(new NavigationButtonOption(StorageStatus, "Lagerstatus"));
+            StockNav.AddOption(new NavigationButtonOption(CreateProduct, "Opret produkt"));
+        }
+        private async void StorageStatus(object sender, EventArgs e)
+        {
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new AllProductsPage());
+        }
+        private async void CreateProduct(object sender, EventArgs e)
+        {
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new CreateProductPage());
+        }
+
 
         //AdministrationMenu
         private void CreateAndSetAdministrationMenu()
@@ -160,18 +183,12 @@ namespace _2SemesterProjekt.Pages
             AddMoveHandlers(AdministrationNav);
 
             AdministrationNav.AddOption(new NavigationButtonOption(CreateEmployee, "Opret Ansat"));
-            AdministrationNav.AddOption(new NavigationButtonOption(StorageStatus, "Lagerstatus"));
         }
         private async void CreateEmployee(object sender, EventArgs e)
         {
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
-        }
-        private async void StorageStatus(object sender, EventArgs e)
-        {
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
-        }
+			MainPanel.Controls.Clear();
+			MainPanel.Controls.Add(new CreateEmployeePage(MainPanel));
+		}
 
         // MoveHandler
         private void AddMoveHandlers(Control control)
@@ -214,6 +231,11 @@ namespace _2SemesterProjekt.Pages
         private void Page_Load(object sender, EventArgs e)
         {
             MainPanel.Controls.Add(new MainPageWallpaper());
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

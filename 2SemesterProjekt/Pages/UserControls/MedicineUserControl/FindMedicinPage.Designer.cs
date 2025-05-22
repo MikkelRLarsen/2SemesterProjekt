@@ -37,11 +37,13 @@
 			pictureBox2 = new PictureBox();
 			label2 = new Label();
 			pictureBox1 = new PictureBox();
+			changeButton = new PictureBox();
 			((System.ComponentModel.ISupportInitialize)customerSearchButton).BeginInit();
 			((System.ComponentModel.ISupportInitialize)findAllButton).BeginInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+			((System.ComponentModel.ISupportInitialize)changeButton).BeginInit();
 			SuspendLayout();
 			// 
 			// flowPanel
@@ -143,10 +145,23 @@
 			pictureBox1.TabIndex = 32;
 			pictureBox1.TabStop = false;
 			// 
+			// changeButton
+			// 
+			changeButton.Image = Properties.Resources.ChangeButtonGreyedOut;
+			changeButton.Location = new Point(1223, 742);
+			changeButton.Margin = new Padding(3, 4, 3, 4);
+			changeButton.Name = "changeButton";
+			changeButton.Size = new Size(240, 60);
+			changeButton.SizeMode = PictureBoxSizeMode.StretchImage;
+			changeButton.TabIndex = 46;
+			changeButton.TabStop = false;
+			changeButton.Click += changeButton_Click;
+			// 
 			// FindMedicinPage
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
+			Controls.Add(changeButton);
 			Controls.Add(flowPanel);
 			Controls.Add(textBoxCustomerPhoneNumberOrName);
 			Controls.Add(customerSearchButton);
@@ -164,6 +179,7 @@
 			((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+			((System.ComponentModel.ISupportInitialize)changeButton).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -179,5 +195,6 @@
 		private PictureBox pictureBox2;
 		private Label label2;
 		private PictureBox pictureBox1;
+		private PictureBox changeButton;
 	}
 }

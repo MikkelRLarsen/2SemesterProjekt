@@ -44,6 +44,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             InitializeUIDesign();
         }
 
+        public ProductCardUpdated(Domain.Models.Product product)
+        {
+            _product = product;
+            InitializeComponent();
+            InitializeUIDesign();
+        }
+
         private void InitializeUIDesign()
         {
             productEANLabel.Text = _product.EAN.ToString();
@@ -91,6 +98,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 }
 
                 _createOrderPage.IncrementItemsInCart(dialogBox.Amount);
+                inStockLabel.Text = _product.NumberInStock.ToString();
             }
             else if (_mode == ProductCardMode.RemoveFromCart)
             {
