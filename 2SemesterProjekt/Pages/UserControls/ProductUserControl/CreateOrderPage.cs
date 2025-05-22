@@ -10,9 +10,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         public List<Product> _order; // Products in the order is stored here.
         public BindingList<Product> _allProducts; // Products in stock is stored here.
         private readonly IProductService _productService;
-        private readonly ICustomerService _customerService;
-        private readonly IOrderService _orderService;
-        private readonly IProductLineService _productLineService;
         private int _itemsInCart;
         private Panel _mainPagePanel;
         private CustomerCartPage _customerCartPage;
@@ -22,10 +19,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             InitializeComponent();
             _mainPagePanel = mainPagePanel;
-
-            _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
-            _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>()!;
-            _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>()!;
 
             _order = new List<Product>();
             _customerCartPage = new CustomerCartPage(_order, _mainPagePanel, this);
