@@ -31,12 +31,22 @@ namespace _2SemesterProjekt.Services
             return Task.FromResult(true);
         }
 
-        public async Task<int> CreateOrderAsync(decimal totalPrice)
+        public async Task<int> CreateOrderAsync(decimal totalPrice/*, decimal totalPriceWithDiscount*/)
         {
-            Order order = new Order(
-            DateTime.Now,
-            totalPrice);
-            return await _orderRepository.CreateOrderAsync(order);
+            //if (totalPriceWithDiscount != -1) // If the totalPriceWithDiscount field doesn't remain its default value
+            //{
+            //    Order order = new Order(
+            //    DateTime.Now,
+            //    totalPriceWithDiscount);
+            //    return await _orderRepository.CreateOrderAsync(order);
+            //}
+            //else
+            //{
+                Order order = new Order(
+                DateTime.Now,
+                totalPrice);
+                return await _orderRepository.CreateOrderAsync(order);
+            //}
         }
 
         public async Task<int> CreateOrderWithCustomerIDAsync(int customerID, decimal totalPrice)
