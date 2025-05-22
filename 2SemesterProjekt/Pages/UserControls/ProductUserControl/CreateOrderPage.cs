@@ -8,7 +8,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 {
     public partial class CreateOrderPage : UserControl
     {
-        public List<Product> _order; // Products in the order is stored here.
+        public List<Product> _order = new List<Product>(); // Products in the order is stored here.
         private readonly IProductService _productService;
         private int _itemsInCart;
         private Panel _mainPagePanel;

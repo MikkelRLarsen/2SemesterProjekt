@@ -124,7 +124,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             // Updates the model for later order creation
             _productData.AddQuantityToOrder(quantity);
-            int newStock = _productData.NumberInStock - quantity;
+            int newStock = _productData.NumberInStock - _productData.QuantityInOrder;
             inStockLabel.Text = newStock.ToString();
             _productData.UpdateTotalPriceOfProductInOrder();
 
