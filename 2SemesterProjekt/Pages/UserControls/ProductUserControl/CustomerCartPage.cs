@@ -298,5 +298,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             Cursor = Cursors.Default;
         }
+
+        private void textBoxProduct_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                productSearchButton_Click(sender, e);
+            }
+        }
     }
 }

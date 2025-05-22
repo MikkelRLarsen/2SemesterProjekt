@@ -32,7 +32,7 @@
             pictureBox1 = new PictureBox();
             flowPanel = new FlowLayoutPanel();
             textBoxProduct = new TextBox();
-            customerSearchButton = new PictureBox();
+            productSearchButton = new PictureBox();
             findAllButton = new PictureBox();
             label1 = new Label();
             pictureBox3 = new PictureBox();
@@ -42,7 +42,7 @@
             pictureBox2 = new PictureBox();
             itemsInCart = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customerSearchButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)productSearchButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)findAllButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -95,22 +95,23 @@
             textBoxProduct.TabIndex = 48;
             textBoxProduct.Text = "Søg på produktnavn";
             textBoxProduct.Enter += textBoxProduct_Enter;
+            textBoxProduct.KeyPress += textBoxProduct_KeyPress;
             textBoxProduct.Leave += textBoxProduct_Leave;
             // 
-            // customerSearchButton
+            // productSearchButton
             // 
-            customerSearchButton.BackColor = Color.AntiqueWhite;
-            customerSearchButton.Image = Properties.Resources.SearchButton;
-            customerSearchButton.Location = new Point(850, 197);
-            customerSearchButton.Margin = new Padding(3, 4, 3, 4);
-            customerSearchButton.Name = "customerSearchButton";
-            customerSearchButton.Size = new Size(47, 21);
-            customerSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
-            customerSearchButton.TabIndex = 47;
-            customerSearchButton.TabStop = false;
-            customerSearchButton.Click += customerSearchButton_Click;
-            customerSearchButton.MouseEnter += customerSearchButton_MouseEnter;
-            customerSearchButton.MouseLeave += customerSearchButton_MouseLeave;
+            productSearchButton.BackColor = Color.AntiqueWhite;
+            productSearchButton.Image = Properties.Resources.SearchButton;
+            productSearchButton.Location = new Point(850, 197);
+            productSearchButton.Margin = new Padding(3, 4, 3, 4);
+            productSearchButton.Name = "productSearchButton";
+            productSearchButton.Size = new Size(47, 21);
+            productSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
+            productSearchButton.TabIndex = 47;
+            productSearchButton.TabStop = false;
+            productSearchButton.Click += productSearchButton_Click;
+            productSearchButton.MouseEnter += customerSearchButton_MouseEnter;
+            productSearchButton.MouseLeave += customerSearchButton_MouseLeave;
             // 
             // findAllButton
             // 
@@ -218,7 +219,7 @@
             Controls.Add(cancelButton);
             Controls.Add(flowPanel);
             Controls.Add(textBoxProduct);
-            Controls.Add(customerSearchButton);
+            Controls.Add(productSearchButton);
             Controls.Add(findAllButton);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
@@ -230,7 +231,7 @@
             Size = new Size(1600, 845);
             Load += CreateOrderPage_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customerSearchButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)productSearchButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)findAllButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
@@ -247,7 +248,7 @@
         private PictureBox pictureBox1;
         private FlowLayoutPanel flowPanel;
         private TextBox textBoxProduct;
-        private PictureBox customerSearchButton;
+        private PictureBox productSearchButton;
         private PictureBox findAllButton;
         private Label label1;
         private PictureBox pictureBox3;

@@ -82,7 +82,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _mainPagePanel.Controls.Add(new MainPageWallpaper());
         }
 
-        private void customerSearchButton_Click(object sender, EventArgs e)
+        private void productSearchButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -108,12 +108,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private void textBoxProduct_Enter(object sender, EventArgs e)
         {
+            // Removes placeholder text from textbox
             textBoxProduct.ForeColor = SystemColors.WindowText;
             textBoxProduct.Text = string.Empty;
         }
 
         private void textBoxProduct_Leave(object sender, EventArgs e)
         {
+            // Adds placeholder text to textbox
             if (textBoxProduct.Text == String.Empty)
             {
                 textBoxProduct.ForeColor = SystemColors.InactiveCaption;
@@ -159,6 +161,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private void goToCartButton_MouseLeave(object sender, EventArgs e)
         {
             Cursor = Cursors.Default;
+        }
+
+        private void textBoxProduct_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                productSearchButton_Click(sender, e);
+            }
         }
     }
 }
