@@ -51,7 +51,14 @@ namespace _2SemesterProjekt.Services
             }
             else
             {
-                await _productRepository.CreateProductAsync(product);
+                try
+                {
+                    await _productRepository.CreateProductAsync(product);
+                }
+                catch (Exception)
+                {
+                    throw new ArgumentException("Der opstod en fejl.");
+                }
             }
         }
 
