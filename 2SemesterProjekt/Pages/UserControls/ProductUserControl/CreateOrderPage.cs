@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
+using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
@@ -19,6 +21,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             InitializeComponent();
             _mainPagePanel = mainPagePanel;
+
+            _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>()!;
 
             _order = new List<Product>();
             _customerCartPage = new CustomerCartPage(_order, _mainPagePanel, this);
@@ -46,12 +50,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             // Clears the panel and then adds the wanted ExaminationCards
             flowPanel.Controls.Clear();
             flowPanel.Controls.AddRange(productCardsToBeLoaded.ToArray());
-            Cursor = Cursors.Default;
         }
 
         private void findAllButton_Click(object sender, EventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
             LoadAndShowProductCards(AllProductCards);
         }
 
@@ -84,6 +86,81 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private void findAllButton_MouseLeave(object sender, EventArgs e)
         {
             Cursor = Cursors.Default;
+        }
+
+        private void goToCartButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void goToCartButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            _mainPagePanel.Controls.Remove(this);
+            _mainPagePanel.Controls.Add(new MainPageWallpaper());
+        }
+
+        private void cancelButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void cancelButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void customerSearchButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void customerSearchButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void customerSearchButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Search by name
+                IEnumerable<ProductCard> productCards = AllProductCards
+                    .Where(p => p._productData.Name.Contains(textBoxProduct.Text, StringComparison.OrdinalIgnoreCase));
+
+                LoadAndShowProductCards(productCards);
+
+                // No hits - show user
+                if (flowPanel.Controls.Count == 0)
+                {
+                    MessageBox.Show($"Ingen hits på \"{textBoxProduct.Text}\"", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                textBoxProduct.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void textBoxProduct_Enter(object sender, EventArgs e)
+        {
+            textBoxProduct.ForeColor = SystemColors.WindowText;
+            textBoxProduct.Text = string.Empty;
+        }
+
+        private void textBoxProduct_Leave(object sender, EventArgs e)
+        {
+            if (textBoxProduct.Text == String.Empty)
+            {
+                textBoxProduct.ForeColor = SystemColors.InactiveCaption;
+                textBoxProduct.Text = "Søg på produktnavn";
+            }
         }
     }
 }

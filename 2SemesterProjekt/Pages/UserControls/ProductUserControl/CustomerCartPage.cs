@@ -58,13 +58,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private async void createOrderButton_Click(object sender, EventArgs e)
         {
             // Checks if the added quantities of each product can be added to the order.
-            bool orderCanBeCreated = await _orderService.CheckIfOrderCanBeCreated(_productsInCart.ToList()); 
+            //bool orderCanBeCreated = await _orderService.CheckIfOrderCanBeCreated(_productsInCart.ToList());
 
-            if (orderCanBeCreated == false) // Quantity in order > quantity in stock
-            {
-                DialogResult messageBoxError = MessageBox.Show("Ordren kan ikke oprettes, da der ikke kan tilføjes det ønskede antal af en/nogle af produkterne til ordren. Tjek venligst lagerbeholdning.", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            //if (orderCanBeCreated == false) // Quantity in order > quantity in stock
+            //{
+                //DialogResult messageBoxError = MessageBox.Show("Ordren kan ikke oprettes, da der ikke kan tilføjes det ønskede antal af en/nogle af produkterne til ordren. Tjek venligst lagerbeholdning.", "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //return;
+            //}
 
             if (discountNumericUpDown.Value >= 60) // Discount warning box
             {
@@ -146,7 +146,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 await _productLineService.CreateProductLinesAsync(orderID, _productsInCart.ToList());
 
                 // Updates the stock status of each product in the order.
-                await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList()); 
+                await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList());
                 DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -160,7 +160,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             await _productLineService.CreateProductLinesAsync(orderID, _productsInCart.ToList());
 
             // Updates the stock status of each product in the order.
-            await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList()); 
+            await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList());
 
             DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
@@ -210,6 +210,90 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         public FlowLayoutPanel GetFlowLayoutPanelFromCustomerCart()
         {
             return flowPanel;
+        }
+
+        public async void LoadAndShowProductCards(IEnumerable<InCartProductCard> productCardsToBeLoaded)
+        {
+            // Clears the panel and then adds the wanted ExaminationCards
+            flowPanel.Controls.Clear();
+            flowPanel.Controls.AddRange(productCardsToBeLoaded.ToArray());
+        }
+
+        private void productSearchButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (textBoxProduct.Text == string.Empty)
+                {
+                    LoadAndShowProductCards(_cartProductCards);
+                }
+                else
+                {
+                    // Search by name
+                    IEnumerable<InCartProductCard> inCartProductCards = _cartProductCards
+                        .Where(p => p.ProductCard._productData.Name.Contains(textBoxProduct.Text, StringComparison.OrdinalIgnoreCase));
+
+                    LoadAndShowProductCards(inCartProductCards);
+
+                    // No hits - show user
+                    if (flowPanel.Controls.Count == 0)
+                    {
+                        MessageBox.Show($"Ingen hits på \"{textBoxProduct.Text}\"", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    textBoxProduct.Text = string.Empty;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void textBoxProduct_Enter(object sender, EventArgs e)
+        {
+            textBoxProduct.ForeColor = SystemColors.WindowText;
+            textBoxProduct.Text = string.Empty;
+        }
+
+        private void textBoxProduct_Leave_1(object sender, EventArgs e)
+        {
+            if (textBoxProduct.Text == String.Empty)
+            {
+                textBoxProduct.ForeColor = SystemColors.InactiveCaption;
+                textBoxProduct.Text = "Søg på produktnavn";
+            }
+        }
+
+        private void productSearchButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void productSearchButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void createOrderButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void createOrderButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void cancelButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void cancelButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
         }
     }
 }

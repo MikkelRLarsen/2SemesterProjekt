@@ -19,17 +19,17 @@ namespace _2SemesterProjekt.Services
             _orderRepository = orderRepository;
         }
 
-        public Task<bool> CheckIfOrderCanBeCreated(List<Product> order)
-        {
-            foreach (Product product in order)
-            {
-                if (product.QuantityInOrder > product.NumberInStock)
-                {
-                    return Task.FromResult(false);
-                }
-            }
-            return Task.FromResult(true);
-        }
+        //public Task<bool> CheckIfOrderCanBeCreated(List<Product> order)
+        //{
+        //    foreach (Product product in order)
+        //    {
+        //        if (product.QuantityInOrder > product.NumberInStock)
+        //        {
+        //            return Task.FromResult(false);
+        //        }
+        //    }
+        //    return Task.FromResult(true);
+        //}
 
         public async Task<int> CreateOrderAsync(decimal totalPrice/*, decimal totalPriceWithDiscount*/)
         {
