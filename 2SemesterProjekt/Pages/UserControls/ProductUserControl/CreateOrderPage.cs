@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
-using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
 using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using Microsoft.Extensions.DependencyInjection;
 
