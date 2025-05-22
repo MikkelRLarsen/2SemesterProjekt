@@ -87,7 +87,6 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 			}
 
 			submitButton.Image = Properties.Resources.SaveButton;
-			submitButton.Enabled = true;
 		}
 
 		private async void submitButton_Click(object sender, EventArgs e)
