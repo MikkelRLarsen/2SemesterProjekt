@@ -31,6 +31,8 @@ namespace _2SemesterProjekt.Pages.UserControls.EmployeeUserControl
 				await _employeeService.CreateEmployeeAsync(newEmployee);
 
 				MessageBox.Show("Oprettelse fuldført");
+
+				cancelButton_Click(sender, e);
 			}
 			catch (Exception ex)
 			{
