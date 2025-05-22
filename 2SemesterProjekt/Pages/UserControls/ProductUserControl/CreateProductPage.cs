@@ -95,50 +95,16 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             {
                 errorMessage = "Indtast venligst alle informationerne.\n";
             }
+
             try
             {
                 Convert.ToInt64(textBoxEAN.Text);
-            }
-            catch
-            {
-                errorMessage = "Indtast venligst et gyldigt tal.";
-                textBoxEAN.BackColor = Color.IndianRed;
-            }
-            try
-            {
-                Convert.ToInt32(numericMinInStock.Value);
-            }
-            catch
-            {
-                errorMessage = "Indtast venligst et gyldigt tal.";
-                numericMinInStock.BackColor = Color.IndianRed;
-            }
-            try
-            {
-                Convert.ToInt32(numericMinInStock.Value);
-            }
-            catch
-            {
-                errorMessage = "Indtast venligst et gyldigt tal.";
-                numericNumberInStock.BackColor = Color.IndianRed;
-            }
-            try
-            {
                 Convert.ToDecimal(textBoxPurchasePrice.Text);
-            }
-            catch
-            {
-                errorMessage = "Indtast venligst et gyldigt tal.";
-                textBoxPurchasePrice.BackColor = Color.IndianRed;
-            }
-            try
-            {
                 Convert.ToDecimal(textBoxSalesPrice.Text);
             }
             catch
             {
-                errorMessage = "Indtast venligst et gyldigt tal.";
-                textBoxSalesPrice.BackColor = Color.IndianRed;
+                errorMessage = "Indtast venligst et gyldigt varenummer, salgspris eller indkøbspris.";
             }
 
             return errorMessage;
