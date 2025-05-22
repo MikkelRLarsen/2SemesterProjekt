@@ -161,7 +161,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _productData.UpdateTotalPriceOfProductInOrder();
 
             // Checks if the card was removed earlier to re-add it to the add-panel
-            if (_orderPage.AllProductCards.Any(p => p._productData.ProductID == _productData.ProductID) == false)
+            if (_orderPage._allProductCards.Any(p => p._productData.ProductID == _productData.ProductID) == false)
             {
                 AddNewAddProductCard();
             }
@@ -252,7 +252,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         /// </summary>
         private void UpdateInStockLabelInAddProductCard(int quantity)
         {
-            var addToOrderCard = _orderPage.AllProductCards
+            var addToOrderCard = _orderPage._allProductCards
                 .First(c => c._productData.ProductID == _productData.ProductID);
 
             var labelInSpecificCard = addToOrderCard.Controls

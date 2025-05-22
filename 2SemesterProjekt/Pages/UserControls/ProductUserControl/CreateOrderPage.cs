@@ -15,7 +15,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private int _itemsInCart;
         private Panel _mainPagePanel;
         private CustomerCartPage _customerCartPage;
-        public List<ProductCard> AllProductCards { get; set; } = new List<ProductCard>();
+        public List<ProductCard> _allProductCards = new List<ProductCard>();
 
         public CreateOrderPage(Panel mainPagePanel)
         {
@@ -39,7 +39,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             foreach (var product in allProductsInStock)
             {
-                AllProductCards.Add(new ProductCard(this, _customerCartPage, this.flowPanel, product, ProductCard.CardMode.AddToCart));
+                _allProductCards.Add(new ProductCard(this, _customerCartPage, this.flowPanel, product, ProductCard.CardMode.AddToCart));
             }
 
             findAllButton.Image = Properties.Resources.FindAllButton;
@@ -54,7 +54,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private void findAllButton_Click(object sender, EventArgs e)
         {
-            LoadAndShowProductCards(AllProductCards);
+            LoadAndShowProductCards(_allProductCards);
         }
 
         public void IncrementItemsInCart(int amount)
@@ -89,7 +89,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             try
             {
                 // Search by name
-                IEnumerable<ProductCard> productCards = AllProductCards
+                IEnumerable<ProductCard> productCards = _allProductCards
                     .Where(p => p._productData.Name.Contains(textBoxProduct.Text, StringComparison.OrdinalIgnoreCase));
 
                 LoadAndShowProductCards(productCards);
