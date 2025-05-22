@@ -33,12 +33,20 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 
 		private async Task GetAllExaminationCardsAsync()
 		{
-			var allExaminations = await _examinationService.GetAllExaminationsAsync();
-
-			// Adds exam to all examination if they are completed and have a Medicine Presription. For this page you shouldn't need exam which have yet to be completed and doesn't have medicine
-			foreach (var exam in allExaminations.Where(ex => ex.Date < DateTime.Now && ex.Medicine != null))
+			try
 			{
-				_allExaminationCards.Add(new ExaminationCardUpdated(exam, this));
+				var allExaminations = await _examinationService.GetAllExaminationsAsync();
+
+				// Adds exam to all examination if they are completed and have a Medicine Presription. For this page you shouldn't need exam which have yet to be completed and doesn't have medicine
+				foreach (var exam in allExaminations.Where(ex => ex.Date < DateTime.Now && ex.Medicine != null))
+				{
+					_allExaminationCards.Add(new ExaminationCardUpdated(exam, this));
+				}
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show(ex.Message);
 			}
 		}
 
