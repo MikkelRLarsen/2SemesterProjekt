@@ -48,18 +48,18 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
                 ManualDateTimePicker.Enabled = false;
                 ChangeStartDateButton.Enabled = false;
             }
-            else if (ExaminationCard.Examination.Medicine?.MedicineID != null)
+            else if (ExaminationCard.Examination.MedicinePrescriptions[0] != null)
             {
                 MedicineStatusLabel.Text = "Ja";
-                ActualMedicineNameLabel.Text = examinationCard.Examination.Medicine.Name;
-                ActualMedicineTypeLabel.Text = examinationCard.Examination.Medicine.Type;
-                ActualMedicineMilligramLabel.Text = examinationCard.Examination.Medicine.DoseMiligram.ToString();
-                ActualMedicineDosesPerDayLabel.Text = examinationCard.Examination.Medicine.DosesTake24Hours.ToString();
-                ActualMedicineNumberOfDaysLabel.Text = examinationCard.Examination.Medicine.DoseDurationDays.ToString();
-                ActualMedicineStartDateLabel.Text = examinationCard.Examination.Date.ToShortDateString();
+                ActualMedicineNameLabel.Text = examinationCard.Examination.MedicinePrescriptions[0].MedicineDetails.MedicineType.Name;
+				ActualMedicineTypeLabel.Text = examinationCard.Examination.MedicinePrescriptions[0].MedicineDetails.MedicineType.Type;
+                ActualMedicineMilligramLabel.Text = examinationCard.Examination.MedicinePrescriptions[0].MedicineDetails.DoseAmount.ToString();
+                ActualMedicineDosesPerDayLabel.Text = examinationCard.Examination.MedicinePrescriptions[0].MedicineDetails.Doses24Hours.ToString();
+                ActualMedicineNumberOfDaysLabel.Text = examinationCard.Examination.MedicinePrescriptions[0].DoseDuration.ToString();
+                ActualMedicineStartDateLabel.Text = examinationCard.Examination.MedicinePrescriptions[0].StartDate.ToShortDateString();
                 // End date:
-                DateTime startDate = examinationCard.Examination.Date;
-                int durationDays = examinationCard.Examination.Medicine.DoseDurationDays;
+                DateTime startDate = examinationCard.Examination.MedicinePrescriptions[0].StartDate;
+                int durationDays = examinationCard.Examination.MedicinePrescriptions[0].MedicineDetails.DoseAmount;
                 DateTime endDate = startDate.AddDays(durationDays - 1);
                 ActualMedicineEndDateLabel.Text = endDate.ToShortDateString();
                 // Manual date:
@@ -87,17 +87,17 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
         /// <param name="e"></param>
         private void ManualDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            if (ExaminationCard.Examination.Medicine != null)
-            {
-                DateTime startDate = ManualDateTimePicker.Value;
-                int durationDays = ExaminationCard.Examination.Medicine.DoseDurationDays;
-                DateTime endDate = startDate.AddDays(durationDays - 1); // -1 to include the starting day.
-                ActualMedicineStartDateLabel.Text = startDate.ToShortDateString();
-                ActualMedicineEndDateLabel.Text = endDate.ToShortDateString();
+            //if (ExaminationCard.Examination.Medicine != null)
+            //{
+            //    DateTime startDate = ManualDateTimePicker.Value;
+            //    int durationDays = ExaminationCard.Examination.Medicine.DoseDurationDays;
+            //    DateTime endDate = startDate.AddDays(durationDays - 1); // -1 to include the starting day.
+            //    ActualMedicineStartDateLabel.Text = startDate.ToShortDateString();
+            //    ActualMedicineEndDateLabel.Text = endDate.ToShortDateString();
 
-                // Set the manually picked date as the new start date:
-                ExaminationCard.Examination.Medicine.UpdateMedicineStartDate(startDate);
-            }
+            //    // Set the manually picked date as the new start date:
+            //   // ExaminationCard.Examination.Medicine.UpdateMedicineStartDate(startDate);
+            //}
         }
         /// <summary>
         /// Saves the manually set start date to db.

@@ -15,7 +15,15 @@ namespace _2SemesterProjekt.Domain.Models
 		public int Doses24Hours { get; private set; }
 		public List<MedicinePrescription>? MedicinePrescriptions { get; }
 		public MedicineType MedicineType { get; }
+		public MedicineFormat MedicineFormat { get; }
 
-
+		public MedicineDetails(int medicineDetailsID, int medicineTypeID, int mediineFormatID, int doseAmount, int doses24Hours)
+		{
+			MedicineDetailsID = medicineDetailsID;
+			MedicineTypeID = medicineTypeID;
+			MediineFormatID = mediineFormatID;
+			DoseAmount = doseAmount;
+			Doses24Hours = doses24Hours;
+		}
 	}
 }

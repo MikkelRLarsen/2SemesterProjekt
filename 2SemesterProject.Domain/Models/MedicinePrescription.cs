@@ -17,5 +17,13 @@ namespace _2SemesterProjekt.Domain.Models
 		public Examination Examination { get; }
 		public MedicineDetails MedicineDetails { get; }
 
+		public MedicinePrescription(int medicinePrescriptionID, int examinationID, int medicineDetailsID, int doseDuration, DateTime startDate)
+		{
+			MedicinePrescriptionID = medicinePrescriptionID;
+			ExaminationID = examinationID;
+			MedicineDetailsID = medicineDetailsID;
+			DoseDuration = doseDuration;
+			StartDate = startDate;
+		}
 	}
 }

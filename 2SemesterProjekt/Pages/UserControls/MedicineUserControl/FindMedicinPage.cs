@@ -9,8 +9,8 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 	public partial class FindMedicinPage : UserControl, IExaminationCardHost
 	{
 		private IExaminationService _examinationService;
-		private List<ExaminationCardUpdated> _allExaminationCards = new List<ExaminationCardUpdated>();
-		private ExaminationCardUpdated _selectedExaminationCard;
+		private List<MedicineCard> _allExaminationCards = new List<MedicineCard>();
+		private MedicineCard _selectedExaminationCard;
 		private Panel _panel;
 
 		public FindMedicinPage(Panel panel)
@@ -50,7 +50,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			}
 		}
 
-		public async Task LoadAndShowExaminationCards(IEnumerable<ExaminationCardUpdated> examinationCardsToBeLoaded)
+		public async Task LoadAndShowExaminationCards(IEnumerable<MedicineCard> examinationCardsToBeLoaded)
 		{
 			flowPanel.Controls.Clear();
 
@@ -66,7 +66,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 				if (Int32.TryParse(input, out int customerPhoneNumber))
 				{
 					// Search by ID
-					ExaminationCardUpdated examinationCard = _allExaminationCards
+					MedicineCard examinationCard = _allExaminationCards
 						.First(ex => ex.Examination.Pet.Customer.PhoneNumber == customerPhoneNumber);
 
 					flowPanel.Controls.Clear();
@@ -76,7 +76,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 				else
 				{
 					// Search by name
-					IEnumerable<ExaminationCardUpdated> examinationCards = _allExaminationCards
+					IEnumerable<MedicineCard> examinationCards = _allExaminationCards
 						.Where(ex => ex.Examination.Pet.Customer.FirstName.Contains(textBoxCustomerPhoneNumberOrName.Text, StringComparison.OrdinalIgnoreCase) ||
 									ex.Examination.Pet.Customer.LastName.Contains(textBoxCustomerPhoneNumberOrName.Text, StringComparison.OrdinalIgnoreCase));
 
@@ -110,7 +110,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			}
 		}
 
-		public void OnCardSelected(ExaminationCardUpdated selectedCard)
+		public void OnCardSelected(MedicineCard selectedCard)
 		{
 			if (_selectedExaminationCard != null)
 			{

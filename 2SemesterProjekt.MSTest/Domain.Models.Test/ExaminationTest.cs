@@ -10,7 +10,6 @@ public class ExaminationTest
 	private int EmployeeID = 1;
 	private DateTime Date = DateTime.Now;
 	private int ExaminationTypeID = 1;
-	private int MedicineID = 1;
 	private decimal Price = 500m;
 	private int CageBookingID = 1;
 
@@ -18,7 +17,7 @@ public class ExaminationTest
 	public void Constructor_ValidData_ShouuldCreateObject()
 	{
 		// Act
-		Examination exam = new Examination(PetID, EmployeeID, Date, MedicineID, ExaminationTypeID, Price, CageBookingID);
+		Examination exam = new Examination(PetID, EmployeeID, Date, ExaminationTypeID, Price, CageBookingID);
 
 		// Assert
 		Assert.AreEqual(PetID, exam.PetID);
@@ -34,7 +33,7 @@ public class ExaminationTest
 	public void Constructor_PetidZero_ShouldThrowException()
 	{
 		//Act
-		_ = new Examination(0, EmployeeID, Date, MedicineID, ExaminationTypeID, Price, CageBookingID);
+		_ = new Examination(0, EmployeeID, Date, ExaminationTypeID, Price, CageBookingID);
 	}
 
 	[TestMethod]
@@ -42,7 +41,7 @@ public class ExaminationTest
 	public void Constructor_EmployeeidZero_ShouldThrowException()
 	{
 		//Act
-		_ = new Examination(PetID, 0, Date, MedicineID, ExaminationTypeID, Price, CageBookingID);
+		_ = new Examination(PetID, 0, Date, ExaminationTypeID, Price, CageBookingID);
 	}
 
 	[TestMethod]
@@ -50,7 +49,7 @@ public class ExaminationTest
 	public void Constructor_ExaminationTypeidZero_ShouldThrowException()
 	{
 		//Act
-		_ = new Examination(PetID, EmployeeID, Date, MedicineID, 0, Price, CageBookingID);
+		_ = new Examination(PetID, EmployeeID, Date, 0, Price, CageBookingID);
 	}
 
 	[TestMethod]
@@ -61,7 +60,7 @@ public class ExaminationTest
 		decimal priceWithTooManyDecimals = 123.456m;
 
 		// Act
-		_ = new Examination(PetID, EmployeeID, Date, MedicineID, ExaminationTypeID, priceWithTooManyDecimals, CageBookingID);
+		_ = new Examination(PetID, EmployeeID, Date, ExaminationTypeID, priceWithTooManyDecimals, CageBookingID);
 	}
 
 	[TestMethod]
@@ -71,7 +70,7 @@ public class ExaminationTest
 		decimal validPriceWithTwoDecimals = 123.45m;
 
 		// Act
-		Examination exam = new Examination(PetID, EmployeeID, Date, MedicineID, ExaminationTypeID, validPriceWithTwoDecimals, CageBookingID);
+		Examination exam = new Examination(PetID, EmployeeID, Date, ExaminationTypeID, validPriceWithTwoDecimals, CageBookingID);
 
 		// Assert
 		Assert.AreEqual(validPriceWithTwoDecimals, exam.Price);
@@ -82,7 +81,7 @@ public class ExaminationTest
     public void Constructor_CageBookingIdZero_ShouldThrowException()
     {
         // Act
-        _ = new Examination(PetID, EmployeeID, Date, MedicineID, ExaminationTypeID, Price, 0);
+        _ = new Examination(PetID, EmployeeID, Date, ExaminationTypeID, Price, 0);
     }
 
     [TestMethod]
@@ -93,7 +92,7 @@ public class ExaminationTest
 		int invalidCageBooking = 0;
 
 		// Act
-		Examination exam = new Examination(PetID, EmployeeID, Date, MedicineID, ExaminationTypeID, Price, CageBookingID);
+		Examination exam = new Examination(PetID, EmployeeID, Date, ExaminationTypeID, Price, CageBookingID);
 		exam.SetCageBookingID(invalidCageBooking);
     }
 
@@ -104,7 +103,7 @@ public class ExaminationTest
 		int validCageBooking = 1;
 
         // Act
-        Examination exam = new Examination(PetID, EmployeeID, Date, MedicineID, ExaminationTypeID, Price, CageBookingID);
+        Examination exam = new Examination(PetID, EmployeeID, Date, ExaminationTypeID, Price, CageBookingID);
         exam.SetCageBookingID(validCageBooking);
     }
 }
