@@ -310,6 +310,7 @@
             discountNumericUpDown.Increment = new decimal(new int[] { 5, 0, 0, 0 });
             discountNumericUpDown.Location = new Point(1199, 593);
             discountNumericUpDown.Name = "discountNumericUpDown";
+            discountNumericUpDown.ReadOnly = true;
             discountNumericUpDown.Size = new Size(204, 27);
             discountNumericUpDown.TabIndex = 70;
             discountNumericUpDown.ValueChanged += discountNumericUpDown_ValueChanged;
