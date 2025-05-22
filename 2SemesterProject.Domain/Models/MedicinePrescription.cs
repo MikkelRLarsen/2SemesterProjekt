@@ -11,5 +11,11 @@ namespace _2SemesterProjekt.Domain.Models
 		public int MedicinePrescriptionID { get; init; }
 		public int ExaminationID { get; private set; }
 		public int MedicineDetailsID { get; private set; }
+		public int DoseDuration { get; private set; }
+		public DateTime StartDate { get; private set; }
+
+		public Examination Examination { get; }
+		public MedicineDetails MedicineDetails { get; }
+
 	}
 }
