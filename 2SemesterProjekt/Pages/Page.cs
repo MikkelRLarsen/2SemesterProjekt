@@ -1,4 +1,5 @@
 ﻿using _2SemesterProjekt.Pages.UserControls.CustomerUserControl;
+using _2SemesterProjekt.Pages.UserControls.EmployeeUserControl;
 using _2SemesterProjekt.Pages.UserControls.ExaminationUserControl;
 using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using _2SemesterProjekt.Pages.UserControls.MedicineUserControl;
@@ -185,9 +186,9 @@ namespace _2SemesterProjekt.Pages
         }
         private async void CreateEmployee(object sender, EventArgs e)
         {
-            //MainPanel.Controls.Clear();
-            //MainPanel.Controls.Add(new KonsultationPage());
-        }
+			MainPanel.Controls.Clear();
+			MainPanel.Controls.Add(new CreateEmployeePage(MainPanel));
+		}
 
         // MoveHandler
         private void AddMoveHandlers(Control control)
