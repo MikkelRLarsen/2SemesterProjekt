@@ -37,19 +37,20 @@
             // 
             // amountUpDown
             // 
-            amountUpDown.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            amountUpDown.Location = new Point(324, 27);
+            amountUpDown.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            amountUpDown.Location = new Point(207, 32);
             amountUpDown.Name = "amountUpDown";
             amountUpDown.ReadOnly = true;
-            amountUpDown.Size = new Size(150, 43);
+            amountUpDown.Size = new Size(90, 27);
             amountUpDown.TabIndex = 0;
             // 
             // addAmountButton
             // 
             addAmountButton.Image = Properties.Resources.AddButton;
-            addAmountButton.Location = new Point(354, 86);
+            addAmountButton.Location = new Point(225, 65);
             addAmountButton.Name = "addAmountButton";
-            addAmountButton.Size = new Size(120, 35);
+            addAmountButton.Size = new Size(72, 21);
+            addAmountButton.SizeMode = PictureBoxSizeMode.StretchImage;
             addAmountButton.TabIndex = 1;
             addAmountButton.TabStop = false;
             addAmountButton.Click += addAmountButton_Click;
@@ -58,11 +59,11 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Linen;
-            label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.SaddleBrown;
             label1.Location = new Point(22, 34);
             label1.Name = "label1";
-            label1.Size = new Size(265, 31);
+            label1.Size = new Size(176, 20);
             label1.TabIndex = 46;
             label1.Text = "A N G I V   M Æ N G D E";
             // 
@@ -71,7 +72,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Linen;
-            ClientSize = new Size(486, 133);
+            ClientSize = new Size(309, 95);
             Controls.Add(label1);
             Controls.Add(addAmountButton);
             Controls.Add(amountUpDown);

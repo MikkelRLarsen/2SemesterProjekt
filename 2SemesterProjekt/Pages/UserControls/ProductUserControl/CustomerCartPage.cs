@@ -18,6 +18,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
     public partial class CustomerCartPage : UserControl
     {
         public List<Domain.Models.Product> _order;
+        public List<ProductCardUpdated> _productCardsInOrder = new List<ProductCardUpdated>();
         private CreateOrderPage _createOrderPage;
         private Panel _mainPagePanel;
         private Customer _customer;
@@ -41,9 +42,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private void CustomerCartPage_Load(object sender, EventArgs e)
         {
-            foreach (var product in _order)
+            foreach (var productCard in _productCardsInOrder)
             {
-                flowPanel.Controls.Add(new InCartProductCardUpdated(product, flowPanel, this, _createOrderPage));
+                flowPanel.Controls.Add(new InCartProductCardUpdated(productCard));
             }
 
             UpdateTotalPrice();
