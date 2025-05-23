@@ -170,9 +170,9 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
                 Cursor = Cursors.Default;
                 submitButton.Enabled = true;
             }
-            catch 
+            catch (Exception ex)
             {
-                throw new Exception("Fejl!");
+                throw new Exception("Fejl!", ex);
             }
         }
     }
