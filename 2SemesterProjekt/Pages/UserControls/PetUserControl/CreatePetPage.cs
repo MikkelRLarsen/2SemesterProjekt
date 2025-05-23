@@ -50,10 +50,6 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 			{
 				e.Value = employee.FirstName;
 			}
-			else // Make the item to a string
-			{
-				e.Value = e.ListItem!.ToString();
-			}
 		}
 
 		private void textBoxPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
@@ -160,5 +156,50 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
 			MessageBox.Show(displayMessage, "Information", MessageBoxButtons.OK);
 		}
-	}
+
+		// AUTO FILL-IN BEGIN!
+		// ProcessCmdKey is a method in the Control class (inherited by UserControl and Form)
+		// that intercepts keyboard commands before they are sent to the focused control.
+		// This makes it ideal for global shortcuts, like Ctrl+F, regardless of which control has focus.
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		{
+			if (keyData == (Keys.Control | Keys.F))
+			{
+				TriggerAutoPetFillIn();
+				return true;
+			}
+
+			return base.ProcessCmdKey(ref msg, keyData);
+		}
+		private async void TriggerAutoPetFillIn()
+		{
+			/// Phone number to fill in:
+			textBoxPhoneNumber.Text = "12345678";
+
+			/// Pet species to fill in:
+			var petSpecies = await _petService.GetAllPetSpeciesAsync();
+			ComboBoxPetSpecies.DataSource = petSpecies;
+			var speciesToSelect = petSpecies.FirstOrDefault(s => s.Name == "Kat");
+			if (speciesToSelect != null)
+			{
+				ComboBoxPetSpecies.SelectedItem = speciesToSelect;
+			}
+
+			/// Pet name to fill in:
+			textBoxPetName.Text = "Kjartan";
+
+			/// Pet birthday to fill in:
+			DateTimePickerBirthday.Value = DateTime.Today.AddDays(-1);
+
+			/// Pet doctor to fill in:
+			var petDoctor = await _employeeService.GetAllEmployeeWithTypeAsync("Dyrlæge");
+			ComboBoxPetDoctor.DataSource = petDoctor;
+			var doctorToSelect = petDoctor.FirstOrDefault(e => e.FirstName == "Peter");
+			if (doctorToSelect != null)
+			{
+				ComboBoxPetDoctor.SelectedItem = doctorToSelect;
+			}
+			CheckAndEnableButton();
+        }// AUTO FILL-IN END!
+    }
 }
