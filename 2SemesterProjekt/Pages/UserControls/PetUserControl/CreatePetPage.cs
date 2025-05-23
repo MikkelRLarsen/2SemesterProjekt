@@ -50,10 +50,6 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 			{
 				e.Value = employee.FirstName;
 			}
-			//else // Make the item to a string
-			//{
-			//	e.Value = e.ListItem!.ToString();
-			//}
 		}
 
 		private void textBoxPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
@@ -162,10 +158,10 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 		}
 
 		// AUTO FILL-IN BEGIN!
-		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		// ProcessCmdKey is a method in the Control class (inherited by UserControl and Form)
 		// that intercepts keyboard commands before they are sent to the focused control.
 		// This makes it ideal for global shortcuts, like Ctrl+F, regardless of which control has focus.
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		{
 			if (keyData == (Keys.Control | Keys.F))
 			{
