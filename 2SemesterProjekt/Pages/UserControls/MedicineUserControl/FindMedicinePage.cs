@@ -6,14 +6,14 @@ using System.Data;
 
 namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 {
-	public partial class FindMedicinPage : UserControl, IExaminationCardHost
+	public partial class FindMedicinePage : UserControl, IExaminationCardHost
 	{
 		private IExaminationService _examinationService;
 		private List<ExaminationCardUpdated> _allExaminationCards = new List<ExaminationCardUpdated>();
 		private ExaminationCardUpdated _selectedExaminationCard;
 		private Panel _panel;
 
-		public FindMedicinPage(Panel panel)
+		public FindMedicinePage(Panel panel)
 		{
 			InitializeComponent();
 			_panel = panel;
@@ -119,7 +119,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 				return;
 			}
 			_panel.Controls.Clear();
-			_panel.Controls.Add(new SeeMedicinDetails(_selectedExaminationCard.Examination, this, _panel));
+			_panel.Controls.Add(new SeeMedicineDetails(_selectedExaminationCard.Examination, this, _panel));
 
 		}
 

@@ -2,13 +2,13 @@
 
 namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 {
-	public partial class SeeMedicinDetails : UserControl
+	public partial class SeeMedicineDetails : UserControl
 	{
-		private readonly FindMedicinPage _findMedicinPage;
+		private readonly FindMedicinePage _findMedicinPage;
 		private readonly Panel _panel;
 		private readonly Examination _examination;
 		private Dictionary<string, MedicineCard> _medicineCards = new Dictionary<string, MedicineCard>();
-		public SeeMedicinDetails(Examination examination, FindMedicinPage previousPage, Panel panel)
+		public SeeMedicineDetails(Examination examination, FindMedicinePage previousPage, Panel panel)
 		{
 			InitializeComponent();
 

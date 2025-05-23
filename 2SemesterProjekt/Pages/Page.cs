@@ -75,7 +75,7 @@ namespace _2SemesterProjekt.Pages
         private async void FindMedicinPage(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
-            MainPanel.Controls.Add(new FindMedicinPage(MainPanel));
+            MainPanel.Controls.Add(new FindMedicinePage(MainPanel));
         }
 
 

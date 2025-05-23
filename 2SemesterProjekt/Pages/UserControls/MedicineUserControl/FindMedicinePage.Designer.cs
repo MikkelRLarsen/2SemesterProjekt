@@ -1,6 +1,7 @@
-﻿namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
+﻿
+namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 {
-	partial class SeeMedicinDetails
+	partial class FindMedicinePage
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -28,35 +29,24 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			cancelButton = new PictureBox();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FindMedicinePage));
 			flowPanel = new FlowLayoutPanel();
-			SearchMedicineTextBox = new TextBox();
+			textBoxCustomerPhoneNumberOrName = new TextBox();
 			customerSearchButton = new PictureBox();
+			findAllButton = new PictureBox();
 			label1 = new Label();
 			pictureBox3 = new PictureBox();
 			pictureBox2 = new PictureBox();
 			label2 = new Label();
 			pictureBox1 = new PictureBox();
-			findAllButton = new PictureBox();
-			((System.ComponentModel.ISupportInitialize)cancelButton).BeginInit();
+			changeButton = new PictureBox();
 			((System.ComponentModel.ISupportInitialize)customerSearchButton).BeginInit();
+			((System.ComponentModel.ISupportInitialize)findAllButton).BeginInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-			((System.ComponentModel.ISupportInitialize)findAllButton).BeginInit();
+			((System.ComponentModel.ISupportInitialize)changeButton).BeginInit();
 			SuspendLayout();
-			// 
-			// cancelButton
-			// 
-			cancelButton.Image = Properties.Resources.CancelButton;
-			cancelButton.Location = new Point(157, 747);
-			cancelButton.Margin = new Padding(3, 4, 3, 4);
-			cancelButton.Name = "cancelButton";
-			cancelButton.Size = new Size(240, 55);
-			cancelButton.SizeMode = PictureBoxSizeMode.StretchImage;
-			cancelButton.TabIndex = 62;
-			cancelButton.TabStop = false;
-			cancelButton.Click += cancelButton_Click;
 			// 
 			// flowPanel
 			// 
@@ -66,17 +56,17 @@
 			flowPanel.Location = new Point(416, 240);
 			flowPanel.Name = "flowPanel";
 			flowPanel.Size = new Size(769, 562);
-			flowPanel.TabIndex = 71;
+			flowPanel.TabIndex = 39;
 			// 
-			// SearchMedicineTextBox
+			// textBoxCustomerPhoneNumberOrName
 			// 
-			SearchMedicineTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			SearchMedicineTextBox.Location = new Point(570, 191);
-			SearchMedicineTextBox.Margin = new Padding(3, 4, 3, 4);
-			SearchMedicineTextBox.MaxLength = 55;
-			SearchMedicineTextBox.Name = "SearchMedicineTextBox";
-			SearchMedicineTextBox.Size = new Size(274, 27);
-			SearchMedicineTextBox.TabIndex = 70;
+			textBoxCustomerPhoneNumberOrName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			textBoxCustomerPhoneNumberOrName.Location = new Point(570, 191);
+			textBoxCustomerPhoneNumberOrName.Margin = new Padding(3, 4, 3, 4);
+			textBoxCustomerPhoneNumberOrName.MaxLength = 8;
+			textBoxCustomerPhoneNumberOrName.Name = "textBoxCustomerPhoneNumberOrName";
+			textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
+			textBoxCustomerPhoneNumberOrName.TabIndex = 38;
 			// 
 			// customerSearchButton
 			// 
@@ -87,9 +77,20 @@
 			customerSearchButton.Name = "customerSearchButton";
 			customerSearchButton.Size = new Size(47, 21);
 			customerSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
-			customerSearchButton.TabIndex = 69;
+			customerSearchButton.TabIndex = 37;
 			customerSearchButton.TabStop = false;
-			customerSearchButton.Click += MedicineSearchButton_Click;
+			customerSearchButton.Click += customerSearchButton_Click;
+			// 
+			// findAllButton
+			// 
+			findAllButton.Image = Properties.Resources.FindAllButton;
+			findAllButton.Location = new Point(931, 194);
+			findAllButton.Name = "findAllButton";
+			findAllButton.Size = new Size(99, 21);
+			findAllButton.SizeMode = PictureBoxSizeMode.StretchImage;
+			findAllButton.TabIndex = 36;
+			findAllButton.TabStop = false;
+			findAllButton.Click += findAllButton_Click;
 			// 
 			// label1
 			// 
@@ -97,11 +98,11 @@
 			label1.BackColor = Color.AntiqueWhite;
 			label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label1.ForeColor = Color.SaddleBrown;
-			label1.Location = new Point(555, 167);
+			label1.Location = new Point(483, 166);
 			label1.Name = "label1";
-			label1.Size = new Size(475, 20);
-			label1.TabIndex = 67;
-			label1.Text = "T R Y K   S E   A L L E   E L L E R   S Ø G   P Å   M E D I C I N   N A V N";
+			label1.Size = new Size(635, 20);
+			label1.TabIndex = 35;
+			label1.Text = "T R Y K   F I N D   A L L E   E L L E R   S Ø G   P Å   K U N D E N S   T E L E F O N N U M M E R";
 			// 
 			// pictureBox3
 			// 
@@ -111,7 +112,7 @@
 			pictureBox3.Name = "pictureBox3";
 			pictureBox3.Size = new Size(769, 88);
 			pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
-			pictureBox3.TabIndex = 66;
+			pictureBox3.TabIndex = 34;
 			pictureBox3.TabStop = false;
 			// 
 			// pictureBox2
@@ -121,7 +122,7 @@
 			pictureBox2.Name = "pictureBox2";
 			pictureBox2.Size = new Size(1399, 705);
 			pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-			pictureBox2.TabIndex = 65;
+			pictureBox2.TabIndex = 33;
 			pictureBox2.TabStop = false;
 			// 
 			// label2
@@ -130,11 +131,11 @@
 			label2.BackColor = Color.Linen;
 			label2.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label2.ForeColor = Color.SaddleBrown;
-			label2.Location = new Point(523, 33);
+			label2.Location = new Point(311, 36);
 			label2.Name = "label2";
-			label2.Size = new Size(595, 50);
-			label2.TabIndex = 63;
-			label2.Text = "S E   M E D I C I N   D E T A L J E R";
+			label2.Size = new Size(935, 50);
+			label2.TabIndex = 31;
+			label2.Text = "F I N D   M E D I C I N   F O R   K O N S U L T A T I O N";
 			// 
 			// pictureBox1
 			// 
@@ -143,27 +144,28 @@
 			pictureBox1.Name = "pictureBox1";
 			pictureBox1.Size = new Size(1399, 86);
 			pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-			pictureBox1.TabIndex = 64;
+			pictureBox1.TabIndex = 32;
 			pictureBox1.TabStop = false;
 			// 
-			// findAllButton
+			// changeButton
 			// 
-			findAllButton.Image = Properties.Resources.FindAllButton;
-			findAllButton.Location = new Point(931, 194);
-			findAllButton.Name = "findAllButton";
-			findAllButton.Size = new Size(99, 21);
-			findAllButton.SizeMode = PictureBoxSizeMode.StretchImage;
-			findAllButton.TabIndex = 68;
-			findAllButton.TabStop = false;
-			findAllButton.Click += findAllButton_Click;
+			changeButton.Image = (Image)resources.GetObject("changeButton.Image");
+			changeButton.Location = new Point(1223, 742);
+			changeButton.Margin = new Padding(3, 4, 3, 4);
+			changeButton.Name = "changeButton";
+			changeButton.Size = new Size(240, 60);
+			changeButton.SizeMode = PictureBoxSizeMode.StretchImage;
+			changeButton.TabIndex = 46;
+			changeButton.TabStop = false;
+			changeButton.Click += changeButton_Click;
 			// 
-			// SeeMedicinDetails
+			// FindMedicinPage
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
-			Controls.Add(cancelButton);
+			Controls.Add(changeButton);
 			Controls.Add(flowPanel);
-			Controls.Add(SearchMedicineTextBox);
+			Controls.Add(textBoxCustomerPhoneNumberOrName);
 			Controls.Add(customerSearchButton);
 			Controls.Add(findAllButton);
 			Controls.Add(label1);
@@ -171,29 +173,30 @@
 			Controls.Add(pictureBox2);
 			Controls.Add(label2);
 			Controls.Add(pictureBox1);
-			Name = "SeeMedicinDetails";
+			Name = "FindMedicinPage";
 			Size = new Size(1600, 845);
-			Load += SeeMedicinDetails_Load;
-			((System.ComponentModel.ISupportInitialize)cancelButton).EndInit();
+			Load += FindMedicinPage_Load;
 			((System.ComponentModel.ISupportInitialize)customerSearchButton).EndInit();
+			((System.ComponentModel.ISupportInitialize)findAllButton).EndInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-			((System.ComponentModel.ISupportInitialize)findAllButton).EndInit();
+			((System.ComponentModel.ISupportInitialize)changeButton).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
 
 		#endregion
-		private PictureBox cancelButton;
+
 		private FlowLayoutPanel flowPanel;
-		private TextBox SearchMedicineTextBox;
+		private TextBox textBoxCustomerPhoneNumberOrName;
 		private PictureBox customerSearchButton;
+		private PictureBox findAllButton;
 		private Label label1;
 		private PictureBox pictureBox3;
 		private PictureBox pictureBox2;
 		private Label label2;
 		private PictureBox pictureBox1;
-		private PictureBox findAllButton;
+		private PictureBox changeButton;
 	}
 }
