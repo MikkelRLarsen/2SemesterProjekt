@@ -34,10 +34,15 @@ namespace _2SemesterProjekt.Domain.Models
             SalesPricePerUnit = salesPricePerUnit;
             NumberInStock = numberInStock;
             MinNumberInStock = minNumberInStock;
+            NumberInStockOrderPage = numberInStock;
         }
         public void SetNumberInStockOnOrderPage()
         {
-            if (QuantityInOrder == 0)
+            if (QuantityInOrder != 0)
+            {
+                NumberInStockOrderPage = NumberInStock - QuantityInOrder;
+            }
+            else
             {
                 NumberInStockOrderPage = NumberInStock;
             }
@@ -45,16 +50,17 @@ namespace _2SemesterProjekt.Domain.Models
         public void AddQuantityToOrder(int amount)
         {
             QuantityInOrder += amount;
-            NumberInStockOrderPage -= amount;
+            SetNumberInStockOnOrderPage();
         }
         public void RemoveQuantityFromOrder(int amount)
         { 
             QuantityInOrder -= amount;
-            NumberInStockOrderPage += amount;
+            SetNumberInStockOnOrderPage();
         }
         public void ResetQuantityInOrder()
         {
             QuantityInOrder = 0;
+            SetNumberInStockOnOrderPage();
         }
         public void UpdateTotalPriceOfProductInOrder()
         {

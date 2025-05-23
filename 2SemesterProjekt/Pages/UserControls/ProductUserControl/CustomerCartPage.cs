@@ -9,7 +9,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
     public partial class CustomerCartPage : UserControl
     {
         public List<Product> _productsInCart;
-        public List<InCartProductCard> _cartProductCards = new List<InCartProductCard>();
+        public List<InCartProductCard> _cartProductCards;
         private Panel _mainPagePanel;
         private Customer _customer;
 
@@ -23,11 +23,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             InitializeComponent();
             _mainPagePanel = mainPagePanel;
             _productsInCart = order;
+            _cartProductCards = new List<InCartProductCard>();
 
             _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>()!;
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
             _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>()!;
-            _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>()!;
+            //_productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>()!;
 
             IServiceScope scope = ServiceProviderSingleton.GetServiceProvider().CreateScope();
             _productService = scope.ServiceProvider.GetService<IProductService>()!; /* This ensure that the Listbox gets the newest
@@ -36,6 +37,34 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private void CustomerCartPage_Load(object sender, EventArgs e)
         {
+
+            foreach (var productCard in _cartProductCards)
+            {
+                flowPanel.Controls.Add(productCard);
+            }
+
+            UpdateTotalPrice();
+        }
+
+        public async void ReloadCustomerCart()
+        {
+            flowPanel.Controls.Clear();
+
+            var list = await _productService.GetAllProductsAsync();
+            var updatedList = new List<Product>();
+
+            foreach (var productInCart in _productsInCart)
+            {
+                foreach (var product in list)
+                {
+                    if (productInCart.ProductID == product.ProductID)
+                    updatedList.Add(product);
+                }
+            }
+
+            _productsInCart.Clear();
+            _productsInCart = updatedList;
+
             foreach (var productCard in _cartProductCards)
             {
                 flowPanel.Controls.Add(productCard);
@@ -141,6 +170,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList());
                 DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                _cartProductCards.Clear();
                 _mainPagePanel.Controls.Remove(this);
                 _mainPagePanel.Controls.Add(new MainPageWallpaper());
             }
@@ -159,6 +189,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            _cartProductCards.Clear();
             _mainPagePanel.Controls.Remove(this);
             _mainPagePanel.Controls.Add(new MainPageWallpaper());
         }
@@ -201,7 +232,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private async void cancelButton_Click(object sender, EventArgs e)
         {
-            _mainPagePanel.Controls.Remove(this);
+            this.Hide();
         }
 
         public FlowLayoutPanel GetFlowLayoutPanelFromCustomerCart()
@@ -211,7 +242,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         public async void LoadAndShowProductCards(IEnumerable<InCartProductCard> productCardsToBeLoaded)
         {
-            // Clears the panel and then adds the wanted ExaminationCards
+            // Clears the panel and then adds the wanted ProductCards
             flowPanel.Controls.Clear();
             flowPanel.Controls.AddRange(productCardsToBeLoaded.ToArray());
         }

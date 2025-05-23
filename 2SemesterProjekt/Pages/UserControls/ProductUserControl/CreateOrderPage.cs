@@ -73,7 +73,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private void goToCartButton_Click(object sender, EventArgs e)
         {
             _mainPagePanel.Controls.Add(_customerCartPage);
-
+            _customerCartPage.ReloadCustomerCart();
+            _customerCartPage.Show();
             _customerCartPage.BringToFront();
         }
 

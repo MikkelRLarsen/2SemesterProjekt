@@ -72,7 +72,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             CenterLabelHorizontally(productNameLabel);
             productPurchasePriceLabel.Text = _productData.PurchasePricePerUnit.ToString();
             productSalesPriceLabel.Text = _productData.SalesPricePerUnit.ToString();
-            inStockLabel.Text = _productData.NumberInStock.ToString();
+            inStockLabel.Text = _productData.NumberInStockOrderPage.ToString();
             minStockLabel.Text = _productData.MinNumberInStock.ToString();
             categoryLabel.Text = _productData.Type;
         }
@@ -127,10 +127,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _productData.AddQuantityToOrder(quantity);
             int newStock = _productData.NumberInStockOrderPage;
             inStockLabel.Text = newStock.ToString();
+            inStockLabel.Refresh();
             _productData.UpdateTotalPriceOfProductInOrder();
 
             // Checks if the card already exists in the cart, if not => create and add new card
-            if (_orderPage._order.Any(p => p.ProductID == _productData.ProductID) == false)
+            if (_cartPage._productsInCart.Any(p => p.ProductID == _productData.ProductID) == false)
             {
                 AddProductCardToCart();
             }
@@ -157,6 +158,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             _productData.RemoveQuantityFromOrder(quantity);
             _productData.UpdateTotalPriceOfProductInOrder();
+            int newStock = _productData.NumberInStockOrderPage;
+            inStockLabel.Text = newStock.ToString();
+            inStockLabel.Refresh();
 
             // Checks if the card was removed earlier to re-add it to the add-panel
             if (_orderPage._allProductCards.Any(p => p._productData.ProductID == _productData.ProductID) == false)
