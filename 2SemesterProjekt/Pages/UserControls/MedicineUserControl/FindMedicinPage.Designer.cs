@@ -29,6 +29,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FindMedicinPage));
 			flowPanel = new FlowLayoutPanel();
 			textBoxCustomerPhoneNumberOrName = new TextBox();
 			customerSearchButton = new PictureBox();
@@ -148,7 +149,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			// 
 			// changeButton
 			// 
-			changeButton.Image = Properties.Resources.ChangeButtonGreyedOut;
+			changeButton.Image = (Image)resources.GetObject("changeButton.Image");
 			changeButton.Location = new Point(1223, 742);
 			changeButton.Margin = new Padding(3, 4, 3, 4);
 			changeButton.Name = "changeButton";
