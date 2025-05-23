@@ -1,6 +1,5 @@
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
-using _2SemesterProjekt.Pages.UserControls.Product;
 using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,7 +17,7 @@ namespace _2SemesterProjekt.Pages
     public partial class ProductPage : UserControl
     {
         private readonly IProductService _productService;
-        public List<ProductCard> AllProductCards { get; set; } = new List<ProductCard>();
+        public List<OldProductCard> AllProductCards { get; set; } = new List<OldProductCard>();
         public ProductPage()
         {
             InitializeComponent();
@@ -40,7 +39,7 @@ namespace _2SemesterProjekt.Pages
 
             foreach (Product product in allProducts)
             {
-                AllProductCards.Add(new ProductCard(product));
+                AllProductCards.Add(new OldProductCard(product));
             }
         }
 
@@ -53,7 +52,7 @@ namespace _2SemesterProjekt.Pages
         private void CreateOrder(object sender, EventArgs e)
         {
             productFlowPanel.Controls.Clear(); // Clear existing content
-            productFlowPanel.Controls.Add(new CreateOrder(productFlowPanel)); // Load the new page
+           // productFlowPanel.Controls.Add(new CreateOrder(productFlowPanel)); // Load the new page - From old branch before UI update
         }
 
         private async void ExportToTxt_Click(object sender, EventArgs e)

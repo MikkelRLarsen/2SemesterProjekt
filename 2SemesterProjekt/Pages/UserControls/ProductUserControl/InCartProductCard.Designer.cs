@@ -1,6 +1,6 @@
 ﻿namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 {
-    partial class InCartProductCardUpdated
+    partial class InCartProductCard
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,43 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            amountLabel = new Label();
             cardPanel = new Panel();
+            quantityLabel = new Label();
             SuspendLayout();
-            // 
-            // amountLabel
-            // 
-            amountLabel.AutoSize = true;
-            amountLabel.BackColor = Color.Linen;
-            amountLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            amountLabel.ForeColor = Color.SaddleBrown;
-            amountLabel.Location = new Point(12, 37);
-            amountLabel.Name = "amountLabel";
-            amountLabel.Size = new Size(36, 41);
-            amountLabel.TabIndex = 69;
-            amountLabel.Text = "#";
             // 
             // cardPanel
             // 
-            cardPanel.Location = new Point(60, 0);
+            cardPanel.Location = new Point(0, 0);
             cardPanel.Name = "cardPanel";
-            cardPanel.Size = new Size(660, 114);
+            cardPanel.Size = new Size(660, 150);
             cardPanel.TabIndex = 70;
+            // 
+            // amountLabel
+            // 
+            quantityLabel.AutoSize = true;
+            quantityLabel.BackColor = Color.Linen;
+            quantityLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            quantityLabel.ForeColor = Color.SaddleBrown;
+            quantityLabel.Location = new Point(672, 55);
+            quantityLabel.Name = "amountLabel";
+            quantityLabel.Size = new Size(36, 41);
+            quantityLabel.TabIndex = 70;
+            quantityLabel.Text = "#";
             // 
             // InCartProductCardUpdated
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(quantityLabel);
             Controls.Add(cardPanel);
-            Controls.Add(amountLabel);
+            Margin = new Padding(30, 5, 5, 5);
             Name = "InCartProductCardUpdated";
-            Size = new Size(720, 114);
+            Size = new Size(720, 150);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Label amountLabel;
         private Panel cardPanel;
+        private Label quantityLabel;
     }
 }
