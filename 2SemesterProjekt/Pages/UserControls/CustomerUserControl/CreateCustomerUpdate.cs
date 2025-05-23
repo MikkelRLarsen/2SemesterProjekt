@@ -93,87 +93,91 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
         {
             try
             {
-                // Wait cursor (timeglas)
-                Cursor = Cursors.WaitCursor;
-                submitButton.Enabled = false;
-
-                string displayMessage = string.Empty;
-
-                // Validate first and last name: only letters
-                if (string.IsNullOrWhiteSpace(textBoxFirstName.Text) || !textBoxFirstName.Text.All(char.IsLetter))
-                {
-                    textBoxFirstName.ForeColor = Color.White;
-                    textBoxFirstName.BackColor = Color.LightCoral;
-                    displayMessage += "Fornavn må kun indeholde bogstaver.\n";
-                }
-
-                if (string.IsNullOrWhiteSpace(textBoxLastName.Text) || !textBoxLastName.Text.All(char.IsLetter))
-                {
-                    textBoxLastName.ForeColor = Color.White;
-                    textBoxLastName.BackColor = Color.LightCoral;
-                    displayMessage += "Efternavn må kun indeholde bogstaver.\n";
-                }
-
-                // Validate email: "@" and "." in correct order.
-                int atIndex = textBoxEmail.Text.IndexOf('@');
-                int dotIndex = textBoxEmail.Text.LastIndexOf('.');
-                if (string.IsNullOrWhiteSpace(textBoxEmail.Text) || atIndex <= 0 || dotIndex <= atIndex + 1 || dotIndex == textBoxEmail.Text.Length - 1)
-                {
-                    textBoxEmail.ForeColor = Color.White;
-                    textBoxEmail.BackColor = Color.LightCoral;
-                    displayMessage += "Indtast en gyldig e-mailadresse.\n";
-                }
-
-                // Validate address: only letters and digits.
-                if (string.IsNullOrWhiteSpace(textBoxAddress.Text) || textBoxAddress.Text.All(char.IsLetterOrDigit))
-                {
-                    textBoxAddress.ForeColor = Color.White;
-                    textBoxAddress.BackColor = Color.LightCoral;
-                    displayMessage += "Adressen må kun indeholde bogstaver, tal og mellemrum.\n";
-                }
-
-                // Validate phonenumber: only numbers and 8-digit long.
-                if (!Int32.TryParse(textBoxPhoneNumber.Text, out int phoneNumber) || textBoxPhoneNumber.Text[0] == '0' || phoneNumber < 10000000 || phoneNumber > 99999999)
-                {
-                    textBoxPhoneNumber.ForeColor = Color.White;
-                    textBoxPhoneNumber.BackColor = Color.LightCoral;
-                    displayMessage += "Telefonnummer skal være et helt 8-cifret tal.\n";
-                }
-
-                if (displayMessage == string.Empty) // If there is no errors, then create customer
-                {
-                    try
-                    {
-                        var customer = new Customer(
-                           textBoxFirstName.Text, // FirstName
-                           textBoxLastName.Text, // LastName
-                           textBoxEmail.Text,    // Email
-                           textBoxAddress.Text,  // Address
-                           comboBoxType.Text,    // Type
-                        phoneNumber           // PhoneNumber
-                        );
-
-                        await _customerService.CreateCustomerAsync(customer); // Creates the customer in DB
-
-                        MessageBox.Show($"{textBoxFirstName.Text} er oprettet i systemet", "Kunde oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"{ex}", "Fejl i oprettelse", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else // Show error to user in UI
-                {
-                    MessageBox.Show(displayMessage, "Fejl i indtastning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                // Wait cursor (timeglas)
-                Cursor = Cursors.Default;
-                submitButton.Enabled = true;
-            }
+				// Wait cursor (timeglas)
+				Cursor = Cursors.WaitCursor;
+				submitButton.Enabled = false;
+			}
             catch (Exception ex)
             {
-                throw new Exception("Fejl!", ex);
+				// Wait cursor (timeglas)
+				Cursor = Cursors.Default;
+				submitButton.Enabled = true;
+				MessageBox.Show($"{ex.Message}", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+			}
+
+            string displayMessage = string.Empty;
+
+            // Validate first and last name: only letters
+            if (string.IsNullOrWhiteSpace(textBoxFirstName.Text) || !textBoxFirstName.Text.All(char.IsLetter))
+            {
+                textBoxFirstName.ForeColor = Color.White;
+                textBoxFirstName.BackColor = Color.LightCoral;
+                displayMessage += "Fornavn må kun indeholde bogstaver.\n";
             }
+
+            if (string.IsNullOrWhiteSpace(textBoxLastName.Text) || !textBoxLastName.Text.All(char.IsLetter))
+            {
+                textBoxLastName.ForeColor = Color.White;
+                textBoxLastName.BackColor = Color.LightCoral;
+                displayMessage += "Efternavn må kun indeholde bogstaver.\n";
+            }
+
+            // Validate email: "@" and "." in correct order.
+            int atIndex = textBoxEmail.Text.IndexOf('@');
+            int dotIndex = textBoxEmail.Text.LastIndexOf('.');
+            if (string.IsNullOrWhiteSpace(textBoxEmail.Text) || atIndex <= 0 || dotIndex <= atIndex + 1 || dotIndex == textBoxEmail.Text.Length - 1)
+            {
+                textBoxEmail.ForeColor = Color.White;
+                textBoxEmail.BackColor = Color.LightCoral;
+                displayMessage += "Indtast en gyldig e-mailadresse.\n";
+            }
+
+            // Validate address: only letters and digits.
+            if (string.IsNullOrWhiteSpace(textBoxAddress.Text) || textBoxAddress.Text.All(char.IsLetterOrDigit))
+            {
+                textBoxAddress.ForeColor = Color.White;
+                textBoxAddress.BackColor = Color.LightCoral;
+                displayMessage += "Adressen må kun indeholde bogstaver, tal og mellemrum.\n";
+            }
+
+            // Validate phonenumber: only numbers and 8-digit long.
+            if (!Int32.TryParse(textBoxPhoneNumber.Text, out int phoneNumber) || textBoxPhoneNumber.Text[0] == '0' || phoneNumber < 10000000 || phoneNumber > 99999999)
+            {
+                textBoxPhoneNumber.ForeColor = Color.White;
+                textBoxPhoneNumber.BackColor = Color.LightCoral;
+                displayMessage += "Telefonnummer skal være et helt 8-cifret tal.\n";
+            }
+
+            if (displayMessage == string.Empty) // If there is no errors, then create customer
+            {
+                try
+                {
+                    var customer = new Customer(
+                        textBoxFirstName.Text, // FirstName
+                        textBoxLastName.Text, // LastName
+                        textBoxEmail.Text,    // Email
+                        textBoxAddress.Text,  // Address
+                        comboBoxType.Text,    // Type
+                    phoneNumber           // PhoneNumber
+                    );
+
+                    await _customerService.CreateCustomerAsync(customer); // Creates the customer in DB
+
+                    MessageBox.Show($"{textBoxFirstName.Text} er oprettet i systemet", "Kunde oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{ex.Message}", "Fejl i oprettelse", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else // Show error to user in UI
+            {
+                MessageBox.Show(displayMessage, "Fejl i indtastning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            // Wait cursor (timeglas)
+            Cursor = Cursors.Default;
+            submitButton.Enabled = true;
         }
     }
 }
