@@ -73,7 +73,7 @@
 			SearchMedicineTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			SearchMedicineTextBox.Location = new Point(570, 191);
 			SearchMedicineTextBox.Margin = new Padding(3, 4, 3, 4);
-			SearchMedicineTextBox.MaxLength = 8;
+			SearchMedicineTextBox.MaxLength = 55;
 			SearchMedicineTextBox.Name = "SearchMedicineTextBox";
 			SearchMedicineTextBox.Size = new Size(274, 27);
 			SearchMedicineTextBox.TabIndex = 70;
@@ -89,7 +89,7 @@
 			customerSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
 			customerSearchButton.TabIndex = 69;
 			customerSearchButton.TabStop = false;
-			customerSearchButton.Click += customerSearchButton_Click;
+			customerSearchButton.Click += MedicineSearchButton_Click;
 			// 
 			// label1
 			// 
@@ -155,6 +155,7 @@
 			findAllButton.SizeMode = PictureBoxSizeMode.StretchImage;
 			findAllButton.TabIndex = 68;
 			findAllButton.TabStop = false;
+			findAllButton.Click += findAllButton_Click;
 			// 
 			// SeeMedicinDetails
 			// 

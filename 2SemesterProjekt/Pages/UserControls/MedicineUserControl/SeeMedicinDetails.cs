@@ -23,21 +23,22 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			_panel.Controls.Add(_findMedicinPage);
 		}
 
-		private void customerSearchButton_Click(object sender, EventArgs e)
+		private void MedicineSearchButton_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				// Finds all examination where Examination.Pet.Customers phonenumber == input phonenumber
+				// Finds all MedicineCard where MedicinePrescriptions name is equal to SearchMedicineTextBox
 				MedicineCard? medicineCardsWithMedicineName = _medicineCards.GetValueOrDefault(SearchMedicineTextBox.Text);
 
-				// If there wasn't any examination with customer phonenumber
+				// If there wasn't any MedicineCard
 				if (medicineCardsWithMedicineName == null)
 				{
 					throw new ArgumentException("Der er ikke nogen medicine detaljer med det navn");
 				}
 
 				// Adds all relevant MedicineCard to flowpanel and display them
-				LoadAndShow(_medicineCards.Values);
+				flowPanel.Controls.Clear();
+				flowPanel.Controls.Add(medicineCardsWithMedicineName);
 			}
 			catch (Exception ex)
 			{
@@ -47,8 +48,6 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 
 		private async void SeeMedicinDetails_Load(object sender, EventArgs e)
 		{
-
-
 			foreach (MedicinePrescription medicinePrescription in _examination.MedicinePrescriptions)
 			{
 				_medicineCards.Add(medicinePrescription.MedicineDetails.MedicineType.Name, new MedicineCard(medicinePrescription));
@@ -61,6 +60,11 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 		{
 			flowPanel.Controls.Clear();
 			flowPanel.Controls.AddRange(medicineCards.ToArray());
+		}
+
+		private void findAllButton_Click(object sender, EventArgs e)
+		{
+			LoadAndShow(_medicineCards.Values);
 		}
 	}
 }
