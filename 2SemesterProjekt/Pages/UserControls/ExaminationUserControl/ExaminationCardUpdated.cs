@@ -52,7 +52,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             {
                 medicineStatusLabel.Text = "Ukendt";
             }
-            else if (Examination.Medicine?.MedicineID != null)
+            else if (Examination.MedicinePrescriptions.Count > 0)
             {
                 medicineStatusLabel.Text = "Ja";
             }

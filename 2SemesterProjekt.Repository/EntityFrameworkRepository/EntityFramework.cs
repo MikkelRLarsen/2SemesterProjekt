@@ -119,12 +119,28 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.WithMany(p => p.Cages)
 				.HasForeignKey(p => p.CageID);
 
-			modelBuilder.Entity<Examination>()
-				.HasOne(ex => ex.Medicine)
-				.WithMany(p => p.Examinations)
-				.HasForeignKey(ex => ex.MedicineID);
+            modelBuilder.Entity<Examination>()
+                .HasMany(ex => ex.MedicinePrescriptions)
+                .WithOne(mp => mp.Examination)
+                .HasForeignKey(mp => mp.ExaminationID);
 
-            modelBuilder.Entity<Species>()
+            modelBuilder.Entity<MedicinePrescription>()
+                .HasOne(mp => mp.MedicineDetails)
+                .WithMany(md => md.MedicinePrescriptions)
+                .HasForeignKey(mp => mp.MedicineDetailsID);
+
+            modelBuilder.Entity<MedicineDetails>()
+                .HasOne(md => md.MedicineType)
+                .WithMany(mt => mt.MedicineDetails)
+                .HasForeignKey(md => md.MedicineTypeID);
+
+			modelBuilder.Entity<MedicineDetails>()
+				.HasOne(md => md.MedicineFormat)
+				.WithMany(mf => mf.MedicineDetails)
+				.HasForeignKey(md => md.MedicineFormatID);
+
+
+			modelBuilder.Entity<Species>()
                 .HasMany(s => s.Pets)
                 .WithOne(p => p.Species)
                 .HasForeignKey(p => p.SpeciesID);
@@ -143,6 +159,10 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             modelBuilder.Entity<CageBooking>().HasKey(cBooking => cBooking.CageBookingID);
             modelBuilder.Entity<Cage>().HasKey(ca => ca.CageID);
             modelBuilder.Entity<Species>().HasKey(s => s.SpeciesID);
+            modelBuilder.Entity<MedicinePrescription>().HasKey(mp => mp.MedicinePrescriptionID);
+            modelBuilder.Entity<MedicineDetails>().HasKey(md => md.MedicineDetailsID);
+            modelBuilder.Entity<MedicineFormat>().HasKey(mf => mf.MedicineFormatID);
+            modelBuilder.Entity<MedicineType>().HasKey(mt => mt.MedicineTypeID);
 
             // Ignoring properties that don't exist in the DB
             modelBuilder.Entity<Product>().Ignore(pr => pr.QuantityInOrder);

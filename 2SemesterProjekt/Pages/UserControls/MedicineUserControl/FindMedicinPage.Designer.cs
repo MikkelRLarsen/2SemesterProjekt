@@ -56,7 +56,6 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			flowPanel.Name = "flowPanel";
 			flowPanel.Size = new Size(769, 562);
 			flowPanel.TabIndex = 39;
-			flowPanel.Paint += this.flowPanel_Paint;
 			// 
 			// textBoxCustomerPhoneNumberOrName
 			// 
@@ -67,7 +66,6 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			textBoxCustomerPhoneNumberOrName.Name = "textBoxCustomerPhoneNumberOrName";
 			textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
 			textBoxCustomerPhoneNumberOrName.TabIndex = 38;
-			textBoxCustomerPhoneNumberOrName.TextChanged += textBoxCustomerPhoneNumberOrName_TextChanged;
 			// 
 			// customerSearchButton
 			// 
@@ -104,7 +102,6 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			label1.Size = new Size(635, 20);
 			label1.TabIndex = 35;
 			label1.Text = "T R Y K   F I N D   A L L E   E L L E R   S Ø G   P Å   K U N D E N S   T E L E F O N N U M M E R";
-			label1.Click += this.label1_Click;
 			// 
 			// pictureBox3
 			// 
@@ -116,7 +113,6 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
 			pictureBox3.TabIndex = 34;
 			pictureBox3.TabStop = false;
-			pictureBox3.Click += this.pictureBox3_Click;
 			// 
 			// pictureBox2
 			// 
@@ -187,21 +183,6 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			((System.ComponentModel.ISupportInitialize)changeButton).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
-		}
-
-		private void flowPanel_Paint(object sender, PaintEventArgs e)
-		{
-			throw new NotImplementedException();
-		}
-
-		private void pictureBox3_Click(object sender, EventArgs e)
-		{
-			throw new NotImplementedException();
-		}
-
-		private void label1_Click(object sender, EventArgs e)
-		{
-			throw new NotImplementedException();
 		}
 
 		#endregion

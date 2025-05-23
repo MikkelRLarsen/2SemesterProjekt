@@ -87,8 +87,13 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 				.Include(e => e.Pet)
 					.ThenInclude(p => p.Species)
                 .Include(e => e.Employee)
-				.Include(me => me.Medicine)
-                .Include(e => e.ExaminationType)
+				.Include(e => e.MedicinePrescriptions)
+					.ThenInclude(mp => mp.MedicineDetails)
+						.ThenInclude(md => md.MedicineType)
+				.Include(e => e.MedicinePrescriptions)
+					.ThenInclude(mp => mp.MedicineDetails)
+						.ThenInclude(md => md.MedicineFormat)
+				.Include(e => e.ExaminationType)
 				.Include (e => e.CageBooking)
                 .ToListAsync();
         }

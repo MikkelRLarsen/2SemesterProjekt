@@ -323,6 +323,7 @@
 			Controls.Add(label1);
 			Controls.Add(petPicture);
 			Controls.Add(pictureBox);
+			Margin = new Padding(50, 10, 10, 10);
 			Name = "MedicineCard";
 			Size = new Size(655, 280);
 			Load += MedicineCard_Load;
