@@ -30,9 +30,21 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             _host = host;
             InitializeComponent();
             InitializeUIDesign();
+            AddMoveHandlers(this);
         }
 
-        private void InitializeUIDesign()
+		private void AddMoveHandlers(Control control)
+		{
+            control.Click += pictureBox_Click;
+
+			// Add the same handler to each of the control.Controls.
+			foreach (Control child in control.Controls)
+			{
+				AddMoveHandlers(child);
+			}
+		}
+
+		private void InitializeUIDesign()
         {
             // Sets all information on Card based on Examination
             petNameLabel.Text = Examination.Pet.Name;

@@ -13,12 +13,15 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 		public DbSet<ExaminationType> ExaminationTypes { get; set;}
 		public DbSet<ExaminationTag> ExaminationTags { get; set;}
 		public DbSet<Product> Products { get; set;}
-		public DbSet<Medicine> Medicines { get; set;}
 		public DbSet<Order> Orders { get; set;}
 		public DbSet<ProductLine> ProductLines { get; set;}
         public DbSet<CageBooking> CageBookings { get; set; }
         public DbSet<Cage> Cages { get; set; }
         public DbSet<Species> Species { get; set; }
+        public DbSet<MedicinePrescription> MedicinePrescriptions { get; set;}
+        public DbSet<MedicineDetails> MedicineDetails { get; set; }
+        public DbSet<MedicineType> MedicineTypes { get; set; }
+        public DbSet<MedicineFormat> MedicineFormats { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -46,12 +49,15 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<ExaminationType>().ToTable("ExaminationType");
 			modelBuilder.Entity<ExaminationTag>().ToTable("ExaminationTag");
 			modelBuilder.Entity<Product>().ToTable("Product");
-			modelBuilder.Entity<Medicine>().ToTable("Medicine");
 			modelBuilder.Entity<Order>().ToTable("Order");
 			modelBuilder.Entity<ProductLine>().ToTable("ProductLine");
             modelBuilder.Entity<CageBooking>().ToTable("CageBooking");
             modelBuilder.Entity<Cage>().ToTable("Cage");
             modelBuilder.Entity<Species>().ToTable("Species");
+            modelBuilder.Entity<MedicinePrescription>().ToTable("MedicinePrescription");
+            modelBuilder.Entity<MedicineDetails>().ToTable("MedicineDetails");
+            modelBuilder.Entity<MedicineType>().ToTable("MedicineType");
+            modelBuilder.Entity<MedicineFormat>().ToTable("MedicineFormat");
 
             //Relations
             modelBuilder.Entity<Customer>()
@@ -153,7 +159,6 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			modelBuilder.Entity<ExaminationType>().HasKey(eType => eType.ExaminationTypeID);
 			modelBuilder.Entity<ExaminationTag>().HasKey(eTag => eTag.ExaminationTagID);
 			modelBuilder.Entity<Product>().HasKey(pr => pr.ProductID);
-			modelBuilder.Entity<Medicine>().HasKey(me => me.MedicineID);
 			modelBuilder.Entity<Order>().HasKey(o => o.OrderID);
 			modelBuilder.Entity<ProductLine>().HasKey(prLine => prLine.ProductLineID);
             modelBuilder.Entity<CageBooking>().HasKey(cBooking => cBooking.CageBookingID);
