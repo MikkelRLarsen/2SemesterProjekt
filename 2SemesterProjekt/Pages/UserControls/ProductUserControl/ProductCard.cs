@@ -50,6 +50,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _productData = product;
             
         }
+        public ProductCard()
+        {
+
+        }
 
         /// <summary>
         /// Sets up the UI based on card-type
@@ -183,6 +187,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _orderPage.DecreaseItemsInCart(quantity);
             cartProductCard.UpdateAmountLabel();
             cartProductCard.UpdateAmountUpDown(quantity);
+            _productData.SetNumberInStockOnOrderPage();
+            inStockLabel.Refresh();
 
             UpdateInStockLabelInAddProductCard(quantity);
         }
@@ -201,6 +207,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             var wrappedCard = new InCartProductCard(productCard, _cartItemsPanel);
 
             _cartPage._cartProductCards.Add(wrappedCard);
+        }
+
+        public void UpdateInStockLabel()
+        {
+            inStockLabel.Refresh();
         }
 
         /// <summary>

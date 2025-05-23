@@ -12,6 +12,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         public List<InCartProductCard> _cartProductCards;
         private Panel _mainPagePanel;
         private Customer _customer;
+        private ProductCard _productCard = new ProductCard();
 
         private readonly IOrderService _orderService;
         private readonly ICustomerService _customerService;
@@ -58,7 +59,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 foreach (var product in list)
                 {
                     if (productInCart.ProductID == product.ProductID)
-                    updatedList.Add(product);
+                    {
+                        product.SetNumberInStockOnOrderPage();
+                        updatedList.Add(product);
+                    }
                 }
             }
 
@@ -68,6 +72,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             foreach (var productCard in _cartProductCards)
             {
                 flowPanel.Controls.Add(productCard);
+                _productCard.UpdateInStockLabel();
             }
 
             UpdateTotalPrice();
