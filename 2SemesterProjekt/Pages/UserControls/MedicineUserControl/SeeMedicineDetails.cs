@@ -4,7 +4,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 {
 	public partial class SeeMedicineDetails : UserControl
 	{
-		private readonly FindMedicinePage _findMedicinPage;
+		private readonly FindMedicinePage _findMedicinePage;
 		private readonly Panel _panel;
 		private readonly Examination _examination;
 		private Dictionary<string, MedicineCard> _medicineCards = new Dictionary<string, MedicineCard>();
@@ -13,14 +13,14 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			InitializeComponent();
 
 			_examination = examination;
-			_findMedicinPage = previousPage;
+			_findMedicinePage = previousPage;
 			_panel = panel;
 		}
 
 		private void cancelButton_Click(object sender, EventArgs e)
 		{
 			_panel.Controls.Clear();
-			_panel.Controls.Add(_findMedicinPage);
+			_panel.Controls.Add(_findMedicinePage);
 		}
 
 		private void MedicineSearchButton_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 			}
 		}
 
-		private async void SeeMedicinDetails_Load(object sender, EventArgs e)
+		private async void SeeMedicineDetails_Load(object sender, EventArgs e)
 		{
 			foreach (MedicinePrescription medicinePrescription in _examination.MedicinePrescriptions)
 			{

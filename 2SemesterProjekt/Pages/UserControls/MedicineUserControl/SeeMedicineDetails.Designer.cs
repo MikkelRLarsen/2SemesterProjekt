@@ -173,7 +173,7 @@
 			Controls.Add(pictureBox1);
 			Name = "SeeMedicinDetails";
 			Size = new Size(1600, 845);
-			Load += SeeMedicinDetails_Load;
+			Load += SeeMedicineDetails_Load;
 			((System.ComponentModel.ISupportInitialize)cancelButton).EndInit();
 			((System.ComponentModel.ISupportInitialize)customerSearchButton).EndInit();
 			((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
