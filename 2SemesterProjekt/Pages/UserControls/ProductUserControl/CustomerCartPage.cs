@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
@@ -139,6 +140,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 // Updates the stock status of each product in the order.
                 await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList());
                 DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                _mainPagePanel.Controls.Remove(this);
+                _mainPagePanel.Controls.Add(new MainPageWallpaper());
             }
         }
 
@@ -154,7 +158,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList());
 
             DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            return;
+
+            _mainPagePanel.Controls.Remove(this);
+            _mainPagePanel.Controls.Add(new MainPageWallpaper());
         }
 
         private void discountNumericUpDown_ValueChanged(object sender, EventArgs e)
