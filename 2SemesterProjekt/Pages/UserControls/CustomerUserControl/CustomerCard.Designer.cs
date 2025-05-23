@@ -195,8 +195,9 @@
             // 
             // pictureBox
             // 
+            pictureBox.BackColor = SystemColors.Control;
             pictureBox.Image = Properties.Resources.CardExamination;
-            pictureBox.Location = new Point(3, 3);
+            pictureBox.Location = new Point(0, 0);
             pictureBox.Name = "pictureBox";
             pictureBox.Size = new Size(655, 192);
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -221,7 +222,7 @@
             Controls.Add(customerAddressLabel);
             Controls.Add(customerIdLabel);
             Controls.Add(pictureBox);
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(50, 10, 10, 10);
             Name = "CustomerCard";
             Size = new Size(655, 192);
             ((System.ComponentModel.ISupportInitialize)profilePicture).EndInit();
