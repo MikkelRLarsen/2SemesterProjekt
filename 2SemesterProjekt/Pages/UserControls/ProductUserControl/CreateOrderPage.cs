@@ -25,6 +25,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _order = new List<Product>();
             _customerCartPage = new CustomerCartPage(_order, _mainPagePanel);
         }
+        public CreateOrderPage()
+        {
+
+        }
 
         private async void CreateOrderPage_Load(object sender, EventArgs e)
         {
@@ -61,6 +65,16 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _itemsInCart += amount;
 
             itemsInCart.Text = _itemsInCart.ToString();
+        }
+
+        public void UpdateProductCards()
+        {
+            foreach (var productCards in _allProductCards)
+            {
+                productCards.UpdateInStockLabel(productCards._productData);
+                productCards.Refresh();
+            }
+            LoadAndShowProductCards(_allProductCards);
         }
 
         public void DecreaseItemsInCart(int amount)

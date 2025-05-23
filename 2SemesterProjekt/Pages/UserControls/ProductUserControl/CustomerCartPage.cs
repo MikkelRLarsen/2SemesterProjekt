@@ -13,6 +13,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private Panel _mainPagePanel;
         private Customer _customer;
         private ProductCard _productCard;
+        private CreateOrderPage _createOrderPage;
 
         private readonly IOrderService _orderService;
         private readonly ICustomerService _customerService;
@@ -26,6 +27,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _productsInCart = order;
             _cartProductCards = new List<InCartProductCard>();
             _productCard = new ProductCard();
+            _createOrderPage = new CreateOrderPage();
 
             _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>()!;
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
@@ -239,6 +241,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private async void cancelButton_Click(object sender, EventArgs e)
         {
             this.Hide();
+            _createOrderPage.UpdateProductCards();
         }
 
         public FlowLayoutPanel GetFlowLayoutPanelFromCustomerCart()
