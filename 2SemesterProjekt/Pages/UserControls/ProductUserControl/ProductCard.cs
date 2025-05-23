@@ -39,7 +39,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _productData = product;
             _cardMode = cardMode;
             _cartItemsPanel = _cartPage.GetFlowLayoutPanelFromCustomerCart();
-
+            _productData.SetNumberInStockOnOrderPage();
             InitializeComponent();
             InitializeUIDesign();
         }
@@ -48,6 +48,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         public ProductCard(Product product)
         {
             _productData = product;
+            
         }
 
         /// <summary>
@@ -124,7 +125,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             // Updates the model for later order creation
             _productData.AddQuantityToOrder(quantity);
-            int newStock = _productData.NumberInStock - _productData.QuantityInOrder;
+            int newStock = _productData.NumberInStockOrderPage;
             inStockLabel.Text = newStock.ToString();
             _productData.UpdateTotalPriceOfProductInOrder();
 

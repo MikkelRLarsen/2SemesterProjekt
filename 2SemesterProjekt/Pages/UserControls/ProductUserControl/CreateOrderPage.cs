@@ -37,6 +37,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             foreach (var product in allProductsInStock)
             {
+                product.ResetQuantityInOrder();
                 _allProductCards.Add(new ProductCard(this, _customerCartPage, this.flowPanel, product, ProductCard.CardMode.AddToCart));
             }
 
