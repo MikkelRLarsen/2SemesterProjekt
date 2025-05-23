@@ -55,7 +55,7 @@ namespace _2SemesterProjekt.Domain.Models
         public void RemoveQuantityFromOrder(int amount)
         { 
             QuantityInOrder -= amount;
-            SetNumberInStockOnOrderPage();
+            NumberInStockOrderPage += amount;
         }
         public void ResetQuantityInOrder()
         {

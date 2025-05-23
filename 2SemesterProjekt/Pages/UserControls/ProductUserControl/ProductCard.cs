@@ -239,7 +239,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 // Find the label named "inStockLabel" that displays number in stock
                 .First(l => l.Name == "inStockLabel");
 
-            labelInSpecificCard.Text = _productData.NumberInStock.ToString();
+            labelInSpecificCard.Text = _productData.NumberInStockOrderPage.ToString();
 
             card.UpdateAmountLabel();
             card.UpdateAmountUpDown(quantity);
