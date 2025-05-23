@@ -204,13 +204,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             var productCard = new ProductCard(_orderPage, _cartPage, _addProductPanel, _productData, CardMode.RemoveFromCart);
 
             // Wrap the ProductCard in a UI component that handles how it is displayed inside the cart panel
-            var wrappedCard = new InCartProductCard(productCard, _cartItemsPanel);
+            var wrappedCard = new InCartProductCard(productCard, _productData, _cartItemsPanel);
 
             _cartPage._cartProductCards.Add(wrappedCard);
         }
 
-        public void UpdateInStockLabel()
+        public void UpdateInStockLabel(Product product)
         {
+            inStockLabel.Text = product.NumberInStockOrderPage.ToString();
             inStockLabel.Refresh();
         }
 

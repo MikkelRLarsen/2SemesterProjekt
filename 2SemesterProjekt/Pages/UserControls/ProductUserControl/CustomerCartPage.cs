@@ -12,7 +12,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         public List<InCartProductCard> _cartProductCards;
         private Panel _mainPagePanel;
         private Customer _customer;
-        private ProductCard _productCard = new ProductCard();
+        private ProductCard _productCard;
 
         private readonly IOrderService _orderService;
         private readonly ICustomerService _customerService;
@@ -25,6 +25,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _mainPagePanel = mainPagePanel;
             _productsInCart = order;
             _cartProductCards = new List<InCartProductCard>();
+            _productCard = new ProductCard();
 
             _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>()!;
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
@@ -71,8 +72,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             foreach (var productCard in _cartProductCards)
             {
+                productCard.UpdateCardPanel();
                 flowPanel.Controls.Add(productCard);
-                _productCard.UpdateInStockLabel();
             }
 
             UpdateTotalPrice();
