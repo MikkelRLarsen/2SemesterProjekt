@@ -163,7 +163,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                             chosenPet.PetID,
                             chosenEmployee.EmployeeID,
                             chosenExaminationDate,
-                            null,
                             chosenExaminationType.ExaminationTypeID,
                             Convert.ToDecimal(PriceExaminationDisplay.Text),
                             null
@@ -191,7 +190,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                             chosenPet.PetID,
                             chosenEmployee.EmployeeID,
                             chosenExaminationDate,
-                            null,
                             chosenExaminationType.ExaminationTypeID,
                             Convert.ToDecimal(PriceExaminationDisplay.Text),
                             null

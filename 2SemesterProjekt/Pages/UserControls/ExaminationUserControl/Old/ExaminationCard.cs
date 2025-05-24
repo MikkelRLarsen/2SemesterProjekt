@@ -45,10 +45,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             {
                 MedicineStatusLabel.Text = "Ukendt";
             }
-            else if (Examination.Medicine?.MedicineID != null)
-            {
-                MedicineStatusLabel.Text = "Ja";
-            }
             else
             {
                 MedicineStatusLabel.Text = "Nej";
