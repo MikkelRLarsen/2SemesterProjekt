@@ -27,6 +27,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 _allProductCards.Add(new ProductCard(product));
             }
         }
+
         private void findAllButton_Click(object sender, EventArgs e)
         {
             ViewAllProducts();
