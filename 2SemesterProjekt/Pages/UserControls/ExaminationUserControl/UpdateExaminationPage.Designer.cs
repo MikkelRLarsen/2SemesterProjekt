@@ -274,6 +274,7 @@
             ExaminationTypeDropdown.Name = "ExaminationTypeDropdown";
             ExaminationTypeDropdown.Size = new Size(274, 28);
             ExaminationTypeDropdown.TabIndex = 39;
+            ExaminationTypeDropdown.SelectionChangeCommitted += ExaminationTypeDropdown_SelectionChangeCommitted;
             // 
             // petDropdown
             // 

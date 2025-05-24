@@ -84,6 +84,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             return await _db.Examinations
                 .Include(e => e.Pet)
 					.ThenInclude(p => p.Customer)
+						.ThenInclude(c => c.Pets)
 				.Include(e => e.Pet)
 					.ThenInclude(p => p.Species)
                 .Include(e => e.Employee)

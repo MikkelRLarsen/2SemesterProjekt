@@ -21,6 +21,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private readonly Examination _examination;
         private readonly ChangeExaminationPage _changeExaminationPage;
         private readonly Panel _mainPagePanel;
+        private decimal? _basePriceForExamination;
 
         public UpdateExaminationPage(Examination examination, ChangeExaminationPage changeExaminationPage, Panel mainPagePanel)
         {
@@ -31,7 +32,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
             _examinationService = ServiceProviderSingleton.GetServiceProvider().GetService<IExaminationService>()!;
             _employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
-            
+
         }
 
         private async void UpdateExaminationPage_Load(object sender, EventArgs e)
@@ -39,21 +40,32 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             /// Customer of the chosen examination:
             customerSearchTextBox.Text = _examination.Pet.Customer.FirstName;
 
-            /// Pet of the chosen examination:
-            
+            /// Pet of the chosen examination (+ the customer's other pets):
             petDropdown.Enabled = true;
             petDropdown.DataSource = _examination.Pet.Customer.Pets;
+            petDropdown.DisplayMember = "Name";
+            petDropdown.SelectedItem = _examination.Pet;
 
-            employeeDropdown.DataSource = (await GetListOfEmployeeWithExaminationEmployeeFirst(_examination)).ToList();
-            employeeDropdown.DisplayMember = "FirstName";
-
+            /// Examination of the chosen examination and its price (+ all the other examinations and their prices):
+            ExaminationTypeDropdown.Enabled = true;
+            var allExaminationTypes = await _examinationService.GetAllExaminationTypesAsync();
+            ExaminationTypeDropdown.DataSource = allExaminationTypes.ToList();
+            ExaminationTypeDropdown.DisplayMember = "Description";
+            ExaminationTypeDropdown.SelectedItem = _examination.ExaminationType;
+            /// Price - also changes dynamically when new examinationType is chosen via Eventhandler: ExaminationTypeDropdown_SelectionChangeCommitted.
+            PriceExaminationDisplay.Text = _examination.Price.ToString();
+         
+            /// Date of the chosen examination (+ ability to change):
+            DateTimePickerExamination.Enabled = true;
             DateTimePickerExamination.Value = _examination.Date;
             DateTimePickerExamination.MinDate = DateTime.UtcNow;
 
+            /// Employee of the chosen examination (+ all the other employees):
+            employeeDropdown.Enabled = true;
+            employeeDropdown.DataSource = (await GetListOfEmployeeWithExaminationEmployeeFirst(_examination)).ToList();
+            employeeDropdown.DisplayMember = "FirstName";
 
 
-            ExaminationTypeDropdown.Text = _examination.ExaminationType.Description;
-            PriceExaminationDisplay.Text = _examination.Price.ToString();
         }
 
         private async Task<IEnumerable<Employee>> GetListOfEmployeeWithExaminationEmployeeFirst(Examination examination)
@@ -72,7 +84,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             try
             {
-                // Creates a new examinations with updated information, which validates the information
+                // Creates a new examination with updated information, which validates the information
                 Examination examinationWithupdatedInformation = new Examination(
                         _examination.PetID,
                         (employeeDropdown.SelectedItem as Employee).EmployeeID,
@@ -116,9 +128,18 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-
             _mainPagePanel.Controls.Remove(this);
             _mainPagePanel.Controls.Add(_changeExaminationPage);
+        }
+        /// <summary>
+        /// Changes price when a different examination is chosen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExaminationTypeDropdown_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            _basePriceForExamination = (ExaminationTypeDropdown.SelectedItem as ExaminationType).BasePrice;
+            PriceExaminationDisplay.Text = _basePriceForExamination.ToString();
         }
     }
 }
