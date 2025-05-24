@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
@@ -19,27 +20,38 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private readonly IEmployeeService _employeeService;
         private readonly Examination _examination;
         private readonly ChangeExaminationPage _changeExaminationPage;
+        private readonly Panel _mainPagePanel;
 
-        public UpdateExaminationPage(Examination examination, ChangeExaminationPage changeExaminationPage)
+        public UpdateExaminationPage(Examination examination, ChangeExaminationPage changeExaminationPage, Panel mainPagePanel)
         {
             InitializeComponent();
             _examination = examination;
+            _changeExaminationPage = changeExaminationPage;
+            _mainPagePanel = mainPagePanel;
 
             _examinationService = ServiceProviderSingleton.GetServiceProvider().GetService<IExaminationService>()!;
             _employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
-            _changeExaminationPage = changeExaminationPage;
+            
         }
 
         private async void UpdateExaminationPage_Load(object sender, EventArgs e)
         {
+            /// Customer of the chosen examination:
+            customerSearchTextBox.Text = _examination.Pet.Customer.FirstName;
+
+            /// Pet of the chosen examination:
+            
+            petDropdown.Enabled = true;
+            petDropdown.DataSource = _examination.Pet.Customer.Pets;
+
             employeeDropdown.DataSource = (await GetListOfEmployeeWithExaminationEmployeeFirst(_examination)).ToList();
             employeeDropdown.DisplayMember = "FirstName";
 
             DateTimePickerExamination.Value = _examination.Date;
             DateTimePickerExamination.MinDate = DateTime.UtcNow;
 
-            customerSearchTextBox.Text = _examination.Pet.Customer.FirstName;
-            petDropdown.Text = _examination.Pet.Name;
+
+
             ExaminationTypeDropdown.Text = _examination.ExaminationType.Description;
             PriceExaminationDisplay.Text = _examination.Price.ToString();
         }
@@ -100,6 +112,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             {
                 MessageBox.Show(ex.Message, "Advarsel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+
+            _mainPagePanel.Controls.Remove(this);
+            _mainPagePanel.Controls.Add(_changeExaminationPage);
         }
     }
 }

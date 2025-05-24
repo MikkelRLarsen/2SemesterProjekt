@@ -408,6 +408,7 @@
             cancelButton.SizeMode = PictureBoxSizeMode.StretchImage;
             cancelButton.TabIndex = 61;
             cancelButton.TabStop = false;
+            cancelButton.Click += cancelButton_Click;
             // 
             // UpdateExaminationPage
             // 
