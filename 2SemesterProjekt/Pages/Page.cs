@@ -140,7 +140,7 @@ namespace _2SemesterProjekt.Pages
         private async void CreatePetPage(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
-            MainPanel.Controls.Add(new CreatePetPage());
+            MainPanel.Controls.Add(new CreatePetPage(MainPanel));
         }
         private async void FindPetPage(object sender, EventArgs e)
         {
