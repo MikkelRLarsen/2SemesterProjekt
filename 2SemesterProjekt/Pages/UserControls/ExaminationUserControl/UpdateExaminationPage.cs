@@ -25,7 +25,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private readonly Panel _mainPagePanel;
         private decimal? _basePriceForExamination;
         private bool _cageBookingIsChecked;
-        
+
 
         public UpdateExaminationPage(Examination examination, ChangeExaminationPage changeExaminationPage, Panel mainPagePanel)
         {
@@ -60,9 +60,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             /// Price - also changes dynamically when new examinationType is chosen via Eventhandler: ExaminationTypeDropdown_SelectionChangeCommitted.
             PriceExaminationDisplay.Text = _examination.Price.ToString();
 
-            /// Cage booking:
-            
-
             /// Date of the chosen examination (+ ability to change):
             DateTimePickerExamination.Enabled = true;
             DateTimePickerExamination.Value = _examination.Date;
@@ -72,10 +69,19 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             employeeDropdown.Enabled = true;
             employeeDropdown.DataSource = (await GetListOfEmployeeWithExaminationEmployeeFirst(_examination)).ToList();
             employeeDropdown.DisplayMember = "FirstName";
+            
+            /// Discount:
+            
 
+            /// Cage booking:
+            UpdateCageBookingCheckbox();
+            CageBookingStatus();
+            
             /// Button (needs work):
             updateButton.Enabled = true;
             updateButton.Image = Properties.Resources.SaveButton;
+
+       
         }
 
         private async Task<IEnumerable<Employee>> GetListOfEmployeeWithExaminationEmployeeFirst(Examination examination)
@@ -102,6 +108,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
                 if (_cageBookingIsChecked == true) // Create Cage Booking
                 {
+                    /// User confirmation:
+                    DialogResult messageBoxResult = MessageBox.Show("Er du sikker på, at denne konsultationstid skal ændres?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (messageBoxResult != DialogResult.Yes)
+                    {
+                        return;
+                    }
+
                     /// Validate the cagebooking before creating examination - to ensure no errors is thrown before the creation
                     DateTime estimatedEndOfCageBooking = DateTimePickerExamination.Value.AddDays(Convert.ToDouble(numericUpDownCageBooking.Value));
 
@@ -122,15 +136,29 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                         totalPrice,
                         availableCage.CageID
                     );
+
+                    /// Updates cage booking in database:
+                    await _cageService.CreateCageBookingAsync(cageBooking);
+
                     /// Creates a new examination with updated information, which validates the information
-                    Examination examinationWithupdatedInformation = new Examination(
-                        _examination.PetID,
+                    Examination examinationWithupdatedInformationYesCage = new Examination(
+                        (petDropdown.SelectedItem as Pet).PetID,
                         (employeeDropdown.SelectedItem as Employee).EmployeeID,
                         DateTimePickerExamination.Value,
-                        _examination.ExaminationTypeID,
-                        _examination.Price,
-                        _examination.CageBookingID);
+                        (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTypeID,
+                        Convert.ToDecimal(PriceExaminationDisplay.Text),
+                        cageBooking.CageBookingID
+                        );
+                    
+                    /// Validates information again and sets the new properties
+                    _examination.UpdateExaminationProperties(examinationWithupdatedInformationYesCage);
 
+                    /// Updates examination in database:
+                    await _examinationService.UpdateExamination(_examination);
+                }
+                else /// Update examination without cagebooking:
+                {
+                    /// User confirmation:
                     DialogResult messageBoxResult = MessageBox.Show("Er du sikker på, at denne konsultationstid skal ændres?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                     if (messageBoxResult != DialogResult.Yes)
@@ -138,26 +166,40 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                         return;
                     }
 
+                    Examination examinationWithupdatedInformationNoCage = new Examination(
+                        (petDropdown.SelectedItem as Pet).PetID,
+                        (employeeDropdown.SelectedItem as Employee).EmployeeID,
+                        DateTimePickerExamination.Value,
+                        (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTypeID,
+                        Convert.ToDecimal(PriceExaminationDisplay.Text),
+                        null
+                        );
+
                     /// Validates information again and sets the new properties
-                    _examination.UpdateExaminationProperties(examinationWithupdatedInformation);
+                    _examination.UpdateExaminationProperties(examinationWithupdatedInformationNoCage);
 
                     /// Updates Examination in Database
                     _examinationService.UpdateExamination(_examination);
-
-                    MessageBox.Show("Konsultationen er blevet opdateret", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    /// Finds the index of the ExaminationCard to replace
-                    //int index = _changeExaminationPage.AllExaminationCards.FindIndex(exCard => exCard.Examination.ExaminationID == _examination.ExaminationID);
-
-                    /// Replaces ExaminationCard with a new one with the updated information
-                    //_changeExaminationPage.AllExaminationCards[index] = new ExaminationCardUpdated(_examination, _changeExaminationPage);
-
-                    /// Set the selected ExaminationCard to null, so its no longer highligted
-                    //_changeExaminationPage.ExaminationCard = null;
-
-                    /// Return to show all pets
-                    //_changeExaminationPage.LoadAndShowExaminationCards(_changeExaminationPage.AllExaminationCards);
                 }
+
+                MessageBox.Show("Konsultationen er blevet opdateret", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                /// Return to ChangeExaminationPage after completed update:
+                _mainPagePanel.Controls.Remove(this);
+                _mainPagePanel.Controls.Add(_changeExaminationPage);
+
+                /// Finds the index of the ExaminationCard to replace
+                //int index = _changeExaminationPage.AllExaminationCards.FindIndex(exCard => exCard.Examination.ExaminationID == _examination.ExaminationID);
+
+                /// Replaces ExaminationCard with a new one with the updated information
+                //_changeExaminationPage.AllExaminationCards[index] = new ExaminationCardUpdated(_examination, _changeExaminationPage);
+
+                /// Set the selected ExaminationCard to null, so its no longer highligted
+                //_changeExaminationPage.ExaminationCard = null;
+
+                /// Return to show all pets
+                //_changeExaminationPage.LoadAndShowExaminationCards(_changeExaminationPage.AllExaminationCards);
+
             }
             catch (Exception ex)
             {
@@ -170,6 +212,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             _mainPagePanel.Controls.Remove(this);
             _mainPagePanel.Controls.Add(_changeExaminationPage);
         }
+
         /// <summary>
         /// Changes price when a different examination is chosen.
         /// </summary>
@@ -181,6 +224,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             PriceExaminationDisplay.Text = _basePriceForExamination.ToString();
             UpdateCageBookingCheckbox();
         }
+
+        /// <summary>
+        /// Cage booking functionality shows up if examinationType is operation.
+        /// </summary>
         private void UpdateCageBookingCheckbox()
         {
             if (ExaminationTypeDropdown.SelectedItem != null)
@@ -205,6 +252,11 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             }
         }
 
+        /// <summary>
+        /// Functionality for the cage booking checkbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cageBookingCheckBox_Click(object sender, EventArgs e)
         {
             _cageBookingIsChecked = !_cageBookingIsChecked;
@@ -216,6 +268,56 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             else
             {
                 cageBookingCheckBox.Image = Properties.Resources.CheckBox;
+            }
+        }
+        /// <summary>
+        /// Sets the cage booking checkbox to clicked or not:
+        /// </summary>
+        private void CageBookingStatus()
+        {
+            if (_examination.CageBookingID != null)
+            {
+                _cageBookingIsChecked = true;
+                cageBookingCheckBox.Image = Properties.Resources.CheckBoxClicked;
+                int numberOfCageDays = (_examination.CageBooking.EndDate - _examination.CageBooking.StartDate).Days;
+                numericUpDownCageBooking.Value = numberOfCageDays;
+            }
+            else
+            {
+                _cageBookingIsChecked = false;
+                cageBookingCheckBox.Image = Properties.Resources.CheckBox;
+            }
+        }
+        private void UpdateDiscountStatus()
+        {
+            try
+            {
+                // Checks if selected Customer is Private and ExaminationTag is 2 which is Operation
+                if (_examination.Pet.Customer.Type == "Privat"
+                    && ExaminationTypeDropdown.SelectedItem as ExaminationType != null
+                    && (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTag.ExaminationTagID == 2)
+                {
+                    discountNumericUpDown.Enabled = true;
+                }
+                // Checks if selected Customer is Erhverv
+                else if (_examination.Pet.Customer.Type == "Erhverv")
+                {
+                    discountNumericUpDown.Visible = true;
+                    discountNumericUpDown.Enabled = true;
+                    discountLabel.Visible = true;
+                }
+
+                else
+                {
+                    discountNumericUpDown.Visible = false;
+                    discountNumericUpDown.Enabled = false;
+                    discountNumericUpDown.Value = 0;
+                    PriceExaminationDisplay.Text = _basePriceForExamination.ToString();
+                }
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Fejl i Display af rabat");
             }
         }
     }
