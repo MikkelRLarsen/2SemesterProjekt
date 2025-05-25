@@ -48,7 +48,19 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         public ProductCard(Product product)
         {
             _productData = product;
-        }
+			InitializeComponent();
+			amountUpDown.Hide();
+			cardButton.Hide();
+
+			productEANLabel.Text = _productData.EAN.ToString();
+			productNameLabel.Text = _productData.Name;
+			CenterLabelHorizontally(productNameLabel);
+			productPurchasePriceLabel.Text = _productData.PurchasePricePerUnit.ToString();
+			productSalesPriceLabel.Text = _productData.SalesPricePerUnit.ToString();
+			inStockLabel.Text = _productData.NumberInStock.ToString();
+			minStockLabel.Text = _productData.MinNumberInStock.ToString();
+			categoryLabel.Text = _productData.Type;
+		}
 
         /// <summary>
         /// Sets up the UI based on card-type

@@ -91,6 +91,21 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
 
         private async void submitButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+				// Wait cursor (hourglass)
+				Cursor = Cursors.WaitCursor;
+				submitButton.Enabled = false;
+			}
+            catch (Exception ex)
+            {
+                // Wait cursor (hourglass)
+                Cursor = Cursors.Default;
+				submitButton.Enabled = true;
+				MessageBox.Show($"{ex.Message}", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+			}
+
             string displayMessage = string.Empty;
 
             // Validate first and last name: only letters
@@ -139,11 +154,11 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
                 try
                 {
                     var customer = new Customer(
-                       textBoxFirstName.Text, // FirstName
-                       textBoxLastName.Text, // LastName
-                       textBoxEmail.Text,    // Email
-                       textBoxAddress.Text,  // Address
-                       comboBoxType.Text,    // Type
+                        textBoxFirstName.Text, // FirstName
+                        textBoxLastName.Text, // LastName
+                        textBoxEmail.Text,    // Email
+                        textBoxAddress.Text,  // Address
+                        comboBoxType.Text,    // Type
                     phoneNumber           // PhoneNumber
                     );
 
@@ -153,13 +168,16 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"{ex}", "Fejl i oprettelse", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"{ex.Message}", "Fejl i oprettelse", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else // Show error to user in UI
             {
                 MessageBox.Show(displayMessage, "Fejl i indtastning", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            // Wait cursor (hourglass)
+            Cursor = Cursors.Default;
+            submitButton.Enabled = true;
         }
     }
 }
