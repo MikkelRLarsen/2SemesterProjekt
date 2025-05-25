@@ -69,19 +69,19 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             employeeDropdown.Enabled = true;
             employeeDropdown.DataSource = (await GetListOfEmployeeWithExaminationEmployeeFirst(_examination)).ToList();
             employeeDropdown.DisplayMember = "FirstName";
-            
+
             /// Discount:
-            
+            UpdateDiscountStatus();
 
             /// Cage booking:
             UpdateCageBookingCheckbox();
             CageBookingStatus();
-            
+
             /// Button (needs work):
             updateButton.Enabled = true;
             updateButton.Image = Properties.Resources.SaveButton;
 
-       
+
         }
 
         private async Task<IEnumerable<Employee>> GetListOfEmployeeWithExaminationEmployeeFirst(Examination examination)
@@ -106,7 +106,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                 ExaminationType chosenExaminationType = (ExaminationTypeDropdown.SelectedItem as ExaminationType)!;
                 DateTime chosenExaminationDate = DateTimePickerExamination.Value;
 
-                if (_cageBookingIsChecked == true) // Create Cage Booking
+                if (_cageBookingIsChecked == true) /// Create Cage Booking
                 {
                     /// User confirmation:
                     DialogResult messageBoxResult = MessageBox.Show("Er du sikker på, at denne konsultationstid skal ændres?", "Advarsel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -149,7 +149,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                         Convert.ToDecimal(PriceExaminationDisplay.Text),
                         cageBooking.CageBookingID
                         );
-                    
+
                     /// Validates information again and sets the new properties
                     _examination.UpdateExaminationProperties(examinationWithupdatedInformationYesCage);
 
@@ -260,7 +260,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private void cageBookingCheckBox_Click(object sender, EventArgs e)
         {
             _cageBookingIsChecked = !_cageBookingIsChecked;
-
             if (_cageBookingIsChecked == true)
             {
                 cageBookingCheckBox.Image = Properties.Resources.CheckBoxClicked;
@@ -277,8 +276,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             if (_examination.CageBookingID != null)
             {
-                _cageBookingIsChecked = true;
                 cageBookingCheckBox.Image = Properties.Resources.CheckBoxClicked;
+
                 int numberOfCageDays = (_examination.CageBooking.EndDate - _examination.CageBooking.StartDate).Days;
                 numericUpDownCageBooking.Value = numberOfCageDays;
             }
@@ -297,7 +296,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     && ExaminationTypeDropdown.SelectedItem as ExaminationType != null
                     && (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTag.ExaminationTagID == 2)
                 {
+                    discountNumericUpDown.Visible = true;
                     discountNumericUpDown.Enabled = true;
+                    discountLabel.Visible = true;
                 }
                 // Checks if selected Customer is Erhverv
                 else if (_examination.Pet.Customer.Type == "Erhverv")
@@ -318,6 +319,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             catch (Exception)
             {
                 throw new ArgumentException("Fejl i Display af rabat");
+            }
+        }
+
+        private void discountNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (PriceExaminationDisplay.Text != null && _basePriceForExamination != null)
+            {
+                PriceExaminationDisplay.Text = (_basePriceForExamination * ((100 - discountNumericUpDown.Value) / 100)).ToString();
             }
         }
     }

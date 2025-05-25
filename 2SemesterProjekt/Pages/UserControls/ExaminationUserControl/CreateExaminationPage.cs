@@ -87,8 +87,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             PriceExaminationDisplay.Text = _basePriceForExamination.ToString();
 
             DateTimePickerExamination.Enabled = true;
-            UpdateDiscountStatus();
             UpdateCageBookingCheckbox();
+            UpdateDiscountStatus();
         }
 
         private async void DateTimePickerExamination_ValueChanged(object sender, EventArgs e)
@@ -158,6 +158,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                         availableCage.CageID
                     );
 
+                    // Then creates/updates cagebooking
+                    await _cageService.CreateCageBookingAsync(cageBooking);
+
                     // Creates the new Examination as a local variable to run validate Information.
                     Examination newExamination = new Examination(
                             chosenPet.PetID,
@@ -165,14 +168,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                             chosenExaminationDate,
                             chosenExaminationType.ExaminationTypeID,
                             Convert.ToDecimal(PriceExaminationDisplay.Text),
-                            null
+                            cageBooking.CageBookingID
                     );
+
 
                     // First creates examination
                     await _examinationService.CreateExaminationAsync(newExamination);
-
-                    // Then creates cagebooking
-                    await _cageService.CreateCageBookingAsync(cageBooking);
 
                     // Connects cagebooking to examination
                     newExamination.SetCageBookingID(cageBooking.CageBookingID);

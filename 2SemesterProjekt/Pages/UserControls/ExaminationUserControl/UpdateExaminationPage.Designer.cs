@@ -241,6 +241,7 @@
             discountNumericUpDown.Size = new Size(266, 27);
             discountNumericUpDown.TabIndex = 42;
             discountNumericUpDown.Visible = false;
+            discountNumericUpDown.ValueChanged += discountNumericUpDown_ValueChanged;
             // 
             // employeeDropdown
             // 
