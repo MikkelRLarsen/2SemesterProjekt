@@ -92,19 +92,19 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.BackColor = Color.AntiqueWhite;
+            label1.BackColor = Color.Linen;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label1.ForeColor = Color.SaddleBrown;
-            label1.Location = new Point(742, 569);
+            label1.Location = new Point(705, 569);
             label1.Name = "label1";
-            label1.Size = new Size(135, 20);
+            label1.Size = new Size(190, 20);
             label1.TabIndex = 51;
-            label1.Text = "T E L E F O N N R .";
+            label1.Text = "T E L E F O N N U M M E R";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.BackColor = Color.AntiqueWhite;
+            label5.BackColor = Color.Linen;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label5.ForeColor = Color.SaddleBrown;
             label5.Location = new Point(757, 469);
@@ -116,7 +116,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.BackColor = Color.AntiqueWhite;
+            label4.BackColor = Color.Linen;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label4.ForeColor = Color.SaddleBrown;
             label4.Location = new Point(728, 369);
@@ -128,7 +128,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.BackColor = Color.AntiqueWhite;
+            label3.BackColor = Color.Linen;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label3.ForeColor = Color.SaddleBrown;
             label3.Location = new Point(744, 269);
@@ -140,7 +140,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.BackColor = Color.AntiqueWhite;
+            label2.BackColor = Color.Linen;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label2.ForeColor = Color.SaddleBrown;
             label2.Location = new Point(753, 169);
@@ -260,7 +260,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.BackColor = Color.AntiqueWhite;
+            label9.BackColor = Color.Linen;
             label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label9.ForeColor = Color.SaddleBrown;
             label9.Location = new Point(744, 664);
