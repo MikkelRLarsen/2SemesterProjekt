@@ -229,6 +229,7 @@
             cageBookingCheckBox.TabIndex = 43;
             cageBookingCheckBox.TabStop = false;
             cageBookingCheckBox.Visible = false;
+            cageBookingCheckBox.Click += cageBookingCheckBox_Click;
             // 
             // discountNumericUpDown
             // 
