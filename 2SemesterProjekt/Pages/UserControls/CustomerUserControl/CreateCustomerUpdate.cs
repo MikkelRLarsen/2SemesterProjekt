@@ -93,14 +93,14 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
         {
             try
             {
-				// Wait cursor (timeglas)
+				// Wait cursor (hourglass)
 				Cursor = Cursors.WaitCursor;
 				submitButton.Enabled = false;
 			}
             catch (Exception ex)
             {
-				// Wait cursor (timeglas)
-				Cursor = Cursors.Default;
+                // Wait cursor (hourglass)
+                Cursor = Cursors.Default;
 				submitButton.Enabled = true;
 				MessageBox.Show($"{ex.Message}", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -175,7 +175,7 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             {
                 MessageBox.Show(displayMessage, "Fejl i indtastning", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            // Wait cursor (timeglas)
+            // Wait cursor (hourglass)
             Cursor = Cursors.Default;
             submitButton.Enabled = true;
         }
