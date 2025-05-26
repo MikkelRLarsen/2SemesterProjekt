@@ -34,7 +34,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         }
 
         /// <summary>
-        /// Loads all customers on customerPage click, making them ready for "Vis alle"-click. 
+        /// Loads all pets on Page click, making them ready for "Vis alle"-click. 
         /// </summary>
         private async void FindAndSetAllPetsAsync()
         {
@@ -61,7 +61,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         }
 
         /// <summary>
-        /// Responsible for adding the userControl CustomerCards to the customerFlowPanel.
+        /// Responsible for adding the userControl PetCards to the FlowPanel.
         /// </summary>
         /// <param name="petCardsToBeLoaded"></param>
         public async void LoadAndShowPetCards(IEnumerable<PetCard> petCardsToBeLoaded)
@@ -71,7 +71,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         }
 
         /// <summary>
-        /// Searches for a customer by phonenumber or name (first or last).
+        /// Searches for a customer by phonenumber or name.
         /// If numbers is entered, search by phonenumber.
         /// </summary>
         private async void ShowPetByOwnerPhoneNumberOrName()
