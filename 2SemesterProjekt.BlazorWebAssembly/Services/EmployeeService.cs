@@ -46,11 +46,11 @@ namespace _2SemesterProjekt.BlazorWebAssembly.Services
         /// </summary>
         public async Task LoadFromStringAsync(string content)
         {
-            var lines = content.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            string[] lines = content.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
-            var newList = new List<Employee>();
+            List<Employee> newList = new List<Employee>();
 
-            foreach (var line in lines)
+            foreach (string line in lines)
             {
                 // Create a new Employee object from each line
                 newList.Add(new Employee(line));

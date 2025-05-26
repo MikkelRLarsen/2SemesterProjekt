@@ -30,13 +30,13 @@ namespace _2SemesterProjekt.BlazorWebAssembly.Services
         public async Task LoadFromStringAsync(string content)
         {
             // Splits by \n and removes if lines between splits are empty
-            var lines = content.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            string[] lines = content.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
-            var newList = new List<Destination>();
+            List<Destination> newList = new List<Destination>();
 
-            foreach (var line in lines)
+            foreach (string line in lines)
             {
-                var split = line.Split(';');
+                string[] split = line.Split(';');
 
                 if (split.Length >= 3)
                 {
