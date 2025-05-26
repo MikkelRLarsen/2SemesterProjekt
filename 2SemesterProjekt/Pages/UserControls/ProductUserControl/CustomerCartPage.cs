@@ -20,14 +20,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private readonly IProductLineService _productLineService;
         private readonly IProductService _productService;
 
-        public CustomerCartPage(List<Product> order, Panel mainPagePanel)
+        public CustomerCartPage(List<Product> order, Panel mainPagePanel, CreateOrderPage createOrderPage)
         {
             InitializeComponent();
             _mainPagePanel = mainPagePanel;
             _productsInCart = order;
             _cartProductCards = new List<InCartProductCard>();
             _productCard = new ProductCard();
-            _createOrderPage = new CreateOrderPage();
+            _createOrderPage = createOrderPage;
 
             _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>()!;
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;

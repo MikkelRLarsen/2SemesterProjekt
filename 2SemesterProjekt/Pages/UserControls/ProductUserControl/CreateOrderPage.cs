@@ -23,7 +23,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>()!;
 
             _order = new List<Product>();
-            _customerCartPage = new CustomerCartPage(_order, _mainPagePanel);
+            _customerCartPage = new CustomerCartPage(_order, _mainPagePanel, this);
+
         }
         public CreateOrderPage()
         {
@@ -67,7 +68,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             itemsInCart.Text = _itemsInCart.ToString();
         }
 
-        public void UpdateProductCards()
+        public async void UpdateProductCards()
         {
             foreach (var productCards in _allProductCards)
             {
