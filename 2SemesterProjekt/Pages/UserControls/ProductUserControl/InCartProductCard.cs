@@ -15,10 +15,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
     public partial class InCartProductCard : UserControl
     {
         public ProductCard ProductCard { get; set; }
+        public Product Product { get; set; }
 
-        public InCartProductCard(ProductCard productCard, FlowLayoutPanel cartPanel)
+        public InCartProductCard(ProductCard productCard, Product product, FlowLayoutPanel cartPanel)
         {
             ProductCard = productCard;
+            Product = product;
             InitializeComponent();
             InitializeUIDesign();
         }
@@ -26,6 +28,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private void InitializeUIDesign()
         {
             cardPanel.Controls.Clear();
+            ProductCard.UpdateInStockLabel(Product);
             cardPanel.Controls.Add(ProductCard);
             quantityLabel.Text = $"{ProductCard._productData.QuantityInOrder.ToString()}x";
         }
@@ -34,7 +37,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             quantityLabel.Text = $"{ProductCard._productData.QuantityInOrder.ToString()}x";
         }
-
+        public void UpdateCardPanel()
+        {
+            cardPanel.Refresh();
+        }
         public void UpdateAmountUpDown(int addAmount)
         {
             var amountSelector = ProductCard.Controls

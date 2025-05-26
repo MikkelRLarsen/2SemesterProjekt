@@ -8,7 +8,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 {
     public partial class CreateOrderPage : UserControl
     {
-        public List<Product> _order; // Products in the order is stored here.
+        public List<Product> _order = new List<Product>(); // Products in the order is stored here.
         private readonly IProductService _productService;
         private int _itemsInCart;
         private Panel _mainPagePanel;
@@ -23,7 +23,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>()!;
 
             _order = new List<Product>();
-            _customerCartPage = new CustomerCartPage(_order, _mainPagePanel);
+            _customerCartPage = new CustomerCartPage(_order, _mainPagePanel, this);
+
         }
 
         private async void CreateOrderPage_Load(object sender, EventArgs e)
@@ -31,12 +32,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             Task.Run(() => FindAndSetAllProductsAsync());
         }
 
-        private async void FindAndSetAllProductsAsync()
+        public async void FindAndSetAllProductsAsync()
         {
             IEnumerable<Product> allProductsInStock = await _productService.GetAllProductsInStockAsync();
 
             foreach (var product in allProductsInStock)
             {
+                product.ResetQuantityInOrder();
                 _allProductCards.Add(new ProductCard(this, _customerCartPage, this.flowPanel, product, ProductCard.CardMode.AddToCart));
             }
 
@@ -62,6 +64,15 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             itemsInCart.Text = _itemsInCart.ToString();
         }
 
+        public async void UpdateProductCards()
+        {
+            foreach (var productCards in _allProductCards)
+            {
+                productCards.UpdateInStockLabel(productCards._productData);
+            }
+            LoadAndShowProductCards(_allProductCards);
+        }
+
         public void DecreaseItemsInCart(int amount)
         {
             _itemsInCart -= amount;
@@ -69,11 +80,30 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             itemsInCart.Text = _itemsInCart.ToString();
         }
 
+        public void EmptyItemsInCart()
+        {
+            _itemsInCart = 0;
+            itemsInCart.Text = _itemsInCart.ToString();
+        }
+
         private void goToCartButton_Click(object sender, EventArgs e)
         {
-            _mainPagePanel.Controls.Add(_customerCartPage);
+            if (_order.Count == 0)
+            {
+                MessageBox.Show("Tilføj venligst produkter først!", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                foreach (var productCards in _allProductCards)
+                {
+                    productCards.UpdateInStockLabel(productCards._productData);
+                }
 
-            _customerCartPage.BringToFront();
+                _mainPagePanel.Controls.Add(_customerCartPage);
+                _customerCartPage.ReloadCustomerCart(_order);
+                _customerCartPage.Show();
+                _customerCartPage.BringToFront();
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
