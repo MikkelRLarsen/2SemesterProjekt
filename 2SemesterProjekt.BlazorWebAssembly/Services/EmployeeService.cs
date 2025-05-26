@@ -9,7 +9,7 @@ namespace _2SemesterProjekt.BlazorWebAssembly.Services
     {
         private readonly ILocalStorageService _localStorage;
 
-        private List<Employee> _employees = new();
+        private List<Employee> _employees = new List<Employee>();
 
         // Key used to store/retrieve employee data from local storage
         private const string StorageKey = "employeeData";

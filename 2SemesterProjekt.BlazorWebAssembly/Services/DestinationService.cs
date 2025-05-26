@@ -4,7 +4,7 @@ namespace _2SemesterProjekt.BlazorWebAssembly.Services
 {
     public class DestinationService
     {
-        private List<Destination> _destinations = new();
+        private List<Destination> _destinations = new List<Destination>();
 
         /// <summary>
         /// Initializes the service by loading destinations from local storage,
