@@ -82,6 +82,7 @@
             textBoxPhoneNumber.Name = "textBoxPhoneNumber";
             textBoxPhoneNumber.Size = new Size(274, 27);
             textBoxPhoneNumber.TabIndex = 86;
+            textBoxPhoneNumber.KeyPress += textBoxPhoneNumber_KeyPress;
             // 
             // textBoxAddress
             // 

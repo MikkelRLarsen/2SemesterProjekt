@@ -18,10 +18,10 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
     {
         private readonly ICustomerService _customerService;
         private readonly CustomerCard _customerCard;
-        private readonly CustomerPage _customerPage;
+        private readonly ChangeCustomerPage _customerPage;
         private readonly Customer _customer;
 
-        public UpdateCustomerPage(CustomerPage customerPage, Customer customer)
+        public UpdateCustomerPage(ChangeCustomerPage customerPage, Customer customer)
         {
             InitializeComponent();
             _customerPage = customerPage;
@@ -83,7 +83,7 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             int index = _customerPage.AllCustomerCards.FindIndex(cusCard => cusCard.Customer.CustomerID == _customer.CustomerID);
 
             // Replaces ExaminationCard with a new one with the updated information
-            _customerPage.AllCustomerCards[index] = new CustomerCard(_customer, _customerPage);
+            _customerPage.AllCustomerCards[index] = new CustomerCard(_customer);
 
             // Set the selected ExaminationCard to null, so its no longer highligted
             _customerPage.CustomerCard = null;
