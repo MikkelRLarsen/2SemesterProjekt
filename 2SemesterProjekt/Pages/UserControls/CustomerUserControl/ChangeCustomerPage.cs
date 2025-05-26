@@ -140,8 +140,13 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
 
             _mainPanel.Controls.Add(updatePage);
             updatePage.BringToFront();
-            
+
             changeButton.Image = Properties.Resources.ChangeButtonGreyedOut;
+        }
+
+        private void customerSearchButton_Click(object sender, EventArgs e)
+        {
+            ShowCustomerByPhoneNumberOrName();
         }
     }
 }
