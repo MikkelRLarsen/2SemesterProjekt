@@ -46,9 +46,9 @@ namespace _2SemesterProjekt.Services
             return await _customerRepository.GetAllCustomersAsync();
         }
 
-        public async Task UpdateCustomer(Customer customer)
+        public async Task UpdateCustomerAsync(Customer customer)
         {
-            await _customerRepository.UpdateCustomer(customer);
+            await _customerRepository.UpdateCustomerAsync(customer);
         }
     }
 }

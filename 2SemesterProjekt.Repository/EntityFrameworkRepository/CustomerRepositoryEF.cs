@@ -74,7 +74,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
                 .ToListAsync();
         }
 
-        public async Task UpdateCustomer(Customer customer)
+        public async Task UpdateCustomerAsync(Customer customer)
         {
             _db.Customers.Update(customer);
             await _db.SaveChangesAsync();

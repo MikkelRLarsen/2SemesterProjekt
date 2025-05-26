@@ -8,6 +8,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.RepositoryInterfaces
 		public Task CreateCustomerAsync(Customer customer);
 		public Task<Customer> GetCustomerByPhoneNumberAsync(int phoneNumber);
         public Task<IEnumerable<Customer>> GetAllCustomersAsync();
-        public Task UpdateCustomer(Customer customer);
+        public Task UpdateCustomerAsync(Customer customer);
     }
 }

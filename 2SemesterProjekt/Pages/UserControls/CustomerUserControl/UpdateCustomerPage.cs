@@ -47,7 +47,7 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             }
         }
 
-        private void submitButton_Click(object sender, EventArgs e)
+        private async void submitButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
                 return;
             }
 
-            _customerService.UpdateCustomer(_customer);
+            await _customerService.UpdateCustomerAsync(_customer);
 
             MessageBox.Show("Kunden blev opdateret", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
