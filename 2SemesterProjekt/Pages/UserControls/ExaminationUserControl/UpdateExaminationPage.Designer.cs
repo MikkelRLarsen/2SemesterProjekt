@@ -47,7 +47,6 @@
             ExaminationTypeDropdown = new ComboBox();
             petDropdown = new ComboBox();
             customerSearchTextBox = new TextBox();
-            customerSearchButton = new PictureBox();
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
             pictureBox5 = new PictureBox();
@@ -61,7 +60,6 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownCageBooking).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cageBookingCheckBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)discountNumericUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customerSearchButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -188,11 +186,11 @@
             label1.BackColor = Color.AntiqueWhite;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label1.ForeColor = Color.SaddleBrown;
-            label1.Location = new Point(608, 169);
+            label1.Location = new Point(713, 169);
             label1.Name = "label1";
-            label1.Size = new Size(384, 20);
+            label1.Size = new Size(174, 20);
             label1.TabIndex = 46;
-            label1.Text = "S Ø G   P Å   K U N D E N S   T E L E F O N N U M M E R";
+            label1.Text = "K U N D E N S   N A V N";
             // 
             // PriceExaminationDisplay
             // 
@@ -293,24 +291,12 @@
             // customerSearchTextBox
             // 
             customerSearchTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            customerSearchTextBox.Location = new Point(632, 194);
+            customerSearchTextBox.Location = new Point(663, 194);
             customerSearchTextBox.Margin = new Padding(3, 4, 3, 4);
             customerSearchTextBox.MaxLength = 8;
             customerSearchTextBox.Name = "customerSearchTextBox";
             customerSearchTextBox.Size = new Size(274, 27);
             customerSearchTextBox.TabIndex = 37;
-            // 
-            // customerSearchButton
-            // 
-            customerSearchButton.BackColor = Color.AntiqueWhite;
-            customerSearchButton.Image = Properties.Resources.SearchButton;
-            customerSearchButton.Location = new Point(921, 197);
-            customerSearchButton.Margin = new Padding(3, 4, 3, 4);
-            customerSearchButton.Name = "customerSearchButton";
-            customerSearchButton.Size = new Size(47, 21);
-            customerSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
-            customerSearchButton.TabIndex = 36;
-            customerSearchButton.TabStop = false;
             // 
             // pictureBox3
             // 
@@ -436,7 +422,6 @@
             Controls.Add(ExaminationTypeDropdown);
             Controls.Add(petDropdown);
             Controls.Add(customerSearchTextBox);
-            Controls.Add(customerSearchButton);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox5);
@@ -454,7 +439,6 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownCageBooking).EndInit();
             ((System.ComponentModel.ISupportInitialize)cageBookingCheckBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)discountNumericUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customerSearchButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
@@ -488,7 +472,6 @@
         private ComboBox ExaminationTypeDropdown;
         private ComboBox petDropdown;
         private TextBox customerSearchTextBox;
-        private PictureBox customerSearchButton;
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;

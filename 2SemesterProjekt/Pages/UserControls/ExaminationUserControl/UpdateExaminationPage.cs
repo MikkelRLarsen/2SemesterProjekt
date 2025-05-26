@@ -25,7 +25,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private readonly Panel _mainPagePanel;
         private decimal? _basePriceForExamination;
         private bool _cageBookingIsChecked;
-
+        public List<UpdateExaminationPage> AllExaminationCards { get; set; } = new List<UpdateExaminationPage>();
 
         public UpdateExaminationPage(Examination examination, ChangeExaminationPage changeExaminationPage, Panel mainPagePanel)
         {
@@ -184,21 +184,20 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
                 MessageBox.Show("Konsultationen er blevet opdateret", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                /// Return to ChangeExaminationPage after completed update:
-                _mainPagePanel.Controls.Remove(this);
-                _mainPagePanel.Controls.Add(_changeExaminationPage);
-
                 /// Finds the index of the ExaminationCard to replace
-                //int index = _changeExaminationPage.AllExaminationCards.FindIndex(exCard => exCard.Examination.ExaminationID == _examination.ExaminationID);
+                int index = _changeExaminationPage.AllExaminationCards.FindIndex(exCard => exCard.Examination.ExaminationID == _examination.ExaminationID);
 
                 /// Replaces ExaminationCard with a new one with the updated information
-                //_changeExaminationPage.AllExaminationCards[index] = new ExaminationCardUpdated(_examination, _changeExaminationPage);
+                _changeExaminationPage.AllExaminationCards[index] = new ExaminationCardUpdated(_examination, _changeExaminationPage);
 
                 /// Set the selected ExaminationCard to null, so its no longer highligted
-                //_changeExaminationPage.ExaminationCard = null;
+                _changeExaminationPage.ExaminationCard = null;
 
                 /// Return to show all pets
-                //_changeExaminationPage.LoadAndShowExaminationCards(_changeExaminationPage.AllExaminationCards);
+                _changeExaminationPage.LoadAndShowExaminationCards(_changeExaminationPage.AllExaminationCards);
+
+                /// Return to ChangeExaminationPage after completed update:
+                this.Parent.Controls.Remove(this);
 
             }
             catch (Exception ex)
