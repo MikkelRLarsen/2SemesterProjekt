@@ -67,10 +67,17 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 
             return customersWithPets;
         }
+
         public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
         {
             return await _db.Customers
                 .ToListAsync();
+        }
+
+        public async Task UpdateCustomerAsync(Customer customer)
+        {
+            _db.Customers.Update(customer);
+            await _db.SaveChangesAsync();
         }
     }
 }

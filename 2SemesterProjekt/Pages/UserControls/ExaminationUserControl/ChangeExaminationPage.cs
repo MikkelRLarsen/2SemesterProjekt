@@ -48,7 +48,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             }
 
             _mainPagePanel.Controls.Clear();
-            _mainPagePanel.Controls.Add(new UpdateExaminationPage(this.ExaminationCard.Examination, this));
+            _mainPagePanel.Controls.Add(new UpdateExaminationPage(this.ExaminationCard.Examination, this, _mainPagePanel));
             changeButton.Image = Properties.Resources.ChangeButtonGreyedOut;
         }
 

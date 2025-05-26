@@ -93,6 +93,7 @@
         {
             examination.InformationValid();
 
+            PetID = examination.PetID;
 			EmployeeID = examination.EmployeeID;
 			Date = examination.Date;
 			ExaminationTypeID = examination.ExaminationTypeID;

@@ -87,8 +87,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             PriceExaminationDisplay.Text = _basePriceForExamination.ToString();
 
             DateTimePickerExamination.Enabled = true;
-            UpdateDiscountStatus();
             UpdateCageBookingCheckbox();
+            UpdateDiscountStatus();
         }
 
         private async void DateTimePickerExamination_ValueChanged(object sender, EventArgs e)
@@ -144,7 +144,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     Cage availableCage = await _cageService.GetAvailableCageAsync(chosenPet, chosenExaminationDate, estimatedEndOfCageBooking);
 
                     // Creates estimated totalprice for the cage
-                    decimal totalPrice = await _cageService.GetTotalPriceForCage(
+                    decimal totalPrice = await _cageService.GetTotalPriceForCageAsync(
                         availableCage,
                         chosenExaminationDate,
                         estimatedEndOfCageBooking
@@ -158,6 +158,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                         availableCage.CageID
                     );
 
+                    // Then creates/updates cagebooking
+                    await _cageService.CreateCageBookingAsync(cageBooking);
+
                     // Creates the new Examination as a local variable to run validate Information.
                     Examination newExamination = new Examination(
                             chosenPet.PetID,
@@ -165,14 +168,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                             chosenExaminationDate,
                             chosenExaminationType.ExaminationTypeID,
                             Convert.ToDecimal(PriceExaminationDisplay.Text),
-                            null
+                            cageBooking.CageBookingID
                     );
+
 
                     // First creates examination
                     await _examinationService.CreateExaminationAsync(newExamination);
-
-                    // Then creates cagebooking
-                    await _cageService.CreateCageBookingAsync(cageBooking);
 
                     // Connects cagebooking to examination
                     newExamination.SetCageBookingID(cageBooking.CageBookingID);
@@ -253,7 +254,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     && ExaminationTypeDropdown.SelectedItem as ExaminationType != null
                     && (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTag.ExaminationTagID == 2)
                 {
+                    discountNumericUpDown.Visible = true;
                     discountNumericUpDown.Enabled = true;
+                    discountLabel.Visible = true;
                 }
                 // Checks if selected Customer is Erhverv
                 else if (_customer.Type == "Erhverv")

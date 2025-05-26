@@ -12,6 +12,6 @@ namespace _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces
 		public Task DeleteExaminationAsync(Examination examination);
 		public Task<bool> CheckIfExaminationCanBeDeleted(DateTime examinationTime);
 		public Task ExportInvoiceToTxtAsync(ExaminationInvoice invoiceExamination, string fileName);
-		public Task UpdateExamination(Examination examination);
+		public Task UpdateExaminationAsync(Examination examination);
     }
 }

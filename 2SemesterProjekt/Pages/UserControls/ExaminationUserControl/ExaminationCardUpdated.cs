@@ -17,13 +17,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         public Examination Examination { get; }
         private readonly IExaminationCardHost _host;
 
-        public ExaminationCardUpdated(Examination examination)
-        {
-            Examination = examination;
-            InitializeComponent();
-            InitializeUIDesign();
-        }
-
         public ExaminationCardUpdated(Examination examination, IExaminationCardHost host)
         {
             Examination = examination;
