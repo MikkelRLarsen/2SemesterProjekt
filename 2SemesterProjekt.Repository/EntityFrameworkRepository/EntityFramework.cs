@@ -172,6 +172,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             // Ignoring properties that don't exist in the DB
             modelBuilder.Entity<Product>().Ignore(pr => pr.QuantityInOrder);
             modelBuilder.Entity<Product>().Ignore(pr => pr.TotalPrice);
+            modelBuilder.Entity<Product>().Ignore(pr => pr.NumberInStockOrderPage);
 		}
 	}
 }
