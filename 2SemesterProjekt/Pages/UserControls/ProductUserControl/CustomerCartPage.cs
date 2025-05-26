@@ -49,22 +49,16 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             UpdateTotalPrice();
         }
 
-        public async void ReloadCustomerCart(List<Product> updatedOrder)
+        public void ReloadCustomerCart(List<Product> updatedOrder)
         {
             flowPanel.Controls.Clear();
 
-            var list = await _productService.GetAllProductsAsync();
-            var updatedList = new List<Product>();
-
-            foreach (var productInCart in _productsInCart)
+            foreach (var product in updatedOrder)
             {
-                foreach (var product in updatedOrder)
-                {
-                    product.SetNumberInStockOnOrderPage();
-                }
+                product.SetNumberInStockOnOrderPage(); // Updates stock label on this page
             }
 
-            _productsInCart = updatedOrder;
+            _productsInCart = updatedOrder; // Updates the list of orders
 
             foreach (var productCard in _cartProductCards)
             {

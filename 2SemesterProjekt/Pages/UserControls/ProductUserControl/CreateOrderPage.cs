@@ -69,7 +69,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             foreach (var productCards in _allProductCards)
             {
                 productCards.UpdateInStockLabel(productCards._productData);
-                productCards.Refresh();
             }
             LoadAndShowProductCards(_allProductCards);
         }
