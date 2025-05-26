@@ -100,7 +100,7 @@
             textBoxCustomerPhoneNumberOrName.Name = "textBoxCustomerPhoneNumberOrName";
             textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
             textBoxCustomerPhoneNumberOrName.TabIndex = 42;
-            textBoxCustomerPhoneNumberOrName.Text = "Søg på navn eller ID";
+            textBoxCustomerPhoneNumberOrName.Text = "Søg på telefonnummer";
             textBoxCustomerPhoneNumberOrName.Click += textBoxCustomerPhoneNumberOrName_Click;
             textBoxCustomerPhoneNumberOrName.KeyPress += textBoxCustomerPhoneNumberOrName_KeyPress;
             // 
@@ -115,6 +115,7 @@
             customerSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
             customerSearchButton.TabIndex = 41;
             customerSearchButton.TabStop = false;
+            customerSearchButton.Click += customerSearchButton_Click;
             // 
             // findAllButton
             // 
