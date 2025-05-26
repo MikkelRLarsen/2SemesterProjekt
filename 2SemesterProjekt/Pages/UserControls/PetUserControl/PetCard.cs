@@ -42,13 +42,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             _petCardType = petCardType;
             CardSetup();
         }
-
-        /// <summary>
-        /// Creates the PetCard for inactive pets.
-        /// </summary>
-        /// <param name="petPage"></param>
-        /// <param name="examination"></param>
-        /// <param name="petCardType"></param>
+        
         public PetCard(Examination examination, PetCardType petCardType)
         {
             InitializeComponent();
@@ -103,6 +97,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
                 labelPetBirth.Text = Pet.Birthday.ToString("dd-MM-yyyy");
                 labelPetSpecies.Text = Pet.Species.Name;
+                this.Click += pictureBox_Click;
             }
 
             if (_petCardType == PetCardType.InactivePet)
@@ -122,6 +117,8 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 labelPetBirth.Visible = false;
                 label3.Visible = false;
                 labelPetSpecies.Visible = false;
+
+                this.Click -= pictureBox_Click;
             }
 
             profilePicture.Image = GetImage(Pet.Species.Name);
