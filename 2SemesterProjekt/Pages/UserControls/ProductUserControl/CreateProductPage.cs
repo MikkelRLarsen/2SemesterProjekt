@@ -115,6 +115,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         private void textBoxSalesPrice_TextChanged(object sender, EventArgs e)
         {
             textBoxSalesPrice.BackColor = SystemColors.Window;
+            submitButton.Image = Properties.Resources.SaveButton;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

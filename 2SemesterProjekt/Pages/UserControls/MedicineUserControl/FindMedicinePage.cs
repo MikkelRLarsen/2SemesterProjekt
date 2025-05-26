@@ -19,9 +19,17 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
             _panel = panel;
         }
 
-        private async void findAllButton_Click(object sender, EventArgs e)
-        {
+		private async void findAllButton_Click(object sender, EventArgs e)
+		{
+            // Wait cursor (hourglass)
+            Cursor = Cursors.WaitCursor;
+            findAllButton.Enabled = false;
+
             await LoadAndShowExaminationCards(_allExaminationCards);
+
+            // Wait cursor (pointer)
+            Cursor = Cursors.Default;
+            findAllButton.Enabled = true;
         }
 
         private async void FindMedicinPage_Load(object sender, EventArgs e)
@@ -46,8 +54,10 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
-            }
+				MessageBox.Show(ex.Message);
+			}
+
+            findAllButton.Image = Properties.Resources.FindAllButton;
         }
 
         public async Task LoadAndShowExaminationCards(IEnumerable<ExaminationCardUpdated> examinationCardsToBeLoaded)

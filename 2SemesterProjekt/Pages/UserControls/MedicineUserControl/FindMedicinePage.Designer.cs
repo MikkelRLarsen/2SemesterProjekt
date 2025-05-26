@@ -86,7 +86,7 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
             // 
             // findAllButton
             // 
-            findAllButton.Image = Properties.Resources.FindAllButton;
+            findAllButton.Image = Properties.Resources.FindAllButtonGreyedOut;
             findAllButton.Location = new Point(931, 194);
             findAllButton.Name = "findAllButton";
             findAllButton.Size = new Size(99, 21);

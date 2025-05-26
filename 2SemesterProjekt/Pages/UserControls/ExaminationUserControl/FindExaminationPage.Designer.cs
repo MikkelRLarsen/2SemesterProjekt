@@ -103,7 +103,7 @@
             // 
             // findAllButton
             // 
-            findAllButton.Image = Properties.Resources.FindAllButton;
+            findAllButton.Image = Properties.Resources.FindAllButtonGreyedOut;
             findAllButton.Location = new Point(931, 197);
             findAllButton.Name = "findAllButton";
             findAllButton.Size = new Size(99, 21);
@@ -115,7 +115,6 @@
             // textBoxCustomerPhoneNumberOrName
             // 
             textBoxCustomerPhoneNumberOrName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxCustomerPhoneNumberOrName.ForeColor = SystemColors.InactiveCaption;
             textBoxCustomerPhoneNumberOrName.Location = new Point(570, 194);
             textBoxCustomerPhoneNumberOrName.Margin = new Padding(3, 4, 3, 4);
             textBoxCustomerPhoneNumberOrName.MaxLength = 8;

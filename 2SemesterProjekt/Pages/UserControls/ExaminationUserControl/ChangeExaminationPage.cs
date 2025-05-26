@@ -60,6 +60,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             {
                 AllExaminationCards.Add(new ExaminationCardUpdated(examination, this));
             }
+
+            findAllButton.Image = Properties.Resources.FindAllButton;
         }
 
         private void customerSearchButton_Click(object sender, EventArgs e)
@@ -121,7 +123,15 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
         private void findAllButton_Click(object sender, EventArgs e)
         {
+            // Wait cursor (hourglass)
+            Cursor = Cursors.WaitCursor;
+            findAllButton.Enabled = false;
+
             LoadAndShowExaminationCards(AllExaminationCards);
+
+            // Wait cursor (pointer)
+            Cursor = Cursors.Default;
+            findAllButton.Enabled = true;
         }
 
         public void OnCardSelected(ExaminationCardUpdated selectedCard)

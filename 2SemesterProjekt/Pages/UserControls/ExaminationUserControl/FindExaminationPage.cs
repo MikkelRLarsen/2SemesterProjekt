@@ -27,9 +27,17 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             _examinationService = ServiceProviderSingleton.GetServiceProvider().GetService<IExaminationService>();
         }
 
-        private void findAllButton_Click(object sender, EventArgs e)
-        {
+		private void findAllButton_Click(object sender, EventArgs e)
+		{
+            // Wait cursor (hourglass)
+            Cursor = Cursors.WaitCursor;
+            findAllButton.Enabled = false;
+
             LoadAndShowExaminationCards(AllExaminationCards);
+
+            // Wait cursor (pointer)
+            Cursor = Cursors.Default;
+            findAllButton.Enabled = true;
         }
 
         private void FindExaminationPage_Load(object sender, EventArgs e)
@@ -41,10 +49,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             IEnumerable<Examination> allExaminations = await _examinationService.GetAllExaminationsAsync();
 
-            foreach (var examination in allExaminations)
-            {
-                AllExaminationCards.Add(new ExaminationCardUpdated(examination, this));
-            }
+			foreach (var examination in allExaminations)
+			{
+				AllExaminationCards.Add(new ExaminationCardUpdated(examination, this));
+			}
+
+            findAllButton.Image = Properties.Resources.FindAllButton;
         }
 
         private void customerSearchButton_Click(object sender, EventArgs e)
