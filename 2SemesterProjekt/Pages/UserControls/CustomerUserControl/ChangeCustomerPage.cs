@@ -17,7 +17,7 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
     public partial class ChangeCustomerPage : UserControl
     {
         private readonly ICustomerService _customerService;
-        private Panel _mainPanel;
+        private readonly Panel _mainPanel;
         public CustomerCard CustomerCard { get; set; }
         public List<CustomerCard> AllCustomerCards { get; set; } = new List<CustomerCard>();
         public ChangeCustomerPage(Panel mainPanel)
