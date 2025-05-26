@@ -49,7 +49,7 @@
             // 
             profilePicture.Anchor = AnchorStyles.Left;
             profilePicture.BackColor = Color.AntiqueWhite;
-            profilePicture.Image = Properties.Resources.member;
+            profilePicture.Image = Properties.Resources.CustomerPicture;
             profilePicture.Location = new Point(15, 15);
             profilePicture.Margin = new Padding(3, 4, 3, 4);
             profilePicture.Name = "profilePicture";
@@ -113,7 +113,7 @@
             label2.BackColor = Color.AntiqueWhite;
             label2.Font = new Font("Gadugi", 8F, FontStyle.Bold);
             label2.ForeColor = Color.SaddleBrown;
-            label2.Location = new Point(15, 111);
+            label2.Location = new Point(370, 15);
             label2.Name = "label2";
             label2.Size = new Size(139, 18);
             label2.TabIndex = 7;
@@ -125,7 +125,7 @@
             label3.BackColor = Color.AntiqueWhite;
             label3.Font = new Font("Gadugi", 8F, FontStyle.Bold);
             label3.ForeColor = Color.SaddleBrown;
-            label3.Location = new Point(15, 140);
+            label3.Location = new Point(370, 49);
             label3.Name = "label3";
             label3.Size = new Size(62, 18);
             label3.TabIndex = 8;
@@ -137,7 +137,7 @@
             customerPhoneNumberLabel.BackColor = Color.AntiqueWhite;
             customerPhoneNumberLabel.Font = new Font("Gadugi", 8F, FontStyle.Bold);
             customerPhoneNumberLabel.ForeColor = Color.SaddleBrown;
-            customerPhoneNumberLabel.Location = new Point(118, 140);
+            customerPhoneNumberLabel.Location = new Point(438, 49);
             customerPhoneNumberLabel.Name = "customerPhoneNumberLabel";
             customerPhoneNumberLabel.Size = new Size(72, 18);
             customerPhoneNumberLabel.TabIndex = 9;
@@ -174,7 +174,7 @@
             customerEmailLabel.BackColor = Color.AntiqueWhite;
             customerEmailLabel.Font = new Font("Gadugi", 8F, FontStyle.Bold);
             customerEmailLabel.ForeColor = Color.SaddleBrown;
-            customerEmailLabel.Location = new Point(118, 163);
+            customerEmailLabel.Location = new Point(438, 78);
             customerEmailLabel.Name = "customerEmailLabel";
             customerEmailLabel.Size = new Size(123, 18);
             customerEmailLabel.TabIndex = 11;
@@ -187,7 +187,7 @@
             label7.BackColor = Color.AntiqueWhite;
             label7.Font = new Font("Gadugi", 8F, FontStyle.Bold);
             label7.ForeColor = Color.SaddleBrown;
-            label7.Location = new Point(15, 163);
+            label7.Location = new Point(370, 79);
             label7.Name = "label7";
             label7.Size = new Size(48, 18);
             label7.TabIndex = 10;
@@ -199,7 +199,7 @@
             pictureBox.Image = Properties.Resources.CardExamination;
             pictureBox.Location = new Point(0, 0);
             pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(655, 192);
+            pictureBox.Size = new Size(655, 110);
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.TabIndex = 40;
             pictureBox.TabStop = false;
@@ -227,7 +227,7 @@
             Controls.Add(pictureBox);
             Margin = new Padding(50, 10, 10, 10);
             Name = "CustomerCard";
-            Size = new Size(655, 192);
+            Size = new Size(655, 110);
             ((System.ComponentModel.ISupportInitialize)profilePicture).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ResumeLayout(false);

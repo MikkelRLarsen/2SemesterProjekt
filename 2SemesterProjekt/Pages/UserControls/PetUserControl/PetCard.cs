@@ -23,41 +23,65 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
     }
     public partial class PetCard : UserControl
     {
-        private FindPetPage _petPage;
-        private PetCardType _petCardType;
-        private IPetService _petService;
+        private readonly ChangePetPage _changePage;
+        private readonly PetCardType _petCardType;
+        private readonly IPetService _petService;
         public Pet Pet { get; }
         public Examination Examination { get; }
-        
+
         /// <summary>
         /// Creates the whole PetCard for active pets.
         /// </summary>
         /// <param name="petPage"></param>
         /// <param name="pet"></param>
         /// <param name="petCardType"></param>
-        public PetCard(FindPetPage petPage, Pet pet, PetCardType petCardType)
+        public PetCard(Pet pet, PetCardType petCardType)
         {
             InitializeComponent();
-            _petPage = petPage;
             Pet = pet;
             _petCardType = petCardType;
-            CardSetup(); 
+            CardSetup();
         }
-        
+
         /// <summary>
         /// Creates the PetCard for inactive pets.
         /// </summary>
         /// <param name="petPage"></param>
         /// <param name="examination"></param>
         /// <param name="petCardType"></param>
-        public PetCard(FindPetPage petPage, Examination examination, PetCardType petCardType)
+        public PetCard(Examination examination, PetCardType petCardType)
         {
             InitializeComponent();
-            _petPage = petPage;
             Pet = examination.Pet;
             Examination = examination;
             _petCardType = petCardType;
             CardSetup();
+        }
+
+        /// <summary>
+        /// Change pet contructor
+        /// </summary>
+        public PetCard(ChangePetPage changePetPage, Pet pet, PetCardType petCardType)
+        {
+            InitializeComponent();
+            _changePage = changePetPage;
+            Pet = pet;
+            _petCardType = petCardType;
+            AddMoveHandlers(this);
+            CardSetup();
+        }
+
+        private void AddMoveHandlers(Control control)
+        {
+            control.Click += pictureBox_Click;
+            control.MouseEnter += pictureBox_MouseEnter;
+            control.MouseLeave += pictureBox_MouseLeave;
+
+            // Add the same handler to each of the control.Controls.
+            foreach (Control child in control.Controls)
+            {
+                AddMoveHandlers(child);
+            }
         }
 
         private async void CardSetup()
@@ -85,12 +109,12 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             {
                 // Changing ID to Date.
                 label.Text = "Sidste besøg: ";
-                labelPetID.Location = new Point (label.Location.X + 160, label.Location.Y);
+                labelPetID.Location = new Point(label.Location.X + 160, label.Location.Y);
                 labelPetID.Text = Examination.Date.ToString("dd-MM-yyyy");
 
                 labelPetName.Text = Examination.Pet.Name;
                 labelPetOwner.Text = $"{Examination.Pet.Customer.FirstName} {Examination.Pet.Customer.LastName}";
-                
+
                 // Hiding the not needed labels:
                 label2.Visible = false;
                 labelPrimaryVet.Visible = false;
@@ -100,29 +124,47 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 labelPetSpecies.Visible = false;
             }
 
-			profilePicture.Image = GetImage(Pet.Species.Name);
-		}
+            profilePicture.Image = GetImage(Pet.Species.Name);
+        }
 
-		private async void PetCard_Click(object sender, EventArgs e)
-		{
-			if (_petPage.PetCard != null) // protects against null reference exceptions the first time it's clicked
-			{
-				_petPage.PetCard.BackColor = SystemColors.Window; // If a card was previously selected, reset its background color
-			}
+        /// <summary>
+        /// Finds matching image for pet species in resources
+        /// </summary>
+        private Image GetImage(string speciesName)
+        {
+            var image = (Image)Properties.Resources.ResourceManager.GetObject(speciesName)!;
 
-			_petPage.PetCard = this; // Set the currently clicked card as the new selected card
+            return image;
+        }
 
-			this.BackColor = SystemColors.ActiveBorder;
-		}
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+            if (_changePage != null)
+            {
+                if (_changePage.PetCard != null) // protects against null reference exceptions the first time it's clicked
+                {
+                    _changePage.PetCard.pictureBox.Image = Properties.Resources.CardExamination; // If a card was previously selected, reset its background color
+                }
 
-		/// <summary>
-		/// Finds matching image for pet species in resources
-		/// </summary>
-		private Image GetImage(string speciesName)
-		{
-			var image = (Image)Properties.Resources.ResourceManager.GetObject(speciesName)!;
+                // Finds the changebutton in changepage to manipulate the picture
+                PictureBox changeButton = _changePage.Controls.OfType<PictureBox>().First(p => p.Name == "pictureBox2");
 
-			return image;
-		}
-	}
+                changeButton.Image = Properties.Resources.ChangeButton;
+
+                _changePage.PetCard = this; // Set the currently clicked card as the new selected card
+
+                this.pictureBox.Image = Properties.Resources.CardExaminationSelected;
+            }
+        }
+
+        private void pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+    }
 }
