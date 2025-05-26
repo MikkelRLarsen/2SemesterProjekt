@@ -19,11 +19,11 @@ namespace _2SemesterProjekt.Domain.Models
         public decimal SalesPricePerUnit { get; private set; }
         public int NumberInStock { get; private set; }
         public int MinNumberInStock { get; private set; }
+        public int NumberInStockOrderPage { get; private set; }
         public int QuantityInOrder { get; private set; }
         public decimal TotalPrice { get; private set; }
         public List<ProductLine> ProductLines { get; }
-        public string ProductInfo { get {return $"{Name} [{NumberInStock} på lager] - {SalesPricePerUnit} kr. [EAN: {EAN}"; } } // This will only be used for a WinForms listbox
-        public string ProductInOrderInfo { get { return $"{QuantityInOrder}x {Name} - {TotalPrice} kr. [max. {NumberInStock}]"; } } // This will only be used for a WinForms listbox
+        
 
         public Product(string name, long eAN, string type, decimal purchasePricePerUnit, decimal salesPricePerUnit, int numberInStock, int minNumberInStock)
         {
@@ -34,14 +34,33 @@ namespace _2SemesterProjekt.Domain.Models
             SalesPricePerUnit = salesPricePerUnit;
             NumberInStock = numberInStock;
             MinNumberInStock = minNumberInStock;
+            NumberInStockOrderPage = numberInStock;
+        }
+        public void SetNumberInStockOnOrderPage()
+        {
+            if (QuantityInOrder != 0)
+            {
+                NumberInStockOrderPage = NumberInStock - QuantityInOrder;
+            }
+            else
+            {
+                NumberInStockOrderPage = NumberInStock;
+            }
         }
         public void AddQuantityToOrder(int amount)
         {
             QuantityInOrder += amount;
+            SetNumberInStockOnOrderPage();
         }
         public void RemoveQuantityFromOrder(int amount)
         { 
             QuantityInOrder -= amount;
+            NumberInStockOrderPage += amount;
+        }
+        public void ResetQuantityInOrder()
+        {
+            QuantityInOrder = 0;
+            SetNumberInStockOnOrderPage();
         }
         public void UpdateTotalPriceOfProductInOrder()
         {
