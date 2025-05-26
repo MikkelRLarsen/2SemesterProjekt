@@ -141,7 +141,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     Cage availableCage = await _cageService.GetAvailableCageAsync(chosenPet, chosenExaminationDate, estimatedEndOfCageBooking);
 
                     // Creates estimated totalprice for the cage
-                    decimal totalPrice = await _cageService.GetTotalPriceForCage(
+                    decimal totalPrice = await _cageService.GetTotalPriceForCageAsync(
                         availableCage,
                         chosenExaminationDate,
                         estimatedEndOfCageBooking

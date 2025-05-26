@@ -84,6 +84,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
             return await _db.Examinations
                 .Include(e => e.Pet)
 					.ThenInclude(p => p.Customer)
+						.ThenInclude(c => c.Pets)
 				.Include(e => e.Pet)
 					.ThenInclude(p => p.Species)
                 .Include(e => e.Employee)
@@ -136,7 +137,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
 			return result;
         }
 
-		public async Task UpdateExamination(Examination examination)
+		public async Task UpdateExaminationAsync(Examination examination)
 		{
             _db.Examinations.Update(examination);
             await _db.SaveChangesAsync();
