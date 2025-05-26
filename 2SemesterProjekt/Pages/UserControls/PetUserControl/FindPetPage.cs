@@ -40,11 +40,22 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             {
                 AllPetCards.Add(new PetCard(pet, PetCardType.WholePet));
             }
+
+            findAllButton.Image = Properties.Resources.FindAllButton;
         }
 
         private void findAllButton_Click(object sender, EventArgs e)
         {
+            // Wait cursor (hourglass)
+            Cursor = Cursors.WaitCursor;
+            findAllButton.Enabled = false;
+
+
             LoadAndShowPetCards(AllPetCards);
+
+            // Wait cursor (pointer)
+            Cursor = Cursors.Default;
+            findAllButton.Enabled = true;
         }
 
         /// <summary>
