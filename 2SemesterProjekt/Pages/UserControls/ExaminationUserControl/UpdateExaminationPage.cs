@@ -122,7 +122,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     Cage availableCage = await _cageService.GetAvailableCageAsync(chosenPet, chosenExaminationDate, estimatedEndOfCageBooking);
 
                     /// Creates estimated totalprice for the cage
-                    decimal totalPrice = await _cageService.GetTotalPriceForCage(
+                    decimal totalPrice = await _cageService.GetTotalPriceForCageAsync(
                         availableCage,
                         chosenExaminationDate,
                         estimatedEndOfCageBooking
@@ -153,7 +153,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     _examination.UpdateExaminationProperties(examinationWithupdatedInformationYesCage);
 
                     /// Updates examination in database:
-                    await _examinationService.UpdateExamination(_examination);
+                    await _examinationService.UpdateExaminationAsync(_examination);
                 }
                 else /// Update examination without cagebooking:
                 {
@@ -178,7 +178,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     _examination.UpdateExaminationProperties(examinationWithupdatedInformationNoCage);
 
                     /// Updates Examination in Database
-                    _examinationService.UpdateExamination(_examination);
+                    await _examinationService.UpdateExaminationAsync(_examination);
                 }
 
                 MessageBox.Show("Konsultationen er blevet opdateret", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
