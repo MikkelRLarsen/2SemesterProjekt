@@ -129,6 +129,7 @@
             ComboBoxPetDoctor.Name = "ComboBoxPetDoctor";
             ComboBoxPetDoctor.Size = new Size(274, 28);
             ComboBoxPetDoctor.TabIndex = 46;
+            ComboBoxPetDoctor.SelectionChangeCommitted += ComboBoxPetDoctor_SelectionChangeCommitted;
             // 
             // DateTimePickerBirthday
             // 
@@ -138,6 +139,7 @@
             DateTimePickerBirthday.Name = "DateTimePickerBirthday";
             DateTimePickerBirthday.Size = new Size(274, 27);
             DateTimePickerBirthday.TabIndex = 45;
+            DateTimePickerBirthday.ValueChanged += DateTimePickerBirthday_ValueChanged;
             // 
             // ComboBoxPetSpecies
             // 

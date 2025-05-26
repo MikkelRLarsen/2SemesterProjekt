@@ -84,6 +84,16 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             CheckAndEnableButton();
         }
 
+        private void ComboBoxPetDoctor_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            CheckAndEnableButton();
+        }
+
+        private void DateTimePickerBirthday_ValueChanged(object sender, EventArgs e)
+        {
+            CheckAndEnableButton();
+        }
+
         private void CheckAndEnableButton()
         {
             if (textBoxPetName.Text.Length == 0)
@@ -92,11 +102,6 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             }
 
             if (textBoxPhoneNumber.Text.Length == 0)
-            {
-                return;
-            }
-
-            if (ComboBoxPetDoctor.SelectedIndex == 0)
             {
                 return;
             }
