@@ -173,8 +173,17 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList());
                 DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                foreach(var product in _productsInCart)
+                {
+                    product.ResetQuantityInOrder();
+                }
+
                 _cartProductCards.Clear();
+                _productsInCart.Clear();
+                _createOrderPage.EmptyItemsInCart();
+
                 _mainPagePanel.Controls.Remove(this);
+                _mainPagePanel.Controls.Remove(_createOrderPage);
                 _mainPagePanel.Controls.Add(new MainPageWallpaper());
             }
         }
@@ -192,8 +201,17 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            foreach (var product in _productsInCart)
+            {
+                product.ResetQuantityInOrder();
+            }
+
             _cartProductCards.Clear();
+            _productsInCart.Clear();
+            _createOrderPage.EmptyItemsInCart();
+
             _mainPagePanel.Controls.Remove(this);
+            _mainPagePanel.Controls.Remove(_createOrderPage);
             _mainPagePanel.Controls.Add(new MainPageWallpaper());
         }
 

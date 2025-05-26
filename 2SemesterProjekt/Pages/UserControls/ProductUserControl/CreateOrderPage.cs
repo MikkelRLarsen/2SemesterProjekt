@@ -32,7 +32,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             Task.Run(() => FindAndSetAllProductsAsync());
         }
 
-        private async void FindAndSetAllProductsAsync()
+        public async void FindAndSetAllProductsAsync()
         {
             IEnumerable<Product> allProductsInStock = await _productService.GetAllProductsInStockAsync();
 
@@ -78,6 +78,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             _itemsInCart -= amount;
 
+            itemsInCart.Text = _itemsInCart.ToString();
+        }
+
+        public void EmptyItemsInCart()
+        {
+            _itemsInCart = 0;
             itemsInCart.Text = _itemsInCart.ToString();
         }
 
