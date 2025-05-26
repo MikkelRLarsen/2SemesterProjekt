@@ -109,9 +109,9 @@ namespace _2SemesterProjekt.Services
             await _exportService.ExportInvoiceToTxtAsync(invoiceExamination, fileName);
         }
 
-		public async Task UpdateExamination(Examination examination)
+		public async Task UpdateExaminationAsync(Examination examination)
 		{
-			await _examinationRepository.UpdateExamination(examination);
+			await _examinationRepository.UpdateExaminationAsync(examination);
 		}
 	}
 }

@@ -13,7 +13,7 @@ namespace _2SemesterProjekt.Services
             _cageRepository = cageRepository;
         }
 
-        public async Task<decimal> GetTotalPriceForCage(Cage availableCage, DateTime startDate, DateTime estimatedEndDate)
+        public async Task<decimal> GetTotalPriceForCageAsync(Cage availableCage, DateTime startDate, DateTime estimatedEndDate)
         {
             decimal basePrice = await _cageRepository.GetBasePriceForPetCageAsync(availableCage);
 

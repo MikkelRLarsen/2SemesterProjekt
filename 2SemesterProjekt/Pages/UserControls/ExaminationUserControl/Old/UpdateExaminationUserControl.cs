@@ -80,7 +80,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				_examination.UpdateExaminationProperties(examinationWithupdatedInformation);
 
 				// Updates Examination in Database
-				_examinationService.UpdateExamination(_examination);
+				_examinationService.UpdateExaminationAsync(_examination);
 
 				MessageBox.Show("Konsultationen er blevet opdateret", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
