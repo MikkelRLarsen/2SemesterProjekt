@@ -5,7 +5,6 @@
         public int ExaminationID { get; private set; }
         public int PetID { get; private set; }
         public int EmployeeID { get; private set; }
-        public int? MedicineID { get; private set; }
         public DateTime Date { get; private set; }
         public int ExaminationTypeID { get; private set; }
         public int? CageBookingID { get; private set; }
@@ -14,13 +13,12 @@
         public Employee Employee { get; }
         public ExaminationType ExaminationType { get; }
         public CageBooking CageBooking { get; }
-        public Medicine? Medicine { get; }
+        public List<MedicinePrescription> MedicinePrescriptions { get; }
 
-        public Examination(int petID, int employeeID, DateTime date, int? medicineID, int examinationTypeID, decimal price, int? cageBookingID)
+        public Examination(int petID, int employeeID, DateTime date, int examinationTypeID, decimal price, int? cageBookingID)
         {
             PetID = petID;
             EmployeeID = employeeID;
-            MedicineID = medicineID;
             Date = date;
             ExaminationTypeID = examinationTypeID;
             Price = price;
@@ -96,7 +94,6 @@
             examination.InformationValid();
 
 			EmployeeID = examination.EmployeeID;
-			MedicineID = examination.MedicineID;
 			Date = examination.Date;
 			ExaminationTypeID = examination.ExaminationTypeID;
 			Price = examination.Price;

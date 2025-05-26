@@ -18,7 +18,7 @@ namespace _2SemesterProjekt.Repository.EntityFrameworkRepository
         }
         public bool CheckIfPetExists(Pet pet)
         {
-            var existingPet = _db.Pets.FirstOrDefault(p => p.Name == pet.Name && p.CustomerID == pet.CustomerID && p.Species == pet.Species);
+            var existingPet = _db.Pets.FirstOrDefault(p => p.Name == pet.Name && p.CustomerID == pet.CustomerID && p.SpeciesID == pet.SpeciesID);
             /* Checks if a pet with the same name, customer ID and species
             as the argument already exists in the DB. */
 
