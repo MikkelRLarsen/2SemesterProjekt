@@ -32,7 +32,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>()!;
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
             _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>()!;
-            //_productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>()!;
 
             IServiceScope scope = ServiceProviderSingleton.GetServiceProvider().CreateScope();
             _productService = scope.ServiceProvider.GetService<IProductService>()!; /* This ensure that the Listbox gets the newest
@@ -178,6 +177,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                     product.ResetQuantityInOrder();
                 }
 
+                // Empties the current order list
+
                 _cartProductCards.Clear();
                 _productsInCart.Clear();
                 _createOrderPage.EmptyItemsInCart();
@@ -206,6 +207,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 product.ResetQuantityInOrder();
             }
 
+            // Clears the current order list
             _cartProductCards.Clear();
             _productsInCart.Clear();
             _createOrderPage.EmptyItemsInCart();
@@ -243,12 +245,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             decimal basePrice = CalculateTotalPrice();
             decimal discount = discountNumericUpDown.Value;
-
             decimal finalPrice = basePrice * ((100 - discount) / 100);
-            if (finalPrice == 0 && discount != 100 && basePrice != 0)
-            {
-                
-            }
 
             totalPriceTextBox.Text = finalPrice.ToString("0.00");
         }
