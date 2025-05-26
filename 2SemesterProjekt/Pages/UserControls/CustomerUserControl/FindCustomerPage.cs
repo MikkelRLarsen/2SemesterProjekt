@@ -83,7 +83,7 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
 
                 if (Int32.TryParse(input, out int customerPhoneNumber))
                 {
-                    // Search by ID
+                    // Search by phonenumber
                     CustomerCard customerCard = AllCustomerCards
                         .First(c => c.Customer.PhoneNumber == customerPhoneNumber);
 

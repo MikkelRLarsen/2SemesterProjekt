@@ -23,7 +23,6 @@ namespace _2SemesterProjekt
             InitializeComponent();
             Customer = customer;
             InitializeUIDesign();
-            AddMoveHandlers(this);
         }
 
         // For update customer

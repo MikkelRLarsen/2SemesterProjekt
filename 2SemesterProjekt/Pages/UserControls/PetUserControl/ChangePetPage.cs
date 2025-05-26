@@ -83,12 +83,10 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 if (Int32.TryParse(input, out int customerPhoneNumber))
                 {
                     // Search by phonenumber
-                    PetCard customerCard = AllPetCards
-                        .First(p => p.Pet.Customer.PhoneNumber == customerPhoneNumber);
+                    IEnumerable<PetCard> petCards = AllPetCards
+                        .Where(p => p.Pet.Customer.PhoneNumber == customerPhoneNumber);
 
-                    flowPanel.Controls.Clear();
-
-                    flowPanel.Controls.Add(customerCard);
+                    LoadAndShowPetCards(petCards);
                 }
                 else
                 {

@@ -83,7 +83,7 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             int index = _customerPage.AllCustomerCards.FindIndex(cusCard => cusCard.Customer.CustomerID == _customer.CustomerID);
 
             // Replaces ExaminationCard with a new one with the updated information
-            _customerPage.AllCustomerCards[index] = new CustomerCard(_customer);
+            _customerPage.AllCustomerCards[index] = new CustomerCard(_customerPage ,_customer);
 
             // Set the selected ExaminationCard to null, so its no longer highligted
             _customerPage.CustomerCard = null;

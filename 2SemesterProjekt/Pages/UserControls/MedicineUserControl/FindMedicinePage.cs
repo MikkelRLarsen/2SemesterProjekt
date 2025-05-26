@@ -75,13 +75,11 @@ namespace _2SemesterProjekt.Pages.UserControls.MedicineUserControl
 
                 if (Int32.TryParse(input, out int customerPhoneNumber))
                 {
-                    // Search by ID
-                    ExaminationCardUpdated examinationCard = _allExaminationCards
-                        .First(ex => ex.Examination.Pet.Customer.PhoneNumber == customerPhoneNumber);
+                    // Search by phonenumber
+                    IEnumerable<ExaminationCardUpdated> examinationCards = _allExaminationCards
+                        .Where(ex => ex.Examination.Pet.Customer.PhoneNumber == customerPhoneNumber);
 
-                    flowPanel.Controls.Clear();
-
-                    flowPanel.Controls.Add(examinationCard);
+                    LoadAndShowExaminationCards(examinationCards);
                 }
                 else
                 {
