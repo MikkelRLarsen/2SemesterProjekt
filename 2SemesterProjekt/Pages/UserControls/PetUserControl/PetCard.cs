@@ -23,7 +23,6 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
     }
     public partial class PetCard : UserControl
     {
-        private PetCardType _petCardType;
         private InactivePetPage _inactivePetPage;
         private readonly ChangePetPage _changePage;
         private readonly PetCardType _petCardType;
@@ -100,7 +99,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
                 labelPetBirth.Text = Pet.Birthday.ToString("dd-MM-yyyy");
                 labelPetSpecies.Text = Pet.Species.Name;
-                this.Click += PetCard_Click;
+                this.Click += pictureBox_Click;
             }
 
             if (_petCardType == PetCardType.InactivePet)
@@ -120,6 +119,8 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 labelPetBirth.Visible = false;
                 label3.Visible = false;
                 labelPetSpecies.Visible = false;
+
+                this.Click -= pictureBox_Click;
             }
 
             profilePicture.Image = GetImage(Pet.Species.Name);
