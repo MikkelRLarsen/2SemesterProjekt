@@ -12,7 +12,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         public List<InCartProductCard> _cartProductCards;
         private Panel _mainPagePanel;
         private Customer _customer;
-        private ProductCard _productCard;
         private CreateOrderPage _createOrderPage;
 
         private readonly IOrderService _orderService;
@@ -26,7 +25,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _mainPagePanel = mainPagePanel;
             _productsInCart = order;
             _cartProductCards = new List<InCartProductCard>();
-            _productCard = new ProductCard();
             _createOrderPage = createOrderPage;
 
             _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>()!;

@@ -61,11 +61,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 			minStockLabel.Text = _productData.MinNumberInStock.ToString();
 			categoryLabel.Text = _productData.Type;
 		}
-        // For use in CustomerCartPage
-        public ProductCard()
-        {
-
-        }
 
         /// <summary>
         /// Sets up the UI based on card-type
