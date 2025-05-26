@@ -59,6 +59,9 @@ namespace _2SemesterProjekt.BlazorWebAssembly.Services
             _employees = newList;
         }
 
+        /// <summary>
+        /// Proof of concept database
+        /// </summary>
         private string GetDefaultEmployeeString()
         {
             return "Mikkel Jensen\n" +

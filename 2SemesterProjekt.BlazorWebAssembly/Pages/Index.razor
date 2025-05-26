@@ -18,12 +18,14 @@
 <div id="driver-selection">
 	<h1 class="center-text">Hvem er ude og køre?</h1>
 	<div class="driver-div justify-content-center">
+		@* Loading screen *@
 		@if (_employees == null)
 		{
 			<p>Indlæser...</p>
 		}
 		else
 		{
+			@* Finished load *@
 			@foreach (var employee in _employees)
 			{
 				var selectedClass = _selectedEmployee == employee ? "selected" : "";
@@ -39,12 +41,14 @@
 <div id="destination-selection" hidden="@_isHidden">
 	<h1 class="center-text">Vælg destination</h1>
 	<div class="destination-div justify-content-center">
+		@* Loading screen *@
 		@if (_destinations == null)
 		{
 			<p>Indlæser...</p>
 		}
 		else
 		{
+			@* Foreach loop with href method to make the app a two click applikation *@
 			@foreach (var destination in _destinations)
 			{
 				<a class="destination-link" href="@_mailService.GenerateMail(_selectedEmployee!, destination)">
@@ -83,6 +87,7 @@
 		await _destinationService.InitializeAsync();
 		_destinations = _destinationService.GetAllDestinations().ToList();
 
+		// Get local storage
 		var storedName = await _localStorage.GetItemAsync<string>("selectedEmployee");
 
 		if (!string.IsNullOrWhiteSpace(storedName))
@@ -101,6 +106,7 @@
 		_selectedEmployee = selectedEmployee;
 		_isHidden = false;
 
+		// Save selected employee in local storage for a smoother user experience next time
 		await _localStorage.SetItemAsync("selectedEmployee", selectedEmployee.Name);
 	}
 }

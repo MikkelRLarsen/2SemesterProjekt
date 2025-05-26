@@ -49,7 +49,7 @@ namespace _2SemesterProjekt.BlazorWebAssembly.Services
         }
 
         /// <summary>
-        /// Default destination data
+        /// Proof of concept database
         /// </summary>
         private string GetDefaultDestinationString()
         {

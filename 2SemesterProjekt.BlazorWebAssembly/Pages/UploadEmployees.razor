@@ -42,6 +42,7 @@
 	{
 		_employees = _employeeService.GetAllEmployees();
 
+		// Invoke localstorage to add it to proof of concept database
 		_employees.AddRange(await LocalStorage.GetItemAsync<List<Employee>>(StorageKey) ?? new List<Employee>());
 	}
 
