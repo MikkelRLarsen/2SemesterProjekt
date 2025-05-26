@@ -38,7 +38,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
             foreach (var pet in allPets)
             {
-                AllPetCards.Add(new PetCard(this, pet, PetCardType.WholePet));
+                AllPetCards.Add(new PetCard(pet, PetCardType.WholePet));
             }
         }
 

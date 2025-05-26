@@ -19,10 +19,10 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         private readonly IPetService _petService;
         private readonly ICustomerService _customerService;
         private readonly IEmployeeService _employeeService;
-        private readonly PetPage _petPage;
+        private readonly ChangePetPage _changePage;
         private readonly PetCard _petCard;
 
-        public UpdatePetUserControl(PetCard petCard, PetPage petPage)
+        public UpdatePetUserControl(PetCard petCard, ChangePetPage changePage)
         {
             InitializeComponent();
             petBirthdaySelector.MaxDate = DateTime.Today;
@@ -30,7 +30,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
             _employeeService = ServiceProviderSingleton.GetServiceProvider().GetService<IEmployeeService>()!;
             _petCard = petCard;
-            _petPage = petPage;
+            _changePage = changePage;
         }
 
         private async void UpdatePetUserControl_Load(object sender, EventArgs e)
@@ -149,7 +149,17 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
                     await _petService.UpdatePetASync(_petCard.Pet); // The newly instantiated Pet object gets added to the DB.
                     displayMessage += $"{_petCard.Pet.Name} er blevet ændret i systemet.";
-                    _petPage.RefreshPetList(); // Refresh PetPages petlist to reflect changes
+
+                    int index = _changePage.AllPetCards.FindIndex(petCard => petCard.Pet.PetID == _petCard.Pet.PetID);
+
+                    // Replaces ExaminationCard with a new one with the updated information
+                    _changePage.AllPetCards[index] = new PetCard(_changePage, _petCard.Pet, PetCardType.WholePet);
+
+                    // Set the selected ExaminationCard to null, so its no longer highligted
+                    _changePage.PetCard = null;
+
+                    _changePage.LoadAndShowPetCards(_changePage.AllPetCards);
+
                     this.Parent!.Controls.Remove(this); // Clear existing content (Parent is PetPage)
                 }
                 catch (Exception ex)

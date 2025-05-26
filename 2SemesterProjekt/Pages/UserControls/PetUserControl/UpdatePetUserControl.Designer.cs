@@ -61,8 +61,7 @@
             // 
             // updateButton
             // 
-            updateButton.Enabled = false;
-            updateButton.Image = Properties.Resources.SaveButtonGreyedOut;
+            updateButton.Image = Properties.Resources.ChangeButton;
             updateButton.Location = new Point(945, 749);
             updateButton.Margin = new Padding(3, 4, 3, 4);
             updateButton.Name = "updateButton";
