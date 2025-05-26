@@ -61,8 +61,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				totalPriceTextBox.Text.ToString()
             );
 
-            // Creates savefile dialog to make user chose være they wan't to save file
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
+			// Creates savefile dialog to make user chose være they wan't to save file
+			SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Tekstfil|*.txt";
             saveFileDialog.FileName = $"Faktura for {invoice.ExaminationDescription.ToLower()} af {invoice.PetName}.txt";
             saveFileDialog.Title = "Gem din tekstfil";
