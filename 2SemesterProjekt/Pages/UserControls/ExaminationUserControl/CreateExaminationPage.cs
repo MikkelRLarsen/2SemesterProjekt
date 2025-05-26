@@ -50,6 +50,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         {
             try
             {
+                // Wait cursor (hourglass)
+                Cursor = Cursors.WaitCursor;
+                customerSearchButton.Enabled = false;
+
                 _customer = await _customerService.GetCustomerByPhoneNumberAsync(Convert.ToInt32(customerSearchTextBox.Text));
 
                 petDropdown.Enabled = true;
@@ -70,6 +74,10 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             {
                 MessageBox.Show($"{ex}");
             }
+
+            // Wait cursor (hourglass)
+            Cursor = Cursors.Default;
+            customerSearchButton.Enabled = true;
         }
 
         private async void petDropdown_SelectionChangeCommitted(object sender, EventArgs e)
