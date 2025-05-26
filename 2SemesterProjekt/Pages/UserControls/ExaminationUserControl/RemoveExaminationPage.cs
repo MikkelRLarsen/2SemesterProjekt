@@ -167,5 +167,14 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 
             deleteButton.Image = Properties.Resources.DeleteButton;
         }
+
+        private void textBoxCustomerPhoneNumberOrName_Click(object sender, EventArgs e)
+        {
+            if (textBoxCustomerPhoneNumberOrName.Text == "Søg på navn eller telefonnummer")
+            {
+                textBoxCustomerPhoneNumberOrName.Text = string.Empty;
+                textBoxCustomerPhoneNumberOrName.ForeColor = SystemColors.WindowText;
+            }
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         }
 
         /// <summary>
-        /// Loads all customers on customerPage click, making them ready for "Vis alle"-click. 
+        /// Loads all pets on Page click, making them ready for "Vis alle"-click. 
         /// </summary>
         private async void FindAndSetAllPetsAsync()
         {
@@ -50,7 +50,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
         private void findAllButton_Click(object sender, EventArgs e)
         {
-            if (textBoxPetByOwnerPhoneNumberOrPetName.Text == "Søg på navn eller telefonnummer" || string.IsNullOrEmpty(textBoxPetByOwnerPhoneNumberOrPetName.Text))
+            if (textBoxPetByOwnerPhoneNumberOrPetName.Text == "Søg på kæledyr eller telefonnummer" || string.IsNullOrEmpty(textBoxPetByOwnerPhoneNumberOrPetName.Text))
             {
                 LoadAndShowPetCards(AllPetCards);
             }
@@ -61,7 +61,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         }
 
         /// <summary>
-        /// Responsible for adding the userControl CustomerCards to the customerFlowPanel.
+        /// Responsible for adding the userControl PetCards to the FlowPanel.
         /// </summary>
         /// <param name="petCardsToBeLoaded"></param>
         public async void LoadAndShowPetCards(IEnumerable<PetCard> petCardsToBeLoaded)
@@ -71,7 +71,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         }
 
         /// <summary>
-        /// Searches for a customer by phonenumber or name (first or last).
+        /// Searches for a customer by phonenumber or name.
         /// If numbers is entered, search by phonenumber.
         /// </summary>
         private async void ShowPetByOwnerPhoneNumberOrName()
@@ -83,12 +83,10 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 if (Int32.TryParse(input, out int customerPhoneNumber))
                 {
                     // Search by phonenumber
-                    PetCard customerCard = AllPetCards
-                        .First(p => p.Pet.Customer.PhoneNumber == customerPhoneNumber);
+                    IEnumerable<PetCard> petCards = AllPetCards
+                        .Where(p => p.Pet.Customer.PhoneNumber == customerPhoneNumber);
 
-                    flowPanel.Controls.Clear();
-
-                    flowPanel.Controls.Add(customerCard);
+                    LoadAndShowPetCards(petCards);
                 }
                 else
                 {
@@ -123,7 +121,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
         private void textBoxPetByOwnerPhoneNumberOrPetName_Click(object sender, EventArgs e)
         {
-            if (textBoxPetByOwnerPhoneNumberOrPetName.Text == "Søg på navn eller telefonnummer")
+            if (textBoxPetByOwnerPhoneNumberOrPetName.Text == "Søg på kæledyr eller telefonnummer")
             {
                 textBoxPetByOwnerPhoneNumberOrPetName.Text = string.Empty;
                 textBoxPetByOwnerPhoneNumberOrPetName.ForeColor = SystemColors.WindowText;
@@ -132,7 +130,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
         private void customerSearchButton_Click(object sender, EventArgs e)
         {
-            if (textBoxPetByOwnerPhoneNumberOrPetName.Text != "Søg på navn eller telefonnummer" || !string.IsNullOrEmpty(textBoxPetByOwnerPhoneNumberOrPetName.Text))
+            if (textBoxPetByOwnerPhoneNumberOrPetName.Text != "Søg på kæledyr eller telefonnummer" || !string.IsNullOrEmpty(textBoxPetByOwnerPhoneNumberOrPetName.Text))
             {
                 ShowPetByOwnerPhoneNumberOrName();
             }

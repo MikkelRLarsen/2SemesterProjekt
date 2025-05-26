@@ -124,8 +124,8 @@
   <data name="Fugl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fugl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AddToCartButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddToCartButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ExportToTxtButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExportToTxtButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,11 +133,11 @@
   <data name="DeleteButtonGreyedOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DeleteButtonGreyedOut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AddButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddButton1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RemoveCustomer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RemoveCustomer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FindAllButtonGreyedOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FindAllButtonGreyedOut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FindAllButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FindAllButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SaveButtonGreyedOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SaveButtonGreyedOut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,8 +145,8 @@
   <data name="Product" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Product.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FindAllButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FindAllButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FindAllButtonGreyedOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FindAllButtonGreyedOut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PageTitelBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PageTitelBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -159,6 +159,9 @@
   </data>
   <data name="member" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\member.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CustomerPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CustomerPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AddCustomer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddCustomer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,8 +217,8 @@
   <data name="CardExamination" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CardExamination.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ExportToTxtButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ExportToTxtButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddToCartButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddToCartButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CancelButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CancelButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -241,13 +244,13 @@
   <data name="PageBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PageBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RemoveCustomer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RemoveCustomer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddButton1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CheckBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CustomerPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CustomerPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CreateInvoice" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CreateInvoice.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

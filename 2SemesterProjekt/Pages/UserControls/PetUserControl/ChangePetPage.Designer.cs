@@ -79,7 +79,7 @@
             textBoxPetByOwnerPhoneNumberOrPetName.Name = "textBoxPetByOwnerPhoneNumberOrPetName";
             textBoxPetByOwnerPhoneNumberOrPetName.Size = new Size(274, 27);
             textBoxPetByOwnerPhoneNumberOrPetName.TabIndex = 62;
-            textBoxPetByOwnerPhoneNumberOrPetName.Text = "Søg på navn eller telefonnummer";
+            textBoxPetByOwnerPhoneNumberOrPetName.Text = "Søg på kæledyr eller telefonnummer";
             textBoxPetByOwnerPhoneNumberOrPetName.Click += textBoxPetByOwnerPhoneNumberOrPetName_Click;
             textBoxPetByOwnerPhoneNumberOrPetName.KeyPress += textBoxPetByOwnerPhoneNumberOrPetName_KeyPress;
             // 

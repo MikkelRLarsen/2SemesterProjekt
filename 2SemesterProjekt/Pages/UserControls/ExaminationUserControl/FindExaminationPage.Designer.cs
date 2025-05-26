@@ -115,12 +115,15 @@
             // textBoxCustomerPhoneNumberOrName
             // 
             textBoxCustomerPhoneNumberOrName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxCustomerPhoneNumberOrName.ForeColor = SystemColors.InactiveCaption;
             textBoxCustomerPhoneNumberOrName.Location = new Point(570, 194);
             textBoxCustomerPhoneNumberOrName.Margin = new Padding(3, 4, 3, 4);
             textBoxCustomerPhoneNumberOrName.MaxLength = 8;
             textBoxCustomerPhoneNumberOrName.Name = "textBoxCustomerPhoneNumberOrName";
             textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
             textBoxCustomerPhoneNumberOrName.TabIndex = 29;
+            textBoxCustomerPhoneNumberOrName.Text = "Søg på navn eller telefonnummer";
+            textBoxCustomerPhoneNumberOrName.Click += textBoxCustomerPhoneNumberOrName_Click;
             // 
             // customerSearchButton
             // 
@@ -147,10 +150,11 @@
             // 
             // exportToTxtButton
             // 
-            exportToTxtButton.Image = Properties.Resources.ExportToTxtButton;
+            exportToTxtButton.BackColor = Color.Linen;
+            exportToTxtButton.Image = Properties.Resources.CreateInvoice;
             exportToTxtButton.Location = new Point(1191, 784);
             exportToTxtButton.Name = "exportToTxtButton";
-            exportToTxtButton.Size = new Size(170, 21);
+            exportToTxtButton.Size = new Size(139, 21);
             exportToTxtButton.TabIndex = 55;
             exportToTxtButton.TabStop = false;
             exportToTxtButton.Click += exportToTxtButton_Click;

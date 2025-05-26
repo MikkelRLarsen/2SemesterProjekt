@@ -100,7 +100,7 @@
             textBoxCustomerPhoneNumberOrName.Name = "textBoxCustomerPhoneNumberOrName";
             textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
             textBoxCustomerPhoneNumberOrName.TabIndex = 42;
-            textBoxCustomerPhoneNumberOrName.Text = "Søg på telefonnummer";
+            textBoxCustomerPhoneNumberOrName.Text = "Søg på navn eller telefonnummer";
             textBoxCustomerPhoneNumberOrName.Click += textBoxCustomerPhoneNumberOrName_Click;
             textBoxCustomerPhoneNumberOrName.KeyPress += textBoxCustomerPhoneNumberOrName_KeyPress;
             // 
