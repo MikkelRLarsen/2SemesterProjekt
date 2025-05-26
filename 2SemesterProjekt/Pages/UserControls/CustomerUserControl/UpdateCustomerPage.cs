@@ -17,7 +17,6 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
     public partial class UpdateCustomerPage : UserControl
     {
         private readonly ICustomerService _customerService;
-        private readonly CustomerCard _customerCard;
         private readonly ChangeCustomerPage _customerPage;
         private readonly Customer _customer;
 
@@ -37,6 +36,7 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             textBoxEmail.Text = _customer.Email;
             textBoxAddress.Text = _customer.Address;
             textBoxPhoneNumber.Text = _customer.PhoneNumber.ToString();
+            comboBoxType.Text = _customer.Type;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -111,6 +111,26 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             // Resets textbox after error message
             textBoxPhoneNumber.ForeColor = SystemColors.WindowText;
             textBoxPhoneNumber.BackColor = SystemColors.Window;
+        }
+
+        private void submitButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void submitButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void cancelButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void cancelButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
         }
     }
 }

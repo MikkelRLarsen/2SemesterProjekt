@@ -66,6 +66,8 @@
             // 
             // comboBoxType
             // 
+            comboBoxType.BackColor = SystemColors.InactiveBorder;
+            comboBoxType.Enabled = false;
             comboBoxType.FormattingEnabled = true;
             comboBoxType.Location = new Point(663, 686);
             comboBoxType.Margin = new Padding(3, 4, 3, 4);
@@ -221,8 +223,7 @@
             // 
             // submitButton
             // 
-            submitButton.Enabled = false;
-            submitButton.Image = (Image)resources.GetObject("submitButton.Image");
+            submitButton.Image = Properties.Resources.SaveButton;
             submitButton.Location = new Point(945, 757);
             submitButton.Margin = new Padding(3, 4, 3, 4);
             submitButton.Name = "submitButton";
@@ -231,6 +232,8 @@
             submitButton.TabIndex = 66;
             submitButton.TabStop = false;
             submitButton.Click += submitButton_Click;
+            submitButton.MouseEnter += submitButton_MouseEnter;
+            submitButton.MouseLeave += submitButton_MouseLeave;
             // 
             // cancelButton
             // 
@@ -243,6 +246,8 @@
             cancelButton.TabIndex = 65;
             cancelButton.TabStop = false;
             cancelButton.Click += cancelButton_Click;
+            cancelButton.MouseEnter += cancelButton_MouseEnter;
+            cancelButton.MouseLeave += cancelButton_MouseLeave;
             // 
             // pictureBox1
             // 
