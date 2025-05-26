@@ -7,7 +7,7 @@ namespace _2SemesterProjekt.BlazorWebAssembly.Services
         // Default email recipient address used when generating mail
         private readonly string _defaultReciever;
 
-        // Constructor injecting the default receiver email address (configured in Program.cs)
+        // Constructor injecting the default recipient email address (configured in Program.cs)
         public MailService(string defaultReciever)
         {
             _defaultReciever = defaultReciever;
