@@ -469,11 +469,11 @@ namespace _2SemesterProjekt.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ExportToTxtButton
+        internal static System.Drawing.Bitmap CreateInvoice
         {
             get
             {
-                object obj = ResourceManager.GetObject("ExportToTxtButton", resourceCulture);
+                object obj = ResourceManager.GetObject("CreateInvoice", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

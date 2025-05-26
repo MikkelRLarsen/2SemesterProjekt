@@ -65,6 +65,7 @@
             textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
             textBoxCustomerPhoneNumberOrName.TabIndex = 44;
             textBoxCustomerPhoneNumberOrName.Text = "Søg på navn eller telefonnummer";
+            textBoxCustomerPhoneNumberOrName.Click += textBoxCustomerPhoneNumberOrName_Click;
             // 
             // customerSearchButton
             // 

@@ -123,6 +123,11 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             }
         }
 
+        private void customerSearchButton_Click(object sender, EventArgs e)
+        {
+            ShowCustomerByPhoneNumberOrName();
+        }
+
         private void textBoxCustomerPhoneNumberOrName_Click(object sender, EventArgs e)
         {
             if (textBoxCustomerPhoneNumberOrName.Text == "Søg på navn eller telefonnummer")
@@ -130,11 +135,6 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
                 textBoxCustomerPhoneNumberOrName.Text = string.Empty;
                 textBoxCustomerPhoneNumberOrName.ForeColor = SystemColors.WindowText;
             }
-        }
-
-        private void customerSearchButton_Click(object sender, EventArgs e)
-        {
-            ShowCustomerByPhoneNumberOrName();
         }
     }
 }

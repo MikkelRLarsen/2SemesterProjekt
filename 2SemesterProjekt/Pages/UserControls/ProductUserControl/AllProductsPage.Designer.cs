@@ -121,7 +121,7 @@
 			// 
 			// exportToTxtButton
 			// 
-			exportToTxtButton.Image = Properties.Resources.ExportToTxtButton;
+			exportToTxtButton.Image = Properties.Resources.CreateInvoice;
 			exportToTxtButton.Location = new Point(1191, 780);
 			exportToTxtButton.Name = "exportToTxtButton";
 			exportToTxtButton.Size = new Size(170, 21);
