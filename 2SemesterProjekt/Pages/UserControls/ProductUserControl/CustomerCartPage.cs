@@ -50,7 +50,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             UpdateTotalPrice();
         }
 
-        public async void ReloadCustomerCart()
+        public async void ReloadCustomerCart(List<Product> updatedOrder)
         {
             flowPanel.Controls.Clear();
 
@@ -59,18 +59,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             foreach (var productInCart in _productsInCart)
             {
-                foreach (var product in list)
+                foreach (var product in updatedOrder)
                 {
-                    if (productInCart.ProductID == product.ProductID)
-                    {
-                        product.SetNumberInStockOnOrderPage();
-                        updatedList.Add(product);
-                    }
+                    product.SetNumberInStockOnOrderPage();
                 }
             }
 
-            _productsInCart.Clear();
-            _productsInCart = updatedList;
+            _productsInCart = updatedOrder;
 
             foreach (var productCard in _cartProductCards)
             {
@@ -204,11 +199,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private void discountNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            if (Convert.ToDecimal(totalPriceTextBox.Text) != 0) // Updates the total price with the added discount
-            {
-                totalPriceTextBox.Text = (Convert.ToDecimal(totalPriceTextBox.Text) * ((100 - discountNumericUpDown.Value) / 100)).ToString();
-                UpdateTotalPrice();
-            }
+            totalPriceTextBox.Text = (Convert.ToDecimal(totalPriceTextBox.Text) * ((100 - discountNumericUpDown.Value) / 100)).ToString();
+            UpdateTotalPrice();
         }
 
         /// <summary>
@@ -220,7 +212,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             foreach (var product in _productsInCart)
             {
-                totalPrice += product.SalesPricePerUnit * product.QuantityInOrder;
+                totalPrice += product.TotalPrice;
             }
 
             return totalPrice;
@@ -233,7 +225,12 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             decimal basePrice = CalculateTotalPrice();
             decimal discount = discountNumericUpDown.Value;
+
             decimal finalPrice = basePrice * ((100 - discount) / 100);
+            if (finalPrice == 0 && discount != 100 && basePrice != 0)
+            {
+                
+            }
 
             totalPriceTextBox.Text = finalPrice.ToString("0.00");
         }

@@ -198,6 +198,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         /// </summary>
         private void AddProductCardToCart()
         {
+            _orderPage._order.Add(_productData);
             _cartPage._productsInCart.Add(_productData);
 
             // Create a new product card in "RemoveFromCart" mode to represent the product in the cart
@@ -220,6 +221,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         /// </summary>
         private void UpdateCartProductCard(int quantity)
         {
+            _orderPage._order.Remove(_productData);
+            _orderPage._order.Add(_productData);
             var card = _cartPage._cartProductCards
                 .First(c => c.ProductCard._productData.ProductID == _productData.ProductID);
 

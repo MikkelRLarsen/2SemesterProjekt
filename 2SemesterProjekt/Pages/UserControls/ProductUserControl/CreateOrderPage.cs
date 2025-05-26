@@ -26,10 +26,6 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _customerCartPage = new CustomerCartPage(_order, _mainPagePanel, this);
 
         }
-        public CreateOrderPage()
-        {
-
-        }
 
         private async void CreateOrderPage_Load(object sender, EventArgs e)
         {
@@ -87,15 +83,22 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private void goToCartButton_Click(object sender, EventArgs e)
         {
-            foreach (var productCards in _allProductCards)
+            if (_order.Count == 0)
             {
-                productCards.UpdateInStockLabel(productCards._productData);
+                MessageBox.Show("Tilføj venligst produkter først!", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else
+            {
+                foreach (var productCards in _allProductCards)
+                {
+                    productCards.UpdateInStockLabel(productCards._productData);
+                }
 
-            _mainPagePanel.Controls.Add(_customerCartPage);
-            _customerCartPage.ReloadCustomerCart();
-            _customerCartPage.Show();
-            _customerCartPage.BringToFront();
+                _mainPagePanel.Controls.Add(_customerCartPage);
+                _customerCartPage.ReloadCustomerCart(_order);
+                _customerCartPage.Show();
+                _customerCartPage.BringToFront();
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
