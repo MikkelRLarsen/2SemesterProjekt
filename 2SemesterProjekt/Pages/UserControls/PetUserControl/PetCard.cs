@@ -26,6 +26,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         private FindPetPage _petPage;
         private PetCardType _petCardType;
         private IPetService _petService;
+        private InactivePetPage _inactivePetPage;
         public Pet Pet { get; }
         public Examination Examination { get; }
         
@@ -44,16 +45,10 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             CardSetup(); 
         }
         
-        /// <summary>
-        /// Creates the PetCard for inactive pets.
-        /// </summary>
-        /// <param name="petPage"></param>
-        /// <param name="examination"></param>
-        /// <param name="petCardType"></param>
-        public PetCard(FindPetPage petPage, Examination examination, PetCardType petCardType)
+        public PetCard(InactivePetPage inactivePetPage, Examination examination, PetCardType petCardType)
         {
             InitializeComponent();
-            _petPage = petPage;
+            _inactivePetPage = inactivePetPage;
             Pet = examination.Pet;
             Examination = examination;
             _petCardType = petCardType;
@@ -79,6 +74,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
                 labelPetBirth.Text = Pet.Birthday.ToString("dd-MM-yyyy");
                 labelPetSpecies.Text = Pet.Species.Name;
+                this.Click += PetCard_Click;
             }
 
             if (_petCardType == PetCardType.InactivePet)

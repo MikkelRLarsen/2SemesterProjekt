@@ -37,7 +37,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 var listOfPets = await _examinationService.GetAllInactivesAsync();
                 foreach (var examination in listOfPets)
                 {
-                    AllInactivePetCards.Add(new PetCard(examination, PetCardType.InactivePet));
+                    AllInactivePetCards.Add(new PetCard(this, examination, PetCardType.InactivePet));
                 }
             }
             catch

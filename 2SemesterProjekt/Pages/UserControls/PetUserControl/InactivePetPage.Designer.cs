@@ -130,6 +130,7 @@
             Controls.Add(pictureBox4);
             Name = "InactivePetPage";
             Size = new Size(1600, 845);
+            Load += InactivePetPage_Load;
             ((System.ComponentModel.ISupportInitialize)findAllButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

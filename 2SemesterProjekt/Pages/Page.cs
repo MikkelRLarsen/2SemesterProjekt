@@ -183,12 +183,19 @@ namespace _2SemesterProjekt.Pages
             AddMoveHandlers(AdministrationNav);
 
             AdministrationNav.AddOption(new NavigationButtonOption(CreateEmployee, "Opret Ansat"));
+            AdministrationNav.AddOption(new NavigationButtonOption(InactivePets, "Inaktive kæledyr"));
         }
         private async void CreateEmployee(object sender, EventArgs e)
         {
 			MainPanel.Controls.Clear();
 			MainPanel.Controls.Add(new CreateEmployeePage(MainPanel));
 		}
+
+        private async void InactivePets(object sender, EventArgs e)
+        {
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new InactivePetPage());
+        }
 
         // MoveHandler
         private void AddMoveHandlers(Control control)
