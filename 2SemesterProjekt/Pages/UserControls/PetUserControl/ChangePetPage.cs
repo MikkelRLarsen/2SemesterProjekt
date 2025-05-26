@@ -50,7 +50,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
         private void findAllButton_Click(object sender, EventArgs e)
         {
-            if (textBoxPetByOwnerPhoneNumberOrPetName.Text == "Søg på navn eller telefonnummer" || string.IsNullOrEmpty(textBoxPetByOwnerPhoneNumberOrPetName.Text))
+            if (textBoxPetByOwnerPhoneNumberOrPetName.Text == "Søg på kæledyr eller telefonnummer" || string.IsNullOrEmpty(textBoxPetByOwnerPhoneNumberOrPetName.Text))
             {
                 LoadAndShowPetCards(AllPetCards);
             }
@@ -123,7 +123,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
         private void textBoxPetByOwnerPhoneNumberOrPetName_Click(object sender, EventArgs e)
         {
-            if (textBoxPetByOwnerPhoneNumberOrPetName.Text == "Søg på navn eller telefonnummer")
+            if (textBoxPetByOwnerPhoneNumberOrPetName.Text == "Søg på kæledyr eller telefonnummer")
             {
                 textBoxPetByOwnerPhoneNumberOrPetName.Text = string.Empty;
                 textBoxPetByOwnerPhoneNumberOrPetName.ForeColor = SystemColors.WindowText;
@@ -132,7 +132,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
 
         private void customerSearchButton_Click(object sender, EventArgs e)
         {
-            if (textBoxPetByOwnerPhoneNumberOrPetName.Text != "Søg på navn eller telefonnummer" || !string.IsNullOrEmpty(textBoxPetByOwnerPhoneNumberOrPetName.Text))
+            if (textBoxPetByOwnerPhoneNumberOrPetName.Text != "Søg på kæledyr eller telefonnummer" || !string.IsNullOrEmpty(textBoxPetByOwnerPhoneNumberOrPetName.Text))
             {
                 ShowPetByOwnerPhoneNumberOrName();
             }
