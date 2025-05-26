@@ -525,5 +525,17 @@ namespace _2SemesterProjekt.Properties {
 				return ((System.Drawing.Bitmap)(obj));
 			}
 		}
-	}
+
+        /// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap CustomerPicture
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("CustomerPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+    }
 }
