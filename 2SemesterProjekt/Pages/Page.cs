@@ -150,7 +150,7 @@ namespace _2SemesterProjekt.Pages
         private async void UpdatePetPage(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
-            MainPanel.Controls.Add(new UpdatePetPage());
+            MainPanel.Controls.Add(new ChangePetPage(MainPanel));
         }
 
         //StockMenu
