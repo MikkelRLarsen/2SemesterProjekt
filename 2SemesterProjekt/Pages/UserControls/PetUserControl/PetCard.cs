@@ -23,7 +23,6 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
     }
     public partial class PetCard : UserControl
     {
-        private InactivePetPage _inactivePetPage;
         private readonly ChangePetPage _changePage;
         private readonly PetCardType _petCardType;
         private readonly IPetService _petService;
@@ -44,10 +43,9 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             CardSetup();
         }
         
-        public PetCard(InactivePetPage inactivePetPage, Examination examination, PetCardType petCardType)
+        public PetCard(Examination examination, PetCardType petCardType)
         {
             InitializeComponent();
-            _inactivePetPage = inactivePetPage;
             Pet = examination.Pet;
             Examination = examination;
             _petCardType = petCardType;

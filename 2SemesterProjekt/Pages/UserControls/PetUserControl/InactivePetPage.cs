@@ -16,8 +16,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
     public partial class InactivePetPage : UserControl
     {
         private readonly IExaminationService _examinationService;
-        public PetCard InactivePetCard { get; set; }
-        public List<PetCard> AllInactivePetCards { get; set; } = new List<PetCard>();
+        private List<PetCard> AllInactivePetCards { get; set; } = new List<PetCard>();
         public InactivePetPage()
         {
             InitializeComponent();
@@ -37,7 +36,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 var listOfPets = await _examinationService.GetAllInactivesAsync();
                 foreach (var examination in listOfPets)
                 {
-                    AllInactivePetCards.Add(new PetCard(this, examination, PetCardType.InactivePet));
+                    AllInactivePetCards.Add(new PetCard(examination, PetCardType.InactivePet));
                 }
             }
             catch
