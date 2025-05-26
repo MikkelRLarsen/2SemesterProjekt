@@ -12,6 +12,7 @@ using _2SemesterProjekt.Domain.Models;
 using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
 {
@@ -93,18 +94,18 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
         {
             try
             {
-				// Wait cursor (hourglass)
-				Cursor = Cursors.WaitCursor;
-				submitButton.Enabled = false;
-			}
+                // Wait cursor (hourglass)
+                Cursor = Cursors.WaitCursor;
+                submitButton.Enabled = false;
+            }
             catch (Exception ex)
             {
                 // Wait cursor (hourglass)
                 Cursor = Cursors.Default;
-				submitButton.Enabled = true;
-				MessageBox.Show($"{ex.Message}", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                submitButton.Enabled = true;
+                MessageBox.Show($"{ex.Message}", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-			}
+            }
 
             string displayMessage = string.Empty;
 
@@ -178,6 +179,12 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             // Wait cursor (hourglass)
             Cursor = Cursors.Default;
             submitButton.Enabled = true;
+        }
+
+        private void textBoxPhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+
+            submitButton.Image = Properties.Resources.SaveButton;
         }
     }
 }
