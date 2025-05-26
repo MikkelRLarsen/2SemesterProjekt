@@ -121,7 +121,7 @@ namespace _2SemesterProjekt.Pages
         private async void UpdateCustomerPage(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
-            MainPanel.Controls.Add(new ChangeCustomerPage());
+            MainPanel.Controls.Add(new ChangeCustomerPage(MainPanel));
         }
 
 

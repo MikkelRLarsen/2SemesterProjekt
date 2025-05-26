@@ -203,6 +203,9 @@
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.TabIndex = 40;
             pictureBox.TabStop = false;
+            pictureBox.Click += pictureBox_Click;
+            pictureBox.MouseEnter += pictureBox_MouseEnter;
+            pictureBox.MouseLeave += pictureBox_MouseLeave;
             // 
             // CustomerCard
             // 

@@ -17,12 +17,14 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
     public partial class ChangeCustomerPage : UserControl
     {
         private readonly ICustomerService _customerService;
+        private readonly Panel _mainPanel;
         public CustomerCard CustomerCard { get; set; }
         public List<CustomerCard> AllCustomerCards { get; set; } = new List<CustomerCard>();
-        public ChangeCustomerPage()
+        public ChangeCustomerPage(Panel mainPanel)
         {
             InitializeComponent();
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
+            _mainPanel = mainPanel;
         }
 
         private void ChangeCustomerPage_Load(object sender, EventArgs e)
@@ -39,7 +41,7 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
 
             foreach (var customer in allCustomers)
             {
-                AllCustomerCards.Add(new CustomerCard(customer));
+                AllCustomerCards.Add(new CustomerCard(this, customer));
             }
         }
 
@@ -134,7 +136,10 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
                 return;
             }
 
-            var updatePage =
+            var updatePage = new UpdateCustomerPage(this, CustomerCard.Customer);
+
+            _mainPanel.Controls.Add(updatePage);
+            updatePage.BringToFront();
             
             changeButton.Image = Properties.Resources.ChangeButtonGreyedOut;
         }
