@@ -44,11 +44,13 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             {
                 AllPetCards.Add(new PetCard(this, pet, PetCardType.WholePet));
             }
+
+            findAllButton.Image = Properties.Resources.FindAllButton;
         }
 
-        private void findAllButton_Click_1(object sender, EventArgs e)
+        private void findAllButton_Click(object sender, EventArgs e)
         {
-            if (textBoxPetByOwnerPhoneNumberOrPetName.Text == "Søg på navn eller ID" || string.IsNullOrEmpty(textBoxPetByOwnerPhoneNumberOrPetName.Text))
+            if (textBoxPetByOwnerPhoneNumberOrPetName.Text == "Søg på navn eller telefonnummer" || string.IsNullOrEmpty(textBoxPetByOwnerPhoneNumberOrPetName.Text))
             {
                 LoadAndShowPetCards(AllPetCards);
             }
@@ -128,6 +130,14 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             }
         }
 
+        private void customerSearchButton_Click(object sender, EventArgs e)
+        {
+            if (textBoxPetByOwnerPhoneNumberOrPetName.Text != "Søg på navn eller telefonnummer" || !string.IsNullOrEmpty(textBoxPetByOwnerPhoneNumberOrPetName.Text))
+            {
+                ShowPetByOwnerPhoneNumberOrName();
+            }
+        }
+
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             if (this.PetCard == null)
@@ -142,6 +152,26 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             updatePage.BringToFront();
 
             changeButton.Image = Properties.Resources.ChangeButtonGreyedOut;
+        }
+
+        private void findAllButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void findAllButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void customerSearchButton_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void customerSearchButton_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
         }
     }
 }

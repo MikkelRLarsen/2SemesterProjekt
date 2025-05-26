@@ -72,12 +72,14 @@
             // textBoxPetByOwnerPhoneNumberOrPetName
             // 
             textBoxPetByOwnerPhoneNumberOrPetName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxPetByOwnerPhoneNumberOrPetName.ForeColor = SystemColors.InactiveCaption;
             textBoxPetByOwnerPhoneNumberOrPetName.Location = new Point(570, 191);
             textBoxPetByOwnerPhoneNumberOrPetName.Margin = new Padding(3, 4, 3, 4);
             textBoxPetByOwnerPhoneNumberOrPetName.MaxLength = 8;
             textBoxPetByOwnerPhoneNumberOrPetName.Name = "textBoxPetByOwnerPhoneNumberOrPetName";
             textBoxPetByOwnerPhoneNumberOrPetName.Size = new Size(274, 27);
             textBoxPetByOwnerPhoneNumberOrPetName.TabIndex = 62;
+            textBoxPetByOwnerPhoneNumberOrPetName.Text = "Søg på navn eller telefonnummer";
             textBoxPetByOwnerPhoneNumberOrPetName.Click += textBoxPetByOwnerPhoneNumberOrPetName_Click;
             textBoxPetByOwnerPhoneNumberOrPetName.KeyPress += textBoxPetByOwnerPhoneNumberOrPetName_KeyPress;
             // 
@@ -92,17 +94,22 @@
             customerSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
             customerSearchButton.TabIndex = 61;
             customerSearchButton.TabStop = false;
+            customerSearchButton.Click += customerSearchButton_Click;
+            customerSearchButton.MouseEnter += customerSearchButton_MouseEnter;
+            customerSearchButton.MouseLeave += customerSearchButton_MouseLeave;
             // 
             // findAllButton
             // 
-            findAllButton.Image = Properties.Resources.FindAllButton;
+            findAllButton.Image = Properties.Resources.FindAllButtonGreyedOut;
             findAllButton.Location = new Point(931, 194);
             findAllButton.Name = "findAllButton";
             findAllButton.Size = new Size(99, 21);
             findAllButton.SizeMode = PictureBoxSizeMode.StretchImage;
             findAllButton.TabIndex = 60;
             findAllButton.TabStop = false;
-            findAllButton.Click += findAllButton_Click_1;
+            findAllButton.Click += findAllButton_Click;
+            findAllButton.MouseEnter += findAllButton_MouseEnter;
+            findAllButton.MouseLeave += findAllButton_MouseLeave;
             // 
             // label1
             // 

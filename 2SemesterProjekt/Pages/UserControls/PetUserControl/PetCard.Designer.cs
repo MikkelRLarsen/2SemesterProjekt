@@ -213,7 +213,7 @@
             pictureBox.Image = Properties.Resources.CardExamination;
             pictureBox.Location = new Point(0, 0);
             pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(655, 192);
+            pictureBox.Size = new Size(655, 110);
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.TabIndex = 41;
             pictureBox.TabStop = false;
@@ -236,9 +236,9 @@
             Controls.Add(labelPetID);
             Controls.Add(label);
             Controls.Add(pictureBox);
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(50, 10, 10, 10);
             Name = "PetCard";
-            Size = new Size(655, 192);
+            Size = new Size(655, 110);
             ((System.ComponentModel.ISupportInitialize)profilePicture).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ResumeLayout(false);
