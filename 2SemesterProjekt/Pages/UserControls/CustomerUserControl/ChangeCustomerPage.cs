@@ -43,6 +43,7 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             {
                 AllCustomerCards.Add(new CustomerCard(this, customer));
             }
+            findAllButton.Image = Properties.Resources.FindAllButton;
         }
 
         private void findAllButton_Click(object sender, EventArgs e)
