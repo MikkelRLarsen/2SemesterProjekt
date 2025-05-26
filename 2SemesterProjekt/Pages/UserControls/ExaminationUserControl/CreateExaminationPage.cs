@@ -262,7 +262,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                     && ExaminationTypeDropdown.SelectedItem as ExaminationType != null
                     && (ExaminationTypeDropdown.SelectedItem as ExaminationType).ExaminationTag.ExaminationTagID == 2)
                 {
+                    discountNumericUpDown.Visible = true;
                     discountNumericUpDown.Enabled = true;
+                    discountLabel.Visible = true;
                 }
                 // Checks if selected Customer is Erhverv
                 else if (_customer.Type == "Erhverv")

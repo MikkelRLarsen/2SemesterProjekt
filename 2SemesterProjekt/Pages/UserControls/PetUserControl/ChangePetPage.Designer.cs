@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangePetPage));
             changeButton = new PictureBox();
             flowPanel = new FlowLayoutPanel();
-            textBoxCustomerPhoneNumberOrName = new TextBox();
+            textBoxPetByOwnerPhoneNumberOrPetName = new TextBox();
             customerSearchButton = new PictureBox();
             findAllButton = new PictureBox();
             label1 = new Label();
@@ -69,15 +69,19 @@
             flowPanel.Size = new Size(769, 562);
             flowPanel.TabIndex = 63;
             // 
-            // textBoxCustomerPhoneNumberOrName
+            // textBoxPetByOwnerPhoneNumberOrPetName
             // 
-            textBoxCustomerPhoneNumberOrName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxCustomerPhoneNumberOrName.Location = new Point(570, 191);
-            textBoxCustomerPhoneNumberOrName.Margin = new Padding(3, 4, 3, 4);
-            textBoxCustomerPhoneNumberOrName.MaxLength = 8;
-            textBoxCustomerPhoneNumberOrName.Name = "textBoxCustomerPhoneNumberOrName";
-            textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
-            textBoxCustomerPhoneNumberOrName.TabIndex = 62;
+            textBoxPetByOwnerPhoneNumberOrPetName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxPetByOwnerPhoneNumberOrPetName.ForeColor = SystemColors.InactiveCaption;
+            textBoxPetByOwnerPhoneNumberOrPetName.Location = new Point(570, 191);
+            textBoxPetByOwnerPhoneNumberOrPetName.Margin = new Padding(3, 4, 3, 4);
+            textBoxPetByOwnerPhoneNumberOrPetName.MaxLength = 8;
+            textBoxPetByOwnerPhoneNumberOrPetName.Name = "textBoxPetByOwnerPhoneNumberOrPetName";
+            textBoxPetByOwnerPhoneNumberOrPetName.Size = new Size(274, 27);
+            textBoxPetByOwnerPhoneNumberOrPetName.TabIndex = 62;
+            textBoxPetByOwnerPhoneNumberOrPetName.Text = "Søg på navn eller telefonnummer";
+            textBoxPetByOwnerPhoneNumberOrPetName.Click += textBoxPetByOwnerPhoneNumberOrPetName_Click;
+            textBoxPetByOwnerPhoneNumberOrPetName.KeyPress += textBoxPetByOwnerPhoneNumberOrPetName_KeyPress;
             // 
             // customerSearchButton
             // 
@@ -90,16 +94,22 @@
             customerSearchButton.SizeMode = PictureBoxSizeMode.StretchImage;
             customerSearchButton.TabIndex = 61;
             customerSearchButton.TabStop = false;
+            customerSearchButton.Click += customerSearchButton_Click;
+            customerSearchButton.MouseEnter += customerSearchButton_MouseEnter;
+            customerSearchButton.MouseLeave += customerSearchButton_MouseLeave;
             // 
             // findAllButton
             // 
-            findAllButton.Image = Properties.Resources.FindAllButton;
+            findAllButton.Image = Properties.Resources.FindAllButtonGreyedOut;
             findAllButton.Location = new Point(931, 194);
             findAllButton.Name = "findAllButton";
             findAllButton.Size = new Size(99, 21);
             findAllButton.SizeMode = PictureBoxSizeMode.StretchImage;
             findAllButton.TabIndex = 60;
             findAllButton.TabStop = false;
+            findAllButton.Click += findAllButton_Click;
+            findAllButton.MouseEnter += findAllButton_MouseEnter;
+            findAllButton.MouseLeave += findAllButton_MouseLeave;
             // 
             // label1
             // 
@@ -107,11 +117,11 @@
             label1.BackColor = Color.AntiqueWhite;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.SaddleBrown;
-            label1.Location = new Point(483, 166);
+            label1.Location = new Point(433, 166);
             label1.Name = "label1";
-            label1.Size = new Size(635, 20);
+            label1.Size = new Size(735, 20);
             label1.TabIndex = 59;
-            label1.Text = "T R Y K   F I N D   A L L E   E L L E R   S Ø G   P Å   K U N D E N S   T E L E F O N N U M M E R";
+            label1.Text = "T R Y K   F I N D   A L L E   E L L E R   S Ø G   P Å   K Æ L E D Y R E T S  E J E R S   T E L E F O N N U M M E R";
             // 
             // pictureBox3
             // 
@@ -166,6 +176,7 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 65;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // ChangePetPage
             // 
@@ -173,7 +184,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(pictureBox2);
             Controls.Add(flowPanel);
-            Controls.Add(textBoxCustomerPhoneNumberOrName);
+            Controls.Add(textBoxPetByOwnerPhoneNumberOrPetName);
             Controls.Add(customerSearchButton);
             Controls.Add(findAllButton);
             Controls.Add(label1);
@@ -185,6 +196,7 @@
             Margin = new Padding(0);
             Name = "ChangePetPage";
             Size = new Size(1600, 845);
+            Load += ChangePetPage_Load;
             ((System.ComponentModel.ISupportInitialize)changeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)customerSearchButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)findAllButton).EndInit();
@@ -199,7 +211,7 @@
         #endregion
         private PictureBox changeButton;
         private FlowLayoutPanel flowPanel;
-        private TextBox textBoxCustomerPhoneNumberOrName;
+        private TextBox textBoxPetByOwnerPhoneNumberOrPetName;
         private PictureBox customerSearchButton;
         private PictureBox findAllButton;
         private Label label1;
