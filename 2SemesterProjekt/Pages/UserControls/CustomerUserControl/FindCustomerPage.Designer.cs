@@ -57,12 +57,14 @@
             // textBoxCustomerPhoneNumberOrName
             // 
             textBoxCustomerPhoneNumberOrName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxCustomerPhoneNumberOrName.ForeColor = SystemColors.InactiveCaption;
             textBoxCustomerPhoneNumberOrName.Location = new Point(570, 191);
             textBoxCustomerPhoneNumberOrName.Margin = new Padding(3, 4, 3, 4);
             textBoxCustomerPhoneNumberOrName.MaxLength = 8;
             textBoxCustomerPhoneNumberOrName.Name = "textBoxCustomerPhoneNumberOrName";
             textBoxCustomerPhoneNumberOrName.Size = new Size(274, 27);
             textBoxCustomerPhoneNumberOrName.TabIndex = 44;
+            textBoxCustomerPhoneNumberOrName.Text = "Søg på navn eller telefonnummer";
             // 
             // customerSearchButton
             // 
