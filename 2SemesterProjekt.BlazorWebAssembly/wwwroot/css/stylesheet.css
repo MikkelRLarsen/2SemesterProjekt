@@ -1,0 +1,127 @@
+﻿body {
+    padding: 0.1em;
+}
+
+.destination-div,
+.driver-div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2em;
+    max-width: 600px;
+    margin: auto;
+    padding: 1em;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.centered-container {
+    display: flex;
+    margin-top: 2em;
+    justify-content: center;
+}
+
+.drive-button {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+    cursor: pointer;
+    width: 90%;
+    aspect-ratio: 1 / 1;
+    font-size: clamp(14px, 1.5vw, 20px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 0.5em;
+    transition: background-color 0.2s ease;
+}
+
+    .drive-button:hover {
+        transform: scale(1.02);
+    }
+
+.driver-btn.selected {
+    background-color: lightgreen;
+}
+
+.destination-image {
+    width: 60%;
+    aspect-ratio: 1 / 1;
+}
+
+.logo {
+    width: 2em;
+    height: 2em;
+}
+
+a {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 700;
+    color: #007bff;
+    text-decoration: none;
+    display: inline-block;
+}
+
+    a:focus {
+        text-decoration: underline;
+    }
+
+.destination-link {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+    cursor: pointer;
+    width: 90%;
+    aspect-ratio: 1 / 1;
+    font-size: clamp(14px, 1.5vw, 20px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 0.5em;
+    transition: background-color 0.2s ease;
+}
+
+    .destination-link:hover {
+        transform: scale(1.02);
+    }
+
+    .destination-link:focus {
+        background-color: lightgreen;
+    }
+
+.image-center {
+    display: block;
+    margin: auto;
+    width: 20%;
+}
+
+.support-image {
+    width: 70vw;
+}
+
+section {
+    margin-top: 2em;
+}
+
+p {
+    font-size: clamp(14px, 1.5vw, 20px);
+}
+
+@media (min-width: 768px) {
+    section {
+        margin-top: 4em;
+    }
+
+    img {
+        width: 30vw;
+        height: auto;
+    }
+}

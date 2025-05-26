@@ -1,0 +1,66 @@
+﻿@page "/upload-employees"
+@inject EmployeeService _employeeService
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+
+<div class="center-text" style="margin-top: 2em;">
+	<h3>Upload medarbejdere</h3>
+
+
+	<div style="margin-top: 2em; margin-bottom: 2em;">
+		<input @bind="_newEmployeeName" placeholder="Indtast medarbejders navn" />
+		<button class="btn-primary" @onclick="AddEmployee">Tilføj medarbejder</button>
+	</div>
+
+	@if (_employees == null)
+	{
+		<p>Indlæser medarbejdere...</p>
+	}
+	else
+	{
+		<ul>
+			@foreach (var employee in _employees)
+			{
+				<p>@employee.Name</p>
+			}
+		</ul>
+	}
+</div>
+
+<div class="center-text">
+	<a href="/">🚗 Tilbage til kørselsregistrering</a>
+</div>
+
+@code {
+
+	private string? _newEmployeeName;
+
+	private List<Employee>? _employees;
+
+	private const string StorageKey = "employees";
+
+	protected override async Task OnInitializedAsync()
+	{
+		_employees = _employeeService.GetAllEmployees();
+
+		// Invoke localstorage to add it to proof of concept database
+		_employees.AddRange(await LocalStorage.GetItemAsync<List<Employee>>(StorageKey) ?? new List<Employee>());
+	}
+
+	private async Task AddEmployee()
+	{
+		if (string.IsNullOrWhiteSpace(_newEmployeeName))
+		{
+			return;
+		}
+
+		_newEmployeeName.Trim();
+
+		Employee newEmployee = new Employee(_newEmployeeName);
+
+		_employees.Add(newEmployee);
+
+		await LocalStorage.SetItemAsync(StorageKey, _employees);
+
+		_newEmployeeName = string.Empty;
+	}
+}
