@@ -25,8 +25,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
         private readonly Panel _mainPagePanel;
         private decimal? _basePriceForExamination;
         private bool _cageBookingIsChecked;
-        public List<UpdateExaminationPage> AllExaminationCards { get; set; } = new List<UpdateExaminationPage>();
-
+     
         public UpdateExaminationPage(Examination examination, ChangeExaminationPage changeExaminationPage, Panel mainPagePanel)
         {
             InitializeComponent();
@@ -197,7 +196,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                 _changeExaminationPage.LoadAndShowExaminationCards(_changeExaminationPage.AllExaminationCards);
 
                 /// Return to ChangeExaminationPage after completed update:
-                this.Parent.Controls.Remove(this);
+                _mainPagePanel.Controls.Remove(this);
+                _mainPagePanel.Controls.Add(_changeExaminationPage);
 
             }
             catch (Exception ex)
