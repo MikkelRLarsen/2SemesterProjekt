@@ -117,11 +117,11 @@
             label2.BackColor = Color.Linen;
             label2.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.SaddleBrown;
-            label2.Location = new Point(367, 34);
+            label2.Location = new Point(637, 34);
             label2.Name = "label2";
-            label2.Size = new Size(743, 50);
+            label2.Size = new Size(326, 50);
             label2.TabIndex = 38;
-            label2.Text = "O P D A T E R   K O N S U L T A T I O N E R";
+            label2.Text = "F I N D  K U N D E";
             // 
             // pictureBox1
             // 

@@ -64,7 +64,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
 				Examination examinationWithupdatedInformation = new Examination(
 						_examination.PetID,
 						(EmployeeExaminationDropdown.SelectedItem as Employee).EmployeeID,
-						DateTimePickerExamination.Value, _examination.MedicineID,
+						DateTimePickerExamination.Value, 
 						_examination.ExaminationTypeID,
 						_examination.Price,
 						_examination.CageBookingID);
