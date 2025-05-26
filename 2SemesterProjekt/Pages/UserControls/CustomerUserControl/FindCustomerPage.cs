@@ -44,11 +44,21 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
             {
                 AllCustomerCards.Add(new CustomerCard(customer));
             }
+
+            findAllButton.Image = Properties.Resources.FindAllButton;
         }
 
         private void findAllButton_Click(object sender, EventArgs e)
         {
+            // Wait cursor (hourglass)
+            Cursor = Cursors.WaitCursor;
+            findAllButton.Enabled = false;
+
             LoadAndShowCustomerCards(AllCustomerCards);
+
+            // Wait cursor (pointer)
+            Cursor = Cursors.Default;
+            findAllButton.Enabled = true;
         }
 
         /// <summary>

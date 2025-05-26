@@ -142,6 +142,7 @@
             // 
             submitButton.BackgroundImage = Properties.Resources.SaveButton;
             submitButton.BackgroundImageLayout = ImageLayout.Stretch;
+            submitButton.Image = Properties.Resources.SaveButtonGreyedOut;
             submitButton.Location = new Point(945, 749);
             submitButton.Margin = new Padding(3, 4, 3, 4);
             submitButton.Name = "submitButton";
