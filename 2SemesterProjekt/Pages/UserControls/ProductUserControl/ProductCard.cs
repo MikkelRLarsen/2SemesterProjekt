@@ -39,7 +39,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _productData = product;
             _cardMode = cardMode;
             _cartItemsPanel = _cartPage.GetFlowLayoutPanelFromCustomerCart();
-
+            _productData.SetNumberInStockOnOrderPage();
             InitializeComponent();
             InitializeUIDesign();
         }
@@ -83,7 +83,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             CenterLabelHorizontally(productNameLabel);
             productPurchasePriceLabel.Text = _productData.PurchasePricePerUnit.ToString();
             productSalesPriceLabel.Text = _productData.SalesPricePerUnit.ToString();
-            inStockLabel.Text = _productData.NumberInStock.ToString();
+            inStockLabel.Text = _productData.NumberInStockOrderPage.ToString();
             minStockLabel.Text = _productData.MinNumberInStock.ToString();
             categoryLabel.Text = _productData.Type;
         }
@@ -136,12 +136,13 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             // Updates the model for later order creation
             _productData.AddQuantityToOrder(quantity);
-            int newStock = _productData.NumberInStock - quantity;
+            int newStock = _productData.NumberInStockOrderPage;
             inStockLabel.Text = newStock.ToString();
+            inStockLabel.Refresh();
             _productData.UpdateTotalPriceOfProductInOrder();
 
             // Checks if the card already exists in the cart, if not => create and add new card
-            if (_orderPage._order.Any(p => p.ProductID == _productData.ProductID) == false)
+            if (_cartPage._productsInCart.Any(p => p.ProductID == _productData.ProductID) == false)
             {
                 AddProductCardToCart();
             }
@@ -168,6 +169,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         {
             _productData.RemoveQuantityFromOrder(quantity);
             _productData.UpdateTotalPriceOfProductInOrder();
+            int newStock = _productData.NumberInStockOrderPage;
+            inStockLabel.Text = newStock.ToString();
+            inStockLabel.Refresh();
 
             // Checks if the card was removed earlier to re-add it to the add-panel
             if (_orderPage._allProductCards.Any(p => p._productData.ProductID == _productData.ProductID) == false)
@@ -190,6 +194,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             _orderPage.DecreaseItemsInCart(quantity);
             cartProductCard.UpdateAmountLabel();
             cartProductCard.UpdateAmountUpDown(quantity);
+            _productData.SetNumberInStockOnOrderPage();
+            inStockLabel.Refresh();
 
             UpdateInStockLabelInAddProductCard(quantity);
         }
@@ -199,15 +205,22 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         /// </summary>
         private void AddProductCardToCart()
         {
+            _orderPage._order.Add(_productData);
             _cartPage._productsInCart.Add(_productData);
 
             // Create a new product card in "RemoveFromCart" mode to represent the product in the cart
             var productCard = new ProductCard(_orderPage, _cartPage, _addProductPanel, _productData, CardMode.RemoveFromCart);
 
             // Wrap the ProductCard in a UI component that handles how it is displayed inside the cart panel
-            var wrappedCard = new InCartProductCard(productCard, _cartItemsPanel);
+            var wrappedCard = new InCartProductCard(productCard, _productData, _cartItemsPanel);
 
             _cartPage._cartProductCards.Add(wrappedCard);
+        }
+
+        public void UpdateInStockLabel(Product product)
+        {
+            inStockLabel.Text = product.NumberInStockOrderPage.ToString();
+            inStockLabel.Refresh();
         }
 
         /// <summary>
@@ -215,6 +228,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
         /// </summary>
         private void UpdateCartProductCard(int quantity)
         {
+            _orderPage._order.Remove(_productData);
+            _orderPage._order.Add(_productData);
             var card = _cartPage._cartProductCards
                 .First(c => c.ProductCard._productData.ProductID == _productData.ProductID);
 
@@ -234,7 +249,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 // Find the label named "inStockLabel" that displays number in stock
                 .First(l => l.Name == "inStockLabel");
 
-            labelInSpecificCard.Text = _productData.NumberInStock.ToString();
+            labelInSpecificCard.Text = _productData.NumberInStockOrderPage.ToString();
 
             card.UpdateAmountLabel();
             card.UpdateAmountUpDown(quantity);

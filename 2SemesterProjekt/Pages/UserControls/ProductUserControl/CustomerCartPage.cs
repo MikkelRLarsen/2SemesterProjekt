@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
+using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
@@ -8,25 +9,27 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
     public partial class CustomerCartPage : UserControl
     {
         public List<Product> _productsInCart;
-        public List<InCartProductCard> _cartProductCards = new List<InCartProductCard>();
+        public List<InCartProductCard> _cartProductCards;
         private Panel _mainPagePanel;
         private Customer _customer;
+        private CreateOrderPage _createOrderPage;
 
         private readonly IOrderService _orderService;
         private readonly ICustomerService _customerService;
         private readonly IProductLineService _productLineService;
         private readonly IProductService _productService;
 
-        public CustomerCartPage(List<Product> order, Panel mainPagePanel)
+        public CustomerCartPage(List<Product> order, Panel mainPagePanel, CreateOrderPage createOrderPage)
         {
             InitializeComponent();
             _mainPagePanel = mainPagePanel;
             _productsInCart = order;
+            _cartProductCards = new List<InCartProductCard>();
+            _createOrderPage = createOrderPage;
 
             _orderService = ServiceProviderSingleton.GetServiceProvider().GetService<IOrderService>()!;
             _customerService = ServiceProviderSingleton.GetServiceProvider().GetService<ICustomerService>()!;
             _productLineService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductLineService>()!;
-            _productService = ServiceProviderSingleton.GetServiceProvider().GetService<IProductService>()!;
 
             IServiceScope scope = ServiceProviderSingleton.GetServiceProvider().CreateScope();
             _productService = scope.ServiceProvider.GetService<IProductService>()!; /* This ensure that the Listbox gets the newest
@@ -35,8 +38,29 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private void CustomerCartPage_Load(object sender, EventArgs e)
         {
+
             foreach (var productCard in _cartProductCards)
             {
+                flowPanel.Controls.Add(productCard);
+            }
+
+            UpdateTotalPrice();
+        }
+
+        public void ReloadCustomerCart(List<Product> updatedOrder)
+        {
+            flowPanel.Controls.Clear();
+
+            foreach (var product in updatedOrder)
+            {
+                product.SetNumberInStockOnOrderPage(); // Updates stock label on this page
+            }
+
+            _productsInCart = updatedOrder; // Updates the list of orders
+
+            foreach (var productCard in _cartProductCards)
+            {
+                productCard.UpdateCardPanel();
                 flowPanel.Controls.Add(productCard);
             }
 
@@ -139,6 +163,21 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 // Updates the stock status of each product in the order.
                 await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList());
                 DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n Anonym kunde", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                foreach(var product in _productsInCart)
+                {
+                    product.ResetQuantityInOrder();
+                }
+
+                // Empties the current order list
+
+                _cartProductCards.Clear();
+                _productsInCart.Clear();
+                _createOrderPage.EmptyItemsInCart();
+
+                _mainPagePanel.Controls.Remove(this);
+                _mainPagePanel.Controls.Remove(_createOrderPage);
+                _mainPagePanel.Controls.Add(new MainPageWallpaper());
             }
         }
 
@@ -154,16 +193,26 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
             await _productService.UpdateSeveralProductsAsync(_productsInCart.ToList());
 
             DialogResult messageBoxConfirmation = MessageBox.Show($"Ordren er blevet oprettet.\n Ordre #{orderID}\n {_customer.FirstName} {_customer.LastName} \n {_customer.PhoneNumber} \n {_customer.Address}", "Ordre oprettet", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            return;
+
+            foreach (var product in _productsInCart)
+            {
+                product.ResetQuantityInOrder();
+            }
+
+            // Clears the current order list
+            _cartProductCards.Clear();
+            _productsInCart.Clear();
+            _createOrderPage.EmptyItemsInCart();
+
+            _mainPagePanel.Controls.Remove(this);
+            _mainPagePanel.Controls.Remove(_createOrderPage);
+            _mainPagePanel.Controls.Add(new MainPageWallpaper());
         }
 
         private void discountNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            if (Convert.ToDecimal(totalPriceTextBox.Text) != 0) // Updates the total price with the added discount
-            {
-                totalPriceTextBox.Text = (Convert.ToDecimal(totalPriceTextBox.Text) * ((100 - discountNumericUpDown.Value) / 100)).ToString();
-                UpdateTotalPrice();
-            }
+            totalPriceTextBox.Text = (Convert.ToDecimal(totalPriceTextBox.Text) * ((100 - discountNumericUpDown.Value) / 100)).ToString();
+            UpdateTotalPrice();
         }
 
         /// <summary>
@@ -175,7 +224,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
             foreach (var product in _productsInCart)
             {
-                totalPrice += product.SalesPricePerUnit * product.QuantityInOrder;
+                totalPrice += product.TotalPrice;
             }
 
             return totalPrice;
@@ -195,7 +244,8 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         private async void cancelButton_Click(object sender, EventArgs e)
         {
-            _mainPagePanel.Controls.Remove(this);
+            this.Hide();
+            _createOrderPage.UpdateProductCards();
         }
 
         public FlowLayoutPanel GetFlowLayoutPanelFromCustomerCart()
@@ -205,7 +255,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
 
         public async void LoadAndShowProductCards(IEnumerable<InCartProductCard> productCardsToBeLoaded)
         {
-            // Clears the panel and then adds the wanted ExaminationCards
+            // Clears the panel and then adds the wanted ProductCards
             flowPanel.Controls.Clear();
             flowPanel.Controls.AddRange(productCardsToBeLoaded.ToArray());
         }

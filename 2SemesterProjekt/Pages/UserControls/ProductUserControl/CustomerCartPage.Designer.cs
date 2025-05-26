@@ -97,7 +97,7 @@
             textBoxProduct.ForeColor = SystemColors.InactiveCaption;
             textBoxProduct.Location = new Point(637, 194);
             textBoxProduct.Margin = new Padding(3, 4, 3, 4);
-            textBoxProduct.MaxLength = 8;
+            textBoxProduct.MaxLength = 0;
             textBoxProduct.Name = "textBoxProduct";
             textBoxProduct.Size = new Size(274, 27);
             textBoxProduct.TabIndex = 55;
