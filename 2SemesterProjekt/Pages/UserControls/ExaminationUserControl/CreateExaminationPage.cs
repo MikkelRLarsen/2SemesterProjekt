@@ -72,7 +72,7 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex}");
+                MessageBox.Show($"{ex.Message}");
             }
 
             // Wait cursor (hourglass)
