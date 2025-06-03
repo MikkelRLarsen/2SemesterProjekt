@@ -229,7 +229,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
         private async void TriggerAutoPetFillIn()
         {
             /// Phone number to fill in:
-            textBoxPhoneNumber.Text = "12345678";
+            textBoxPhoneNumber.Text = "18192021";
 
             /// Pet species to fill in:
             var petSpecies = await _petService.GetAllPetSpeciesAsync();
@@ -247,6 +247,9 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             DateTimePickerBirthday.Value = DateTime.Today.AddDays(-1);
 
             /// Pet doctor to fill in:
+            ComboBoxPetDoctor.SelectedIndex = 0; // 0 = "Ikke valgt"
+
+            /*
             var petDoctor = await _employeeService.GetAllEmployeeWithTypeAsync("Dyrlæge");
             ComboBoxPetDoctor.DataSource = petDoctor;
             var doctorToSelect = petDoctor.FirstOrDefault(e => e.FirstName == "Peter");
@@ -255,6 +258,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
                 ComboBoxPetDoctor.SelectedItem = doctorToSelect;
             }
             CheckAndEnableButton();
+            */
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------//

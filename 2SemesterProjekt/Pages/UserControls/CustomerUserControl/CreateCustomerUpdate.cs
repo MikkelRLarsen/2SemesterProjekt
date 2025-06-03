@@ -186,5 +186,41 @@ namespace _2SemesterProjekt.Pages.UserControls.CustomerUserControl
 
             submitButton.Image = Properties.Resources.SaveButton;
         }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // AUTO FILL-IN BEGIN
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // ProcessCmdKey is a method in the Control class (inherited by UserControl and Form)
+        // that intercepts keyboard commands before they are sent to the focused control.
+        // This makes it ideal for global shortcuts, like Ctrl+F, regardless of which control has focus.
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.F))
+            {
+                TriggerAutoCustomerFillIn();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        private async void TriggerAutoCustomerFillIn()
+        {
+            /// First name:
+            textBoxFirstName.Text = "Palle";
+            /// Last name:
+            textBoxLastName.Text = "Pallesen";
+            /// Email:
+            textBoxEmail.Text = "pallep@pp.dk";
+            /// Address:
+            textBoxAddress.Text = "Pallevej 77";
+            /// Phone number:
+            textBoxPhoneNumber.Text = "18192021";
+            /// Customer type:
+            comboBoxType.SelectedIndex = 0; // 0 = Privat, 1 = Erhverv.
+        }
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // AUTO FILL-IN END
+        //----------------------------------------------------------------------------------------------------------------------------------------------------
     }
 }

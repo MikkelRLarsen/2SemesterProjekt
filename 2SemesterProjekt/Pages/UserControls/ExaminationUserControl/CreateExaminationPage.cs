@@ -403,7 +403,9 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
             }
         }
 
-        // AUTO FILL-IN BEGIN:
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // AUTO FILL-IN BEGIN
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
         // ProcessCmdKey is a method in the Control class (inherited by UserControl and Form)
         // that intercepts keyboard commands before they are sent to the focused control.
         // This makes it ideal for global shortcuts, like Ctrl+F, regardless of which control has focus.
@@ -414,13 +416,53 @@ namespace _2SemesterProjekt.Pages.UserControls.ExaminationUserControl
                 TriggerAutoCustomerSearchFillIn();
                 return true;
             }
-
+            else if (keyData == (Keys.Control | Keys.G))
+            {
+                TriggerAutoCustomerDataFillIn();
+            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
         private async void TriggerAutoCustomerSearchFillIn()
         {
             ///Customer phonenumber to fill in:
-            customerSearchTextBox.Text = "12345678";
-        }// AUTO FILL-IN END:
+            customerSearchTextBox.Text = "18192021";
+        }
+        private async void TriggerAutoCustomerDataFillIn()
+        {
+            _customer = await _customerService.GetCustomerByPhoneNumberAsync(18192021);
+            petDropdown.Enabled = true;
+            petDropdown.DataSource = _customer.Pets;
+            petDropdown.SelectedIndex = 0; // 0 = Select the first of the customer's pets.
+
+
+            var examTypes = await _examinationService.GetAllExaminationTypesAsync();
+            ExaminationTypeDropdown.DataSource = examTypes;
+            ExaminationTypeDropdown.Enabled = true;
+            ExaminationTypeDropdown.SelectedIndex = 6; // 6 = Select "Knæoperation".
+
+            var selectedExaminationType = ExaminationTypeDropdown.SelectedItem as ExaminationType;
+            _basePriceForExamination = selectedExaminationType.BasePrice;
+            PriceExaminationDisplay.Text = _basePriceForExamination.ToString();
+
+            DateTimePickerExamination.Enabled = true;
+            DateTimePickerExamination.Value = DateTime.Now.AddDays(1);
+           
+            /*
+            employeeDropdown.Enabled = true;
+            _employees = await _employeeService.GetAllEmployeeWithTypeAsync("Dyrlæge");
+            employeeDropdown.DataSource = _employees;
+            employeeDropdown.SelectedIndex = 1;
+            */
+
+            submitButton.Enabled = true;
+            submitButton.Image = Properties.Resources.SaveButton;
+            submitButton.BackColor = Color.MediumAquamarine;
+
+            UpdateDiscountStatus();
+            UpdateCageBookingCheckbox();
+        }
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // AUTO FILL-IN END
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
