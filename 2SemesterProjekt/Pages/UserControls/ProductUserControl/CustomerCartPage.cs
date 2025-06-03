@@ -2,6 +2,7 @@
 using _2SemesterProjekt.Domain.Interfaces.ServiceInterfaces;
 using _2SemesterProjekt.Domain.Models;
 using _2SemesterProjekt.Pages.UserControls.MainPageWallpaperControl;
+using _2SemesterProjekt.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
@@ -360,5 +361,30 @@ namespace _2SemesterProjekt.Pages.UserControls.ProductUserControl
                 productSearchButton_Click(sender, e);
             }
         }
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // AUTO FILL-IN BEGIN
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // ProcessCmdKey is a method in the Control class (inherited by UserControl and Form)
+        // that intercepts keyboard commands before they are sent to the focused control.
+        // This makes it ideal for global shortcuts, like Ctrl+F, regardless of which control has focus.
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.F))
+            {
+                TriggerAutoPetFillIn();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        private async void TriggerAutoPetFillIn()
+        {
+            /// Phone number to fill in:
+            customerPhoneNumberTextbox.Text = "18192021";
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
+        // AUTO FILL-IN END
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
