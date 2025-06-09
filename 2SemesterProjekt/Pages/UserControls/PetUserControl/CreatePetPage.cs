@@ -241,7 +241,7 @@ namespace _2SemesterProjekt.Pages.UserControls.PetUserControl
             }
 
             /// Pet name to fill in:
-            textBoxPetName.Text = "Ajaccio";
+            textBoxPetName.Text = "Mis";
 
             /// Pet birthday to fill in:
             DateTimePickerBirthday.Value = DateTime.Today.AddDays(-1);
